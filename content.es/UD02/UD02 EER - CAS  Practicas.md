@@ -1,5 +1,5 @@
 ---
-title: "UD02 - Modelo Entidad-Relación Extendido (EER). Prácticas de Diseño Conceptual"
+title: "UD02 - Modelo Entidad-Relación Extendido (EER). Prácticas"
 weight: 2
 ---
 

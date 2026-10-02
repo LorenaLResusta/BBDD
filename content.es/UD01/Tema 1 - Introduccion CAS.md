@@ -1,6 +1,6 @@
 ---
 title: "UD01 - Introducción a las Bases de Datos y Sistemas de Almacenamiento"
-weight: 2
+weight: 1
 ---
 
 ## Resumen del Tema

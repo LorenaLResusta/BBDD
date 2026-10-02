@@ -1,4 +1,4 @@
 ---
-title: "Unidad 1: Introducción a las Bases de Datos y Almacenamiento"
+title: "UD01: Introducción a las Bases de Datos."
 weight: 1
 ---
