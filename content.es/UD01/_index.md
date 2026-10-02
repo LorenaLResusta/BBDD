@@ -1,4 +1,4 @@
 ---
-title: "UD01: Introducción a las Bases de Datos."
+title: "UD01: Introducción."
 weight: 1
 ---

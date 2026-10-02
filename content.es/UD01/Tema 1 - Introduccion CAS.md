@@ -1,5 +1,5 @@
 ---
-title: "UD01 - Introducción a las Bases de Datos y Sistemas de Almacenamiento"
+title: "UD01 - Introducción a las Bases de Datos"
 weight: 1
 ---
 
