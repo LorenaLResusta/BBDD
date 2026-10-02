@@ -1,0 +1,334 @@
+---
+title: "UD02 - Modelo Entidad-Relación Extendido (EER). Prácticas de Diseño Conceptual"
+weight: 2
+---
+
+## Relación de Ejercicios Prácticos de Diseño Conceptual (EER)
+
+> **Objetivo:** Practicar el modelado conceptual de bases de datos mediante la resolución de enunciados de requisitos reales. En esta colección de ejercicios se abordan escenarios de complejidad progresiva, haciendo especial hincapié en la identificación de **entidades fuertes y débiles (por ID y por existencia)**, **relaciones reflexivas/recursivas**, **relaciones ternarias** y **restricciones de cardinalidad**.
+
+---
+
+## Bloque 1: Ejercicios Iniciales y Fundamentales
+
+### Ejercicio 1: Relación Reflexiva Familiar (Genealogía)
+
+**Enunciado:**  
+Se desea diseñar una base de datos para registrar relaciones de parentesco entre personas. De cada `PERSONA` se conocen los atributos `dni` (clave primaria), `nombre`, `dirección` y `teléfono`.
+
+- Una persona puede ser progenitora (padre/madre) de varios hijos/as o de ninguno.
+- Toda persona registrada en el sistema es obligatoriamente hijo/a de otra persona (se registra la filiación directa).
+- Modele la **relación reflexiva** correspondiente indicando los nombres de rol y determine sus cardinalidades mínimas y máximas.
+
+#### Pautas de Resolución
+
+- **Entidad:** `PERSONA` (`dni` [PK], `nombre`, `dirección`, `teléfono`).
+- **Relación Reflexiva:** `ES_PADRE_DE` sobre la entidad `PERSONA`.
+- **Nombres de Rol:** *Progenitor/Padre* y *Descendiente/Hijo*.
+- **Cardinalidades:**
+  - Rol *Progenitor* respecto a `ES_PADRE_DE`: $(0, N)$ (una persona puede tener 0 o muchos hijos).
+  - Rol *Descendiente* respecto a `ES_PADRE_DE`: $(1, 1)$ o $(1, 2)$ según se registre filiación uniparental o biparental.
+
+---
+
+### Ejercicio 2: Gestión Municipal de Multas de Tráfico
+
+**Enunciado:**  
+Un Ayuntamiento requiere una base de datos para la gestión integral de infracciones y multas de tráfico:
+
+- **Vehículos:** Se registra `matrícula` (clave primaria), `tipo`, `marca` y `modelo`. Un vehículo pertenece a un propietario registrado.
+- **Propietarios:** Se registra `dni` (clave primaria), `nombre`, `apellidos` y `dirección`. Un propietario puede poseer más de un vehículo.
+- **Infracciones:** Catálogo tipo de infracciones con `cod_infraccion` (clave primaria), `descripción` y `cuantía_euros`.
+- **Sanciones / Multas:** Cuando un vehículo comete una infracción, se genera una multa registrando la `fecha_multa` y la `fecha_pago`. Un vehículo puede ser sancionado con múltiples multas y una infracción del catálogo puede cometerse muchas veces.
+
+#### Pautas de Resolución
+
+- **Entidades:** `VEHÍCULO`, `PROPIETARIO`, `INFRACCIÓN`.
+- **Relación $N:M$ (con atributos):** `SANCIONADO_CON` entre `VEHÍCULO` e `INFRACCIÓN`, con los atributos `fecha_multa` y `fecha_pago`.
+
+---
+
+### Ejercicio 3: Ventas, Clientes, Productos y Suministro de Proveedores
+
+**Enunciado:**  
+Una empresa comercializa productos a clientes finales y se abastece mediante proveedores externos:
+
+- **Clientes:** Se registran datos personales: `dni` (PK), `nombre`, `apellidos`, `dirección` y `fecha_nacimiento`. Un cliente puede comprar varios productos y un mismo producto puede ser adquirido por diferentes clientes.
+- **Productos:** Cada producto se identifica por `cod_producto` (PK), `nombre` y `precio_unitario`.
+- **Proveedores:** Se conoce su `nif` (PK), `nombre` y `dirección`. Un producto es suministrado por un **único** proveedor exclusivo, mientras que un proveedor puede suministrar diferentes productos.
+
+#### Pautas de Resolución
+
+- **Entidades:** `CLIENTE`, `PRODUCTO`, `PROVEEDOR`.
+- **Relación `COMPRA` ($N:M$):** Entre `CLIENTE` y `PRODUCTO`.
+- **Relación `SUMINISTRA` ($1:N$):** Entre `PROVEEDOR` y `PRODUCTO` (cardinalidad del producto en suministro: $(1,1)$).
+
+---
+
+### Ejercicio 4: Gestión Naviera, Capitanes, Barcos, Contenedores y Puertos
+
+**Enunciado:**  
+Una empresa naviera internacional requiere gestionar su flota de transporte de mercancías:
+
+- **Capitanes:** Se registra `dni` (PK), `nombre`, `teléfono`, `dirección`, `salario` y `población`.
+- **Barcos:** Identificados indistintamente por su `matrícula` (PK) o por su `nombre_barco` (clave alternativa), indicando además `potencia_motor` y `astillero_fabricación`. Un capitán puede gobernar diferentes barcos en fechas distintas, y un barco puede ser capitaneado por varios capitanes a lo largo del tiempo (registrando `fecha_inicio` y `fecha_fin`).
+- **Contenedores:** Se conoce `cod_contenedor` (PK), `descripción`, `dirección_remitente` y `dirección_destinatario`. Cada contenedor es transportado bajo la responsabilidad de un único capitán, y un capitán transporta muchos contenedores.
+- **Puertos:** Se guarda `cod_puerto` (PK) y `nombre_puerto`. Un contenedor tiene como destino un único puerto, mientras que a un puerto llegan múltiples contenedores.
+
+#### Pautas de Resolución
+
+- **Entidades:** `CAPITÁN`, `BARCO`, `CONTENEDOR`, `PUERTO`.
+- **Relaciones:**
+  - `GOBIERNA` ($N:M$ con atributos temporales) entre `CAPITÁN` y `BARCO`.
+  - `SUPERVISA` ($1:N$) entre `CAPITÁN` y `CONTENEDOR`.
+  - `DESTINADO_A` ($1:N$) entre `CONTENEDOR` y `PUERTO`.
+
+---
+
+### Ejercicio 5: Sistema Académico de Instituto (Prerrequisitos, Delegados y Casilleros)
+
+**Enunciado:**  
+Un Instituto de Educación Secundaria y Formación Profesional necesita diseñar su base de datos:
+
+- **Profesorado y Módulos:** De cada `PROFESOR` se guarda `dni` (PK), `nombre`, `dirección` y `teléfono`. Los profesores imparten `MÓDULO` (identificado por `cod_modulo` y `nombre_modulo`). Un profesor puede impartir varios módulos, pero un módulo solo puede ser impartido por un único profesor.
+- **Prerrequisitos (Relación Reflexiva):** Algunos módulos tienen como prerrequisito haber cursado previamente otros módulos. Un módulo puede necesitar uno o varios módulos previos, y a su vez ser requisito de otros módulos.
+- **Alumnos y Grupos:** De cada `ALUMNO` se registra `num_expediente` (PK), `nombre`, `apellidos` y `fecha_nacimiento`. Los alumnos se matriculan en varios módulos (registrando `fecha_matriculación`). Cada curso se organiza en un grupo de alumnos, y dentro de cada grupo un alumno es elegido como **Delegado** ($1:1$ entre grupo y alumno delegado).
+- **Casilleros:** Los alumnos que lo soliciten disponen de un `CASILLERO` personal cerrado con llave única. Se conoce el `num_casillero` (PK) y su `tamaño_metros`. Un casillero pertenece a un único alumno y un alumno puede tener como máximo un casillero.
+
+#### Pautas de Resolución
+
+- **Entidades:** `PROFESOR`, `MÓDULO`, `ALUMNO`, `CASILLERO`.
+- **Relación Reflexiva $N:M$:** `ES_PRERREQUISITO` sobre `MÓDULO` (roles: *Módulo Principal* y *Módulo Requisito*).
+- **Relación Reflexiva / Roles de Alumnado:** `DELEGADO_DE` entre `ALUMNO` y el grupo.
+- **Relación 1:1 Opcional:** `ASIGNADO_A` entre `ALUMNO` y `CASILLERO` ($(0,1)$ a $(1,1)$).
+
+---
+
+### Ejercicio 6: Concesionario, Revisiones Débiles y Supervisión de Mecánicos
+
+**Enunciado:**  
+Un concesionario de automóviles gestiona la venta y el mantenimiento postventa de vehículos:
+
+- **Coches y Clientes:** De cada `COCHE` se conoce `matrícula` (PK), `marca`, `modelo`, `color` y `precio_venta`. De cada `CLIENTE` se guarda `cod_cliente` (PK), `nif`, `nombre`, `dirección`, `ciudad` y `teléfono`. Un cliente puede comprar varios coches; cada coche determinado solo puede ser comprado por un único cliente.
+- **Revisiones (Entidad Débil por Identificación):** Cada coche pasa revisiones periódicas en el taller. La revisión se identifica mediante un `cod_revision` secuencial (1, 2, 3...) que **solo es único para un coche determinado** (clave compuesta con la matrícula del coche). Se indica si se hizo cambio de filtro, aceite, frenos u otros.
+- **Mecánicos y Supervisión (Relación Reflexiva):** Cada revisión es realizada por un único `MECÁNICO` (del que se conoce `cod_empleado` [PK], `dni`, `nombre`, `teléfono` y `dirección`). Un mecánico realiza muchas revisiones. Entre los mecánicos existe un revisor/supervisor que gestiona y supervisa el trabajo de los mecánicos (**Relación Reflexiva $1:N$**).
+
+#### Pautas de Resolución
+
+- **Entidades Fuertes:** `CLIENTE`, `COCHE`, `MECÁNICO`.
+- **Entidad Débil por Identificación:** `REVISIÓN` (asociada a `COCHE` con clave `(matrícula, cod_revision)`).
+- **Relación Reflexiva $1:N$:** `SUPERVISA` sobre `MECÁNICO` (roles: *Mecánico Supervisor* y *Mecánico Supervisado*).
+
+---
+
+### Ejercicio 7: Gestión Hospitalaria de Médicos, Pacientes e Ingresos Débiles
+
+**Enunciado:**  
+Una clínica necesita llevar un control informatizado de sus ingresos hospitalarios:
+
+- **Pacientes:** Se guarda `cod_paciente` (PK), `nombre`, `apellidos`, `dirección`, `población`, `provincia`, `código_postal`, `teléfono` y `fecha_nacimiento`.
+- **Médicos:** Se guarda `cod_medico` (PK), `nombre`, `apellidos`, `teléfono` y `especialidad`.
+- **Ingresos (Entidad Débil por Identificación y Existencia):** Cada paciente puede realizar múltiples ingresos en el hospital a lo largo del tiempo. De cada `INGRESO` se guarda un `cod_ingreso` (que se incrementa automáticamente empezando por 0 o 1 para cada paciente), el `num_habitación`, la `cama` y la `fecha_ingreso`. Un ingreso pertenece a un único paciente y **no puede identificarse ni existir sin el paciente**.
+- **Atención Médica:** Un médico puede atender varios ingresos, pero el ingreso de un paciente solo puede ser atendido por un único médico responsable.
+
+#### Pautas de Resolución
+
+- **Entidades Fuertes:** `PACIENTE`, `MÉDICO`.
+- **Entidad Débil por Identificación y Existencia:** `INGRESO` (vinculada a `PACIENTE`, clave primaria compuesta `(cod_paciente, cod_ingreso)`).
+- **Relación $1:N$:** `RESPONSABLE_DE` entre `MÉDICO` e `INGRESO`.
+
+---
+
+### Ejercicio 8: Biblioteca, Autores, Libros, Ejemplares Débiles y Préstamos
+
+**Enunciado:**  
+En la biblioteca del centro se manejan fichas de autores, libros, ejemplares y usuarios:
+
+- **Autores y Libros:** De cada `AUTOR` se conoce `cod_autor` (PK) y `nombre`. De cada `LIBRO` se guarda `cod_libro` (PK), `título`, `isbn`, `editorial` y `num_páginas`. Un autor puede escribir varios libros y un libro puede ser escrito por varios autores ($N:M$).
+- **Ejemplares (Entidad Débil por Identificación):** Un libro está formado por `EJEMPLAR`. Cada ejemplar tiene un `cod_ejemplar` local y una `localización`. Un libro tiene muchos ejemplares y un ejemplar pertenece solo a un libro.
+- **Usuarios y Préstamos:** De cada `USUARIO` se guarda `cod_usuario` (PK), `nombre`, `dirección` y `teléfono`. Los ejemplares son prestados a los usuarios. Un usuario puede tomar prestados varios ejemplares y un ejemplar puede ser prestado a varios usuarios a lo largo del tiempo (registrando `fecha_préstamo` y `fecha_devolución`).
+
+#### Pautas de Resolución
+
+- **Entidades Fuertes:** `AUTOR`, `LIBRO`, `USUARIO`.
+- **Entidad Débil por Identificación:** `EJEMPLAR` (vinculada a `LIBRO` con clave compuesta `(cod_libro, cod_ejemplar)`).
+- **Relación $N:M$ (con atributos):** `PRESTADO_A` entre `EJEMPLAR` y `USUARIO`.
+
+---
+
+### Ejercicio 9: Comandancia de Starship Troopers (Defensa, Bichos y Mazmorras Débiles)
+
+**Enunciado:**  
+Se desea registrar en una base de datos el funcionamiento interno de una comandancia de la fuerzas de defensa *Starship Troopers*:
+
+- **Troopers y Jefes (Relación Reflexiva):** De cada `TROOPER` se conoce `num_placa` (PK), `dni`, `nombre` y `categoría`. Los troopers desempeñan funciones como pilotos, agentes, etc. Cada Trooper tiene un **único jefe direct**, aunque un Trooper puede ser jefe de varios (**Relación Reflexiva $1:N$**).
+- **Armas y Habilidad:** En el arsenal existen `ARMA` identificadas por `cod_arma` (PK), `clase` y `nombre`. Cada Trooper puede utilizar una o varias armas. Interesa conocer el `grado_habilidad` (puntuación de 1 a 10) de cada Trooper con cada arma que utiliza.
+- **Bichos y Detenciones:** De cada `BICHO` se conoce `id_bicho` (PK), `raza`, `localización_origen` y `peso`. Un bicho es detenido por uno o varios Troopers. Se guarda la `fecha_detención`. Un mismo Trooper puede detener al mismo bicho en fechas distintas.
+- **Mazmorras y Asaltos:** A cada bicho detenido que permanece en la comandancia se le encierra en una `MAZMORRA` (`cod_mazmorra` [PK] y `ubicación`). En una mazmorra pueden estar encerrados varios bichos (máximo 4). Los bichos están involucrados en `ASALTO` (`num_asalto` [PK] y `juzgado_instructor`), guardando el `cargo_principal` imputado a cada bicho en cada delito. Uno o varios Troopers investigan cada uno de los casos/asaltos.
+
+#### Pautas de Resolución
+
+- **Entidades:** `TROOPER`, `ARMA`, `BICHO`, `MAZMORRA`, `ASALTO`.
+- **Relación Reflexiva $1:N$:** `JEFE_DE` sobre `TROOPER` (roles: *Jefe* y *Subordinado*).
+- **Relaciones con Atributos:**  
+  - `UTILIZA` ($N:M$) entre `TROOPER` y `ARMA` con atributo `grado_habilidad`.  
+  - `DETIENE` ($N:M$) entre `TROOPER` y `BICHO` con atributo `fecha_detención`.
+
+---
+
+### Ejercicio 10: Muestra Gastronómica de Platos Españoles, Localidades Débiles y Bodegas
+
+**Enunciado:**  
+Se va a organizar una muestra gastronómica de platos típicos de la geografía española:
+
+- **Provincias y Localidades (Entidad Débil por Identificación):** De las `PROVINCIA` se conoce `nombre_provincia` (PK), `extensión` y `capital`. De las `LOCALIDAD` pintorescas se conoce su `nombre_localidad`, `tamaño` y `num_habitantes`. Como dos localidades pueden llamarse igual en provincias distintas, `LOCALIDAD` se identifica como **entidad débil por identificación** mediante la clave compuesta `(nombre_provincia, nombre_localidad)`.
+- **Platos Típicos y Variaciones:** De los `PLATO_TÍPICO` se guarda `nombre_plato` (PK), `ingredientes_básicos` y `preparación_general`. Un plato puede ser típico de varias localidades y una localidad tiene varios platos típicos. Se registra para cada localidad una `descripción_variación_local` del plato.
+- **Restaurantes (Entidad Débil por Identificación):** De los `RESTAURANTE` se guarda `nombre_restaurante`, `dirección`, `teléfono`, `precio_menú` y `máx_comensales`. Como el nombre de un restaurante puede repetirse en distintas localidades, `RESTAURANTE` es una **entidad débil por identificación** respecto a `LOCALIDAD` con clave `(nombre_provincia, nombre_localidad, nombre_restaurante)`. Cada restaurante debe estar especializado en al menos uno de los platos típicos.
+- **Bodegas y Vinos:** De las `BODEGA` patrocinadoras se conoce `cif` (PK), `nombre_director`, `dirección_sede` y `teléfono`. Las bodegas producen `VARIEDAD_VINO` (`cod_vino` [PK], `cosecha`, `grado`, `color` y `textura`). Un grupo de expertos recomienda qué vino servir con cada plato típico (relación de recomendación de sumiller).
+
+#### Pautas de Resolución
+
+- **Entidad Fuerte Base:** `PROVINCIA`.
+- **Entidades Débiles por Identificación:**  
+  - `LOCALIDAD` (dependiente de `PROVINCIA`).  
+  - `RESTAURANTE` (dependiente de `LOCALIDAD`).
+- **Entidades Adicionales:** `PLATO_TÍPICO`, `BODEGA`, `VARIEDAD_VINO`.
+
+---
+
+## Bloque 2: Ejercicios Avanzados (3-4 Entidades con Entidades Débiles y Relaciones Reflexivas)
+
+### Ejercicio 11: Gestión de Proyectos de Software, Tareas Débiles y Liderazgo Técnico
+
+**Enunciado:**  
+Una consultora tecnológica gestiona proyectos de desarrollo de software para empresas clientes:
+
+1. **Clientes:** Se registra `cif` (PK), `razón_social`, `dirección_web` y `teléfono_contacto`.
+2. **Proyectos:** Cada `PROYECTO` se identifica por `cod_proyecto` (PK) e incluye `nombre_proyecto`, `fecha_inicio` y `presupuesto_total`. Un cliente puede encargar varios proyectos, pero un proyecto pertenece a un único cliente.
+3. **Tareas (Entidad Débil por Identificación):** Cada proyecto se descompone en múltiples `TAREA`. La tarea se identifica únicamente mediante un `num_tarea` secuencial (1, 2, 3...) dentro de ese proyecto concreto (**clave primaria compuesta:** `cod_proyecto` + `num_tarea`). Se guarda la `descripción_tarea`, `horas_estimadas` y `estado` (Pendiente, En Proceso, Completada).
+4. **Desarrolladores y Liderazgo Técnico (Relación Reflexiva):** De cada `DESARROLLADOR` se almacena `num_empleado` (PK), `dni`, `nombre`, `especialidad` y `nivel`. Un desarrollador es asignado a varias tareas y una tarea puede ser realizada por varios desarrolladores (registrando `horas_reales_invertidas`). Además, en la entidad `DESARROLLADOR` existe una **relación reflexiva $1:N$** denominada `MENTORIZA`, donde un desarrollador senior tutoriza a varios desarrolladores junior.
+
+#### Esquema de Análisis Resuelto
+
+- **Entidades Fuertes:** `CLIENTE`, `PROYECTO`, `DESARROLLADOR`.
+- **Entidad Débil por Identificación:** `TAREA` (dependiente de `PROYECTO`, PK: `(cod_proyecto, num_tarea)`).
+- **Relación Reflexiva:** `MENTORIZA` en `DESARROLLADOR` (roles: *Mentor Senior* [0..N] y *Desarrollador Junior* [1..1]).
+
+```mermaid
+erDiagram
+    CLIENTE ||--|{ PROYECTO : CONTRATA
+    PROYECTO ||--|{ TAREA : CONTIENE
+    DESARROLLADOR }|--|{ TAREA : EJECUTA
+    DESARROLLADOR ||--o{ DESARROLLADOR : MENTORIZA
+
+    CLIENTE {
+        string cif PK
+        string razon_social
+    }
+    PROYECTO {
+        int cod_proyecto PK
+        string nombre_proyecto
+    }
+    TAREA {
+        int cod_proyecto PK_FK
+        int num_tarea PK
+        string descripcion
+    }
+    DESARROLLADOR {
+        int num_empleado PK
+        string nombre
+    }
+```
+
+---
+
+### Ejercicio 12: Cadena Hotelera, Habitaciones Débiles, Reservas y Jerarquía de Personal
+
+**Enunciado:**  
+Una cadena hotelera internacional necesita estructurar su sistema central de reservas:
+
+1. **Hoteles:** Cada `HOTEL` se identifica por `cod_hotel` (PK) e incluye `nombre_hotel`, `categoría_estrellas`, `dirección` y `ciudad`.
+2. **Habitaciones (Entidad Débil por Identificación):** Un hotel cuenta con decenas de `HABITACIÓN`. Cada habitación tiene un `num_habitación` (101, 102, 201...) que **no es único a nivel global**, sino únicamente dentro de ese hotel (**clave primaria compuesta:** `cod_hotel` + `num_habitación`). De cada habitación se indica `tipo` (Individual, Doble, Suite) y `precio_noche`.
+3. **Clientes y Reservas:** De cada `CLIENTE` se guarda `dni` (PK), `nombre`, `email` y `teléfono`. Un cliente realiza `RESERVA` sobre una habitación específica de un hotel para un rango de fechas (`fecha_entrada`, `fecha_salida` y `precio_total`).
+4. **Empleados y Supervisión de Planta (Relación Reflexiva):** De cada `EMPLEADO` se registra `cod_empleado` (PK), `nombre` y `puesto`. Los empleados están destinados a un único hotel. Existe una **relación reflexiva $1:N$** denominada `SUPERVISA_TURNO`, donde un gobernante/supervisora de planta supervisa el trabajo de otros empleados del equipo de limpieza.
+
+#### Esquema de Análisis Resuelto
+
+- **Entidades Fuertes:** `HOTEL`, `CLIENTE`, `EMPLEADO`.
+- **Entidad Débil por Identificación:** `HABITACIÓN` (dependiente de `HOTEL`, PK: `(cod_hotel, num_habitación)`).
+- **Relaciones:**
+  - `POSICE` ($1:N$) entre `HOTEL` y `HABITACIÓN`.
+  - `RESERVA` ($N:M$) entre `CLIENTE` y `HABITACIÓN`.
+  - `TRABAJA_EN` ($1:N$) entre `EMPLEADO` y `HOTEL`.
+  - `SUPERVISA_TURNO` (Reflexiva $1:N$ en `EMPLEADO`).
+
+---
+
+### Ejercicio 13: Fabricación Industrial, Piezas Compuestas (BOM) y Control de Calidad Débil
+
+**Enunciado:**  
+Una planta de fabricación industrial de maquinaria pesada gestiona su proceso de producción:
+
+1. **Fábricas y Líneas de Montaje:** De cada `FÁBRICA` se conoce `cod_fabrica` (PK), `ubicación` y `teléfono`. Una fábrica alberga varias `LÍNEA_MONTAJE` (identificadas por `cod_linea` [PK] y `denominación`).
+2. **Piezas y Estructura Compuesta (Relación Reflexiva $N:M$):** Se registran las `PIEZA` utilizadas en la producción con `cod_pieza` (PK), `nombre_pieza`, `peso_gramos` y `coste_estándar`. Una pieza puede estar ensamblada a partir de múltiples subpiezas componentes, y a su vez una subpieza puede formar parte de la fabricación de varias piezas superiores (**Estructura de Lista de Materiales / Bill of Materials - BOM**). En esta relación reflexiva $N:M$ llamada `ENSAMBLADA_CON` se registra la `cantidad_unidades_requeridas`.
+3. **Inspección de Calidad (Entidad Débil por Existencia e Identificación):** Cada pieza fabricada en una línea de montaje debe someterse a controles de calidad periódicos. La `INSPECCIÓN_CALIDAD` genera un informe identificado por un `num_inspección` relativo a esa pieza (**clave compuesta:** `cod_pieza` + `num_inspección`). Se indica `fecha_inspección`, `resultado` (Aprobado/Rechazado) y `observaciones`. Si la pieza es descatalogada y eliminada del sistema, todos sus informes de inspección deben borrarse automáticamente en cascada.
+
+#### Esquema de Análisis Resuelto
+
+- **Entidades Fuertes:** `FÁBRICA`, `LÍNEA_MONTAJE`, `PIEZA`.
+- **Entidad Débil por Identificación y Existencia:** `INSPECCIÓN_CALIDAD` (dependiente de `PIEZA`, PK: `(cod_pieza, num_inspección)`).
+- **Relación Reflexiva $N:M$:** `ENSAMBLADA_CON` sobre `PIEZA` (roles: *Pieza Ensamblada Padre* y *Subpieza Componente Hijo*, con atributo `cantidad`).
+
+---
+
+### Ejercicio 14: Estructura Universitaria, Cátedras Débiles y Tutorización Docente
+
+**Enunciado:**  
+Una universidad pública organiza su estructura académica e investigadora:
+
+1. **Facultades y Departamentos:** Cada `FACULTAD` se identifica por `cod_facultad` (PK) y `nombre_facultad`. Una facultad se divide en varios `DEPARTAMENTO` (identificados por `cod_departamento` [PK] y `área_conocimiento`).
+2. **Cátedras (Entidad Débil por Identificación):** Cada departamento organiza varias `CÁTEDRA` de investigación. La cátedra no posee un código único nacional, sino que se identifica mediante un `num_cátedra` interno (1, 2, 3...) dentro de su departamento (**clave primaria compuesta:** `cod_departamento` + `num_cátedra`). Se guarda el `nombre_cátedra` y el `presupuesto_anual`.
+3. **Profesores y Tutorización Noveles (Relación Reflexiva):** De cada `PROFESOR` se guarda `num_registro_personal` (PK), `dni`, `nombre`, `categoría` (Asociado, Titular, Catedrático) y `fecha_ingreso`. Un profesor está adscrito a un único departamento. Un profesor con categoría de Catedrático es designado como *Director* de una cátedra débil. Además, dentro de la entidad `PROFESOR` existe una **relación reflexiva $1:N$** denominada `TUTORIZA_NOVEL`, donde un profesor experimentado tutela la labor docente de profesores noveles contratados.
+
+#### Esquema de Análisis Resuelto
+
+- **Entidades Fuertes:** `FACULTAD`, `DEPARTAMENTO`, `PROFESOR`.
+- **Entidad Débil por Identificación:** `CÁTEDRA` (dependiente de `DEPARTAMENTO`, PK: `(cod_departamento, num_cátedra)`).
+- **Relación Reflexiva $1:N$:** `TUTORIZA_NOVEL` sobre `PROFESOR` (roles: *Profesor Tutor* [0..N] y *Profesor Novel* [1..1]).
+
+---
+
+### Ejercicio 15: Red de Transportes Urbanos, Paradas Débiles y Transbordos entre Líneas
+
+**Enunciado:**  
+La empresa municipal de transportes urbanos requiere modelar su red de autobuses:
+
+1. **Líneas de Autobús:** Se registra `cod_linea` (PK, ej. "L1", "L12"), `nombre_trayecto` y `frecuencia_minutos`.
+2. **Paradas (Entidad Débil por Identificación):** Una línea realiza su recorrido a través de una secuencia ordenada de `PARADA`. Cada parada tiene un `orden_secuencia` (1, 2, 3... N) que **solo tiene sentido dentro de esa línea de autobús** (**clave primaria compuesta:** `cod_linea` + `orden_secuencia`). Se almacena el `nombre_calle_marquesina` y si dispone de `panel_digital`.
+3. **Transbordos entre Líneas (Relación Reflexiva $N:M$):** Dos líneas de autobús distintas pueden conectarse en puntos de correspondencia para permitir el intercambio de pasajeros. Modele la **relación reflexiva $N:M$** denominada `PERMITE_TRANSBORDO` sobre la entidad `LÍNEA_AUTOBÚS`, registrando el atributo `tiempo_estimado_andando_minutos`.
+4. **Vehículos y Conductores:** Se registran los `AUTOBÚS` (`matrícula` [PK], `modelo`, `plazas_de_pie`) adscritos a una línea, y los `CONDUCTOR` (`dni` [PK], `nombre`, `licencia`) que conducen los autobuses en turnos específicos.
+
+#### Esquema de Análisis Resuelto
+
+- **Entidades Fuertes:** `LÍNEA_AUTOBÚS`, `AUTOBÚS`, `CONDUCTOR`.
+- **Entidad Débil por Identificación:** `PARADA` (dependiente de `LÍNEA_AUTOBÚS`, PK: `(cod_linea, orden_secuencia)`).
+- **Relación Reflexiva $N:M$:** `PERMITE_TRANSBORDO` en `LÍNEA_AUTOBÚS` (roles: *Línea Origen* y *Línea Destino*, con atributo `tiempo_andando`).
+
+---
+
+### Ejercicio 16: Campeonato Deportivo, Partidos, Actas Débiles y Capitanía
+
+**Enunciado:**  
+Una federación deportiva automatiza la gestión de sus ligas oficiales:
+
+1. **Equipos y Jugadores (Relación Reflexiva de Capitanía):** De cada `EQUIPO` se conoce `cod_equipo` (PK), `nombre_club` y `ciudad`. De cada `JUGADOR` se registra `num_ficha_federativa` (PK), `dni`, `nombre` y `dorsal`. Un jugador pertenece a un único equipo. Dentro de cada equipo, se designa a un único jugador como **Capitán Oficial** ($1:1$ entre `EQUIPO` y `JUGADOR`).
+2. **Partidos de Competición (Relación Múltiple con la misma entidad):** Un `PARTIDO` (identificado por `cod_partido` [PK], `fecha_hora` y `jornada`) enfrenta obligatoriamente a dos equipos distintos. Se deben establecer dos relaciones $1:N$ independientes desde `EQUIPO` hacia `PARTIDO`: la relación `JUEGA_LOCAL` y la relación `JUEGA_VISITANTE`.
+3. **Acta de Incidencias (Entidad Débil por Identificación e Existencia):** Durante el desarrollo de un partido se registran múltiples eventos en el acta oficial (`INCIDENCIA_ACTA`). La incidencia no tiene un código propio en la federación, sino que se identifica mediante el `minuto_partido` y un `num_secuencia` (ej. Minuto 45, secuencia 1) dentro de ese partido concreto (**clave primaria compuesta:** `cod_partido` + `minuto_partido` + `num_secuencia`). Se guarda el `tipo_incidencia` (Gol, Tarjeta Amarilla, Expulsión, Cambio) y el jugador implicado. Si un partido es anulado y eliminado del expediente federativo, sus incidencias asociadas se eliminan en cascada.
+
+#### Esquema de Análisis Resuelto
+
+- **Entidades Fuertes:** `EQUIPO`, `JUGADOR`, `PARTIDO`.
+- **Entidad Débil por Identificación y Existencia:** `INCIDENCIA_ACTA` (dependiente de `PARTIDO`, PK: `(cod_partido, minuto_partido, num_secuencia)`).
+- **Relaciones Especiales:**
+  - Dos relaciones roles independientes de `EQUIPO` a `PARTIDO`: `JUEGA_LOCAL` $(1,1)$ y `JUEGA_VISITANTE` $(1,1)$.
+  - Relación de Capitanía $1:1$ opcional entre `EQUIPO` y `JUGADOR`.

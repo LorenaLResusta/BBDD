@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgDep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="820" height="400" rx="12" fill="url(#bgDep)"/>
+  <text x="410" y="35" text-anchor="middle" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">Arquitecturas de Despliegue de Bases de Datos</text>
+
+  <!-- 1. Centralizada -->
+  <g transform="translate(30, 65)">
+    <rect width="230" height="290" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="115" y="30" text-anchor="middle" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="15" font-weight="bold">1. Centralizada</text>
+    
+    <rect x="45" y="55" width="140" height="70" rx="6" fill="#0284c7"/>
+    <text x="115" y="85" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Servidor Único</text>
+    <text x="115" y="105" text-anchor="middle" fill="#e0f2fe" font-size="11">App + SGBD + BD</text>
+
+    <text x="115" y="160" text-anchor="middle" fill="#94a3b8" font-size="11">Terminales tontos o locales</text>
+    <rect x="25" y="180" width="180" height="85" rx="6" fill="#0f172a"/>
+    <text x="35" y="205" fill="#38bdf8" font-size="11">✓ Fácil mantenimiento</text>
+    <text x="35" y="225" fill="#fca5a5" font-size="11">❌ Cuello de botella</text>
+    <text x="35" y="245" fill="#fca5a5" font-size="11">❌ Punto único de fallo</text>
+  </g>
+
+  <!-- 2. Cliente-Servidor -->
+  <g transform="translate(295, 65)">
+    <rect width="230" height="290" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="115" y="30" text-anchor="middle" fill="#34d399" font-family="system-ui, sans-serif" font-size="15" font-weight="bold">2. Cliente-Servidor</text>
+
+    <rect x="35" y="55" width="160" height="35" rx="4" fill="#334155"/>
+    <text x="115" y="77" text-anchor="middle" fill="#fff" font-size="11">Clientes (PCs / Web)</text>
+
+    <path d="M 115 90 L 115 115" stroke="#10b981" stroke-width="2"/>
+
+    <rect x="35" y="115" width="160" height="45" rx="6" fill="#047857"/>
+    <text x="115" y="137" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Servidor SGBD</text>
+    <text x="115" y="152" text-anchor="middle" fill="#d1fae5" font-size="10">Procesamiento SQL Central</text>
+
+    <rect x="25" y="180" width="180" height="85" rx="6" fill="#0f172a"/>
+    <text x="35" y="205" fill="#34d399" font-size="11">✓ Gran escalabilidad</text>
+    <text x="35" y="225" fill="#34d399" font-size="11">✓ Carga distribuida</text>
+    <text x="35" y="245" fill="#94a3b8" font-size="11">✓ Modelo estándar hoy</text>
+  </g>
+
+  <!-- 3. Distribuida -->
+  <g transform="translate(560, 65)">
+    <rect width="230" height="290" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="115" y="30" text-anchor="middle" fill="#a78bfa" font-family="system-ui, sans-serif" font-size="15" font-weight="bold">3. Distribuida</text>
+
+    <rect x="20" y="55" width="85" height="40" rx="4" fill="#6d28d9"/>
+    <text x="62" y="78" text-anchor="middle" fill="#fff" font-size="10">Nodo Madrid</text>
+
+    <rect x="125" y="55" width="85" height="40" rx="4" fill="#6d28d9"/>
+    <text x="167" y="78" text-anchor="middle" fill="#fff" font-size="10">Nodo BCN</text>
+
+    <path d="M 105 75 L 125 75" stroke="#a78bfa" stroke-width="2" stroke-dasharray="2"/>
+
+    <rect x="70" y="115" width="90" height="40" rx="4" fill="#6d28d9"/>
+    <text x="115" y="138" text-anchor="middle" fill="#fff" font-size="10">Nodo Valencia</text>
+
+    <rect x="25" y="180" width="180" height="85" rx="6" fill="#0f172a"/>
+    <text x="35" y="205" fill="#a78bfa" font-size="11">✓ Alta disponibilidad</text>
+    <text x="35" y="225" fill="#a78bfa" font-size="11">✓ Tolerancia a fallos</text>
+    <text x="35" y="245" fill="#fca5a5" font-size="11">❌ Complejidad réplicas</text>
+  </g>
+</svg>

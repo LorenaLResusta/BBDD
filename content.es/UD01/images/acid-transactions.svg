@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgAcid" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="420" rx="12" fill="url(#bgAcid)"/>
+  <text x="400" y="38" text-anchor="middle" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">Propiedades ACID de las Transacciones</text>
+
+  <!-- Grid of 4 ACID properties -->
+  <!-- A -->
+  <g transform="translate(40, 70)">
+    <rect width="340" height="145" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="2"/>
+    <rect x="15" y="15" width="40" height="40" rx="6" fill="#ef4444"/>
+    <text x="35" y="42" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="22" font-weight="bold">A</text>
+    <text x="70" y="35" fill="#fca5a5" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">Atomicidad (Atomicity)</text>
+    <text x="70" y="52" fill="#94a3b8" font-size="12">«Todo o nada»</text>
+    <text x="15" y="82" fill="#e2e8f0" font-size="12">Todas las operaciones de la transacción se completan con éxito (COMMIT) o ninguna surte efecto (ROLLBACK).</text>
+  </g>
+
+  <!-- C -->
+  <g transform="translate(420, 70)">
+    <rect width="340" height="145" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+    <rect x="15" y="15" width="40" height="40" rx="6" fill="#f59e0b"/>
+    <text x="35" y="42" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="22" font-weight="bold">C</text>
+    <text x="70" y="35" fill="#fcd34d" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">Consistencia (Consistency)</text>
+    <text x="70" y="52" fill="#94a3b8" font-size="12">«Estado válido a estado válido»</text>
+    <text x="15" y="82" fill="#e2e8f0" font-size="12">La BD pasa de un estado consistente a otro. Se respetan todas las reglas e integridad (claves, CHECK, etc.).</text>
+  </g>
+
+  <!-- I -->
+  <g transform="translate(40, 235)">
+    <rect width="340" height="145" rx="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+    <rect x="15" y="15" width="40" height="40" rx="6" fill="#3b82f6"/>
+    <text x="35" y="42" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="22" font-weight="bold">I</text>
+    <text x="70" y="35" fill="#93c5fd" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">Aislamiento (Isolation)</text>
+    <text x="70" y="52" fill="#94a3b8" font-size="12">«Operaciones concurrentes independientes»</text>
+    <text x="15" y="82" fill="#e2e8f0" font-size="12">Las transacciones simultáneas no interfieren entre sí. Los cambios no son visibles hasta confirmarse.</text>
+  </g>
+
+  <!-- D -->
+  <g transform="translate(420, 235)">
+    <rect width="340" height="145" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <rect x="15" y="15" width="40" height="40" rx="6" fill="#10b981"/>
+    <text x="35" y="42" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="22" font-weight="bold">D</text>
+    <text x="70" y="35" fill="#6ee7b7" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">Durabilidad (Durability)</text>
+    <text x="70" y="52" fill="#94a3b8" font-size="12">«Cambios permanentes»</text>
+    <text x="15" y="82" fill="#e2e8f0" font-size="12">Una vez confirmada la transacción (COMMIT), los datos persisten incluso ante fallos del sistema o reinicios.</text>
+  </g>
+</svg>

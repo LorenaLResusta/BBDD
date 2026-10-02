@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgER" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="850" height="420" rx="12" fill="url(#bgER)"/>
+  <text x="425" y="35" text-anchor="middle" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">Componentes Principales del Modelo Entidad-Relación (E/R)</text>
+
+  <!-- Entity Strong vs Weak -->
+  <g transform="translate(40, 65)">
+    <rect width="360" height="150" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="180" y="25" text-anchor="middle" fill="#38bdf8" font-size="15" font-weight="bold">1. Entidades (Fuerte y Débil)</text>
+
+    <!-- Strong Entity -->
+    <rect x="25" y="45" width="130" height="45" rx="4" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+    <text x="90" y="72" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">ALUMNO</text>
+    <text x="90" y="110" text-anchor="middle" fill="#94a3b8" font-size="11">Entidad Fuerte (Rectángulo)</text>
+
+    <!-- Weak Entity -->
+    <rect x="200" y="45" width="130" height="45" rx="4" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+    <rect x="205" y="50" width="120" height="35" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/>
+    <text x="265" y="72" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">EJEMPLAR</text>
+    <text x="265" y="110" text-anchor="middle" fill="#94a3b8" font-size="11">Entidad Débil (Doble recuadro)</text>
+  </g>
+
+  <!-- Relationship -->
+  <g transform="translate(430, 65)">
+    <rect width="380" height="150" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="190" y="25" text-anchor="middle" fill="#34d399" font-size="15" font-weight="bold">2. Relaciones y Cardinalidades</text>
+
+    <rect x="20" y="55" width="90" height="35" rx="4" fill="#047857"/>
+    <text x="65" y="77" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">CLIENTE</text>
+
+    <path d="M 110 72 L 150 72" stroke="#34d399" stroke-width="2"/>
+    <text x="130" y="65" fill="#34d399" font-size="11" font-weight="bold">(1,1)</text>
+
+    <polygon points="190,45 230,72 190,99 150,72" fill="#059669" stroke="#34d399" stroke-width="1.5"/>
+    <text x="190" y="76" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">REALIZA</text>
+
+    <path d="M 230 72 L 270 72" stroke="#34d399" stroke-width="2"/>
+    <text x="250" y="65" fill="#34d399" font-size="11" font-weight="bold">(0,n)</text>
+
+    <rect x="270" y="55" width="90" height="35" rx="4" fill="#047857"/>
+    <text x="315" y="77" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">PEDIDO</text>
+
+    <text x="190" y="125" text-anchor="middle" fill="#cbd5e1" font-size="11">Asociación entre entidades con rango min/máx</text>
+  </g>
+
+  <!-- Attributes -->
+  <g transform="translate(40, 230)">
+    <rect width="770" height="165" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="385" y="25" text-anchor="middle" fill="#a78bfa" font-size="15" font-weight="bold">3. Tipos de Atributos</text>
+
+    <!-- PK -->
+    <g transform="translate(30, 45)">
+      <ellipse cx="65" cy="25" rx="55" ry="20" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="65" y="29" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold" text-decoration="underline">dni (PK)</text>
+      <text x="65" y="65" text-anchor="middle" fill="#94a3b8" font-size="11">Identificador Principal</text>
+    </g>
+
+    <!-- Descriptor -->
+    <g transform="translate(190, 45)">
+      <ellipse cx="65" cy="25" rx="55" ry="20" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="65" y="29" text-anchor="middle" fill="#fff" font-size="12">nombre</text>
+      <text x="65" y="65" text-anchor="middle" fill="#94a3b8" font-size="11">Descriptor Simple</text>
+    </g>
+
+    <!-- Compuesto -->
+    <g transform="translate(350, 45)">
+      <ellipse cx="75" cy="20" rx="55" ry="18" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="75" y="24" text-anchor="middle" fill="#fff" font-size="11">dirección</text>
+      <line x1="40" y1="36" x2="20" y2="60" stroke="#a78bfa" stroke-width="1.5"/>
+      <line x1="110" y1="36" x2="130" y2="60" stroke="#a78bfa" stroke-width="1.5"/>
+      <ellipse cx="15" cy="72" rx="35" ry="14" fill="#4c1d95"/>
+      <text x="15" y="75" text-anchor="middle" fill="#fff" font-size="9">calle</text>
+      <ellipse cx="135" cy="72" rx="35" ry="14" fill="#4c1d95"/>
+      <text x="135" y="75" text-anchor="middle" fill="#fff" font-size="9">ciudad</text>
+      <text x="75" y="105" text-anchor="middle" fill="#94a3b8" font-size="11">Atributo Compuesto</text>
+    </g>
+
+    <!-- Multivaluado -->
+    <g transform="translate(560, 45)">
+      <ellipse cx="75" cy="25" rx="55" ry="20" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="75" y="29" text-anchor="middle" fill="#fff" font-size="12">teléfono</text>
+      <text x="135" y="18" fill="#38bdf8" font-size="12" font-weight="bold">N</text>
+      <text x="75" y="65" text-anchor="middle" fill="#94a3b8" font-size="11">Multivaluado (N valores)</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgAnsi" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" rx="12" fill="url(#bgAnsi)"/>
+  <text x="400" y="38" text-anchor="middle" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">Arquitectura ANSI/SPARC a 3 Niveles</text>
+
+  <!-- Level 1: External -->
+  <g transform="translate(50, 70)">
+    <rect width="700" height="90" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="350" y="25" text-anchor="middle" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">NIVEL EXTERNO (Vistas de Usuarios)</text>
+    
+    <rect x="30" y="38" width="180" height="38" rx="6" fill="#0284c7"/>
+    <text x="120" y="62" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Vista Recepción / Venta</text>
+
+    <rect x="260" y="38" width="180" height="38" rx="6" fill="#0284c7"/>
+    <text x="350" y="62" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Vista Contabilidad</text>
+
+    <rect x="490" y="38" width="180" height="38" rx="6" fill="#0284c7"/>
+    <text x="580" y="62" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Vista Dirección / BI</text>
+  </g>
+
+  <!-- Vertical connectors 1 -->
+  <line x1="170" y1="160" x2="170" y2="195" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4"/>
+  <line x1="400" y1="160" x2="400" y2="195" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4"/>
+  <line x1="630" y1="160" x2="630" y2="195" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4"/>
+  <text x="410" y="182" fill="#38bdf8" font-size="11" font-weight="bold">Transformación Lógica / Vistas</text>
+
+  <!-- Level 2: Conceptual -->
+  <g transform="translate(50, 195)">
+    <rect width="700" height="90" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+    <text x="350" y="28" text-anchor="middle" fill="#34d399" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">NIVEL CONCEPTUAL (Esquema Global de la Base de Datos)</text>
+    <rect x="100" y="40" width="500" height="36" rx="6" fill="#047857"/>
+    <text x="350" y="63" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">Estructura Global: Tablas, Relaciones, Claves, Restricciones de Integridad</text>
+  </g>
+
+  <!-- Vertical connectors 2 -->
+  <line x1="400" y1="285" x2="400" y2="320" stroke="#10b981" stroke-width="2" stroke-dasharray="4"/>
+  <text x="410" y="307" fill="#34d399" font-size="11" font-weight="bold">Transformación Física / Acceso a Disco</text>
+
+  <!-- Level 3: Internal -->
+  <g transform="translate(50, 320)">
+    <rect width="700" height="90" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="350" y="28" text-anchor="middle" fill="#a78bfa" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">NIVEL INTERNO (Esquema Físico y Almacenamiento)</text>
+    <rect x="100" y="40" width="500" height="36" rx="6" fill="#6d28d9"/>
+    <text x="350" y="63" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">Archivos físicos, Páginas de disco, Índices B-Tree, Cifrado y Compresión</text>
+  </g>
+
+  <!-- Summary box -->
+  <text x="400" y="445" text-anchor="middle" fill="#cbd5e1" font-family="system-ui, sans-serif" font-size="12">Garantiza <tspan fill="#38bdf8" font-weight="bold">Independencia Lógica</tspan> (Nivel Externo ↔ Conceptual) e <tspan fill="#34d399" font-weight="bold">Independencia Física</tspan> (Nivel Conceptual ↔ Interno).</text>
+</svg>

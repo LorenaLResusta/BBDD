@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgComp" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="820" height="420" rx="12" fill="url(#bgComp)"/>
+  <text x="410" y="35" text-anchor="middle" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">Sistemas Basados en Archivos vs. SGBD</text>
+
+  <!-- Left: File System -->
+  <g transform="translate(30, 60)">
+    <rect width="365" height="330" rx="8" fill="#1e293b" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="182" y="30" text-anchor="middle" fill="#fca5a5" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">Sistemas Tradicionales de Archivos</text>
+
+    <!-- App A -> File A -->
+    <rect x="25" y="55" width="130" height="35" rx="4" fill="#334155"/>
+    <text x="90" y="77" text-anchor="middle" fill="#fff" font-size="12">Prog. Nóminas</text>
+    <path d="M 160 72 L 205 72" stroke="#ef4444" stroke-width="2"/>
+    <rect x="210" y="55" width="130" height="35" rx="4" fill="#7f1d1d" stroke="#fca5a5" stroke-width="1"/>
+    <text x="275" y="77" text-anchor="middle" fill="#fff" font-size="11">Fichero_Empleados.dat</text>
+
+    <!-- App B -> File B -->
+    <rect x="25" y="115" width="130" height="35" rx="4" fill="#334155"/>
+    <text x="90" y="137" text-anchor="middle" fill="#fff" font-size="12">Prog. Facturación</text>
+    <path d="M 160 132 L 205 132" stroke="#ef4444" stroke-width="2"/>
+    <rect x="210" y="115" width="130" height="35" rx="4" fill="#7f1d1d" stroke="#fca5a5" stroke-width="1"/>
+    <text x="275" y="137" text-anchor="middle" fill="#fff" font-size="11">Fichero_Clientes.dat</text>
+
+    <!-- Disadvantages -->
+    <rect x="25" y="175" width="315" height="135" rx="6" fill="#0f172a"/>
+    <text x="35" y="200" fill="#fca5a5" font-size="12" font-weight="bold">❌ Redundancia e inconsistencia</text>
+    <text x="35" y="222" fill="#fca5a5" font-size="12" font-weight="bold">❌ Dependencia física-lógica</text>
+    <text x="35" y="244" fill="#fca5a5" font-size="12" font-weight="bold">❌ Concurrencia y seguridad limitadas</text>
+    <text x="35" y="266" fill="#fca5a5" font-size="12" font-weight="bold">❌ Sin control centralizado de integridad</text>
+    <text x="35" y="288" fill="#fca5a5" font-size="12" font-weight="bold">❌ Aislamiento de datos entre programas</text>
+  </g>
+
+  <!-- Right: SGBD -->
+  <g transform="translate(425, 60)">
+    <rect width="365" height="330" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="182" y="30" text-anchor="middle" fill="#6ee7b7" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">Enfoque con SGBD Centralizado</text>
+
+    <!-- Apps -->
+    <rect x="25" y="55" width="100" height="30" rx="4" fill="#334155"/>
+    <text x="75" y="75" text-anchor="middle" fill="#fff" font-size="11">Nóminas</text>
+
+    <rect x="135" y="55" width="100" height="30" rx="4" fill="#334155"/>
+    <text x="185" y="75" text-anchor="middle" fill="#fff" font-size="11">Facturación</text>
+
+    <rect x="245" y="55" width="95" height="30" rx="4" fill="#334155"/>
+    <text x="292" y="75" text-anchor="middle" fill="#fff" font-size="11">RRHH Web</text>
+
+    <!-- Arrows down -->
+    <path d="M 75 90 L 180 115" stroke="#10b981" stroke-width="2"/>
+    <path d="M 185 90 L 185 115" stroke="#10b981" stroke-width="2"/>
+    <path d="M 292 90 L 190 115" stroke="#10b981" stroke-width="2"/>
+
+    <!-- SGBD layer -->
+    <rect x="25" y="118" width="315" height="40" rx="6" fill="#047857"/>
+    <text x="182" y="143" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">Capa Centralizada SGBD</text>
+
+    <!-- Advantages -->
+    <rect x="25" y="175" width="315" height="135" rx="6" fill="#0f172a"/>
+    <text x="35" y="200" fill="#6ee7b7" font-size="12" font-weight="bold">✓ Eliminación de redundancias</text>
+    <text x="35" y="222" fill="#6ee7b7" font-size="12" font-weight="bold">✓ Independencia física y lógica</text>
+    <text x="35" y="244" fill="#6ee7b7" font-size="12" font-weight="bold">✓ Control de concurrencia y ACID</text>
+    <text x="35" y="266" fill="#6ee7b7" font-size="12" font-weight="bold">✓ Seguridad y permisos finos</text>
+    <text x="35" y="288" fill="#6ee7b7" font-size="12" font-weight="bold">✓ Reglas de integridad unificadas</text>
+  </g>
+</svg>

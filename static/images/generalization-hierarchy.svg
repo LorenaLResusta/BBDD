@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="850" height="450" rx="12" fill="url(#bgGen)"/>
+  <text x="425" y="35" text-anchor="middle" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">Jerarquías EER: Generalización y Especialización</text>
+
+  <!-- Supertype -->
+  <g transform="translate(335, 60)">
+    <rect width="180" height="50" rx="6" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+    <text x="90" y="30" text-anchor="middle" fill="#fff" font-family="system-ui, sans-serif" font-size="15" font-weight="bold">PERSONA</text>
+    <text x="90" y="44" text-anchor="middle" fill="#e0f2fe" font-size="10">Supertipo (Atributos comunes)</text>
+  </g>
+
+  <!-- Triangle for ISA -->
+  <g transform="translate(400, 130)">
+    <polygon points="25,0 0,45 50,45" fill="#f59e0b" stroke="#fff" stroke-width="1.5"/>
+    <text x="25" y="35" text-anchor="middle" fill="#000" font-size="11" font-weight="bold">d, t</text>
+  </g>
+
+  <!-- Connector lines -->
+  <line x1="425" y1="110" x2="425" y2="130" stroke="#38bdf8" stroke-width="2"/>
+  <line x1="425" y1="175" x2="425" y2="195" stroke="#f59e0b" stroke-width="2"/>
+  <line x1="160" y1="195" x2="690" y2="195" stroke="#f59e0b" stroke-width="2"/>
+  <line x1="160" y1="195" x2="160" y2="230" stroke="#f59e0b" stroke-width="2"/>
+  <line x1="425" y1="195" x2="425" y2="230" stroke="#f59e0b" stroke-width="2"/>
+  <line x1="690" y1="195" x2="690" y2="230" stroke="#f59e0b" stroke-width="2"/>
+
+  <!-- Subtypes -->
+  <g transform="translate(80, 230)">
+    <rect width="160" height="45" rx="6" fill="#047857" stroke="#10b981" stroke-width="1.5"/>
+    <text x="80" y="27" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">ALUMNO</text>
+  </g>
+
+  <g transform="translate(345, 230)">
+    <rect width="160" height="45" rx="6" fill="#047857" stroke="#10b981" stroke-width="1.5"/>
+    <text x="80" y="27" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">PROFESOR</text>
+  </g>
+
+  <g transform="translate(610, 230)">
+    <rect width="160" height="45" rx="6" fill="#047857" stroke="#10b981" stroke-width="1.5"/>
+    <text x="80" y="27" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">PAS</text>
+  </g>
+
+  <!-- Classification Explanation Box -->
+  <g transform="translate(50, 310)">
+    <rect width="750" height="110" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="375" y="25" text-anchor="middle" fill="#38bdf8" font-size="14" font-weight="bold">Clasificación de Restricciones en Jerarquías</text>
+
+    <text x="30" y="52" fill="#e2e8f0" font-size="12"><tspan fill="#f59e0b" font-weight="bold">Disjunta (D):</tspan> Una instancia del supertipo solo puede pertenecer a UN subtipo a la vez.</text>
+    <text x="30" y="72" fill="#e2e8f0" font-size="12"><tspan fill="#f59e0b" font-weight="bold">Solapada (S):</tspan> Una instancia del supertipo puede pertenecer a MÚLTIPLES subtipos simultáneamente.</text>
+
+    <text x="430" y="52" fill="#e2e8f0" font-size="12"><tspan fill="#10b981" font-weight="bold">Total (T):</tspan> Toda instancia del supertipo DEBE pertenecer al menos a un subtipo.</text>
+    <text x="430" y="72" fill="#e2e8f0" font-size="12"><tspan fill="#10b981" font-weight="bold">Parcial (P):</tspan> Pueden existir instancias del supertipo que no estén en ningún subtipo.</text>
+  </g>
+</svg>
