@@ -1,0 +1,170 @@
+/*
+  Estilos propios de los apuntes de Bases de Datos (0484).
+  Se cargan después de los del tema hugo-book y usan sus variables,
+  por lo que funcionan en modo claro y oscuro.
+*/
+
+:root {
+  --bd-accent: #c2410c;          /* naranja Oracle-ish para el proyecto */
+  --bd-guiada: var(--color-accent-tip);
+  --bd-autonoma: var(--color-accent-note);
+  --bd-reto: var(--color-accent-caution);
+  --bd-proyecto: var(--color-accent-important);
+}
+
+/* ---------- Tablas más legibles ---------- */
+.markdown table { display: table; width: 100%; font-size: var(--font-size-smaller); }
+.markdown table th { background: var(--gray-200); }
+.markdown table tr:nth-child(2n) td { background: var(--gray-100); }
+
+/* ---------- Bloque RA / CE ---------- */
+.bd-ra {
+  border: 1px solid var(--gray-200);
+  border-left: 4px solid var(--color-accent-important);
+  border-radius: var(--border-radius);
+  padding: .5rem 1rem .25rem;
+  margin: 1rem 0 1.5rem;
+  background: color-mix(in srgb, var(--color-accent-important) 6%, transparent);
+}
+.bd-ra-head {
+  font-size: var(--font-size-smallest);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 700;
+  color: var(--color-accent-important);
+  margin-bottom: .25rem;
+}
+.bd-ra-item { margin: .35rem 0; }
+.bd-ra-item summary { cursor: pointer; line-height: 1.5; }
+.bd-ra-item ul { margin: .4rem 0 .6rem; padding-left: 1.25rem; font-size: var(--font-size-smaller); }
+.bd-ra-code, .bd-ce-code {
+  display: inline-block;
+  font-weight: 700;
+  font-size: var(--font-size-smallest);
+  padding: 0 .4rem;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--color-accent-important);
+  margin-right: .25rem;
+}
+.bd-ce-code { background: transparent; color: var(--color-accent-important); border: 1px solid var(--color-accent-important); }
+.bd-ra-count { font-size: var(--font-size-smallest); opacity: .7; margin-left: .25rem; }
+
+/* ---------- Ficha de práctica ---------- */
+.bd-practica {
+  --c: var(--bd-guiada);
+  border: 1px solid var(--gray-200);
+  border-top: 5px solid var(--c);
+  border-radius: var(--border-radius);
+  margin: .75rem 0 1.25rem;
+  padding: .75rem 1rem;
+  background: color-mix(in srgb, var(--c) 5%, transparent);
+}
+.bd-practica--autonoma { --c: var(--bd-autonoma); }
+.bd-practica--reto { --c: var(--bd-reto); }
+.bd-practica--proyecto { --c: var(--bd-proyecto); }
+.bd-practica-top { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+.bd-practica-num { font-weight: 700; font-size: 1.05rem; }
+.bd-pill {
+  font-size: var(--font-size-smallest);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: .1rem .55rem;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--bd-guiada);
+}
+.bd-pill--autonoma { background: var(--bd-autonoma); }
+.bd-pill--reto { background: var(--bd-reto); }
+.bd-pill--proyecto { background: var(--bd-proyecto); }
+.bd-practica-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: .5rem 1rem;
+  margin: .6rem 0 0;
+}
+.bd-practica-meta dt { font-size: var(--font-size-smallest); text-transform: uppercase; opacity: .7; margin: 0; }
+.bd-practica-meta dd { margin: 0; font-size: var(--font-size-smaller); font-weight: 600; }
+.bd-nivel i {
+  display: inline-block; width: .7rem; height: .7rem; margin-right: .2rem;
+  border-radius: 50%; border: 1px solid var(--c); vertical-align: middle;
+}
+.bd-nivel i.on { background: var(--c); }
+
+/* ---------- Etiqueta de SGBD ---------- */
+.bd-sgbd {
+  display: inline-block;
+  font-size: var(--font-size-smallest);
+  font-weight: 700;
+  padding: .05rem .5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid currentColor;
+  vertical-align: middle;
+  color: #c74634;
+}
+.bd-sgbd::before { content: "SGBD · "; font-weight: 400; opacity: .8; }
+.bd-sgbd--mongo { color: #13aa52; }
+.bd-sgbd--mysql { color: #00758f; }
+.bd-sgbd--pg { color: #336791; }
+.bd-sgbd--std { color: var(--color-accent-default); }
+.bd-sgbd--std::before { content: ""; }
+
+/* ---------- Autoevaluación ---------- */
+.bd-quiz {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin: 1.5rem 0;
+}
+.bd-quiz-head { font-weight: 700; margin-bottom: .75rem; }
+.bd-quiz-head span { font-weight: 400; font-size: var(--font-size-smaller); opacity: .7; margin-left: .5rem; }
+.bd-quiz-q {
+  border: 1px solid var(--gray-200);
+  border-left: 4px solid var(--gray-500);
+  border-radius: var(--border-radius);
+  margin: 0 0 .75rem;
+  padding: .5rem .75rem;
+}
+.bd-quiz-q.ok { border-left-color: var(--color-accent-tip); }
+.bd-quiz-q.ko { border-left-color: var(--color-accent-caution); }
+.bd-quiz-q legend { font-weight: 600; padding: 0; float: left; width: 100%; margin-bottom: .4rem; }
+.bd-quiz-q legend + label { clear: both; }
+.bd-quiz-q legend p, .bd-quiz-q label p { display: inline; margin: 0; }
+.bd-quiz-n {
+  display: inline-block; min-width: 1.5rem; text-align: center;
+  border-radius: 999px; background: var(--gray-200); margin-right: .25rem;
+}
+.bd-quiz-q label { display: block; padding: .2rem .35rem; border-radius: var(--border-radius); cursor: pointer; }
+.bd-quiz-q label:hover { background: var(--gray-100); }
+.bd-quiz-q label.correct { background: color-mix(in srgb, var(--color-accent-tip) 18%, transparent); }
+.bd-quiz-q label.wrong { background: color-mix(in srgb, var(--color-accent-caution) 18%, transparent); text-decoration: line-through; }
+.bd-quiz-explain {
+  margin-top: .4rem; font-size: var(--font-size-smaller);
+  padding: .4rem .6rem; border-radius: var(--border-radius); background: var(--gray-100);
+}
+.bd-quiz-actions { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+.bd-btn {
+  font: inherit; font-size: var(--font-size-smaller); font-weight: 600;
+  padding: .35rem 1rem; border-radius: var(--border-radius);
+  border: 1px solid var(--color-link); background: var(--color-link); color: #fff; cursor: pointer;
+}
+.bd-btn--ghost { background: transparent; color: var(--color-link); }
+.bd-quiz-score { font-weight: 700; }
+
+/* ---------- Tarjetas de unidades en portada ---------- */
+.bd-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 1rem; margin: 1rem 0; }
+.bd-card {
+  border: 1px solid var(--gray-200); border-radius: var(--border-radius);
+  padding: .75rem 1rem; display: flex; flex-direction: column; gap: .35rem;
+}
+.bd-card h3 { margin: 0; font-size: 1rem; }
+.bd-card p { margin: 0; font-size: var(--font-size-smaller); }
+.bd-card .bd-card-ra { font-size: var(--font-size-smallest); font-weight: 700; color: var(--color-accent-important); }
+.bd-card .bd-card-links { margin-top: auto; font-size: var(--font-size-smaller); }
+
+/* Listas de comprobación (task lists) */
+.markdown ul li:has(> input[type="checkbox"]) { list-style: none; margin-left: -1.2rem; }
+
+/* Bloques <details> de soluciones */
+.markdown details > summary { font-weight: 600; }

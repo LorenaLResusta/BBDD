@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" role="img" aria-labelledby="title desc">
+  <title id="title">EDIFICIO y entidad débil AULA en notación Chen</title>
+  <desc id="desc">EDIFICIO se relaciona con AULA mediante el rombo doble identificador. AULA usa doble rectángulo y num_aula es una clave parcial.</desc>
+  <rect width="900" height="340" fill="#0f172a"/>
+  <g fill="none" stroke="#94a3b8" stroke-width="2"><path d="M265 145H355M545 145H635M170 118L120 56M205 172L210 280M730 118L780 55M690 172L675 280"/></g>
+  <g fill="#075985" stroke="#38bdf8" stroke-width="2"><rect x="95" y="118" width="170" height="54"/></g>
+  <g fill="none" stroke="#38bdf8" stroke-width="2"><rect x="635" y="118" width="170" height="54"/><rect x="641" y="124" width="158" height="42"/></g>
+  <g fill="#047857" stroke="#34d399" stroke-width="2"><polygon points="450,94 545,145 450,196 355,145"/><polygon points="450,103 528,145 450,187 372,145"/></g>
+  <g fill="#312e81" stroke="#a5b4fc" stroke-width="2"><ellipse cx="120" cy="48" rx="84" ry="26"/><ellipse cx="210" cy="304" rx="77" ry="25"/><ellipse cx="780" cy="48" rx="77" ry="26"/><ellipse cx="675" cy="304" rx="68" ry="25"/></g>
+  <g fill="#f8fafc" font-family="Arial, sans-serif" text-anchor="middle"><text x="180" y="151" font-size="17" font-weight="700">EDIFICIO</text><text x="720" y="151" font-size="17" font-weight="700">AULA</text><text x="450" y="150" font-size="15" font-weight="700">IDENTIFICA</text><text x="120" y="53" font-size="13" text-decoration="underline">cod_edificio (PK)</text><text x="210" y="309" font-size="14">nombre</text><text x="780" y="53" font-size="14" text-decoration="underline" stroke-dasharray="3 2">num_aula (clave parcial)</text><text x="675" y="309" font-size="14">capacidad</text><text x="310" y="135" font-size="14" font-weight="700">1</text><text x="590" y="135" font-size="14" font-weight="700">N</text></g>
+</svg>

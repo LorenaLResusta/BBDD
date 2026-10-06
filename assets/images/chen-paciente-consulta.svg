@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 330" role="img" aria-labelledby="title desc">
+  <title id="title">PACIENTE realiza CONSULTA, diagrama Chen</title>
+  <desc id="desc">Relación uno a muchos entre PACIENTE y CONSULTA; los atributos de ambas entidades se dibujan como óvalos.</desc>
+  <rect width="950" height="330" fill="#0f172a"/>
+  <g fill="none" stroke="#94a3b8" stroke-width="2"><path d="M255 140H365M535 140H645M150 113L115 53M195 168L220 268M720 113L760 53M695 168L670 268M760 168L825 268"/></g>
+  <g fill="#075985" stroke="#38bdf8" stroke-width="2"><rect x="85" y="113" width="170" height="55"/><rect x="645" y="113" width="170" height="55"/></g>
+  <polygon points="450,93 535,140 450,187 365,140" fill="#047857" stroke="#34d399" stroke-width="2"/>
+  <g fill="#312e81" stroke="#a5b4fc" stroke-width="2"><ellipse cx="115" cy="45" rx="83" ry="25"/><ellipse cx="220" cy="293" rx="66" ry="25"/><ellipse cx="760" cy="45" rx="82" ry="25"/><ellipse cx="670" cy="293" rx="77" ry="25"/><ellipse cx="825" cy="293" rx="70" ry="25"/></g>
+  <g fill="#f8fafc" font-family="Arial, sans-serif" text-anchor="middle"><text x="170" y="147" font-size="16" font-weight="700">PACIENTE</text><text x="730" y="147" font-size="16" font-weight="700">CONSULTA</text><text x="450" y="145" font-size="14" font-weight="700">REALIZA</text><text x="115" y="50" font-size="12" text-decoration="underline">id_paciente (PK)</text><text x="220" y="298" font-size="14">dni</text><text x="760" y="50" font-size="12" text-decoration="underline">id_consulta (PK)</text><text x="670" y="298" font-size="14">fecha</text><text x="825" y="298" font-size="14">importe</text><text x="305" y="128" font-size="14" font-weight="700">1</text><text x="590" y="128" font-size="14" font-weight="700">N</text></g>
+</svg>

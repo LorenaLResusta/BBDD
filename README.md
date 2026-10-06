@@ -1,3 +1,75 @@
+# Bases de Datos · Módulo 0484 (DAM / DAW)
+
+Apuntes del módulo profesional **0484. Bases de datos** de los ciclos de grado superior DAM y DAW (Real Decreto 405/2023), curso 2026/27. Sitio estático generado con **Hugo** y el tema **hugo-book**, publicado en GitHub Pages.
+
+## Estructura del contenido
+
+```text
+content.es/
+├── _index.md                      Portada: unidades, mapa RA ↔ unidades, convenciones
+├── guia/                          Guía del módulo
+│   ├── ra-ce.md                   RA y CE oficiales y su relación con las unidades
+│   ├── proyecto-edugest.md        Proyecto transversal (centro educativo) y scripts
+│   ├── entorno.md                 Oracle AI Database 26ai Free y MongoDB 8.0 en Docker
+│   └── practicas.md               Tipos de práctica, normas de entrega y rúbrica
+├── ud01-introduccion/             RA1 · Sistemas de almacenamiento y SGBD
+├── ud02-modelo-er/                RA6 · Modelo Entidad/Relación (EER)
+├── ud03-modelo-relacional/        RA6, RA2 · Modelo relacional
+├── ud04-normalizacion/            RA6 · Normalización
+├── ud05-ddl-dcl/                  RA2 · DDL y DCL en Oracle
+├── ud06-consultas-basicas/        RA3 · Consultas sobre una tabla y funciones
+├── ud07-consultas-avanzadas/      RA3 · JOIN, agrupamiento, subconsultas, optimización
+├── ud08-dml-transacciones/        RA4 · DML, transacciones y concurrencia
+├── ud09-plsql/                    RA5 · PL/SQL: procedimientos, cursores, triggers, jobs
+└── ud10-nosql/                    RA7 · Bases de datos NoSQL con MongoDB
+```
+
+Cada unidad tiene `_index.md` (presentación y RA/CE), `udXX-teoria.md` y `udXX-practicas.md`.
+
+> Las carpetas antiguas `content.es/UD01` … `UD06` y `content.val/U01` se conservan, pero su `_index.md` impide que Hugo las publique (`build.render: never`). Su contenido ya está migrado a las nuevas carpetas: se pueden borrar.
+
+## Recursos
+
+| Ruta | Contenido |
+|---|---|
+| `assets/recursos/sql/edugest_00_usuario.sql` | Crea el usuario EDUGEST (ejecutar como SYSTEM en FREEPDB1) |
+| `assets/recursos/sql/edugest_01_esquema.sql` | Esquema relacional de referencia |
+| `assets/recursos/sql/edugest_02_datos.sql` | Datos de ejemplo (curso 2025-26) |
+| `assets/recursos/nosql/edugest_mongo.js` | Versión documental para MongoDB |
+| `assets/images/` | Diagramas SVG usados en las páginas (`![...](images/x.svg)`) |
+| `data/curriculo.yaml` | Texto oficial de los RA y CE (lo usa el shortcode `ra`) |
+
+## Elementos interactivos (shortcodes)
+
+| Uso | Resultado |
+|---|---|
+| `{{</* ra "RA3:a,b,c" "RA2:f" */>}}` | Cuadro desplegable con los RA y CE oficiales |
+| `{{</* practica num="5.1" tipo="Guiada" duracion="2 sesiones" nivel="1" ra="RA2: b, c" sgbd="Oracle 26ai" entrega="script.sql" */>}}` | Ficha de cabecera de una práctica (tipos: Guiada, Autónoma, Reto, Proyecto) |
+| `{{</* quiz */>}} … YAML … {{</* /quiz */>}}` | Test de autoevaluación con corrección y explicaciones |
+| `{{</* sgbd "Oracle 26ai" */>}}` | Etiqueta del SGBD de un ejemplo |
+| `> [!TIP]`, `> [!NOTE]`, `> [!IMPORTANT]`, `> [!WARNING]`, `> [!CAUTION]` | Avisos de colores (alertas de Markdown del tema) |
+| `{{%/* details title="Solución" */%}} … {{%/* /details */%}}` | Bloque desplegable (pistas y soluciones) |
+| `{{</* tabs */>}}{{%/* tab "Oracle" */%}} … {{%/* /tab */%}}{{</* /tabs */>}}` | Pestañas (por ejemplo, Oracle / MySQL / PostgreSQL) |
+| Bloques ` ```mermaid ` | Diagramas E/R, de flujo y de secuencia |
+| `$...$` y `$$...$$` con `math: true` en la cabecera | Fórmulas con KaTeX |
+
+Para crear una página nueva con la estructura de las demás:
+
+```bash
+hugo new --kind teoria   content.es/ud11-ejemplo/ud11-teoria.md
+hugo new --kind practicas content.es/ud11-ejemplo/ud11-practicas.md
+```
+
+## Probar en local
+
+```bash
+git submodule update --init --recursive
+hugo server -D
+# http://localhost:1313/BBDD/
+```
+
+---
+
 # **Inicializar el sitio Hugo con la plantilla Book**
 Ejecuta el siguiente comando para crear un nuevo sitio Hugo y añadir la plantilla **Hugo Book** como submódulo de Git:
 ```bash

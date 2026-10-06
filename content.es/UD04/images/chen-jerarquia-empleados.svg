@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 390" role="img" aria-labelledby="title desc">
+  <title id="title">Especialización EER de EMPLEADO en notación Chen</title>
+  <desc id="desc">EMPLEADO se especializa mediante triángulo ISA en PROGRAMADOR y ADMINISTRATIVO. Los atributos están en óvalos.</desc>
+  <rect width="900" height="390" fill="#0f172a"/>
+  <g fill="none" stroke="#94a3b8" stroke-width="2"><path d="M450 99V135M450 203V225M450 225H255V252M450 225H645V252M380 86L310 47M500 86L590 47M255 296L205 350M645 296L695 350M450 295V350"/></g>
+  <g fill="#075985" stroke="#38bdf8" stroke-width="2"><rect x="365" y="55" width="170" height="48"/><rect x="170" y="252" width="170" height="48"/><rect x="560" y="252" width="170" height="48"/></g>
+  <polygon points="450,135 390,203 510,203" fill="#d97706" stroke="#fbbf24" stroke-width="2"/>
+  <g fill="#312e81" stroke="#a5b4fc" stroke-width="2"><ellipse cx="300" cy="40" rx="95" ry="25"/><ellipse cx="600" cy="40" rx="68" ry="25"/><ellipse cx="205" cy="358" rx="84" ry="24"/><ellipse cx="450" cy="358" rx="75" ry="24"/><ellipse cx="695" cy="358" rx="76" ry="24"/></g>
+  <g fill="#f8fafc" font-family="Arial, sans-serif" text-anchor="middle"><text x="450" y="85" font-size="16" font-weight="700">EMPLEADO</text><text x="255" y="282" font-size="16" font-weight="700">PROGRAMADOR</text><text x="645" y="282" font-size="16" font-weight="700">ADMINISTRATIVO</text><text x="450" y="183" font-size="14" font-weight="700">ISA</text><text x="300" y="45" font-size="13" text-decoration="underline">id_empleado (PK)</text><text x="600" y="45" font-size="14">nombre</text><text x="205" y="363" font-size="12">lenguaje_principal</text><text x="450" y="363" font-size="14">salario</text><text x="695" y="363" font-size="12">nivel_ofimatica</text></g>
+</svg>

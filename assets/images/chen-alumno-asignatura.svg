@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" role="img" aria-labelledby="title desc">
+  <title id="title">ALUMNO se matricula en ASIGNATURA, notación Chen</title>
+  <desc id="desc">Relación muchos a muchos representada con rombo; fecha y nota son atributos ovalados de la relación.</desc>
+  <rect width="900" height="340" fill="#0f172a"/>
+  <g fill="none" stroke="#94a3b8" stroke-width="2"><path d="M260 145H365M535 145H640M175 118L125 60M215 174L230 275M725 118L775 60M680 174L665 275M415 180L365 260M485 180L535 260"/></g>
+  <g fill="#075985" stroke="#38bdf8" stroke-width="2"><rect x="90" y="118" width="170" height="54"/><rect x="640" y="118" width="170" height="54"/></g>
+  <polygon points="450,98 535,145 450,192 365,145" fill="#047857" stroke="#34d399" stroke-width="2"/>
+  <g fill="#312e81" stroke="#a5b4fc" stroke-width="2"><ellipse cx="125" cy="52" rx="78" ry="26"/><ellipse cx="230" cy="299" rx="70" ry="26"/><ellipse cx="365" cy="285" rx="70" ry="26"/><ellipse cx="535" cy="285" rx="70" ry="26"/><ellipse cx="665" cy="299" rx="78" ry="26"/><ellipse cx="775" cy="52" rx="86" ry="26"/></g>
+  <g fill="#f8fafc" font-family="Arial, sans-serif" text-anchor="middle"><text x="175" y="151" font-size="17" font-weight="700">ALUMNO</text><text x="725" y="151" font-size="17" font-weight="700">ASIGNATURA</text><text x="450" y="150" font-size="15" font-weight="700">MATRICULA</text><text x="125" y="57" font-size="13" text-decoration="underline">id_alumno (PK)</text><text x="230" y="304" font-size="14">nombre</text><text x="365" y="290" font-size="14">fecha</text><text x="535" y="290" font-size="14">nota</text><text x="665" y="304" font-size="13" text-decoration="underline">id_asignatura (PK)</text><text x="775" y="57" font-size="14">titulo</text><text x="305" y="135" font-size="14" font-weight="700">N</text><text x="590" y="135" font-size="14" font-weight="700">M</text></g>
+</svg>

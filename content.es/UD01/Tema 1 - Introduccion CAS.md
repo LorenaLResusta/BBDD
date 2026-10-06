@@ -1,6 +1,10 @@
 ---
 title: "UD01 - Introducción a las Bases de Datos"
 weight: 1
+linkTitle: "UD01: Introducción a las Bases de Datos"
+bookToc: true
+author: "LLR"
+
 ---
 
 ## Resumen del Tema
@@ -16,20 +20,29 @@ Esta unidad aborda en profundidad la transición histórica desde los soportes f
 
 ## Índice de Contenidos
 
+- [Resumen del Tema](#resumen-del-tema)
+- [Índice de Contenidos](#índice-de-contenidos)
 - [1. Datos, Información y Representación](#1-datos-información-y-representación)
   - [1.1 La cadena de valor: Dato, Información y Conocimiento](#11-la-cadena-de-valor-dato-información-y-conocimiento)
   - [1.2 Representación Tabular y Tipado de Datos](#12-representación-tabular-y-tipado-de-datos)
+    - [La Importancia Crítica del Tipado de Datos Correcto](#la-importancia-crítica-del-tipado-de-datos-correcto)
 - [2. Historia y Evolución de las Bases de Datos](#2-historia-y-evolución-de-las-bases-de-datos)
   - [2.1 Antecedentes Mecánicos y Cintas Magnéticas (1884 - 1950s)](#21-antecedentes-mecánicos-y-cintas-magnéticas-1884---1950s)
   - [2.2 Soportes de Disco y Modelos Pre-Relacionales (1960s)](#22-soportes-de-disco-y-modelos-pre-relacionales-1960s)
   - [2.3 La Revolución Relacional de E. F. Codd (1970s)](#23-la-revolución-relacional-de-e-f-codd-1970s)
+    - [Principios de la Revolución Relacional](#principios-de-la-revolución-relacional)
   - [2.4 Consolidación de SQL, NoSQL y Cloud (1980s - Actualidad)](#24-consolidación-de-sql-nosql-y-cloud-1980s---actualidad)
 - [3. Sistemas Basados en Archivos Tradicionales](#3-sistemas-basados-en-archivos-tradicionales)
   - [3.1 Concepto de Archivo y Clasificación de Formatos](#31-concepto-de-archivo-y-clasificación-de-formatos)
+    - [Clasificación según su Contenido y Propósito](#clasificación-según-su-contenido-y-propósito)
   - [3.2 Métodos de Organización y Acceso Físico](#32-métodos-de-organización-y-acceso-físico)
+    - [1. Archivos Secuenciales](#1-archivos-secuenciales)
+    - [2. Archivos de Acceso Aleatorio (Directo)](#2-archivos-de-acceso-aleatorio-directo)
+    - [3. Archivos Indexados](#3-archivos-indexados)
   - [3.3 Inconvenientes Críticos de la Gestión por Archivos Tradicionales](#33-inconvenientes-críticos-de-la-gestión-por-archivos-tradicionales)
 - [4. Bases de Datos y Sistemas Gestores (SGBD)](#4-bases-de-datos-y-sistemas-gestores-sgbd)
   - [4.1 Definición, Conceptos Clave y Funciones de un SGBD](#41-definición-conceptos-clave-y-funciones-de-un-sgbd)
+    - [Funciones Fundamentales que Otorga un SGBD](#funciones-fundamentales-que-otorga-un-sgbd)
   - [4.2 Análisis Comparativo: Archivos Tradicionales vs SGBD](#42-análisis-comparativo-archivos-tradicionales-vs-sgbd)
   - [4.3 Casos de Uso e Impacto Sectorial en el Mundo Real](#43-casos-de-uso-e-impacto-sectorial-en-el-mundo-real)
 - [5. Arquitectura y Componentes de un SGBD](#5-arquitectura-y-componentes-de-un-sgbd)
@@ -41,16 +54,24 @@ Esta unidad aborda en profundidad la transición histórica desde los soportes f
   - [6.1 Reglas de Integridad del Modelo Relacional](#61-reglas-de-integridad-del-modelo-relacional)
   - [6.2 Control de Concurrencia y Anomalías de Lectura/Escritura](#62-control-de-concurrencia-y-anomalías-de-lecturaescritura)
   - [6.3 Transacciones y Propiedades ACID](#63-transacciones-y-propiedades-acid)
+    - [Control Práctico de Transacciones mediante SQL](#control-práctico-de-transacciones-mediante-sql)
 - [7. Seguridad, Recuperación y Administración](#7-seguridad-recuperación-y-administración)
   - [7.1 Control de Acceso, Autenticación y Cifrado](#71-control-de-acceso-autenticación-y-cifrado)
   - [7.2 Gestión Segura de Contraseñas (Hashing y Sal)](#72-gestión-segura-de-contraseñas-hashing-y-sal)
+    - [El Esquema Correcto de Almacenamiento de Contraseñas](#el-esquema-correcto-de-almacenamiento-de-contraseñas)
   - [7.3 Estrategias de Backup, Logs (WAL) y Recuperación ante Desastres](#73-estrategias-de-backup-logs-wal-y-recuperación-ante-desastres)
 - [8. Modelos de Datos, Arquitecturas y Lenguajes](#8-modelos-de-datos-arquitecturas-y-lenguajes)
   - [8.1 Modelos de Datos (Relacional vs NoSQL)](#81-modelos-de-datos-relacional-vs-nosql)
   - [8.2 Topologías y Arquitecturas de Despliegue](#82-topologías-y-arquitecturas-de-despliegue)
   - [8.3 El Lenguaje Estándar SQL: DDL, DML y DCL](#83-el-lenguaje-estándar-sql-ddl-dml-y-dcl)
+    - [1. DDL (Data Definition Language - Lenguaje de Definición de Datos)](#1-ddl-data-definition-language---lenguaje-de-definición-de-datos)
+    - [2. DML (Data Manipulation Language - Lenguaje de Manipulación de Datos)](#2-dml-data-manipulation-language---lenguaje-de-manipulación-de-datos)
+    - [3. DCL (Data Control Language - Lenguaje de Control de Datos)](#3-dcl-data-control-language---lenguaje-de-control-de-datos)
 - [9. Resumen y Conclusiones](#9-resumen-y-conclusiones)
 - [10. Autoevaluación y Ejercicios Prácticos Resueltos](#10-autoevaluación-y-ejercicios-prácticos-resueltos)
+  - [1. Pregunta Teórica: Justificación de SGBD vs Archivos](#1-pregunta-teórica-justificación-de-sgbd-vs-archivos)
+  - [2. Ejercicio Práctico de Cálculo Físico de Offset](#2-ejercicio-práctico-de-cálculo-físico-de-offset)
+  - [3. Análisis de Independencia en ANSI/SPARC](#3-análisis-de-independencia-en-ansisparc)
 
 ---
 
@@ -189,6 +210,9 @@ Permiten posicionar el cabezal de lectura/escritura directamente en la ubicació
   $$Posición\_Byte = N \times L$$
   *Donde $N$ es el índice del registro deseado (comenzando en 0) y $L$ es la longitud fija del registro expresada en bytes.*
 
+  > [!WARNING]
+  > El índice comienza en **0**: el primer registro está en el byte 0 y el registro con índice 10 ocupa el desplazamiento de diez longitudes, no de nueve. La fórmula solo sirve si todos los registros tienen la misma longitud.
+
 > **Ejemplo Detallado de Cálculo de Offset Físico:**
 > Supongamos que definimos la estructura de un cliente con codificación de caracteres ANSI (1 byte por carácter):
 >
@@ -248,6 +272,9 @@ Cuando cada aplicación informática gestiona sus propios archivos independiente
 Una **Base de Datos (BD)** es una colección integrada, estructurada e interrelacionada de datos compartidos, almacenados de forma persistente en memoria secundaria con la menor redundancia posible, sirviendo a múltiples aplicaciones de forma simultánea.
 
 Un **Sistema Gestor de Bases de Datos (SGBD / DBMS)** es el conjunto complejo de software especializado que se sitúa como capa intermedia entre la base de datos física, los usuarios y las aplicaciones clientes, proporcionando acceso controlado y seguro.
+
+> [!NOTE]
+> Una **base de datos** es el conjunto organizado de datos; un **SGBD** es el software que permite definirlos, consultarlos y administrarlos. No son términos intercambiables.
 
 ```text
 [ Usuarios / Aplicaciones Web / Móviles ]
@@ -489,6 +516,9 @@ COMMIT;
 -- ROLLBACK;
 ```
 
+> [!IMPORTANT]
+> Antes de ejecutar `COMMIT`, la aplicación debe comprobar que **ambas actualizaciones** afectaron a una fila. Si falla cualquiera de ellas, debe ejecutar `ROLLBACK`; abrir una transacción por sí solo no valida el resultado de las operaciones.
+
 ---
 
 ## 7. Seguridad, Recuperación y Administración
@@ -559,9 +589,13 @@ graph TD
 
 - **Modelo Relacional (SQL):** Basado en tablas, esquemas estrictos y cumplimiento de las propiedades ACID. Ideal para datos estructurados de alta integridad (sistemas bancarios, ERPs, CRM).
 - **Modelos NoSQL:** Sacrifican algunas propiedades ACID o el esquema rígido para lograr escalabilidad horizontal masiva en clusters y flexibilidad de datos semiestructurados:
+- **Modelos NoSQL:** Priorizan, según el sistema y el caso de uso, la escalabilidad horizontal o la flexibilidad de datos semiestructurados frente a algunas garantías transaccionales o a un esquema rígido:
   - *Documentales:* Almacenan información en formato JSON/BSON (MongoDB).
   - *Clave-Valor:* Estructuras Hash en memoria de ultra-alta velocidad (Redis).
   - *Orientados a Grafos:* Modelan nodos y relaciones de forma nativa (Neo4j).
+
+> [!WARNING]
+> **NoSQL no significa necesariamente "sin ACID"**: las garantías transaccionales varían entre productos y configuraciones. Comprueba las propiedades concretas del sistema antes de elegirlo.
 
 ---
 

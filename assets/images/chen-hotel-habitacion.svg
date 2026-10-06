@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 350" role="img" aria-labelledby="title desc">
+  <title id="title">HOTEL y entidad débil HABITACION en notación Chen</title>
+  <desc id="desc">HOTEL identifica sus habitaciones mediante una relación identificadora doble; HABITACION se representa con doble rectángulo y número parcial.</desc>
+  <rect width="1000" height="350" fill="#0f172a"/>
+  <g fill="none" stroke="#94a3b8" stroke-width="2"><path d="M265 142H355M545 142H635M165 115L120 55M205 168L210 285M730 115L780 55M685 168L675 285M750 168L835 285"/></g>
+  <g fill="#075985" stroke="#38bdf8" stroke-width="2"><rect x="95" y="115" width="170" height="54"/></g>
+  <g fill="none" stroke="#38bdf8" stroke-width="2"><rect x="635" y="115" width="180" height="54"/><rect x="641" y="121" width="168" height="42"/></g>
+  <g fill="#047857" stroke="#34d399" stroke-width="2"><polygon points="450,91 545,142 450,193 355,142"/><polygon points="450,100 528,142 450,184 372,142"/></g>
+  <g fill="#312e81" stroke="#a5b4fc" stroke-width="2"><ellipse cx="120" cy="47" rx="75" ry="25"/><ellipse cx="210" cy="310" rx="68" ry="25"/><ellipse cx="780" cy="47" rx="81" ry="25"/><ellipse cx="675" cy="310" rx="66" ry="25"/><ellipse cx="835" cy="310" rx="81" ry="25"/></g>
+  <g fill="#f8fafc" font-family="Arial, sans-serif" text-anchor="middle"><text x="180" y="148" font-size="16" font-weight="700">HOTEL</text><text x="725" y="148" font-size="16" font-weight="700">HABITACION</text><text x="450" y="147" font-size="14" font-weight="700">CONTIENE</text><text x="120" y="52" font-size="12" text-decoration="underline">id_hotel (PK)</text><text x="210" y="315" font-size="14">nombre</text><text x="780" y="52" font-size="12" text-decoration="underline" stroke-dasharray="3 2">num_habitacion (parcial)</text><text x="675" y="315" font-size="14">capacidad</text><text x="835" y="315" font-size="13">precio_noche</text><text x="310" y="130" font-size="14" font-weight="700">1</text><text x="590" y="130" font-size="14" font-weight="700">N</text></g>
+</svg>

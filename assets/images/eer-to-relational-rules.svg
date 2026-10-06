@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 440" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgTrans" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="850" height="440" rx="12" fill="url(#bgTrans)"/>
+  <text x="425" y="35" text-anchor="middle" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">Reglas de Transformación de EER a Modelo Relacional</text>
+
+  <!-- 1:N Transformation -->
+  <g transform="translate(40, 65)">
+    <rect width="360" height="150" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="180" y="25" text-anchor="middle" fill="#38bdf8" font-size="15" font-weight="bold">1. Relación 1:N (Propagación de Clave)</text>
+    
+    <text x="20" y="52" fill="#e2e8f0" font-size="12">Se propaga la PK del lado "1" al lado "N" como FK.</text>
+    <rect x="20" y="68" width="320" height="30" rx="4" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+    <text x="180" y="88" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">DEPARTAMENTO (id_dep [PK], nombre)</text>
+
+    <rect x="20" y="105" width="320" height="30" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1"/>
+    <text x="180" y="125" text-anchor="middle" fill="#fff" font-size="11">EMPLEADO (id_emp [PK], nombre, <tspan fill="#f59e0b" font-weight="bold">id_dep [FK]</tspan>)</text>
+  </g>
+
+  <!-- N:M Transformation -->
+  <g transform="translate(430, 65)">
+    <rect width="380" height="150" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+    <text x="190" y="25" text-anchor="middle" fill="#34d399" font-size="15" font-weight="bold">2. Relación N:M (Tabla Intermedia)</text>
+    
+    <text x="20" y="52" fill="#e2e8f0" font-size="12">Se crea una nueva tabla con la PK compuesta de ambas.</text>
+    <rect x="20" y="68" width="340" height="30" rx="4" fill="#0f172a" stroke="#10b981" stroke-width="1"/>
+    <text x="190" y="88" text-anchor="middle" fill="#fff" font-size="11">ALUMNO(id_alumno [PK]), ASIGNATURA(id_asig [PK])</text>
+
+    <rect x="20" y="105" width="340" height="32" rx="4" fill="#047857"/>
+    <text x="190" y="126" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">MATRICULA (<tspan fill="#f59e0b">id_alumno [PK,FK]</tspan>, <tspan fill="#f59e0b">id_asig [PK,FK]</tspan>, nota)</text>
+  </g>
+
+  <!-- Weak Entity Transformation -->
+  <g transform="translate(40, 235)">
+    <rect width="360" height="170" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="180" y="25" text-anchor="middle" fill="#a78bfa" font-size="15" font-weight="bold">3. Entidad Débil por Identificación</text>
+
+    <text x="20" y="50" fill="#e2e8f0" font-size="12">La PK de la débil se compone con la PK del padre.</text>
+
+    <rect x="20" y="68" width="320" height="30" rx="4" fill="#0f172a" stroke="#a78bfa" stroke-width="1"/>
+    <text x="180" y="88" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="bold">EDIFICIO (id_edificio [PK], direccion)</text>
+
+    <rect x="20" y="110" width="320" height="40" rx="4" fill="#6d28d9"/>
+    <text x="180" y="128" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">AULA (<tspan fill="#f59e0b">id_edificio [PK,FK]</tspan>, num_aula [PK])</text>
+    <text x="180" y="142" text-anchor="middle" fill="#d8b4fe" font-size="10">Clave primaria compuesta resultante</text>
+  </g>
+
+  <!-- Recursive Transformation -->
+  <g transform="translate(430, 235)">
+    <rect width="380" height="170" rx="8" fill="#1e293b" stroke="#ec4899" stroke-width="1.5"/>
+    <text x="190" y="25" text-anchor="middle" fill="#f472b6" font-size="15" font-weight="bold">4. Relación Reflexiva / Recursiva (1:N)</text>
+
+    <text x="20" y="50" fill="#e2e8f0" font-size="12">Autorreferencia: la FK apunta a la propia tabla.</text>
+
+    <rect x="20" y="75" width="340" height="60" rx="4" fill="#0f172a" stroke="#f472b6" stroke-width="1.5"/>
+    <text x="190" y="98" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">EMPLEADO</text>
+    <text x="190" y="120" text-anchor="middle" fill="#f472b6" font-size="11">id_emp [PK], nombre, <tspan fill="#f59e0b" font-weight="bold">id_jefe [FK -> EMPLEADO(id_emp)]</tspan></text>
+  </g>
+</svg>
