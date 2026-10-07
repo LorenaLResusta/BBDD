@@ -16,6 +16,25 @@ Un **Sistema Gestor de Bases de Datos (SGBD)** es el componente software neurál
 Esta unidad aborda en profundidad la transición histórica desde los soportes físicos primitivos (tarjetas perforadas, cintas magnéticas y discos planos) hacia los SGBD relacionales y NoSQL actuales. Se analizan detalladamente los métodos de organización de archivos (secuenciales, de acceso aleatorio por cálculo de *offset* e indexados mediante árboles B), la arquitectura estándar de tres niveles **ANSI/SPARC**, los componentes internos de un motor de base de datos, las reglas de integridad referencial y de dominio, la gestión de la concurrencia mediante **transacciones ACID**, las políticas de seguridad y recuperación, así como las topologías de despliegue y los subconjuntos del lenguaje SQL.
 
 {{< ra "RA1:a,b,c,d,e,f,g,h,i,j" "RA2:a" "RA7:a" >}}
+### Temporalización
+
+La unidad ocupa **12 horas de aula** (8 de teoría y 4 de práctica).
+
+{{< sesiones unidad="UD01" horas="12" >}}
+items:
+  - {h: 2, tipo: T, t: "Datos e información. Historia. Sistemas basados en archivos", ref: "§1 a §3"}
+  - {h: 1, tipo: P, t: "De la hoja de cálculo al SGBD", ref: "Práctica 1.1"}
+  - {h: 2, tipo: T, t: "Bases de datos y SGBD. Arquitectura y componentes", ref: "§4 y §5"}
+  - {h: 2, tipo: P, t: "Primer contacto con Oracle", ref: "Práctica 1.2"}
+  - {h: 2, tipo: T, t: "Integridad, concurrencia y transacciones. Seguridad. Modelos de datos y lenguajes", ref: "§6 a §8"}
+  - {h: 1, tipo: T, t: "Clasificación de los SGBD. Bases de datos distribuidas y fragmentación", ref: "§9 y §10"}
+  - {h: 1, tipo: T, t: "Big Data, inteligencia de negocios y protección de datos", ref: "§11 y §12"}
+  - {h: 1, tipo: P, t: "Informe de análisis de EduGest", ref: "Proyecto EduGest-1"}
+autonomo:
+  - "Prácticas 1.3 (elegir un SGBD), 1.4 (distribución de datos), 1.5 (auditoría de protección de datos) y 1.6"
+  - "Ejercicios resueltos y autoevaluación"
+{{< /sesiones >}}
+
 
 ### Objetivos de aprendizaje
 
@@ -36,6 +55,8 @@ Al terminar esta unidad serás capaz de:
 
 ---
 
+
+{{< sesion n="1" h="2" tipo="t" >}}Datos, historia y archivos{{< /sesion >}}
 
 ## 1. Datos, Información y Representación
 
@@ -227,6 +248,8 @@ Cuando cada aplicación informática gestiona sus propios archivos independiente
 
 ---
 
+{{< sesion n="3" h="2" tipo="t" >}}SGBD y arquitectura{{< /sesion >}}
+
 ## 4. Bases de Datos y Sistemas Gestores (SGBD)
 
 ### 4.1 Definición, Conceptos Clave y Funciones de un SGBD
@@ -378,6 +401,8 @@ En la gestión de bases de datos intervienen diferentes perfiles profesionales c
   Personas que interactúan de forma indirecta con la base de datos a través de formularios e interfaces gráficas web o móviles sin necesidad de conocer la sintaxis SQL.
 
 ---
+
+{{< sesion n="5" h="2" tipo="t" >}}Integridad, seguridad y modelos{{< /sesion >}}
 
 ## 6. Integridad, Concurrencia y Transacciones
 
@@ -635,6 +660,8 @@ REVOKE DELETE ON producto FROM usuario_ventas;
 
 ---
 
+{{< sesion n="6" h="1" tipo="t" >}}Clasificación y distribución{{< /sesion >}}
+
 ## 9. Clasificación de los Sistemas Gestores de Bases de Datos
 
 Hay cientos de SGBD. Para elegir uno hay que saber **clasificarlos** según criterios que respondan a las necesidades del proyecto (RA1.f).
@@ -725,6 +752,8 @@ Además de fragmentar, se puede **replicar**: guardar copias completas o parcial
 > La **partición** de tablas (*partitioning*) es una idea muy parecida que se aplica **dentro de un único servidor**: Oracle puede dividir una tabla de matrículas por curso académico para que las consultas de un curso solo lean su partición. Es una decisión de diseño físico.
 
 ---
+
+{{< sesion n="7" h="1" tipo="t" >}}Big Data y protección de datos{{< /sesion >}}
 
 ## 11. Big Data e Inteligencia de Negocios
 

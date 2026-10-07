@@ -14,6 +14,27 @@ Un esquema relacional puede ser **correcto** (guarda toda la información) y aun
 En esta unidad aprenderás a reconocer las anomalías de un mal diseño, a identificar dependencias funcionales y claves candidatas, y a llevar un esquema hasta la **tercera forma normal (3FN)** y la **forma normal de Boyce-Codd (FNBC)**. También verás cuándo tiene sentido **desnormalizar** y cómo documentar las reglas que la normalización no resuelve.
 
 {{< ra "RA6:b,c,e,g,h" >}}
+### Temporalización
+
+La unidad ocupa **14 horas de aula** (6 de teoría y 8 de práctica). Es una unidad muy práctica: se aprende a normalizar normalizando.
+
+{{< sesiones unidad="UD04" horas="14" >}}
+items:
+  - {h: 2, tipo: T, t: "Anomalías y dependencias funcionales", ref: "§1 y §2"}
+  - {h: 1, tipo: P, t: "Dependencias, cierres y claves", ref: "Práctica 4.2"}
+  - {h: 2, tipo: T, t: "Las formas normales: 1FN, 2FN, 3FN y FNBC", ref: "§3"}
+  - {h: 2, tipo: P, t: "Normalizar las facturas de un taller", ref: "Práctica 4.1"}
+  - {h: 1, tipo: T, t: "Descomposición sin pérdida y desnormalización controlada", ref: "§4 y §5"}
+  - {h: 1, tipo: T, t: "Restricciones no representables y procedimiento completo", ref: "§6 y §7"}
+  - {h: 2, tipo: P, t: "Reservas de un hotel rural", ref: "Práctica 4.4"}
+  - {h: 1, tipo: P, t: "¿En qué forma normal está?", ref: "Práctica 4.3"}
+  - {h: 1, tipo: P, t: "FNBC y dependencias perdidas", ref: "Práctica 4.5"}
+  - {h: 1, tipo: P, t: "Informe de normalización de EduGest", ref: "Proyecto EduGest-4"}
+autonomo:
+  - "Práctica 4.6 (¿normalizar o desnormalizar?)"
+  - "Ejercicios resueltos y autoevaluación"
+{{< /sesiones >}}
+
 
 ### Objetivos de aprendizaje
 
@@ -30,6 +51,8 @@ Al terminar esta unidad serás capaz de:
 > El diseño E/R bien hecho (UD02) y su transformación correcta (UD03) suelen producir tablas ya normalizadas. La normalización sirve para **verificar** ese resultado y para **arreglar** diseños heredados: hojas de cálculo, ficheros CSV o bases de datos antiguas.
 
 ---
+
+{{< sesion n="1" h="2" tipo="t" >}}Anomalías y dependencias funcionales{{< /sesion >}}
 
 ## 1. Por qué normalizar: las anomalías
 
@@ -142,6 +165,8 @@ De ellas se derivan la **unión** (si $X \rightarrow Y$ y $X \rightarrow Z$, ent
 
 ---
 
+{{< sesion n="3" h="2" tipo="t" >}}Formas normales{{< /sesion >}}
+
 ## 3. Las formas normales
 
 Las **formas normales** son niveles de calidad de un esquema. Cada una incluye a la anterior: una relación en 3FN también está en 2FN y en 1FN.
@@ -247,6 +272,8 @@ Existen la **cuarta forma normal** (4FN), que trata las *dependencias multivalua
 
 ---
 
+{{< sesion n="5" h="1" tipo="t" >}}Descomposición y desnormalización{{< /sesion >}}
+
 ## 4. Descomposición sin pérdida
 
 Normalizar es **descomponer** una tabla en varias. Una descomposición correcta cumple dos propiedades:
@@ -280,6 +307,8 @@ Cuando lleguemos a la UD07 podrás comprobarlo en Oracle: la consulta que recons
 > Desnormalizar «porque los JOIN son lentos» sin haberlo medido es un error frecuente. Con índices adecuados (UD05 y UD07), un esquema normalizado responde rápido en la mayoría de los sistemas transaccionales.
 
 ---
+
+{{< sesion n="6" h="1" tipo="t" >}}Restricciones y procedimiento{{< /sesion >}}
 
 ## 6. Normalización y restricciones no representables
 
