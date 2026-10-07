@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-352 -450 1131 653" width="1131" height="653" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
+<title id="t">Red eléctrica: centrales, nodos y suministro</title><desc id="d">CENTRAL se especializa en hidroeléctrica, térmica y renovable y tiene PARTE (débil). NODO se une a NODO mediante líneas. CENTRAL, COMERCIALIZADORA y ZONA se relacionan en suministro.</desc>
+<rect x="-352" y="-450" width="1131" height="653" rx="10" fill="#0f172a"/>
+<g stroke="#94a3b8" stroke-width="1.6" fill="none"><line x1="4.7" y1="-24.4" x2="10.1" y2="37.4"/><line x1="-14.7" y1="-24.4" x2="-31.5" y2="-4.5"/><line x1="-47.4" y1="-41.0" x2="-73.3" y2="-38.7"/><line x1="47.9" y1="-66.4" x2="71.5" y2="-77.4"/><line x1="238.0" y1="124.2" x2="259.3" y2="139.1"/><line x1="193.3" y1="124.2" x2="178.4" y2="145.5"/><line x1="222.7" y1="82.2" x2="237.6" y2="60.9"/><line x1="593.8" y1="-35.8" x2="621.3" y2="-106.2"/><line x1="635.1" y1="-19.1" x2="661.0" y2="-21.4"/><line x1="16.3" y1="130.1" x2="31.2" y2="151.4"/><line x1="-28.4" y1="130.1" x2="-49.7" y2="145.0"/><line x1="144.2" y1="-232.1" x2="155.0" y2="-223.3"/><line x1="113.0" y1="-232.1" x2="106.3" y2="-207.0"/><line x1="106.5" y1="-274.1" x2="93.5" y2="-296.7"/><line x1="155.0" y1="-274.1" x2="177.5" y2="-287.1"/><line x1="536.7" y1="-108.1" x2="543.4" y2="-83.0"/><line x1="489.1" y1="-117.9" x2="463.9" y2="-111.1"/><line x1="-37.2" y1="-335.2" x2="-15.9" y2="-320.3"/><line x1="-52.5" y1="-377.2" x2="-37.5" y2="-398.5"/><line x1="-245.6" y1="-355.4" x2="-256.6" y2="-378.9"/><line x1="-215.2" y1="-355.4" x2="-179.7" y2="-391.7"/><line x1="488.6" y1="-314.7" x2="482.9" y2="-335.9"/><line x1="523.9" y1="-300.2" x2="545.1" y2="-305.9"/><line x1="-173.1" y1="-176.4" x2="-170.2" y2="-154.2"/><line x1="-199.2" y1="-185.0" x2="-217.2" y2="-172.3"/><line x1="-213.1" y1="-210.7" x2="-234.4" y2="-216.4"/><line x1="2.3" y1="-66.4" x2="-0.6" y2="-162.4"/><line x1="81.2" y1="-229.8" x2="24.1" y2="-198.9"/><line x1="78.7" y1="-234.4" x2="21.6" y2="-203.5"/><path d="M516.2 -150.1 Q454.0 -196.7 490.4 -268.9" fill="none"/><path d="M534.8 -150.1 Q572.9 -224.5 507.4 -274.3" fill="none"/><line x1="-21.3" y1="-66.4" x2="-156.5" y2="-183.7"/><line x1="-81.9" y1="-335.2" x2="-162.5" y2="-220.8"/><line x1="-226.4" y1="-313.4" x2="-186.1" y2="-222.6"/><line x1="30.2" y1="-26.4" x2="91.0" y2="23.3"/><line x1="26.9" y1="-22.4" x2="87.7" y2="27.3"/><line x1="115.2" y1="44.0" x2="175.1" y2="82.2"/><line x1="117.7" y1="33.8" x2="536.0" y2="-9.6"/><line x1="88.9" y1="44.9" x2="30.1" y2="88.1"/></g>
+<g transform="translate(156.5 70.4) rotate(32.5)"><rect x="-6" y="-8" width="9" height="16" fill="#0f172a" stroke="none"/><path d="M3 -7 A7 7 0 0 0 3 7" fill="none" stroke="#fbbf24" stroke-width="2"/></g>
+<g transform="translate(514.1 -7.3) rotate(-5.9)"><rect x="-6" y="-8" width="9" height="16" fill="#0f172a" stroke="none"/><path d="M3 -7 A7 7 0 0 0 3 7" fill="none" stroke="#fbbf24" stroke-width="2"/></g>
+<g transform="translate(47.8 75.1) rotate(143.7)"><rect x="-6" y="-8" width="9" height="16" fill="#0f172a" stroke="none"/><path d="M3 -7 A7 7 0 0 0 3 7" fill="none" stroke="#fbbf24" stroke-width="2"/></g>
+<rect x="-47.4" y="-66.4" width="100.5" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="127.8" y="82.2" width="160.5" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="536.0" y="-35.8" width="99.2" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="-58.8" y="88.1" width="120.8" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="76.6" y="-274.1" width="84.0" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="81.6" y="-269.1" width="74.0" height="32.0" fill="none" stroke="#38bdf8" stroke-width="2"/>
+<rect x="489.1" y="-150.1" width="84.0" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="-159.9" y="-377.2" width="185.4" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="-277.8" y="-355.4" width="84.0" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<polygon points="-1.4,-214.0 47.7,-188.0 -1.4,-162.0 -50.4,-188.0" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="-1.4,-207.0 34.5,-188.0 -1.4,-169.0 -37.2,-188.0" fill="none" stroke="#34d399" stroke-width="2"/>
+<polygon points="494.6,-318.3 536.6,-292.3 494.6,-266.3 452.6,-292.3" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="-176.4,-226.9 -117.4,-200.9 -176.4,-174.9 -235.4,-200.9" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<circle cx="101.7" cy="35.4" r="16" fill="#92400e" stroke="#fbbf24" stroke-width="2"/>
+<ellipse cx="11.3" cy="51.3" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-42.8" cy="9.1" rx="45.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-149.9" cy="-32.0" rx="87.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="98.8" cy="-90.1" rx="65.9" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="277.9" cy="152.1" rx="49.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="168.9" cy="159.0" rx="36.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="246.9" cy="47.7" rx="27.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="626.7" cy="-120.1" rx="41.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="706.8" cy="-25.4" rx="47.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="40.7" cy="165.0" rx="40.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-68.7" cy="158.3" rx="58.4" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="169.5" cy="-211.4" rx="27.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="102.6" cy="-193.2" rx="27.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="85.6" cy="-310.3" rx="37.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="199.4" cy="-299.8" rx="51.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="547.1" cy="-69.1" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="432.3" cy="-102.6" rx="39.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="1.4" cy="-308.2" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-28.3" cy="-411.7" rx="27.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-263.0" cy="-392.7" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-166.8" cy="-404.9" rx="39.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="479.2" cy="-349.9" rx="50.4" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="581.9" cy="-315.8" rx="51.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-168.3" cy="-140.3" rx="27.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-233.3" cy="-161.1" rx="27.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-272.5" cy="-226.7" rx="55.9" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<rect x="-16.9" y="-105.4" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="1.4" y="-91.9" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="34.7" y="-226.8" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="53.6" y="-213.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="472.6" y="-183.6" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="491.5" y="-170.1" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="442.4" y="-219.2" width="70.1" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="477.5" y="-205.7" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">extremo A</text>
+<rect x="528.1" y="-192.8" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="547.0" y="-179.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="510.3" y="-233.5" width="70.1" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="545.3" y="-220.0" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">extremo B</text>
+<rect x="-62.9" y="-95.1" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-44.0" y="-81.6" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="-118.1" y="-319.7" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-99.2" y="-306.2" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="-233.1" y="-295.0" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-214.2" y="-281.5" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="2.9" y="-40.4" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">CENTRAL</text>
+<text x="208.0" y="108.2" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">HIDROELÉCTRICA</text>
+<text x="585.5" y="-9.8" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">TÉRMICA</text>
+<text x="1.6" y="114.1" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">RENOVABLE</text>
+<text x="118.6" y="-248.1" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">PARTE</text>
+<text x="531.1" y="-124.1" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">NODO</text>
+<text x="-67.2" y="-351.2" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">COMERCIALIZADORA</text>
+<text x="-235.8" y="-329.4" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">ZONA</text>
+<text x="-1.4" y="-183.5" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">registra</text>
+<text x="494.6" y="-287.8" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">línea</text>
+<text x="-176.4" y="-196.4" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">suministro</text>
+<text x="101.7" y="40.4" font-size="14" font-weight="700" text-anchor="middle" fill="#f8fafc">d</text>
+<text x="11.3" y="55.3" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="-42.8" y="13.1" font-size="12" text-anchor="middle" fill="#f8fafc">cód_central</text>
+<line x1="-77.6" y1="17.1" x2="-8.1" y2="17.1" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="-149.9" y="-28.0" font-size="12" text-anchor="middle" fill="#f8fafc">fecha_puesta_en_marcha</text>
+<text x="98.8" y="-86.1" font-size="12" text-anchor="middle" fill="#f8fafc">producción_media</text>
+<text x="277.9" y="156.1" font-size="12" text-anchor="middle" fill="#f8fafc">volumen_útil</text>
+<text x="168.9" y="163.0" font-size="12" text-anchor="middle" fill="#f8fafc">embalse</text>
+<text x="246.9" y="51.7" font-size="12" text-anchor="middle" fill="#f8fafc">río</text>
+<text x="626.7" y="-116.1" font-size="12" text-anchor="middle" fill="#f8fafc">emisiones</text>
+<text x="706.8" y="-21.4" font-size="12" text-anchor="middle" fill="#f8fafc">combustible</text>
+<text x="40.7" y="169.0" font-size="12" text-anchor="middle" fill="#f8fafc">superficie</text>
+<text x="-68.7" y="162.3" font-size="12" text-anchor="middle" fill="#f8fafc">nº_generadores</text>
+<text x="169.5" y="-207.4" font-size="12" text-anchor="middle" fill="#f8fafc">fecha</text>
+<text x="102.6" y="-189.2" font-size="12" text-anchor="middle" fill="#f8fafc">coste</text>
+<text x="85.6" y="-306.3" font-size="12" text-anchor="middle" fill="#f8fafc">empresa</text>
+<text x="199.4" y="-295.8" font-size="12" text-anchor="middle" fill="#f8fafc">nº_incidencia</text>
+<line x1="159.4" y1="-291.8" x2="239.5" y2="-291.8" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
+<text x="547.1" y="-65.1" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="432.3" y="-98.6" font-size="12" text-anchor="middle" fill="#f8fafc">cód_nodo</text>
+<line x1="403.6" y1="-94.6" x2="461.0" y2="-94.6" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="1.4" y="-304.2" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="-28.3" y="-407.7" font-size="12" text-anchor="middle" fill="#f8fafc">cif</text>
+<line x1="-35.4" y1="-403.7" x2="-21.3" y2="-403.7" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="-263.0" y="-388.7" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="-166.8" y="-400.9" font-size="12" text-anchor="middle" fill="#f8fafc">cód_zona</text>
+<line x1="-194.9" y1="-396.9" x2="-138.7" y2="-396.9" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="479.2" y="-345.9" font-size="12" text-anchor="middle" fill="#f8fafc">distancia_km</text>
+<text x="581.9" y="-311.8" font-size="12" text-anchor="middle" fill="#f8fafc">capacidad_kv</text>
+<text x="-168.3" y="-136.3" font-size="12" text-anchor="middle" fill="#f8fafc">tarifa</text>
+<text x="-233.3" y="-157.1" font-size="12" text-anchor="middle" fill="#f8fafc">MWh</text>
+<text x="-272.5" y="-222.7" font-size="12" text-anchor="middle" fill="#f8fafc">fecha_contrato</text>
+<line x1="-317.4" y1="-218.7" x2="-227.6" y2="-218.7" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
+</svg>

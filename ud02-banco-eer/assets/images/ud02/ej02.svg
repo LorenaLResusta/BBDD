@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-218 -461 924 464" width="924" height="464" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
+<title id="t">Naviera: capitanes, contenedores, puertos y barcos</title><desc id="d">CAPITÁN transporta CONTENEDOR (1:N). CONTENEDOR llega a PUERTO (N:1). CAPITÁN gobierna BARCO (N:M con fechas).</desc>
+<rect x="-218" y="-461" width="924" height="464" rx="10" fill="#0f172a"/>
+<g stroke="#94a3b8" stroke-width="1.6" fill="none"><line x1="197.7" y1="-183.8" x2="200.0" y2="-157.9"/><line x1="147.5" y1="-184.6" x2="98.5" y2="-164.2"/><line x1="147.5" y1="-211.1" x2="126.5" y2="-213.8"/><line x1="194.1" y1="-225.8" x2="189.0" y2="-283.6"/><line x1="211.0" y1="-225.8" x2="255.1" y2="-287.1"/><line x1="232.3" y1="-225.8" x2="273.8" y2="-249.8"/><line x1="-40.6" y1="-182.6" x2="-28.2" y2="-59.4"/><line x1="-63.7" y1="-182.6" x2="-82.1" y2="-164.3"/><line x1="-44.8" y1="-224.6" x2="-49.6" y2="-272.2"/><line x1="-9.6" y1="-224.6" x2="43.9" y2="-258.6"/><line x1="-25.4" y1="-353.5" x2="-10.4" y2="-336.1"/><line x1="-13.5" y1="-395.5" x2="7.8" y2="-410.4"/><line x1="539.8" y1="-96.6" x2="565.8" y2="-96.6"/><line x1="530.6" y1="-75.6" x2="559.6" y2="-57.2"/><line x1="497.5" y1="-75.6" x2="497.5" y2="-49.6"/><line x1="497.5" y1="-117.6" x2="497.5" y2="-143.6"/><line x1="350.6" y1="-71.3" x2="344.9" y2="-50.0"/><line x1="362.9" y1="-117.2" x2="368.6" y2="-138.5"/><line x1="172.3" y1="-183.8" x2="92.5" y2="-112.9"/><line x1="-20.2" y1="-182.6" x2="54.1" y2="-113.2"/><line x1="-64.5" y1="-224.6" x2="-132.8" y2="-290.3"/><line x1="-76.2" y1="-353.5" x2="-128.3" y2="-320.1"/><line x1="226.5" y1="-183.8" x2="334.8" y2="-109.4"/><line x1="455.2" y1="-95.9" x2="407.7" y2="-95.1"/></g>
+<rect x="147.5" y="-225.8" width="96.8" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="-110.1" y="-224.6" width="134.8" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="-89.6" y="-395.5" width="92.3" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="455.2" y="-117.6" width="84.6" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<polygon points="73.0,-121.5 132.0,-95.5 73.0,-69.5 14.0,-95.5" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="-149.6,-332.5 -105.0,-306.5 -149.6,-280.5 -194.1,-306.5" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="356.8,-120.2 409.4,-94.2 356.8,-68.2 304.1,-94.2" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<ellipse cx="201.2" cy="-143.9" rx="27.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="72.7" cy="-153.5" rx="40.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="90.4" cy="-218.5" rx="38.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="187.8" cy="-297.5" rx="31.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="264.8" cy="-300.5" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="293.9" cy="-261.4" rx="35.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-26.8" cy="-45.4" rx="45.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-95.7" cy="-150.6" rx="59.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-51.0" cy="-286.2" rx="51.4" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="64.5" cy="-271.7" rx="57.9" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="0.9" cy="-322.9" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="26.1" cy="-423.2" rx="44.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="623.8" cy="-96.6" rx="58.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="578.9" cy="-45.0" rx="39.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="497.5" cy="-35.6" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="497.5" cy="-157.6" rx="34.9" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="341.2" cy="-36.1" rx="46.4" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="372.3" cy="-152.4" rx="38.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<rect x="131.6" y="-172.8" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="149.9" y="-159.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="-17.2" y="-171.2" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="1.7" y="-157.7" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="-105.0" y="-254.4" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-86.1" y="-240.9" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="-119.7" y="-346.3" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-101.5" y="-332.8" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="232.3" y="-175.8" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="251.2" y="-162.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="406.3" y="-104.4" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="425.2" y="-90.9" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="195.9" y="-199.8" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">CAPITÁN</text>
+<text x="-42.7" y="-198.6" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">CONTENEDOR</text>
+<text x="-43.5" y="-369.5" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">PUERTO</text>
+<text x="497.5" y="-91.6" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">BARCO</text>
+<text x="73.0" y="-91.0" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">transporta</text>
+<text x="-149.6" y="-302.0" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">llega a</text>
+<text x="356.8" y="-89.7" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">gobierna</text>
+<text x="201.2" y="-139.9" font-size="12" text-anchor="middle" fill="#f8fafc">dni</text>
+<line x1="192.0" y1="-135.9" x2="210.5" y2="-135.9" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="72.7" y="-149.5" font-size="12" text-anchor="middle" fill="#f8fafc">población</text>
+<text x="90.4" y="-214.5" font-size="12" text-anchor="middle" fill="#f8fafc">dirección</text>
+<text x="187.8" y="-293.5" font-size="12" text-anchor="middle" fill="#f8fafc">salario</text>
+<text x="264.8" y="-296.5" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="293.9" y="-257.4" font-size="12" text-anchor="middle" fill="#f8fafc">teléfono</text>
+<text x="-26.8" y="-41.4" font-size="12" text-anchor="middle" fill="#f8fafc">descripción</text>
+<text x="-95.7" y="-146.6" font-size="12" text-anchor="middle" fill="#f8fafc">cód_contenedor</text>
+<line x1="-143.8" y1="-142.6" x2="-47.7" y2="-142.6" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="-51.0" y="-282.2" font-size="12" text-anchor="middle" fill="#f8fafc">dir_remitente</text>
+<text x="64.5" y="-267.7" font-size="12" text-anchor="middle" fill="#f8fafc">dir_destinatario</text>
+<text x="0.9" y="-318.9" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="26.1" y="-419.2" font-size="12" text-anchor="middle" fill="#f8fafc">cód_puerto</text>
+<line x1="-7.5" y1="-415.2" x2="59.6" y2="-415.2" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="623.8" y="-92.6" font-size="12" text-anchor="middle" fill="#f8fafc">potencia_motor</text>
+<text x="578.9" y="-41.0" font-size="12" text-anchor="middle" fill="#f8fafc">matrícula</text>
+<line x1="550.4" y1="-37.0" x2="607.3" y2="-37.0" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="497.5" y="-31.6" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="497.5" y="-153.6" font-size="12" text-anchor="middle" fill="#f8fafc">astillero</text>
+<text x="341.2" y="-32.1" font-size="12" text-anchor="middle" fill="#f8fafc">fecha_inicio</text>
+<line x1="305.8" y1="-28.1" x2="376.5" y2="-28.1" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
+<text x="372.3" y="-148.4" font-size="12" text-anchor="middle" fill="#f8fafc">fecha_fin</text>
+</svg>

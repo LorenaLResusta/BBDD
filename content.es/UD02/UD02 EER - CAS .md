@@ -110,7 +110,7 @@ Una **entidad** es cualquier objeto, persona, lugar, concepto abstracto o evento
   Posee existencia propia e independiente en el sistema. Sus instancias se identifican unívocamente mediante sus propios atributos identificadores (clave primaria) sin requerir la presencia de otras entidades (ej. `CLIENTE`, `PRODUCTO`, `LIBRO`).
 
 - **Entidad Débil:**
-  No puede existir de forma autónoma en la base de datos. Su presencia depende de la existencia previa de una entidad fuerte principal (denominada *Entidad Propietaria* o *Padre*). Si una instancia de la entidad fuerte es eliminada, todas las instancias de la entidad débil vinculadas a ella carecen de sentido y deben ser eliminadas en cascada. Se representa gráficamente mediante un **doble recuadro**.
+  No puede exigit rm -r --ignore-unmatch content.es/UD01 content.es/UD02 content.es/UD03 content.es/UD04 content.es/UD05 content.es/UD06 content.val/U01stir de forma autónoma en la base de datos. Su presencia depende de la existencia previa de una entidad fuerte principal (denominada *Entidad Propietaria* o *Padre*). Si una instancia de la entidad fuerte es eliminada, todas las instancias de la entidad débil vinculadas a ella carecen de sentido y deben ser eliminadas en cascada. Se representa gráficamente mediante un **doble recuadro**.
 
 > **Ejemplo de Entidad Débil:**
 > La entidad `EJEMPLAR` respecto a la entidad fuerte `LIBRO`. La biblioteca posee la obra intelectual "Don Quijote de la Mancha" (`LIBRO` fuerte), pero físicamente dispone de 5 copias en la estantería (`EJEMPLAR` débil). Si la obra deja de prestarse y se borra de la base de datos, todos sus ejemplares físicos asociados desaparecen automáticamente.

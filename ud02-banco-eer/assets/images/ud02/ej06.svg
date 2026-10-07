@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="334 -7 762 431" width="762" height="431" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
+<title id="t">Hospital: pacientes, ingresos y médicos</title><desc id="d">PACIENTE realiza INGRESO (relación identificadora, INGRESO es débil). MÉDICO atiende INGRESO (1:N).</desc>
+<rect x="334" y="-7" width="762" height="431" rx="10" fill="#0f172a"/>
+<g stroke="#94a3b8" stroke-width="1.6" fill="none"><line x1="583.3" y1="272.5" x2="593.1" y2="292.9"/><line x1="551.7" y1="272.5" x2="520.2" y2="303.2"/><line x1="493.3" y1="329.5" x2="482.0" y2="340.4"/><line x1="529.2" y1="327.7" x2="607.5" y2="367.2"/><line x1="468.6" y1="315.1" x2="434.4" y2="314.0"/><line x1="513.0" y1="330.2" x2="532.6" y2="373.0"/><line x1="521.1" y1="256.1" x2="495.2" y2="258.3"/><line x1="521.1" y1="230.8" x2="498.7" y2="221.9"/><line x1="566.6" y1="230.5" x2="552.5" y2="186.2"/><line x1="599.6" y1="230.5" x2="629.9" y2="206.3"/><line x1="681.8" y1="111.7" x2="720.7" y2="177.1"/><line x1="666.6" y1="111.7" x2="663.0" y2="139.3"/><line x1="623.3" y1="106.8" x2="602.0" y2="114.3"/><line x1="623.3" y1="74.0" x2="598.9" y2="65.1"/><line x1="677.0" y1="69.7" x2="685.8" y2="45.3"/><line x1="980.5" y1="114.7" x2="1004.1" y2="125.7"/><line x1="885.6" y1="87.2" x2="871.7" y2="85.4"/><line x1="920.8" y1="72.7" x2="905.9" y2="51.4"/><line x1="953.1" y1="72.7" x2="969.8" y2="52.8"/><line x1="625.4" y1="247.9" x2="872.9" y2="230.9"/><line x1="934.5" y1="115.1" x2="919.4" y2="205.0"/><line x1="929.4" y1="114.3" x2="914.3" y2="204.1"/><line x1="715.3" y1="107.4" x2="776.6" y2="129.5"/><line x1="885.6" y1="111.4" x2="834.3" y2="129.7"/></g>
+<rect x="521.1" y="230.5" width="104.3" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="623.3" y="69.7" width="92.0" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="885.6" y="72.7" width="99.7" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="890.6" y="77.7" width="89.7" height="32.0" fill="none" stroke="#38bdf8" stroke-width="2"/>
+<polygon points="912.8,202.2 957.5,228.2 912.8,254.2 868.2,228.2" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="912.8,209.2 945.4,228.2 912.8,247.2 880.2,228.2" fill="none" stroke="#34d399" stroke-width="2"/>
+<polygon points="805.3,113.9 853.1,139.9 805.3,165.9 757.5,139.9" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<ellipse cx="599.7" cy="306.6" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="506.7" cy="316.3" rx="38.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="469.3" cy="352.8" rx="27.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="630.3" cy="378.7" rx="40.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="396.1" cy="312.7" rx="38.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="538.9" cy="386.9" rx="43.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="435.7" cy="263.5" rx="64.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="469.7" cy="210.4" rx="50.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="548.1" cy="172.3" rx="35.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="645.9" cy="193.6" rx="37.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="728.8" cy="190.8" rx="37.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="661.2" cy="153.3" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="571.5" cy="124.9" rx="46.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="568.7" cy="54.1" rx="48.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="690.9" cy="31.4" rx="35.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="1028.6" cy="137.1" rx="42.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="824.3" cy="79.3" rx="52.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="896.6" cy="38.2" rx="27.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="981.1" cy="39.3" rx="42.4" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<rect x="637.1" y="236.9" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="655.3" y="250.4" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="908.1" y="135.3" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="927.0" y="148.8" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="725.3" y="108.6" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="743.5" y="122.1" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="838.5" y="112.4" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="857.4" y="125.9" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="573.2" y="256.5" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">PACIENTE</text>
+<text x="669.3" y="95.7" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">MÉDICO</text>
+<text x="935.5" y="98.7" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">INGRESO</text>
+<text x="912.8" y="232.7" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">realiza</text>
+<text x="805.3" y="144.4" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">atiende</text>
+<text x="599.7" y="310.6" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="506.7" y="320.3" font-size="12" text-anchor="middle" fill="#f8fafc">dirección</text>
+<text x="469.3" y="356.8" font-size="12" text-anchor="middle" fill="#f8fafc">calle</text>
+<text x="630.3" y="382.7" font-size="12" text-anchor="middle" fill="#f8fafc">población</text>
+<text x="396.1" y="316.7" font-size="12" text-anchor="middle" fill="#f8fafc">provincia</text>
+<text x="538.9" y="390.9" font-size="12" text-anchor="middle" fill="#f8fafc">cód_postal</text>
+<text x="435.7" y="267.5" font-size="12" text-anchor="middle" fill="#f8fafc">fecha_nacimiento</text>
+<text x="469.7" y="214.4" font-size="12" text-anchor="middle" fill="#f8fafc">cód_paciente</text>
+<line x1="429.9" y1="218.4" x2="509.5" y2="218.4" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="548.1" y="176.3" font-size="12" text-anchor="middle" fill="#f8fafc">teléfono</text>
+<text x="645.9" y="197.6" font-size="12" text-anchor="middle" fill="#f8fafc">apellidos</text>
+<text x="728.8" y="194.8" font-size="12" text-anchor="middle" fill="#f8fafc">apellidos</text>
+<text x="661.2" y="157.3" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="571.5" y="128.9" font-size="12" text-anchor="middle" fill="#f8fafc">cód_médico</text>
+<line x1="535.8" y1="132.9" x2="607.3" y2="132.9" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="568.7" y="58.1" font-size="12" text-anchor="middle" fill="#f8fafc">especialidad</text>
+<text x="690.9" y="35.4" font-size="12" text-anchor="middle" fill="#f8fafc">teléfono</text>
+<text x="1028.6" y="141.1" font-size="12" text-anchor="middle" fill="#f8fafc">nº_ingreso</text>
+<line x1="996.9" y1="145.1" x2="1060.4" y2="145.1" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
+<text x="824.3" y="83.3" font-size="12" text-anchor="middle" fill="#f8fafc">fecha_ingreso</text>
+<text x="896.6" y="42.2" font-size="12" text-anchor="middle" fill="#f8fafc">cama</text>
+<text x="981.1" y="43.3" font-size="12" text-anchor="middle" fill="#f8fafc">habitación</text>
+</svg>
