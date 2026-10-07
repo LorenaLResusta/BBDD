@@ -168,3 +168,16 @@
 
 /* Bloques <details> de soluciones */
 .markdown details > summary { font-weight: 600; }
+
+/* Diagramas EER en notación de Chen (soluciones de la UD02) */
+.bd-chen { margin: 1rem 0; }
+.bd-chen a { display: block; line-height: 0; }
+.bd-chen img { width: 100%; height: auto; border-radius: var(--border-radius); border: 1px solid var(--gray-200); background: #0f172a; }
+.bd-chen figcaption { font-size: var(--font-size-smaller); opacity: .75; margin-top: .35rem; line-height: 1.4; }
+
+/* ---- Figuras (diagramas EER de solución) ---- */
+.bd-figura { margin: 1rem 0 1.25rem; text-align: center; }
+.bd-figura a { display: block; }
+.bd-figura img { width: 100%; height: auto; border-radius: 10px; border: 1px solid rgba(148, 163, 184, .35); }
+.bd-figura figcaption { margin-top: .5rem; font-size: .85rem; opacity: .85; }
+.bd-figura figcaption span { display: block; font-size: .78rem; opacity: .7; }

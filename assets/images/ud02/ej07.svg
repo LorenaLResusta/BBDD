@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-472 -1228 1224 588" width="1224" height="588" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
+<title id="t">Tienda online: pedidos, líneas y categorías</title><desc id="d">CLIENTE realiza PEDIDO. PEDIDO incluye LÍNEA_PEDIDO (débil). LÍNEA_PEDIDO se refiere a PRODUCTO. PRODUCTO pertenece a CATEGORÍA, que puede ser subcategoría de otra.</desc>
+<rect x="-472" y="-1228" width="1224" height="588" rx="10" fill="#0f172a"/>
+<g stroke="#94a3b8" stroke-width="1.6" fill="none"><line x1="582.9" y1="-815.8" x2="613.8" y2="-811.8"/><line x1="664.4" y1="-794.2" x2="687.0" y2="-774.1"/><line x1="653.9" y1="-821.1" x2="676.2" y2="-896.8"/><line x1="642.8" y1="-793.4" x2="590.9" y2="-691.2"/><line x1="557.3" y1="-800.9" x2="575.7" y2="-782.9"/><line x1="528.2" y1="-800.9" x2="519.3" y2="-776.5"/><line x1="526.0" y1="-842.9" x2="515.0" y2="-866.5"/><line x1="580.8" y1="-842.9" x2="604.4" y2="-853.9"/><line x1="315.6" y1="-937.5" x2="341.6" y2="-937.5"/><line x1="260.9" y1="-916.5" x2="249.9" y2="-893.0"/><line x1="249.1" y1="-958.5" x2="233.4" y2="-973.9"/><line x1="280.5" y1="-958.5" x2="291.5" y2="-982.1"/><line x1="-138.2" y1="-756.4" x2="-123.0" y2="-747.9"/><line x1="-177.5" y1="-756.4" x2="-181.7" y2="-708.6"/><line x1="-220.7" y1="-756.4" x2="-244.3" y2="-745.4"/><line x1="-117.5" y1="-934.2" x2="-93.1" y2="-925.3"/><line x1="-167.9" y1="-934.2" x2="-147.0" y2="-874.4"/><line x1="-182.9" y1="-934.2" x2="-191.8" y2="-909.8"/><line x1="-196.7" y1="-976.2" x2="-215.2" y2="-994.3"/><line x1="-167.6" y1="-976.2" x2="-158.7" y2="-1000.7"/><line x1="-177.8" y1="-1108.8" x2="-184.5" y2="-1083.6"/><line x1="-166.5" y1="-1150.8" x2="-159.8" y2="-1175.9"/><line x1="489.9" y1="-800.9" x2="394.3" y2="-757.2"/><line x1="281.5" y1="-916.5" x2="359.1" y2="-765.7"/><line x1="225.7" y1="-927.4" x2="78.6" y2="-894.4"/><line x1="-134.4" y1="-800.7" x2="19.9" y2="-877.1"/><line x1="-132.1" y1="-796.0" x2="22.2" y2="-872.5"/><line x1="-202.6" y1="-798.4" x2="-303.8" y2="-877.1"/><line x1="-226.7" y1="-934.2" x2="-294.1" y2="-906.7"/><line x1="-134.0" y1="-976.2" x2="-34.8" y2="-1026.7"/><line x1="-132.9" y1="-1108.8" x2="-34.0" y2="-1055.9"/><path d="M-227.1 -1108.8 Q-265.2 -1071.6 -341.6 -1110.0" fill="none"/><path d="M-230.7 -1146.8 Q-266.8 -1180.4 -346.3 -1134.2" fill="none"/></g>
+<rect x="488.7" y="-842.9" width="94.2" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="225.7" y="-958.5" width="89.9" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="-245.3" y="-798.4" width="139.3" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="-240.3" y="-793.4" width="129.3" height="32.0" fill="none" stroke="#38bdf8" stroke-width="2"/>
+<rect x="-232.9" y="-976.2" width="115.4" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="-230.7" y="-1150.8" width="117.0" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<polygon points="369.4,-771.7 414.0,-745.7 369.4,-719.7 324.7,-745.7" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="45.6,-913.0 91.8,-887.0 45.6,-861.0 -0.6,-887.0" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="45.6,-906.0 79.4,-887.0 45.6,-868.0 11.9,-887.0" fill="none" stroke="#34d399" stroke-width="2"/>
+<polygon points="-325.5,-920.0 -263.8,-894.0 -325.5,-868.0 -387.1,-894.0" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="-6.4,-1067.2 57.3,-1041.2 -6.4,-1015.2 -70.2,-1041.2" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="-380.2,-1147.2 -312.4,-1121.2 -380.2,-1095.2 -448.0,-1121.2" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<ellipse cx="649.8" cy="-807.1" rx="38.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="700.6" cy="-762.0" rx="27.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="680.3" cy="-910.7" rx="43.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="583.9" cy="-677.5" rx="31.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="588.9" cy="-769.9" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="514.3" cy="-762.7" rx="27.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="508.6" cy="-880.3" rx="35.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="508.6" cy="-880.3" rx="30.7" ry="9.0" fill="none" stroke="#a5b4fc" stroke-width="1.6"/>
+<ellipse cx="627.9" cy="-864.9" rx="37.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="392.8" cy="-937.5" rx="51.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2" stroke-dasharray="5 3"/>
+<ellipse cx="243.5" cy="-879.2" rx="31.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="219.8" cy="-987.1" rx="41.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="297.8" cy="-995.7" rx="27.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-102.3" cy="-736.3" rx="37.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-182.9" cy="-694.6" rx="35.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-270.7" cy="-733.1" rx="55.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-63.8" cy="-914.7" rx="45.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-142.1" cy="-860.6" rx="30.9" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-196.8" cy="-896.0" rx="27.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-228.4" cy="-1007.2" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-153.7" cy="-1014.4" rx="29.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-188.3" cy="-1069.7" rx="53.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-156.1" cy="-1189.8" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<rect x="444.4" y="-797.4" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="462.6" y="-783.9" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="276.3" y="-898.8" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="295.2" y="-885.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="178.2" y="-929.8" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="196.5" y="-916.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="-125.3" y="-820.7" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-106.4" y="-807.2" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,N)</text>
+<rect x="-245.2" y="-825.8" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-226.3" y="-812.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="-272.7" y="-931.9" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-254.5" y="-918.4" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="-126.2" y="-998.8" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-107.3" y="-985.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="-124.7" y="-1103.6" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-106.4" y="-1090.1" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="-267.9" y="-1103.5" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-249.6" y="-1090.0" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,1)</text>
+<rect x="-307.1" y="-1100.3" width="42.7" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-285.8" y="-1086.8" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">padre</text>
+<rect x="-271.1" y="-1167.8" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-252.2" y="-1154.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="-302.6" y="-1167.8" width="29.6" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-287.7" y="-1154.3" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">hija</text>
+<text x="535.8" y="-816.9" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">CLIENTE</text>
+<text x="270.7" y="-932.5" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">PEDIDO</text>
+<text x="-175.7" y="-772.4" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">LÍNEA_PEDIDO</text>
+<text x="-175.2" y="-950.2" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">PRODUCTO</text>
+<text x="-172.2" y="-1124.8" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">CATEGORÍA</text>
+<text x="369.4" y="-741.2" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">realiza</text>
+<text x="45.6" y="-882.5" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">incluye</text>
+<text x="-325.5" y="-889.5" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">se refiere a</text>
+<text x="-6.4" y="-1036.7" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">pertenece a</text>
+<text x="-380.2" y="-1116.7" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">subcategoría</text>
+<text x="649.8" y="-803.1" font-size="12" text-anchor="middle" fill="#f8fafc">dirección</text>
+<text x="700.6" y="-758.0" font-size="12" text-anchor="middle" fill="#f8fafc">calle</text>
+<text x="680.3" y="-906.7" font-size="12" text-anchor="middle" fill="#f8fafc">cód_postal</text>
+<text x="583.9" y="-673.5" font-size="12" text-anchor="middle" fill="#f8fafc">ciudad</text>
+<text x="588.9" y="-765.9" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="514.3" y="-758.7" font-size="12" text-anchor="middle" fill="#f8fafc">email</text>
+<line x1="497.7" y1="-754.7" x2="530.8" y2="-754.7" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="508.6" y="-876.3" font-size="12" text-anchor="middle" fill="#f8fafc">teléfono</text>
+<text x="627.9" y="-860.9" font-size="12" text-anchor="middle" fill="#f8fafc">apellidos</text>
+<text x="392.8" y="-933.5" font-size="12" text-anchor="middle" fill="#f8fafc">importe_total</text>
+<text x="243.5" y="-875.2" font-size="12" text-anchor="middle" fill="#f8fafc">estado</text>
+<text x="219.8" y="-983.1" font-size="12" text-anchor="middle" fill="#f8fafc">nº_pedido</text>
+<line x1="189.7" y1="-979.1" x2="249.9" y2="-979.1" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="297.8" y="-991.7" font-size="12" text-anchor="middle" fill="#f8fafc">fecha</text>
+<text x="-102.3" y="-732.3" font-size="12" text-anchor="middle" fill="#f8fafc">cantidad</text>
+<text x="-182.9" y="-690.6" font-size="12" text-anchor="middle" fill="#f8fafc">nº_línea</text>
+<line x1="-207.0" y1="-686.6" x2="-158.8" y2="-686.6" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
+<text x="-270.7" y="-729.1" font-size="12" text-anchor="middle" fill="#f8fafc">precio_unitario</text>
+<text x="-63.8" y="-910.7" font-size="12" text-anchor="middle" fill="#f8fafc">descripción</text>
+<text x="-142.1" y="-856.6" font-size="12" text-anchor="middle" fill="#f8fafc">código</text>
+<line x1="-162.1" y1="-852.6" x2="-122.2" y2="-852.6" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="-196.8" y="-892.0" font-size="12" text-anchor="middle" fill="#f8fafc">stock</text>
+<text x="-228.4" y="-1003.2" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="-153.7" y="-1010.4" font-size="12" text-anchor="middle" fill="#f8fafc">precio</text>
+<text x="-188.3" y="-1065.7" font-size="12" text-anchor="middle" fill="#f8fafc">cód_categoría</text>
+<line x1="-230.4" y1="-1061.7" x2="-146.2" y2="-1061.7" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="-156.1" y="-1185.8" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+</svg>

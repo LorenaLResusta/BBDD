@@ -50,6 +50,7 @@ Cada unidad tiene `_index.md` (presentación y RA/CE), `udXX-teoria.md` y `udXX-
 | `> [!TIP]`, `> [!NOTE]`, `> [!IMPORTANT]`, `> [!WARNING]`, `> [!CAUTION]` | Avisos de colores (alertas de Markdown del tema) |
 | `{{%/* details title="Solución" */%}} … {{%/* /details */%}}` | Bloque desplegable (pistas y soluciones) |
 | `{{</* tabs */>}}{{%/* tab "Oracle" */%}} … {{%/* /tab */%}}{{</* /tabs */>}}` | Pestañas (por ejemplo, Oracle / MySQL / PostgreSQL) |
+| `{{</* figura src="ud02/ej01.svg" alt="Descripción" caption="Pie" */>}}` | Imagen de `assets/images` que se abre a tamaño completo al pulsarla (diagramas grandes) |
 | Bloques ` ```mermaid ` | Diagramas E/R, de flujo y de secuencia |
 | `$...$` y `$$...$$` con `math: true` en la cabecera | Fórmulas con KaTeX |
 
@@ -59,6 +60,20 @@ Para crear una página nueva con la estructura de las demás:
 hugo new --kind teoria   content.es/ud11-ejemplo/ud11-teoria.md
 hugo new --kind practicas content.es/ud11-ejemplo/ud11-practicas.md
 ```
+
+## Diagramas EER del banco de ejercicios (UD02)
+
+Las soluciones del banco de ejercicios de la UD02 son SVG en notación de Chen generados con Python (necesita `graphviz`, `Pillow`):
+
+| Fichero | Función |
+|---|---|
+| `tools/chen_eer.py` | Motor: describe entidades, relaciones y jerarquías y calcula la disposición |
+| `tools/ud02_banco_1.py`, `tools/ud02_banco_2.py` | Datos de los 25 ejercicios (enunciado, tareas, solución y modelo) |
+| `tools/gen_svgs.py` | Genera `assets/images/ud02/ejNN.svg` (admite números: `python3 tools/gen_svgs.py 5 12`) |
+| `tools/gen_leyenda.py` | Genera la leyenda `chen-eer-leyenda.svg` |
+| `tools/build_banco.py` | Reescribe la sección «Banco de ejercicios» de `ud02-practicas.md` |
+
+Para cambiar un ejercicio: edita su entrada en `ud02_banco_*.py`, ejecuta `gen_svgs.py <n>` y `build_banco.py`. **No edites a mano la sección del banco** en `ud02-practicas.md`: se sobrescribe al ejecutar el script.
 
 ## Probar en local
 

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-214 -211 762 505" width="762" height="505" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
+<title id="t">Universidad: facultades, departamentos y cátedras</title><desc id="d">FACULTAD engloba DEPARTAMENTO. DEPARTAMENTO crea CÁTEDRA (débil). PROFESOR pertenece a DEPARTAMENTO, dirige CÁTEDRA y tutoriza a PROFESOR.</desc>
+<rect x="-214" y="-211" width="762" height="505" rx="10" fill="#0f172a"/>
+<g stroke="#94a3b8" stroke-width="1.6" fill="none"><line x1="-142.2" y1="-112.5" x2="-151.1" y2="-136.9"/><line x1="-110.0" y1="-112.5" x2="-55.3" y2="-159.5"/><line x1="81.1" y1="194.2" x2="81.1" y2="242.2"/><line x1="36.0" y1="194.2" x2="12.5" y2="205.2"/><line x1="368.6" y1="168.5" x2="392.2" y2="179.5"/><line x1="325.4" y1="168.5" x2="329.6" y2="216.3"/><line x1="293.6" y1="168.5" x2="272.3" y2="183.4"/><line x1="355.0" y1="-31.1" x2="381.0" y2="-31.1"/><line x1="307.3" y1="-10.1" x2="334.2" y2="54.3"/><line x1="292.0" y1="-10.1" x2="283.2" y2="18.0"/><line x1="242.2" y1="-10.6" x2="217.8" y2="-1.7"/><line x1="296.8" y1="-52.1" x2="294.5" y2="-78.0"/><line x1="-127.4" y1="-70.5" x2="-97.2" y2="17.9"/><line x1="54.1" y1="152.2" x2="-69.8" y2="55.5"/><line x1="111.4" y1="152.2" x2="184.9" y2="101.5"/><line x1="280.6" y1="128.8" x2="226.7" y2="101.7"/><line x1="282.9" y1="124.2" x2="229.1" y2="97.1"/><line x1="243.1" y1="-52.1" x2="94.3" y2="-108.4"/><line x1="79.6" y1="152.2" x2="62.9" y2="-95.6"/><line x1="326.5" y1="-10.1" x2="409.6" y2="52.4"/><line x1="350.9" y1="126.5" x2="409.9" y2="81.1"/><path d="M314.3 -52.1 Q350.4 -137.1 428.2 -130.8" fill="none"/><path d="M355.0 -45.0 Q397.5 -29.1 447.7 -120.4" fill="none"/></g>
+<rect x="-187.7" y="-112.5" width="106.4" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="5.0" y="152.2" width="152.0" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="273.0" y="126.5" width="101.2" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="278.0" y="131.5" width="91.2" height="32.0" fill="none" stroke="#38bdf8" stroke-width="2"/>
+<rect x="242.2" y="-52.1" width="112.8" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<polygon points="-89.7,13.9 -40.3,39.9 -89.7,65.9 -139.1,39.9" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="204.7,61.8 246.7,87.8 204.7,113.8 162.7,87.8" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="204.7,68.8 235.4,87.8 204.7,106.8 174.0,87.8" fill="none" stroke="#34d399" stroke-width="2"/>
+<polygon points="61.2,-146.9 124.9,-120.9 61.2,-94.9 -2.5,-120.9" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="428.6,40.6 470.6,66.6 428.6,92.6 386.6,66.6" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="461.7,-165.0 510.6,-139.0 461.7,-113.0 412.7,-139.0" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<ellipse cx="-156.1" cy="-150.8" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-39.8" cy="-172.8" rx="49.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="81.1" cy="256.2" rx="67.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="-15.0" cy="218.0" rx="67.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="417.7" cy="191.4" rx="48.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="330.8" cy="230.3" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="254.1" cy="196.1" rx="43.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="452.5" cy="-31.1" rx="71.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="339.9" cy="68.1" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="278.8" cy="31.9" rx="39.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="188.9" cy="8.8" rx="43.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="293.3" cy="-92.0" rx="27.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<rect x="-135.9" y="-51.1" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-117.7" y="-37.6" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="11.6" y="124.8" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="30.5" y="138.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,N)</text>
+<rect x="117.9" y="126.2" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="136.1" y="139.7" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="236.1" y="104.0" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="255.0" y="117.5" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="196.1" y="-71.8" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="215.0" y="-58.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,N)</text>
+<rect x="59.4" y="113.3" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="77.6" y="126.8" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="332.3" y="-1.1" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="350.5" y="12.4" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="356.4" y="99.2" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="374.6" y="112.7" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,1)</text>
+<rect x="313.7" y="-93.7" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="331.9" y="-80.2" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,1)</text>
+<rect x="335.7" y="-127.0" width="61.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="366.6" y="-113.5" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">veterano</text>
+<rect x="357.9" y="-52.7" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="376.8" y="-39.2" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="385.5" y="-70.6" width="40.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="405.8" y="-57.1" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">novel</text>
+<text x="-134.5" y="-86.5" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">FACULTAD</text>
+<text x="81.1" y="178.2" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">DEPARTAMENTO</text>
+<text x="323.6" y="152.5" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">CÁTEDRA</text>
+<text x="298.6" y="-26.1" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">PROFESOR</text>
+<text x="-89.7" y="44.4" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">engloba</text>
+<text x="204.7" y="92.3" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">crea</text>
+<text x="61.2" y="-116.4" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">pertenece a</text>
+<text x="428.6" y="71.1" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">dirige</text>
+<text x="461.7" y="-134.5" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">tutoriza</text>
+<text x="-156.1" y="-146.8" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="-39.8" y="-168.8" font-size="12" text-anchor="middle" fill="#f8fafc">cód_facultad</text>
+<line x1="-77.9" y1="-164.8" x2="-1.6" y2="-164.8" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="81.1" y="260.2" font-size="12" text-anchor="middle" fill="#f8fafc">cód_departamento</text>
+<line x1="24.4" y1="264.2" x2="137.7" y2="264.2" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="-15.0" y="222.0" font-size="12" text-anchor="middle" fill="#f8fafc">área_conocimiento</text>
+<text x="417.7" y="195.4" font-size="12" text-anchor="middle" fill="#f8fafc">presupuesto</text>
+<text x="330.8" y="234.3" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="254.1" y="200.1" font-size="12" text-anchor="middle" fill="#f8fafc">nº_cátedra</text>
+<line x1="221.5" y1="204.1" x2="286.7" y2="204.1" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
+<text x="452.5" y="-27.1" font-size="12" text-anchor="middle" fill="#f8fafc">fecha_incorporación</text>
+<text x="339.9" y="72.1" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="278.8" y="35.9" font-size="12" text-anchor="middle" fill="#f8fafc">categoría</text>
+<text x="188.9" y="12.8" font-size="12" text-anchor="middle" fill="#f8fafc">nº_registro</text>
+<line x1="156.3" y1="16.8" x2="221.5" y2="16.8" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="293.3" y="-88.0" font-size="12" text-anchor="middle" fill="#f8fafc">dni</text>
+</svg>

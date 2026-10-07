@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 -1031 1021 512" width="1021" height="512" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
+<title id="t">Planta industrial: lista de materiales e inspecciones</title><desc id="d">FÁBRICA alberga LÍNEA (débil). PIEZA se fabrica en una LÍNEA. PIEZA se compone de PIEZA con una cantidad. PIEZA se inspecciona en INSPECCIÓN (débil).</desc>
+<rect x="30" y="-1031" width="1021" height="512" rx="10" fill="#0f172a"/>
+<g stroke="#94a3b8" stroke-width="1.6" fill="none"><line x1="864.9" y1="-648.7" x2="871.6" y2="-623.5"/><line x1="853.6" y1="-690.7" x2="846.9" y2="-715.8"/><line x1="907.2" y1="-682.5" x2="932.3" y2="-689.2"/><line x1="538.2" y1="-596.8" x2="535.9" y2="-570.9"/><line x1="541.8" y1="-638.8" x2="544.1" y2="-664.7"/><line x1="266.4" y1="-808.4" x2="289.9" y2="-797.4"/><line x1="209.7" y1="-807.0" x2="194.7" y2="-785.7"/><line x1="182.4" y1="-835.4" x2="156.8" y2="-839.9"/><line x1="218.7" y1="-849.0" x2="212.0" y2="-874.1"/><line x1="917.1" y1="-819.5" x2="941.5" y2="-810.6"/><line x1="856.7" y1="-819.5" x2="853.1" y2="-792.0"/><line x1="814.4" y1="-819.5" x2="790.8" y2="-808.5"/><line x1="867.1" y1="-861.5" x2="876.0" y2="-885.9"/><line x1="386.2" y1="-965.9" x2="403.0" y2="-980.0"/><line x1="811.3" y1="-657.8" x2="739.6" y2="-640.1"/><line x1="581.8" y1="-623.9" x2="665.1" y2="-631.0"/><line x1="582.2" y1="-618.8" x2="665.5" y2="-625.8"/><line x1="235.0" y1="-807.0" x2="290.4" y2="-698.0"/><line x1="498.0" y1="-628.1" x2="342.7" y2="-666.2"/><path d="M236.0 -849.0 Q259.5 -937.0 336.1 -938.3" fill="none"/><path d="M266.4 -843.3 Q325.6 -838.1 355.3 -929.0" fill="none"/><line x1="266.4" y1="-835.8" x2="630.6" y2="-903.2"/><line x1="805.6" y1="-859.1" x2="712.6" y2="-895.9"/><line x1="807.5" y1="-863.9" x2="714.6" y2="-900.8"/></g>
+<rect x="811.3" y="-690.7" width="95.8" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="498.0" y="-638.8" width="84.0" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="503.0" y="-633.8" width="74.0" height="32.0" fill="none" stroke="#38bdf8" stroke-width="2"/>
+<rect x="182.4" y="-849.0" width="84.0" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="797.7" y="-861.5" width="123.3" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="802.7" y="-856.5" width="113.3" height="32.0" fill="none" stroke="#38bdf8" stroke-width="2"/>
+<polygon points="706.7,-657.9 754.7,-631.9 706.7,-605.9 658.8,-631.9" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="706.7,-650.9 741.8,-631.9 706.7,-612.9 671.7,-631.9" fill="none" stroke="#34d399" stroke-width="2"/>
+<polygon points="301.5,-702.3 368.9,-676.3 301.5,-650.3 234.1,-676.3" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="366.6,-975.4 419.9,-949.4 366.6,-923.4 313.4,-949.4" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="678.9,-938.1 752.7,-912.1 678.9,-886.1 605.2,-912.1" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="678.9,-931.1 732.8,-912.1 678.9,-893.1 625.0,-912.1" fill="none" stroke="#34d399" stroke-width="2"/>
+<ellipse cx="875.3" cy="-609.6" rx="39.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="843.2" cy="-729.7" rx="35.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="966.6" cy="-698.4" rx="45.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="534.7" cy="-556.9" rx="53.4" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="545.3" cy="-678.7" rx="39.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="314.1" cy="-786.2" rx="40.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="185.3" cy="-772.2" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="110.6" cy="-848.1" rx="56.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="208.3" cy="-888.0" rx="32.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="972.9" cy="-799.2" rx="54.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="851.3" cy="-778.0" rx="27.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="764.8" cy="-796.3" rx="52.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="881.0" cy="-899.8" rx="39.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="418.3" cy="-992.8" rx="37.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<rect x="764.0" y="-659.6" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="782.2" y="-646.1" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="593.0" y="-632.9" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="611.9" y="-619.4" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,N)</text>
+<rect x="229.7" y="-789.3" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="248.6" y="-775.8" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="450.6" y="-644.2" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="468.9" y="-630.7" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="230.3" y="-893.0" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="249.2" y="-879.5" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="237.1" y="-928.6" width="81.6" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="277.9" y="-915.1" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">ensamblada</text>
+<rect x="274.5" y="-855.4" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="293.4" y="-841.9" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<rect x="281.0" y="-875.7" width="83.3" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="322.6" y="-862.2" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">componente</text>
+<rect x="277.6" y="-850.2" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="295.9" y="-836.7" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<rect x="759.7" y="-881.6" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="778.6" y="-868.1" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="859.3" y="-664.7" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">FÁBRICA</text>
+<text x="540.0" y="-612.8" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">LÍNEA</text>
+<text x="224.4" y="-823.0" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">PIEZA</text>
+<text x="859.4" y="-835.5" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">INSPECCIÓN</text>
+<text x="706.7" y="-627.4" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">alberga</text>
+<text x="301.5" y="-671.8" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">se fabrica en</text>
+<text x="366.6" y="-944.9" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">compone</text>
+<text x="678.9" y="-907.6" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">se inspecciona</text>
+<text x="875.3" y="-605.6" font-size="12" text-anchor="middle" fill="#f8fafc">ubicación</text>
+<text x="843.2" y="-725.7" font-size="12" text-anchor="middle" fill="#f8fafc">teléfono</text>
+<text x="966.6" y="-694.4" font-size="12" text-anchor="middle" fill="#f8fafc">cód_fábrica</text>
+<line x1="932.1" y1="-690.4" x2="1001.1" y2="-690.4" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="534.7" y="-552.9" font-size="12" text-anchor="middle" fill="#f8fafc">denominación</text>
+<text x="545.3" y="-674.7" font-size="12" text-anchor="middle" fill="#f8fafc">cód_línea</text>
+<line x1="517.0" y1="-670.7" x2="573.6" y2="-670.7" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
+<text x="314.1" y="-782.2" font-size="12" text-anchor="middle" fill="#f8fafc">cód_pieza</text>
+<line x1="284.3" y1="-778.2" x2="343.9" y2="-778.2" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="185.3" y="-768.2" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
+<text x="110.6" y="-844.1" font-size="12" text-anchor="middle" fill="#f8fafc">coste_estándar</text>
+<text x="208.3" y="-884.0" font-size="12" text-anchor="middle" fill="#f8fafc">peso_g</text>
+<text x="972.9" y="-795.2" font-size="12" text-anchor="middle" fill="#f8fafc">observaciones</text>
+<text x="851.3" y="-774.0" font-size="12" text-anchor="middle" fill="#f8fafc">fecha</text>
+<text x="764.8" y="-792.3" font-size="12" text-anchor="middle" fill="#f8fafc">nº_inspección</text>
+<line x1="723.3" y1="-788.3" x2="806.2" y2="-788.3" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
+<text x="881.0" y="-895.8" font-size="12" text-anchor="middle" fill="#f8fafc">resultado</text>
+<text x="418.3" y="-988.8" font-size="12" text-anchor="middle" fill="#f8fafc">cantidad</text>
+</svg>

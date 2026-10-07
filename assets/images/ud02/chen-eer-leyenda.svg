@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 470" width="940" height="470" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
+<title id="t">Leyenda de la notación EER de Chen</title>
+<desc id="d">Símbolos para entidad, entidad débil, relación, relación identificadora, atributos, jerarquía de especialización y cardinalidad (mín, máx).</desc>
+<rect width="940" height="470" rx="10" fill="#0f172a"/>
+<text x="40" y="36" font-size="13" fill="#7dd3fc" text-anchor="start" font-weight="700">ELEMENTOS</text>
+<rect x="62.0" y="63.0" width="96" height="38" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<text x="110" y="86" font-size="12" fill="#f8fafc" text-anchor="middle" font-weight="700">ENTIDAD</text>
+<text x="110" y="120" font-size="12" fill="#cbd5e1" text-anchor="middle">Entidad</text>
+<rect x="242.0" y="63.0" width="96" height="38" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<rect x="247.0" y="68.0" width="86" height="28" fill="none" stroke="#38bdf8" stroke-width="2"/>
+<text x="290" y="86" font-size="12" fill="#f8fafc" text-anchor="middle" font-weight="700">DÉBIL</text>
+<text x="290" y="120" font-size="12" fill="#cbd5e1" text-anchor="middle">Entidad débil</text>
+<polygon points="480,58.0 530.0,82 480,106.0 430.0,82" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<text x="480" y="86" font-size="11" fill="#f8fafc" text-anchor="middle" font-weight="700">relación</text>
+<text x="480" y="120" font-size="12" fill="#cbd5e1" text-anchor="middle">Relación</text>
+<polygon points="680,58.0 730.0,82 680,106.0 630.0,82" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<polygon points="680,65.0 715.4166666666666,82 680,99.0 644.5833333333334,82" fill="none" stroke="#34d399" stroke-width="2"/>
+<text x="680" y="86" font-size="11" fill="#f8fafc" text-anchor="middle" font-weight="700">identif.</text>
+<text x="680" y="120" font-size="12" fill="#cbd5e1" text-anchor="middle">Relación identificadora</text>
+<ellipse cx="110" cy="180" rx="48.0" ry="15.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<text x="110" y="184" font-size="12" fill="#f8fafc" text-anchor="middle">atributo</text>
+<text x="110" y="214" font-size="12" fill="#cbd5e1" text-anchor="middle">Atributo</text>
+<ellipse cx="290" cy="180" rx="48.0" ry="15.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<text x="290" y="184" font-size="12" fill="#f8fafc" text-anchor="middle">clave</text>
+<line x1="274.109375" y1="188" x2="305.890625" y2="188" stroke="#f8fafc" stroke-width="1.4"/>
+<text x="290" y="214" font-size="12" fill="#cbd5e1" text-anchor="middle">Identificador (clave)</text>
+<ellipse cx="480" cy="180" rx="58.0" ry="15.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<text x="480" y="184" font-size="12" fill="#f8fafc" text-anchor="middle">discriminador</text>
+<line x1="439.0234375" y1="188" x2="520.9765625" y2="188" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
+<text x="480" y="214" font-size="12" fill="#cbd5e1" text-anchor="middle">Discriminador (débil o repetible)</text>
+<ellipse cx="690" cy="180" rx="48.0" ry="15.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<ellipse cx="690" cy="180" rx="43.0" ry="10.0" fill="none" stroke="#a5b4fc" stroke-width="1.6"/>
+<text x="690" y="184" font-size="12" fill="#f8fafc" text-anchor="middle">teléfono</text>
+<text x="690" y="214" font-size="12" fill="#cbd5e1" text-anchor="middle">Multivaluado</text>
+<ellipse cx="850" cy="180" rx="48.0" ry="15.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="850" y="184" font-size="12" fill="#f8fafc" text-anchor="middle">edad</text>
+<text x="850" y="214" font-size="12" fill="#cbd5e1" text-anchor="middle">Derivado</text>
+<ellipse cx="110" cy="290" rx="48.0" ry="15.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<text x="110" y="294" font-size="12" fill="#f8fafc" text-anchor="middle">dirección</text>
+<ellipse cx="50" cy="350" rx="32.0" ry="15.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<text x="50" y="354" font-size="12" fill="#f8fafc" text-anchor="middle">calle</text>
+<ellipse cx="168" cy="350" rx="35.0" ry="15.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
+<text x="168" y="354" font-size="12" fill="#f8fafc" text-anchor="middle">ciudad</text>
+<line x1="95" y1="305" x2="62" y2="336" stroke="#94a3b8" stroke-width="1.6"/>
+<line x1="125" y1="305" x2="158" y2="336" stroke="#94a3b8" stroke-width="1.6"/>
+<text x="110" y="392" font-size="12" fill="#cbd5e1" text-anchor="middle">Compuesto</text>
+<rect x="295.0" y="243.0" width="110" height="38" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<text x="350" y="266" font-size="12" fill="#f8fafc" text-anchor="middle" font-weight="700">SUPERCLASE</text>
+<g stroke="#94a3b8" stroke-width="1.6"><line x1="344" y1="281" x2="344" y2="316"/><line x1="356" y1="281" x2="356" y2="316"/></g>
+<circle cx="350" cy="332" r="16" fill="#92400e" stroke="#fbbf24" stroke-width="2"/>
+<text x="350" y="337" font-size="14" fill="#f8fafc" text-anchor="middle" font-weight="700">d</text>
+<line x1="338" y1="342" x2="292" y2="372" stroke="#94a3b8" stroke-width="1.6"/>
+<line x1="362" y1="342" x2="408" y2="372" stroke="#94a3b8" stroke-width="1.6"/>
+<rect x="230.0" y="373.0" width="100" height="38" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<text x="280" y="396" font-size="12" fill="#f8fafc" text-anchor="middle" font-weight="700">SUBCLASE</text>
+<rect x="370.0" y="373.0" width="100" height="38" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<text x="420" y="396" font-size="12" fill="#f8fafc" text-anchor="middle" font-weight="700">SUBCLASE</text>
+<g transform="translate(303.7 364.4) rotate(146.9)"><rect x="-6" y="-8" width="9" height="16" fill="#0f172a"/><path d="M3 -7 A7 7 0 0 0 3 7" fill="none" stroke="#fbbf24" stroke-width="2"/></g>
+<g transform="translate(396.3 364.4) rotate(33.1)"><rect x="-6" y="-8" width="9" height="16" fill="#0f172a"/><path d="M3 -7 A7 7 0 0 0 3 7" fill="none" stroke="#fbbf24" stroke-width="2"/></g>
+<text x="350" y="436" font-size="12" fill="#cbd5e1" text-anchor="middle">Especialización: d disyunta · o solapada</text>
+<text x="350" y="452" font-size="12" fill="#cbd5e1" text-anchor="middle">Doble línea = participación total</text>
+<rect x="550.0" y="281.0" width="100" height="38" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<text x="600" y="304" font-size="12" fill="#f8fafc" text-anchor="middle" font-weight="700">CLIENTE</text>
+<polygon points="740,276.0 790.0,300 740,324.0 690.0,300" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<text x="740" y="304" font-size="11" fill="#f8fafc" text-anchor="middle" font-weight="700">realiza</text>
+<rect x="830.0" y="281.0" width="100" height="38" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
+<text x="880" y="304" font-size="12" fill="#f8fafc" text-anchor="middle" font-weight="700">PEDIDO</text>
+<line x1="650" y1="300" x2="690" y2="300" stroke="#94a3b8" stroke-width="1.6"/>
+<line x1="790" y1="300" x2="830" y2="300" stroke="#94a3b8" stroke-width="1.6"/>
+<text x="668" y="292" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="812" y="292" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="740" y="346" font-size="12" fill="#cbd5e1" text-anchor="middle">Cardinalidad (mín, máx)</text>
+<text x="740" y="368" font-size="11" fill="#fde68a" text-anchor="middle">(0,N) junto a PEDIDO: un cliente tiene de 0 a N pedidos</text>
+<text x="740" y="386" font-size="11" fill="#fde68a" text-anchor="middle">(1,1) junto a CLIENTE: un pedido es de exactamente 1 cliente</text>
+<text x="740" y="420" font-size="11" fill="#cbd5e1" text-anchor="middle">El par junto a una entidad cuenta ESA entidad</text>
+<text x="740" y="436" font-size="11" fill="#cbd5e1" text-anchor="middle">por cada instancia de la otra.</text>
+</svg>
