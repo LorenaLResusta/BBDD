@@ -1,117 +1,148 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-103 -1150 1330 958" width="1330" height="958" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
-<title id="t">Hotel-balneario: alojados, habitaciones y tratamientos</title><desc id="d">CLIENTE se especializa en alojado o ambulante. PLANTA tiene HABITACIÓN (débil), que es suite o estándar. EMPLEADO puede ser TERAPEUTA, que coordina a otros terapeutas. CLIENTE, TERAPEUTA y TRATAMIENTO se relacionan en presta.</desc>
-<rect x="-103" y="-1150" width="1330" height="958" rx="10" fill="#0f172a"/>
-<g stroke="#94a3b8" stroke-width="1.6" fill="none"><line x1="755.3" y1="-790.3" x2="746.4" y2="-765.9"/><line x1="737.4" y1="-832.3" x2="719.7" y2="-846.8"/><line x1="770.6" y1="-832.3" x2="782.9" y2="-866.1"/><line x1="810.1" y1="-823.9" x2="835.2" y2="-830.6"/><line x1="544.8" y1="-885.6" x2="531.8" y2="-863.1"/><line x1="569.0" y1="-927.6" x2="582.0" y2="-950.1"/><line x1="453.2" y1="-585.6" x2="438.2" y2="-564.3"/><line x1="705.4" y1="-299.7" x2="728.0" y2="-286.7"/><line x1="656.9" y1="-299.7" x2="643.9" y2="-277.1"/><line x1="681.2" y1="-341.7" x2="694.2" y2="-364.2"/><line x1="225.2" y1="-861.9" x2="251.2" y2="-861.9"/><line x1="105.5" y1="-882.9" x2="81.1" y2="-891.8"/><line x1="236.8" y1="-393.5" x2="262.8" y2="-393.5"/><line x1="194.8" y1="-372.5" x2="194.8" y2="-346.5"/><line x1="102.0" y1="-268.4" x2="110.9" y2="-244.0"/><line x1="38.4" y1="-269.1" x2="14.0" y2="-260.2"/><line x1="718.6" y1="-1035.2" x2="703.7" y2="-1013.9"/><line x1="703.3" y1="-1077.2" x2="682.0" y2="-1092.1"/><line x1="748.0" y1="-1077.2" x2="762.9" y2="-1098.5"/><line x1="722.4" y1="-626.4" x2="697.3" y2="-619.7"/><line x1="785.4" y1="-665.8" x2="778.7" y2="-690.9"/><line x1="218.6" y1="-1035.3" x2="209.3" y2="-1055.2"/><line x1="978.0" y1="-676.1" x2="988.8" y2="-674.4"/><line x1="951.3" y1="-660.2" x2="970.5" y2="-605.2"/><line x1="934.2" y1="-661.4" x2="924.9" y2="-641.4"/><line x1="943.7" y1="-707.7" x2="943.7" y2="-729.7"/><line x1="630.0" y1="-341.7" x2="333.3" y2="-501.3"/><line x1="174.5" y1="-841.9" x2="304.5" y2="-535.0"/><line x1="169.7" y1="-839.9" x2="299.7" y2="-533.0"/><line x1="507.1" y1="-922.8" x2="263.4" y2="-1002.3"/><line x1="172.3" y1="-882.9" x2="219.2" y2="-991.6"/><path d="M1119.2 -831.8 Q1046.2 -862.0 1054.6 -953.9" fill="none"/><path d="M1140.2 -831.8 Q1150.5 -926.1 1069.9 -961.5" fill="none"/><line x1="792.3" y1="-790.3" x2="923.9" y2="-695.9"/><line x1="1111.0" y1="-789.8" x2="964.7" y2="-695.2"/><line x1="859.7" y1="-661.4" x2="912.7" y2="-674.2"/><line x1="715.5" y1="-816.4" x2="645.2" y2="-828.0"/><line x1="716.3" y1="-821.6" x2="646.0" y2="-833.1"/><line x1="618.6" y1="-844.5" x2="577.7" y2="-885.6"/><line x1="620.5" y1="-820.1" x2="482.9" y2="-627.6"/><line x1="161.1" y1="-840.3" x2="65.5" y2="-409.9"/><line x1="156.0" y1="-841.4" x2="60.5" y2="-411.1"/><line x1="75.5" y1="-394.7" x2="152.8" y2="-393.9"/><line x1="64.6" y1="-379.7" x2="87.4" y2="-310.4"/><line x1="764.7" y1="-1035.2" x2="857.5" y2="-973.2"/><line x1="884.7" y1="-956.5" x2="1106.1" y2="-831.8"/></g>
-<g transform="translate(593.2 -870.0) rotate(-134.8)"><rect x="-6" y="-8" width="9" height="16" fill="#0f172a" stroke="none"/><path d="M3 -7 A7 7 0 0 0 3 7" fill="none" stroke="#fbbf24" stroke-width="2"/></g>
-<g transform="translate(495.7 -645.5) rotate(125.6)"><rect x="-6" y="-8" width="9" height="16" fill="#0f172a" stroke="none"/><path d="M3 -7 A7 7 0 0 0 3 7" fill="none" stroke="#fbbf24" stroke-width="2"/></g>
-<g transform="translate(130.8 -394.2) rotate(0.6)"><rect x="-6" y="-8" width="9" height="16" fill="#0f172a" stroke="none"/><path d="M3 -7 A7 7 0 0 0 3 7" fill="none" stroke="#fbbf24" stroke-width="2"/></g>
-<g transform="translate(80.5 -331.3) rotate(71.7)"><rect x="-6" y="-8" width="9" height="16" fill="#0f172a" stroke="none"/><path d="M3 -7 A7 7 0 0 0 3 7" fill="none" stroke="#fbbf24" stroke-width="2"/></g>
-<g transform="translate(1087.0 -842.6) rotate(29.4)"><rect x="-6" y="-8" width="9" height="16" fill="#0f172a" stroke="none"/><path d="M3 -7 A7 7 0 0 0 3 7" fill="none" stroke="#fbbf24" stroke-width="2"/></g>
-<rect x="715.9" y="-832.3" width="94.2" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="507.1" y="-927.6" width="99.7" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="405.6" y="-627.6" width="124.4" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="623.7" y="-341.7" width="90.7" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="101.2" y="-882.9" width="123.9" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="106.2" y="-877.9" width="113.9" height="32.0" fill="none" stroke="#38bdf8" stroke-width="2"/>
-<rect x="152.8" y="-414.5" width="84.0" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="38.4" y="-310.4" width="111.9" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="676.1" y="-1077.2" width="114.4" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="1084.1" y="-831.8" width="118.7" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="722.4" y="-665.8" width="137.3" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<polygon points="310.8,-539.4 352.8,-513.4 310.8,-487.4 268.8,-513.4" fill="#047857" stroke="#34d399" stroke-width="2"/>
-<polygon points="310.8,-532.4 341.5,-513.4 310.8,-494.4 280.1,-513.4" fill="none" stroke="#34d399" stroke-width="2"/>
-<polygon points="228.7,-1039.6 290.1,-1013.6 228.7,-987.6 167.4,-1013.6" fill="#047857" stroke="#34d399" stroke-width="2"/>
-<polygon points="1050.8,-1004.0 1102.7,-978.0 1050.8,-952.0 999.0,-978.0" fill="#047857" stroke="#34d399" stroke-width="2"/>
-<polygon points="943.7,-707.7 987.4,-681.7 943.7,-655.7 900.1,-681.7" fill="#047857" stroke="#34d399" stroke-width="2"/>
-<circle cx="629.8" cy="-833.1" r="16" fill="#92400e" stroke="#fbbf24" stroke-width="2"/>
-<circle cx="59.5" cy="-394.9" r="16" fill="#92400e" stroke="#fbbf24" stroke-width="2"/>
-<circle cx="870.8" cy="-964.3" r="16" fill="#92400e" stroke="#fbbf24" stroke-width="2"/>
-<ellipse cx="741.4" cy="-752.1" rx="27.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="704.2" cy="-859.5" rx="37.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="788.0" cy="-880.0" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="875.7" cy="-841.5" rx="64.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="523.8" cy="-849.3" rx="48.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="589.9" cy="-963.8" rx="40.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="428.6" cy="-550.5" rx="57.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="750.4" cy="-273.7" rx="58.9" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2" stroke-dasharray="5 3"/>
-<ellipse cx="636.0" cy="-263.4" rx="39.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="702.1" cy="-377.8" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="303.2" cy="-861.9" rx="52.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="52.8" cy="-902.1" rx="41.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="298.7" cy="-393.5" rx="35.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="194.8" cy="-332.5" rx="34.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="116.0" cy="-230.1" rx="40.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="-18.5" cy="-248.4" rx="60.4" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="694.2" cy="-1000.4" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="663.2" cy="-1105.2" rx="54.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="772.3" cy="-1111.8" rx="31.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="657.8" cy="-609.1" rx="60.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="775.0" cy="-704.8" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="202.8" cy="-1069.1" rx="62.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="1034.7" cy="-666.9" rx="54.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="975.3" cy="-591.3" rx="51.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="918.6" cy="-627.8" rx="27.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="943.7" cy="-743.7" rx="27.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<rect x="585.4" y="-364.9" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="603.6" y="-351.4" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
-<rect x="164.9" y="-822.3" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="183.8" y="-808.8" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,N)</text>
-<rect x="459.6" y="-941.1" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="478.5" y="-927.6" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
-<rect x="165.3" y="-919.4" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="184.2" y="-905.9" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,N)</text>
-<rect x="1073.1" y="-856.9" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="1091.3" y="-843.4" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,1)</text>
-<rect x="1041.1" y="-892.7" width="44.9" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="1063.5" y="-879.2" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">senior</text>
-<rect x="1121.7" y="-876.7" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="1140.6" y="-863.2" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
-<rect x="1102.9" y="-926.7" width="42.2" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="1124.0" y="-913.2" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">junior</text>
-<rect x="797.7" y="-781.8" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="816.7" y="-768.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
-<rect x="1066.9" y="-782.6" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="1085.8" y="-769.1" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
-<rect x="870.0" y="-677.4" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="888.9" y="-663.9" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
-<text x="763.0" y="-806.3" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">CLIENTE</text>
-<text x="556.9" y="-901.6" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">ALOJADO</text>
-<text x="467.9" y="-601.6" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">AMBULANTE</text>
-<text x="669.1" y="-315.7" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">PLANTA</text>
-<text x="163.2" y="-856.9" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">HABITACIÓN</text>
-<text x="194.8" y="-388.5" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">SUITE</text>
-<text x="94.4" y="-284.4" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">ESTÁNDAR</text>
-<text x="733.3" y="-1051.2" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">EMPLEADO</text>
-<text x="1143.5" y="-805.8" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">TERAPEUTA</text>
-<text x="791.1" y="-639.8" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">TRATAMIENTO</text>
-<text x="310.8" y="-508.9" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">tiene</text>
-<text x="228.7" y="-1009.1" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">se asigna a</text>
-<text x="1050.8" y="-973.5" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">coordina</text>
-<text x="943.7" y="-677.2" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">presta</text>
-<text x="629.8" y="-828.1" font-size="14" font-weight="700" text-anchor="middle" fill="#f8fafc">d</text>
-<text x="59.5" y="-389.9" font-size="14" font-weight="700" text-anchor="middle" fill="#f8fafc">d</text>
-<text x="870.8" y="-959.3" font-size="14" font-weight="700" text-anchor="middle" fill="#f8fafc">d</text>
-<text x="741.4" y="-748.1" font-size="12" text-anchor="middle" fill="#f8fafc">dni</text>
-<line x1="732.2" y1="-744.1" x2="750.7" y2="-744.1" stroke="#f8fafc" stroke-width="1.4"/>
-<text x="704.2" y="-855.5" font-size="12" text-anchor="middle" fill="#f8fafc">apellidos</text>
-<text x="788.0" y="-876.0" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
-<text x="875.7" y="-837.5" font-size="12" text-anchor="middle" fill="#f8fafc">fecha_nacimiento</text>
-<text x="523.8" y="-845.3" font-size="12" text-anchor="middle" fill="#f8fafc">fecha_salida</text>
-<text x="589.9" y="-959.8" font-size="12" text-anchor="middle" fill="#f8fafc">nº_tarjeta</text>
-<text x="428.6" y="-546.5" font-size="12" text-anchor="middle" fill="#f8fafc">tel_emergencia</text>
-<text x="750.4" y="-269.7" font-size="12" text-anchor="middle" fill="#f8fafc">nº_habitaciones</text>
-<text x="636.0" y="-259.4" font-size="12" text-anchor="middle" fill="#f8fafc">nº_planta</text>
-<line x1="607.4" y1="-255.4" x2="664.6" y2="-255.4" stroke="#f8fafc" stroke-width="1.4"/>
-<text x="702.1" y="-373.8" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
-<text x="303.2" y="-857.9" font-size="12" text-anchor="middle" fill="#f8fafc">nº_habitación</text>
-<line x1="262.2" y1="-853.9" x2="344.3" y2="-853.9" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
-<text x="52.8" y="-898.1" font-size="12" text-anchor="middle" fill="#f8fafc">capacidad</text>
-<text x="298.7" y="-389.5" font-size="12" text-anchor="middle" fill="#f8fafc">metros2</text>
-<text x="194.8" y="-328.5" font-size="12" text-anchor="middle" fill="#f8fafc">jacuzzis</text>
-<text x="116.0" y="-226.1" font-size="12" text-anchor="middle" fill="#f8fafc">tipo_baño</text>
-<text x="-18.5" y="-244.4" font-size="12" text-anchor="middle" fill="#f8fafc">cama_supletoria</text>
-<text x="694.2" y="-996.4" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
-<text x="663.2" y="-1101.2" font-size="12" text-anchor="middle" fill="#f8fafc">cód_empleado</text>
-<line x1="619.6" y1="-1097.2" x2="706.9" y2="-1097.2" stroke="#f8fafc" stroke-width="1.4"/>
-<text x="772.3" y="-1107.8" font-size="12" text-anchor="middle" fill="#f8fafc">puesto</text>
-<text x="657.8" y="-605.1" font-size="12" text-anchor="middle" fill="#f8fafc">cód_tratamiento</text>
-<line x1="608.4" y1="-601.1" x2="707.1" y2="-601.1" stroke="#f8fafc" stroke-width="1.4"/>
-<text x="775.0" y="-700.8" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
-<text x="202.8" y="-1065.1" font-size="12" text-anchor="middle" fill="#f8fafc">fecha_asignación</text>
-<line x1="151.0" y1="-1061.1" x2="254.6" y2="-1061.1" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
-<text x="1034.7" y="-662.9" font-size="12" text-anchor="middle" fill="#f8fafc">observaciones</text>
-<text x="975.3" y="-587.3" font-size="12" text-anchor="middle" fill="#f8fafc">duración_min</text>
-<text x="918.6" y="-623.8" font-size="12" text-anchor="middle" fill="#f8fafc">fecha</text>
-<line x1="902.0" y1="-619.8" x2="935.2" y2="-619.8" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
-<text x="943.7" y="-739.7" font-size="12" text-anchor="middle" fill="#f8fafc">hora</text>
-<line x1="930.1" y1="-735.7" x2="957.4" y2="-735.7" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-242 -143 1065 982" width="1065" height="982" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYToxMjE0MzNkMy05NzQ3LTQ4ZjEtYTY5Zi02YWRiNmMyYTIzODAAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaLwIHNGI9f4ELAbRIUVKG+sAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDoxMWI4YzFiMC1jNjMxLTRjMzktYmEzMy0yYTM5MjJmOGMxNjFscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoWtvISPQQ0SAujpdHrjhOzQAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFgg7PgAIHzjxMZfbMr+lhflckjoKzuGhyAPdOtD7HY7BFGkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaIQTJpSGiKOiMyJmloMRVJ0AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCCgJEaxk/W+eblwKuu3wFi3Fw0pETgACJ9lOBHvz1gVY2RuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBj1Zmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjEyMTQzM2QzLTk3NDctNDhmMS1hNjlmLTZhZGI2YzJhMjM4MC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmYwM2JhYzcyLTc3ZGQtNGM0Yy1iYmE4LTQyY2VmNDA2MmRiOXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDs+AAgfOPExl9syv6WF+VySOgrO4aHIA9060PsdjsEUaJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggPbcFL8ZBF1YI5AK7S4I/6IU9TcZoKqP5ElvN9O5owd2iY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggeIdXqVZnwQ7IsvnPiNhS0ooucg4vyJQ/D0soI+gwAjt0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQGigbkhBr32JX9MYyBk5QUx6NsmQ40Rx8fuFp8YSnh/oUQ5Xj8QXyo0foH6ZVaA0qj+Pa5imCxyy7Kgw0JzWnis=</c2pa:manifest></metadata>
+<title id="t">Casas de Juego de Tronos: castillos, arquitectos y mecenazgos</title><desc id="d">CASA tiene CASTILLO (débil). ARQUITECTO construye CASTILLO, es maestro de ARQUITECTO y pertenece a ESCUELA. ARQUITECTO y MECENAS forman el MECENAZGO (N:M), agregado y relacionado con CASTILLO.</desc>
+<rect x="-242" y="-143" width="1065" height="982" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+<rect x="-218.1" y="269.0" width="766.1" height="232.0" fill="none" stroke="#15803d" stroke-width="2"/><rect x="-213.1" y="274.0" width="756.1" height="222.0" fill="none" stroke="#15803d" stroke-width="1.2"/>
+<g stroke="#1f2937" stroke-width="1.4" fill="none"><line x1="42.0" y1="14.2" x2="125.7" y2="42.4"/><line x1="134.3" y1="63.9" x2="108.2" y2="80.1"/><line x1="128.1" y1="62.3" x2="11.8" y2="109.3"/><line x1="150.3" y1="37.9" x2="128.0" y2="-50.1"/><line x1="7.9" y1="21.0" x2="24.1" y2="63.9"/><line x1="-21.0" y1="21.0" x2="-39.4" y2="39.4"/><line x1="-42.0" y1="0.0" x2="-90.0" y2="0.0"/><line x1="-25.7" y1="-21.0" x2="-41.7" y2="-34.1"/><line x1="-0.0" y1="-21.0" x2="-0.0" y2="-69.0"/><line x1="485.0" y1="21.0" x2="508.6" y2="32.0"/><line x1="403.6" y1="-21.0" x2="362.1" y2="-45.0"/><line x1="430.2" y1="-21.0" x2="397.2" y2="-91.7"/><line x1="443.7" y1="-21.0" x2="453.8" y2="-78.1"/><line x1="461.0" y1="-21.0" x2="479.4" y2="-39.4"/><line x1="491.9" y1="-9.2" x2="539.2" y2="-17.5"/><line x1="461.0" y1="401.0" x2="479.4" y2="419.4"/><line x1="419.0" y1="401.0" x2="400.6" y2="419.4"/><line x1="376.1" y1="375.1" x2="388.6" y2="376.1"/><line x1="419.0" y1="359.0" x2="400.6" y2="340.6"/><line x1="461.0" y1="359.0" x2="479.4" y2="340.6"/><line x1="489.8" y1="740.0" x2="515.8" y2="740.0"/><line x1="473.1" y1="761.0" x2="484.8" y2="768.4"/><line x1="440.0" y1="761.0" x2="440.0" y2="787.0"/><line x1="390.2" y1="740.0" x2="364.2" y2="740.0"/><line x1="25.7" y1="401.0" x2="41.8" y2="414.2"/><line x1="0.0" y1="401.0" x2="0.0" y2="459.0"/><line x1="-21.0" y1="401.0" x2="-39.4" y2="419.4"/><line x1="-52.3" y1="380.0" x2="-100.3" y2="380.0"/><line x1="-25.7" y1="359.0" x2="-41.8" y2="345.9"/><line x1="-0.0" y1="359.0" x2="-0.0" y2="311.0"/><line x1="239.6" y1="388.9" x2="258.0" y2="397.2"/><line x1="220.0" y1="401.0" x2="220.0" y2="453.0"/><line x1="207.0" y1="393.0" x2="183.9" y2="416.1"/><line x1="186.0" y1="0.0" x2="42.0" y2="0.0"/><line x1="254.0" y1="0.0" x2="388.1" y2="0.0"/><line x1="440.0" y1="224.0" x2="440.0" y2="359.0"/><line x1="440.0" y1="156.0" x2="440.0" y2="21.0"/><path d="M660.0 346.0 Q650.0 300.0 495.1 359.0" fill="none"/><path d="M660.0 414.0 Q650.0 460.0 495.1 401.0" fill="none"/><line x1="440.0" y1="536.0" x2="440.0" y2="401.0"/><line x1="440.0" y1="604.0" x2="440.0" y2="719.0"/><line x1="254.0" y1="380.0" x2="376.1" y2="380.0"/><line x1="186.0" y1="380.0" x2="52.3" y2="380.0"/><line x1="93.3" y1="189.6" x2="122.4" y2="269.0"/><line x1="126.7" y1="130.4" x2="389.5" y2="21.0"/></g>
+<rect x="-42.0" y="-21.0" width="84.0" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="388.1" y="-21.0" width="103.8" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="392.1" y="-17.0" width="95.8" height="34.0" fill="none" stroke="#111111" stroke-width="1.4"/>
+<rect x="376.1" y="359.0" width="127.8" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="390.2" y="719.0" width="99.6" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="-52.3" y="359.0" width="104.5" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<polygon points="186.0,0.0 220.0,21.0 220.0,-21.0" fill="#ffffff" stroke="none"/>
+<polygon points="254.0,0.0 220.0,21.0 220.0,-21.0" fill="#111111" stroke="none"/>
+<polygon points="186.0,0.0 220.0,21.0 254.0,0.0 220.0,-21.0" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="220.0" y1="21.0" x2="220.0" y2="-21.0" stroke="#111111" stroke-width="1"/>
+<polygon points="440.0,224.0 461.0,190.0 419.0,190.0" fill="#ffffff" stroke="none"/>
+<polygon points="440.0,156.0 461.0,190.0 419.0,190.0" fill="#111111" stroke="none"/>
+<polygon points="440.0,224.0 461.0,190.0 440.0,156.0 419.0,190.0" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="461.0" y1="190.0" x2="419.0" y2="190.0" stroke="#111111" stroke-width="1"/>
+<polygon points="660.0,346.0 639.0,380.0 681.0,380.0" fill="#ffffff" stroke="none"/>
+<polygon points="660.0,414.0 639.0,380.0 681.0,380.0" fill="#111111" stroke="none"/>
+<polygon points="660.0,346.0 639.0,380.0 660.0,414.0 681.0,380.0" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="639.0" y1="380.0" x2="681.0" y2="380.0" stroke="#111111" stroke-width="1"/>
+<polygon points="440.0,536.0 419.0,570.0 461.0,570.0" fill="#111111" stroke="none"/>
+<polygon points="440.0,604.0 419.0,570.0 461.0,570.0" fill="#ffffff" stroke="none"/>
+<polygon points="440.0,536.0 419.0,570.0 440.0,604.0 461.0,570.0" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="419.0" y1="570.0" x2="461.0" y2="570.0" stroke="#111111" stroke-width="1"/>
+<polygon points="254.0,380.0 220.0,359.0 220.0,401.0" fill="#111111" stroke="none"/>
+<polygon points="186.0,380.0 220.0,359.0 220.0,401.0" fill="#111111" stroke="none"/>
+<polygon points="254.0,380.0 220.0,359.0 186.0,380.0 220.0,401.0" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="220.0" y1="359.0" x2="220.0" y2="401.0" stroke="#111111" stroke-width="1"/>
+<polygon points="93.3,189.6 128.3,170.3 91.7,149.7" fill="#ffffff" stroke="none"/>
+<polygon points="126.7,130.4 128.3,170.3 91.7,149.7" fill="#111111" stroke="none"/>
+<polygon points="93.3,189.6 128.3,170.3 126.7,130.4 91.7,149.7" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="128.3" y1="170.3" x2="91.7" y2="149.7" stroke="#111111" stroke-width="1"/>
+<ellipse cx="153.8" cy="51.9" rx="38.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="90.8" cy="90.8" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-13.8" cy="119.7" rx="37.8" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="124.5" cy="-64.0" rx="30.3" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="29.2" cy="77.7" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-52.5" cy="52.5" rx="38.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-144.8" cy="0.0" rx="54.8" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-57.8" cy="-47.2" rx="45.9" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-0.0" cy="-83.0" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="531.2" cy="42.5" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="342.6" cy="-56.3" rx="32.8" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="390.9" cy="-105.3" rx="27.6" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="456.2" cy="-92.1" rx="27.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="492.1" cy="-52.1" rx="30.9" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="572.4" cy="-23.4" rx="36.6" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="492.6" cy="432.6" rx="41.4" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="387.4" cy="432.6" rx="39.7" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="335.5" cy="372.0" rx="55.5" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="387.1" cy="327.1" rx="49.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="492.3" cy="327.7" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="549.9" cy="740.0" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="501.9" cy="779.3" rx="27.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="440.0" cy="801.0" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="305.9" cy="740.0" rx="58.3" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="57.6" cy="427.1" rx="41.4" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="0.0" cy="473.0" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-52.6" cy="432.6" rx="39.7" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-152.2" cy="380.0" rx="51.9" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-57.8" cy="332.8" rx="44.9" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-0.0" cy="297.0" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="283.7" cy="408.9" rx="46.4" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="220.0" cy="467.0" rx="38.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="170.7" cy="429.3" rx="40.1" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<rect x="-201.0" y="259.0" width="86.0" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="-158.0" y="272.5" font-size="11" fill="#15803d" text-anchor="middle" font-weight="700">MECENAZGO</text>
+<rect x="51.8" y="-9.0" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="70.0" y="4.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="177.0" y="-6.0" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="341.2" y="-9.0" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="360.1" y="4.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="263.0" y="14.0" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="378.1" y="-20.0" font-size="11" font-weight="700" fill="#111111" text-anchor="middle">ID</text>
+<rect x="421.8" y="322.0" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="440.0" y="335.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="430.0" y="237.0" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="421.1" y="40.0" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="440.0" y="53.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="450.0" y="151.0" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="559.2" y="323.5" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="577.5" y="337.0" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,1)</text>
+<text x="670.0" y="341.0" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<text x="572.5" y="321.4" font-size="11" fill="#475569" text-anchor="middle" font-style="italic">maestro</text>
+<rect x="558.6" y="418.5" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="577.5" y="432.0" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="650.0" y="427.0" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="572.4" y="447.6" font-size="11" fill="#475569" text-anchor="middle" font-style="italic">discípulo</text>
+<rect x="421.1" y="420.0" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="440.0" y="433.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="450.0" y="531.0" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="421.8" y="682.0" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="440.0" y="695.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,1)</text>
+<text x="430.0" y="617.0" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="329.2" y="371.0" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="348.1" y="384.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,N)</text>
+<text x="263.0" y="394.0" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="61.4" y="371.0" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="80.3" y="384.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="177.0" y="374.0" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="94.5" y="233.7" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="112.8" y="247.2" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,1)</text>
+<text x="80.2" y="196.5" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="344.8" y="22.8" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="363.7" y="36.3" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="139.8" y="131.5" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="0.0" y="5.0" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">CASA</text>
+<text x="440.0" y="5.0" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">CASTILLO</text>
+<text x="440.0" y="385.0" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">ARQUITECTO</text>
+<text x="440.0" y="745.0" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">ESCUELA</text>
+<text x="0.0" y="385.0" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">MECENAS</text>
+<text x="220.0" y="-29.5" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">posee</text>
+<text x="506.4" y="194.5" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">construye</text>
+<text x="742.1" y="384.5" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">es maestro de</text>
+<text x="507.1" y="574.5" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">pertenece</text>
+<text x="220.0" y="350.5" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">mecenazgo</text>
+<text x="147.7" y="185.8" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">resulta de</text>
+<text x="153.8" y="55.9" font-size="12" text-anchor="middle" fill="#111111">dirección</text>
+<text x="90.8" y="94.8" font-size="12" text-anchor="middle" fill="#111111">valle</text>
+<text x="-13.8" y="123.7" font-size="12" text-anchor="middle" fill="#111111">montaña</text>
+<text x="124.5" y="-60.0" font-size="12" text-anchor="middle" fill="#111111">arroyo</text>
+<text x="29.2" y="81.7" font-size="12" text-anchor="middle" fill="#111111">m2</text>
+<text x="-52.5" y="56.5" font-size="12" text-anchor="middle" fill="#111111">nº_orden</text>
+<line x1="-79.5" y1="60.5" x2="-25.5" y2="60.5" stroke="#111111" stroke-width="1.3"/>
+<text x="-144.8" y="4.0" font-size="12" text-anchor="middle" fill="#111111">año_fundación</text>
+<text x="-57.8" y="-43.2" font-size="12" text-anchor="middle" fill="#111111">localización</text>
+<text x="-0.0" y="-79.0" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<line x1="-23.2" y1="-75.0" x2="23.2" y2="-75.0" stroke="#111111" stroke-width="1.8" stroke-dasharray="1.5 2.5"/>
+<text x="531.2" y="46.5" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="342.6" y="-52.3" font-size="12" text-anchor="middle" fill="#111111">técnica</text>
+<text x="390.9" y="-101.3" font-size="12" text-anchor="middle" fill="#111111">fecha</text>
+<text x="456.2" y="-88.1" font-size="12" text-anchor="middle" fill="#111111">estilo</text>
+<text x="492.1" y="-48.1" font-size="12" text-anchor="middle" fill="#111111">código</text>
+<line x1="472.2" y1="-44.1" x2="512.1" y2="-44.1" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
+<text x="572.4" y="-19.4" font-size="12" text-anchor="middle" fill="#111111">medidas</text>
+<text x="492.6" y="436.6" font-size="12" text-anchor="middle" fill="#111111">fecha_nac</text>
+<text x="387.4" y="436.6" font-size="12" text-anchor="middle" fill="#111111">fecha_fall</text>
+<text x="335.5" y="376.0" font-size="12" text-anchor="middle" fill="#111111">cód_arquitecto</text>
+<line x1="291.0" y1="380.0" x2="380.0" y2="380.0" stroke="#111111" stroke-width="1.3"/>
+<text x="387.1" y="331.1" font-size="12" text-anchor="middle" fill="#111111">nacionalidad</text>
+<text x="492.3" y="331.7" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="549.9" y="744.0" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<line x1="526.8" y1="748.0" x2="573.1" y2="748.0" stroke="#111111" stroke-width="1.3"/>
+<text x="501.9" y="783.3" font-size="12" text-anchor="middle" fill="#111111">estilo</text>
+<text x="440.0" y="805.0" font-size="12" text-anchor="middle" fill="#111111">país</text>
+<text x="305.9" y="744.0" font-size="12" text-anchor="middle" fill="#111111">fecha_aparición</text>
+<text x="57.6" y="431.1" font-size="12" text-anchor="middle" fill="#111111">fecha_nac</text>
+<text x="0.0" y="477.0" font-size="12" text-anchor="middle" fill="#111111">país</text>
+<text x="-52.6" y="436.6" font-size="12" text-anchor="middle" fill="#111111">fecha_fall</text>
+<text x="-152.2" y="384.0" font-size="12" text-anchor="middle" fill="#111111">cód_mecenas</text>
+<line x1="-193.1" y1="388.0" x2="-111.3" y2="388.0" stroke="#111111" stroke-width="1.3"/>
+<text x="-57.8" y="336.8" font-size="12" text-anchor="middle" fill="#111111">ciudad_nac</text>
+<text x="-0.0" y="301.0" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="283.7" y="412.9" font-size="12" text-anchor="middle" fill="#111111">fecha_inicio</text>
+<line x1="248.4" y1="416.9" x2="319.1" y2="416.9" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
+<text x="220.0" y="471.0" font-size="12" text-anchor="middle" fill="#111111">fecha_fin</text>
+<text x="170.7" y="433.3" font-size="12" text-anchor="middle" fill="#111111">población</text>
 </svg>

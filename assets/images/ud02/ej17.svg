@@ -1,67 +1,100 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 -1031 1021 512" width="1021" height="512" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
-<title id="t">Planta industrial: lista de materiales e inspecciones</title><desc id="d">FÁBRICA alberga LÍNEA (débil). PIEZA se fabrica en una LÍNEA. PIEZA se compone de PIEZA con una cantidad. PIEZA se inspecciona en INSPECCIÓN (débil).</desc>
-<rect x="30" y="-1031" width="1021" height="512" rx="10" fill="#0f172a"/>
-<g stroke="#94a3b8" stroke-width="1.6" fill="none"><line x1="864.9" y1="-648.7" x2="871.6" y2="-623.5"/><line x1="853.6" y1="-690.7" x2="846.9" y2="-715.8"/><line x1="907.2" y1="-682.5" x2="932.3" y2="-689.2"/><line x1="538.2" y1="-596.8" x2="535.9" y2="-570.9"/><line x1="541.8" y1="-638.8" x2="544.1" y2="-664.7"/><line x1="266.4" y1="-808.4" x2="289.9" y2="-797.4"/><line x1="209.7" y1="-807.0" x2="194.7" y2="-785.7"/><line x1="182.4" y1="-835.4" x2="156.8" y2="-839.9"/><line x1="218.7" y1="-849.0" x2="212.0" y2="-874.1"/><line x1="917.1" y1="-819.5" x2="941.5" y2="-810.6"/><line x1="856.7" y1="-819.5" x2="853.1" y2="-792.0"/><line x1="814.4" y1="-819.5" x2="790.8" y2="-808.5"/><line x1="867.1" y1="-861.5" x2="876.0" y2="-885.9"/><line x1="386.2" y1="-965.9" x2="403.0" y2="-980.0"/><line x1="811.3" y1="-657.8" x2="739.6" y2="-640.1"/><line x1="581.8" y1="-623.9" x2="665.1" y2="-631.0"/><line x1="582.2" y1="-618.8" x2="665.5" y2="-625.8"/><line x1="235.0" y1="-807.0" x2="290.4" y2="-698.0"/><line x1="498.0" y1="-628.1" x2="342.7" y2="-666.2"/><path d="M236.0 -849.0 Q259.5 -937.0 336.1 -938.3" fill="none"/><path d="M266.4 -843.3 Q325.6 -838.1 355.3 -929.0" fill="none"/><line x1="266.4" y1="-835.8" x2="630.6" y2="-903.2"/><line x1="805.6" y1="-859.1" x2="712.6" y2="-895.9"/><line x1="807.5" y1="-863.9" x2="714.6" y2="-900.8"/></g>
-<rect x="811.3" y="-690.7" width="95.8" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="498.0" y="-638.8" width="84.0" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="503.0" y="-633.8" width="74.0" height="32.0" fill="none" stroke="#38bdf8" stroke-width="2"/>
-<rect x="182.4" y="-849.0" width="84.0" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="797.7" y="-861.5" width="123.3" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="802.7" y="-856.5" width="113.3" height="32.0" fill="none" stroke="#38bdf8" stroke-width="2"/>
-<polygon points="706.7,-657.9 754.7,-631.9 706.7,-605.9 658.8,-631.9" fill="#047857" stroke="#34d399" stroke-width="2"/>
-<polygon points="706.7,-650.9 741.8,-631.9 706.7,-612.9 671.7,-631.9" fill="none" stroke="#34d399" stroke-width="2"/>
-<polygon points="301.5,-702.3 368.9,-676.3 301.5,-650.3 234.1,-676.3" fill="#047857" stroke="#34d399" stroke-width="2"/>
-<polygon points="366.6,-975.4 419.9,-949.4 366.6,-923.4 313.4,-949.4" fill="#047857" stroke="#34d399" stroke-width="2"/>
-<polygon points="678.9,-938.1 752.7,-912.1 678.9,-886.1 605.2,-912.1" fill="#047857" stroke="#34d399" stroke-width="2"/>
-<polygon points="678.9,-931.1 732.8,-912.1 678.9,-893.1 625.0,-912.1" fill="none" stroke="#34d399" stroke-width="2"/>
-<ellipse cx="875.3" cy="-609.6" rx="39.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="843.2" cy="-729.7" rx="35.7" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="966.6" cy="-698.4" rx="45.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="534.7" cy="-556.9" rx="53.4" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="545.3" cy="-678.7" rx="39.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="314.1" cy="-786.2" rx="40.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="185.3" cy="-772.2" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="110.6" cy="-848.1" rx="56.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="208.3" cy="-888.0" rx="32.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="972.9" cy="-799.2" rx="54.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="851.3" cy="-778.0" rx="27.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="764.8" cy="-796.3" rx="52.5" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="881.0" cy="-899.8" rx="39.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="418.3" cy="-992.8" rx="37.1" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<rect x="764.0" y="-659.6" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="782.2" y="-646.1" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
-<rect x="593.0" y="-632.9" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="611.9" y="-619.4" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,N)</text>
-<rect x="229.7" y="-789.3" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="248.6" y="-775.8" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
-<rect x="450.6" y="-644.2" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="468.9" y="-630.7" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
-<rect x="230.3" y="-893.0" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="249.2" y="-879.5" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
-<rect x="237.1" y="-928.6" width="81.6" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="277.9" y="-915.1" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">ensamblada</text>
-<rect x="274.5" y="-855.4" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="293.4" y="-841.9" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
-<rect x="281.0" y="-875.7" width="83.3" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="322.6" y="-862.2" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">componente</text>
-<rect x="277.6" y="-850.2" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="295.9" y="-836.7" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
-<rect x="759.7" y="-881.6" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="778.6" y="-868.1" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
-<text x="859.3" y="-664.7" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">FÁBRICA</text>
-<text x="540.0" y="-612.8" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">LÍNEA</text>
-<text x="224.4" y="-823.0" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">PIEZA</text>
-<text x="859.4" y="-835.5" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">INSPECCIÓN</text>
-<text x="706.7" y="-627.4" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">alberga</text>
-<text x="301.5" y="-671.8" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">se fabrica en</text>
-<text x="366.6" y="-944.9" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">compone</text>
-<text x="678.9" y="-907.6" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">se inspecciona</text>
-<text x="875.3" y="-605.6" font-size="12" text-anchor="middle" fill="#f8fafc">ubicación</text>
-<text x="843.2" y="-725.7" font-size="12" text-anchor="middle" fill="#f8fafc">teléfono</text>
-<text x="966.6" y="-694.4" font-size="12" text-anchor="middle" fill="#f8fafc">cód_fábrica</text>
-<line x1="932.1" y1="-690.4" x2="1001.1" y2="-690.4" stroke="#f8fafc" stroke-width="1.4"/>
-<text x="534.7" y="-552.9" font-size="12" text-anchor="middle" fill="#f8fafc">denominación</text>
-<text x="545.3" y="-674.7" font-size="12" text-anchor="middle" fill="#f8fafc">cód_línea</text>
-<line x1="517.0" y1="-670.7" x2="573.6" y2="-670.7" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
-<text x="314.1" y="-782.2" font-size="12" text-anchor="middle" fill="#f8fafc">cód_pieza</text>
-<line x1="284.3" y1="-778.2" x2="343.9" y2="-778.2" stroke="#f8fafc" stroke-width="1.4"/>
-<text x="185.3" y="-768.2" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
-<text x="110.6" y="-844.1" font-size="12" text-anchor="middle" fill="#f8fafc">coste_estándar</text>
-<text x="208.3" y="-884.0" font-size="12" text-anchor="middle" fill="#f8fafc">peso_g</text>
-<text x="972.9" y="-795.2" font-size="12" text-anchor="middle" fill="#f8fafc">observaciones</text>
-<text x="851.3" y="-774.0" font-size="12" text-anchor="middle" fill="#f8fafc">fecha</text>
-<text x="764.8" y="-792.3" font-size="12" text-anchor="middle" fill="#f8fafc">nº_inspección</text>
-<line x1="723.3" y1="-788.3" x2="806.2" y2="-788.3" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
-<text x="881.0" y="-895.8" font-size="12" text-anchor="middle" fill="#f8fafc">resultado</text>
-<text x="418.3" y="-988.8" font-size="12" text-anchor="middle" fill="#f8fafc">cantidad</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-402 -811 897 503" width="897" height="503" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTozZDMwN2EzMC00MzFiLTQzMjItYWNmNS04NDMxODNjMGJmNDYAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaD1FLilVLy0RxVUqNTkyL3UAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDowOGY4NDZhYS1kOTEwLTRhMjEtYTkxOS1kY2M1Yzk1NGYwMDlscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoN0t09YgatCVbeoSAAhOSmQAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFgg1W14OnfyVbyLaHXL3LXjQLakzWL8p2b0t+7RBv1IuBCkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaFkuQt+mX/jc+4sGCfjI4vEAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCAN3JzsOmgpxOeNZ4Xclx6xERqiVZ9sLsHiZ3F/4GtqpmRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjzZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjNkMzA3YTMwLTQzMWItNDMyMi1hY2Y1LTg0MzE4M2MwYmY0Ni9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmMxM2E3ZGMxLTdjYjItNDFkOC1hYjU5LTI5NWM4OWYzNGNjNXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDVbXg6d/JVvItodcvcteNAtqTNYvynZvS37tEG/Ui4EKJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFgg3w6DW4GNAQ8cEevUsT1UG74ZyovW3kohe84Lly8+iJmiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggRZQPdxvb9LT6h8RI6j3zCTciYSq3ZubSsfUL0wxL9a50Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQJzod0v+s2IMxQQmcMlBjd4NwJL79QY5G6jGkQJQ6iuhZ1d2etOYyNeb6vSre9uIl+2MfUruMJUDwPgY4k3x8qc=</c2pa:manifest></metadata>
+<title id="t">Federación deportiva: equipos, partidos e incidencias</title><desc id="d">JUGADOR pertenece a EQUIPO y un jugador es capitán. EQUIPO es local o visitante en PARTIDO. PARTIDO registra INCIDENCIA (débil) protagonizada por JUGADOR.</desc>
+<rect x="-402" y="-811" width="897" height="503" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+<g stroke="#1f2937" stroke-width="1.4" fill="none"><line x1="257.6" y1="-736.1" x2="243.8" y2="-755.3"/><line x1="282.5" y1="-736.1" x2="293.5" y2="-759.7"/><line x1="317.7" y1="-723.1" x2="343.3" y2="-727.6"/><line x1="-152.3" y1="-599.4" x2="-145.6" y2="-574.2"/><line x1="-209.0" y1="-629.4" x2="-234.6" y2="-633.9"/><line x1="-177.3" y1="-641.4" x2="-197.3" y2="-663.2"/><line x1="-150.3" y1="-641.4" x2="-141.4" y2="-665.8"/><line x1="255.7" y1="-411.6" x2="281.6" y2="-409.3"/><line x1="228.4" y1="-394.9" x2="246.9" y2="-376.8"/><line x1="194.8" y1="-394.9" x2="181.8" y2="-372.4"/><line x1="-178.8" y1="-382.2" x2="-165.8" y2="-359.7"/><line x1="-203.0" y1="-382.2" x2="-216.0" y2="-359.7"/><line x1="-250.5" y1="-403.2" x2="-276.5" y2="-403.2"/><line x1="179.4" y1="-734.9" x2="227.8" y2="-724.7"/><line x1="113.0" y1="-720.3" x2="-107.0" y2="-639.2"/><line x1="41.0" y1="-583.9" x2="-107.0" y2="-611.0"/><line x1="107.4" y1="-598.5" x2="242.9" y2="-694.1"/><line x1="241.1" y1="-596.3" x2="267.1" y2="-694.1"/><line x1="226.5" y1="-529.9" x2="210.6" y2="-436.9"/><line x1="379.5" y1="-664.4" x2="316.9" y2="-694.1"/><line x1="364.9" y1="-597.9" x2="225.2" y2="-436.9"/><line x1="1.0" y1="-412.6" x2="158.3" y2="-415.1"/><line x1="-67.0" y1="-410.4" x2="-131.3" y2="-406.7"/><line x1="-261.4" y1="-569.6" x2="-200.7" y2="-599.4"/><line x1="-271.6" y1="-502.4" x2="-208.0" y2="-424.2"/></g>
+<rect x="227.8" y="-736.1" width="89.9" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="-209.0" y="-641.4" width="102.0" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="158.3" y="-436.9" width="97.4" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="-250.5" y="-424.2" width="119.1" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="-246.5" y="-420.2" width="111.1" height="34.0" fill="none" stroke="#111111" stroke-width="1.4"/>
+<polygon points="179.4,-734.9 141.6,-748.1 150.7,-707.1" fill="#ffffff" stroke="none"/>
+<polygon points="113.0,-720.3 141.6,-748.1 150.7,-707.1" fill="#111111" stroke="none"/>
+<polygon points="179.4,-734.9 141.6,-748.1 113.0,-720.3 150.7,-707.1" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="141.6" y1="-748.1" x2="150.7" y2="-707.1" stroke="#111111" stroke-width="1"/>
+<polygon points="41.0,-583.9 78.7,-570.7 69.6,-611.7" fill="#ffffff" stroke="none"/>
+<polygon points="107.4,-598.5 78.7,-570.7 69.6,-611.7" fill="#ffffff" stroke="none"/>
+<polygon points="41.0,-583.9 78.7,-570.7 107.4,-598.5 69.6,-611.7" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="78.7" y1="-570.7" x2="69.6" y2="-611.7" stroke="#111111" stroke-width="1"/>
+<polygon points="241.1,-596.3 213.3,-567.6 254.3,-558.6" fill="#ffffff" stroke="none"/>
+<polygon points="226.5,-529.9 213.3,-567.6 254.3,-558.6" fill="#111111" stroke="none"/>
+<polygon points="241.1,-596.3 213.3,-567.6 226.5,-529.9 254.3,-558.6" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="213.3" y1="-567.6" x2="254.3" y2="-558.6" stroke="#111111" stroke-width="1"/>
+<polygon points="379.5,-664.4 351.7,-635.7 392.7,-626.6" fill="#ffffff" stroke="none"/>
+<polygon points="364.9,-597.9 351.7,-635.7 392.7,-626.6" fill="#111111" stroke="none"/>
+<polygon points="379.5,-664.4 351.7,-635.7 364.9,-597.9 392.7,-626.6" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="351.7" y1="-635.7" x2="392.7" y2="-626.6" stroke="#111111" stroke-width="1"/>
+<polygon points="1.0,-412.6 -33.7,-432.5 -32.3,-390.5" fill="#ffffff" stroke="none"/>
+<polygon points="-67.0,-410.4 -33.7,-432.5 -32.3,-390.5" fill="#111111" stroke="none"/>
+<polygon points="1.0,-412.6 -33.7,-432.5 -67.0,-410.4 -32.3,-390.5" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="-33.7" y1="-432.5" x2="-32.3" y2="-390.5" stroke="#111111" stroke-width="1"/>
+<polygon points="-261.4,-569.6 -287.2,-539.1 -245.7,-532.8" fill="#ffffff" stroke="none"/>
+<polygon points="-271.6,-502.4 -287.2,-539.1 -245.7,-532.8" fill="#111111" stroke="none"/>
+<polygon points="-261.4,-569.6 -287.2,-539.1 -271.6,-502.4 -245.7,-532.8" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="-287.2" y1="-539.1" x2="-245.7" y2="-532.8" stroke="#111111" stroke-width="1"/>
+<ellipse cx="234.2" cy="-768.6" rx="31.1" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="299.8" cy="-773.3" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="382.6" cy="-734.5" rx="45.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-141.9" cy="-560.4" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-266.7" cy="-639.5" rx="35.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-209.4" cy="-676.3" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-136.4" cy="-679.6" rx="29.4" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="326.0" cy="-405.5" rx="46.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="260.1" cy="-363.9" rx="33.7" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="173.9" cy="-358.6" rx="44.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-157.9" cy="-346.1" rx="32.1" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-223.8" cy="-346.3" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-327.2" cy="-403.2" rx="50.7" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<rect x="189.2" y="-738.0" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="207.4" y="-724.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="190.3" y="-723.1" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="-99.6" y="-657.9" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="-80.7" y="-644.4" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,N)</text>
+<text x="102.0" y="-724.1" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="-97.7" y="-615.0" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="-79.4" y="-601.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="30.0" y="-587.7" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="201.8" y="-687.0" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="220.1" y="-673.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,1)</text>
+<text x="118.3" y="-586.7" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="241.7" y="-676.1" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="259.9" y="-662.6" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="252.8" y="-599.0" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="196.4" y="-473.5" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="215.3" y="-460.0" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="214.8" y="-519.3" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="323.9" y="-691.1" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="342.2" y="-677.6" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="391.2" y="-667.0" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="224.6" y="-467.0" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="243.5" y="-453.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="353.2" y="-587.3" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="112.0" y="-423.7" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="130.3" y="-410.2" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="10.3" y="-398.9" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="-123.2" y="-417.3" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="-104.3" y="-403.8" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="-76.3" y="-416.1" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="-122.8" y="-427.2" font-size="11" font-weight="700" fill="#111111" text-anchor="middle">ID</text>
+<rect x="-244.1" y="-596.0" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="-225.9" y="-582.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="-250.1" y="-573.0" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="-244.6" y="-455.0" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="-225.7" y="-441.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="-282.8" y="-491.0" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="272.7" y="-710.1" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">EQUIPO</text>
+<text x="-158.0" y="-615.4" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">JUGADOR</text>
+<text x="207.0" y="-410.9" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">PARTIDO</text>
+<text x="-190.9" y="-398.2" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">INCIDENCIA</text>
+<text x="138.8" y="-756.5" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">pertenece a</text>
+<text x="66.8" y="-620.1" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">capitán</text>
+<text x="280.4" y="-548.4" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">local</text>
+<text x="433.8" y="-613.1" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">visitante</text>
+<text x="-34.1" y="-441.0" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">registra</text>
+<text x="-192.8" y="-520.3" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">protagoniza</text>
+<text x="234.2" y="-764.6" font-size="12" text-anchor="middle" fill="#111111">ciudad</text>
+<text x="299.8" y="-769.3" font-size="12" text-anchor="middle" fill="#111111">club</text>
+<text x="382.6" y="-730.5" font-size="12" text-anchor="middle" fill="#111111">cód_equipo</text>
+<line x1="348.3" y1="-726.5" x2="416.8" y2="-726.5" stroke="#111111" stroke-width="1.3"/>
+<text x="-141.9" y="-556.4" font-size="12" text-anchor="middle" fill="#111111">dni</text>
+<text x="-266.7" y="-635.5" font-size="12" text-anchor="middle" fill="#111111">nº_ficha</text>
+<line x1="-290.9" y1="-631.5" x2="-242.5" y2="-631.5" stroke="#111111" stroke-width="1.3"/>
+<text x="-209.4" y="-672.3" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="-136.4" y="-675.6" font-size="12" text-anchor="middle" fill="#111111">dorsal</text>
+<text x="326.0" y="-401.5" font-size="12" text-anchor="middle" fill="#111111">cód_partido</text>
+<line x1="290.7" y1="-397.5" x2="361.2" y2="-397.5" stroke="#111111" stroke-width="1.3"/>
+<text x="260.1" y="-359.9" font-size="12" text-anchor="middle" fill="#111111">jornada</text>
+<text x="173.9" y="-354.6" font-size="12" text-anchor="middle" fill="#111111">fecha_hora</text>
+<text x="-157.9" y="-342.1" font-size="12" text-anchor="middle" fill="#111111">minuto</text>
+<line x1="-179.1" y1="-338.1" x2="-136.8" y2="-338.1" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
+<text x="-223.8" y="-342.3" font-size="12" text-anchor="middle" fill="#111111">tipo</text>
+<text x="-327.2" y="-399.2" font-size="12" text-anchor="middle" fill="#111111">nº_secuencia</text>
+<line x1="-366.8" y1="-395.2" x2="-287.5" y2="-395.2" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
 </svg>

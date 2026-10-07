@@ -14,4 +14,4 @@ Modificar datos es fácil; modificarlos **bien** —sin dejar operaciones a medi
 | [Teoría](/ud08-dml-transacciones/ud08-teoria) | Herramientas, `INSERT` (también desde consultas), `UPDATE` y `DELETE` con subconsultas, `MERGE`, transacciones y ACID, `SAVEPOINT`, concurrencia, bloqueos, interbloqueos, restricciones diferidas y guiones |
 | [Prácticas](/ud08-dml-transacciones/ud08-practicas) | Altas y bajas, históricos, modificaciones con subconsultas, laboratorio de transacciones, experimentos con dos sesiones, `MERGE` desde CSV y guion de promoción de curso |
 
-**Duración orientativa:** 14 sesiones.
+**Duración:** 9 horas de aula, del 03/05/2027 al 13/05/2027. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.

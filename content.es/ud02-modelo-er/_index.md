@@ -14,4 +14,4 @@ El diseño de una base de datos empieza **lejos del ordenador**: escuchando al c
 | [Teoría](/ud02-modelo-er/ud02-teoria) | Ciclo de diseño, entidades, atributos, relaciones, cardinalidades, entidades débiles, jerarquías, agregación, ternarias, notaciones, herramientas y caso EduGest |
 | [Prácticas](/ud02-modelo-er/ud02-practicas) | Seis prácticas progresivas, la tarea EduGest y un banco de 25 enunciados |
 
-**Duración orientativa:** 16 sesiones.
+**Duración:** 19 horas de aula, del 25/09/2026 al 23/10/2026. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.

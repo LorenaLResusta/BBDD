@@ -17,6 +17,31 @@ En esta unidad se estudian minuciosamente los conceptos matemáticos y pragmáti
 
 {{< ra "RA6:a,b,c,d,e,f,h" "RA2:a,d,e" >}}
 
+### Temporalización
+
+La unidad ocupa **17 horas de aula** (9 de teoría y 8 de práctica).
+
+{{< sesiones unidad="UD03" horas="17" >}}
+items:
+  - {h: 2, tipo: T, t: "Relación, atributo, dominio, tupla, grado y cardinalidad. Claves", ref: "§1 y §2 · laboratorio de claves"}
+  - {h: 2, tipo: T, t: "Restricciones e integridad referencial", ref: "§3 · simulador de integridad"}
+  - {h: 1, tipo: P, t: "Simulador de integridad referencial", ref: "Práctica 3.2"}
+  - {h: 2, tipo: T, t: "Reglas de transformación (I): entidades, débiles y atributos", ref: "§4.1 a §4.3 · transformador"}
+  - {h: 2, tipo: T, t: "Reglas de transformación (II): relaciones y jerarquías. Ejemplos", ref: "§4.4 a §4.9 y §5"}
+  - {h: 2, tipo: P, t: "Biblioteca: del E/R a las tablas", ref: "Práctica 3.1"}
+  - {h: 1, tipo: T, t: "Restricciones no representables y herramientas", ref: "§6 y §7"}
+  - {h: 2, tipo: P, t: "Tres formas de transformar una jerarquía", ref: "Práctica 3.3"}
+  - {h: 1, tipo: P, t: "Catálogo de restricciones de un hotel", ref: "Práctica 3.5"}
+  - {h: 2, tipo: P, t: "Modelo lógico de EduGest", ref: "§8 y proyecto EduGest-3"}
+autonomo:
+  - "Tareas de transformación 1 a 7 (E/R → relacional)"
+  - "Práctica 3.4 (ingeniería inversa) y práctica 3.6"
+  - "Banco de 20 ejercicios"
+{{< /sesiones >}}
+
+> [!IMPORTANT]
+> Esta unidad es el **puente** entre el diseño y la implementación: lo que decidas aquí (claves, nulos, políticas de borrado) determina las sentencias `CREATE TABLE` de la UD05. Un error de diseño que no detectes ahora se paga después con datos incorrectos.
+
 ### Objetivos de aprendizaje
 
 Al terminar esta unidad serás capaz de:
@@ -31,6 +56,8 @@ Al terminar esta unidad serás capaz de:
 
 ---
 
+
+{{< sesion n="1" h="2" tipo="t" >}}Elementos del modelo y claves{{< /sesion >}}
 
 ## 1. Conceptos Fundamentales del Modelo Relacional
 
@@ -101,7 +128,29 @@ Cuando una única columna no basta para identificar de forma unívoca a una fila
 > **Ejemplo de Clave Compuesta:**
 > En una tabla de matrícula universitaria `MATRICULA`, la clave primaria se compone de `(id_alumno, id_asignatura)`. Un alumno puede matricularse en varias asignaturas y en una asignatura hay varios alumnos, pero la combinación de un alumno concreto en una asignatura concreta es única.
 
+> [!CAUTION]
+> **Una clave no se descubre mirando los datos de hoy.** Que ningún valor se repita en la muestra no demuestra que no pueda repetirse mañana. La clave se decide por el **significado** del problema: ¿puede dos alumnos tener el mismo nombre? ¿Puede cambiar el valor con el tiempo? ¿Puede faltar?
+
+#### Laboratorio: ¿es una clave?
+
+Con datos reales de la tabla `ALUMNO` de EduGest, prueba qué conjuntos de columnas identifican a cada fila. Fíjate en el `NULL` de `dni` y en los apellidos repetidos.
+
+{{< claves >}}
+
+{{< quiz >}}
+- q: "En la muestra de arriba, `(nombre, apellidos)` no se repite. ¿Es una buena clave primaria para `ALUMNO`?"
+  options: ["Sí, identifica a todas las filas", "No: dos alumnos distintos pueden llamarse igual y los nombres cambian", "Sí, siempre que se añada `NOT NULL`", "Solo si se añade también `localidad`"]
+  answer: 1
+  explain: "Que no se repita **hoy** no la convierte en clave. Una clave primaria debe ser estable, no nula y única por significado. Por eso se usa `id_alumno` (artificial) y se protege el NIA con `UNIQUE`."
+- q: "`dni` contiene algún `NULL` en la muestra. ¿Qué papel puede tener esa columna?"
+  options: ["Clave primaria", "Clave alternativa con `UNIQUE`, pero no clave primaria", "Ninguno: no puede ser clave de ningún tipo", "Clave ajena"]
+  answer: 1
+  explain: "Una clave primaria no admite nulos (integridad de entidad). Una clave alternativa con `UNIQUE` sí admite `NULL`, aunque en la práctica conviene que el DNI sea obligatorio si es un dato del negocio."
+{{< /quiz >}}
+
 ---
+
+{{< sesion n="2" h="2" tipo="t" >}}Restricciones e integridad referencial{{< /sesion >}}
 
 ## 3. Restricciones del Modelo Relacional
 
@@ -150,7 +199,38 @@ Cuando se intenta eliminar o actualizar una fila en la tabla padre (la tabla que
 > [!WARNING]
 > **Diferencias entre SGBD.** El estándar SQL define `CASCADE`, `SET NULL`, `SET DEFAULT`, `RESTRICT` y `NO ACTION` tanto para `ON DELETE` como para `ON UPDATE`. **Oracle** solo implementa `ON DELETE CASCADE` y `ON DELETE SET NULL`; si no se indica nada, rechaza el borrado (equivale a `NO ACTION`). No admite `ON UPDATE`. Los ejemplos SQL de esta unidad usan la sintaxis estándar; en la UD05 los escribiremos en Oracle.
 
+> [!TIP]
+> **¿Qué política elijo?** Hazte esta pregunta sobre la fila hija: *¿tiene sentido que siga existiendo sin la fila padre?*
+> - **No** (una matrícula sin alumno) → `CASCADE`.
+> - **Sí, pero hay que revisarla** (un alumno cuyo grupo desaparece) → `SET NULL`, con la columna opcional.
+> - **No debe pasar nunca por accidente** (un departamento con empleados) → rechazar (la opción por defecto de Oracle).
+
+#### Laboratorio: simulador de integridad referencial
+
+Cambia la política de la clave ajena, intenta borrar, cambiar y insertar filas, y lee los mensajes de error **reales de Oracle**. Después, repite el experimento con la columna `NOT NULL`.
+
+{{< integridad >}}
+
+{{< quiz >}}
+- q: "La FK `matricula.id_alumno` debe eliminar la matrícula cuando se borra el alumno. ¿Qué política declaras?"
+  options: ["Sin cláusula", "`ON DELETE CASCADE`", "`ON DELETE SET NULL`", "`ON UPDATE CASCADE`"]
+  answer: 1
+  explain: "La matrícula carece de sentido sin su alumno: se borra en cascada. `SET NULL` dejaría matrículas huérfanas y `ON UPDATE` no existe en Oracle."
+- q: "En el simulador, ¿por qué `ON DELETE SET NULL` falla si `cod_grupo` es `NOT NULL`?"
+  options: ["Porque Oracle no soporta SET NULL", "Porque la política exige poner NULL en una columna que no lo admite", "Porque el grupo no existe", "Porque falta el `COMMIT`"]
+  answer: 1
+  explain: "SET NULL y NOT NULL se contradicen: el SGBD no puede cumplir las dos reglas a la vez (ORA-01407). Hay que elegir entre una política o la otra."
+{{< /quiz >}}
+
 ---
+
+{{< sesion n="3" h="1" tipo="p" practica="3.2" >}}Simulador de integridad referencial{{< /sesion >}}
+
+La práctica 3.2 se hace en la [página de prácticas](/ud03-modelo-relacional/ud03-practicas), con lápiz y papel, y se comprueba en la UD05 en Oracle.
+
+---
+
+{{< sesion n="4" h="2" tipo="t" >}}Reglas de transformación (I){{< /sesion >}}
 
 ## 4. Reglas de Transformación del Modelo EER al Modelo Relacional
 
@@ -194,7 +274,15 @@ $$\text{FK: id\_padre } \rightarrow \text{ENTIDAD\_PADRE}(\text{id\_padre}) \tex
 $$\text{ENTIDAD\_TELÉFONO}(\underline{\text{id\_persona}}, \underline{\text{numero\_telefono}}, \text{tipo\_linea})$$
 $$\text{FK: id\_persona } \rightarrow \text{PERSONA}(\text{id\_persona}) \text{ ON DELETE CASCADE}$$
 
+#### Laboratorio: del E/R a las tablas
+
+Este transformador aplica las reglas del apartado 4 y produce el esquema formal y el DDL de Oracle. Empieza por los casos de esta sesión (débil, multivaluado) y vuelve a él en la siguiente.
+
+{{< er-a-relacional >}}
+
 ---
+
+{{< sesion n="5" h="2" tipo="t" >}}Reglas de transformación (II): relaciones y jerarquías{{< /sesion >}}
 
 ### 4.4 Transformación de Relaciones Binarias 1:N
 
@@ -217,9 +305,12 @@ $$\text{FK: id\_persona } \rightarrow \text{PERSONA}(\text{id\_persona}) \text{ 
 
 Existen 3 alternativas según las cardinalidades mínimas de participación:
 
-1. **Participación (0,1) en ambos lados:** Se crea una tabla intermedia de relación con la clave primaria de cualquiera de las dos entidades como `PK` y la otra como `UNIQUE` (clave alternativa).
-2. **Participación (0,1) en un lado y (1,1) en el otro:** Se propaga la clave de la entidad con participación (1,1) hacia la tabla de la entidad con participación (0,1) como `FK` protegida con `UNIQUE`.
-3. **Participación (1,1) en ambos lados:** Ambas entidades pueden unificarse en una **única tabla sólida** que agrupa todos los atributos de ambas entidades.
+1. **Participación opcional en ambos lados:** hay dos soluciones válidas. La más simple propaga la clave de una entidad a la tabla de la otra como `FK` con `UNIQUE` que **admite `NULL`** (es la que usa EduGest para la tutoría). Si se quieren evitar los nulos, se crea una tabla intermedia con la clave de una entidad como `PK` y la de la otra como `UNIQUE NOT NULL`.
+2. **Participación obligatoria en un lado y opcional en el otro:** la clave ajena se coloca en la tabla de la entidad cuya participación es **obligatoria**, referenciando a la otra, como `FK NOT NULL UNIQUE`. Así no necesita admitir nulos.
+3. **Participación obligatoria en ambos lados:** ambas entidades pueden unificarse en una **única tabla** que agrupa todos los atributos, siempre que describan de verdad el mismo objeto.
+
+> [!NOTE]
+> En el transformador interactivo, la regla 2 se refleja así: si «cada A debe tener un B» (mínimo 1) y no al revés, la clave ajena está en A.
 
 ---
 
@@ -244,6 +335,17 @@ Existen 3 estrategias relacionales para transformar jerarquías EER:
 1. **Opción A (Tabla Única para toda la Jerarquía):** Se crea una sola tabla con todos los atributos del supertipo y de los subtipos, añadiendo una columna discriminadora de tipo (`tipo_subtipo`). Válida para especializaciones disjuntas.
 2. **Opción B (Tablas para el Supertipo y cada Subtipo):** Se crea una tabla para el supertipo (con la `PK` principal) y una tabla por cada subtipo (cuya `PK` y `FK` es la clave del supertipo). Es la solución más limpia y flexible.
 3. **Opción C (Tablas únicamente para los Subtipos):** Solo se crean tablas para las entidades especializadas, duplicando los atributos del supertipo en cada una. Solo válida si la jerarquía es Total y Disjunta $(T,D)$.
+
+{{< quiz >}}
+- q: "Todo `PASAPORTE` pertenece a una persona, pero no toda `PERSONA` tiene pasaporte. ¿Dónde va la clave ajena?"
+  options: ["En `PERSONA`, `NOT NULL UNIQUE`", "En `PASAPORTE`, `NOT NULL UNIQUE`", "En ambas tablas", "En una tabla nueva obligatoriamente"]
+  answer: 1
+  explain: "La clave ajena va en la tabla de la entidad con participación obligatoria (`PASAPORTE`): nunca es nula y `UNIQUE` garantiza el «1» del otro lado."
+- q: "`AULA` es débil por identificación respecto a `EDIFICIO`. ¿Cuál es su clave primaria?"
+  options: ["`num_aula`", "`id_edificio`", "`(id_edificio, num_aula)`", "No tiene clave primaria"]
+  answer: 2
+  explain: "El número de aula solo es único dentro de cada edificio: la clave primaria incluye la clave del propietario (que además es clave ajena)."
+{{< /quiz >}}
 
 ---
 
@@ -533,6 +635,10 @@ CREATE TABLE revision (
 
 ---
 
+{{< sesion n="6" h="2" tipo="p" practica="3.1" >}}Biblioteca: del E/R a las tablas{{< /sesion >}}
+
+{{< sesion n="7" h="1" tipo="t" >}}Restricciones no representables y herramientas{{< /sesion >}}
+
 ## 6. Restricciones que el Modelo Lógico no Puede Expresar
 
 El modelo relacional expresa muy bien las restricciones **de una fila** (`NOT NULL`, `CHECK`) y **de clave** (`PRIMARY KEY`, `UNIQUE`, `FOREIGN KEY`). Pero muchas reglas de negocio afectan a **varias filas o varias tablas** y no se pueden declarar así. El criterio RA6.h exige **analizarlas y documentarlas** para que no se pierdan entre el diseño y la implementación.
@@ -577,7 +683,15 @@ El diseño lógico se representa con un **diagrama relacional**: un rectángulo 
 > [!TIP]
 > Cuando termines el proyecto en la UD05, usa la **ingeniería inversa** de SQL Developer Data Modeler (*Archivo → Importar → Diccionario de datos*) sobre el esquema `EDUGEST`. Si el diagrama obtenido no coincide con tu diseño lógico, hay un error en uno de los dos.
 
+{{% details title="Pista: ¿dónde se comprueba una regla de negocio?" %}}
+Hazte tres preguntas, en este orden: ¿se decide mirando **una sola fila**? → `CHECK`. ¿Compara una columna con la **clave de otra tabla**? → clave ajena. ¿Necesita **sumar, contar o comparar varias filas** o tablas? → trigger o procedimiento en el servidor (UD09). Solo si ninguna de las tres sirve debe vivir en la aplicación.
+{{% /details %}}
+
 ---
+
+{{< sesion n="8" h="2" tipo="p" practica="3.3" >}}Tres formas de transformar una jerarquía{{< /sesion >}}
+
+{{< sesion n="9" h="1" tipo="p" practica="3.5" >}}Catálogo de restricciones de un hotel{{< /sesion >}}
 
 ## 8. Caso Guiado: EduGest del Modelo E/R al Relacional
 
@@ -616,6 +730,8 @@ erDiagram
 {{% /details %}}
 
 ---
+
+{{< sesion n="10" h="2" tipo="p" practica="EduGest-3" >}}Modelo lógico de EduGest{{< /sesion >}}
 
 ## 9. Resumen y Conclusiones
 

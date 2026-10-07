@@ -14,6 +14,32 @@ Todos los ejemplos se ejecutan sobre el esquema de referencia **EDUGEST** cargad
 
 {{< ra "RA3:a,b" "RA5:e" >}}
 
+### Temporalización
+
+La unidad ocupa **23 horas de aula** (12 de teoría y 11 de práctica). Es la unidad con más horas del curso: aquí se adquiere la destreza con `SELECT` que se utilizará hasta el final del módulo.
+
+{{< sesiones unidad="UD06" horas="23" >}}
+items:
+  - {h: 2, tipo: T, t: "Herramientas y sentencia SELECT. Proyección, alias, concatenación y DISTINCT", ref: "§1 y §2"}
+  - {h: 1, tipo: P, t: "Primeras consultas y herramientas", ref: "Práctica 6.1"}
+  - {h: 2, tipo: T, t: "Ordenación y selección con WHERE: comparación, LIKE y operadores lógicos", ref: "§3 y §4 · laboratorio de SELECT"}
+  - {h: 3, tipo: P, t: "Consultas para secretaría", ref: "Práctica 6.2"}
+  - {h: 2, tipo: T, t: "El valor NULL y la lógica de tres valores", ref: "§5 · simulador de lógica trivalente"}
+  - {h: 2, tipo: P, t: "Laboratorio de valores nulos", ref: "Práctica 6.3"}
+  - {h: 1, tipo: T, t: "Limitar el número de filas", ref: "§6"}
+  - {h: 3, tipo: T, t: "Funciones de fila (I): texto, numéricas y de fecha", ref: "§7.1 a §7.3"}
+  - {h: 2, tipo: T, t: "Funciones de fila (II): conversión, CASE, DECODE y expresiones regulares", ref: "§7.4 a §7.6"}
+  - {h: 3, tipo: P, t: "Funciones para informes", ref: "Práctica 6.4"}
+  - {h: 1, tipo: P, t: "Validar datos con SQL", ref: "Práctica 6.5"}
+  - {h: 1, tipo: P, t: "Consultas del día a día en EduGest", ref: "Proyecto EduGest-6"}
+autonomo:
+  - "Terminar las consultas de la práctica 6.2 que no hayan dado tiempo en el aula"
+  - "Ampliaciones de las prácticas 6.3, 6.4 y 6.5"
+{{< /sesiones >}}
+
+> [!IMPORTANT]
+> Las consultas **se aprenden escribiéndolas**. Antes de ejecutar cada una, predice cuántas filas devolverá y por qué; después compruébalo. Los laboratorios interactivos simulan el comportamiento de Oracle sobre los datos reales de EduGest, pero no sustituyen a un SGBD.
+
 ### Objetivos de aprendizaje
 
 Al terminar esta unidad serás capaz de:
@@ -36,6 +62,8 @@ Al terminar esta unidad serás capaz de:
 > El formato de presentación **no** cambia los datos guardados, solo cómo se muestran.
 
 ---
+
+{{< sesion n="1" h="2" tipo="t" >}}Herramientas, SELECT y proyección{{< /sesion >}}
 
 ## 1. Herramientas y sentencias para consultar
 
@@ -174,6 +202,21 @@ SELECT SYSDATE, 7 * 24 AS horas_semana, UPPER('edugest') FROM dual;
 
 ---
 
+{{< quiz >}}
+- q: "¿Qué devuelve `SELECT DISTINCT localidad FROM alumno`?"
+  options: ["Una fila por alumno", "Cada localidad una sola vez (el `NULL` cuenta como un valor más)", "Solo las localidades sin alumnos", "Un error: falta `GROUP BY`"]
+  answer: 1
+  explain: "`DISTINCT` elimina filas duplicadas del resultado. Considera iguales a dos `NULL`, de modo que aparece como mucho una fila nula."
+- q: "En Oracle 26ai, ¿cómo se evalúa una expresión como `1+1` sin consultar ninguna tabla?"
+  options: ["Solo es posible con `FROM dual`", "Con `FROM dual` (válido en todas las versiones) o, desde 23ai, sin `FROM`", "No es posible: toda consulta necesita una tabla real", "Con `VALUES (1+1)`"]
+  answer: 1
+  explain: "`DUAL` es una tabla de una fila y una columna. Oracle exigía `FROM` hasta la 21c; desde 23ai se admite omitirlo, pero para código portable a versiones anteriores se usa `DUAL`."
+{{< /quiz >}}
+
+---
+
+{{< sesion n="3" h="2" tipo="t" >}}Ordenación y selección{{< /sesion >}}
+
 ## 3. Ordenación: ORDER BY
 
 ```sql
@@ -303,7 +346,29 @@ ORDER  BY id_matricula;
 Por la precedencia, se evalúa como `(nota_final < 5 AND id_modulo = 2) OR id_modulo = 8`: devolvería los suspensos del módulo 2 **y todas** las matrículas del módulo 8, aprobadas o no. Por eso hay que poner paréntesis, o usar `IN`.
 {{% /details %}}
 
+#### Laboratorio de `SELECT`
+
+Construye una consulta sobre la tabla `ALUMNO` eligiendo columnas, condiciones y orden. Compara el resultado con el que predijiste.
+
+{{< select-lab >}}
+
+> [!WARNING]
+> `WHERE a OR b AND c` **no** se evalúa de izquierda a derecha: `AND` tiene mayor precedencia que `OR`. Usa paréntesis siempre que mezcles ambos.
+
+{{< quiz >}}
+- q: "`WHERE nombre LIKE 'M_ría'` ¿qué cadenas cumplen el patrón?"
+  options: ["Las que empiezan por M y terminan en ría, con cualquier número de caracteres en medio", "Las que tienen exactamente un carácter entre `M` y `ría` (María, Mería...)", "Solo la cadena literal `M_ría`", "Ninguna: `_` no se admite en `LIKE`"]
+  answer: 1
+  explain: "`%` sustituye a cero o más caracteres y `_` a exactamente uno."
+- q: "¿Cuál es la forma correcta de buscar las matrículas sin nota?"
+  options: ["`WHERE nota_final = NULL`", "`WHERE nota_final IS NULL`", "`WHERE nota_final == NULL`", "`WHERE NOT nota_final`"]
+  answer: 1
+  explain: "Cualquier comparación con `NULL` mediante `=` da `UNKNOWN`, y `WHERE` solo conserva las filas `TRUE`. Se debe usar `IS NULL`."
+{{< /quiz >}}
+
 ---
+
+{{< sesion n="5" h="2" tipo="t" >}}El valor NULL{{< /sesion >}}
 
 ## 5. El valor NULL
 
@@ -345,6 +410,23 @@ WHERE  cod_grupo IS NULL;
 *3 filas*
 
 
+#### Simulador de lógica de tres valores
+
+Combina `TRUE`, `FALSE` y `UNKNOWN` con `AND`, `OR` y `NOT`, y comprueba qué filas conserva `WHERE`.
+
+{{< null-logic >}}
+
+{{< quiz >}}
+- q: "`TRUE AND UNKNOWN` vale…"
+  options: ["`TRUE`", "`FALSE`", "`UNKNOWN`", "Error"]
+  answer: 2
+  explain: "Si un operando es `UNKNOWN` y el otro no decide el resultado, el resultado es `UNKNOWN`. En cambio, `FALSE AND UNKNOWN` es `FALSE`."
+- q: "`WHERE nota_final NOT IN (5, NULL)` ¿qué devuelve?"
+  options: ["Las notas distintas de 5", "Ninguna fila", "Solo las filas con nota nula", "Error de sintaxis"]
+  answer: 1
+  explain: "`x NOT IN (5, NULL)` equivale a `x <> 5 AND x <> NULL`; la segunda parte es `UNKNOWN` y la conjunción nunca llega a `TRUE`. Es una trampa clásica."
+{{< /quiz >}}
+
 ### 5.2 Funciones para tratar los nulos
 
 | Función | Devuelve | Ejemplo |
@@ -381,6 +463,8 @@ ORDER  BY id_alumno;
 
 ---
 
+{{< sesion n="7" h="1" tipo="t" >}}Limitar el número de filas{{< /sesion >}}
+
 ## 6. Limitar el número de filas
 
 ```sql
@@ -415,6 +499,8 @@ FETCH FIRST 5 ROWS ONLY;
 > `FETCH FIRST` es SQL estándar y está en Oracle desde la versión 12c. En código antiguo verás la pseudocolumna `ROWNUM` (`WHERE ROWNUM <= 5`), que se evalúa **antes** del `ORDER BY` y produce errores si no se usa con una subconsulta. MySQL y PostgreSQL usan `LIMIT 5`.
 
 ---
+
+{{< sesion n="8" h="3" tipo="t" >}}Funciones de fila: texto, numéricas y de fecha{{< /sesion >}}
 
 ## 7. Funciones de fila
 
@@ -531,6 +617,8 @@ SELECT * FROM matricula
 WHERE  fecha_matricula >= DATE '2025-09-15'
 AND    fecha_matricula <  DATE '2025-09-16';
 ```
+
+{{< sesion n="9" h="2" tipo="t" >}}Conversión, CASE y expresiones regulares{{< /sesion >}}
 
 ### 7.4 Funciones de conversión
 

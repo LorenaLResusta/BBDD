@@ -17,6 +17,33 @@ Todos los ejemplos usan **Oracle AI Database 26ai Free**. Cuando una caracterís
 
 {{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,f" >}}
 
+### Temporalización
+
+La unidad ocupa **17 horas de aula** (9 de teoría y 8 de práctica).
+
+{{< sesiones unidad="UD05" horas="17" >}}
+items:
+  - {h: 1, tipo: T, t: "SQL y Oracle. Almacenamiento de la información", ref: "§1 y §2"}
+  - {h: 2, tipo: T, t: "Tipos de datos de Oracle", ref: "§3 · calculadora de NUMBER(p, s)"}
+  - {h: 2, tipo: T, t: "CREATE TABLE y restricciones de integridad", ref: "§4 y §5 · constructor de CREATE TABLE"}
+  - {h: 2, tipo: P, t: "Primeras tablas y restricciones en Oracle", ref: "Práctica 5.1"}
+  - {h: 2, tipo: P, t: "Del diagrama de Chen al DDL", ref: "Práctica 5.2"}
+  - {h: 1, tipo: T, t: "Modificar y eliminar la estructura (ALTER, DROP)", ref: "§6"}
+  - {h: 1, tipo: P, t: "Evolución del esquema con ALTER", ref: "Práctica 5.5"}
+  - {h: 1, tipo: T, t: "Secuencias, identidad, índices y vistas", ref: "§7, §8 y §9"}
+  - {h: 1, tipo: P, t: "Índices, vistas y secuencias en EduGest", ref: "Práctica 5.6"}
+  - {h: 2, tipo: T, t: "Usuarios, roles y privilegios. Diccionario de datos y herramientas", ref: "§10 a §12 · taller de privilegios"}
+  - {h: 1, tipo: P, t: "Usuarios, roles y privilegios en EduGest", ref: "Práctica 5.7"}
+  - {h: 1, tipo: P, t: "Implementación de EduGest", ref: "Proyecto EduGest-5"}
+autonomo:
+  - "Práctica 5.3 (biblioteca: script completo y batería de pruebas)"
+  - "Práctica 5.4 (seis casos para implementar)"
+  - "Práctica 5.8 (depurar un script defectuoso)"
+{{< /sesiones >}}
+
+> [!IMPORTANT]
+> En esta unidad pasas del papel al SGBD. **Ejecuta cada sentencia** mientras lees: un `CREATE TABLE` que no has probado es solo una hipótesis. Los widgets interactivos simulan el comportamiento de Oracle con fines didácticos, pero **no sustituyen** a un SGBD real.
+
 ### Objetivos de aprendizaje
 
 Al terminar esta unidad serás capaz de:
@@ -31,6 +58,8 @@ Al terminar esta unidad serás capaz de:
 - Usar asistentes y herramientas gráficas sin depender de ellos.
 
 ---
+
+{{< sesion n="1" h="1" tipo="t" >}}SQL, Oracle y almacenamiento{{< /sesion >}}
 
 ## 1. SQL y Oracle
 
@@ -139,6 +168,8 @@ SELECT ROWID, nombre FROM alumno FETCH FIRST 3 ROWS ONLY;
 
 ---
 
+{{< sesion n="2" h="2" tipo="t" >}}Tipos de datos de Oracle{{< /sesion >}}
+
 ## 3. Tipos de datos
 
 Elegir bien el tipo de cada columna (RA2.c) evita errores, ahorra espacio y permite que el SGBD valide los datos.
@@ -200,7 +231,26 @@ Elegir bien el tipo de cada columna (RA2.c) evita errores, ahorra espacio y perm
 > [!WARNING]
 > El tipo `DATE` de Oracle **siempre guarda la hora**. `SYSDATE` devuelve fecha y hora actuales. Si comparas `fecha_matricula = DATE '2025-09-15'` y la fila se insertó con `SYSDATE`, no coincidirá porque la hora no es 00:00:00. Lo trataremos en la UD06.
 
+#### Calculadora de `NUMBER(p, s)`
+
+Prueba qué valores admite una columna y cómo los redondea Oracle. Observa lo que ocurre cuando la escala es negativa o cuando el valor excede la precisión.
+
+{{< number-prec >}}
+
+{{< quiz >}}
+- q: "¿Qué ocurre al insertar `123.456` en una columna `NUMBER(5,2)`?"
+  options: ["Se guarda 123.456", "Se guarda 123.46 (se redondea a la escala)", "Error ORA-01438 (valor mayor que la precisión)", "Se guarda 123"]
+  answer: 1
+  explain: "`NUMBER(5,2)` permite 3 dígitos enteros y 2 decimales. Oracle **redondea** los decimales sobrantes. El error ORA-01438 aparecería con `1234.5`, que necesita 4 dígitos enteros."
+- q: "Para guardar un importe en euros con céntimos, ¿qué tipo es más adecuado?"
+  options: ["`FLOAT`, por la rapidez", "`NUMBER(10,2)`", "`VARCHAR2(10)`", "`NUMBER` sin precisión ni escala"]
+  answer: 1
+  explain: "Los importes exigen aritmética decimal exacta: `NUMBER(p,2)`. Los tipos en coma flotante acumulan errores de representación y el texto impide calcular."
+{{< /quiz >}}
+
 ---
+
+{{< sesion n="3" h="2" tipo="t" >}}CREATE TABLE y restricciones{{< /sesion >}}
 
 ## 4. Creación de tablas: `CREATE TABLE`
 
@@ -365,7 +415,29 @@ ORDER  BY constraint_name, position;
 
 `constraint_type`: **P** = clave primaria, **U** = única, **R** = referencial (clave ajena), **C** = `CHECK` (también `NOT NULL`).
 
+#### Constructor de `CREATE TABLE`
+
+Define columnas, tipos y restricciones y observa el script que genera. Las restricciones llevan **siempre nombre** (`pk_`, `fk_`, `uq_`, `ck_`, `nn_`), lo que facilita interpretar los errores de Oracle.
+
+{{< ddl-builder >}}
+
+> [!TIP]
+> Cambia al ejemplo **MATRICULA** y localiza la clave primaria compuesta y las dos claves ajenas. Después elimina una de ellas y razona qué integridad pierdes.
+
+{{< quiz >}}
+- q: "¿Qué hace Oracle con una cadena vacía `''` en una columna `VARCHAR2` con `NOT NULL`?"
+  options: ["La acepta como cadena vacía", "La trata como `NULL` y rechaza la fila (ORA-01400)", "La convierte en un espacio", "Depende del `NLS_LANG`"]
+  answer: 1
+  explain: "En Oracle la cadena vacía **es** `NULL`. Es una diferencia con el estándar SQL y con otros SGBD, y una fuente clásica de errores."
+- q: "¿Cuántas claves primarias puede tener una tabla y cuántas `UNIQUE`?"
+  options: ["Una primaria y una `UNIQUE`", "Una primaria (puede ser compuesta) y tantas `UNIQUE` como se necesiten", "Varias primarias y una `UNIQUE`", "Ilimitadas de ambas"]
+  answer: 1
+  explain: "La clave primaria es única por tabla, aunque puede constar de varias columnas. Las claves alternativas se definen con `UNIQUE` y pueden ser varias."
+{{< /quiz >}}
+
 ---
+
+{{< sesion n="6" h="1" tipo="t" >}}Modificar y eliminar la estructura{{< /sesion >}}
 
 ## 6. Modificar y eliminar la estructura
 
@@ -433,6 +505,8 @@ SELECT column_name, comments FROM user_col_comments WHERE table_name = 'MATRICUL
 ```
 
 ---
+
+{{< sesion n="8" h="1" tipo="t" >}}Secuencias, identidad, índices y vistas{{< /sesion >}}
 
 ## 7. Secuencias y columnas identidad
 
@@ -550,6 +624,8 @@ DROP VIEW v_alumno_1dam;
 > Una vista sobre **una sola tabla**, sin agrupaciones, `DISTINCT` ni columnas calculadas, suele ser **actualizable**: un `UPDATE` sobre la vista modifica la tabla base. Las vistas con `JOIN` solo lo son parcialmente. Una **vista materializada** (`CREATE MATERIALIZED VIEW`) sí almacena el resultado y se refresca periódicamente: es una herramienta de rendimiento para informes.
 
 ---
+
+{{< sesion n="10" h="2" tipo="t" >}}Usuarios, roles y privilegios{{< /sesion >}}
 
 ## 10. Control de datos: usuarios, privilegios y roles
 
@@ -670,6 +746,26 @@ ALTER USER prof_marta PROFILE perfil_personal;
 - **Exposición del servicio:** el puerto 1521 **no** debe estar accesible desde Internet; solo desde los servidores de aplicación.
 - **Copias de seguridad:** Oracle Data Pump (`expdp`/`impdp`) para exportar esquemas y RMAN para copias físicas. Una copia que no se ha probado a restaurar no es una copia.
 - **Datos personales:** vistas y privilegios por columna para cumplir la **minimización** del RGPD (UD01).
+
+#### Taller de roles y privilegios
+
+Diseña un rol, asígnalo a un usuario y comprueba qué sentencias puede ejecutar. Los errores (`ORA-01031`, `ORA-00942`, `ORA-01045`) son los que devuelve Oracle.
+
+{{< privilegios >}}
+
+> [!WARNING]
+> `SELECT ANY TABLE` y `GRANT ... WITH ADMIN OPTION` son privilegios muy amplios. Concédelos solo cuando exista una razón justificada y documentada: el **mínimo privilegio** es una buena práctica de seguridad y un requisito de protección de datos.
+
+{{< quiz >}}
+- q: "Un usuario tiene `SELECT` sobre `ALUMNO` pero recibe ORA-01045 al conectarse. ¿Qué falta?"
+  options: ["El privilegio `SELECT ANY TABLE`", "El privilegio de sistema `CREATE SESSION`", "Un `COMMIT`", "Un sinónimo público"]
+  answer: 1
+  explain: "ORA-01045 indica que el usuario no tiene `CREATE SESSION`: sin él no puede conectarse, tenga los privilegios de objeto que tenga."
+- q: "¿Qué ventaja principal tiene agrupar privilegios en un rol?"
+  options: ["Las consultas se ejecutan más rápido", "Se gestionan los permisos por función, no usuario a usuario", "Evita la necesidad de contraseñas", "Permite saltarse el mínimo privilegio"]
+  answer: 1
+  explain: "Con roles se concede o revoca un conjunto coherente de permisos a la vez, reduciendo errores y facilitando la auditoría."
+{{< /quiz >}}
 
 ---
 

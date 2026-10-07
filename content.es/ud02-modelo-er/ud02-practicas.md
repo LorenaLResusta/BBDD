@@ -18,6 +18,10 @@ math: true
 | [2.5 Revisión de un diseño defectuoso](#práctica-25--revisión-de-un-diseño-defectuoso) | Reto | ●●● | RA6.d, RA6.h |
 | [2.6 Autoescuela: ternaria o agregación](#práctica-26--autoescuela-ternaria-o-agregación) | Reto | ●●● | RA6.d |
 | [Proyecto EduGest · UD02](#proyecto-edugest--ud02-modelo-conceptual) | Proyecto | ●●○ | RA6.a, RA6.d, RA6.e, RA6.h |
+| [Banco · Fundamentos (ejercicios 1-5)](#bloque-1--fundamentos) | Autónoma | ●○○ | RA6.a, RA6.d, RA6.e, RA6.h |
+| [Banco · Intermedio (ejercicios 6-15)](#bloque-2--intermedio) | Autónoma | ●●○ | RA6.a, RA6.d, RA6.e, RA6.h |
+| [Banco · Integración (ejercicios 16-23)](#bloque-3--integración) | Autónoma | ●●○ → ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
+| [Banco · EER avanzado (ejercicios 24-30)](#bloque-4--eer-avanzado) | Autónoma | ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
 
 > [!TIP]
 > **Método para todos los ejercicios.** (1) Subraya sustantivos y verbos; (2) decide entidades e identificadores; (3) relaciones y cardinalidades en **los dos sentidos**; (4) atributos, incluidos los de las relaciones; (5) revisa redundancias y escribe los **supuestos** que hayas tenido que hacer.
@@ -376,22 +380,21 @@ A partir del [enunciado completo de EduGest](/guia/proyecto-edugest#1-enunciado-
 
 ---
 
----
-
----
-
 ## Banco de ejercicios
 
-Veinticinco ejercicios para practicar el diseño conceptual, **ordenados de menor a mayor dificultad** en cuatro bloques. Cada ejercicio tiene el mismo formato que las prácticas (objetivo, contexto, enunciado, tareas, comprobación, errores habituales y ampliación) y una **solución desplegable** dibujada en notación EER de Chen.
+30 ejercicios para practicar el diseño conceptual, **ordenados de menor a mayor dificultad** en cuatro bloques. Cada ejercicio tiene el mismo formato que las prácticas (objetivo, contexto, enunciado, tareas, comprobación, errores habituales y ampliación) y una **solución desplegable** dibujada con la notación EER que usamos en clase.
 
 | Bloque | Ejercicios | Qué introduce | Además del diagrama se pide |
 |---|---|---|---|
-| Fundamentos ●○○ | 1-4 | Entidades, atributos, identificadores, relaciones 1:N y N:M, atributos de relación y una primera relación reflexiva. | Diagrama y supuestos |
-| Intermedio ●●○ | 5-12 | Relaciones 1:1, N:M reflexivas, entidades débiles, atributos compuestos, multivaluados y derivados, y varias relaciones entre las mismas entidades. | Justificar decisiones y escribir restricciones textuales |
-| Integración ●●○ → ●●● | 13-19 | Relaciones ternarias, dos relaciones entre las mismas entidades, listas de materiales, cardinalidades máximas concretas y primera especialización. | Clasificar jerarquías, analizar ternarias y diccionario parcial |
-| EER avanzado ●●● | 20-25 | Varias especializaciones en un mismo modelo, cadenas de entidades débiles, ternarias con atributos y casos de integración completos. | Diccionario de datos, restricciones y tablas previstas |
+| Fundamentos ●○○ | 1-5 | Entidades, atributos, identificadores, relaciones 1:N y N:M, atributos de relación y una primera relación reflexiva. | Diagrama y supuestos |
+| Intermedio ●●○ | 6-15 | Relaciones 1:1, N:M reflexivas, entidades débiles, atributos compuestos, multivaluados y derivados, y varias relaciones entre las mismas entidades. | Justificar decisiones y escribir restricciones textuales |
+| Integración ●●○ → ●●● | 16-23 | Relaciones ternarias, agregación, dos relaciones entre las mismas entidades, listas de materiales, cardinalidades máximas concretas y primera generalización. | Clasificar jerarquías, comparar ternaria y agregación, diccionario parcial |
+| EER avanzado ●●● | 24-30 | Varias especializaciones en un mismo modelo, cadenas de entidades débiles, ternarias con atributos y casos de integración completos. | Diccionario de datos, restricciones y tablas previstas |
 
-{{< figura src="ud02/chen-eer-leyenda.svg" alt="Leyenda de la notación EER de Chen: entidad, entidad débil, relación, atributos, jerarquía y cardinalidad" caption="Leyenda de la notación EER de Chen usada en las soluciones" >}}
+{{< figura src="ud02/chen-eer-leyenda.svg" alt="Leyenda de la notación EER: entidad, entidad débil, rombo blanco 1:1, rombo mitad blanco y mitad negro 1:N, rombo negro N:M, ternaria, dependencias ID y E, atributos, generalización y agregación" caption="Leyenda de la notación EER usada en las soluciones" >}}
+
+> [!IMPORTANT]
+> **Cómo se lee el rombo.** Cada mitad del rombo mira a una entidad. La mitad es **negra** si el máximo escrito junto a esa entidad es N (o un número mayor que 1) y **blanca** si es 1. Así, un rombo blanco es 1:1, uno mitad blanco y mitad negro es 1:N y uno negro entero es N:M. En las ternarias se divide un triángulo en tres sectores con el mismo criterio. Junto a cada punta se repite el máximo (1 o N).
 
 > [!IMPORTANT]
 > **Convenio de cardinalidades.** El par (mín, máx) escrito **junto a una entidad** indica con cuántas instancias de **esa** entidad se relaciona una instancia de la otra. Es el mismo convenio de la [teoría](/ud02-modelo-er/ud02-teoria#71-equivalencia-entre-la-notación-de-chen-y-la-pata-de-gallo). En una relación ternaria, el par junto a una entidad cuenta cuántas instancias de ella corresponden a cada pareja de las otras dos.
@@ -400,7 +403,7 @@ Veinticinco ejercicios para practicar el diseño conceptual, **ordenados de meno
 > **Cómo trabajar un ejercicio.** Aplica el método de arriba, dibuja en papel o en draw.io, rellena la lista de comprobación y solo entonces despliega la solución. Si tu diagrama difiere, no significa que esté mal: compara los **supuestos**. Dos diseños distintos son válidos si responden igual a las reglas del enunciado.
 
 > [!NOTE]
-> Los atributos se escriben en `snake_case` sin acentos para que sirvan de nombres de columna en la [UD03](/ud03-modelo-relacional/ud03-teoria). Una línea doble marca la participación total de una entidad débil en su relación identificadora y de la superclase en una especialización total. El subrayado discontinuo también señala el atributo de una relación que permite repetir la misma combinación de entidades (por ejemplo, la fecha de una multa).
+> Los atributos se escriben en `snake_case` para que sirvan de nombres de columna en la [UD03](/ud03-modelo-relacional/ud03-teoria). Las entidades débiles llevan doble rectángulo y la etiqueta **ID** (dependencia en identificación) o **E** (dependencia en existencia) junto a la relación de la que dependen. El subrayado discontinuo marca el discriminador de una entidad débil y el atributo de una relación que permite repetir la misma combinación de entidades (por ejemplo, la fecha de una multa). El subrayado de puntos marca una clave alternativa. En las generalizaciones, **T/P** indica total o parcial y **D/S**, disjunta o solapada.
 
 
 ---
@@ -476,70 +479,69 @@ La empresa quiere guardar la **fecha** y la **cantidad** de cada compra. ¿Dónd
 
 ---
 
-### Ejercicio 2 · Naviera: capitanes, contenedores, puertos y barcos
+### Ejercicio 2 · Películas en streaming
 
 {{< practica num="2" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="1" ra="RA6: a, d, e" sgbd="draw.io o papel" entrega="Diagrama EER + supuestos" >}}
 
 #### Objetivo
 
-Encadenar varias relaciones 1:N y modelar un histórico mediante una relación N:M con atributos propios.
+Convertir en entidades los datos por los que se busca (actor, género) y descubrir que un hecho («haber visto») es una relación, no un atributo booleano.
 
 #### Contexto
 
-Una naviera internacional necesita gestionar su flota y las mercancías que transporta.
+Una plataforma de cine bajo demanda quiere recomendar películas y avisar al cliente de lo que ya ha visto.
 
 #### Enunciado
 
-> De los **capitanes** se quiere guardar el DNI, el nombre, el teléfono, la dirección, el salario y la población de residencia. Un capitán transporta muchos contenedores y cada contenedor lo transporta un único capitán.
+> Se desea crear una base de datos para una plataforma de películas en *streaming*.
 >
-> De los **contenedores** interesa conocer el código, una descripción, la dirección del remitente y la dirección del destinatario. Cada contenedor tiene como destino un único **puerto**, pero a un puerto pueden llegar muchos contenedores. De los puertos se guarda el código y el nombre.
+> A los **clientes** se les piden sus datos personales (NIF, nombre, apellidos, correo electrónico y dirección) y el sistema mantiene el **saldo** disponible de su cuenta.
 >
-> De los **barcos** se conoce la matrícula, el nombre, la potencia del motor y el astillero. Un capitán puede gobernar distintos barcos en fechas diferentes (se registra la fecha de inicio y la de fin) y un barco puede ser gobernado por varios capitanes a lo largo del tiempo.
+> Los clientes pueden buscar **películas** por **género**, por **actores** y por título. De cada película se guarda un código, el título, el año de estreno y la duración en minutos. De los actores se conoce un código, el nombre completo y la nacionalidad. Cada película pertenece a un género (comedia, drama, terror…).
+>
+> La plataforma debe avisar al cliente si una película **ya la ha visto**. Para ello registra qué películas ha visto cada cliente, la fecha y la valoración (de 1 a 5) que le ha dado.
 
 #### Tareas
 
 1. Dibuja el diagrama EER en notación de Chen.
-2. Indica qué relaciones son 1:N y cuál es N:M, y justifícalo con las preguntas en los dos sentidos.
-3. Decide dónde van `fecha_inicio` y `fecha_fin` y explica por qué no pueden ser atributos de `CAPITÁN` ni de `BARCO`.
+2. Explica por qué `ACTOR` y `GÉNERO` son entidades y no atributos de `PELÍCULA`.
+3. ¿Hace falta un atributo `vista (sí/no)`? Razona la respuesta.
 4. Anota los supuestos.
 
 #### Comprobación
 
-- [ ] Hay cuatro entidades y tres relaciones.
-- [ ] Las fechas están en la relación *gobierna*, no en las entidades.
-- [ ] Has pensado qué ocurre si el **mismo** capitán gobierna el **mismo** barco en dos periodos distintos.
-- [ ] `dirección_remitente` y `dirección_destinatario` están en `CONTENEDOR`.
+- [ ] Hay cuatro entidades: `CLIENTE`, `PELÍCULA`, `ACTOR` y `GÉNERO`.
+- [ ] *Ve* es N:M y lleva `fecha` y `valoración`.
+- [ ] *Actúa en* es N:M y *pertenece a* es 1:N.
+- [ ] No existe ningún atributo booleano «vista».
 
 #### Errores habituales
 
 > [!WARNING]
-> - Poner `fecha_inicio` en `BARCO`: un barco tiene muchos capitanes y solo podría guardar una fecha.
-> - Relacionar directamente `CAPITÁN` con `PUERTO`. El puerto se deduce del contenedor.
-
-{{% details title="Pista: histórico de una relación N:M" %}}
-Si el mismo capitán puede volver a gobernar el mismo barco, la pareja (capitán, barco) **no basta** para distinguir cada periodo. La `fecha_inicio` debe formar parte de la identificación. En el diagrama se marca con subrayado discontinuo.
-{{% /details %}}
+> - Añadir `vista (sí/no)` a la relación: si existe la pareja cliente–película, ya la ha visto; si no existe, no. El booleano es redundante.
+> - Guardar `actor` y `género` como atributos de `PELÍCULA`: una película tiene varios actores y buscar por ellos obligaría a recorrer texto libre.
+> - Poner el `saldo` en una entidad aparte: es un dato de cada cliente.
 
 #### Ampliación
 
-La naviera quiere saber en qué **barco** viaja cada contenedor. ¿Cómo se modifica el modelo? ¿Sigue siendo necesaria la relación entre capitán y contenedor?
+Una película puede pertenecer a **varios géneros** (comedia romántica, terror psicológico…). ¿Qué cambia en la relación *pertenece a*? ¿Y en el color del rombo?
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej02.svg" alt="CAPITÁN transporta CONTENEDOR (1:N). CONTENEDOR llega a PUERTO (N:1). CAPITÁN gobierna BARCO (N:M con fechas)." caption="Ejercicio 2: Naviera: capitanes, contenedores, puertos y barcos" >}}
+{{< figura src="ud02/ej02.svg" alt="CLIENTE ve PELÍCULA (N:M con fecha y valoración). ACTOR actúa en PELÍCULA (N:M). PELÍCULA pertenece a GÉNERO (N:1)." caption="Ejercicio 2: Películas en streaming" >}}
 
 **Decisiones de diseño**
 
-- *Transporta* y *llega a* son 1:N en cadena: capitán → contenedor → puerto.
-- *Gobierna* es N:M y lleva `fecha_inicio` y `fecha_fin`. `fecha_inicio` se marca como discriminador (subrayado discontinuo) porque permite repetir la pareja capitán-barco en periodos distintos.
-- El puerto de destino es una entidad: tiene datos propios (código y nombre) y varios contenedores comparten el mismo puerto.
+- *Ve* es **N:M** con `fecha` y `valoración`: la existencia de la pareja (cliente, película) ya indica que la ha visto. Si se quiere guardar cada visionado, la fecha pasa a formar parte de la identificación (subrayado discontinuo).
+- *Actúa en* es N:M: un actor participa en muchas películas y una película tiene muchos actores.
+- *Pertenece a* es 1:N: cada película tiene un género y un género agrupa muchas películas. El rombo tiene la mitad blanca junto a `GÉNERO` (máximo 1) y la negra junto a `PELÍCULA` (máximo N).
 
 **Supuestos semánticos**
 
-1. Todo contenedor tiene capitán y puerto de destino: (1,1).
-2. Un capitán puede no haber transportado aún ningún contenedor.
-3. `fecha_fin` está vacía mientras el capitán sigue al mando del barco.
-4. Un capitán no gobierna dos barcos a la vez (restricción que el diagrama no recoge).
+1. Un cliente puede no haber visto ninguna película todavía: (0,N).
+2. Toda película tiene al menos un actor registrado: (1,N).
+3. Se guarda cada visionado, de modo que un cliente puede ver la misma película en fechas distintas.
+4. La valoración es un entero entre 1 y 5 (restricción de dominio).
 
 {{% /details %}}
 
@@ -612,13 +614,83 @@ La multa puede **recurrirse** varias veces (fecha del recurso y resolución). ¿
 
 ---
 
-### Ejercicio 4 · Parentesco y filiación
+### Ejercicio 4 · Naviera: capitanes, contenedores, puertos y barcos
 
-{{< practica num="4" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="1" ra="RA6: d, h" sgbd="draw.io o papel" entrega="Diagrama EER + análisis del enunciado" >}}
+{{< practica num="4" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="1" ra="RA6: a, d, e" sgbd="draw.io o papel" entrega="Diagrama EER + supuestos" >}}
 
 #### Objetivo
 
-Modelar una relación **reflexiva** y detectar una cardinalidad mínima imposible.
+Encadenar varias relaciones 1:N y modelar un histórico mediante una relación N:M con atributos propios.
+
+#### Contexto
+
+Una naviera internacional necesita gestionar su flota y las mercancías que transporta.
+
+#### Enunciado
+
+> De los **capitanes** se quiere guardar el DNI, el nombre, el teléfono, la dirección, el salario y la población de residencia. Un capitán transporta muchos contenedores y cada contenedor lo transporta un único capitán.
+>
+> De los **contenedores** interesa conocer el código, una descripción, la dirección del remitente y la dirección del destinatario. Cada contenedor tiene como destino un único **puerto**, pero a un puerto pueden llegar muchos contenedores. De los puertos se guarda el código y el nombre.
+>
+> De los **barcos** se conoce la matrícula, el nombre, la potencia del motor y el astillero. Un capitán puede gobernar distintos barcos en fechas diferentes (se registra la fecha de inicio y la de fin) y un barco puede ser gobernado por varios capitanes a lo largo del tiempo.
+
+#### Tareas
+
+1. Dibuja el diagrama EER en notación de Chen.
+2. Indica qué relaciones son 1:N y cuál es N:M, y justifícalo con las preguntas en los dos sentidos.
+3. Decide dónde van `fecha_inicio` y `fecha_fin` y explica por qué no pueden ser atributos de `CAPITÁN` ni de `BARCO`.
+4. Anota los supuestos.
+
+#### Comprobación
+
+- [ ] Hay cuatro entidades y tres relaciones.
+- [ ] Las fechas están en la relación *gobierna*, no en las entidades.
+- [ ] Has pensado qué ocurre si el **mismo** capitán gobierna el **mismo** barco en dos periodos distintos.
+- [ ] `dirección_remitente` y `dirección_destinatario` están en `CONTENEDOR`.
+
+#### Errores habituales
+
+> [!WARNING]
+> - Poner `fecha_inicio` en `BARCO`: un barco tiene muchos capitanes y solo podría guardar una fecha.
+> - Relacionar directamente `CAPITÁN` con `PUERTO`. El puerto se deduce del contenedor.
+
+{{% details title="Pista: histórico de una relación N:M" %}}
+Si el mismo capitán puede volver a gobernar el mismo barco, la pareja (capitán, barco) **no basta** para distinguir cada periodo. La `fecha_inicio` debe formar parte de la identificación. En el diagrama se marca con subrayado discontinuo.
+{{% /details %}}
+
+#### Ampliación
+
+La naviera quiere saber en qué **barco** viaja cada contenedor. ¿Cómo se modifica el modelo? ¿Sigue siendo necesaria la relación entre capitán y contenedor?
+
+{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
+
+{{< figura src="ud02/ej04.svg" alt="CAPITÁN transporta CONTENEDOR (1:N). CONTENEDOR llega a PUERTO (N:1). CAPITÁN gobierna BARCO (N:M con fechas)." caption="Ejercicio 4: Naviera: capitanes, contenedores, puertos y barcos" >}}
+
+**Decisiones de diseño**
+
+- *Transporta* y *llega a* son 1:N en cadena: capitán → contenedor → puerto.
+- *Gobierna* es N:M y lleva `fecha_inicio` y `fecha_fin`. `fecha_inicio` se marca como discriminador (subrayado discontinuo) porque permite repetir la pareja capitán-barco en periodos distintos.
+- El puerto de destino es una entidad: tiene datos propios (código y nombre) y varios contenedores comparten el mismo puerto.
+
+**Supuestos semánticos**
+
+1. Todo contenedor tiene capitán y puerto de destino: (1,1).
+2. Un capitán puede no haber transportado aún ningún contenedor.
+3. `fecha_fin` está vacía mientras el capitán sigue al mando del barco.
+4. Un capitán no gobierna dos barcos a la vez (restricción que el diagrama no recoge).
+
+{{% /details %}}
+
+
+---
+
+### Ejercicio 5 · Parentesco y filiación
+
+{{< practica num="5" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="1" ra="RA6: d, h" sgbd="draw.io o papel" entrega="Diagrama EER + análisis del enunciado" >}}
+
+#### Objetivo
+
+Modelar una relación **reflexiva** con roles, detectar una cardinalidad mínima imposible y fijar un máximo concreto (2).
 
 #### Contexto
 
@@ -633,22 +705,23 @@ Un registro genealógico quiere guardar quién es progenitor de quién.
 #### Tareas
 
 1. Dibuja el diagrama EER con una **relación reflexiva** y los **roles** (progenitor, hijo).
-2. Escribe las cardinalidades (mín, máx) de cada rol según el enunciado y razona si es posible mantenerlas en una base de datos real.
-3. Propón una cardinalidad mínima que sí sea viable y justifica el cambio.
-4. Anota los supuestos.
+2. Escribe las cardinalidades (mín, máx) de cada rol. ¿Cuántos progenitores puede tener una persona como máximo?
+3. Razona si el mínimo que pide el enunciado («obligatoriamente») se puede mantener en una base de datos real y propón uno viable.
+4. Colorea el rombo según la notación del módulo y explica por qué queda entero en negro.
 
 #### Comprobación
 
 - [ ] Solo hay una entidad y la relación sale y vuelve a ella.
 - [ ] Los dos extremos de la relación tienen **rol**.
-- [ ] Has detectado el problema de las personas sin ascendientes registrados.
-- [ ] El máximo del rol *progenitor* es 1.
+- [ ] El máximo del rol *progenitor* es **2** (padre y madre), no 1 ni N.
+- [ ] Has detectado el problema de las personas sin ascendientes registrados y el mínimo del rol *progenitor* es 0.
 
 #### Errores habituales
 
 > [!WARNING]
 > - Crear dos entidades `PADRE` e `HIJO`. Ambos son `PERSONA` y una persona puede ser a la vez padre e hijo.
-> - Mantener (1,1) en el rol de progenitor: obligaría a que cada persona tuviera un progenitor registrado, y este otro, y así sin fin.
+> - Poner (1,1) en el rol de progenitor: solo permitiría registrar a uno de los dos progenitores y, además, obligaría a que todas las personas tuvieran uno registrado.
+> - Dibujar el rombo mitad blanco y mitad negro: los dos máximos (2 y N) son mayores que 1, así que las dos mitades van en negro.
 
 {{% details title="Pista: ¿quién es el primer antepasado?" %}}
 Si todas las personas deben tener progenitor registrado y la base de datos es finita, la cadena de ascendientes tendría que cerrarse en un ciclo. Esto es imposible. El mínimo del rol *progenitor* tiene que ser 0.
@@ -656,23 +729,24 @@ Si todas las personas deben tener progenitor registrado y la base de datos es fi
 
 #### Ampliación
 
-Se quiere registrar **los dos** progenitores de cada persona. ¿Cambia la cardinalidad? ¿La relación sigue siendo 1:N o pasa a ser N:M con máximo 2 en uno de los roles?
+Se quiere distinguir la filiación **biológica** de la **adoptiva** y registrar la fecha de adopción. ¿Dónde colocas esos atributos? ¿Sigue siendo 2 el máximo del rol *progenitor*?
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej04.svg" alt="PERSONA es progenitor de PERSONA: relación reflexiva 1:N con los roles progenitor e hijo." caption="Ejercicio 4: Parentesco y filiación" >}}
+{{< figura src="ud02/ej05.svg" alt="PERSONA tiene hijos PERSONA: relación reflexiva N:M con los roles progenitor (0,2) e hijo (0,N)." caption="Ejercicio 5: Parentesco y filiación" >}}
 
 **Decisiones de diseño**
 
-- *Es progenitor de* es una relación reflexiva 1:N: una persona tiene como mucho un progenitor registrado y puede tener muchos hijos.
-- El enunciado pide (1,1) en el rol de progenitor, pero eso es insostenible: se corrige a **(0,1)** y se documenta como restricción de negocio (RA6.h).
+- *Tiene hijos* es una relación reflexiva **N:M**: una persona tiene hasta 2 progenitores registrados y puede tener muchos hijos. Por eso el rombo es negro entero.
+- El enunciado pide que la filiación sea obligatoria (mínimo 1), pero eso es insostenible: se corrige a **(0,2)** y se documenta como restricción de negocio (RA6.h).
+- El máximo 2 es una cardinalidad concreta: se escribe tal cual en el diagrama. Al pasar al modelo relacional (UD03) no se puede controlar solo con claves; necesitará un `CHECK` o un disparador.
 - Los roles distinguen los dos extremos de la misma entidad.
 
 **Supuestos semánticos**
 
-1. Las personas fundadoras del árbol no tienen progenitor registrado.
-2. Una persona no puede ser progenitora de sí misma ni de sus ascendientes (restricción que el diagrama no recoge).
-3. La relación se registra solo con un progenitor directo.
+1. Las personas fundadoras del árbol no tienen progenitor registrado: mínimo 0.
+2. Una persona tiene como máximo dos progenitores registrados (padre y madre).
+3. Una persona no puede ser progenitora de sí misma ni de sus ascendientes (restricción que el diagrama no recoge).
 
 {{% /details %}}
 
@@ -686,13 +760,13 @@ Se quiere registrar **los dos** progenitores de cada persona. ¿Cambia la cardin
 
 Relaciones 1:1, N:M reflexivas, entidades débiles, atributos compuestos, multivaluados y derivados, y varias relaciones entre las mismas entidades.
 
-### Ejercicio 5 · Instituto: módulos, matrículas, delegados y casilleros
+### Ejercicio 6 · Instituto: módulos, matrículas, delegados y casilleros
 
-{{< practica num="5" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones textuales" >}}
+{{< practica num="6" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones textuales" >}}
 
 #### Objetivo
 
-Distinguir relaciones 1:1, dos relaciones distintas entre las mismas entidades y una N:M reflexiva.
+Distinguir una relación 1:1 opcional, una N:M reflexiva y una 1:N reflexiva en un mismo modelo.
 
 #### Contexto
 
@@ -704,51 +778,57 @@ Un instituto de Educación Secundaria y Formación Profesional diseña su base d
 >
 > Algunos módulos tienen como **prerrequisito** haber cursado otros. Un módulo puede exigir varios módulos previos y, a su vez, ser requisito de otros.
 >
-> De cada **alumno** se almacena el número de expediente, el nombre, los apellidos y la fecha de nacimiento. Un alumno se matricula en uno o varios módulos y se registra la fecha de matriculación.
+> De cada **alumno** se almacena el número de expediente, el nombre, los apellidos, la fecha de nacimiento y el curso. Un alumno se matricula en uno o varios módulos y se registra la fecha de matriculación.
 >
-> Cada alumno pertenece a un **grupo**, que tiene un código y un curso. En cada grupo se elige a un alumno como **delegado**.
+> Cada curso cuenta con un grupo de alumnos. Dentro de cada grupo se elige a uno de ellos como **delegado**, que representa a sus compañeros.
 >
 > Los alumnos que lo soliciten pueden disponer de un **casillero** (número y tamaño en metros). Un casillero pertenece a un único alumno y un alumno tiene como máximo un casillero.
 
 #### Tareas
 
 1. Dibuja el diagrama EER en notación de Chen.
-2. Entre `ALUMNO` y `GRUPO` hay **dos** relaciones. Explica por qué no pueden fusionarse en una sola.
-3. Calcula las cardinalidades de la relación con el casillero y razona por qué el mínimo no es el mismo en los dos lados.
-4. Escribe al menos **dos restricciones** que el diagrama no puede expresar (por ejemplo, sobre el delegado).
+2. Modela al delegado **sin crear una entidad nueva**. ¿Qué tipo de relación necesitas? Escribe sus roles.
+3. Calcula las cardinalidades de la relación con el casillero y razona por qué el mínimo es 0 en los dos lados.
+4. Escribe al menos **dos restricciones** que el diagrama no puede expresar.
 
 #### Comprobación
 
-- [ ] *Prerrequisito* es una N:M reflexiva con dos roles.
-- [ ] *Delegado* y *pertenece* son relaciones distintas con cardinalidades distintas.
-- [ ] La relación alumno–casillero es 1:1 con mínimo 0 en un lado y 1 en el otro.
-- [ ] `fecha_matriculación` está en la relación *se matricula*.
+- [ ] *Es requisito de* es una N:M **reflexiva** sobre `MÓDULO` con dos roles.
+- [ ] *Es delegado de* es una 1:N **reflexiva** sobre `ALUMNO`.
+- [ ] La relación alumno–casillero es 1:1 con (0,1) en los dos lados: el rombo es blanco entero.
+- [ ] `fecha_matrícula` está en la relación *se matricula*, no en `ALUMNO`.
 
 #### Errores habituales
 
 > [!WARNING]
-> - Usar un único atributo `es_delegado` en `ALUMNO`: no garantiza que haya exactamente un delegado por grupo.
-> - Dibujar *prerrequisito* como 1:N. Un módulo puede tener varios previos y ser previo de varios.
+> - Usar un atributo `es_delegado` en `ALUMNO`: no dice a quién representa ni garantiza un único delegado por grupo.
+> - Dibujar *es requisito de* como 1:N. Un módulo puede tener varios previos y ser previo de varios.
+> - Poner la fecha de matrícula en `ALUMNO`: un alumno se matricula de varios módulos, quizá en fechas distintas.
+
+{{% details title="Pista: el delegado también es un alumno" %}}
+Cuando una entidad se relaciona consigo misma se usa una **relación reflexiva**. Un alumno (rol *delegado*) representa a muchos alumnos (rol *representado*) y cada alumno tiene, como mucho, un delegado.
+{{% /details %}}
 
 #### Ampliación
 
-Algunos alumnos repiten curso y se matriculan **dos veces** en el mismo módulo en cursos académicos distintos. ¿Cómo cambia la relación *se matricula*?
+El centro decide guardar los **grupos** como entidad (código, curso, aula). Rediseña la parte del delegado: ¿qué relaciones aparecen entre `ALUMNO` y `GRUPO`? ¿Por qué no pueden fusionarse en una sola?
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej05.svg" alt="PROFESOR imparte MÓDULO; MÓDULO es prerrequisito de MÓDULO; ALUMNO se matricula en MÓDULO; ALUMNO pertenece a GRUPO y es delegado de GRUPO; ALUMNO tiene CASILLERO." caption="Ejercicio 5: Instituto: módulos, matrículas, delegados y casilleros" >}}
+{{< figura src="ud02/ej06.svg" alt="PROFESOR imparte MÓDULO (1:N); MÓDULO es requisito de MÓDULO (N:M reflexiva); ALUMNO se matricula en MÓDULO (N:M con fecha); ALUMNO es delegado de ALUMNO (1:N reflexiva); ALUMNO tiene CASILLERO (1:1)." caption="Ejercicio 6: Instituto: módulos, matrículas, delegados y casilleros" >}}
 
 **Decisiones de diseño**
 
-- *Imparte* es 1:N; *se matricula* es N:M con atributo; *prerrequisito* es N:M reflexiva.
-- *Pertenece* (1:N) y *delegado* (1:1) son hechos distintos entre `ALUMNO` y `GRUPO`: la primera la tiene todo alumno; la segunda solo un alumno por grupo.
-- En *casillero* el mínimo es 0 en el lado del alumno (no todos lo piden) y 1 en el del casillero (siempre tiene dueño).
+- *Imparte* es 1:N; *se matricula* es N:M con atributo; *es requisito de* es N:M reflexiva.
+- *Es delegado de* es una reflexiva 1:N: un alumno delegado representa a (0,N) compañeros y cada alumno tiene (0,1) delegado (0 mientras no se haya elegido).
+- *Tiene* (casillero) es 1:1 con mínimos 0: no todos los alumnos piden casillero y puede haber casilleros libres. Este caso, con (0,1) en los dos lados, se transforma en la UD03 con una tabla propia.
+- El curso es un atributo de `ALUMNO`. Si el grupo tuviera más datos, pasaría a ser una entidad (ver ampliación).
 
 **Supuestos semánticos**
 
 1. Todo módulo tiene profesor asignado: (1,1).
-2. Un grupo siempre tiene delegado: (1,1) en el lado del alumno.
-3. El delegado debe pertenecer al grupo que representa (restricción textual).
+2. Un alumno matriculado lo está al menos de un módulo: (1,N).
+3. El delegado y sus representados son del mismo curso (restricción textual).
 4. Un módulo no puede ser prerrequisito de sí mismo ni formar ciclos (restricción textual).
 
 {{% /details %}}
@@ -756,9 +836,9 @@ Algunos alumnos repiten curso y se matriculan **dos veces** en el mismo módulo 
 
 ---
 
-### Ejercicio 6 · Hospital: pacientes, ingresos y médicos
+### Ejercicio 7 · Hospital: pacientes, ingresos y médicos
 
-{{< practica num="6" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e" sgbd="draw.io o papel" entrega="Diagrama EER + supuestos" >}}
+{{< practica num="7" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e" sgbd="draw.io o papel" entrega="Diagrama EER + supuestos" >}}
 
 #### Objetivo
 
@@ -787,7 +867,7 @@ Una clínica quiere controlar los ingresos de sus pacientes y los médicos que l
 
 #### Comprobación
 
-- [ ] `INGRESO` es una entidad débil (doble rectángulo) con relación identificadora (doble rombo).
+- [ ] `INGRESO` es una entidad débil (doble rectángulo) y depende de `PACIENTE` en identificación (etiqueta ID junto a la entidad débil).
 - [ ] El número de ingreso es un discriminador (subrayado discontinuo).
 - [ ] `dirección` es un atributo compuesto.
 - [ ] *Atiende* es 1:N entre `MÉDICO` e `INGRESO`.
@@ -804,7 +884,7 @@ Un ingreso puede ser atendido por **varios médicos** que se turnan. ¿Cómo cam
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej06.svg" alt="PACIENTE realiza INGRESO (relación identificadora, INGRESO es débil). MÉDICO atiende INGRESO (1:N)." caption="Ejercicio 6: Hospital: pacientes, ingresos y médicos" >}}
+{{< figura src="ud02/ej07.svg" alt="PACIENTE realiza INGRESO (relación identificadora, INGRESO es débil). MÉDICO atiende INGRESO (1:N)." caption="Ejercicio 7: Hospital: pacientes, ingresos y médicos" >}}
 
 **Decisiones de diseño**
 
@@ -824,9 +904,83 @@ Un ingreso puede ser atendido por **varios médicos** que se turnan. ¿Cómo cam
 
 ---
 
-### Ejercicio 7 · Tienda online: pedidos, líneas y categorías
+### Ejercicio 8 · Clínica veterinaria: calendario de vacunación
 
-{{< practica num="7" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + atributos derivados" >}}
+{{< practica num="8" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + supuestos" >}}
+
+#### Objetivo
+
+Separar los datos que se **calculan** (edad, próxima vacuna) de los que se guardan y evitar relaciones redundantes.
+
+#### Contexto
+
+Una clínica veterinaria quiere avisar a los dueños de las vacunas pendientes de sus animales.
+
+#### Enunciado
+
+> Queremos crear una base de datos para una clínica veterinaria con el fin de controlar el calendario de vacunación de los animales y avisar al dueño cuándo debe acudir a la clínica.
+>
+> De cada **cliente** (dueño) se guardan el DNI, el nombre, los apellidos, la dirección, el teléfono y el correo electrónico. Un cliente puede tener varios animales.
+>
+> De cada **animal** se conoce un código, el nombre, el tipo (perro, gato…), la raza y la fecha de nacimiento; también se quiere mostrar su edad.
+>
+> De cada **vacuna** se guarda un código, el nombre y cada cuántos días hay que repetirla. Cuando se administra una vacuna a un animal se registra la fecha; la próxima fecha de vacunación se calcula a partir de la última administración y del tipo de vacuna.
+>
+> La clínica envía **notificaciones**: de cada una se guarda un número, la fecha de envío, la vacuna pendiente y la fecha prevista de administración.
+>
+> Se registran también las **visitas** de cada animal: fecha, tipo de visita (vacunación, consulta…) y notas.
+
+#### Tareas
+
+1. Dibuja el diagrama EER en notación de Chen.
+2. Marca los atributos **derivados** y explica de qué datos se obtienen.
+3. ¿Debe relacionarse `NOTIFICACIÓN` directamente con `CLIENTE`? Razona la respuesta.
+4. Decide si `VISITA` es una entidad débil y escribe su identificador completo.
+
+#### Comprobación
+
+- [ ] `edad` y `próxima_fecha` son derivados (óvalo discontinuo).
+- [ ] *Se vacuna* es N:M entre `ANIMAL` y `VACUNA` y la fecha permite repetir la misma vacuna.
+- [ ] `NOTIFICACIÓN` se relaciona con `ANIMAL` y con `VACUNA`, no con `CLIENTE`.
+- [ ] `VISITA` es débil de `ANIMAL` (etiqueta ID).
+
+#### Errores habituales
+
+> [!WARNING]
+> - Guardar la edad: cambia cada día. Se calcula a partir de la fecha de nacimiento.
+> - Guardar «tipo de vacuna pendiente» como texto en la notificación: debe ser una relación con `VACUNA`.
+> - Relacionar la notificación con el cliente **y** con el animal: el dueño se obtiene a partir del animal, y las dos relaciones podrían contradecirse.
+
+#### Ampliación
+
+Algunas vacunas se ponen **durante una visita**. ¿Cómo relacionarías la administración de la vacuna con la visita? ¿Qué problema aparece si una visita incluye dos vacunas?
+
+{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
+
+{{< figura src="ud02/ej08.svg" alt="CLIENTE es dueño de ANIMAL (1:N). ANIMAL se vacuna con VACUNA (N:M con fecha). NOTIFICACIÓN avisa de VACUNA y se envía por ANIMAL. ANIMAL tiene VISITA (débil)." caption="Ejercicio 8: Clínica veterinaria: calendario de vacunación" >}}
+
+**Decisiones de diseño**
+
+- *Es dueño de* es 1:N: cada animal tiene un único dueño registrado.
+- *Se vacuna* es N:M con `fecha` como discriminador (una vacuna se repite cada cierto tiempo) y `próxima_fecha` como atributo derivado.
+- `NOTIFICACIÓN` es una entidad con identificador propio relacionada 1:N con `ANIMAL` y con `VACUNA`; el cliente se deduce del animal.
+- `VISITA` es débil: se identifica por (código del animal, fecha).
+
+**Supuestos semánticos**
+
+1. Todo animal tiene dueño: (1,1).
+2. Un animal no recibe dos veces la misma vacuna el mismo día.
+3. Un animal no tiene dos visitas en la misma fecha.
+4. La próxima fecha = última administración + periodicidad de la vacuna (regla de cálculo).
+
+{{% /details %}}
+
+
+---
+
+### Ejercicio 9 · Tienda online: pedidos, líneas y categorías
+
+{{< practica num="9" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + atributos derivados" >}}
 
 #### Objetivo
 
@@ -870,7 +1024,7 @@ Un producto puede pertenecer a **varias categorías** a la vez. ¿Cambia la card
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej07.svg" alt="CLIENTE realiza PEDIDO. PEDIDO incluye LÍNEA_PEDIDO (débil). LÍNEA_PEDIDO se refiere a PRODUCTO. PRODUCTO pertenece a CATEGORÍA, que puede ser subcategoría de otra." caption="Ejercicio 7: Tienda online: pedidos, líneas y categorías" >}}
+{{< figura src="ud02/ej09.svg" alt="CLIENTE realiza PEDIDO. PEDIDO incluye LÍNEA_PEDIDO (débil). LÍNEA_PEDIDO se refiere a PRODUCTO. PRODUCTO pertenece a CATEGORÍA, que puede ser subcategoría de otra." caption="Ejercicio 9: Tienda online: pedidos, líneas y categorías" >}}
 
 **Decisiones de diseño**
 
@@ -890,9 +1044,9 @@ Un producto puede pertenecer a **varias categorías** a la vez. ¿Cambia la card
 
 ---
 
-### Ejercicio 8 · Concesionario: ventas, revisiones y mecánicos
+### Ejercicio 10 · Concesionario: ventas, revisiones y mecánicos
 
-{{< practica num="8" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + supuestos" >}}
+{{< practica num="10" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + supuestos" >}}
 
 #### Objetivo
 
@@ -914,7 +1068,7 @@ Un concesionario gestiona la venta de coches y las revisiones de su taller.
 
 1. Dibuja el diagrama EER con la entidad débil y la relación reflexiva.
 2. Decide cómo guardar los trabajos de la revisión (booleanos o atributo multivaluado) y justifica la elección.
-3. El cliente tiene un **código interno** y un **NIF**. ¿Cuál eliges como identificador? ¿Qué papel tiene el otro?
+3. El cliente tiene un **código interno** y un **NIF**. ¿Cuál eliges como identificador? ¿Qué papel tiene el otro y cómo se marca en el diagrama?
 4. Anota los supuestos y una restricción textual.
 
 #### Comprobación
@@ -936,13 +1090,13 @@ El taller quiere guardar **qué piezas** se cambiaron en cada revisión y cuánt
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej08.svg" alt="CLIENTE compra COCHE (1:N). COCHE pasa REVISIÓN (identificadora, débil). MECÁNICO realiza REVISIÓN. MECÁNICO supervisa a MECÁNICO." caption="Ejercicio 8: Concesionario: ventas, revisiones y mecánicos" >}}
+{{< figura src="ud02/ej10.svg" alt="CLIENTE compra COCHE (1:N). COCHE pasa REVISIÓN (identificadora, débil). MECÁNICO realiza REVISIÓN. MECÁNICO supervisa a MECÁNICO." caption="Ejercicio 10: Concesionario: ventas, revisiones y mecánicos" >}}
 
 **Decisiones de diseño**
 
 - `REVISIÓN` es débil porque su número solo es único dentro de cada coche.
 - Un mecánico tiene como mucho un supervisor, y un supervisor puede coordinar a muchos mecánicos: relación reflexiva 1:N con roles.
-- En `CLIENTE`, el código interno es el identificador elegido; el NIF es una **clave alternativa**: único, pero no se usa para relacionar.
+- En `CLIENTE`, el código interno es el identificador elegido; el NIF es una **clave alternativa** (subrayado de puntos): único, pero no se usa para relacionar.
 
 **Supuestos semánticos**
 
@@ -956,9 +1110,79 @@ El taller quiere guardar **qué piezas** se cambiaron en cada revisión y cuánt
 
 ---
 
-### Ejercicio 9 · Consultora de software: proyectos, tareas y desarrolladores
+### Ejercicio 11 · Casas rurales: provincias, ciudades y habitaciones
 
-{{< practica num="9" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
+{{< practica num="11" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + identificadores completos" >}}
+
+#### Objetivo
+
+Encadenar dos entidades débiles por identificación y modelar una estancia repetible con fechas.
+
+#### Contexto
+
+Una central de reservas de turismo rural quiere gestionar su oferta de alojamientos.
+
+#### Enunciado
+
+> De cada **provincia** se guarda el nombre, el área y la población. En cada provincia hay **ciudades**, de las que se conoce el nombre y el número de habitantes. El nombre de una ciudad **solo es único dentro de su provincia** (hay varias ciudades llamadas «Villanueva»).
+>
+> Las **casas rurales** tienen un nombre único, una localización y si ofrecen desayuno. Cada casa está en una ciudad y en una ciudad puede haber varias casas.
+>
+> Cada casa tiene varias **habitaciones**, numeradas dentro de la casa (1, 2, 3…), con una descripción y un precio por noche.
+>
+> Los **clientes** (DNI, nombre, dirección y teléfono) se alojan en habitaciones. De cada estancia se guarda la fecha de entrada y la de salida. Un cliente puede alojarse varias veces en la misma habitación.
+
+#### Tareas
+
+1. Dibuja el diagrama EER en notación de Chen.
+2. Escribe el **identificador completo** de `CIUDAD` y de `HABITACIÓN`.
+3. ¿Qué atributo permite que un cliente repita la misma habitación? Márcalo en el diagrama.
+4. Anota los supuestos.
+
+#### Comprobación
+
+- [ ] `CIUDAD` es débil de `PROVINCIA` y `HABITACIÓN` es débil de `CASA_RURAL` (etiqueta ID).
+- [ ] *Está en* (casa–ciudad) es 1:N y **no** es identificadora: el nombre de la casa ya es único.
+- [ ] *Se aloja* es N:M y `fecha_entrada` forma parte de la identificación.
+- [ ] `desayuno` es un atributo de `CASA_RURAL`.
+
+#### Errores habituales
+
+> [!WARNING]
+> - Dar a `CIUDAD` el nombre como clave: dos provincias pueden tener una ciudad con el mismo nombre.
+> - Relacionar al cliente con la casa en lugar de con la habitación: se pierde qué habitación ocupó.
+> - Identificar la estancia solo con (cliente, habitación): impide alojarse dos veces en la misma habitación.
+
+#### Ampliación
+
+Variante: además de alquilar, se quiere saber qué **personas viven** en cada casa (cada persona vive en una sola) y qué personas **son propietarias** (una casa puede tener varios propietarios y se guarda la fecha de compra). Las casas tienen ahora un identificador propio y **no pueden existir sin su ciudad** (dependencia en existencia, etiqueta E). Dibuja el diagrama de esta variante.
+
+{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
+
+{{< figura src="ud02/ej11.svg" alt="PROVINCIA tiene CIUDAD (débil). CASA_RURAL está en CIUDAD (N:1). CASA_RURAL tiene HABITACIÓN (débil). CLIENTE se aloja en HABITACIÓN (N:M con fechas)." caption="Ejercicio 11: Casas rurales: provincias, ciudades y habitaciones" >}}
+
+**Decisiones de diseño**
+
+- `CIUDAD` depende de `PROVINCIA` en identificación: su identificador es (nombre de la provincia, nombre de la ciudad).
+- `HABITACIÓN` depende de `CASA_RURAL`: su identificador es (nombre de la casa, número).
+- *Se aloja* es N:M con `fecha_entrada` (discriminador) y `fecha_salida`.
+- El rombo de *está en* tiene la mitad blanca junto a `CIUDAD` (máximo 1) y la negra junto a `CASA_RURAL`.
+
+**Supuestos semánticos**
+
+1. Toda casa está en una ciudad: (1,1).
+2. Una ciudad puede no tener casas rurales: (0,N).
+3. Una casa tiene al menos una habitación: (1,N).
+4. La fecha de salida es posterior a la de entrada (restricción textual).
+
+{{% /details %}}
+
+
+---
+
+### Ejercicio 12 · Consultora de software: proyectos, tareas y desarrolladores
+
+{{< practica num="12" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
 #### Objetivo
 
@@ -1002,7 +1226,7 @@ Se quiere que cada desarrollador tenga **un único rol** por proyecto (jefe de p
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej09.svg" alt="CLIENTE encarga PROYECTO (1:N). PROYECTO se descompone en TAREA (débil). DESARROLLADOR trabaja en TAREA (N:M con horas reales). DESARROLLADOR tutela a DESARROLLADOR." caption="Ejercicio 9: Consultora de software: proyectos, tareas y desarrolladores" >}}
+{{< figura src="ud02/ej12.svg" alt="CLIENTE encarga PROYECTO (1:N). PROYECTO se descompone en TAREA (débil). DESARROLLADOR trabaja en TAREA (N:M con horas reales). DESARROLLADOR tutela a DESARROLLADOR." caption="Ejercicio 12: Consultora de software: proyectos, tareas y desarrolladores" >}}
 
 **Decisiones de diseño**
 
@@ -1022,9 +1246,9 @@ Se quiere que cada desarrollador tenga **un único rol** por proyecto (jefe de p
 
 ---
 
-### Ejercicio 10 · Cadena hotelera: hoteles, habitaciones y reservas
+### Ejercicio 13 · Cadena hotelera: hoteles, habitaciones y reservas
 
-{{< practica num="10" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
+{{< practica num="13" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
 #### Objetivo
 
@@ -1070,7 +1294,7 @@ Una reserva puede incluir **varias habitaciones** (una familia reserva dos). ¿Q
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej10.svg" alt="HOTEL dispone de HABITACIÓN (débil). CLIENTE reserva HABITACIÓN (N:M con fechas y precio). EMPLEADO trabaja en HOTEL. EMPLEADO supervisa a EMPLEADO." caption="Ejercicio 10: Cadena hotelera: hoteles, habitaciones y reservas" >}}
+{{< figura src="ud02/ej13.svg" alt="HOTEL dispone de HABITACIÓN (débil). CLIENTE reserva HABITACIÓN (N:M con fechas y precio). EMPLEADO trabaja en HOTEL. EMPLEADO supervisa a EMPLEADO." caption="Ejercicio 13: Cadena hotelera: hoteles, habitaciones y reservas" >}}
 
 **Decisiones de diseño**
 
@@ -1090,9 +1314,9 @@ Una reserva puede incluir **varias habitaciones** (una familia reserva dos). ¿Q
 
 ---
 
-### Ejercicio 11 · Universidad: facultades, departamentos y cátedras
+### Ejercicio 14 · Universidad: facultades, departamentos y cátedras
 
-{{< practica num="11" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
+{{< practica num="14" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
 #### Objetivo
 
@@ -1136,7 +1360,7 @@ Los **catedráticos** tienen datos propios (año de oposición, sexenios). Convi
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej11.svg" alt="FACULTAD engloba DEPARTAMENTO. DEPARTAMENTO crea CÁTEDRA (débil). PROFESOR pertenece a DEPARTAMENTO, dirige CÁTEDRA y tutoriza a PROFESOR." caption="Ejercicio 11: Universidad: facultades, departamentos y cátedras" >}}
+{{< figura src="ud02/ej14.svg" alt="FACULTAD engloba DEPARTAMENTO. DEPARTAMENTO crea CÁTEDRA (débil). PROFESOR pertenece a DEPARTAMENTO, dirige CÁTEDRA y tutoriza a PROFESOR." caption="Ejercicio 14: Universidad: facultades, departamentos y cátedras" >}}
 
 **Decisiones de diseño**
 
@@ -1156,9 +1380,9 @@ Los **catedráticos** tienen datos propios (año de oposición, sexenios). Convi
 
 ---
 
-### Ejercicio 12 · Centro de menores: residentes, educadores e informes
+### Ejercicio 15 · Centro de menores: residentes, educadores e informes
 
-{{< practica num="12" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + nota de protección de datos" >}}
+{{< practica num="15" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + nota de protección de datos" >}}
 
 #### Objetivo
 
@@ -1202,7 +1426,7 @@ Un menor puede ser **trasladado** a otro centro y volver años después. ¿Cómo
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej12.svg" alt="EDUCADOR tutela a MENOR (1:N). EDUCADOR coordina a EDUCADOR. MENOR tiene INFORME (débil)." caption="Ejercicio 12: Centro de menores: residentes, educadores e informes" >}}
+{{< figura src="ud02/ej15.svg" alt="EDUCADOR tutela a MENOR (1:N). EDUCADOR coordina a EDUCADOR. MENOR tiene INFORME (débil)." caption="Ejercicio 15: Centro de menores: residentes, educadores e informes" >}}
 
 **Decisiones de diseño**
 
@@ -1227,11 +1451,11 @@ Un menor puede ser **trasladado** a otro centro y volver años después. ¿Cómo
 
 ## Bloque 3 · Integración
 
-Relaciones ternarias, dos relaciones entre las mismas entidades, listas de materiales, cardinalidades máximas concretas y primera especialización.
+Relaciones ternarias, agregación, dos relaciones entre las mismas entidades, listas de materiales, cardinalidades máximas concretas y primera generalización.
 
-### Ejercicio 13 · Transporte urbano: líneas, paradas y turnos
+### Ejercicio 16 · Transporte urbano: líneas, paradas y turnos
 
-{{< practica num="13" etiqueta="Ejercicio" tipo="Autónoma" duracion="1-2 sesiones" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + análisis de la ternaria" >}}
+{{< practica num="16" etiqueta="Ejercicio" tipo="Autónoma" duracion="1-2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + análisis de la ternaria" >}}
 
 #### Objetivo
 
@@ -1281,7 +1505,7 @@ El transbordo se produce realmente **entre paradas**, no entre líneas. Redibuja
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej13.svg" alt="LÍNEA tiene PARADA (débil). LÍNEA se conecta con LÍNEA mediante transbordo. CONDUCTOR, AUTOBÚS y LÍNEA se relacionan en conduce (ternaria) con el turno." caption="Ejercicio 13: Transporte urbano: líneas, paradas y turnos" >}}
+{{< figura src="ud02/ej16.svg" alt="LÍNEA tiene PARADA (débil). LÍNEA se conecta con LÍNEA mediante transbordo. CONDUCTOR, AUTOBÚS y LÍNEA se relacionan en conduce (ternaria) con el turno." caption="Ejercicio 16: Transporte urbano: líneas, paradas y turnos" >}}
 
 **Decisiones de diseño**
 
@@ -1301,9 +1525,9 @@ El transbordo se produce realmente **entre paradas**, no entre líneas. Redibuja
 
 ---
 
-### Ejercicio 14 · Federación deportiva: equipos, partidos e incidencias
+### Ejercicio 17 · Federación deportiva: equipos, partidos e incidencias
 
-{{< practica num="14" etiqueta="Ejercicio" tipo="Autónoma" duracion="1-2 sesiones" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
+{{< practica num="17" etiqueta="Ejercicio" tipo="Autónoma" duracion="1-2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
 #### Objetivo
 
@@ -1347,7 +1571,7 @@ La federación quiere guardar los **jugadores convocados** en cada partido y los
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej14.svg" alt="JUGADOR pertenece a EQUIPO y un jugador es capitán. EQUIPO es local o visitante en PARTIDO. PARTIDO registra INCIDENCIA (débil) protagonizada por JUGADOR." caption="Ejercicio 14: Federación deportiva: equipos, partidos e incidencias" >}}
+{{< figura src="ud02/ej17.svg" alt="JUGADOR pertenece a EQUIPO y un jugador es capitán. EQUIPO es local o visitante en PARTIDO. PARTIDO registra INCIDENCIA (débil) protagonizada por JUGADOR." caption="Ejercicio 17: Federación deportiva: equipos, partidos e incidencias" >}}
 
 **Decisiones de diseño**
 
@@ -1367,9 +1591,9 @@ La federación quiere guardar los **jugadores convocados** en cada partido y los
 
 ---
 
-### Ejercicio 15 · Red de gimnasios: salas, reservas y entrenadores
+### Ejercicio 18 · Red de gimnasios: salas, reservas y entrenadores
 
-{{< practica num="15" etiqueta="Ejercicio" tipo="Autónoma" duracion="1-2 sesiones" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
+{{< practica num="18" etiqueta="Ejercicio" tipo="Autónoma" duracion="1-2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
 #### Objetivo
 
@@ -1415,7 +1639,7 @@ Las reservas de clase **tienen un entrenador** responsable. ¿La reserva pasa a 
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej15.svg" alt="GIMNASIO dispone de SALA (débil). SOCIO se inscribe en GIMNASIO y reserva SALA. ENTRENADOR trabaja en GIMNASIO, diseña rutinas para SOCIO y es dirigido por otro ENTRENADOR." caption="Ejercicio 15: Red de gimnasios: salas, reservas y entrenadores" >}}
+{{< figura src="ud02/ej18.svg" alt="GIMNASIO dispone de SALA (débil). SOCIO se inscribe en GIMNASIO y reserva SALA. ENTRENADOR trabaja en GIMNASIO, diseña rutinas para SOCIO y es dirigido por otro ENTRENADOR." caption="Ejercicio 18: Red de gimnasios: salas, reservas y entrenadores" >}}
 
 **Decisiones de diseño**
 
@@ -1435,9 +1659,9 @@ Las reservas de clase **tienen un entrenador** responsable. ¿La reserva pasa a 
 
 ---
 
-### Ejercicio 16 · Repostería PAVA S.A.: recetas, formatos, pedidos y competencia
+### Ejercicio 19 · Repostería PAVA S.A.: recetas, formatos, pedidos y competencia
 
-{{< practica num="16" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario de datos" >}}
+{{< practica num="19" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario de datos" >}}
 
 #### Objetivo
 
@@ -1487,7 +1711,7 @@ El **precio** de cada formato cambia con el tiempo y se quiere conservar el hist
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej16.svg" alt="INGREDIENTE forma parte de PRODUCTO con un porcentaje. PRODUCTO tiene FORMATO (débil). CLIENTE hace PEDIDO que solicita FORMATO. PROMOCIÓN se aplica a FORMATO. COMPETIDOR se parece a PRODUCTO." caption="Ejercicio 16: Repostería PAVA S.A." >}}
+{{< figura src="ud02/ej19.svg" alt="INGREDIENTE forma parte de PRODUCTO con un porcentaje. PRODUCTO tiene FORMATO (débil). CLIENTE hace PEDIDO que solicita FORMATO. PROMOCIÓN se aplica a FORMATO. COMPETIDOR se parece a PRODUCTO." caption="Ejercicio 19: Repostería PAVA S.A." >}}
 
 **Decisiones de diseño**
 
@@ -1507,9 +1731,9 @@ El **precio** de cada formato cambia con el tiempo y se quiere conservar el hist
 
 ---
 
-### Ejercicio 17 · Planta industrial: lista de materiales e inspecciones
+### Ejercicio 20 · Planta industrial: lista de materiales e inspecciones
 
-{{< practica num="17" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
+{{< practica num="20" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
 #### Objetivo
 
@@ -1553,7 +1777,7 @@ Algunas piezas se **compran a proveedores** en lugar de fabricarse. ¿Cómo mode
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej17.svg" alt="FÁBRICA alberga LÍNEA (débil). PIEZA se fabrica en una LÍNEA. PIEZA se compone de PIEZA con una cantidad. PIEZA se inspecciona en INSPECCIÓN (débil)." caption="Ejercicio 17: Planta industrial: lista de materiales e inspecciones" >}}
+{{< figura src="ud02/ej20.svg" alt="FÁBRICA alberga LÍNEA (débil). PIEZA se fabrica en una LÍNEA. PIEZA se compone de PIEZA con una cantidad. PIEZA se inspecciona en INSPECCIÓN (débil)." caption="Ejercicio 20: Planta industrial: lista de materiales e inspecciones" >}}
 
 **Decisiones de diseño**
 
@@ -1573,9 +1797,9 @@ Algunas piezas se **compran a proveedores** en lugar de fabricarse. ¿Cómo mode
 
 ---
 
-### Ejercicio 18 · Comandancia de Starship Troopers
+### Ejercicio 21 · Comandancia de Starship Troopers
 
-{{< practica num="18" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
+{{< practica num="21" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
 #### Objetivo
 
@@ -1623,7 +1847,7 @@ Cada trooper tiene una **especialidad** (piloto, agente, médico…) con datos p
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej18.svg" alt="TROOPER tiene jefe TROOPER, usa ARMA, detiene BICHO e investiga DELITO. MAZMORRA encierra BICHO. BICHO está implicado en DELITO." caption="Ejercicio 18: Comandancia de Starship Troopers" >}}
+{{< figura src="ud02/ej21.svg" alt="TROOPER tiene jefe TROOPER, usa ARMA, detiene BICHO e investiga DELITO. MAZMORRA encierra BICHO. BICHO está implicado en DELITO." caption="Ejercicio 21: Comandancia de Starship Troopers" >}}
 
 **Decisiones de diseño**
 
@@ -1643,68 +1867,160 @@ Cada trooper tiene una **especialidad** (piloto, agente, médico…) con datos p
 
 ---
 
-### Ejercicio 19 · Torneo de Quidditch: jugadores especializados
+### Ejercicio 22 · Casas de Juego de Tronos: castillos, arquitectos y mecenazgos
 
-{{< practica num="19" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + clasificación de la jerarquía" >}}
+{{< practica num="22" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + justificación de la agregación" >}}
 
 #### Objetivo
 
-Ampliar un modelo conocido (ejercicio 14) con una **especialización total y disyunta** con atributos propios.
+Usar una **agregación** para relacionar una entidad con una relación N:M, junto con una entidad débil y una reflexiva.
 
 #### Contexto
 
-Una liga mágica celebra un torneo oficial. El modelo parte del de la federación deportiva, pero ahora los jugadores se especializan por puesto.
+George R. R. Martin quiere documentar los castillos de las grandes casas de Poniente.
 
 #### Enunciado
 
-> De cada **equipo** se registra el código, el nombre del club, la casa o colegio al que representa y el año de fundación. Los **jugadores** (número de carné, nombre y apellidos) pertenecen a un único equipo y cada equipo designa a uno como **capitán**.
+> De cada **casa** (Stark, Tully, Lannister…) se guarda un número de orden según el año de fundación, el nombre (que es único), el año de fundación, la localización, la dirección (valle, montaña y arroyo) y los metros cuadrados.
 >
-> Cada jugador ocupa un único puesto y de cada puesto se guardan estadísticas propias: los **guardianes**, las paradas; los **golpeadores**, las bludgers golpeadas; los **cazadores**, los goles marcados; los **buscadores**, las capturas de snitch.
+> Cada casa tiene una serie de **castillos**. De cada castillo se guarda un código **establecido por cada casa**, el nombre, las medidas, la fecha y el estilo de construcción (gótico, románico…) y una descripción de la técnica utilizada.
 >
-> De los **partidos** se conoce el código, el estadio, la fecha y hora y el **árbitro** asignado (código y nombre). En cada partido compiten un equipo local y uno visitante.
+> Cada castillo lo crea un **arquitecto**, del que se conoce el nombre, la nacionalidad, la fecha de nacimiento y la de fallecimiento. Un arquitecto puede tener como **maestro** a otro arquitecto de la base de datos; a su vez, un maestro puede serlo de varios o de ninguno. Los arquitectos pueden pertenecer o no a una **escuela** (nombre, país, fecha de aparición y estilo).
 >
-> Durante el partido se registran **incidencias** (infracciones y penaltis), identificadas por el minuto y un número de secuencia dentro del partido. Se anotan el tipo de falta, la puntuación otorgada y el jugador sancionado.
+> Los arquitectos pueden tener uno o varios **mecenas** (nombre, que puede repetirse, país y ciudad de nacimiento, fecha de nacimiento y de fallecimiento), y un mecenas puede serlo de varios arquitectos. De cada **mecenazgo** se quiere saber la fecha de inicio, la de fin y la población donde tuvo lugar, y **qué castillos resultaron** de cada mecenazgo.
 
 #### Tareas
 
-1. Dibuja el diagrama EER en notación de Chen con la jerarquía de jugadores.
-2. Clasifica la jerarquía (total o parcial, disyunta o solapada) y justifícalo con una frase del enunciado.
-3. ¿Qué ocurre con el atributo `posición` que aparecía en el ejercicio 14? ¿Sigue haciendo falta?
-4. Escribe las restricciones: capitán del propio equipo, local distinto de visitante, árbitro sin vínculo con los equipos.
+1. Dibuja el diagrama EER en notación de Chen.
+2. Escribe el identificador completo de `CASTILLO`.
+3. Los castillos se relacionan con el **mecenazgo**, que es una relación. Compara dos soluciones: una ternaria (arquitecto, mecenas, castillo) y una **agregación**. ¿Cuál representa mejor el enunciado?
+4. ¿Qué identificador das a `MECENAS` si su nombre puede repetirse?
 
 #### Comprobación
 
-- [ ] La especialización es **total y disyunta** y se dibuja con el círculo `d` y doble línea hacia la superclase.
-- [ ] Los atributos comunes están en `JUGADOR` y las estadísticas, en cada subclase.
-- [ ] El árbitro es una entidad relacionada con el partido.
-- [ ] `INCIDENCIA` es débil de `PARTIDO`.
+- [ ] `CASTILLO` es débil de `CASA` (etiqueta ID).
+- [ ] *Es maestro de* es una reflexiva 1:N sobre `ARQUITECTO`.
+- [ ] *Mecenazgo* es N:M y queda dentro de un recuadro de **agregación**.
+- [ ] La relación *resulta de* une `CASTILLO` con la agregación, no con `ARQUITECTO` ni con `MECENAS` por separado.
+- [ ] `MECENAS` tiene un código artificial como identificador.
 
 #### Errores habituales
 
 > [!WARNING]
-> - Repetir los atributos comunes (nombre, carné…) en cada subclase.
-> - Mantener un atributo `posición` además de la especialización: duplica la información y puede contradecirse.
+> - Usar una ternaria: obligaría a que todo mecenazgo tuviera un castillo, y el enunciado admite mecenazgos sin castillos.
+> - Relacionar `CASTILLO` solo con `MECENAS`: se pierde qué arquitecto trabajó para él en ese mecenazgo.
+> - Usar el nombre del mecenas como clave: se repite.
+
+{{% details title="Pista: relacionar algo con una relación" %}}
+En el modelo E/R una relación solo une entidades. Cuando necesitas relacionar una entidad con el **hecho** de que dos entidades estén relacionadas (el mecenazgo), encierra esa relación en una **agregación** y trátala como si fuera una entidad.
+{{% /details %}}
 
 #### Ampliación
 
-Algunos jugadores pueden ocupar **dos puestos** en la misma temporada (cazador y buscador). ¿Qué cambia en la clasificación de la jerarquía? ¿Cómo la dibujarías?
+Un castillo puede ser fruto de **varios mecenazgos** (por ejemplo, empezado con un mecenas y terminado con otro). ¿Cómo cambia la cardinalidad de *resulta de*? ¿Y el color del rombo?
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej19.svg" alt="JUGADOR se especializa (d, total) en GUARDIÁN, GOLPEADOR, CAZADOR y BUSCADOR. EQUIPO tiene JUGADOR y capitán, juega PARTIDO como local y visitante. ÁRBITRO arbitra PARTIDO. PARTIDO registra INCIDENCIA." caption="Ejercicio 19: Torneo de Quidditch: jugadores especializados" >}}
+{{< figura src="ud02/ej22.svg" alt="CASA tiene CASTILLO (débil). ARQUITECTO construye CASTILLO, es maestro de ARQUITECTO y pertenece a ESCUELA. ARQUITECTO y MECENAS forman el MECENAZGO (N:M), agregado y relacionado con CASTILLO." caption="Ejercicio 22: Casas de Juego de Tronos: castillos, arquitectos y mecenazgos" >}}
 
 **Decisiones de diseño**
 
-- Hay cuatro subclases con una sola jerarquía **total y disyunta**: cada jugador ocupa un puesto y solo uno.
-- El atributo `posición` desaparece: la pertenencia a una subclase la expresa.
-- El resto del modelo (capitán, local, visitante, incidencias) es el del ejercicio 14, más la entidad `ÁRBITRO`.
+- `CASTILLO` depende de `CASA` en identificación: (nº de orden de la casa, código del castillo).
+- El nombre de la casa es **clave alternativa** (subrayado de puntos): es único, pero se identifica por el número de orden.
+- *Mecenazgo* es N:M con `fecha_inicio` como discriminador, `fecha_fin` y `población`. Se agrega para poder relacionarlo con `CASTILLO`.
+- *Resulta de* es 1:N entre la agregación y `CASTILLO`: cada castillo procede como mucho de un mecenazgo; un mecenazgo puede producir varios castillos o ninguno.
+- La solución con ternaria (la del primer borrador) es válida solo si todo mecenazgo produce castillos.
 
 **Supuestos semánticos**
 
-1. Todo jugador tiene un puesto: especialización total.
-2. Un partido tiene un único árbitro: (1,1).
-3. El jugador sancionado pertenece a uno de los dos equipos del partido (restricción textual).
-4. El capitán pertenece a su equipo (restricción textual).
+1. Todo castillo tiene un arquitecto creador: (1,1).
+2. Un arquitecto puede no pertenecer a ninguna escuela: (0,1).
+3. Un arquitecto no puede ser maestro de sí mismo (restricción textual).
+4. El arquitecto que construye el castillo es el del mecenazgo del que resulta (restricción textual).
+
+{{% /details %}}
+
+
+---
+
+### Ejercicio 23 · Campeonato de Quidditch
+
+{{< practica num="23" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + clasificación de la jerarquía + restricciones" >}}
+
+#### Objetivo
+
+Integrar una **generalización** con atributos propios, dos entidades débiles, una reflexiva, un atributo multivaluado y una cardinalidad máxima concreta (2).
+
+#### Contexto
+
+Se va a celebrar un campeonato de *quidditch* entre selecciones de distintos países.
+
+#### Enunciado
+
+> En el campeonato participan **jugadores** y **árbitros**. De todos ellos se quiere conocer el número de mago, el nombre, la dirección y los **campeonatos** en los que han participado. De los jugadores se guarda además el nivel de juego (numérico) y de los árbitros, la categoría (nacional o internacional). Ningún árbitro puede participar como jugador.
+>
+> Los **países** envían al campeonato **equipos** y árbitros, aunque no todos los países envían selección. Todo equipo y todo árbitro es enviado por un único país. Un país puede estar **representado** por otro país. Cada país se identifica por un número correlativo según su orden alfabético y se guarda su nombre y el número de clubes de quidditch que existen en él. Cada equipo tiene un nombre y está formado por varios jugadores.
+>
+> Cada **juego** (partida) se identifica por un número correlativo (Cod-Q). Lo juegan **dos equipos** y lo arbitra un árbitro. Todo equipo participa al menos en un juego. Un árbitro no puede arbitrar a equipos enviados por su mismo país.
+>
+> Los participantes se alojan en los **castillos** donde se desarrollan las partidas y se quiere saber en qué castillo y en qué fechas se ha alojado cada uno; pueden alojarse varias veces, en el mismo o en distinto castillo. De cada castillo se guarda el nombre, la dirección y el teléfono.
+>
+> El campeonato se desarrolla a lo largo de una serie de **jornadas** (fecha). Cada juego tiene lugar en una jornada, aunque puede haber jornadas de descanso.
+>
+> Cada juego se celebra en un **estadio** de uno de los castillos (los estadios se numeran dentro de cada castillo) y se guarda el número de entradas vendidas. De cada estadio se conoce la capacidad y los **medios** de que dispone para la retransmisión (radio, televisión, vídeo…).
+>
+> De cada juego se registran todos los **movimientos**, identificados por un número de orden dentro del juego; de cada uno se guarda la jugada y un breve comentario de un experto.
+
+#### Tareas
+
+1. Dibuja el diagrama EER en notación de Chen.
+2. Clasifica la generalización de `PARTICIPANTE` (total/parcial, disjunta/solapada) y justifícalo con frases del enunciado.
+3. ¿Qué cardinalidad tiene `EQUIPO` en la relación *juega*? ¿Qué color tiene esa mitad del rombo?
+4. Escribe las restricciones que el diagrama no puede expresar.
+
+#### Comprobación
+
+- [ ] `PARTICIPANTE` se generaliza en `JUGADOR` y `ÁRBITRO` con **T,D**.
+- [ ] *Juega* tiene (2,2) junto a `EQUIPO`.
+- [ ] `ESTADIO` es débil de `CASTILLO` y `MOVIMIENTO` es débil de `JUEGO` (etiqueta ID).
+- [ ] `campeonato` (de los participantes) y `medios` (de los estadios) son multivaluados.
+- [ ] *Se aloja* es N:M y la fecha de entrada forma parte de la identificación.
+
+#### Errores habituales
+
+> [!WARNING]
+> - Repetir número de mago, nombre y dirección en `JUGADOR` y en `ÁRBITRO`: van en la superclase.
+> - Guardar las entradas vendidas en `ESTADIO`: dependen de cada juego.
+> - Hacer de la fecha un atributo de `JUEGO` y olvidar que el enunciado pide jornadas sin juegos (de descanso).
+> - Relacionar `JUGADOR` directamente con `PAÍS`: el país se obtiene a través del equipo.
+
+{{% details title="Pista: dos equipos por juego" %}}
+Cuando el número de participantes es fijo se escribe el número en la cardinalidad: (2,2) junto a `EQUIPO`. La mitad del rombo que mira a `EQUIPO` es negra, porque el máximo (2) es mayor que 1.
+{{% /details %}}
+
+#### Ampliación
+
+Se quiere distinguir el equipo **local** del **visitante**. Propón dos alternativas (dos relaciones 1:N o una relación con un atributo `papel`) y explica qué restricción textual necesita cada una.
+
+{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
+
+{{< figura src="ud02/ej23.svg" alt="PARTICIPANTE se generaliza (T,D) en JUGADOR y ÁRBITRO. PAÍS envía EQUIPO y ÁRBITRO y representa a PAÍS. EQUIPO está formado por JUGADOR y juega JUEGO (2,2). ÁRBITRO arbitra JUEGO. JUEGO tiene lugar en JORNADA y se celebra en ESTADIO (débil de CASTILLO). JUEGO registra MOVIMIENTO (débil). PARTICIPANTE se aloja en CASTILLO." caption="Ejercicio 23: Campeonato de Quidditch" >}}
+
+**Decisiones de diseño**
+
+- Generalización **total y disjunta**: todo participante es jugador o árbitro y «ningún árbitro puede participar como jugador».
+- *Juega* es N:M con máximo 2 en el lado del equipo; *arbitra*, *tiene lugar* y *se celebra en* son 1:N.
+- *Se celebra en* lleva `entradas_vendidas`, que depende del juego y del estadio.
+- *Representa a* es una reflexiva 1:N sobre `PAÍS`.
+- `JORNADA` es entidad porque existen jornadas sin juegos.
+
+**Supuestos semánticos**
+
+1. Un equipo tiene al menos un jugador: (1,N).
+2. Un país puede no enviar equipo ni árbitros: (0,N).
+3. Un árbitro no arbitra juegos de equipos de su país (restricción textual).
+4. Los dos equipos de un juego son distintos (restricción textual).
+5. Un participante no está alojado en dos castillos a la vez (restricción textual).
 
 {{% /details %}}
 
@@ -1718,9 +2034,9 @@ Algunos jugadores pueden ocupar **dos puestos** en la misma temporada (cazador y
 
 Varias especializaciones en un mismo modelo, cadenas de entidades débiles, ternarias con atributos y casos de integración completos.
 
-### Ejercicio 20 · Seguridad bancaria: vigilantes, bandas y atracos
+### Ejercicio 24 · Seguridad bancaria: vigilantes, bandas y atracos
 
-{{< practica num="20" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
+{{< practica num="24" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
 #### Objetivo
 
@@ -1766,7 +2082,7 @@ Un detenido puede pertenecer a **varias bandas** a lo largo del tiempo. ¿Qué a
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej20.svg" alt="ENTIDAD tiene SUCURSAL (débil). SUCURSAL contrata VIGILANTE, que es armado o no armado. DETENIDO pertenece a BANDA, que puede ser subordinada de otra. DETENIDO, SUCURSAL y JUEZ se relacionan en atraco." caption="Ejercicio 20: Seguridad bancaria: vigilantes, bandas y atracos" >}}
+{{< figura src="ud02/ej24.svg" alt="ENTIDAD tiene SUCURSAL (débil). SUCURSAL contrata VIGILANTE, que es armado o no armado. DETENIDO pertenece a BANDA, que puede ser subordinada de otra. DETENIDO, SUCURSAL y JUEZ se relacionan en atraco." caption="Ejercicio 24: Seguridad bancaria: vigilantes, bandas y atracos" >}}
 
 **Decisiones de diseño**
 
@@ -1786,9 +2102,9 @@ Un detenido puede pertenecer a **varias bandas** a lo largo del tiempo. ¿Qué a
 
 ---
 
-### Ejercicio 21 · Club hípico: caballos, boxes y lecciones
+### Ejercicio 25 · Club hípico: caballos, boxes y lecciones
 
-{{< practica num="21" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
+{{< practica num="25" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
 #### Objetivo
 
@@ -1834,7 +2150,7 @@ Un caballo cambia de box con el tiempo y se quiere conservar el **historial de u
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej21.svg" alt="CABALLO se especializa en propio y de socio y tiene genealogía. PABELLÓN tiene BOX (débil), ocupado por un caballo. INSTRUCTOR se especializa en titular y en prácticas. SOCIO, INSTRUCTOR y CABALLO se relacionan en lección." caption="Ejercicio 21: Club hípico: caballos, boxes y lecciones" >}}
+{{< figura src="ud02/ej25.svg" alt="CABALLO se especializa en propio y de socio y tiene genealogía. PABELLÓN tiene BOX (débil), ocupado por un caballo. INSTRUCTOR se especializa en titular y en prácticas. SOCIO, INSTRUCTOR y CABALLO se relacionan en lección." caption="Ejercicio 25: Club hípico: caballos, boxes y lecciones" >}}
 
 **Decisiones de diseño**
 
@@ -1854,9 +2170,9 @@ Un caballo cambia de box con el tiempo y se quiere conservar el **historial de u
 
 ---
 
-### Ejercicio 22 · Hotel-balneario: alojados, habitaciones y tratamientos
+### Ejercicio 26 · Hotel-balneario: alojados, habitaciones y tratamientos
 
-{{< practica num="22" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
+{{< practica num="26" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
 #### Objetivo
 
@@ -1902,7 +2218,7 @@ Una suite puede **reformarse** y pasar a estándar. ¿Es compatible con una espe
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej22.svg" alt="CLIENTE se especializa en alojado o ambulante. PLANTA tiene HABITACIÓN (débil), que es suite o estándar. EMPLEADO puede ser TERAPEUTA, que coordina a otros terapeutas. CLIENTE, TERAPEUTA y TRATAMIENTO se relacionan en presta." caption="Ejercicio 22: Hotel-balneario: alojados, habitaciones y tratamientos" >}}
+{{< figura src="ud02/ej26.svg" alt="CLIENTE se especializa en alojado o ambulante. PLANTA tiene HABITACIÓN (débil), que es suite o estándar. EMPLEADO puede ser TERAPEUTA, que coordina a otros terapeutas. CLIENTE, TERAPEUTA y TRATAMIENTO se relacionan en presta." caption="Ejercicio 26: Hotel-balneario: alojados, habitaciones y tratamientos" >}}
 
 **Decisiones de diseño**
 
@@ -1922,9 +2238,9 @@ Una suite puede **reformarse** y pasar a estándar. ¿Es compatible con una espe
 
 ---
 
-### Ejercicio 23 · Red eléctrica: centrales, nodos y suministro
+### Ejercicio 27 · Red eléctrica: centrales, nodos y suministro
 
-{{< practica num="23" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
+{{< practica num="27" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
 #### Objetivo
 
@@ -1970,7 +2286,7 @@ Las centrales renovables se dividen a su vez en **solares** y **eólicas** con a
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej23.svg" alt="CENTRAL se especializa en hidroeléctrica, térmica y renovable y tiene PARTE (débil). NODO se une a NODO mediante líneas. CENTRAL, COMERCIALIZADORA y ZONA se relacionan en suministro." caption="Ejercicio 23: Red eléctrica: centrales, nodos y suministro" >}}
+{{< figura src="ud02/ej27.svg" alt="CENTRAL se especializa en hidroeléctrica, térmica y renovable y tiene PARTE (débil). NODO se une a NODO mediante líneas. CENTRAL, COMERCIALIZADORA y ZONA se relacionan en suministro." caption="Ejercicio 27: Red eléctrica: centrales, nodos y suministro" >}}
 
 **Decisiones de diseño**
 
@@ -1990,9 +2306,9 @@ Las centrales renovables se dividen a su vez en **solares** y **eólicas** con a
 
 ---
 
-### Ejercicio 24 · Festival de música: ediciones, escenarios y actuaciones
+### Ejercicio 28 · Festival de música: ediciones, escenarios y actuaciones
 
-{{< practica num="24" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
+{{< practica num="28" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
 #### Objetivo
 
@@ -2038,7 +2354,7 @@ Los festivales tienen **patrocinadores** que aportan un importe por edición. A�
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej24.svg" alt="FESTIVAL tiene EDICIÓN (débil). EDICIÓN monta ESCENARIO (débil) y emite ENTRADA (débil). ARTISTA, solista o grupo, actúa en ESCENARIO. ASISTENTE compra ENTRADA." caption="Ejercicio 24: Festival de música: ediciones, escenarios y actuaciones" >}}
+{{< figura src="ud02/ej28.svg" alt="FESTIVAL tiene EDICIÓN (débil). EDICIÓN monta ESCENARIO (débil) y emite ENTRADA (débil). ARTISTA, solista o grupo, actúa en ESCENARIO. ASISTENTE compra ENTRADA." caption="Ejercicio 28: Festival de música: ediciones, escenarios y actuaciones" >}}
 
 **Decisiones de diseño**
 
@@ -2058,9 +2374,82 @@ Los festivales tienen **patrocinadores** que aportan un importe por edición. A�
 
 ---
 
-### Ejercicio 25 · Muestra gastronómica: provincias, platos, restaurantes y vinos
+### Ejercicio 29 · Grupos de supervivientes del apocalipsis zombi
 
-{{< practica num="25" etiqueta="Ejercicio" tipo="Autónoma" duracion="2-3 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
+{{< practica num="29" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + clasificación de la jerarquía + restricciones" >}}
+
+#### Objetivo
+
+Combinar una especialización con atributos propios, un atributo derivado, una entidad débil y una reflexiva sobre la entidad débil.
+
+#### Contexto
+
+Año 2050: tras una invasión zombi, los supervivientes se organizan en grupos y el informático superviviente quiere una base de datos con ellos.
+
+#### Enunciado
+
+> Se necesita almacenar información sobre cada **grupo**, los **integrantes** que lo componen, las **tareas** (proyectos) que realiza y sus **trabajadores**.
+>
+> De los grupos se guarda el identificador, la denominación, la dirección, la provincia y el tipo (recolectores, creadores de munición, atacantes…).
+>
+> Cada grupo está formado por integrantes, de los que se conoce el DNI, el nombre, la dirección, la provincia, la fecha de alta en el grupo, la cuota mensual con que colaboran y la aportación anual (que se obtiene multiplicando la cuota mensual por los meses del año).
+>
+> Los grupos tienen también **trabajadores**. Cada trabajador se identifica por un ID y tiene un nombre y una fecha de ingreso. Los trabajadores son de dos tipos: **mantenidos**, que cobran un sueldo en especie y ocupan un cargo (se guarda la cantidad total que se les ha dado), y **voluntarios**, de los que se guarda la edad, la profesión y las horas que dedican al grupo. Un integrante no puede ser trabajador del grupo.
+>
+> Los grupos realizan **tareas**. Cada tarea se identifica por un número **dentro del grupo** y se guarda en qué zona libre de zombis se realiza y en qué parte de ella, el objetivo y el número de beneficiarios. Una tarea se compone a su vez de **subtareas**, que también son tareas.
+
+#### Tareas
+
+1. Dibuja el diagrama EER en notación de Chen.
+2. Clasifica la especialización de `TRABAJADOR` y justifícala.
+3. Indica qué atributo es derivado y cómo se calcula.
+4. Modela las subtareas y escribe el identificador completo de `TAREA`.
+5. Escribe las restricciones que el diagrama no puede expresar.
+
+#### Comprobación
+
+- [ ] `TRABAJADOR` se especializa en `MANTENIDO` y `VOLUNTARIO` con **T,D**.
+- [ ] `aportación_anual` es derivado (óvalo discontinuo).
+- [ ] `TAREA` es débil de `GRUPO` (etiqueta ID).
+- [ ] *Se compone de* es una reflexiva 1:N sobre `TAREA`.
+
+#### Errores habituales
+
+> [!WARNING]
+> - Crear una entidad `SUBTAREA`: una subtarea es una tarea, se modela con una relación reflexiva.
+> - Guardar la aportación anual: se calcula como `cuota_mensual × 12`.
+> - Poner `edad` y `profesión` en `TRABAJADOR`: solo los tienen los voluntarios.
+
+#### Ampliación
+
+Un integrante puede pertenecer a **varios grupos** con una cuota distinta en cada uno. ¿Qué cambia en la relación *forma parte de*? ¿Dónde van ahora `fecha_alta`, `cuota_mensual` y `aportación_anual`?
+
+{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
+
+{{< figura src="ud02/ej29.svg" alt="INTEGRANTE forma parte de GRUPO. TRABAJADOR trabaja en GRUPO y se especializa (T,D) en MANTENIDO y VOLUNTARIO. GRUPO realiza TAREA (débil). TAREA se compone de TAREA." caption="Ejercicio 29: Grupos de supervivientes del apocalipsis zombi" >}}
+
+**Decisiones de diseño**
+
+- Especialización **total y disjunta**: todo trabajador es mantenido o voluntario, nunca ambos.
+- *Forma parte de* y *trabaja en* son 1:N con `GRUPO`.
+- `TAREA` se identifica por (id del grupo, nº de tarea). *Se compone de* es reflexiva 1:N con los roles *tarea* y *subtarea*.
+- «Un integrante no puede ser trabajador» no se representa en el diagrama: integrantes y trabajadores son entidades distintas con identificadores distintos. Se documenta como restricción textual.
+
+**Supuestos semánticos**
+
+1. Todo integrante pertenece a un grupo: (1,1).
+2. Una subtarea pertenece al mismo grupo que su tarea (restricción textual).
+3. Una persona no puede ser a la vez integrante y trabajador (restricción textual).
+4. Las horas de los voluntarios son un número positivo.
+
+{{% /details %}}
+
+
+---
+
+### Ejercicio 30 · Muestra gastronómica: provincias, platos, restaurantes y vinos
+
+{{< practica num="30" etiqueta="Ejercicio" tipo="Autónoma" duracion="2-3 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
 #### Objetivo
 
@@ -2109,13 +2498,14 @@ Los expertos aconsejan un vino **distinto según la temporada** (invierno o vera
 
 {{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
 
-{{< figura src="ud02/ej25.svg" alt="PROVINCIA tiene LOCALIDAD (débil), que ubica RESTAURANTE (débil) y ofrece VISITA (débil), cultural o industrial. PLATO es típico de LOCALIDAD, RESTAURANTE se especializa en PLATO. BODEGA ofrece VINO y PLATO se aconseja con VINO." caption="Ejercicio 25: Muestra gastronómica: provincias, platos, restaurantes y vinos" >}}
+{{< figura src="ud02/ej30.svg" alt="PROVINCIA tiene LOCALIDAD (débil), que ubica RESTAURANTE (débil) y ofrece VISITA (débil), cultural o industrial. PLATO es típico de LOCALIDAD, RESTAURANTE se especializa en PLATO. BODEGA ofrece VINO y PLATO se aconseja con VINO." caption="Ejercicio 30: Muestra gastronómica: provincias, platos, restaurantes y vinos" >}}
 
 **Decisiones de diseño**
 
 - `PROVINCIA` es propietaria de `LOCALIDAD` (identificador: provincia + nombre) y `LOCALIDAD`, de `RESTAURANTE` y `VISITA`.
 - *Es típico de* (N:M con `variación_local`), *especializado en* (N:M con mínimo 1 para el restaurante) y *aconseja* (N:M) son tres relaciones distintas.
 - Visitas: especialización total y disyunta en culturales (horario) e industriales (contacto y teléfono).
+- Variante del borrador de clase: si interesa saber **qué experto** aconsejó cada vino, se agrega la relación plato–vino y se relaciona la agregación con una entidad `EXPERTO`. Con el enunciado tal como está (un único grupo de expertos), basta la N:M *aconseja*.
 
 **Supuestos semánticos**
 

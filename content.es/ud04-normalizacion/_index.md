@@ -14,4 +14,4 @@ weight: 40
 | [Teoría](/ud04-normalizacion/ud04-teoria) | Anomalías, dependencias funcionales, cierre y claves, 1FN, 2FN, 3FN, FNBC, descomposición sin pérdida y desnormalización |
 | [Prácticas](/ud04-normalizacion/ud04-practicas) | Seis prácticas y la tarea EduGest (informe de normalización y comparación con la solución de referencia) |
 
-**Duración orientativa:** 10 sesiones.
+**Duración:** 14 horas de aula, del 18/11/2026 al 07/12/2026. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.

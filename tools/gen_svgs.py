@@ -3,15 +3,18 @@
 import sys, os
 from multiprocessing import Pool
 sys.path.insert(0, os.path.dirname(__file__))
-import ud02_banco_1, ud02_banco_2
+import ud02_banco
 from chen_eer import draw
 
-OUT = os.path.join(os.path.dirname(__file__), "..", "assets", "images", "ud02")
-ALL = ud02_banco_1.EJS + ud02_banco_2.EJS
+OUT = os.environ.get("UD02_OUT") or os.path.join(os.path.dirname(__file__), "..", "assets", "images", "ud02")
+ALL = ud02_banco.todos()
 
 
 def job(e):
     nodes = len(e["model"].ents) + len(e["model"].rels)
+    if e["model"].pos:
+        p, sz = draw(e["model"], os.path.join(OUT, f"ej{e['n']:02d}.svg"), 1)
+        return e["n"], round(p), [round(x) for x in sz]
     tries = 30 if nodes < 12 else 45
     p, sz = draw(e["model"], os.path.join(OUT, f"ej{e['n']:02d}.svg"), tries)
     return e["n"], round(p), [round(x) for x in sz]

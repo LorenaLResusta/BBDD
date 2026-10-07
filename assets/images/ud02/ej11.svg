@@ -1,65 +1,95 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-214 -211 762 505" width="762" height="505" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
-<title id="t">Universidad: facultades, departamentos y cátedras</title><desc id="d">FACULTAD engloba DEPARTAMENTO. DEPARTAMENTO crea CÁTEDRA (débil). PROFESOR pertenece a DEPARTAMENTO, dirige CÁTEDRA y tutoriza a PROFESOR.</desc>
-<rect x="-214" y="-211" width="762" height="505" rx="10" fill="#0f172a"/>
-<g stroke="#94a3b8" stroke-width="1.6" fill="none"><line x1="-142.2" y1="-112.5" x2="-151.1" y2="-136.9"/><line x1="-110.0" y1="-112.5" x2="-55.3" y2="-159.5"/><line x1="81.1" y1="194.2" x2="81.1" y2="242.2"/><line x1="36.0" y1="194.2" x2="12.5" y2="205.2"/><line x1="368.6" y1="168.5" x2="392.2" y2="179.5"/><line x1="325.4" y1="168.5" x2="329.6" y2="216.3"/><line x1="293.6" y1="168.5" x2="272.3" y2="183.4"/><line x1="355.0" y1="-31.1" x2="381.0" y2="-31.1"/><line x1="307.3" y1="-10.1" x2="334.2" y2="54.3"/><line x1="292.0" y1="-10.1" x2="283.2" y2="18.0"/><line x1="242.2" y1="-10.6" x2="217.8" y2="-1.7"/><line x1="296.8" y1="-52.1" x2="294.5" y2="-78.0"/><line x1="-127.4" y1="-70.5" x2="-97.2" y2="17.9"/><line x1="54.1" y1="152.2" x2="-69.8" y2="55.5"/><line x1="111.4" y1="152.2" x2="184.9" y2="101.5"/><line x1="280.6" y1="128.8" x2="226.7" y2="101.7"/><line x1="282.9" y1="124.2" x2="229.1" y2="97.1"/><line x1="243.1" y1="-52.1" x2="94.3" y2="-108.4"/><line x1="79.6" y1="152.2" x2="62.9" y2="-95.6"/><line x1="326.5" y1="-10.1" x2="409.6" y2="52.4"/><line x1="350.9" y1="126.5" x2="409.9" y2="81.1"/><path d="M314.3 -52.1 Q350.4 -137.1 428.2 -130.8" fill="none"/><path d="M355.0 -45.0 Q397.5 -29.1 447.7 -120.4" fill="none"/></g>
-<rect x="-187.7" y="-112.5" width="106.4" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="5.0" y="152.2" width="152.0" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="273.0" y="126.5" width="101.2" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<rect x="278.0" y="131.5" width="91.2" height="32.0" fill="none" stroke="#38bdf8" stroke-width="2"/>
-<rect x="242.2" y="-52.1" width="112.8" height="42.0" fill="#075985" stroke="#38bdf8" stroke-width="2"/>
-<polygon points="-89.7,13.9 -40.3,39.9 -89.7,65.9 -139.1,39.9" fill="#047857" stroke="#34d399" stroke-width="2"/>
-<polygon points="204.7,61.8 246.7,87.8 204.7,113.8 162.7,87.8" fill="#047857" stroke="#34d399" stroke-width="2"/>
-<polygon points="204.7,68.8 235.4,87.8 204.7,106.8 174.0,87.8" fill="none" stroke="#34d399" stroke-width="2"/>
-<polygon points="61.2,-146.9 124.9,-120.9 61.2,-94.9 -2.5,-120.9" fill="#047857" stroke="#34d399" stroke-width="2"/>
-<polygon points="428.6,40.6 470.6,66.6 428.6,92.6 386.6,66.6" fill="#047857" stroke="#34d399" stroke-width="2"/>
-<polygon points="461.7,-165.0 510.6,-139.0 461.7,-113.0 412.7,-139.0" fill="#047857" stroke="#34d399" stroke-width="2"/>
-<ellipse cx="-156.1" cy="-150.8" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="-39.8" cy="-172.8" rx="49.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="81.1" cy="256.2" rx="67.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="-15.0" cy="218.0" rx="67.8" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="417.7" cy="191.4" rx="48.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="330.8" cy="230.3" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="254.1" cy="196.1" rx="43.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="452.5" cy="-31.1" rx="71.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="339.9" cy="68.1" rx="34.2" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="278.8" cy="31.9" rx="39.3" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="188.9" cy="8.8" rx="43.6" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<ellipse cx="293.3" cy="-92.0" rx="27.0" ry="14.0" fill="#312e81" stroke="#a5b4fc" stroke-width="2"/>
-<rect x="-135.9" y="-51.1" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="-117.7" y="-37.6" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
-<rect x="11.6" y="124.8" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="30.5" y="138.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,N)</text>
-<rect x="117.9" y="126.2" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="136.1" y="139.7" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
-<rect x="236.1" y="104.0" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="255.0" y="117.5" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
-<rect x="196.1" y="-71.8" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="215.0" y="-58.3" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,N)</text>
-<rect x="59.4" y="113.3" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="77.6" y="126.8" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
-<rect x="332.3" y="-1.1" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="350.5" y="12.4" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(1,1)</text>
-<rect x="356.4" y="99.2" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="374.6" y="112.7" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,1)</text>
-<rect x="313.7" y="-93.7" width="36.5" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="331.9" y="-80.2" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,1)</text>
-<rect x="335.7" y="-127.0" width="61.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="366.6" y="-113.5" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">veterano</text>
-<rect x="357.9" y="-52.7" width="37.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="376.8" y="-39.2" font-size="12" fill="#fde68a" text-anchor="middle" font-weight="700">(0,N)</text>
-<rect x="385.5" y="-70.6" width="40.8" height="17" rx="4" fill="#0f172a" opacity="0.92"/><text x="405.8" y="-57.1" font-size="11" fill="#cbd5e1" text-anchor="middle" font-style="italic">novel</text>
-<text x="-134.5" y="-86.5" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">FACULTAD</text>
-<text x="81.1" y="178.2" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">DEPARTAMENTO</text>
-<text x="323.6" y="152.5" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">CÁTEDRA</text>
-<text x="298.6" y="-26.1" font-size="13" font-weight="700" text-anchor="middle" fill="#f8fafc">PROFESOR</text>
-<text x="-89.7" y="44.4" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">engloba</text>
-<text x="204.7" y="92.3" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">crea</text>
-<text x="61.2" y="-116.4" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">pertenece a</text>
-<text x="428.6" y="71.1" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">dirige</text>
-<text x="461.7" y="-134.5" font-size="12" font-weight="700" text-anchor="middle" fill="#f8fafc">tutoriza</text>
-<text x="-156.1" y="-146.8" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
-<text x="-39.8" y="-168.8" font-size="12" text-anchor="middle" fill="#f8fafc">cód_facultad</text>
-<line x1="-77.9" y1="-164.8" x2="-1.6" y2="-164.8" stroke="#f8fafc" stroke-width="1.4"/>
-<text x="81.1" y="260.2" font-size="12" text-anchor="middle" fill="#f8fafc">cód_departamento</text>
-<line x1="24.4" y1="264.2" x2="137.7" y2="264.2" stroke="#f8fafc" stroke-width="1.4"/>
-<text x="-15.0" y="222.0" font-size="12" text-anchor="middle" fill="#f8fafc">área_conocimiento</text>
-<text x="417.7" y="195.4" font-size="12" text-anchor="middle" fill="#f8fafc">presupuesto</text>
-<text x="330.8" y="234.3" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
-<text x="254.1" y="200.1" font-size="12" text-anchor="middle" fill="#f8fafc">nº_cátedra</text>
-<line x1="221.5" y1="204.1" x2="286.7" y2="204.1" stroke="#f8fafc" stroke-width="1.4" stroke-dasharray="4 3"/>
-<text x="452.5" y="-27.1" font-size="12" text-anchor="middle" fill="#f8fafc">fecha_incorporación</text>
-<text x="339.9" y="72.1" font-size="12" text-anchor="middle" fill="#f8fafc">nombre</text>
-<text x="278.8" y="35.9" font-size="12" text-anchor="middle" fill="#f8fafc">categoría</text>
-<text x="188.9" y="12.8" font-size="12" text-anchor="middle" fill="#f8fafc">nº_registro</text>
-<line x1="156.3" y1="16.8" x2="221.5" y2="16.8" stroke="#f8fafc" stroke-width="1.4"/>
-<text x="293.3" y="-88.0" font-size="12" text-anchor="middle" fill="#f8fafc">dni</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="167 -499 791 574" width="791" height="574" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif" xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTo5MGNlYmFiNy03NGRkLTQ1N2MtOGIyOC1iYTMwYTU3MzIyODkAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaGznfLNXU09mXXdUjqrbiB4AAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDpjZmZlY2YxNC04ZjliLTQwNWEtYTc0OS1jMmZiNzI0NzIwN2VscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoqxAWIVrfSOEHR4ImwZMjgwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFgg4RP1uKQq0aOF3q1wRyLZfOn5iSYvPwteGznPZqHqkLmkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaFMiB9cG5IqOYr5uw906nVMAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCDEmhA+Bis/P8PZP+JCEZFDdnz9ZFoMI/WyvZ5FNvY2LmRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBjyZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjkwY2ViYWI3LTc0ZGQtNDU3Yy04YjI4LWJhMzBhNTczMjI4OS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmIwOTlmNGIyLWI1NzAtNGYxZC1iMTA5LTVhMWIwMmFmOWE3Y3JjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDhE/W4pCrRo4XerXBHItl86fmJJi8/C14bOc9moeqQuaJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggdZv4rL0bUGV7bsHR4rZDBg6zlQ1gn12qvXF+nw8bELeiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggoe7SoHPh4UXjVq3MbBkB7lm31PbbkD7+ZOO2580vttJ0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQB0/hgI7w8xw1JOBuRks5F6xkAVy2xII/DIy4PFjexnoOap1mEuVGZLs8t3InMMSjRJW94GN/7urHRc6aNvHXhc=</c2pa:manifest></metadata>
+<title id="t">Casas rurales: provincias, ciudades y habitaciones</title><desc id="d">PROVINCIA tiene CIUDAD (débil). CASA_RURAL está en CIUDAD (N:1). CASA_RURAL tiene HABITACIÓN (débil). CLIENTE se aloja en HABITACIÓN (N:M con fechas).</desc>
+<rect x="167" y="-499" width="791" height="574" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+<g stroke="#1f2937" stroke-width="1.4" fill="none"><line x1="792.5" y1="-380.8" x2="801.3" y2="-356.4"/><line x1="777.2" y1="-422.8" x2="768.3" y2="-447.2"/><line x1="842.1" y1="-422.6" x2="866.5" y2="-431.5"/><line x1="442.7" y1="-379.7" x2="417.6" y2="-386.4"/><line x1="491.7" y1="-388.5" x2="496.2" y2="-414.1"/><line x1="661.1" y1="-170.6" x2="677.2" y2="-127.8"/><line x1="628.1" y1="-170.6" x2="608.2" y2="-153.9"/><line x1="653.2" y1="-212.6" x2="653.2" y2="-238.6"/><line x1="347.8" y1="-189.2" x2="336.8" y2="-165.6"/><line x1="295.6" y1="-226.8" x2="270.5" y2="-233.5"/><line x1="359.4" y1="-231.2" x2="361.7" y2="-257.1"/><line x1="825.6" y1="-15.1" x2="851.2" y2="-10.6"/><line x1="782.5" y1="-2.4" x2="787.3" y2="23.1"/><line x1="748.5" y1="-2.4" x2="727.2" y2="12.5"/><line x1="782.2" y1="-44.4" x2="786.7" y2="-70.0"/><line x1="550.4" y1="-58.7" x2="586.7" y2="16.6"/><line x1="533.4" y1="-56.8" x2="520.7" y2="-29.4"/><line x1="687.4" y1="-353.6" x2="742.4" y2="-380.8"/><line x1="619.9" y1="-345.8" x2="533.3" y2="-360.1"/><line x1="835.9" y1="-187.1" x2="717.4" y2="-190.0"/><line x1="789.4" y1="-236.7" x2="533.3" y2="-347.9"/><line x1="538.0" y1="-215.3" x2="588.9" y2="-204.8"/><line x1="470.2" y1="-219.6" x2="419.6" y2="-215.3"/><line x1="573.3" y1="-61.9" x2="731.4" y2="-32.2"/><line x1="511.1" y1="-89.4" x2="384.3" y2="-189.2"/></g>
+<rect x="727.6" y="-422.8" width="114.5" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="442.7" y="-388.5" width="90.6" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="446.7" y="-384.5" width="82.6" height="34.0" fill="none" stroke="#111111" stroke-width="1.4"/>
+<rect x="588.9" y="-212.6" width="128.5" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="295.6" y="-231.2" width="123.9" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="299.6" y="-227.2" width="115.9" height="34.0" fill="none" stroke="#111111" stroke-width="1.4"/>
+<rect x="731.4" y="-44.4" width="94.2" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<polygon points="687.4,-353.6 651.3,-370.5 656.1,-328.8" fill="#ffffff" stroke="none"/>
+<polygon points="619.9,-345.8 651.3,-370.5 656.1,-328.8" fill="#111111" stroke="none"/>
+<polygon points="687.4,-353.6 651.3,-370.5 619.9,-345.8 656.1,-328.8" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="651.3" y1="-370.5" x2="656.1" y2="-328.8" stroke="#111111" stroke-width="1"/>
+<polygon points="835.9,-187.1 828.0,-226.3 797.3,-197.5" fill="#111111" stroke="none"/>
+<polygon points="789.4,-236.7 828.0,-226.3 797.3,-197.5" fill="#ffffff" stroke="none"/>
+<polygon points="835.9,-187.1 828.0,-226.3 789.4,-236.7 797.3,-197.5" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="828.0" y1="-226.3" x2="797.3" y2="-197.5" stroke="#111111" stroke-width="1"/>
+<polygon points="538.0,-215.3 505.4,-238.4 502.8,-196.5" fill="#ffffff" stroke="none"/>
+<polygon points="470.2,-219.6 505.4,-238.4 502.8,-196.5" fill="#111111" stroke="none"/>
+<polygon points="538.0,-215.3 505.4,-238.4 470.2,-219.6 502.8,-196.5" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="505.4" y1="-238.4" x2="502.8" y2="-196.5" stroke="#111111" stroke-width="1"/>
+<polygon points="573.3,-61.9 550.7,-94.8 533.7,-56.5" fill="#111111" stroke="none"/>
+<polygon points="511.1,-89.4 550.7,-94.8 533.7,-56.5" fill="#111111" stroke="none"/>
+<polygon points="573.3,-61.9 550.7,-94.8 511.1,-89.4 533.7,-56.5" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="550.7" y1="-94.8" x2="533.7" y2="-56.5" stroke="#111111" stroke-width="1"/>
+<ellipse cx="806.4" cy="-342.5" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="763.3" cy="-461.0" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="894.2" cy="-441.6" rx="40.1" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="384.4" cy="-395.3" rx="43.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="498.7" cy="-428.1" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="682.4" cy="-113.9" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="592.5" cy="-140.7" rx="45.9" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="653.2" cy="-252.6" rx="40.1" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="330.4" cy="-151.8" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="236.3" cy="-242.7" rx="45.3" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="362.9" cy="-271.1" rx="29.5" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="885.7" cy="-4.5" rx="38.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="789.9" cy="37.1" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="709.8" cy="24.7" rx="35.7" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="789.2" cy="-83.9" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="593.4" cy="30.5" rx="48.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="514.2" cy="-15.5" rx="54.1" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<rect x="701.1" y="-378.4" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="719.3" y="-364.9" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="697.5" y="-340.7" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="542.0" y="-364.5" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="560.9" y="-351.0" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,N)</text>
+<text x="609.8" y="-350.7" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="547.1" y="-378.1" font-size="11" font-weight="700" fill="#111111" text-anchor="middle">ID</text>
+<rect x="726.5" y="-198.3" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="745.4" y="-184.8" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="834.8" y="-169.7" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="540.8" y="-345.7" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="559.0" y="-332.2" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="790.5" y="-246.1" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="549.3" y="-218.2" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="567.5" y="-204.7" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="546.4" y="-200.8" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="421.9" y="-226.1" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="440.8" y="-212.6" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,N)</text>
+<text x="461.8" y="-226.1" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="427.5" y="-236.1" font-size="11" font-weight="700" fill="#111111" text-anchor="middle">ID</text>
+<rect x="685.0" y="-46.4" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="703.9" y="-32.9" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="577.5" y="-45.1" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="387.4" y="-180.9" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="406.3" y="-167.4" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="507.0" y="-98.2" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="784.8" y="-396.8" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">PROVINCIA</text>
+<text x="488.0" y="-362.5" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">CIUDAD</text>
+<text x="653.2" y="-186.6" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">CASA_RURAL</text>
+<text x="357.6" y="-205.2" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">HABITACIÓN</text>
+<text x="778.5" y="-18.4" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">CLIENTE</text>
+<text x="649.8" y="-379.0" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">está situada</text>
+<text x="840.5" y="-233.5" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">está en</text>
+<text x="506.2" y="-246.9" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">dispone de</text>
+<text x="556.4" y="-103.0" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">se aloja</text>
+<text x="806.4" y="-338.5" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<line x1="783.2" y1="-334.5" x2="829.6" y2="-334.5" stroke="#111111" stroke-width="1.3"/>
+<text x="763.3" y="-457.0" font-size="12" text-anchor="middle" fill="#111111">área</text>
+<text x="894.2" y="-437.6" font-size="12" text-anchor="middle" fill="#111111">población</text>
+<text x="384.4" y="-391.3" font-size="12" text-anchor="middle" fill="#111111">habitantes</text>
+<text x="498.7" y="-424.1" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<line x1="475.5" y1="-420.1" x2="521.8" y2="-420.1" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
+<text x="682.4" y="-109.9" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<line x1="659.2" y1="-105.9" x2="705.6" y2="-105.9" stroke="#111111" stroke-width="1.3"/>
+<text x="592.5" y="-136.7" font-size="12" text-anchor="middle" fill="#111111">localización</text>
+<text x="653.2" y="-248.6" font-size="12" text-anchor="middle" fill="#111111">desayuno</text>
+<text x="330.4" y="-147.8" font-size="12" text-anchor="middle" fill="#111111">número</text>
+<line x1="307.3" y1="-143.8" x2="353.6" y2="-143.8" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
+<text x="236.3" y="-238.7" font-size="12" text-anchor="middle" fill="#111111">descripción</text>
+<text x="362.9" y="-267.1" font-size="12" text-anchor="middle" fill="#111111">precio</text>
+<text x="885.7" y="-0.5" font-size="12" text-anchor="middle" fill="#111111">dirección</text>
+<text x="789.9" y="41.1" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="709.8" y="28.7" font-size="12" text-anchor="middle" fill="#111111">teléfono</text>
+<text x="789.2" y="-79.9" font-size="12" text-anchor="middle" fill="#111111">dni</text>
+<line x1="779.9" y1="-75.9" x2="798.5" y2="-75.9" stroke="#111111" stroke-width="1.3"/>
+<text x="593.4" y="34.5" font-size="12" text-anchor="middle" fill="#111111">fecha_salida</text>
+<text x="514.2" y="-11.5" font-size="12" text-anchor="middle" fill="#111111">fecha_entrada</text>
+<line x1="471.1" y1="-7.5" x2="557.3" y2="-7.5" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
 </svg>

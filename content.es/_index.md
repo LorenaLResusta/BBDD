@@ -10,7 +10,7 @@ Apuntes del módulo profesional **0484. Bases de datos**, común a los ciclos fo
 | Característica | Valor |
 |---|---|
 | **Referencia curricular** | Real Decreto 405/2023, de 29 de mayo (actualiza los títulos de DAM y DAW) |
-| **Duración (enseñanzas mínimas)** | 105 horas · 12 créditos ECTS |
+| **Duración** | 105 horas (enseñanzas mínimas) · 12 créditos ECTS · 160 horas de aula en el centro |
 | **Resultados de aprendizaje** | 7 (RA1 a RA7) con 57 criterios de evaluación |
 | **SGBD relacional** | Oracle AI Database 26ai Free (23.26) |
 | **SGBD no relacional** | MongoDB Community Server 8.0 |
@@ -34,6 +34,51 @@ flowchart LR
     C -.comparación.-> I[NoSQL<br/>UD10]
     H -.-> I
 ```
+
+## Guía didáctica del curso 2026/27
+
+El módulo se imparte con una carga de **160 horas de aula** (5 horas semanales, una por día lectivo) entre el **9 de septiembre de 2026** y el **18 de junio de 2027**. Las horas se reparten en tres evaluaciones y se han ajustado al calendario escolar y a las fechas de pruebas y de Formación en Empresa (FE) comunicadas por el centro.
+
+> [!NOTE]
+> Las enseñanzas mínimas del RD 405/2023 fijan 105 horas para el módulo. Las 160 horas son las de **horario del centro**; el exceso sobre el mínimo se dedica a la práctica guiada, al proyecto EduGest y al refuerzo. Todos los criterios de evaluación se cubren en las unidades; el reparto de horas es orientativo y puede ajustarse a cada grupo.
+
+{{< calendario >}}
+
+### Reparto de horas por evaluación
+
+| Evaluación | Unidad | Horas | Del | Al | RA principal |
+|---|---|:-:|---|---|---|
+| **1ª** (65 h) | UD01 · Sistemas de almacenamiento y SGBD | 12 | 09/09/2026 | 24/09/2026 | RA1 |
+| | UD02 · Modelo Entidad/Relación | 19 | 25/09/2026 | 23/10/2026 | RA6 |
+| | UD03 · Modelo relacional | 17 | 26/10/2026 | 17/11/2026 | RA6 · RA2 |
+| | UD04 · Normalización | 14 | 18/11/2026 | 07/12/2026 | RA6 |
+| | Prueba y revisión de la 1ª evaluación | 3 | 09/12/2026 | 11/12/2026 | |
+| **2ª** (43 h) | UD05 · Definición y control de datos | 17 | 14/12/2026 | 21/01/2027 | RA2 |
+| | UD06 · Consultas sobre una tabla | 23 | 22/01/2027 | 23/02/2027 | RA3 · RA5 |
+| | Prueba y revisión de la 2ª evaluación | 3 | 24/02/2027 | 26/02/2027 | |
+| **3ª** (52 h) | UD07 · Consultas avanzadas | 17 | 01/03/2027 | 24/03/2027 | RA3 |
+| | *Pascua y Formación en Empresa (abril)* | | 25/03/2027 | 30/04/2027 | |
+| | UD08 · DML, transacciones y concurrencia | 9 | 03/05/2027 | 13/05/2027 | RA4 |
+| | UD09 · Programación con PL/SQL | 11 | 14/05/2027 | 28/05/2027 | RA5 |
+| | UD10 · Bases de datos NoSQL | 7 | 31/05/2027 | 08/06/2027 | RA7 |
+| | Prueba y revisión de la 3ª evaluación y final | 3 | 09/06/2027 | 11/06/2027 | |
+| | Refuerzo, recuperación y margen | 5 | 14/06/2027 | 18/06/2027 | |
+| | **Total** | **160** | | | |
+
+La evaluación extraordinaria está prevista para el **21 de junio de 2027**.
+
+### Criterios de la planificación
+
+- **Teoría y práctica en la misma unidad.** Cada unidad indica en su página de teoría una *temporalización* con el reparto de sesiones entre teoría (T) y práctica (P). La suma de horas de cada unidad coincide con la de esta tabla.
+- **Práctica guiada en el aula, práctica autónoma fuera de ella.** Las prácticas guiadas y la tarea del proyecto EduGest se hacen en clase. Las prácticas autónomas, los retos y las ampliaciones son trabajo personal, y el profesorado resuelve las dudas en las sesiones de práctica.
+- **Pruebas de evaluación.** Cada evaluación reserva 3 horas a la prueba y a su revisión, en la semana indicada por el centro para los ciclos de grado superior.
+- **Un día lectivo equivale a una hora.** Los festivos y los días sin docencia no cuentan. El tiempo previsto para el refuerzo final absorbe los días que se pierdan por fiestas locales o actividades del centro.
+
+> [!WARNING]
+> **Abril y la Formación en Empresa.** Se ha previsto que el alumnado esté en FE durante todo abril, por lo que **no se programa docencia** entre el 6 y el 30 de abril. Si algún alumno o grupo permanece en el centro, ese mes aporta 19 horas adicionales, que se dedicarían a ampliar la práctica de las unidades UD07 a UD10 (consultas avanzadas, transacciones, PL/SQL y NoSQL), las más cortas del curso respecto a su dificultad.
+
+> [!CAUTION]
+> **Calendario provisional.** Las fechas proceden del calendario escolar provisional 2026/27 y de las fechas de evaluación comunicadas por el centro. Los festivos locales y los tres días no lectivos que fije el centro **no están descontados**: se resolverán con la semana de refuerzo. Cuando se publique el calendario definitivo debe revisarse el archivo `data/planificacion.json`; la tabla y el calendario se actualizan solos y la compilación falla si las horas de una unidad dejan de sumar.
 
 ## Unidades didácticas
 

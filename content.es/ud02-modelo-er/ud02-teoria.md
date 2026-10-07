@@ -17,6 +17,32 @@ Su objetivo prioritario es modelar y estructurar la semántica de la informació
 
 {{< ra "RA6:a,d,e,h" >}}
 
+### Temporalización
+
+La unidad ocupa **19 horas de aula** (12 de teoría y 7 de práctica). Cada sesión aparece señalada en la página con una franja de color.
+
+{{< sesiones unidad="UD02" horas="19" >}}
+items:
+  - {h: 2, tipo: T, t: "Ciclo de vida del diseño. Entidades fuertes y débiles", ref: "§1 y §2.1"}
+  - {h: 2, tipo: T, t: "Atributos y relaciones: grado y roles", ref: "§2.2 y §2.3"}
+  - {h: 2, tipo: T, t: "Cardinalidades mínima y máxima", ref: "§2.4 · laboratorio interactivo"}
+  - {h: 1, tipo: P, t: "Leer y escribir cardinalidades", ref: "Práctica 2.2"}
+  - {h: 2, tipo: P, t: "Biblioteca municipal: del enunciado al diagrama", ref: "Práctica 2.1"}
+  - {h: 2, tipo: T, t: "Restricciones avanzadas y jerarquías EER", ref: "§3, §4.1 y §4.2 · clasificador interactivo"}
+  - {h: 2, tipo: T, t: "Agregación y relaciones ternarias", ref: "§4.3 y §4.4"}
+  - {h: 1, tipo: T, t: "Metodología en cinco pasos y ejemplos resueltos", ref: "§5 y §6"}
+  - {h: 1, tipo: T, t: "Notaciones y herramientas de modelado", ref: "§7"}
+  - {h: 2, tipo: P, t: "Plataforma de streaming", ref: "Práctica 2.3"}
+  - {h: 2, tipo: P, t: "Modelo conceptual de EduGest", ref: "§8 y proyecto EduGest-2"}
+autonomo:
+  - "Práctica 2.4 (clínica veterinaria con jerarquías)"
+  - "Retos 2.5 y 2.6"
+  - "Banco de ejercicios (30 enunciados)"
+{{< /sesiones >}}
+
+> [!NOTE]
+> **Cómo se estudia esta unidad.** Cada sesión de teoría termina con una pequeña comprobación o un laboratorio interactivo. Úsalos **antes** de pasar a las prácticas: si no puedes explicar por qué sale un resultado, vuelve a leer el apartado.
+
 ### Objetivos de aprendizaje
 
 Al terminar esta unidad serás capaz de:
@@ -32,6 +58,8 @@ Al terminar esta unidad serás capaz de:
 
 ---
 
+
+{{< sesion n="1" h="2" tipo="t" >}}Ciclo de vida del diseño y entidades{{< /sesion >}}
 
 ## 1. Etapas en el Análisis y Diseño de Datos
 
@@ -89,7 +117,20 @@ Una **entidad** es cualquier objeto, persona, lugar, concepto abstracto o evento
 > **Ejemplo de Entidad Débil:**
 > La entidad `EJEMPLAR` respecto a la entidad fuerte `LIBRO`. La biblioteca posee la obra intelectual "Don Quijote de la Mancha" (`LIBRO` fuerte), pero físicamente dispone de 5 copias en la estantería (`EJEMPLAR` débil). Si la obra deja de prestarse y se borra de la base de datos, todos sus ejemplares físicos asociados desaparecen automáticamente.
 
+{{< quiz >}}
+- q: "En EduGest, ¿cuál de estas opciones debe modelarse como **entidad** y no como atributo?"
+  options: ["El turno (M/T)", "El módulo profesional", "El curso académico (2025-26)", "La nota final"]
+  answer: 1
+  explain: "Un módulo tiene propiedades propias (código, nombre, horas) y muchas instancias. El turno y el curso son **valores**, y la nota depende de la pareja alumno-módulo."
+- q: "Si se borra un `LIBRO`, desaparecen sus `EJEMPLAR`. ¿Qué dependencia describe esto?"
+  options: ["Dependencia de existencia", "Dependencia de identificación", "Herencia", "Agregación"]
+  answer: 0
+  explain: "Las filas dependientes carecen de sentido sin la fila fuerte: es dependencia de **existencia**. La de identificación exige, además, que la clave del débil incluya la del fuerte."
+{{< /quiz >}}
+
 ---
+
+{{< sesion n="2" h="2" tipo="t" >}}Atributos y relaciones{{< /sesion >}}
 
 ### 2.2 Atributos: Clasificación, Estructura y Dominio
 
@@ -117,6 +158,10 @@ El **dominio** de un atributo es el conjunto de todos los valores atómicos vál
 6. **Atributo Derivado (Calculado):**
    Atributo cuyo valor no se almacena físicamente, sino que se calcula dinámicamente a partir de otros atributos guardados en la base de datos (ej. el atributo `edad` se calcula restando la `fecha_nacimiento` de la fecha actual). Se representa con una **elipse discontinua**.
 
+{{% details title="Pista: ¿atributo multivaluado o entidad?" %}}
+Si de cada valor necesitas guardar **información propia** (de un teléfono, su tipo o si es el principal; de una dirección, su fecha de alta), ya no es un simple atributo multivaluado: es una **entidad débil** relacionada con la original. Un multivaluado solo sirve cuando cada valor es un dato aislado.
+{{% /details %}}
+
 ---
 
 ### 2.3 Relaciones: Grado, Semántica y Nombres de Rol
@@ -133,6 +178,8 @@ El **grado** indica el número de entidades distintas que participan en la asoci
 - **Grado 3 — Relación Ternaria:** Asocia simultáneamente tres entidades distintas (ej. `PROFESOR`, `ASIGNATURA` y `GRUPO` en la relación `IMPARTE`).
 
 ---
+
+{{< sesion n="3" h="2" tipo="t" >}}Cardinalidades mínima y máxima{{< /sesion >}}
 
 ### 2.4 Restricciones de Cardinalidad (Mínima y Máxima)
 
@@ -160,12 +207,38 @@ ENTIDAD_A ──────(min_a, max_a)────── < RELACIÓN > ─�
 > **Regla Mnemotécnica de Lectura de Cardinalidades:**
 > Para determinar la cardinalidad de la `ENTIDAD_A` respecto a la `ENTIDAD_B` en la relación `R`, nos formulamos dos preguntas situándonos mentalmente en una instancia de `ENTIDAD_A`:
 >
-> 1. *¿Con cuántas instancias de `ENTIDAD_B` puede asociarse como MÍNIMO una instancia de `ENTIDAD_A`?* $
-ightarrow Cardinalidad\_Mínima$.
-> 2. *¿Con cuántas instancias de `ENTIDAD_B` puede asociarse como MÁXIMO una instancia de `ENTIDAD_A`?* $
-ightarrow Cardinalidad\_Máxima$.
+> 1. *¿Con cuántas instancias de `ENTIDAD_B` puede asociarse como MÍNIMO una instancia de `ENTIDAD_A`?* $\rightarrow$ **Cardinalidad mínima**.
+> 2. *¿Con cuántas instancias de `ENTIDAD_B` puede asociarse como MÁXIMO una instancia de `ENTIDAD_A`?* $\rightarrow$ **Cardinalidad máxima**.
+
+> [!WARNING]
+> **El error más común del tema: leer la cardinalidad al revés.** Un mismo par $(mín, máx)$ puede ir junto a una entidad o junto a la opuesta según el libro o la herramienta (ver apartado 7.1). Antes de interpretar un diagrama, **traduce siempre a una frase**: «cada ... se relaciona con ... instancias de ...».
+
+#### Laboratorio: lee y construye cardinalidades
+
+Cambia los valores y observa cómo se transforman el diagrama, las frases, el tipo de relación y la sintaxis de Mermaid.
+
+{{< er-lectura >}}
+
+{{< quiz >}}
+- q: "En `TRABAJA_EN`, cada empleado está en exactamente 1 departamento y cada departamento tiene 0 o muchos empleados. ¿De qué tipo es la relación?"
+  options: ["1:1", "1:N con DEPARTAMENTO en el lado «1»", "1:N con EMPLEADO en el lado «1»", "N:M"]
+  answer: 1
+  explain: "Muchos empleados comparten un único departamento: el lado «1» es DEPARTAMENTO y el lado «N», EMPLEADO. La clave ajena irá a EMPLEADO (UD03)."
+- q: "En pata de gallo, ¿qué símbolo junto a `ALUMNO` expresa «un grupo tiene cero o muchos alumnos»?"
+  options: ["`||`", "`|o`", "`o{`", "`|{`"]
+  answer: 2
+  explain: "El círculo indica mínimo cero y la pata de gallo máximo muchos. El símbolo junto a una entidad cuenta **cuántas instancias de esa entidad** se asocian a una de la otra."
+{{< /quiz >}}
+
+{{< sesion n="4" h="1" tipo="p" practica="2.2" >}}Leer y escribir cardinalidades{{< /sesion >}}
+
+{{< sesion n="5" h="2" tipo="p" practica="2.1" >}}Biblioteca municipal: del enunciado al diagrama{{< /sesion >}}
+
+Las sesiones 4 y 5 se hacen con las [prácticas de la unidad](/ud02-modelo-er/ud02-practicas). Llévalas preparadas: tienes que haber leído hasta aquí y haber probado el laboratorio.
 
 ---
+
+{{< sesion n="6" h="2" tipo="t" >}}Restricciones avanzadas y jerarquías EER{{< /sesion >}}
 
 ## 3. Restricciones Avanzadas sobre Relaciones
 
@@ -232,7 +305,22 @@ Atendiendo a las reglas de pertenencia de las instancias del supertipo a los sub
    - *Ejemplo:* La entidad `EMPLEADO` especializada en `PROGRAMADOR` y `DIRECTOR` (un empleado puede ser solo programador, o simultáneamente programador y director).
 4. **Total y Solapada $(T, S)$:** Toda instancia debe pertenecer al menos a un subtipo y puede estar en **múltiples** simultáneamente.
 
+#### Laboratorio: ¿qué jerarquía es?
+
+Fija las reglas (cobertura y solapamiento) y marca a qué subtipos pertenece cada empleado: la tabla te dirá quién incumple la jerarquía y qué estrategias de transformación son válidas.
+
+{{< jerarquia >}}
+
+{{< quiz >}}
+- q: "¿Qué estrategia de transformación **no** es válida para una jerarquía parcial y solapada?"
+  options: ["Tabla del supertipo y una tabla por subtipo", "Tabla única con una marca por subtipo", "Solo tablas de los subtipos", "Las tres son válidas"]
+  answer: 2
+  explain: "Con cobertura parcial hay instancias del supertipo sin subtipo, que no tendrían tabla donde guardarse. Solo se admite «solo subtipos» si la jerarquía es **total y disjunta**."
+{{< /quiz >}}
+
 ---
+
+{{< sesion n="7" h="2" tipo="t" >}}Agregación y relaciones ternarias{{< /sesion >}}
 
 ### 4.3 Agregación: Modelado de Asociaciones como Entidades
 
@@ -249,6 +337,9 @@ Cuando se intenta modelar una situación donde una relación solo tiene sentido 
 > Consideremos la relación `CASADO_CON` entre las entidades `HOMBRE` y `MUJER`. Un matrimonio civil requiere ser registrado en un `JUZGADO`. No todas las parejas se casan por lo civil (algunas lo hacen por la iglesia). Si creáramos una relación ternaria entre `HOMBRE`, `MUJER` y `JUZGADO`, obligaríamos erróneamente a que *todos* los matrimonios registraran un juzgado.
 > **Solución con Agregación:** Encapsulamos la relación `CASADO_CON` dentro de una caja de **Entidad Agregada** llamada `MATRIMONIO`. Posteriormente, relacionamos la entidad agregada `MATRIMONIO` con la entidad `JUZGADO` mediante la relación opcional `REGISTRADO_EN`.
 
+> [!TIP]
+> **¿Agregación o ternaria?** Pregúntate: *¿puede existir la relación entre las dos primeras entidades sin que intervenga la tercera?* Si la respuesta es sí (no todos los matrimonios se registran en un juzgado), necesitas **agregación**. Si los tres participantes son siempre indisolubles en el hecho que registras (qué profesor imparte qué módulo a qué grupo), es una **ternaria**.
+
 ---
 
 ### 4.4 Relaciones Ternarias y Análisis Formal de Cardinalidad
@@ -259,8 +350,7 @@ Una **relación ternaria** asocia tres entidades de forma indivisible. Para dete
 
 Fijamos una instancia de $A$ y una instancia de $B$ simultáneamente, y nos preguntamos:
 
-- *¿Con cuántas instancias de $C$ se puede asociar la pareja $(A, B)$ como mínimo y como máximo?* $
-ightarrow (min, max)$ sobre $C$.
+- *¿Con cuántas instancias de $C$ se puede asociar la pareja $(A, B)$ como mínimo y como máximo?* $\rightarrow$ par $(min, max)$ sobre $C$.
 
 #### Clasificación por Conectividad Máxima
 
@@ -277,6 +367,8 @@ ightarrow (min, max)$ sobre $C$.
    Cualquier combinación de parejas de dos entidades puede asociarse con **múltiples** instancias de la tercera entidad libre.
 
 ---
+
+{{< sesion n="8" h="1" tipo="t" >}}Metodología en cinco pasos y ejemplos resueltos{{< /sesion >}}
 
 ## 5. Fases en la Construcción del Esquema Conceptual
 
@@ -381,6 +473,8 @@ Un congreso científico necesita organizar sus actividades. Se registran los `PA
 
 ---
 
+{{< sesion n="9" h="1" tipo="t" >}}Notaciones y herramientas de modelado{{< /sesion >}}
+
 ## 7. Notaciones y Herramientas de Modelado
 
 El modelo E/R es **uno**, pero hay varias formas de dibujarlo. Es importante reconocerlas porque cada herramienta usa la suya (RA6.a).
@@ -436,6 +530,10 @@ erDiagram
 > Una herramienta gráfica **no diseña por ti**. Primero razona entidades, relaciones y cardinalidades sobre el enunciado; después pásalo a la herramienta. Guarda el fichero fuente (`.drawio`, `.dmd`, `.md`) en el repositorio además de la imagen exportada.
 
 ---
+
+{{< sesion n="10" h="2" tipo="p" practica="2.3" >}}Plataforma de streaming{{< /sesion >}}
+
+{{< sesion n="11" h="2" tipo="p" practica="EduGest-2" >}}Modelo conceptual de EduGest{{< /sesion >}}
 
 ## 8. Caso Guiado: el Modelo E/R de EduGest
 
