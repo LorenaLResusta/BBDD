@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 560" width="820" height="560" role="img" aria-labelledby="t d" font-family='system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'>
+<title id="t">Arquitectura ANSI/SPARC de tres niveles</title><desc id="d">Nivel externo (vistas), conceptual (esquema global) e interno (almacenamiento).</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e293b"/></linearGradient></defs>
+<style>.hot{cursor:pointer;transition:filter .15s}.hot:hover,.hot:focus,.hot.on{filter:brightness(1.35) drop-shadow(0 0 6px rgba(255,255,255,.35));outline:none}</style>
+<rect width="820" height="560" rx="12" fill="url(#bg)"/>
+<text x="410.0" y="40.0" font-size="21" fill="#f1f5f9" text-anchor="middle" font-weight="700">Arquitectura ANSI/SPARC de tres niveles</text>
+<g class="hot" tabindex="0" data-tip="Cada grupo de usuarios ve solo lo que necesita (vistas, permisos).">
+<rect x="34.0" y="70.0" width="752.0" height="100.0" rx="12" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+<text x="410.0" y="98.0" font-size="16" fill="#38bdf8" text-anchor="middle" font-weight="700">NIVEL EXTERNO · vistas de usuario</text>
+<rect x="54.0" y="114.0" width="228.0" height="44.0" rx="6" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+<text x="168.0" y="140.6" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">Vista de recepción</text>
+<rect x="296.0" y="114.0" width="228.0" height="44.0" rx="6" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+<text x="410.0" y="140.6" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">Vista de contabilidad</text>
+<rect x="538.0" y="114.0" width="228.0" height="44.0" rx="6" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+<text x="652.0" y="140.6" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">Vista de dirección / BI</text>
+</g>
+<g class="hot" tabindex="0" data-tip="Describe QUÉ datos hay y cómo se relacionan, sin detalles de almacenamiento.">
+<rect x="34.0" y="230.0" width="752.0" height="100.0" rx="12" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+<text x="410.0" y="258.0" font-size="16" fill="#34d399" text-anchor="middle" font-weight="700">NIVEL CONCEPTUAL · esquema global</text>
+<rect x="54.0" y="274.0" width="712.0" height="44.0" rx="6" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<text x="410.0" y="300.6" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">Tablas, relaciones, claves y restricciones de integridad</text>
+</g>
+<g class="hot" tabindex="0" data-tip="Describe CÓMO se guardan los datos en disco.">
+<rect x="34.0" y="390.0" width="752.0" height="100.0" rx="12" fill="#1e293b" stroke="#a78bfa" stroke-width="2"/>
+<text x="410.0" y="418.0" font-size="16" fill="#a78bfa" text-anchor="middle" font-weight="700">NIVEL INTERNO · almacenamiento físico</text>
+<rect x="54.0" y="434.0" width="712.0" height="44.0" rx="6" fill="#6d28d9" stroke="#a78bfa" stroke-width="2"/>
+<text x="410.0" y="460.6" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">Ficheros, páginas de disco, índices B-tree, cifrado y compresión</text>
+</g>
+<line x1="410.0" y1="170.0" x2="410.0" y2="228.0" stroke="#38bdf8" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="424.0" y="204.0" font-size="12.5" fill="#38bdf8" text-anchor="start" font-style="italic">Transformación lógica (vistas)</text>
+<line x1="410.0" y1="330.0" x2="410.0" y2="388.0" stroke="#34d399" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="424.0" y="364.0" font-size="12.5" fill="#34d399" text-anchor="start" font-style="italic">Transformación física (acceso a disco)</text>
+<rect x="34.0" y="502.0" width="752.0" height="44.0" rx="8" fill="#0f172a"/>
+<text x="410.0" y="530.0" font-size="12.5" fill="#f1f5f9" text-anchor="middle">Independencia lógica (externo ↔ conceptual) e independencia física (conceptual ↔ interno).</text>
+</svg>

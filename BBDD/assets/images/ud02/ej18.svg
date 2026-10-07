@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-173 -806 1045 769" width="1045" height="769" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
+<title id="t">Red de gimnasios: salas, reservas y entrenadores</title><desc id="d">GIMNASIO dispone de SALA (débil). SOCIO se inscribe en GIMNASIO y reserva SALA. ENTRENADOR trabaja en GIMNASIO, diseña rutinas para SOCIO y es dirigido por otro ENTRENADOR.</desc>
+<rect x="-173" y="-806" width="1045" height="769" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+<g stroke="#1f2937" stroke-width="1.4" fill="none"><line x1="467.9" y1="-388.5" x2="487.7" y2="-385.3"/><line x1="429.8" y1="-376.3" x2="455.9" y2="-342.4"/><line x1="403.8" y1="-376.3" x2="392.8" y2="-352.8"/><line x1="368.6" y1="-418.3" x2="345.0" y2="-429.3"/><line x1="421.2" y1="-418.3" x2="430.1" y2="-442.8"/><line x1="757.9" y1="-340.9" x2="782.3" y2="-332.0"/><line x1="715.9" y1="-335.2" x2="715.9" y2="-309.2"/><line x1="736.9" y1="-377.2" x2="755.3" y2="-395.6"/><line x1="65.3" y1="-151.8" x2="88.8" y2="-140.8"/><line x1="42.6" y1="-150.4" x2="100.5" y2="-87.4"/><line x1="29.1" y1="-150.4" x2="35.8" y2="-126.4"/><line x1="5.6" y1="-150.4" x2="-25.2" y2="-113.6"/><line x1="-18.7" y1="-186.7" x2="-43.2" y2="-195.6"/><line x1="8.5" y1="-192.4" x2="-19.0" y2="-231.7"/><line x1="202.9" y1="-685.7" x2="207.4" y2="-660.1"/><line x1="152.6" y1="-727.7" x2="140.5" y2="-733.1"/><line x1="201.0" y1="-727.7" x2="203.3" y2="-753.6"/><line x1="256.9" y1="-727.7" x2="281.3" y2="-736.6"/><line x1="572.1" y1="-278.5" x2="594.4" y2="-268.4"/><line x1="556.6" y1="-268.9" x2="563.6" y2="-237.8"/><line x1="539.5" y1="-274.4" x2="516.4" y2="-251.3"/><line x1="41.0" y1="-373.2" x2="64.1" y2="-350.1"/><line x1="7.0" y1="-386.2" x2="-23.0" y2="-386.2"/><line x1="599.4" y1="-538.9" x2="441.2" y2="-418.3"/><line x1="667.4" y1="-538.9" x2="710.3" y2="-377.2"/><line x1="273.8" y1="-343.2" x2="359.4" y2="-376.3"/><line x1="205.8" y1="-343.2" x2="45.6" y2="-192.4"/><line x1="518.5" y1="-287.4" x2="65.3" y2="-181.2"/><line x1="586.5" y1="-287.4" x2="676.4" y2="-335.2"/><line x1="361.0" y1="-569.3" x2="223.9" y2="-685.7"/><line x1="361.0" y1="-501.3" x2="403.0" y2="-418.3"/><line x1="28.0" y1="-420.2" x2="186.6" y2="-685.7"/><line x1="28.0" y1="-352.2" x2="23.8" y2="-192.4"/><path d="M35.9 -572.0 Q45.9 -526.0 181.4 -685.7" fill="none"/><path d="M35.9 -640.0 Q45.9 -686.0 132.0 -697.6" fill="none"/></g>
+<rect x="359.3" y="-418.3" width="108.6" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="673.9" y="-377.2" width="84.0" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="677.9" y="-373.2" width="76.0" height="34.0" fill="none" stroke="#111111" stroke-width="1.4"/>
+<rect x="-18.7" y="-192.4" width="84.0" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="132.0" y="-727.7" width="134.3" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<polygon points="599.4,-538.9 633.4,-517.9 633.4,-559.9" fill="#ffffff" stroke="none"/>
+<polygon points="667.4,-538.9 633.4,-517.9 633.4,-559.9" fill="#111111" stroke="none"/>
+<polygon points="599.4,-538.9 633.4,-517.9 667.4,-538.9 633.4,-559.9" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="633.4" y1="-517.9" x2="633.4" y2="-559.9" stroke="#111111" stroke-width="1"/>
+<polygon points="273.8,-343.2 239.8,-364.2 239.8,-322.2" fill="#ffffff" stroke="none"/>
+<polygon points="205.8,-343.2 239.8,-364.2 239.8,-322.2" fill="#111111" stroke="none"/>
+<polygon points="273.8,-343.2 239.8,-364.2 205.8,-343.2 239.8,-322.2" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="239.8" y1="-364.2" x2="239.8" y2="-322.2" stroke="#111111" stroke-width="1"/>
+<polygon points="518.5,-287.4 552.5,-266.4 552.5,-308.4" fill="#111111" stroke="none"/>
+<polygon points="586.5,-287.4 552.5,-266.4 552.5,-308.4" fill="#111111" stroke="none"/>
+<polygon points="518.5,-287.4 552.5,-266.4 586.5,-287.4 552.5,-308.4" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="552.5" y1="-266.4" x2="552.5" y2="-308.4" stroke="#111111" stroke-width="1"/>
+<polygon points="361.0,-569.3 340.0,-535.3 382.0,-535.3" fill="#111111" stroke="none"/>
+<polygon points="361.0,-501.3 340.0,-535.3 382.0,-535.3" fill="#ffffff" stroke="none"/>
+<polygon points="361.0,-569.3 340.0,-535.3 361.0,-501.3 382.0,-535.3" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="340.0" y1="-535.3" x2="382.0" y2="-535.3" stroke="#111111" stroke-width="1"/>
+<polygon points="28.0,-420.2 7.0,-386.2 49.0,-386.2" fill="#111111" stroke="none"/>
+<polygon points="28.0,-352.2 7.0,-386.2 49.0,-386.2" fill="#111111" stroke="none"/>
+<polygon points="28.0,-420.2 7.0,-386.2 28.0,-352.2 49.0,-386.2" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="7.0" y1="-386.2" x2="49.0" y2="-386.2" stroke="#111111" stroke-width="1"/>
+<polygon points="35.9,-572.0 56.9,-606.0 14.9,-606.0" fill="#ffffff" stroke="none"/>
+<polygon points="35.9,-640.0 56.9,-606.0 14.9,-606.0" fill="#111111" stroke="none"/>
+<polygon points="35.9,-572.0 56.9,-606.0 35.9,-640.0 14.9,-606.0" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="56.9" y1="-606.0" x2="14.9" y2="-606.0" stroke="#111111" stroke-width="1"/>
+<ellipse cx="532.8" cy="-377.9" rx="53.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="466.3" cy="-328.9" rx="38.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="386.4" cy="-339.0" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="320.2" cy="-440.9" rx="43.9" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="435.2" cy="-456.6" rx="31.1" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="809.5" cy="-322.1" rx="38.5" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="715.9" cy="-295.2" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="768.2" cy="-408.5" rx="32.8" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="112.3" cy="-129.9" rx="37.8" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="112.6" cy="-74.3" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="39.7" cy="-112.5" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-36.4" cy="-100.3" rx="36.1" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-71.5" cy="-205.9" rx="42.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-28.4" cy="-245.2" rx="35.7" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="209.9" cy="-646.1" rx="39.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="114.4" cy="-744.9" rx="48.6" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="204.5" cy="-767.6" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="312.8" cy="-748.0" rx="54.7" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="615.0" cy="-259.0" rx="27.6" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="566.7" cy="-223.9" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="504.0" cy="-238.9" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="77.1" cy="-337.1" rx="35.1" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="-85.8" cy="-386.2" rx="62.8" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<rect x="445.2" y="-444.3" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="463.4" y="-430.8" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="590.4" y="-544.9" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="684.2" y="-413.3" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="703.1" y="-399.8" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,N)</text>
+<text x="676.4" y="-524.9" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="731.0" y="-389.0" font-size="11" font-weight="700" fill="#111111" text-anchor="middle">ID</text>
+<rect x="315.1" y="-375.2" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="333.3" y="-361.7" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="282.8" y="-329.2" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="47.1" y="-220.6" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="66.0" y="-207.1" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="196.8" y="-349.2" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="73.6" y="-196.6" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="92.5" y="-183.1" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="509.5" y="-293.4" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="632.8" y="-331.1" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="651.7" y="-317.6" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="595.5" y="-273.4" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="226.3" y="-676.6" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="245.3" y="-663.1" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,N)</text>
+<text x="371.0" y="-574.3" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="372.1" y="-452.3" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="390.3" y="-438.8" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="351.0" y="-488.3" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="153.4" y="-670.6" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="172.3" y="-657.1" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="38.0" y="-425.2" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="5.6" y="-229.4" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="24.5" y="-215.9" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="18.0" y="-339.2" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="91.0" y="-615.2" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="109.2" y="-601.7" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,1)</text>
+<text x="25.9" y="-559.0" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<text x="133.6" y="-590.4" font-size="11" fill="#475569" text-anchor="middle" font-style="italic">director</text>
+<rect x="66.9" y="-696.0" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="85.8" y="-682.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="45.9" y="-645.0" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="76.6" y="-697.6" font-size="11" fill="#475569" text-anchor="middle" font-style="italic">entrenador</text>
+<text x="413.6" y="-392.3" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">GIMNASIO</text>
+<text x="715.9" y="-351.2" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">SALA</text>
+<text x="23.3" y="-166.4" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">SOCIO</text>
+<text x="199.2" y="-701.7" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">ENTRENADOR</text>
+<text x="633.4" y="-568.4" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">dispone de</text>
+<text x="239.8" y="-372.7" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">se inscribe en</text>
+<text x="552.5" y="-316.9" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">reserva</text>
+<text x="428.6" y="-530.8" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">trabaja en</text>
+<text x="82.2" y="-381.7" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">diseña</text>
+<text x="-15.5" y="-601.5" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">dirige</text>
+<text x="532.8" y="-373.9" font-size="12" text-anchor="middle" fill="#111111">superficie_m2</text>
+<text x="466.3" y="-324.9" font-size="12" text-anchor="middle" fill="#111111">dirección</text>
+<text x="386.4" y="-335.0" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="320.2" y="-436.9" font-size="12" text-anchor="middle" fill="#111111">cód_centro</text>
+<line x1="287.3" y1="-432.9" x2="353.1" y2="-432.9" stroke="#111111" stroke-width="1.3"/>
+<text x="435.2" y="-452.6" font-size="12" text-anchor="middle" fill="#111111">ciudad</text>
+<text x="809.5" y="-318.1" font-size="12" text-anchor="middle" fill="#111111">actividad</text>
+<text x="715.9" y="-291.2" font-size="12" text-anchor="middle" fill="#111111">aforo</text>
+<text x="768.2" y="-404.5" font-size="12" text-anchor="middle" fill="#111111">nº_sala</text>
+<line x1="746.4" y1="-400.5" x2="789.9" y2="-400.5" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
+<text x="112.3" y="-125.9" font-size="12" text-anchor="middle" fill="#111111">apellidos</text>
+<text x="112.6" y="-70.3" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="39.7" y="-108.5" font-size="12" text-anchor="middle" fill="#111111">dni</text>
+<text x="-36.4" y="-96.3" font-size="12" text-anchor="middle" fill="#111111">nº_socio</text>
+<line x1="-61.5" y1="-92.3" x2="-11.3" y2="-92.3" stroke="#111111" stroke-width="1.3"/>
+<text x="-71.5" y="-201.9" font-size="12" text-anchor="middle" fill="#111111">fecha_alta</text>
+<text x="-28.4" y="-241.2" font-size="12" text-anchor="middle" fill="#111111">teléfono</text>
+<text x="209.9" y="-642.1" font-size="12" text-anchor="middle" fill="#111111">titulación</text>
+<text x="114.4" y="-740.9" font-size="12" text-anchor="middle" fill="#111111">especialidad</text>
+<text x="204.5" y="-763.6" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="312.8" y="-744.0" font-size="12" text-anchor="middle" fill="#111111">cód_empleado</text>
+<line x1="269.1" y1="-740.0" x2="356.4" y2="-740.0" stroke="#111111" stroke-width="1.3"/>
+<text x="615.0" y="-255.0" font-size="12" text-anchor="middle" fill="#111111">fecha</text>
+<line x1="598.4" y1="-251.0" x2="631.6" y2="-251.0" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
+<text x="566.7" y="-219.9" font-size="12" text-anchor="middle" fill="#111111">plaza</text>
+<text x="504.0" y="-234.9" font-size="12" text-anchor="middle" fill="#111111">hora</text>
+<line x1="490.4" y1="-230.9" x2="517.6" y2="-230.9" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
+<text x="77.1" y="-333.1" font-size="12" text-anchor="middle" fill="#111111">objetivo</text>
+<text x="-85.8" y="-382.2" font-size="12" text-anchor="middle" fill="#111111">fecha_asignación</text>
+<line x1="-137.6" y1="-378.2" x2="-34.0" y2="-378.2" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
+</svg>

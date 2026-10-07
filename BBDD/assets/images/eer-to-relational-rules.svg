@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560" role="img" aria-labelledby="t d" font-family='system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'>
+<title id="t">Reglas de transformación del modelo E/R al relacional</title><desc id="d">Cuatro reglas: 1:N, N:M, entidad débil y relación reflexiva.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e293b"/></linearGradient></defs>
+<style>.hot{cursor:pointer;transition:filter .15s}.hot:hover,.hot:focus,.hot.on{filter:brightness(1.35) drop-shadow(0 0 6px rgba(255,255,255,.35));outline:none}</style>
+<rect width="900" height="560" rx="12" fill="url(#bg)"/>
+<text x="450.0" y="40.0" font-size="21" fill="#f1f5f9" text-anchor="middle" font-weight="700">Del E/R al relacional: 4 reglas</text>
+<g class="hot" tabindex="0" data-tip="No se crea tabla nueva: la FK viaja al lado N.">
+<rect x="24.0" y="66.0" width="420.0" height="224.0" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+<text x="234.0" y="94.0" font-size="16" fill="#38bdf8" text-anchor="middle" font-weight="700">1. Relación 1:N</text>
+<text x="44.0" y="124.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">La PK del lado «1» pasa al lado «N» como FK.</text>
+<rect x="44.0" y="166.0" width="380.0" height="42.0" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+<text x="56.0" y="192.0" font-size="12.5" fill="#f1f5f9" text-anchor="start">DEPARTAMENTO (id_dep PK, nombre)</text>
+<rect x="44.0" y="218.0" width="380.0" height="42.0" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+<text x="56.0" y="244.0" font-size="12.5" fill="#f1f5f9" text-anchor="start">EMPLEADO (id_emp PK, nombre, id_dep FK)</text>
+</g>
+<g class="hot" tabindex="0" data-tip="La PK de la tabla nueva es compuesta; los atributos de la relación (nota) van aquí.">
+<rect x="462.0" y="66.0" width="420.0" height="224.0" rx="10" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+<text x="672.0" y="94.0" font-size="16" fill="#34d399" text-anchor="middle" font-weight="700">2. Relación N:M</text>
+<text x="482.0" y="124.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">Se crea una tabla intermedia con las dos claves.</text>
+<rect x="482.0" y="166.0" width="380.0" height="42.0" rx="6" fill="#0f172a" stroke="#34d399" stroke-width="1.5"/>
+<text x="494.0" y="192.0" font-size="12.5" fill="#f1f5f9" text-anchor="start">ALUMNO (id_alumno PK) · ASIGNATURA (id_asig PK)</text>
+<rect x="482.0" y="218.0" width="380.0" height="42.0" rx="6" fill="#0f172a" stroke="#34d399" stroke-width="1.5"/>
+<text x="494.0" y="244.0" font-size="12.5" fill="#f1f5f9" text-anchor="start">MATRICULA (id_alumno PK,FK · id_asig PK,FK · nota)</text>
+</g>
+<g class="hot" tabindex="0" data-tip="Sin edificio no hay aula: la FK forma parte de la PK.">
+<rect x="24.0" y="306.0" width="420.0" height="224.0" rx="10" fill="#1e293b" stroke="#a78bfa" stroke-width="2"/>
+<text x="234.0" y="334.0" font-size="16" fill="#a78bfa" text-anchor="middle" font-weight="700">3. Entidad débil</text>
+<text x="44.0" y="364.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">La PK de la débil incluye la PK de su propietaria.</text>
+<rect x="44.0" y="406.0" width="380.0" height="42.0" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="56.0" y="432.0" font-size="12.5" fill="#f1f5f9" text-anchor="start">EDIFICIO (id_edificio PK, dirección)</text>
+<rect x="44.0" y="458.0" width="380.0" height="42.0" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="56.0" y="484.0" font-size="12.5" fill="#f1f5f9" text-anchor="start">AULA (id_edificio PK,FK · num_aula PK)</text>
+</g>
+<g class="hot" tabindex="0" data-tip="El jefe de un empleado es otro empleado; la FK admite NULL para el director.">
+<rect x="462.0" y="306.0" width="420.0" height="224.0" rx="10" fill="#1e293b" stroke="#f472b6" stroke-width="2"/>
+<text x="672.0" y="334.0" font-size="16" fill="#f472b6" text-anchor="middle" font-weight="700">4. Reflexiva 1:N</text>
+<text x="482.0" y="364.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">Autorreferencia: la FK apunta a su propia tabla.</text>
+<rect x="482.0" y="406.0" width="380.0" height="42.0" rx="6" fill="#0f172a" stroke="#f472b6" stroke-width="1.5"/>
+<text x="494.0" y="432.0" font-size="12.5" fill="#f1f5f9" text-anchor="start">EMPLEADO (id_emp PK, nombre,</text>
+<rect x="482.0" y="458.0" width="380.0" height="42.0" rx="6" fill="#0f172a" stroke="#f472b6" stroke-width="1.5"/>
+<text x="494.0" y="484.0" font-size="12.5" fill="#f1f5f9" text-anchor="start">id_jefe FK → EMPLEADO.id_emp)</text>
+</g>
+<text x="450.0" y="548.0" font-size="12" fill="#94a3b8" text-anchor="middle" font-style="italic">Pasa el ratón sobre cada regla para ver el porqué.</text>
+</svg>

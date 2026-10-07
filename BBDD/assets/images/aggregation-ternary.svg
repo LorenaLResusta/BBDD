@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 540" width="880" height="540" role="img" aria-labelledby="t d" font-family='system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'>
+<title id="t">Agregación y relación ternaria</title><desc id="d">A la izquierda, MATRIMONIO como agregación relacionada con JUZGADO; a la derecha, la ternaria PROFESOR–ASIGNATURA–GRUPO.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e293b"/></linearGradient></defs>
+<style>.hot{cursor:pointer;transition:filter .15s}.hot:hover,.hot:focus,.hot.on{filter:brightness(1.35) drop-shadow(0 0 6px rgba(255,255,255,.35));outline:none}</style>
+<rect width="880" height="540" rx="12" fill="url(#bg)"/>
+<text x="440.0" y="40.0" font-size="21" fill="#f1f5f9" text-anchor="middle" font-weight="700">Agregación y relación ternaria</text>
+<rect x="24.0" y="66.0" width="420.0" height="440.0" rx="10" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+<text x="234.0" y="94.0" font-size="16" fill="#fbbf24" text-anchor="middle" font-weight="700">1. Agregación</text>
+<rect x="54.0" y="108.0" width="360.0" height="140.0" rx="10" fill="#0f172a" stroke="#fbbf24" stroke-width="2" stroke-dasharray="7 5"/>
+<text x="234.0" y="130.0" font-size="13" fill="#fbbf24" text-anchor="middle" font-weight="700">Agregado: MATRIMONIO</text>
+<rect x="70.0" y="160.0" width="100.0" height="46.0" rx="3" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+<text x="120.0" y="187.6" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">HOMBRE</text>
+<rect x="298.0" y="160.0" width="100.0" height="46.0" rx="3" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+<text x="348.0" y="187.6" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">MUJER</text>
+<line x1="170.0" y1="183.0" x2="202.0" y2="183.0" stroke="#38bdf8" stroke-width="2"/>
+<line x1="266.0" y1="183.0" x2="298.0" y2="183.0" stroke="#38bdf8" stroke-width="2"/>
+<g class="hot" tabindex="0" data-tip="Relación binaria entre HOMBRE y MUJER. Se agrega para poder relacionarla con otra entidad.">
+<polygon points="234,161.0 266.0,183 234,205.0 202.0,183" fill="#065f46" stroke="#34d399" stroke-width="2"/>
+<text x="234.0" y="186.8" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">CASA</text>
+</g>
+<line x1="234.0" y1="248.0" x2="234.0" y2="300.0" stroke="#fbbf24" stroke-width="2"/>
+<g class="hot" tabindex="0" data-tip="Una relación no puede unirse a otra relación; con la agregación, el matrimonio completo se relaciona con JUZGADO.">
+<polygon points="234,296.0 294.0,322 234,348.0 174.0,322" fill="#92400e" stroke="#fbbf24" stroke-width="2"/>
+<text x="234.0" y="326.2" font-size="12" fill="#fff" text-anchor="middle" font-weight="700">CIVIL EN</text>
+</g>
+<line x1="234.0" y1="348.0" x2="234.0" y2="392.0" stroke="#fbbf24" stroke-width="2"/>
+<rect x="174.0" y="392.0" width="120.0" height="46.0" rx="3" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<text x="234.0" y="419.6" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">JUZGADO</text>
+<text x="234.0" y="470.0" font-size="12.5" fill="#94a3b8" text-anchor="middle">Se agrupa una relación como si fuera una entidad.</text>
+<rect x="456.0" y="66.0" width="400.0" height="440.0" rx="10" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+<text x="656.0" y="94.0" font-size="16" fill="#34d399" text-anchor="middle" font-weight="700">2. Relación ternaria</text>
+<rect x="480.0" y="120.0" width="130.0" height="46.0" rx="3" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<text x="545.0" y="147.6" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">PROFESOR</text>
+<rect x="702.0" y="120.0" width="130.0" height="46.0" rx="3" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<text x="767.0" y="147.6" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">ASIGNATURA</text>
+<rect x="591.0" y="380.0" width="130.0" height="46.0" rx="3" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<text x="656.0" y="407.6" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">GRUPO</text>
+<line x1="545.0" y1="166.0" x2="656.0" y2="262.0" stroke="#34d399" stroke-width="2"/>
+<line x1="767.0" y1="166.0" x2="656.0" y2="262.0" stroke="#34d399" stroke-width="2"/>
+<line x1="656.0" y1="300.0" x2="656.0" y2="380.0" stroke="#34d399" stroke-width="2"/>
+<g class="hot" tabindex="0" data-tip="Un profesor imparte una asignatura a un grupo: solo la combinación de los tres tiene sentido.">
+<polygon points="656,249.0 706.0,280 656,311.0 606.0,280" fill="#065f46" stroke="#34d399" stroke-width="2"/>
+<text x="656.0" y="284.2" font-size="12" fill="#fff" text-anchor="middle" font-weight="700">IMPARTE</text>
+</g>
+<text x="656.0" y="460.0" font-size="12.5" fill="#94a3b8" text-anchor="middle">Lectura: una pareja de entidades frente a la tercera.</text>
+</svg>

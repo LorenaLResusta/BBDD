@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="681 -397 835 528" width="835" height="528" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
+<title id="t">Consultora de software: proyectos, tareas y desarrolladores</title><desc id="d">CLIENTE encarga PROYECTO (1:N). PROYECTO se descompone en TAREA (débil). DESARROLLADOR trabaja en TAREA (N:M con horas reales). DESARROLLADOR tutela a DESARROLLADOR.</desc>
+<rect x="681" y="-397" width="835" height="528" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+<g stroke="#1f2937" stroke-width="1.4" fill="none"><line x1="907.9" y1="-224.6" x2="931.0" y2="-220.8"/><line x1="872.9" y1="-211.3" x2="885.9" y2="-188.8"/><line x1="813.7" y1="-244.9" x2="788.6" y2="-251.7"/><line x1="866.4" y1="-253.3" x2="873.1" y2="-278.4"/><line x1="1000.2" y1="37.0" x2="1025.2" y2="54.1"/><line x1="961.8" y1="37.0" x2="952.9" y2="61.4"/><line x1="913.5" y1="31.0" x2="888.4" y2="37.7"/><line x1="977.1" y1="-5.0" x2="986.0" y2="-29.5"/><line x1="1342.7" y1="34.3" x2="1368.7" y2="34.3"/><line x1="1325.8" y1="55.3" x2="1345.7" y2="72.0"/><line x1="1290.9" y1="55.3" x2="1279.9" y2="78.9"/><line x1="1330.7" y1="13.3" x2="1352.0" y2="-1.6"/><line x1="1329.7" y1="-241.7" x2="1354.1" y2="-232.8"/><line x1="1190.7" y1="-277.0" x2="1165.1" y2="-281.5"/><line x1="1250.5" y1="-283.7" x2="1208.8" y2="-324.2"/><line x1="1270.2" y1="-283.7" x2="1264.8" y2="-345.4"/><line x1="1286.7" y1="-283.7" x2="1301.6" y2="-305.0"/><line x1="1240.2" y1="-97.4" x2="1210.2" y2="-97.4"/><line x1="825.3" y1="-134.0" x2="853.2" y2="-211.3"/><line x1="825.3" y1="-66.0" x2="932.5" y2="-5.0"/><line x1="1127.3" y1="10.1" x2="1025.4" y2="13.9"/><line x1="1195.3" y1="10.1" x2="1258.7" y2="24.7"/><line x1="1261.2" y1="-131.4" x2="1270.3" y2="-241.7"/><line x1="1261.2" y1="-63.4" x2="1292.2" y2="13.3"/><path d="M1073.5 -121.1 Q1083.5 -75.1 1250.9 -241.7" fill="none"/><path d="M1073.5 -189.1 Q1083.5 -235.1 1190.7 -250.8" fill="none"/></g>
+<rect x="813.7" y="-253.3" width="94.2" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="913.5" y="-5.0" width="111.9" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="1258.7" y="13.3" width="84.0" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="1262.7" y="17.3" width="76.0" height="34.0" fill="none" stroke="#111111" stroke-width="1.4"/>
+<rect x="1190.7" y="-283.7" width="162.7" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<polygon points="825.3,-134.0 804.3,-100.0 846.3,-100.0" fill="#ffffff" stroke="none"/>
+<polygon points="825.3,-66.0 804.3,-100.0 846.3,-100.0" fill="#111111" stroke="none"/>
+<polygon points="825.3,-134.0 804.3,-100.0 825.3,-66.0 846.3,-100.0" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="804.3" y1="-100.0" x2="846.3" y2="-100.0" stroke="#111111" stroke-width="1"/>
+<polygon points="1127.3,10.1 1161.3,31.1 1161.3,-10.9" fill="#ffffff" stroke="none"/>
+<polygon points="1195.3,10.1 1161.3,31.1 1161.3,-10.9" fill="#111111" stroke="none"/>
+<polygon points="1127.3,10.1 1161.3,31.1 1195.3,10.1 1161.3,-10.9" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="1161.3" y1="31.1" x2="1161.3" y2="-10.9" stroke="#111111" stroke-width="1"/>
+<polygon points="1261.2,-131.4 1240.2,-97.4 1282.2,-97.4" fill="#111111" stroke="none"/>
+<polygon points="1261.2,-63.4 1240.2,-97.4 1282.2,-97.4" fill="#111111" stroke="none"/>
+<polygon points="1261.2,-131.4 1240.2,-97.4 1261.2,-63.4 1282.2,-97.4" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="1240.2" y1="-97.4" x2="1282.2" y2="-97.4" stroke="#111111" stroke-width="1"/>
+<polygon points="1073.5,-121.1 1094.5,-155.1 1052.5,-155.1" fill="#ffffff" stroke="none"/>
+<polygon points="1073.5,-189.1 1094.5,-155.1 1052.5,-155.1" fill="#111111" stroke="none"/>
+<polygon points="1073.5,-121.1 1094.5,-155.1 1073.5,-189.1 1052.5,-155.1" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="1094.5" y1="-155.1" x2="1052.5" y2="-155.1" stroke="#111111" stroke-width="1"/>
+<ellipse cx="966.4" cy="-215.1" rx="38.9" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="893.8" cy="-175.1" rx="35.7" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="753.3" cy="-261.1" rx="47.9" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="876.8" cy="-292.3" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1044.1" cy="67.0" rx="48.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="947.9" cy="75.2" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="851.9" cy="47.5" rx="51.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="991.1" cy="-43.4" rx="46.4" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1430.4" cy="34.3" rx="61.7" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1360.8" cy="84.7" rx="36.4" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1273.6" cy="92.6" rx="31.3" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1370.3" cy="-14.4" rx="45.3" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1384.3" cy="-221.8" rx="48.6" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1122.5" cy="-289.0" rx="50.5" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1195.6" cy="-337.1" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1263.5" cy="-359.4" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1310.8" cy="-318.1" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1161.2" cy="-97.4" rx="48.9" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<rect x="825.4" y="-194.0" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="843.7" y="-180.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="835.3" y="-139.0" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="889.3" y="-27.9" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="908.2" y="-14.4" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="815.3" y="-53.0" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="1035.2" y="3.9" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1053.4" y="17.4" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="1118.3" y="4.1" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="1213.2" y="9.6" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1232.1" y="23.1" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,N)</text>
+<text x="1204.3" y="24.1" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="1254.3" y="3.1" font-size="11" font-weight="700" fill="#111111" text-anchor="middle">ID</text>
+<rect x="1249.1" y="-222.8" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1268.0" y="-209.3" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="1271.2" y="-136.4" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="1262.8" y="-21.7" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1281.7" y="-8.2" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="1251.2" y="-50.4" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="1143.8" y="-167.6" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1162.0" y="-154.1" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,1)</text>
+<text x="1063.5" y="-108.1" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<text x="1182.7" y="-141.9" font-size="11" fill="#475569" text-anchor="middle" font-style="italic">mentor</text>
+<rect x="1114.5" y="-247.1" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1133.4" y="-233.6" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="1083.5" y="-194.1" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="1126.1" y="-248.8" font-size="11" fill="#475569" text-anchor="middle" font-style="italic">tutelado</text>
+<text x="860.8" y="-227.3" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">CLIENTE</text>
+<text x="969.5" y="21.0" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">PROYECTO</text>
+<text x="1300.7" y="39.3" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">TAREA</text>
+<text x="1272.0" y="-257.7" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">DESARROLLADOR</text>
+<text x="884.8" y="-95.5" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">encarga</text>
+<text x="1161.3" y="-19.4" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">se descompone en</text>
+<text x="1328.8" y="-92.9" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">trabaja en</text>
+<text x="1021.7" y="-150.6" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">tutela</text>
+<text x="966.4" y="-211.1" font-size="12" text-anchor="middle" fill="#111111">sitio_web</text>
+<text x="893.8" y="-171.1" font-size="12" text-anchor="middle" fill="#111111">teléfono</text>
+<text x="753.3" y="-257.1" font-size="12" text-anchor="middle" fill="#111111">razón_social</text>
+<text x="876.8" y="-288.3" font-size="12" text-anchor="middle" fill="#111111">cif</text>
+<line x1="869.8" y1="-284.3" x2="883.9" y2="-284.3" stroke="#111111" stroke-width="1.3"/>
+<text x="1044.1" y="71.0" font-size="12" text-anchor="middle" fill="#111111">presupuesto</text>
+<text x="947.9" y="79.2" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="851.9" y="51.5" font-size="12" text-anchor="middle" fill="#111111">cód_proyecto</text>
+<line x1="811.7" y1="55.5" x2="892.0" y2="55.5" stroke="#111111" stroke-width="1.3"/>
+<text x="991.1" y="-39.4" font-size="12" text-anchor="middle" fill="#111111">fecha_inicio</text>
+<text x="1430.4" y="38.3" font-size="12" text-anchor="middle" fill="#111111">horas_estimadas</text>
+<text x="1360.8" y="88.7" font-size="12" text-anchor="middle" fill="#111111">nº_tarea</text>
+<line x1="1335.5" y1="92.7" x2="1386.2" y2="92.7" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
+<text x="1273.6" y="96.6" font-size="12" text-anchor="middle" fill="#111111">estado</text>
+<text x="1370.3" y="-10.4" font-size="12" text-anchor="middle" fill="#111111">descripción</text>
+<text x="1384.3" y="-217.8" font-size="12" text-anchor="middle" fill="#111111">especialidad</text>
+<text x="1122.5" y="-285.0" font-size="12" text-anchor="middle" fill="#111111">nº_empleado</text>
+<line x1="1083.0" y1="-281.0" x2="1162.0" y2="-281.0" stroke="#111111" stroke-width="1.3"/>
+<text x="1195.6" y="-333.1" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="1263.5" y="-355.4" font-size="12" text-anchor="middle" fill="#111111">nivel</text>
+<text x="1310.8" y="-314.1" font-size="12" text-anchor="middle" fill="#111111">dni</text>
+<text x="1161.2" y="-93.4" font-size="12" text-anchor="middle" fill="#111111">horas_reales</text>
+</svg>

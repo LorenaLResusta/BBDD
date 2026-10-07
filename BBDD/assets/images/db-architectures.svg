@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 400" width="860" height="400" role="img" aria-labelledby="t d" font-family='system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'>
+<title id="t">Arquitecturas de despliegue de bases de datos</title><desc id="d">Centralizada, cliente-servidor y distribuida.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e293b"/></linearGradient></defs>
+<style>.hot{cursor:pointer;transition:filter .15s}.hot:hover,.hot:focus,.hot.on{filter:brightness(1.35) drop-shadow(0 0 6px rgba(255,255,255,.35));outline:none}</style>
+<rect width="860" height="400" rx="12" fill="url(#bg)"/>
+<text x="430.0" y="40.0" font-size="21" fill="#f1f5f9" text-anchor="middle" font-weight="700">Arquitecturas de despliegue</text>
+<g class="hot" tabindex="0" data-tip="Todo vive en una máquina: simple, pero si cae, cae todo.">
+<rect x="24.0" y="66.0" width="262.0" height="300.0" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+<text x="155.0" y="94.0" font-size="16" fill="#38bdf8" text-anchor="middle" font-weight="700">1. Centralizada</text>
+<rect x="44.0" y="100.0" width="222.0" height="70.0" rx="8" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+<text x="155.0" y="131.2" font-size="14" fill="#fff" text-anchor="middle" font-weight="700">Servidor único: app + SGBD</text>
+<text x="155.0" y="148.7" font-size="14" fill="#fff" text-anchor="middle" font-weight="700">+ BD</text>
+<text x="155.0" y="198.0" font-size="12.5" fill="#94a3b8" text-anchor="middle" font-style="italic">Terminales o usuarios locales</text>
+<rect x="40.0" y="222.0" width="230.0" height="130.0" rx="8" fill="#0f172a"/>
+<text x="54.0" y="252.0" font-size="13" fill="#38bdf8" text-anchor="start" font-weight="700">✓</text>
+<text x="74.0" y="252.0" font-size="13" fill="#f1f5f9" text-anchor="start">Mantenimiento sencillo</text>
+<text x="54.0" y="274.2" font-size="13" fill="#f87171" text-anchor="start" font-weight="700">✗</text>
+<text x="74.0" y="274.2" font-size="13" fill="#f1f5f9" text-anchor="start">Cuello de botella</text>
+<text x="54.0" y="296.4" font-size="13" fill="#f87171" text-anchor="start" font-weight="700">✗</text>
+<text x="74.0" y="296.4" font-size="13" fill="#f1f5f9" text-anchor="start">Punto único de fallo</text>
+</g>
+<g class="hot" tabindex="0" data-tip="Los clientes envían SQL por la red; el servidor lo ejecuta.">
+<rect x="302.0" y="66.0" width="262.0" height="300.0" rx="10" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+<text x="433.0" y="94.0" font-size="16" fill="#34d399" text-anchor="middle" font-weight="700">2. Cliente-servidor</text>
+<rect x="322.0" y="100.0" width="222.0" height="70.0" rx="8" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<text x="433.0" y="139.9" font-size="14" fill="#fff" text-anchor="middle" font-weight="700">Servidor SGBD (SQL)</text>
+<text x="433.0" y="198.0" font-size="12.5" fill="#94a3b8" text-anchor="middle" font-style="italic">Clientes: PC, web, móvil</text>
+<rect x="318.0" y="222.0" width="230.0" height="130.0" rx="8" fill="#0f172a"/>
+<text x="332.0" y="252.0" font-size="13" fill="#34d399" text-anchor="start" font-weight="700">✓</text>
+<text x="352.0" y="252.0" font-size="13" fill="#f1f5f9" text-anchor="start">Escalabilidad</text>
+<text x="332.0" y="274.2" font-size="13" fill="#34d399" text-anchor="start" font-weight="700">✓</text>
+<text x="352.0" y="274.2" font-size="13" fill="#f1f5f9" text-anchor="start">Carga repartida</text>
+<text x="332.0" y="296.4" font-size="13" fill="#34d399" text-anchor="start" font-weight="700">✓</text>
+<text x="352.0" y="296.4" font-size="13" fill="#f1f5f9" text-anchor="start">Modelo estándar actual</text>
+</g>
+<g class="hot" tabindex="0" data-tip="Los datos se reparten (fragmentación) o copian (réplica) entre nodos.">
+<rect x="580.0" y="66.0" width="262.0" height="300.0" rx="10" fill="#1e293b" stroke="#a78bfa" stroke-width="2"/>
+<text x="711.0" y="94.0" font-size="16" fill="#a78bfa" text-anchor="middle" font-weight="700">3. Distribuida</text>
+<rect x="600.0" y="100.0" width="222.0" height="70.0" rx="8" fill="#6d28d9" stroke="#a78bfa" stroke-width="2"/>
+<text x="711.0" y="131.2" font-size="14" fill="#fff" text-anchor="middle" font-weight="700">Nodos: Madrid · Barcelona ·</text>
+<text x="711.0" y="148.7" font-size="14" fill="#fff" text-anchor="middle" font-weight="700">Valencia</text>
+<text x="711.0" y="198.0" font-size="12.5" fill="#94a3b8" text-anchor="middle" font-style="italic">Datos repartidos o replicados</text>
+<rect x="596.0" y="222.0" width="230.0" height="130.0" rx="8" fill="#0f172a"/>
+<text x="610.0" y="252.0" font-size="13" fill="#a78bfa" text-anchor="start" font-weight="700">✓</text>
+<text x="630.0" y="252.0" font-size="13" fill="#f1f5f9" text-anchor="start">Alta disponibilidad</text>
+<text x="610.0" y="274.2" font-size="13" fill="#a78bfa" text-anchor="start" font-weight="700">✓</text>
+<text x="630.0" y="274.2" font-size="13" fill="#f1f5f9" text-anchor="start">Tolerancia a fallos</text>
+<text x="610.0" y="296.4" font-size="13" fill="#f87171" text-anchor="start" font-weight="700">✗</text>
+<text x="630.0" y="296.4" font-size="13" fill="#f1f5f9" text-anchor="start">Réplicas complejas</text>
+</g>
+</svg>

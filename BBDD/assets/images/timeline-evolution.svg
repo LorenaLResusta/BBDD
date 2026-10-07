@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" width="960" height="430" role="img" aria-labelledby="t d" font-family='system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'>
+<title id="t">Evolución histórica de las bases de datos</title><desc id="d">Línea del tiempo desde las tarjetas Hollerith hasta SQL y NoSQL.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e293b"/></linearGradient></defs>
+<style>.hot{cursor:pointer;transition:filter .15s}.hot:hover,.hot:focus,.hot.on{filter:brightness(1.35) drop-shadow(0 0 6px rgba(255,255,255,.35));outline:none}</style>
+<rect width="960" height="430" rx="12" fill="url(#bg)"/>
+<text x="480.0" y="40.0" font-size="21" fill="#f1f5f9" text-anchor="middle" font-weight="700">Evolución histórica de las bases de datos</text>
+<line x1="50.0" y1="220.0" x2="910.0" y2="220.0" stroke="#475569" stroke-width="4"/>
+<g class="hot" tabindex="0" data-tip="Herman Hollerith patentó la tabuladora en 1884; se usó en el censo de 1890 y su empresa acabó en IBM.">
+<line x1="70.0" y1="220.0" x2="70.0" y2="192.0" stroke="#38bdf8" stroke-width="2"/>
+<rect x="10.0" y="80.0" width="124.0" height="112.0" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+<text x="72.0" y="106.0" font-size="16" fill="#38bdf8" text-anchor="middle" font-weight="700">1890</text>
+<text x="72.0" y="130.0" font-size="13" fill="#f1f5f9" text-anchor="middle" font-weight="700">Tarjetas</text>
+<text x="72.0" y="146.0" font-size="13" fill="#f1f5f9" text-anchor="middle" font-weight="700">Hollerith</text>
+<text x="72.0" y="164.0" font-size="12" fill="#94a3b8" text-anchor="middle">Censo de EE. UU.</text>
+</g>
+<circle cx="70.0" cy="220" r="9" fill="#38bdf8" stroke="#0f172a" stroke-width="3"/>
+<g class="hot" tabindex="0" data-tip="Ficheros secuenciales: para leer el registro 1000 había que pasar por los 999 anteriores.">
+<line x1="206.7" y1="220.0" x2="206.7" y2="262.0" stroke="#34d399" stroke-width="2"/>
+<rect x="144.7" y="262.0" width="124.0" height="112.0" rx="10" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+<text x="206.7" y="288.0" font-size="16" fill="#34d399" text-anchor="middle" font-weight="700">Años 50</text>
+<text x="206.7" y="312.0" font-size="13" fill="#f1f5f9" text-anchor="middle" font-weight="700">Cintas</text>
+<text x="206.7" y="328.0" font-size="13" fill="#f1f5f9" text-anchor="middle" font-weight="700">magnéticas</text>
+<text x="206.7" y="346.0" font-size="12" fill="#94a3b8" text-anchor="middle">Acceso secuencial</text>
+</g>
+<circle cx="206.7" cy="220" r="9" fill="#34d399" stroke="#0f172a" stroke-width="3"/>
+<g class="hot" tabindex="0" data-tip="IMS de IBM nació en el programa Apolo para gestionar listas de materiales. CODASYL definió el modelo en red.">
+<line x1="343.3" y1="220.0" x2="343.3" y2="192.0" stroke="#fbbf24" stroke-width="2"/>
+<rect x="281.3" y="80.0" width="124.0" height="112.0" rx="10" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+<text x="343.3" y="106.0" font-size="16" fill="#fbbf24" text-anchor="middle" font-weight="700">Años 60</text>
+<text x="343.3" y="130.0" font-size="13" fill="#f1f5f9" text-anchor="middle" font-weight="700">Modelos</text>
+<text x="343.3" y="146.0" font-size="13" fill="#f1f5f9" text-anchor="middle" font-weight="700">jerárquico y red</text>
+<text x="343.3" y="164.0" font-size="12" fill="#94a3b8" text-anchor="middle">IMS · CODASYL</text>
+</g>
+<circle cx="343.3" cy="220" r="9" fill="#fbbf24" stroke="#0f172a" stroke-width="3"/>
+<g class="hot" tabindex="0" data-tip="Codd publicó «A Relational Model of Data for Large Shared Data Banks»: datos en tablas y lenguaje declarativo.">
+<line x1="480.0" y1="220.0" x2="480.0" y2="262.0" stroke="#f87171" stroke-width="2"/>
+<rect x="418.0" y="262.0" width="124.0" height="112.0" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+<text x="480.0" y="288.0" font-size="16" fill="#f87171" text-anchor="middle" font-weight="700">1970</text>
+<text x="480.0" y="312.0" font-size="13" fill="#f1f5f9" text-anchor="middle" font-weight="700">Modelo</text>
+<text x="480.0" y="328.0" font-size="13" fill="#f1f5f9" text-anchor="middle" font-weight="700">relacional</text>
+<text x="480.0" y="346.0" font-size="12" fill="#94a3b8" text-anchor="middle">E. F. Codd (IBM)</text>
+</g>
+<circle cx="480.0" cy="220" r="9" fill="#f87171" stroke="#0f172a" stroke-width="3"/>
+<g class="hot" tabindex="0" data-tip="Chen propuso el modelo Entidad-Relación para el diseño conceptual.">
+<line x1="616.7" y1="220.0" x2="616.7" y2="192.0" stroke="#a78bfa" stroke-width="2"/>
+<rect x="554.7" y="80.0" width="124.0" height="112.0" rx="10" fill="#1e293b" stroke="#a78bfa" stroke-width="2"/>
+<text x="616.7" y="106.0" font-size="16" fill="#a78bfa" text-anchor="middle" font-weight="700">1976</text>
+<text x="616.7" y="130.0" font-size="13" fill="#f1f5f9" text-anchor="middle" font-weight="700">Modelo E/R</text>
+<text x="616.7" y="148.0" font-size="12" fill="#94a3b8" text-anchor="middle">Peter Chen</text>
+</g>
+<circle cx="616.7" cy="220" r="9" fill="#a78bfa" stroke="#0f172a" stroke-width="3"/>
+<g class="hot" tabindex="0" data-tip="Oracle V2 (1979) fue el primer SQL comercial; ANSI estandarizó SQL en 1986.">
+<line x1="753.3" y1="220.0" x2="753.3" y2="262.0" stroke="#f472b6" stroke-width="2"/>
+<rect x="691.3" y="262.0" width="124.0" height="112.0" rx="10" fill="#1e293b" stroke="#f472b6" stroke-width="2"/>
+<text x="753.3" y="288.0" font-size="16" fill="#f472b6" text-anchor="middle" font-weight="700">1979–86</text>
+<text x="753.3" y="312.0" font-size="13" fill="#f1f5f9" text-anchor="middle" font-weight="700">SQL comercial y</text>
+<text x="753.3" y="328.0" font-size="13" fill="#f1f5f9" text-anchor="middle" font-weight="700">ANSI</text>
+<text x="753.3" y="346.0" font-size="12" fill="#94a3b8" text-anchor="middle">Oracle · SQL-86</text>
+</g>
+<circle cx="753.3" cy="220" r="9" fill="#f472b6" stroke="#0f172a" stroke-width="3"/>
+<g class="hot" tabindex="0" data-tip="El término NoSQL se popularizó en 2009 ante la necesidad de escalar horizontalmente.">
+<line x1="890.0" y1="220.0" x2="890.0" y2="192.0" stroke="#38bdf8" stroke-width="2"/>
+<rect x="826.0" y="80.0" width="124.0" height="112.0" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+<text x="888.0" y="106.0" font-size="16" fill="#38bdf8" text-anchor="middle" font-weight="700">2009+</text>
+<text x="888.0" y="130.0" font-size="13" fill="#f1f5f9" text-anchor="middle" font-weight="700">NoSQL y la nube</text>
+<text x="888.0" y="148.0" font-size="12" fill="#94a3b8" text-anchor="middle">MongoDB · Cloud</text>
+</g>
+<circle cx="890.0" cy="220" r="9" fill="#38bdf8" stroke="#0f172a" stroke-width="3"/>
+<text x="480.0" y="410.0" font-size="12" fill="#94a3b8" text-anchor="middle" font-style="italic">Pulsa o pasa el ratón sobre cada hito para ver el contexto.</text>
+</svg>

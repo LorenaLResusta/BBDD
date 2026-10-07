@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 480" width="860" height="480" role="img" aria-labelledby="t d" font-family='system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'>
+<title id="t">El modelo relacional: tablas, claves primarias y foráneas</title><desc id="d">Tablas SOCIO y PRESTAMO relacionadas por id_socio.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e293b"/></linearGradient></defs>
+<style>.hot{cursor:pointer;transition:filter .15s}.hot:hover,.hot:focus,.hot.on{filter:brightness(1.35) drop-shadow(0 0 6px rgba(255,255,255,.35));outline:none}</style>
+<rect width="860" height="480" rx="12" fill="url(#bg)"/>
+<text x="430.0" y="40.0" font-size="21" fill="#f1f5f9" text-anchor="middle" font-weight="700">El modelo relacional: PK y FK</text>
+<rect x="24.0" y="66.0" width="410.0" height="280.0" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+<rect x="24.0" y="66.0" width="410.0" height="44.0" rx="10" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+<text x="229.0" y="94.0" font-size="17" fill="#fff" text-anchor="middle" font-weight="700">Tabla: SOCIO</text>
+<rect x="36.0" y="124.0" width="386.0" height="34.0" rx="4" fill="#334155"/>
+<text x="44.0" y="146.0" font-size="13" fill="#38bdf8" text-anchor="start" font-weight="700">id_socio (PK)</text>
+<text x="154.0" y="146.0" font-size="13" fill="#94a3b8" text-anchor="start" font-weight="700">nombre</text>
+<text x="274.0" y="146.0" font-size="13" fill="#94a3b8" text-anchor="start" font-weight="700">email</text>
+<rect x="36.0" y="168.0" width="386.0" height="34.0" rx="4" fill="#0f172a"/>
+<text x="44.0" y="190.0" font-size="13" fill="#38bdf8" text-anchor="start" font-weight="700">101</text>
+<text x="154.0" y="190.0" font-size="13" fill="#f1f5f9" text-anchor="start">Laura Gómez</text>
+<text x="274.0" y="190.0" font-size="13" fill="#f1f5f9" text-anchor="start">laura@mail.com</text>
+<rect x="36.0" y="208.0" width="386.0" height="34.0" rx="4" fill="#1e293b"/>
+<text x="44.0" y="230.0" font-size="13" fill="#38bdf8" text-anchor="start" font-weight="700">102</text>
+<text x="154.0" y="230.0" font-size="13" fill="#f1f5f9" text-anchor="start">Carlos Ruiz</text>
+<text x="274.0" y="230.0" font-size="13" fill="#f1f5f9" text-anchor="start">carlos@mail.com</text>
+<rect x="36.0" y="248.0" width="386.0" height="34.0" rx="4" fill="#0f172a"/>
+<text x="44.0" y="270.0" font-size="13" fill="#38bdf8" text-anchor="start" font-weight="700">103</text>
+<text x="154.0" y="270.0" font-size="13" fill="#f1f5f9" text-anchor="start">Ana Martínez</text>
+<text x="274.0" y="270.0" font-size="13" fill="#f1f5f9" text-anchor="start">ana@mail.com</text>
+<rect x="470.0" y="66.0" width="370.0" height="280.0" rx="10" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+<rect x="470.0" y="66.0" width="370.0" height="44.0" rx="10" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<text x="655.0" y="94.0" font-size="17" fill="#fff" text-anchor="middle" font-weight="700">Tabla: PRESTAMO</text>
+<rect x="482.0" y="124.0" width="346.0" height="34.0" rx="4" fill="#334155"/>
+<text x="490.0" y="146.0" font-size="13" fill="#34d399" text-anchor="start" font-weight="700">id_prestamo</text>
+<text x="590.0" y="146.0" font-size="13" fill="#fbbf24" text-anchor="start" font-weight="700">id_socio (FK)</text>
+<text x="720.0" y="146.0" font-size="13" fill="#94a3b8" text-anchor="start" font-weight="700">fecha</text>
+<rect x="482.0" y="168.0" width="346.0" height="34.0" rx="4" fill="#0f172a"/>
+<text x="490.0" y="190.0" font-size="13" fill="#f1f5f9" text-anchor="start" font-weight="700">5001</text>
+<text x="590.0" y="190.0" font-size="13" fill="#fbbf24" text-anchor="start" font-weight="700">101</text>
+<text x="720.0" y="190.0" font-size="13" fill="#f1f5f9" text-anchor="start">2026-10-01</text>
+<rect x="482.0" y="208.0" width="346.0" height="34.0" rx="4" fill="#1e293b"/>
+<text x="490.0" y="230.0" font-size="13" fill="#f1f5f9" text-anchor="start" font-weight="700">5002</text>
+<text x="590.0" y="230.0" font-size="13" fill="#fbbf24" text-anchor="start" font-weight="700">103</text>
+<text x="720.0" y="230.0" font-size="13" fill="#f1f5f9" text-anchor="start">2026-10-02</text>
+<rect x="482.0" y="248.0" width="346.0" height="34.0" rx="4" fill="#0f172a"/>
+<text x="490.0" y="270.0" font-size="13" fill="#f1f5f9" text-anchor="start" font-weight="700">5003</text>
+<text x="590.0" y="270.0" font-size="13" fill="#fbbf24" text-anchor="start" font-weight="700">101</text>
+<text x="720.0" y="270.0" font-size="13" fill="#f1f5f9" text-anchor="start">2026-10-05</text>
+<g class="hot" tabindex="0" data-tip="Cada valor de id_socio en PRESTAMO debe existir en SOCIO: es la integridad referencial. El SGBD rechaza un préstamo del socio 999 si no existe.">
+<path d="M470 208 C450 208 454 208 434 208" stroke="#fbbf24" stroke-width="2.5" stroke-dasharray="7 5" fill="none"/>
+<polygon points="434,208 445,202 445,214" fill="#fbbf24"/>
+</g>
+<text x="214.0" y="376.0" font-size="13" fill="#38bdf8" text-anchor="middle" font-weight="700">PK: identifica cada fila de forma única</text>
+<text x="650.0" y="376.0" font-size="13" fill="#fbbf24" text-anchor="middle" font-weight="700">FK: referencia la PK de otra tabla</text>
+<rect x="34.0" y="400.0" width="792.0" height="56.0" rx="8" fill="#0f172a"/>
+<text x="430.0" y="424.0" font-size="13" fill="#f1f5f9" text-anchor="middle">La clave foránea apunta a la clave primaria de otra tabla y garantiza la consistencia de los datos.</text>
+</svg>

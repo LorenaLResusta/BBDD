@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="1054 -1047 785 576" width="785" height="576" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
+<title id="t">Cadena hotelera: hoteles, habitaciones y reservas</title><desc id="d">HOTEL dispone de HABITACIÓN (débil). CLIENTE reserva HABITACIÓN (N:M con fechas y precio). EMPLEADO trabaja en HOTEL. EMPLEADO supervisa a EMPLEADO.</desc>
+<rect x="1054" y="-1047" width="785" height="576" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+<g stroke="#1f2937" stroke-width="1.4" fill="none"><line x1="1446.2" y1="-724.4" x2="1491.0" y2="-660.5"/><line x1="1429.7" y1="-724.4" x2="1427.4" y2="-698.5"/><line x1="1398.4" y1="-766.4" x2="1379.5" y2="-778.4"/><line x1="1433.4" y1="-766.4" x2="1437.5" y2="-814.2"/><line x1="1461.5" y1="-766.4" x2="1482.8" y2="-781.3"/><line x1="1257.9" y1="-547.8" x2="1271.7" y2="-528.5"/><line x1="1225.1" y1="-547.8" x2="1208.4" y2="-527.8"/><line x1="1185.1" y1="-589.8" x2="1160.6" y2="-598.7"/><line x1="1718.5" y1="-565.8" x2="1744.4" y2="-563.5"/><line x1="1674.2" y1="-548.9" x2="1677.6" y2="-523.3"/><line x1="1646.4" y1="-548.9" x2="1626.5" y2="-532.2"/><line x1="1673.2" y1="-590.9" x2="1675.5" y2="-616.8"/><line x1="1486.7" y1="-930.9" x2="1464.1" y2="-917.9"/><line x1="1502.0" y1="-972.9" x2="1483.6" y2="-991.2"/><line x1="1535.2" y1="-972.9" x2="1548.2" y2="-995.4"/><line x1="1433.9" y1="-589.1" x2="1451.4" y2="-581.1"/><line x1="1414.3" y1="-576.9" x2="1414.3" y2="-524.9"/><line x1="1401.3" y1="-585.0" x2="1378.2" y2="-561.9"/><line x1="1276.9" y1="-715.2" x2="1389.5" y2="-737.2"/><line x1="1208.9" y1="-715.2" x2="1237.9" y2="-589.8"/><line x1="1448.3" y1="-597.9" x2="1624.3" y2="-575.8"/><line x1="1380.3" y1="-597.9" x2="1304.7" y2="-581.9"/><line x1="1571.8" y1="-743.2" x2="1527.9" y2="-930.9"/><line x1="1571.8" y1="-675.2" x2="1473.5" y2="-724.4"/><path d="M1708.7 -934.8 Q1698.7 -980.8 1580.2 -961.3" fill="none"/><path d="M1708.7 -866.8 Q1698.7 -820.8 1551.2 -930.9" fill="none"/></g>
+<rect x="1389.5" y="-766.4" width="84.0" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="1180.8" y="-589.8" width="123.9" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="1184.8" y="-585.8" width="115.9" height="34.0" fill="none" stroke="#111111" stroke-width="1.4"/>
+<rect x="1624.3" y="-590.9" width="94.2" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="1465.8" y="-972.9" width="114.4" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<polygon points="1276.9,-715.2 1242.9,-736.2 1242.9,-694.2" fill="#ffffff" stroke="none"/>
+<polygon points="1208.9,-715.2 1242.9,-736.2 1242.9,-694.2" fill="#111111" stroke="none"/>
+<polygon points="1276.9,-715.2 1242.9,-736.2 1208.9,-715.2 1242.9,-694.2" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="1242.9" y1="-736.2" x2="1242.9" y2="-694.2" stroke="#111111" stroke-width="1"/>
+<polygon points="1448.3,-597.9 1414.3,-618.9 1414.3,-576.9" fill="#111111" stroke="none"/>
+<polygon points="1380.3,-597.9 1414.3,-618.9 1414.3,-576.9" fill="#111111" stroke="none"/>
+<polygon points="1448.3,-597.9 1414.3,-618.9 1380.3,-597.9 1414.3,-576.9" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="1414.3" y1="-618.9" x2="1414.3" y2="-576.9" stroke="#111111" stroke-width="1"/>
+<polygon points="1571.8,-743.2 1550.8,-709.2 1592.8,-709.2" fill="#111111" stroke="none"/>
+<polygon points="1571.8,-675.2 1550.8,-709.2 1592.8,-709.2" fill="#ffffff" stroke="none"/>
+<polygon points="1571.8,-743.2 1550.8,-709.2 1571.8,-675.2 1592.8,-709.2" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="1550.8" y1="-709.2" x2="1592.8" y2="-709.2" stroke="#111111" stroke-width="1"/>
+<polygon points="1708.7,-934.8 1687.7,-900.8 1729.7,-900.8" fill="#ffffff" stroke="none"/>
+<polygon points="1708.7,-866.8 1687.7,-900.8 1729.7,-900.8" fill="#111111" stroke="none"/>
+<polygon points="1708.7,-934.8 1687.7,-900.8 1708.7,-866.8 1729.7,-900.8" fill="none" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<line x1="1687.7" y1="-900.8" x2="1729.7" y2="-900.8" stroke="#111111" stroke-width="1"/>
+<ellipse cx="1500.4" cy="-647.0" rx="36.3" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1426.2" cy="-684.5" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1360.3" cy="-790.6" rx="38.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1438.8" cy="-828.2" rx="31.1" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1500.7" cy="-793.8" rx="40.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1281.1" cy="-515.4" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1197.0" cy="-514.2" rx="50.8" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1129.7" cy="-609.9" rx="52.1" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1779.2" cy="-560.5" rx="35.7" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1679.5" cy="-509.3" rx="27.5" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1611.5" cy="-519.6" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1676.7" cy="-630.8" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1442.0" cy="-905.1" rx="54.7" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1470.7" cy="-1004.2" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1556.0" cy="-1008.9" rx="31.5" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1478.2" cy="-569.0" rx="54.1" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1414.3" cy="-510.9" rx="46.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1364.8" cy="-548.4" rx="48.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<rect x="1343.8" y="-740.8" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1362.0" y="-727.3" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="1285.9" y="-701.2" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="1212.7" y="-626.0" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1231.6" y="-612.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,N)</text>
+<text x="1199.9" y="-721.2" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="1259.0" y="-600.9" font-size="11" font-weight="700" fill="#111111" text-anchor="middle">ID</text>
+<rect x="1577.6" y="-588.3" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1596.5" y="-574.8" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="1457.3" y="-583.9" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="1313.2" y="-596.7" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1332.1" y="-583.2" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="1371.3" y="-603.9" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="1515.4" y="-912.6" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1534.3" y="-899.1" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,N)</text>
+<text x="1581.8" y="-748.2" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<rect x="1480.3" y="-720.9" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1498.5" y="-707.4" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="1561.8" y="-662.2" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="1625.2" y="-976.1" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1643.4" y="-962.6" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,1)</text>
+<text x="1718.7" y="-939.8" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<text x="1643.6" y="-978.6" font-size="11" fill="#475569" text-anchor="middle" font-style="italic">gobernanta</text>
+<rect x="1610.7" y="-886.5" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="1629.6" y="-873.0" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="1698.7" y="-853.8" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="1611.7" y="-859.2" font-size="11" fill="#475569" text-anchor="middle" font-style="italic">supervisado</text>
+<text x="1431.5" y="-740.4" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">HOTEL</text>
+<text x="1242.7" y="-563.8" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">HABITACIÓN</text>
+<text x="1671.4" y="-564.9" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">CLIENTE</text>
+<text x="1523.0" y="-946.9" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">EMPLEADO</text>
+<text x="1242.9" y="-744.7" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">dispone de</text>
+<text x="1414.3" y="-627.4" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">reserva</text>
+<text x="1639.4" y="-704.7" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">trabaja en</text>
+<text x="1774.1" y="-896.3" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">supervisa</text>
+<text x="1500.4" y="-643.0" font-size="12" text-anchor="middle" fill="#111111">estrellas</text>
+<text x="1426.2" y="-680.5" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="1360.3" y="-786.6" font-size="12" text-anchor="middle" fill="#111111">dirección</text>
+<text x="1438.8" y="-824.2" font-size="12" text-anchor="middle" fill="#111111">ciudad</text>
+<text x="1500.7" y="-789.8" font-size="12" text-anchor="middle" fill="#111111">cód_hotel</text>
+<line x1="1471.7" y1="-785.8" x2="1529.7" y2="-785.8" stroke="#111111" stroke-width="1.3"/>
+<text x="1281.1" y="-511.4" font-size="12" text-anchor="middle" fill="#111111">tipo</text>
+<text x="1197.0" y="-510.2" font-size="12" text-anchor="middle" fill="#111111">precio_noche</text>
+<text x="1129.7" y="-605.9" font-size="12" text-anchor="middle" fill="#111111">nº_habitación</text>
+<line x1="1088.6" y1="-601.9" x2="1170.7" y2="-601.9" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
+<text x="1779.2" y="-556.5" font-size="12" text-anchor="middle" fill="#111111">teléfono</text>
+<text x="1679.5" y="-505.3" font-size="12" text-anchor="middle" fill="#111111">email</text>
+<text x="1611.5" y="-515.6" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="1676.7" y="-626.8" font-size="12" text-anchor="middle" fill="#111111">dni</text>
+<line x1="1667.5" y1="-622.8" x2="1686.0" y2="-622.8" stroke="#111111" stroke-width="1.3"/>
+<text x="1442.0" y="-901.1" font-size="12" text-anchor="middle" fill="#111111">cód_empleado</text>
+<line x1="1398.3" y1="-897.1" x2="1485.6" y2="-897.1" stroke="#111111" stroke-width="1.3"/>
+<text x="1470.7" y="-1000.2" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="1556.0" y="-1004.9" font-size="12" text-anchor="middle" fill="#111111">puesto</text>
+<text x="1478.2" y="-565.0" font-size="12" text-anchor="middle" fill="#111111">fecha_entrada</text>
+<line x1="1435.1" y1="-561.0" x2="1521.3" y2="-561.0" stroke="#111111" stroke-width="1.3" stroke-dasharray="4 3"/>
+<text x="1414.3" y="-506.9" font-size="12" text-anchor="middle" fill="#111111">precio_total</text>
+<text x="1364.8" y="-544.4" font-size="12" text-anchor="middle" fill="#111111">fecha_salida</text>
+</svg>

@@ -1,0 +1,88 @@
+{{- /* Widget UD03: simulador de integridad referencial con mensajes de Oracle. */ -}}
+{{- $id := printf "int-%d" .Ordinal -}}
+<div class="bd-w" id="{{ $id }}" style="--c: var(--color-accent-caution)">
+  <div class="bd-w-head"><span class="bd-w-tag">Interactivo</span> Simulador de integridad referencial <span class="bd-w-sub">GRUPO (padre) ← ALUMNO (hija) · mensajes de Oracle</span></div>
+  <div class="bd-w-body">
+    <div class="bd-w-row">
+      <label class="bd-f">Política de la clave ajena
+        <select data-i="pol">
+          <option value="none">Sin cláusula (Oracle rechaza el borrado)</option>
+          <option value="cascade">ON DELETE CASCADE</option>
+          <option value="setnull">ON DELETE SET NULL</option>
+        </select></label>
+      <label class="bd-f">Columna cod_grupo
+        <select data-i="nn"><option value="null">Admite NULL</option><option value="nn">NOT NULL</option></select></label>
+      <button type="button" class="ghost" data-i="reset">Reiniciar datos</button>
+    </div>
+    <pre data-i="ddl"></pre>
+    <div class="bd-w-cols">
+      <div><strong>GRUPO</strong> (tabla padre)<table data-i="tg"></table></div>
+      <div><strong>ALUMNO</strong> (tabla hija)<table data-i="ta"></table></div>
+    </div>
+    <div class="bd-w-row">
+      <label class="bd-f">Borrar el grupo <select data-i="delg"></select></label>
+      <button type="button" data-i="bdel">DELETE</button>
+      <label class="bd-f">Cambiar la clave de <select data-i="updg"></select></label>
+      <button type="button" data-i="bupd">UPDATE</button>
+    </div>
+    <div class="bd-w-row">
+      <label class="bd-f">Insertar alumno en el grupo <select data-i="insg"></select></label>
+      <button type="button" data-i="bins">INSERT</button>
+    </div>
+    <div class="bd-w-out bd-w-log" data-i="log" aria-live="polite"><div>Resultados de las sentencias…</div></div>
+  </div>
+</div>
+<script>
+(function () {
+  var root = document.getElementById({{ $id }});
+  var q = function (n) { return root.querySelector('[data-i="' + n + '"]'); };
+  var G0 = ['1DAM', '2DAM', '1DAW'];
+  var A0 = [[1, 'Adrián', '1DAM'], [2, 'Rubén', '1DAM'], [8, 'Iván', '2DAM'], [9, 'Martina', '2DAM'], [14, 'Carla', '1DAW']];
+  var G, A, nextId, changed = {};
+  function reset() { G = G0.slice(); A = A0.map(function (r) { return r.slice(); }); nextId = 1001; changed = {}; log(null); draw(); fill(); }
+  function log(msg, cls) { var l = q('log'); if (msg === null) { l.textContent = ''; var d = document.createElement('div'); d.textContent = 'Datos reiniciados.'; l.appendChild(d); return; }
+    var d = document.createElement('div'); if (cls) d.className = cls; d.textContent = msg; l.insertBefore(d, l.firstChild); }
+  function ddl() {
+    var pol = q('pol').value, nn = q('nn').value === 'nn';
+    q('ddl').textContent = 'CREATE TABLE alumno (\n  id_alumno  NUMBER(5) PRIMARY KEY,\n  nombre     VARCHAR2(50) NOT NULL,\n  cod_grupo  VARCHAR2(10)' + (nn ? ' NOT NULL' : '') + ',\n  CONSTRAINT fk_alumno_grupo FOREIGN KEY (cod_grupo)\n    REFERENCES grupo (cod_grupo)' + (pol === 'cascade' ? '\n    ON DELETE CASCADE' : pol === 'setnull' ? '\n    ON DELETE SET NULL' : '') + '\n);';
+  }
+  function tbl(t, head, rows, hl) {
+    while (t.firstChild) t.removeChild(t.firstChild);
+    var tr = document.createElement('tr'); head.forEach(function (h) { var th = document.createElement('th'); th.textContent = h; tr.appendChild(th); }); t.appendChild(tr);
+    rows.forEach(function (r, n) { var x = document.createElement('tr'); if (hl && hl[n]) x.className = hl[n];
+      r.forEach(function (v) { var td = document.createElement('td'); if (v === null) { td.textContent = 'NULL'; td.className = 'null'; } else td.textContent = v; x.appendChild(td); }); t.appendChild(x); });
+  }
+  function draw() { tbl(q('tg'), ['cod_grupo (PK)'], G.map(function (g) { return [g]; }), changed.g); tbl(q('ta'), ['id_alumno', 'nombre', 'cod_grupo (FK)'], A, changed.a); ddl(); }
+  function opts(sel, vals) { while (sel.firstChild) sel.removeChild(sel.firstChild); vals.forEach(function (v) { var o = document.createElement('option'); o.value = v === null ? '' : v; o.textContent = v === null ? 'NULL' : v; sel.appendChild(o); }); }
+  function fill() { opts(q('delg'), G); opts(q('updg'), G); opts(q('insg'), G.concat(['3XYZ', null])); }
+  q('bdel').addEventListener('click', function () {
+    var g = q('delg').value, pol = q('pol').value, nn = q('nn').value === 'nn', kids = A.filter(function (a) { return a[2] === g; });
+    var sql = "DELETE FROM grupo WHERE cod_grupo = '" + g + "';"; changed = {};
+    if (kids.length && pol === 'none') { log(sql + '\n→ ORA-02292: integrity constraint (EDUGEST.FK_ALUMNO_GRUPO) violated - child record found (' + kids.length + ' alumnos lo usan)', 'ko'); draw(); return; }
+    if (kids.length && pol === 'setnull' && nn) { log(sql + '\n→ ORA-01407: cannot update ("EDUGEST"."ALUMNO"."COD_GRUPO") to NULL (SET NULL sobre una columna NOT NULL no puede cumplirse)', 'ko'); draw(); return; }
+    var ca = {};
+    if (kids.length && pol === 'cascade') { var keep = []; A.forEach(function (a) { if (a[2] !== g) keep.push(a); }); A = keep; }
+    if (kids.length && pol === 'setnull') { A.forEach(function (a, n) { if (a[2] === g) { a[2] = null; ca[n] = 'chg'; } }); }
+    G = G.filter(function (x) { return x !== g; }); changed.a = ca; fill(); draw();
+    log(sql + '\n→ 1 fila borrada' + (kids.length ? (pol === 'cascade' ? ' · y ' + kids.length + ' alumno(s) borrados en cascada' : ' · ' + kids.length + ' alumno(s) con cod_grupo = NULL') : ''), 'ok');
+  });
+  q('bupd').addEventListener('click', function () {
+    var g = q('updg').value, kids = A.filter(function (a) { return a[2] === g; }); changed = {};
+    var sql = "UPDATE grupo SET cod_grupo = '" + g + "_B' WHERE cod_grupo = '" + g + "';";
+    if (kids.length) log(sql + '\n→ ORA-02292: integrity constraint (EDUGEST.FK_ALUMNO_GRUPO) violated - child record found. Oracle no tiene ON UPDATE CASCADE: por eso las claves primarias deben ser estables.', 'ko');
+    else { G = G.map(function (x) { return x === g ? g + '_B' : x; }); changed.g = {}; changed.g[G.indexOf(g + '_B')] = 'chg'; fill(); log(sql + '\n→ 1 fila actualizada (el grupo no tenía alumnos)', 'ok'); }
+    draw();
+  });
+  q('bins').addEventListener('click', function () {
+    var g = q('insg').value, nn = q('nn').value === 'nn'; changed = {};
+    var shown = g === '' ? 'NULL' : "'" + g + "'", sql = 'INSERT INTO alumno VALUES (' + nextId + ", 'Nuevo', " + shown + ');';
+    if (g === '' && nn) { log(sql + '\n→ ORA-01400: cannot insert NULL into ("EDUGEST"."ALUMNO"."COD_GRUPO")', 'ko'); draw(); return; }
+    if (g !== '' && G.indexOf(g) < 0) { log(sql + '\n→ ORA-02291: integrity constraint (EDUGEST.FK_ALUMNO_GRUPO) violated - parent key not found', 'ko'); draw(); return; }
+    A.push([nextId++, 'Nuevo', g === '' ? null : g]); changed.a = {}; changed.a[A.length - 1] = 'chg'; draw();
+    log(sql + '\n→ 1 fila insertada' + (g === '' ? ' (una clave ajena a NULL no se comprueba)' : ''), 'ok');
+  });
+  q('pol').addEventListener('change', function () { reset(); }); q('nn').addEventListener('change', function () { reset(); });
+  q('reset').addEventListener('click', reset);
+  reset();
+})();
+</script>

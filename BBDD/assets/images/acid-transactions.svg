@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 455" width="820" height="455" role="img" aria-labelledby="t d" font-family='system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'>
+<title id="t">Propiedades ACID de las transacciones</title><desc id="d">Cuatro tarjetas: Atomicidad, Consistencia, Aislamiento y Durabilidad, con su significado.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e293b"/></linearGradient></defs>
+<style>.hot{cursor:pointer;transition:filter .15s}.hot:hover,.hot:focus,.hot.on{filter:brightness(1.35) drop-shadow(0 0 6px rgba(255,255,255,.35));outline:none}</style>
+<rect width="820" height="455" rx="12" fill="url(#bg)"/>
+<text x="410.0" y="40.0" font-size="21" fill="#f1f5f9" text-anchor="middle" font-weight="700">Propiedades ACID de las transacciones</text>
+<g class="hot" tabindex="0" data-tip="Transferencia de 100 €: o se resta de una cuenta Y se suma en la otra, o no ocurre nada.">
+<rect x="30.0" y="70.0" width="370.0" height="175.0" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+<rect x="46.0" y="86.0" width="46.0" height="46.0" rx="8" fill="#f87171"/>
+<text x="69.0" y="119.0" font-size="26" fill="#0f172a" text-anchor="middle" font-weight="700">A</text>
+<text x="106.0" y="106.0" font-size="16" fill="#f87171" text-anchor="start" font-weight="700">Atomicidad (Atomicity)</text>
+<text x="106.0" y="126.0" font-size="13" fill="#94a3b8" text-anchor="start" font-style="italic">«Todo o nada»</text>
+<text x="48.0" y="162.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">Todas las operaciones de la transacción se</text>
+<text x="48.0" y="181.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">completan (COMMIT) o ninguna surte efecto</text>
+<text x="48.0" y="200.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">(ROLLBACK).</text>
+</g>
+<g class="hot" tabindex="0" data-tip="Una transacción que dejara un pedido sin cliente se rechaza por la FK.">
+<rect x="420.0" y="70.0" width="370.0" height="175.0" rx="10" fill="#1e293b" stroke="#fbbf24" stroke-width="2"/>
+<rect x="436.0" y="86.0" width="46.0" height="46.0" rx="8" fill="#fbbf24"/>
+<text x="459.0" y="119.0" font-size="26" fill="#0f172a" text-anchor="middle" font-weight="700">C</text>
+<text x="496.0" y="106.0" font-size="16" fill="#fbbf24" text-anchor="start" font-weight="700">Consistencia (Consistency)</text>
+<text x="496.0" y="126.0" font-size="13" fill="#94a3b8" text-anchor="start" font-style="italic">«De estado válido a estado válido»</text>
+<text x="438.0" y="162.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">La base de datos pasa de un estado correcto a otro</text>
+<text x="438.0" y="181.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">correcto: se cumplen claves, restricciones CHECK,</text>
+<text x="438.0" y="200.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">FK y reglas.</text>
+</g>
+<g class="hot" tabindex="0" data-tip="Dos usuarios reservando el último asiento: el SGBD los serializa.">
+<rect x="30.0" y="260.0" width="370.0" height="175.0" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+<rect x="46.0" y="276.0" width="46.0" height="46.0" rx="8" fill="#38bdf8"/>
+<text x="69.0" y="309.0" font-size="26" fill="#0f172a" text-anchor="middle" font-weight="700">I</text>
+<text x="106.0" y="296.0" font-size="16" fill="#38bdf8" text-anchor="start" font-weight="700">Aislamiento (Isolation)</text>
+<text x="106.0" y="316.0" font-size="13" fill="#94a3b8" text-anchor="start" font-style="italic">«Sin interferencias»</text>
+<text x="48.0" y="352.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">Las transacciones concurrentes no se interfieren: los</text>
+<text x="48.0" y="371.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">cambios no se ven fuera hasta confirmarse.</text>
+</g>
+<g class="hot" tabindex="0" data-tip="El redo log permite recuperar lo confirmado tras un corte de luz.">
+<rect x="420.0" y="260.0" width="370.0" height="175.0" rx="10" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+<rect x="436.0" y="276.0" width="46.0" height="46.0" rx="8" fill="#34d399"/>
+<text x="459.0" y="309.0" font-size="26" fill="#0f172a" text-anchor="middle" font-weight="700">D</text>
+<text x="496.0" y="296.0" font-size="16" fill="#34d399" text-anchor="start" font-weight="700">Durabilidad (Durability)</text>
+<text x="496.0" y="316.0" font-size="13" fill="#94a3b8" text-anchor="start" font-style="italic">«Los cambios permanecen»</text>
+<text x="438.0" y="352.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">Una vez confirmada (COMMIT), los datos persisten</text>
+<text x="438.0" y="371.0" font-size="13.5" fill="#f1f5f9" text-anchor="start">aunque haya un fallo del sistema o un reinicio.</text>
+</g>
+</svg>
