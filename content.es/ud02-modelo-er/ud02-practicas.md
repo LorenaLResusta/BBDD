@@ -17,11 +17,18 @@ math: true
 | [2.4 Clínica veterinaria con jerarquías](#práctica-24--clínica-veterinaria-con-jerarquías) | Autónoma | ●●○ | RA6.d, RA6.e, RA6.h |
 | [2.5 Revisión de un diseño defectuoso](#práctica-25--revisión-de-un-diseño-defectuoso) | Reto | ●●● | RA6.d, RA6.h |
 | [2.6 Autoescuela: ternaria o agregación](#práctica-26--autoescuela-ternaria-o-agregación) | Reto | ●●● | RA6.d |
+| [2.7 Almazara: la entrevista que no lo dice todo](#práctica-27--almazara-la-entrevista-que-no-lo-dice-todo) | Reto | ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
+| [2.8 Alquiler de coches: el modelo que recuerda](#práctica-28--alquiler-de-coches-el-modelo-que-recuerda) | Reto | ●●● | RA6.d, RA6.e, RA6.h |
+| [2.9 Ingeniería inversa: del albarán a las entidades](#práctica-29--ingeniería-inversa-del-albarán-a-las-entidades) | Reto | ●●● | RA6.a, RA6.d, RA6.h |
+| [2.10 Dos diseños, un ganador](#práctica-210--dos-diseños-un-ganador) | Reto | ●●● | RA6.d, RA6.h |
 | [Proyecto EduGest · UD02](#proyecto-edugest--ud02-modelo-conceptual) | Proyecto | ●●○ | RA6.a, RA6.d, RA6.e, RA6.h |
 | [Banco · Fundamentos (ejercicios 1-5)](#bloque-1--fundamentos) | Autónoma | ●○○ | RA6.a, RA6.d, RA6.e, RA6.h |
 | [Banco · Intermedio (ejercicios 6-15)](#bloque-2--intermedio) | Autónoma | ●●○ | RA6.a, RA6.d, RA6.e, RA6.h |
 | [Banco · Integración (ejercicios 16-23)](#bloque-3--integración) | Autónoma | ●●○ → ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
 | [Banco · EER avanzado (ejercicios 24-30)](#bloque-4--eer-avanzado) | Autónoma | ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
+
+> [!NOTE]
+> **Cómo están organizadas estas páginas.** El enunciado se presenta como lo contaría una persona del negocio, no como una lista de entidades: **decidir qué es una entidad, un atributo o una relación forma parte del trabajo**. Las tareas, la comprobación y los errores habituales están plegados: despliégalos cuando los necesites, no antes de pensar.
 
 > [!TIP]
 > **Método para todos los ejercicios.** (1) Subraya sustantivos y verbos; (2) decide entidades e identificadores; (3) relaciones y cardinalidades en **los dos sentidos**; (4) atributos, incluidos los de las relaciones; (5) revisa redundancias y escribe los **supuestos** que hayas tenido que hacer.
@@ -34,41 +41,55 @@ math: true
 
 #### Objetivo
 
-Aplicar la metodología de cinco pasos para construir un diagrama E/R completo a partir de un enunciado sencillo.
+Aplicar la metodología de cinco pasos para construir un diagrama E/R completo a partir de un relato de una persona del negocio.
 
 #### Contexto
 
-La red de bibliotecas de un ayuntamiento quiere informatizar el préstamo de libros.
+La biblioteca de un barrio quiere dejar el cuaderno y pasar a una base de datos. Su responsable te cuenta cómo trabaja.
 
 #### Enunciado
 
-> De cada **libro** se guarda el ISBN, el título, el año de publicación y la editorial. Un libro puede tener varios **autores** y un autor puede haber escrito varios libros; de cada autor se guarda un código, el nombre y la nacionalidad.
+> «Cuando llega un libro nuevo lo apunto con su ISBN, el título, la editorial y el año. Hay libros escritos por varias personas y autores con muchos libros en nuestro catálogo; de cada autor anoto cómo se llama y de dónde es, y a los que se repiten les pongo un código para no confundirlos.
 >
-> La biblioteca tiene varios **ejemplares** de cada libro. Cada ejemplar se identifica por un número correlativo dentro de su libro (ejemplar 1, 2, 3...) y se guarda su estado de conservación.
+> De cada libro suelo comprar varias copias. Las distingo con un número que les pego en el lomo (la 1, la 2, la 3...), y ese número empieza otra vez en cada libro. Apunto también si la copia está nueva, usada o deteriorada.
 >
-> Los **socios** (número de socio, DNI, nombre, teléfono) se llevan ejemplares en **préstamo**. De cada préstamo se registra la fecha de salida, la fecha prevista de devolución y la fecha real de devolución. Un socio puede tener varios préstamos a lo largo del tiempo y un ejemplar puede prestarse muchas veces.
+> Los vecinos se hacen socios con su DNI, su nombre y un teléfono, y les doy un número de carné. Cuando alguien se lleva una copia a casa, anoto el día que se la lleva, hasta cuándo puede tenerla y el día en que la devuelve de verdad. Hay libros que llevan meses prestados y otros que nunca han salido. A algunos socios los tengo que llamar muchas veces.»
 
 #### Desarrollo
 
+Sigue los cinco pasos y responde a las preguntas antes de abrir las respuestas.
+
 {{% steps %}}
 
-1. **Entidades.** Subraya los sustantivos: libro, ISBN, título, autor, ejemplar, socio, préstamo, fecha... Quédate con los que tienen propiedades propias: `LIBRO`, `AUTOR`, `EJEMPLAR`, `SOCIO`. ¿Y `PRÉSTAMO`? Es un **hecho** que relaciona un socio y un ejemplar en una fecha: lo modelaremos como relación.
+1. **Entidades.** Subraya sustantivos y verbos. ¿Cuáles tienen propiedades propias? ¿Hay algún «hecho» que parezca una entidad pero en realidad relacione otras dos cosas?
 
-2. **Identificadores.** `LIBRO`: ISBN. `AUTOR`: código. `SOCIO`: número de socio (el DNI es una **clave alternativa**). `EJEMPLAR`: el número solo es único dentro de su libro, así que es una **entidad débil** cuyo identificador es (ISBN, número).
+2. **Identificadores.** Para cada entidad, ¿qué dato la distingue de las demás? ¿Alguna se identifica con un número que se repite de unas a otras? ¿Qué dato candidato queda como alternativa?
 
-3. **Relaciones y cardinalidades.** Formula las dos preguntas en los dos sentidos:
+3. **Relaciones y cardinalidades.** Para cada pareja, formula las dos preguntas, una en cada sentido, y decide el mínimo y el máximo. ¿Qué dice el relato sobre libros que «nunca han salido»?
 
-    | Relación | Lectura | Cardinalidad |
-    |---|---|---|
-    | AUTOR *escribe* LIBRO | Un autor escribe (1, N) libros; un libro lo escriben (1, N) autores | N:M |
-    | LIBRO *tiene* EJEMPLAR | Un libro tiene (0, N) ejemplares; un ejemplar es de (1, 1) libro | 1:N, identificadora |
-    | SOCIO *toma prestado* EJEMPLAR | Un socio tiene (0, N) préstamos; un ejemplar tiene (0, N) préstamos | N:M |
+4. **Atributos de las relaciones.** ¿A qué pertenecen las fechas? ¿Puede el mismo socio llevarse la misma copia en dos ocasiones? ¿Qué implica eso para identificar cada préstamo?
 
-4. **Atributos de las relaciones.** Las fechas no son del socio ni del ejemplar: van en la relación de préstamo. Como el **mismo** socio puede llevarse el **mismo** ejemplar en ocasiones distintas, la fecha de salida forma parte de la identificación de cada préstamo.
-
-5. **Dibuja el diagrama** en draw.io con la notación de Chen (*Más formas* → *Entity Relation*). Después compáralo con la versión en pata de gallo de la solución.
+5. **Dibuja** el diagrama en draw.io con la notación de Chen (*Más formas* → *Entity Relation*) y compáralo con la solución.
 
 {{% /steps %}}
+
+{{% details title="Respuestas guiadas a los cinco pasos" %}}
+
+1. **Entidades:** `LIBRO`, `AUTOR`, `EJEMPLAR` y `SOCIO`. «Préstamo» no tiene propiedades propias más allá de fechas: es el hecho que relaciona un socio con un ejemplar, así que se modela como **relación**. La editorial se queda como atributo mientras no haya que guardar datos suyos.
+2. **Identificadores:** `LIBRO` → ISBN; `AUTOR` → código; `SOCIO` → número de carné (el DNI es **clave alternativa**). `EJEMPLAR`: su número solo es único dentro del libro, por lo que es una **entidad débil** identificada por (ISBN, número).
+3. **Cardinalidades:**
+
+    | Relación | Lectura | Tipo |
+    |---|---|---|
+    | AUTOR *escribe* LIBRO | un autor escribe (1, N) libros; un libro lo escriben (1, N) autores | N:M |
+    | LIBRO *tiene* EJEMPLAR | un libro tiene (0, N) ejemplares; un ejemplar es de (1, 1) libro | 1:N identificadora |
+    | SOCIO *toma prestado* EJEMPLAR | un socio tiene (0, N) préstamos; un ejemplar tiene (0, N) préstamos | N:M |
+
+    El mínimo 0 de socio y ejemplar refleja «libros que nunca han salido» y socios que aún no han llevado nada.
+4. **Atributos de relación:** las fechas no son ni del socio ni del ejemplar: son del préstamo. Como el mismo socio puede llevarse la misma copia varias veces, la **fecha de salida** forma parte de la identificación de cada préstamo (atributo discriminador de la relación).
+5. La frase «a algunos socios los tengo que llamar muchas veces» es **ruido**: no genera ningún requisito de datos (podría generar uno si se quisiera guardar un historial de avisos). Saber descartar información es parte del análisis.
+
+{{% /details %}}
 
 {{% details title="Solución en notación de pata de gallo" %}}
 
@@ -107,26 +128,32 @@ erDiagram
     }
 ```
 
-**Supuestos semánticos** (lo que el enunciado no dice y hemos decidido):
+**Supuestos semánticos** (lo que el relato no dice y hemos decidido):
 
 1. Un libro registrado tiene al menos un autor conocido.
 2. Puede existir un libro sin ejemplares (pedido, pero todavía no recibido).
 3. La fecha real de devolución es opcional: está vacía mientras el préstamo sigue abierto.
 4. La editorial se guarda como atributo; si hiciera falta guardar más datos de ella, sería una entidad.
+
 {{% /details %}}
 
-#### Comprobación
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 - [ ] Hay 4 entidades y `EJEMPLAR` está marcada como débil (doble rectángulo en Chen).
 - [ ] Las dos relaciones N:M tienen la cardinalidad máxima N en los dos lados.
 - [ ] Las fechas del préstamo están en la relación, no en `SOCIO` ni en `EJEMPLAR`.
+- [ ] Has descartado la información que no genera datos.
 - [ ] Has escrito al menos tres supuestos semánticos.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
 
 > [!WARNING]
 > - Relacionar `SOCIO` con `LIBRO` en lugar de con `EJEMPLAR`. Lo que se presta es una copia física, no la obra.
 > - Poner `fecha_prestamo` como atributo de `SOCIO`. Un socio tiene muchos préstamos, así que ese atributo solo podría guardar uno.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -189,39 +216,44 @@ erDiagram
 
 {{< practica num="2.3" tipo="Autónoma" duracion="2 sesiones" nivel="2" ra="RA6: a, d, e" sgbd="draw.io u Oracle SQL Developer Data Modeler" entrega="Diagrama + diccionario de datos + supuestos" >}}
 
-#### Objetivo
-
-Elaborar de forma autónoma un modelo E/R con varias relaciones N:M con atributos.
-
 #### Contexto
 
-Una start-up prepara una plataforma de vídeo bajo demanda y te encarga el modelo conceptual.
+Tres amigos preparan el lanzamiento de un servicio de vídeo bajo demanda y te piden el modelo conceptual. Este es el correo que te mandan.
 
 #### Enunciado
 
-> Los **clientes** se registran con su NIF, nombre, apellidos, correo electrónico (único) y una dirección compuesta por calle, código postal y ciudad. Cada cliente tiene un **plan de suscripción** (Básico, Estándar o Premium); de cada plan se guarda el precio mensual y el número máximo de pantallas simultáneas.
+> «Hola. Os cuento cómo queremos que funcione *Cinefilia*.
 >
-> Del catálogo de **películas** se guarda un código, el título, el año, la duración y uno o varios **géneros**. De cada **actor** se guarda un código, el nombre y la nacionalidad. Interesa saber qué actores participan en cada película y el **personaje** que interpretan.
+> La gente se registra con su NIF, su nombre y apellidos, un correo (no queremos dos cuentas con el mismo) y una dirección de facturación: calle, código postal y ciudad. Habrá tres tarifas —básica, estándar y premium— que se diferencian en lo que cuestan al mes y en cuántas pantallas se pueden usar a la vez. Cada cliente tiene contratada una.
 >
-> La plataforma registra cada **visualización**: qué cliente ve qué película, la fecha y hora de inicio y el minuto en el que la dejó. Un cliente puede ver la misma película varias veces. Además, el cliente puede **valorar** cada película una sola vez con una puntuación de 1 a 5.
+> En el catálogo, cada película tiene su título, año y duración. La clasificamos por géneros porque la gente busca «comedia romántica» o «ciencia ficción», y también queremos que se pueda buscar por actor y que en la ficha se vea quién hace de quién.
+>
+> Necesitamos saber qué ve cada cliente y cuándo —a qué hora empezó y hasta qué minuto llegó— para ofrecer «continuar viendo». Sí, hay quien ve tres veces la misma peli. Y los clientes podrán puntuarlas de 1 a 5 estrellas, pero una sola vez por película, que si no se manipulan las medias.»
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
 1. Diagrama E/R completo en la notación que prefieras (indica cuál).
 2. **Diccionario de datos**: tabla con entidad o relación, atributo, descripción, tipo de dato conceptual (texto, número, fecha...) y si es obligatorio.
-3. Lista de supuestos semánticos.
+3. Lista de **supuestos semánticos**.
 4. Dos **restricciones** que el diagrama no pueda expresar.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 - [ ] `género` está modelado como **entidad** o como **atributo multivaluado**, y justificas la elección.
 - [ ] `personaje` es un atributo de la relación actor–película.
 - [ ] *Visualización* y *valoración* son relaciones **distintas**: una se repite y la otra no.
 - [ ] La dirección aparece como atributo **compuesto**.
+- [ ] La tarifa es una entidad con sus propios datos, no un texto en el cliente.
 - [ ] Entre las restricciones textuales está «la puntuación está entre 1 y 5» u otra similar.
 
+{{% /details %}}
+
 {{% details title="Pista: visualización frente a valoración" %}}
+
 Las dos relacionan `CLIENTE` y `PELICULA`, pero la visualización puede repetirse (se identifica también por la fecha y hora), mientras que la valoración es única por pareja cliente-película. Son dos hechos distintos: dos relaciones distintas.
+
 {{% /details %}}
 
 #### Ampliación
@@ -234,31 +266,48 @@ Añade **series**, compuestas por temporadas (1, 2, 3...) y episodios numerados 
 
 {{< practica num="2.4" tipo="Autónoma" duracion="2 sesiones" nivel="2" ra="RA6: d, e, h" sgbd="draw.io" entrega="Diagrama EER + justificación de las jerarquías" >}}
 
-#### Objetivo
+#### Contexto
 
-Aplicar la generalización/especialización y clasificar correctamente cada jerarquía.
+Una clínica veterinaria de tamaño medio estrena sistema de gestión. La gerente describe su día a día.
 
 #### Enunciado
 
-> En la clínica trabajan **empleados** (DNI, nombre, teléfono, fecha de contratación). Todos son **veterinarios** (número de colegiado, especialidad), **auxiliares** (titulación) o **administrativos** (idiomas que hablan). Ningún empleado tiene dos puestos a la vez.
+> «Aquí trabajamos once personas, y de todas guardo el DNI, el nombre, el teléfono y el día que empezaron. Los que pasan consulta son veterinarios, con su número de colegiado y su especialidad; los auxiliares tienen una titulación; y en el mostrador están los administrativos, de los que apunto los idiomas que hablan porque los extranjeros lo agradecen. Nadie hace dos cosas: o es una o es otra.
 >
-> Los **clientes** son los dueños de las **mascotas** (número de chip, nombre, fecha de nacimiento, especie). Algunas mascotas son **perros**, de los que se guarda la raza y si son potencialmente peligrosos, y otras **gatos**, de los que se guarda si están esterilizados. Hay otras especies que no requieren datos adicionales.
+> A los clientes los conocemos por sus mascotas: chip, nombre, fecha de nacimiento y especie. Cada mascota es de un cliente, aunque un cliente puede traer varias. De los perros anoto la raza y si la ley los considera potencialmente peligrosos; de los gatos, si están esterilizados. Con el resto (conejos, tortugas...) no hace falta nada especial.
 >
-> Cada **consulta** la realiza un veterinario a una mascota en una fecha; se anota el motivo, el diagnóstico y los **medicamentos** recetados (código, nombre comercial) con su dosis. Un auxiliar puede ayudar en la consulta.
+> Cada consulta la pasa un veterinario a una mascota un día concreto. Anoto el motivo, el diagnóstico y lo que receta, con la dosis de cada medicamento (nombre comercial y un código interno). A veces un auxiliar echa una mano.»
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
 1. Diagrama EER con todas las jerarquías.
-2. Clasifica cada jerarquía como total/parcial y disyunta/solapada y **justifícalo con una frase del enunciado**.
+2. Clasifica cada jerarquía como total/parcial y disyunta/solapada y **justifícalo con una frase del texto**.
 3. Decide si `CONSULTA` es una entidad o una relación. Razona las dos opciones.
 4. Escribe las restricciones que no puede recoger el diagrama (por ejemplo, sobre la dosis o sobre quién puede recetar).
+5. Identifica qué información del texto **no** da lugar a ningún dato que haya que guardar.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 - [ ] La jerarquía de empleados es **total y disyunta**.
 - [ ] La jerarquía de mascotas es **parcial y disyunta**.
 - [ ] Los atributos comunes están en la superclase y solo los específicos en las subclases.
+- [ ] El cliente aparece como entidad aunque el texto «lo conoce por sus mascotas».
 - [ ] La dosis es un atributo de la relación consulta–medicamento.
+
+{{% /details %}}
+
+{{% details title="Solución y criterios (para el profesorado o tras entregar)" %}}
+
+- **Empleados:** superclase `EMPLEADO` (DNI, nombre, teléfono, fecha de alta) con tres subclases. *Total* («los que pasan consulta son… los auxiliares… los administrativos… de todas») y *disyunta* («nadie hace dos cosas»).
+- **Mascotas:** `MASCOTA` con subclases `PERRO` y `GATO`. *Parcial* («con el resto no hace falta nada especial») y *disyunta* (un animal no es perro y gato a la vez).
+- **Cliente:** no se enumeran sus atributos en el texto. Es una entidad con identificador a decidir (supuesto: DNI) porque «cada mascota es de un cliente» (1:N).
+- **Consulta:** puede ser entidad (con identificador propio) o relación ternaria veterinario–mascota–fecha. Es entidad si se quiere colgar de ella a los auxiliares y los medicamentos con facilidad; la dosis siempre va en la relación *receta* entre consulta y medicamento.
+- **Auxiliar en consulta:** relación 0..N, opcional («a veces»).
+- **Información descartada:** «once personas» es un dato puntual, no un requisito.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -269,10 +318,6 @@ Aplicar la generalización/especialización y clasificar correctamente cada jera
 ## Práctica 2.5 · Revisión de un diseño defectuoso
 
 {{< practica num="2.5" tipo="Reto" duracion="1 sesión" nivel="3" ra="RA6: d, h" sgbd="Papel" entrega="Informe de revisión con el diagrama corregido" >}}
-
-#### Objetivo
-
-Detectar errores de diseño en un modelo ajeno y justificar las correcciones, como se hace en una revisión de código.
 
 #### Contexto
 
@@ -307,9 +352,9 @@ erDiagram
 
 #### Enunciado
 
-Encuentra **al menos siete errores**. Para cada uno indica: elemento afectado, tipo de error, consecuencia y corrección. Después dibuja el diagrama corregido.
+Haz la revisión como la haría un compañero senior: no sabes cuántos problemas hay. Para cada uno que encuentres indica el elemento afectado, el tipo de error, su consecuencia y la corrección. Después dibuja el diagrama corregido y decide si hay algo que **no** puedes corregir sin preguntar al cliente.
 
-{{% details title="Pista: tipos de error que debes buscar" %}}
+{{% details title="Pista: tipos de error que debes buscar (solo si te quedas atascado)" %}}
 Identificadores inestables, atributos derivados, atributos multivaluados escondidos en un texto, atributos colocados en la entidad equivocada, entidades que no tienen identificador, conceptos que deberían ser entidades (monitor, sesión), relaciones redundantes.
 {{% /details %}}
 
@@ -331,23 +376,404 @@ Identificadores inestables, atributos derivados, atributos multivaluados escondi
 
 {{< practica num="2.6" tipo="Reto" duracion="1 sesión" nivel="3" ra="RA6: d" sgbd="Papel o draw.io" entrega="Dos diagramas + análisis de cardinalidades" >}}
 
-#### Objetivo
+#### Enunciado
 
-Decidir entre una relación ternaria y una agregación y calcular las cardinalidades de una relación ternaria.
+> «En nuestra autoescuela cada alumno da las prácticas con el profesor que le asignamos, siempre en uno de nuestros coches (cada uno con su matrícula, marca y modelo). Apuntamos el día y la hora de cada clase y los kilómetros que hacen. A lo largo del curso un alumno puede dar clase con varios profesores, y un profesor puede dar clase en varios coches.
+>
+> Cuando un alumno ha terminado con un profesor y este lo considera preparado, pedimos examen ante la DGT: se anota la fecha y si aprueba o suspende. Hay alumnos que nunca llegan a presentarse, y los que se presentan pueden hacerlo más de una vez.»
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+1. Modela las clases prácticas como una relación **ternaria** alumno–profesor–vehículo. Calcula la cardinalidad de cada entidad fijando las otras dos.
+2. Modela el examen. Explica por qué una **agregación** de la relación alumno–profesor es mejor que una ternaria con `EXAMEN`, y qué cambia porque pueda repetirse.
+3. Explica qué información se perdería si sustituyes la ternaria del punto 1 por tres relaciones binarias.
+
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+- [ ] La ternaria incluye la fecha y la hora como atributos y justificas su cardinalidad (con varios alumnos, profesores y vehículos suele ser N:M:P).
+- [ ] La agregación permite que haya parejas alumno–profesor **sin** examen.
+- [ ] Has identificado cada examen con algo más que la pareja alumno–profesor (la fecha).
+- [ ] Se explica con un ejemplo concreto la pérdida de información de las binarias.
+
+{{% /details %}}
+
+{{% details title="Solución (para el profesorado o tras entregar)" %}}
+
+- **Ternaria `clase`:** un alumno recibe clase de muchos (profesor, vehículo); un profesor de muchos (alumno, vehículo); un vehículo de muchos (alumno, profesor). Cardinalidad N:M:P con atributos `fecha`, `hora` y `kilometros`; `fecha` y `hora` forman parte de la identificación porque la misma terna se repite.
+- **Agregación:** `MATRICULA` = relación alumno–profesor tratada como entidad. Se relaciona con `EXAMEN` (0,N), de modo que hay matrículas sin examen y matrículas con varios. Con una ternaria alumno–profesor–examen la pareja estaría obligada a participar.
+- **Tres binarias:** se pierde *qué alumno dio clase con qué profesor en qué coche*. Si Ana ha dado clase con Luis y con Marta, y Luis y Marta han usado el coche 1, no se sabe si Ana usó el coche 1 con Luis o con Marta.
+
+{{% /details %}}
+
+
+---
+
+## Práctica 2.7 · Almazara: la entrevista que no lo dice todo
+
+{{< practica num="2.7" tipo="Reto" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io" entrega="Lista de preguntas al cliente + diagrama + supuestos + restricciones" >}}
+
+#### Contexto
+
+Una cooperativa de aceite quiere registrar la trazabilidad de su producción. Esta es la transcripción de la reunión con el gerente. Como ocurre en la realidad, **el cliente no te lo cuenta todo, se contradice y mezcla cosas que no son de tu sistema**.
 
 #### Enunciado
 
-> En una autoescuela, un **alumno** recibe **clases prácticas** de un **profesor** en un **vehículo** concreto. En cada clase se anota la fecha, la hora y los kilómetros recorridos. Además, cuando el alumno termina su formación con un profesor, la **matrícula** alumno–profesor puede **dar lugar** a una **solicitud de examen** ante la DGT (fecha y resultado). No todos los alumnos llegan a examinarse.
+> **Gerente:** Somos unos ciento veinte socios. Cada uno tiene sus fincas, aunque hay fincas que son de dos hermanos y entonces cada uno tiene su parte. Una finca se identifica por su polígono y su parcela, y está en un término municipal.
+>
+> **Tú:** ¿Qué entregan los socios?
+>
+> **Gerente:** En campaña, que va de octubre a enero, traen la aceituna en remolque. Se pesa a la entrada y se les da un albarán con su número. Normalmente es de una sola finca, pero a veces un socio mezcla dos fincas en el mismo viaje. Lo que no queremos es que se mezcle aceituna de variedades distintas, eso se rechaza.
+>
+> **Tú:** ¿Y después?
+>
+> **Gerente:** Se muele por lotes. En cada lote entra lo de varios socios, a veces de varios días. Del lote queremos saber cuánto aceite ha salido, que se nos pregunta mucho por el rendimiento. El aceite va a un depósito, y de ahí se envasa en botellas de distinto tamaño. Cada tanda de envasado la anoto con su fecha y el número de botellas.
+>
+> **Tú:** ¿La venta también va en el sistema?
+>
+> **Gerente:** No, eso lo llevamos con el programa de facturación. Pero sí me importa que, si un cliente se queja de una botella, yo pueda decir de qué fincas viene el aceite que lleva. Eso nos lo exige la inspección.
+>
+> **Tú:** ¿Y el aceite de un lote puede acabar en varios depósitos?
+>
+> **Gerente:** Pues… depende. Casi siempre uno, pero si el depósito se llena, se pasa al siguiente.
 
-1. Modela las clases prácticas como una relación **ternaria** ALUMNO–PROFESOR–VEHÍCULO. Calcula la cardinalidad de cada entidad fijando las otras dos. Indica si es 1:N:M, N:M:P...
-2. Modela la solicitud de examen. Explica por qué una **agregación** de la relación alumno–profesor es mejor que una ternaria con `EXAMEN`.
-3. Explica qué información se perdería si sustituyes la ternaria del punto 1 por tres relaciones binarias.
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
-#### Comprobación
+1. Redacta una lista de **al menos cinco preguntas** que harías al gerente porque la entrevista deja cabos sueltos. Para cada una, indica qué decisión de diseño depende de la respuesta.
+2. Delimita el **alcance**: qué parte de la conversación **no** pertenece a tu modelo y por qué.
+3. Elabora el diagrama E/R eligiendo la opción más razonable en cada ambigüedad y recogiéndola como **supuesto**.
+4. Demuestra la **trazabilidad**: escribe, como una secuencia de relaciones, el camino que recorres en tu diagrama desde una botella hasta las fincas de origen. ¿Qué parte del camino pierde precisión?
+5. Escribe tres restricciones que tu diagrama no puede expresar (por ejemplo, sobre la variedad o sobre quién entrega de qué finca).
 
-- [ ] La ternaria incluye la fecha y la hora como atributos y justificas su cardinalidad (con varios alumnos, profesores y vehículos, suele ser N:M:P).
-- [ ] La agregación permite que haya parejas alumno–profesor **sin** examen.
-- [ ] Se explica con un ejemplo concreto la pérdida de información de las binarias.
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+- [ ] Hay una relación entre `SOCIO` y `FINCA` que admite el reparto del porcentaje de propiedad.
+- [ ] La entrega y la molturación son **relaciones N:M con atributos**: una entrega puede alimentar varios lotes y un lote recoge varias entregas.
+- [ ] La relación entre lote y depósito se ha justificado con una pregunta al cliente.
+- [ ] La venta y la facturación no aparecen en el diagrama.
+- [ ] Has identificado el tramo del camino botella → finca que pierde precisión y por qué.
+
+{{% /details %}}
+
+{{% details title="Preguntas al cliente y decisiones asociadas (para el profesorado o tras entregar)" %}}
+
+| Pregunta | Qué decide |
+|---|---|
+| ¿Cuánto pesa cada finca en una entrega que mezcla dos fincas? | Si el peso se guarda **por finca** (la entrega se divide en líneas) o solo por entrega. Afecta a la trazabilidad. |
+| ¿Se registra el porcentaje de propiedad de cada hermano? ¿Puede cambiar con los años? | Atributo `porcentaje` en la relación socio–finca; si cambia, necesita historia (ver práctica 2.8). |
+| ¿Cuánto aceite de cada lote va a cada depósito? | Relación lote–depósito 1:N o N:M con cantidad. |
+| ¿Se mezcla aceite de lotes distintos en un depósito? ¿Y se envasa desde depósitos mezclados? | Trazabilidad hacia atrás: pasa de ser un árbol a un grafo. Hay que decidir hasta dónde se garantiza. |
+| ¿Quién entrega, el titular de la finca o cualquier socio? | Restricción de integridad: el entregador debe ser titular de la finca, no expresable en el diagrama. |
+| ¿La «campaña» tiene identidad propia (fechas, precio) o es solo un año? | Entidad `CAMPAÑA` o atributo. |
+
+{{% /details %}}
+
+{{% details title="Solución de referencia" %}}
+
+```mermaid
+erDiagram
+    SOCIO ||--o{ TITULARIDAD : "es titular"
+    FINCA ||--|{ TITULARIDAD : "tiene titulares"
+    SOCIO ||--o{ ENTREGA : "realiza"
+    ENTREGA ||--|{ LINEA_ENTREGA : "se compone de"
+    FINCA ||--o{ LINEA_ENTREGA : "origen de"
+    CAMPANIA ||--o{ ENTREGA : "agrupa"
+    ENTREGA }o--o{ LOTE : "se muele en (kg)"
+    DEPOSITO }o--o{ LOTE : "recibe aceite de (litros)"
+    DEPOSITO ||--o{ ENVASADO : "abastece"
+    FORMATO ||--o{ ENVASADO : "se envasa en"
+    SOCIO {
+        int cod_socio PK
+        string nombre
+    }
+    FINCA {
+        int poligono PK
+        int parcela PK
+        string termino_municipal
+    }
+    TITULARIDAD {
+        decimal porcentaje
+    }
+    ENTREGA {
+        int num_albaran PK
+        datetime fecha_hora
+        string variedad
+    }
+    LINEA_ENTREGA {
+        decimal kg
+    }
+    LOTE {
+        int cod_lote PK
+        date fecha
+        decimal litros_obtenidos
+    }
+    DEPOSITO {
+        int cod_deposito PK
+        decimal capacidad
+    }
+    ENVASADO {
+        date fecha PK
+        int botellas
+    }
+    FORMATO {
+        string cod_formato PK
+        decimal litros
+    }
+    CAMPANIA {
+        string cod_campania PK
+    }
+```
+
+- `LINEA_ENTREGA` es una entidad débil de `ENTREGA`: guarda los kilos de **cada finca** en un viaje y es lo que permite la trazabilidad por finca.
+- La trazabilidad es **botella → envasado → depósito → lote → entrega → línea → finca**. La parte *depósito → lote* es la que pierde precisión: si un depósito mezcla lotes, solo se puede afirmar que el aceite procede de **alguno** de ellos.
+- Restricciones: (1) el socio de la entrega es titular de todas las fincas de sus líneas; (2) la variedad de todas las líneas de una entrega es la misma; (3) la suma de litros de un lote repartidos en depósitos coincide con los litros obtenidos.
+- Fuera del alcance: pedidos, clientes y facturas.
+
+{{% /details %}}
+
+
+---
+
+## Práctica 2.8 · Alquiler de coches: el modelo que recuerda
+
+{{< practica num="2.8" tipo="Reto" duracion="2 sesiones" nivel="3" ra="RA6: d, e, h" sgbd="draw.io o papel" entrega="Diagrama con tratamiento del tiempo + tabla de decisiones" >}}
+
+#### Contexto
+
+Un diseño que solo guarda «lo que es verdad ahora» olvida lo que ya pasó. Una empresa de alquiler de coches necesita poder explicar una factura de hace tres años.
+
+#### Enunciado
+
+> «Tenemos varias sucursales y una flota de coches. Cada coche está asignado a una sucursal, aunque lo movemos entre ellas según la temporada; para las auditorías necesitamos saber dónde estuvo cada coche en cada momento.
+>
+> Los coches se agrupan por categoría (económico, familiar, de lujo) y cada categoría tiene una tarifa diaria que revisamos cada año. Cuando un cliente firma un contrato, se queda con el precio que había ese día, aunque luego suba. Si alguien reclama, tenemos que demostrar qué tarifa estaba vigente.
+>
+> De los clientes guardamos nombre, documento y la dirección donde se les envían las facturas. Las facturas deben mostrar la dirección que tenía el cliente cuando se emitieron, no la actual.
+>
+> Los empleados tienen una categoría profesional (agente, supervisor, director) que puede cambiar con los años; el sueldo depende de ella. Nos piden informes del tipo «cuántos supervisores había en marzo de 2024».
+>
+> Un contrato es de un cliente, para un coche, entre dos fechas, y lo gestiona un empleado de la sucursal desde la que se entrega el coche.»
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+1. Localiza **todas las frases** del enunciado que exigen conservar el pasado y clasifícalas: relación que cambia, atributo que cambia, o valor que debe «congelarse» en un documento.
+2. Para cada una, decide cómo se modela (atributos de fecha en la relación, entidad histórica, copia del valor en el documento) y cómo cambia la **cardinalidad** al incorporar el tiempo (por ejemplo, una relación 1:N ahora, ¿qué es a lo largo del tiempo?).
+3. Escribe la restricción que **no puedes expresar** con el diagrama y que garantiza que los periodos de una misma entidad no se solapan.
+4. Elabora el diagrama E/R final.
+5. Razona en qué caso se acepta **repetir** un dato (el precio en el contrato) y por qué eso no se considera redundancia dañina.
+
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+- [ ] La asignación coche–sucursal es una relación **N:M con fecha de inicio y de fin** (o una entidad histórica), no un atributo del coche.
+- [ ] La tarifa es una entidad vinculada a la categoría con una fecha de vigencia, y el contrato guarda su propia copia del precio.
+- [ ] La dirección de facturación está versionada, o copiada en la factura.
+- [ ] La categoría profesional del empleado tiene historial.
+- [ ] Has escrito la restricción de no solapamiento de periodos.
+
+{{% /details %}}
+
+{{% details title="Solución y criterios (para el profesorado o tras entregar)" %}}
+
+| Frase del enunciado | Tipo | Modelado |
+|---|---|---|
+| «Dónde estuvo cada coche en cada momento» | Relación que cambia | `COCHE`–`SUCURSAL` N:M con `fecha_inicio` y `fecha_fin` (la actual tiene fin nulo). Un coche está en **una** sucursal en cada instante, pero **a lo largo del tiempo** en muchas. |
+| «Tarifa que revisamos cada año» | Atributo que cambia | Entidad `TARIFA` (categoría, fecha de vigencia, precio día). Identificada por (categoría, fecha de inicio). |
+| «Se queda con el precio de ese día» | Valor que se congela | Atributo `precio_dia` **en el contrato**: copia deliberada de la tarifa vigente. No es redundancia dañina: es un dato firmado que no debe cambiar cuando cambie la tarifa. |
+| «Dirección que tenía el cliente cuando se emitió la factura» | Atributo que cambia | O bien `DIRECCION_CLIENTE` con periodo de vigencia, o bien copia de la dirección en la `FACTURA`. Se prefiere la copia en el documento si no se necesita el historial de domicilios. |
+| «Categoría profesional que cambia con los años» | Atributo que cambia | Relación `EMPLEADO`–`CATEGORIA` N:M con periodo. El sueldo depende de la categoría, no del empleado. |
+
+**Restricciones textuales:** (1) los periodos de un mismo coche en sucursales no se solapan y no hay huecos; (2) la tarifa de una categoría no se solapa con otra de la misma categoría; (3) el contrato debe ser gestionado por un empleado que, en la fecha de entrega, estaba en la sucursal desde la que se entrega el coche.
+
+**Lectura crítica:** tratar el tiempo multiplica el número de relaciones N:M. Antes de aplicarlo a todo, pregunta al negocio qué historia necesita realmente.
+
+{{% /details %}}
+
+
+---
+
+## Práctica 2.9 · Ingeniería inversa: del albarán a las entidades
+
+{{< practica num="2.9" tipo="Reto" duracion="2 sesiones" nivel="3" ra="RA6: a, d, h" sgbd="Papel o draw.io" entrega="Diagrama + diccionario con datos derivados señalados" >}}
+
+#### Contexto
+
+En muchas empresas no hay requisitos escritos: hay **documentos** (albaranes, facturas, hojas de cálculo) y la gente que los usa. Un buen analista sabe leer un documento y deducir el modelo que hay detrás.
+
+#### Enunciado
+
+Una distribuidora de bebidas para hostelería te entrega dos documentos reales con los datos sensibles sustituidos.
+
+**Documento A: albarán de entrega**
+
+| | |
+|---|---|
+| **Distribuciones Marina S. L.** · CIF B-12345678 | **Albarán n.º 2026/004871** |
+| Fecha: 14/09/2026 | Ruta: R-03 (Costa Norte) · Repartidor: M. Soler · Furgoneta 4512-KLM |
+| **Cliente:** 00418 · Bar La Gamba · CIF B-98765432 | **Entregar en:** C/ del Puerto, 12 · 03700 Dénia |
+
+| Ref. | Descripción | Formato | Uds. | Precio | Dto. | Importe |
+|---|---|---|---:|---:|---:|---:|
+| 1021 | Cerveza rubia 33 cl | Caja 24 | 10 | 17,40 | 0 % | 174,00 |
+| 1045 | Agua mineral 50 cl | Pack 12 | 6 | 3,90 | 0 % | 23,40 |
+| 2310 | Ginebra premium 70 cl | Botella | 4 | 19,50 | 10 % | 70,20 |
+| 2310 | Ginebra premium 70 cl (promoción 3×2) | Botella | 2 | 0,00 | 0 % | 0,00 |
+
+Base imponible: 267,60 € · IVA 10 % sobre 23,40 €: 2,34 € · IVA 21 % sobre 244,20 €: 51,28 € · **Total: 321,22 €** · Pago: transferencia a 30 días · Recibí del cliente: firma y DNI
+
+**Documento B: hoja de ruta del repartidor (fragmento de hoja de cálculo)**
+
+| Fecha | Repartidor | Furgoneta | Cliente | Hora llegada | Hora salida | Incidencias |
+|---|---|---|---|---|---|---|
+| 14/09 | M. Soler | 4512-KLM | 00418 | 09:42 | 09:58 | – |
+| 14/09 | M. Soler | 4512-KLM | 00533 | 10:15 | 10:31 | Cliente cerrado, se deja en vecino |
+| 15/09 | M. Soler | 7781-HTB | 00418 | 09:30 | 09:41 | Faltan 2 cajas |
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+1. Deduce las **entidades** que hay detrás de los dos documentos y sus identificadores. ¿Qué entidades aparecen en los dos?
+2. Distingue en el albarán los **atributos básicos** de los **derivados** (que se calculan a partir de otros) y los que son **copia** de un dato que podría cambiar (por ejemplo, el precio).
+3. Identifica el **grupo repetido** del albarán y decide si es un atributo multivaluado o una entidad/relación.
+4. Descubre al menos **dos inconsistencias o preguntas** que el documento deja abiertas (por ejemplo, el IVA).
+5. Dibuja el diagrama E/R y escribe el diccionario de datos con una columna «derivado / copia / básico».
+
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+- [ ] El albarán es una entidad y sus líneas forman una relación N:M con atributos entre albarán y producto (o una entidad débil de línea).
+- [ ] `importe`, `base imponible`, `IVA` y `total` están marcados como derivados.
+- [ ] El precio de la línea se trata como copia del precio de catálogo en el momento de la entrega.
+- [ ] Repartidor, furgoneta y ruta forman un conjunto que se repite en los dos documentos y no se repite como texto.
+- [ ] Has señalado qué hace que los dos documentos describan dos hechos distintos (entrega y visita).
+
+{{% /details %}}
+
+{{% details title="Solución y criterios (para el profesorado o tras entregar)" %}}
+
+**Entidades y relaciones:** `CLIENTE` (código; CIF como alternativa, dirección de entrega), `PRODUCTO` (referencia, descripción, formato), `ALBARAN` (número, fecha, forma de pago, firma), `LINEA_ALBARAN` (débil de `ALBARAN`: nº de línea, unidades, precio, descuento), `REPARTIDOR`, `FURGONETA` (matrícula), `RUTA`, y la relación `VISITA` (documento B) entre cliente, repartidor y furgoneta con hora de llegada, hora de salida e incidencias.
+
+**Derivados:** `importe` = unidades × precio × (1 − descuento); `base imponible` = suma de importes; `IVA` = suma por tipo; `total` = base + IVA.
+
+**Copias:** `precio` y `descuento` de la línea son copias del catálogo vigente: si cambia el catálogo, el albarán no debe cambiar.
+
+**Preguntas abiertas que el documento deja:**
+1. El albarán mezcla **dos tipos de IVA** (10 % para el agua y 21 % para el resto): el tipo depende del producto. Falta saber si `tipo_iva` es atributo de `PRODUCTO` (y entonces cambia con la ley) o debe copiarse en la línea para que el albarán no cambie.
+2. La línea de promoción «3×2» tiene precio 0: ¿es una línea más del albarán o un descuento? Afecta al modelo (¿entidad `PROMOCION`?).
+3. ¿El cliente tiene una dirección de entrega distinta de la fiscal? Se imprime una sola.
+4. ¿Es lo mismo el albarán y la visita? No: un albarán se entrega en una visita, pero puede haber visitas sin albarán (cliente cerrado) y un día puede haber varios albaranes en una misma visita.
+
+**Hecho clave:** el documento A y el B parecen hablar de lo mismo, pero describen hechos distintos. El análisis consiste en separar lo que se entrega (albarán) de lo que se visita (visita).
+
+{{% /details %}}
+
+
+---
+
+## Práctica 2.10 · Dos diseños, un ganador
+
+{{< practica num="2.10" tipo="Reto" duracion="1 sesión" nivel="3" ra="RA6: d, h" sgbd="Papel" entrega="Tabla de casos de prueba + diseño mejorado" >}}
+
+#### Contexto
+
+Un buen diseño no se valora por cómo se ve, sino por si **soporta las situaciones reales** del negocio. Una técnica útil es escribir casos de prueba y comprobar si el diseño puede representarlos.
+
+#### Enunciado
+
+Un club de pádel ha recibido dos propuestas de modelo y no sabe cuál elegir. El club describe así su operativa:
+
+> «Los socios reservan una pista para una hora concreta. En cada reserva juegan cuatro personas, pero a veces solo dos. Los que no son socios son invitados, y de ellos solo apuntamos el nombre. Cada jugador paga su parte, aunque a veces uno paga por todos. Con el tiempo, algunos invitados acaban haciéndose socios. Queremos poder contestar a: ¿cuántas veces ha jugado cada persona?, ¿quién juega habitualmente con quién? y ¿qué debe cada uno?»
+
+**Propuesta A**
+
+```mermaid
+erDiagram
+    SOCIO ||--o{ RESERVA : "hace"
+    PISTA ||--o{ RESERVA : "se reserva en"
+    RESERVA {
+        datetime fecha_hora PK
+        string jugador1
+        string jugador2
+        string jugador3
+        string jugador4
+        decimal pago1
+        decimal pago2
+        decimal pago3
+        decimal pago4
+    }
+    SOCIO {
+        int num_socio PK
+        string nombre
+    }
+    PISTA {
+        int num_pista PK
+    }
+```
+
+**Propuesta B**
+
+```mermaid
+erDiagram
+    PERSONA ||--o{ PARTICIPACION : "juega"
+    RESERVA ||--|{ PARTICIPACION : "tiene"
+    PISTA ||--o{ RESERVA : "se reserva en"
+    SOCIO ||--o{ RESERVA : "hace"
+    PERSONA {
+        int cod_persona PK
+        string nombre
+    }
+    SOCIO {
+        int num_socio PK
+    }
+    PARTICIPACION {
+        decimal importe_pagado
+    }
+```
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+1. Escribe una tabla con **al menos ocho casos de prueba** extraídos del enunciado (por ejemplo: partido de dos jugadores, invitado que se hace socio, pagos cruzados…) y marca, para cada propuesta, si puede representarlo, si lo representa con dificultad o si no puede.
+2. Responde, para cada pregunta del club, qué diseño la resuelve sin esfuerzo y cuál no.
+3. Redacta las **tres correcciones** que haría falta incorporar a la propuesta ganadora para soportar todos los casos.
+4. Dibuja el diseño final.
+
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+- [ ] Has detectado que A contiene un grupo repetido (`jugador1..4`) y que no admite partidos de dos ni de cinco.
+- [ ] Has visto que B resuelve «¿cuántas veces ha jugado cada persona?», pero no distingue quién pagó por quién.
+- [ ] Tu diseño final trata a socios e invitados como **especialización** de persona (o con un atributo de condición).
+- [ ] Has propuesto cómo registrar que un invitado se hace socio sin perder su historial.
+
+{{% /details %}}
+
+{{% details title="Solución y criterios (para el profesorado o tras entregar)" %}}
+
+| Caso de prueba | A | B |
+|---|---|---|
+| Partido de dos jugadores | Deja columnas vacías | Sí |
+| Cuatro jugadores | Sí | Sí |
+| Invitado sin ficha | No hay entidad: el nombre es solo un texto | Sí (`PERSONA`) |
+| Invitado que se hace socio | Pierde su historial al cambiar de texto a socio | Sí: se le añade la especialización de socio |
+| Un jugador paga por todos | Hay que sumar las columnas | Parcialmente: falta saber **quién** pagó |
+| ¿Cuántas veces ha jugado cada persona? | Hay que buscar en cuatro columnas | Sí |
+| ¿Quién juega con quién? | Muy difícil | Sí (autoconsulta sobre la participación) |
+| ¿Qué debe cada uno? | Mezclado con `pagoN` | Sí, si el importe se separa de «lo pagado por otro» |
+
+**Mejoras a B:**
+1. `PERSONA` es la superclase; `SOCIO` es una especialización parcial. Así el invitado se convierte en socio sin cambiar de identidad.
+2. `PARTICIPACION` guarda `importe_a_pagar`, y se añade una relación `PAGO` entre participación y persona pagadora para representar «paga por todos».
+3. La reserva guarda como atributo quién la hace, sin obligar a que sea socio si el club decidiera permitirlo.
+
+**Lección:** el grupo repetido es la forma habitual de hacer que un modelo no escale. La señal de alarma son atributos numerados (`jugador1`, `jugador2`...).
+
+{{% /details %}}
+
 
 ---
 
@@ -361,19 +787,28 @@ Construir el modelo conceptual completo del proyecto transversal.
 
 #### Enunciado
 
-A partir del [enunciado completo de EduGest](/guia/proyecto-edugest#1-enunciado-entrevista-con-la-jefatura-de-estudios), elabora:
+Lee la [entrevista con la jefatura de estudios](/guia/proyecto-edugest#1-enunciado-entrevista-con-la-jefatura-de-estudios) como lo haría un analista: ahí no se enumeran las entidades y hay detalles que se mencionan de pasada. El [caso guiado de la teoría](/ud02-modelo-er/ud02-teoria#8-caso-guiado-el-modelo-er-de-edugest) resuelve una parte.
 
-1. El **diagrama E/R** con todas las entidades, relaciones, cardinalidades, atributos e identificadores. El [caso guiado de la teoría](/ud02-modelo-er/ud02-teoria#8-caso-guiado-el-modelo-er-de-edugest) resuelve una parte: complétalo con profesorado, departamentos, tutorías, asignación docente y faltas.
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+1. El **diagrama E/R** con todas las entidades, relaciones, cardinalidades, atributos e identificadores. Complétalo hasta cubrir todo lo que cuenta la entrevista.
 2. El **diccionario de datos** (entidad, atributo, descripción, dominio, obligatorio, identificador).
 3. Los **supuestos semánticos**.
 4. Las **restricciones textuales**: al menos cinco reglas que el diagrama no puede representar.
+5. Una lista de **preguntas que harías a la jefatura de estudios** porque la entrevista no las resuelve.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 - [ ] La relación *es jefe de* entre `PROFESOR` y `DEPARTAMENTO` es distinta de *pertenece a*.
 - [ ] *Imparte* relaciona profesor, módulo y grupo, e incluye el curso académico. Justificas si es ternaria.
 - [ ] Las faltas de asistencia dependen de la matrícula, no solo del alumno.
 - [ ] Todas las decisiones dudosas están en la lista de supuestos.
+
+{{% /details %}}
+
 
 > [!IMPORTANT]
 > No consultes todavía la solución de referencia del proyecto. Tu diseño se revisará en clase y lo usarás en la UD03. Las diferencias con la referencia se discutirán en la UD04.
@@ -382,7 +817,7 @@ A partir del [enunciado completo de EduGest](/guia/proyecto-edugest#1-enunciado-
 
 ## Banco de ejercicios
 
-30 ejercicios para practicar el diseño conceptual, **ordenados de menor a mayor dificultad** en cuatro bloques. Cada ejercicio tiene el mismo formato que las prácticas (objetivo, contexto, enunciado, tareas, comprobación, errores habituales y ampliación) y una **solución desplegable** dibujada con la notación EER que usamos en clase.
+30 ejercicios para practicar el diseño conceptual, **ordenados de menor a mayor dificultad** en cuatro bloques. Cada ejercicio tiene el mismo formato que las prácticas: contexto y enunciado a la vista, y **objetivo, tareas, comprobación, errores habituales y solución plegados** (dibujada con la notación EER que usamos en clase). Los enunciados están escritos sin resaltar las entidades: reconocerlas es parte del ejercicio.
 
 | Bloque | Ejercicios | Qué introduce | Además del diagrama se pide |
 |---|---|---|---|
@@ -416,9 +851,12 @@ Entidades, atributos, identificadores, relaciones 1:N y N:M, atributos de relaci
 
 {{< practica num="1" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="1" ra="RA6: a, d, e" sgbd="draw.io o papel" entrega="Diagrama EER + supuestos" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Identificar entidades, atributos e identificadores y distinguir una relación 1:N de una N:M.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -428,30 +866,39 @@ Una pequeña empresa de distribución quiere informatizar sus ventas y sus compr
 
 > Una empresa comercializa productos a clientes finales y se abastece mediante proveedores externos.
 >
-> De cada **cliente** se conocen el DNI, el nombre, los apellidos, la dirección y la fecha de nacimiento. Un cliente puede comprar varios productos y un mismo producto puede ser adquirido por diferentes clientes.
+> De cada cliente se conocen el DNI, el nombre, los apellidos, la dirección y la fecha de nacimiento. Un cliente puede comprar varios productos y un mismo producto puede ser adquirido por diferentes clientes.
 >
-> De cada **producto** se almacena un código identificativo, el nombre y el precio unitario.
+> De cada producto se almacena un código identificativo, el nombre y el precio unitario.
 >
-> Los productos los suministran **proveedores**. Cada producto lo suministra un único proveedor (exclusivo), mientras que un proveedor puede suministrar varios productos. De cada proveedor se desea conocer el NIF, el nombre y la dirección.
+> Los productos los suministran proveedores. Cada producto lo suministra un único proveedor (exclusivo), mientras que un proveedor puede suministrar varios productos. De cada proveedor se desea conocer el NIF, el nombre y la dirección.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen: entidades, atributos, claves y relaciones con su cardinalidad (mín, máx).
 2. Explica con una frase por qué *comprar* es N:M y *suministrar* es 1:N.
 3. Anota los supuestos sobre las cardinalidades **mínimas**, que el enunciado no indica.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] Hay tres entidades y dos relaciones, cada una con su rombo.
 - [ ] El máximo es 1 junto a `PROVEEDOR` (cada producto tiene un único proveedor) y N junto a `PRODUCTO`.
 - [ ] Cada entidad tiene su identificador subrayado.
 - [ ] Has escrito al menos dos supuestos.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Dibujar *compra* como 1:N porque «un cliente compra productos». Formula siempre la pregunta en **los dos sentidos**.
 > - Poner el NIF del proveedor como atributo de `PRODUCTO`. Repetirías los datos del proveedor en cada producto.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -483,9 +930,12 @@ La empresa quiere guardar la **fecha** y la **cantidad** de cada compra. ¿Dónd
 
 {{< practica num="2" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="1" ra="RA6: a, d, e" sgbd="draw.io o papel" entrega="Diagrama EER + supuestos" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Convertir en entidades los datos por los que se busca (actor, género) y descubrir que un hecho («haber visto») es una relación, no un atributo booleano.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -495,32 +945,41 @@ Una plataforma de cine bajo demanda quiere recomendar películas y avisar al cli
 
 > Se desea crear una base de datos para una plataforma de películas en *streaming*.
 >
-> A los **clientes** se les piden sus datos personales (NIF, nombre, apellidos, correo electrónico y dirección) y el sistema mantiene el **saldo** disponible de su cuenta.
+> A los clientes se les piden sus datos personales (NIF, nombre, apellidos, correo electrónico y dirección) y el sistema mantiene el saldo disponible de su cuenta.
 >
-> Los clientes pueden buscar **películas** por **género**, por **actores** y por título. De cada película se guarda un código, el título, el año de estreno y la duración en minutos. De los actores se conoce un código, el nombre completo y la nacionalidad. Cada película pertenece a un género (comedia, drama, terror…).
+> Los clientes pueden buscar películas por género, por actores y por título. De cada película se guarda un código, el título, el año de estreno y la duración en minutos. De los actores se conoce un código, el nombre completo y la nacionalidad. Cada película pertenece a un género (comedia, drama, terror…).
 >
-> La plataforma debe avisar al cliente si una película **ya la ha visto**. Para ello registra qué películas ha visto cada cliente, la fecha y la valoración (de 1 a 5) que le ha dado.
+> La plataforma debe avisar al cliente si una película ya la ha visto. Para ello registra qué películas ha visto cada cliente, la fecha y la valoración (de 1 a 5) que le ha dado.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Explica por qué `ACTOR` y `GÉNERO` son entidades y no atributos de `PELÍCULA`.
 3. ¿Hace falta un atributo `vista (sí/no)`? Razona la respuesta.
 4. Anota los supuestos.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] Hay cuatro entidades: `CLIENTE`, `PELÍCULA`, `ACTOR` y `GÉNERO`.
 - [ ] *Ve* es N:M y lleva `fecha` y `valoración`.
 - [ ] *Actúa en* es N:M y *pertenece a* es 1:N.
 - [ ] No existe ningún atributo booleano «vista».
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Añadir `vista (sí/no)` a la relación: si existe la pareja cliente–película, ya la ha visto; si no existe, no. El booleano es redundante.
 > - Guardar `actor` y `género` como atributos de `PELÍCULA`: una película tiene varios actores y buscar por ellos obligaría a recorrer texto libre.
 > - Poner el `saldo` en una entidad aparte: es un dato de cada cliente.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -552,9 +1011,12 @@ Una película puede pertenecer a **varios géneros** (comedia romántica, terror
 
 {{< practica num="3" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="1" ra="RA6: a, d, e" sgbd="draw.io o papel" entrega="Diagrama EER + justificación" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Decidir si un hecho repetible (la multa) se modela como relación con atributos o como entidad.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -562,31 +1024,40 @@ Un ayuntamiento quiere gestionar las infracciones de tráfico y las multas asoci
 
 #### Enunciado
 
-> De cada **vehículo** se registra la matrícula, el tipo, la marca y el modelo. Un vehículo pertenece a un **propietario** registrado. De los propietarios interesa guardar el DNI, el nombre, los apellidos y la dirección. Un propietario puede tener varios vehículos.
+> De cada vehículo se registra la matrícula, el tipo, la marca y el modelo. Un vehículo pertenece a un propietario registrado. De los propietarios interesa guardar el DNI, el nombre, los apellidos y la dirección. Un propietario puede tener varios vehículos.
 >
-> Existe un catálogo de **infracciones** con su código, una descripción y la cuantía a pagar.
+> Existe un catálogo de infracciones con su código, una descripción y la cuantía a pagar.
 >
-> Cuando un vehículo comete una infracción se genera la **multa** correspondiente, con la fecha de la sanción y la fecha de pago. Un mismo vehículo puede recibir varias multas a lo largo del tiempo y una infracción del catálogo puede cometerse muchas veces por distintos vehículos.
+> Cuando un vehículo comete una infracción se genera la multa correspondiente, con la fecha de la sanción y la fecha de pago. Un mismo vehículo puede recibir varias multas a lo largo del tiempo y una infracción del catálogo puede cometerse muchas veces por distintos vehículos.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. ¿La multa es una **relación** o una **entidad**? Razona las dos opciones y quédate con una.
 3. Un vehículo puede cometer **la misma infracción** dos veces. ¿Qué atributo tiene que formar parte de la identificación de la multa?
 4. Anota los supuestos.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] Existen tres entidades: `PROPIETARIO`, `VEHÍCULO` e `INFRACCIÓN`.
 - [ ] `cuantía` está en `INFRACCIÓN`, no en la multa (es del catálogo).
 - [ ] Has resuelto la repetición de la misma infracción en el mismo vehículo.
 - [ ] `fecha_pago` puede estar vacía y lo has anotado.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Guardar la cuantía en la multa **y** en la infracción: si cambia el catálogo, ¿qué cuantía es la correcta?
 > - Modelar la multa como atributo de `VEHÍCULO`. Un vehículo tiene muchas multas.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -618,9 +1089,12 @@ La multa puede **recurrirse** varias veces (fecha del recurso y resolución). ¿
 
 {{< practica num="4" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="1" ra="RA6: a, d, e" sgbd="draw.io o papel" entrega="Diagrama EER + supuestos" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Encadenar varias relaciones 1:N y modelar un histórico mediante una relación N:M con atributos propios.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -628,31 +1102,40 @@ Una naviera internacional necesita gestionar su flota y las mercancías que tran
 
 #### Enunciado
 
-> De los **capitanes** se quiere guardar el DNI, el nombre, el teléfono, la dirección, el salario y la población de residencia. Un capitán transporta muchos contenedores y cada contenedor lo transporta un único capitán.
+> De los capitanes se quiere guardar el DNI, el nombre, el teléfono, la dirección, el salario y la población de residencia. Un capitán transporta muchos contenedores y cada contenedor lo transporta un único capitán.
 >
-> De los **contenedores** interesa conocer el código, una descripción, la dirección del remitente y la dirección del destinatario. Cada contenedor tiene como destino un único **puerto**, pero a un puerto pueden llegar muchos contenedores. De los puertos se guarda el código y el nombre.
+> De los contenedores interesa conocer el código, una descripción, la dirección del remitente y la dirección del destinatario. Cada contenedor tiene como destino un único puerto, pero a un puerto pueden llegar muchos contenedores. De los puertos se guarda el código y el nombre.
 >
-> De los **barcos** se conoce la matrícula, el nombre, la potencia del motor y el astillero. Un capitán puede gobernar distintos barcos en fechas diferentes (se registra la fecha de inicio y la de fin) y un barco puede ser gobernado por varios capitanes a lo largo del tiempo.
+> De los barcos se conoce la matrícula, el nombre, la potencia del motor y el astillero. Un capitán puede gobernar distintos barcos en fechas diferentes (se registra la fecha de inicio y la de fin) y un barco puede ser gobernado por varios capitanes a lo largo del tiempo.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Indica qué relaciones son 1:N y cuál es N:M, y justifícalo con las preguntas en los dos sentidos.
 3. Decide dónde van `fecha_inicio` y `fecha_fin` y explica por qué no pueden ser atributos de `CAPITÁN` ni de `BARCO`.
 4. Anota los supuestos.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] Hay cuatro entidades y tres relaciones.
 - [ ] Las fechas están en la relación *gobierna*, no en las entidades.
 - [ ] Has pensado qué ocurre si el **mismo** capitán gobierna el **mismo** barco en dos periodos distintos.
 - [ ] `dirección_remitente` y `dirección_destinatario` están en `CONTENEDOR`.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Poner `fecha_inicio` en `BARCO`: un barco tiene muchos capitanes y solo podría guardar una fecha.
 > - Relacionar directamente `CAPITÁN` con `PUERTO`. El puerto se deduce del contenedor.
+
+{{% /details %}}
 
 {{% details title="Pista: histórico de una relación N:M" %}}
 Si el mismo capitán puede volver a gobernar el mismo barco, la pareja (capitán, barco) **no basta** para distinguir cada periodo. La `fecha_inicio` debe formar parte de la identificación. En el diagrama se marca con subrayado discontinuo.
@@ -688,9 +1171,12 @@ La naviera quiere saber en qué **barco** viaja cada contenedor. ¿Cómo se modi
 
 {{< practica num="5" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="1" ra="RA6: d, h" sgbd="draw.io o papel" entrega="Diagrama EER + análisis del enunciado" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Modelar una relación **reflexiva** con roles, detectar una cardinalidad mínima imposible y fijar un máximo concreto (2).
+
+{{% /details %}}
 
 #### Contexto
 
@@ -698,30 +1184,39 @@ Un registro genealógico quiere guardar quién es progenitor de quién.
 
 #### Enunciado
 
-> Se desea diseñar una base de datos que registre las relaciones de parentesco entre **personas**. De cada persona se conocen el DNI, el nombre, la dirección y el teléfono.
+> Se desea diseñar una base de datos que registre las relaciones de parentesco entre personas. De cada persona se conocen el DNI, el nombre, la dirección y el teléfono.
 >
 > Una persona puede ser progenitora (padre o madre) de varios hijos o hijas, o de ninguno. Toda persona registrada en el sistema debe tener registrada obligatoriamente su filiación directa con su progenitor o progenitora.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER con una **relación reflexiva** y los **roles** (progenitor, hijo).
 2. Escribe las cardinalidades (mín, máx) de cada rol. ¿Cuántos progenitores puede tener una persona como máximo?
 3. Razona si el mínimo que pide el enunciado («obligatoriamente») se puede mantener en una base de datos real y propón uno viable.
 4. Colorea el rombo según la notación del módulo y explica por qué queda entero en negro.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] Solo hay una entidad y la relación sale y vuelve a ella.
 - [ ] Los dos extremos de la relación tienen **rol**.
 - [ ] El máximo del rol *progenitor* es **2** (padre y madre), no 1 ni N.
 - [ ] Has detectado el problema de las personas sin ascendientes registrados y el mínimo del rol *progenitor* es 0.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Crear dos entidades `PADRE` e `HIJO`. Ambos son `PERSONA` y una persona puede ser a la vez padre e hijo.
 > - Poner (1,1) en el rol de progenitor: solo permitiría registrar a uno de los dos progenitores y, además, obligaría a que todas las personas tuvieran uno registrado.
 > - Dibujar el rombo mitad blanco y mitad negro: los dos máximos (2 y N) son mayores que 1, así que las dos mitades van en negro.
+
+{{% /details %}}
 
 {{% details title="Pista: ¿quién es el primer antepasado?" %}}
 Si todas las personas deben tener progenitor registrado y la base de datos es finita, la cadena de ascendientes tendría que cerrarse en un ciclo. Esto es imposible. El mínimo del rol *progenitor* tiene que ser 0.
@@ -764,9 +1259,12 @@ Relaciones 1:1, N:M reflexivas, entidades débiles, atributos compuestos, multiv
 
 {{< practica num="6" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones textuales" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Distinguir una relación 1:1 opcional, una N:M reflexiva y una 1:N reflexiva en un mismo modelo.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -774,36 +1272,45 @@ Un instituto de Educación Secundaria y Formación Profesional diseña su base d
 
 #### Enunciado
 
-> De los **profesores** se guarda el DNI, el nombre, la dirección y el teléfono. Los profesores imparten **módulos**, cada uno con un código y un nombre. Un profesor puede impartir varios módulos, pero cada módulo lo imparte un único profesor.
+> De los profesores se guarda el DNI, el nombre, la dirección y el teléfono. Los profesores imparten módulos, cada uno con un código y un nombre. Un profesor puede impartir varios módulos, pero cada módulo lo imparte un único profesor.
 >
-> Algunos módulos tienen como **prerrequisito** haber cursado otros. Un módulo puede exigir varios módulos previos y, a su vez, ser requisito de otros.
+> Algunos módulos tienen como prerrequisito haber cursado otros. Un módulo puede exigir varios módulos previos y, a su vez, ser requisito de otros.
 >
-> De cada **alumno** se almacena el número de expediente, el nombre, los apellidos, la fecha de nacimiento y el curso. Un alumno se matricula en uno o varios módulos y se registra la fecha de matriculación.
+> De cada alumno se almacena el número de expediente, el nombre, los apellidos, la fecha de nacimiento y el curso. Un alumno se matricula en uno o varios módulos y se registra la fecha de matriculación.
 >
-> Cada curso cuenta con un grupo de alumnos. Dentro de cada grupo se elige a uno de ellos como **delegado**, que representa a sus compañeros.
+> Cada curso cuenta con un grupo de alumnos. Dentro de cada grupo se elige a uno de ellos como delegado, que representa a sus compañeros.
 >
-> Los alumnos que lo soliciten pueden disponer de un **casillero** (número y tamaño en metros). Un casillero pertenece a un único alumno y un alumno tiene como máximo un casillero.
+> Los alumnos que lo soliciten pueden disponer de un casillero (número y tamaño en metros). Un casillero pertenece a un único alumno y un alumno tiene como máximo un casillero.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Modela al delegado **sin crear una entidad nueva**. ¿Qué tipo de relación necesitas? Escribe sus roles.
 3. Calcula las cardinalidades de la relación con el casillero y razona por qué el mínimo es 0 en los dos lados.
 4. Escribe al menos **dos restricciones** que el diagrama no puede expresar.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] *Es requisito de* es una N:M **reflexiva** sobre `MÓDULO` con dos roles.
 - [ ] *Es delegado de* es una 1:N **reflexiva** sobre `ALUMNO`.
 - [ ] La relación alumno–casillero es 1:1 con (0,1) en los dos lados: el rombo es blanco entero.
 - [ ] `fecha_matrícula` está en la relación *se matricula*, no en `ALUMNO`.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Usar un atributo `es_delegado` en `ALUMNO`: no dice a quién representa ni garantiza un único delegado por grupo.
 > - Dibujar *es requisito de* como 1:N. Un módulo puede tener varios previos y ser previo de varios.
 > - Poner la fecha de matrícula en `ALUMNO`: un alumno se matricula de varios módulos, quizá en fechas distintas.
+
+{{% /details %}}
 
 {{% details title="Pista: el delegado también es un alumno" %}}
 Cuando una entidad se relaciona consigo misma se usa una **relación reflexiva**. Un alumno (rol *delegado*) representa a muchos alumnos (rol *representado*) y cada alumno tiene, como mucho, un delegado.
@@ -840,9 +1347,12 @@ El centro decide guardar los **grupos** como entidad (código, curso, aula). Red
 
 {{< practica num="7" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e" sgbd="draw.io o papel" entrega="Diagrama EER + supuestos" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Reconocer una **entidad débil** y su identificación por dependencia con un atributo compuesto.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -850,33 +1360,42 @@ Una clínica quiere controlar los ingresos de sus pacientes y los médicos que l
 
 #### Enunciado
 
-> De cada **paciente** se guarda el código, el nombre, los apellidos, la dirección (calle, población, provincia y código postal), el teléfono y la fecha de nacimiento.
+> De cada paciente se guarda el código, el nombre, los apellidos, la dirección (calle, población, provincia y código postal), el teléfono y la fecha de nacimiento.
 >
-> De cada **médico** se conserva el código, el nombre, los apellidos, el teléfono y la especialidad.
+> De cada médico se conserva el código, el nombre, los apellidos, el teléfono y la especialidad.
 >
-> Se controlan los **ingresos** de cada paciente. Cada ingreso se identifica con un número que empieza en 1 para cada paciente, e incluye el número de habitación, la cama y la fecha de ingreso. Un paciente puede ingresar varias veces y un ingreso no puede existir sin el paciente al que corresponde.
+> Se controlan los ingresos de cada paciente. Cada ingreso se identifica con un número que empieza en 1 para cada paciente, e incluye el número de habitación, la cama y la fecha de ingreso. Un paciente puede ingresar varias veces y un ingreso no puede existir sin el paciente al que corresponde.
 >
 > Cada ingreso lo atiende un único médico responsable, aunque un médico puede atender muchos ingresos de pacientes distintos.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER con la entidad débil, la relación identificadora y el atributo compuesto.
 2. Escribe el **identificador completo** de `INGRESO` y explica por qué el número de ingreso no basta.
 3. Anota los supuestos.
 4. Escribe una restricción que el diagrama no pueda expresar.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `INGRESO` es una entidad débil (doble rectángulo) y depende de `PACIENTE` en identificación (etiqueta ID junto a la entidad débil).
 - [ ] El número de ingreso es un discriminador (subrayado discontinuo).
 - [ ] `dirección` es un atributo compuesto.
 - [ ] *Atiende* es 1:N entre `MÉDICO` e `INGRESO`.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Usar el número de ingreso como clave: el ingreso 1 lo tienen todos los pacientes.
 > - Relacionar `MÉDICO` con `PACIENTE`. Quien atiende cada ingreso puede cambiar de uno a otro.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -908,9 +1427,12 @@ Un ingreso puede ser atendido por **varios médicos** que se turnan. ¿Cómo cam
 
 {{< practica num="8" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + supuestos" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Separar los datos que se **calculan** (edad, próxima vacuna) de los que se guardan y evitar relaciones redundantes.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -920,36 +1442,45 @@ Una clínica veterinaria quiere avisar a los dueños de las vacunas pendientes d
 
 > Queremos crear una base de datos para una clínica veterinaria con el fin de controlar el calendario de vacunación de los animales y avisar al dueño cuándo debe acudir a la clínica.
 >
-> De cada **cliente** (dueño) se guardan el DNI, el nombre, los apellidos, la dirección, el teléfono y el correo electrónico. Un cliente puede tener varios animales.
+> De cada cliente (dueño) se guardan el DNI, el nombre, los apellidos, la dirección, el teléfono y el correo electrónico. Un cliente puede tener varios animales.
 >
-> De cada **animal** se conoce un código, el nombre, el tipo (perro, gato…), la raza y la fecha de nacimiento; también se quiere mostrar su edad.
+> De cada animal se conoce un código, el nombre, el tipo (perro, gato…), la raza y la fecha de nacimiento; también se quiere mostrar su edad.
 >
-> De cada **vacuna** se guarda un código, el nombre y cada cuántos días hay que repetirla. Cuando se administra una vacuna a un animal se registra la fecha; la próxima fecha de vacunación se calcula a partir de la última administración y del tipo de vacuna.
+> De cada vacuna se guarda un código, el nombre y cada cuántos días hay que repetirla. Cuando se administra una vacuna a un animal se registra la fecha; la próxima fecha de vacunación se calcula a partir de la última administración y del tipo de vacuna.
 >
-> La clínica envía **notificaciones**: de cada una se guarda un número, la fecha de envío, la vacuna pendiente y la fecha prevista de administración.
+> La clínica envía notificaciones: de cada una se guarda un número, la fecha de envío, la vacuna pendiente y la fecha prevista de administración.
 >
-> Se registran también las **visitas** de cada animal: fecha, tipo de visita (vacunación, consulta…) y notas.
+> Se registran también las visitas de cada animal: fecha, tipo de visita (vacunación, consulta…) y notas.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Marca los atributos **derivados** y explica de qué datos se obtienen.
 3. ¿Debe relacionarse `NOTIFICACIÓN` directamente con `CLIENTE`? Razona la respuesta.
 4. Decide si `VISITA` es una entidad débil y escribe su identificador completo.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `edad` y `próxima_fecha` son derivados (óvalo discontinuo).
 - [ ] *Se vacuna* es N:M entre `ANIMAL` y `VACUNA` y la fecha permite repetir la misma vacuna.
 - [ ] `NOTIFICACIÓN` se relaciona con `ANIMAL` y con `VACUNA`, no con `CLIENTE`.
 - [ ] `VISITA` es débil de `ANIMAL` (etiqueta ID).
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Guardar la edad: cambia cada día. Se calcula a partir de la fecha de nacimiento.
 > - Guardar «tipo de vacuna pendiente» como texto en la notificación: debe ser una relación con `VACUNA`.
 > - Relacionar la notificación con el cliente **y** con el animal: el dueño se obtiene a partir del animal, y las dos relaciones podrían contradecirse.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -982,9 +1513,12 @@ Algunas vacunas se ponen **durante una visita**. ¿Cómo relacionarías la admin
 
 {{< practica num="9" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + atributos derivados" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Combinar entidad débil, relación reflexiva, atributos multivaluados, compuestos y derivados en un caso de comercio electrónico.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -992,31 +1526,40 @@ Una tienda de ropa online quiere sustituir su hoja de cálculo por una base de d
 
 #### Enunciado
 
-> De cada **cliente** se guarda el correo electrónico (único), el nombre, los apellidos, una dirección de facturación (calle, código postal y ciudad) y uno o varios teléfonos.
+> De cada cliente se guarda el correo electrónico (único), el nombre, los apellidos, una dirección de facturación (calle, código postal y ciudad) y uno o varios teléfonos.
 >
-> Los **productos** tienen un código, un nombre, una descripción, un precio y las unidades en stock. Cada producto pertenece a una **categoría**. Las categorías se organizan en árbol: una categoría puede ser subcategoría de otra (*Ropa → Camisetas*).
+> Los productos tienen un código, un nombre, una descripción, un precio y las unidades en stock. Cada producto pertenece a una categoría. Las categorías se organizan en árbol: una categoría puede ser subcategoría de otra (*Ropa → Camisetas*).
 >
-> Los clientes realizan **pedidos**. De cada pedido se guarda el número, la fecha, el estado y el importe total, que se calcula a partir de las líneas. Un pedido contiene una o varias **líneas** numeradas dentro del pedido (1, 2, 3…). Cada línea corresponde a un producto y guarda la cantidad y el **precio unitario en el momento de la compra**.
+> Los clientes realizan pedidos. De cada pedido se guarda el número, la fecha, el estado y el importe total, que se calcula a partir de las líneas. Un pedido contiene una o varias líneas numeradas dentro del pedido (1, 2, 3…). Cada línea corresponde a un producto y guarda la cantidad y el precio unitario en el momento de la compra.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Clasifica cada atributo: simple, compuesto, multivaluado o derivado.
 3. Explica por qué `precio_unitario` está en la línea y no solo en `PRODUCTO`.
 4. Escribe dos restricciones que el diagrama no recoge (por ejemplo, sobre el stock).
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `LÍNEA_PEDIDO` es una entidad débil de `PEDIDO`.
 - [ ] `teléfono` es multivaluado y `dirección` es compuesto.
 - [ ] `importe_total` es un atributo derivado.
 - [ ] La relación entre categorías es reflexiva con los roles *categoría* y *subcategoría*.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Guardar `importe_total` como atributo normal: se desincroniza si cambia una línea.
 > - Obtener el precio de la línea siempre desde `PRODUCTO`: los pedidos antiguos cambiarían de importe cuando suba el precio.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -1048,9 +1591,12 @@ Un producto puede pertenecer a **varias categorías** a la vez. ¿Cambia la card
 
 {{< practica num="10" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + supuestos" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Combinar una entidad débil con una relación reflexiva de supervisión y decidir cómo guardar los trabajos de una revisión.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1058,31 +1604,40 @@ Un concesionario gestiona la venta de coches y las revisiones de su taller.
 
 #### Enunciado
 
-> De cada **coche** se conoce la matrícula, la marca, el modelo, el color y el precio de venta. De cada **cliente** se registra un código interno, el NIF, el nombre, la dirección, la ciudad y el teléfono. Un cliente puede comprar varios coches, pero cada coche lo compra un único cliente.
+> De cada coche se conoce la matrícula, la marca, el modelo, el color y el precio de venta. De cada cliente se registra un código interno, el NIF, el nombre, la dirección, la ciudad y el teléfono. Un cliente puede comprar varios coches, pero cada coche lo compra un único cliente.
 >
-> En el taller se realizan **revisiones**. Cada revisión se identifica por un número secuencial dentro de cada coche (1, 2, 3…). De cada revisión se quiere saber si se ha cambiado el filtro, el aceite o los frenos, y si se ha hecho algún otro trabajo. Un coche puede pasar muchas revisiones.
+> En el taller se realizan revisiones. Cada revisión se identifica por un número secuencial dentro de cada coche (1, 2, 3…). De cada revisión se quiere saber si se ha cambiado el filtro, el aceite o los frenos, y si se ha hecho algún otro trabajo. Un coche puede pasar muchas revisiones.
 >
-> Cada revisión la realiza un único **mecánico**, del que se conoce el código de empleado, el DNI, el nombre, el teléfono y la dirección. Un mecánico realiza muchas revisiones. Entre los mecánicos hay un **supervisor** que coordina el trabajo de otros mecánicos.
+> Cada revisión la realiza un único mecánico, del que se conoce el código de empleado, el DNI, el nombre, el teléfono y la dirección. Un mecánico realiza muchas revisiones. Entre los mecánicos hay un supervisor que coordina el trabajo de otros mecánicos.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER con la entidad débil y la relación reflexiva.
 2. Decide cómo guardar los trabajos de la revisión (booleanos o atributo multivaluado) y justifica la elección.
 3. El cliente tiene un **código interno** y un **NIF**. ¿Cuál eliges como identificador? ¿Qué papel tiene el otro y cómo se marca en el diagrama?
 4. Anota los supuestos y una restricción textual.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `REVISIÓN` es débil de `COCHE` y su discriminador es el número de revisión.
 - [ ] El supervisor se modela con una relación **reflexiva** sobre `MECÁNICO`.
 - [ ] Has indicado qué clave es candidata y cuál es alternativa en `CLIENTE`.
 - [ ] Un coche recién fabricado, no vendido aún, es posible en tu modelo.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Crear una entidad `SUPERVISOR` aparte. Un supervisor es un mecánico.
 > - Dar al coche un identificador artificial y olvidar que la matrícula ya identifica.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -1114,9 +1669,12 @@ El taller quiere guardar **qué piezas** se cambiaron en cada revisión y cuánt
 
 {{< practica num="11" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + identificadores completos" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Encadenar dos entidades débiles por identificación y modelar una estancia repetible con fechas.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1124,34 +1682,43 @@ Una central de reservas de turismo rural quiere gestionar su oferta de alojamien
 
 #### Enunciado
 
-> De cada **provincia** se guarda el nombre, el área y la población. En cada provincia hay **ciudades**, de las que se conoce el nombre y el número de habitantes. El nombre de una ciudad **solo es único dentro de su provincia** (hay varias ciudades llamadas «Villanueva»).
+> De cada provincia se guarda el nombre, el área y la población. En cada provincia hay ciudades, de las que se conoce el nombre y el número de habitantes. El nombre de una ciudad solo es único dentro de su provincia (hay varias ciudades llamadas «Villanueva»).
 >
-> Las **casas rurales** tienen un nombre único, una localización y si ofrecen desayuno. Cada casa está en una ciudad y en una ciudad puede haber varias casas.
+> Las casas rurales tienen un nombre único, una localización y si ofrecen desayuno. Cada casa está en una ciudad y en una ciudad puede haber varias casas.
 >
-> Cada casa tiene varias **habitaciones**, numeradas dentro de la casa (1, 2, 3…), con una descripción y un precio por noche.
+> Cada casa tiene varias habitaciones, numeradas dentro de la casa (1, 2, 3…), con una descripción y un precio por noche.
 >
-> Los **clientes** (DNI, nombre, dirección y teléfono) se alojan en habitaciones. De cada estancia se guarda la fecha de entrada y la de salida. Un cliente puede alojarse varias veces en la misma habitación.
+> Los clientes (DNI, nombre, dirección y teléfono) se alojan en habitaciones. De cada estancia se guarda la fecha de entrada y la de salida. Un cliente puede alojarse varias veces en la misma habitación.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Escribe el **identificador completo** de `CIUDAD` y de `HABITACIÓN`.
 3. ¿Qué atributo permite que un cliente repita la misma habitación? Márcalo en el diagrama.
 4. Anota los supuestos.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `CIUDAD` es débil de `PROVINCIA` y `HABITACIÓN` es débil de `CASA_RURAL` (etiqueta ID).
 - [ ] *Está en* (casa–ciudad) es 1:N y **no** es identificadora: el nombre de la casa ya es único.
 - [ ] *Se aloja* es N:M y `fecha_entrada` forma parte de la identificación.
 - [ ] `desayuno` es un atributo de `CASA_RURAL`.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Dar a `CIUDAD` el nombre como clave: dos provincias pueden tener una ciudad con el mismo nombre.
 > - Relacionar al cliente con la casa en lugar de con la habitación: se pierde qué habitación ocupó.
 > - Identificar la estancia solo con (cliente, habitación): impide alojarse dos veces en la misma habitación.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -1184,9 +1751,12 @@ Variante: además de alquilar, se quiere saber qué **personas viven** en cada c
 
 {{< practica num="12" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Modelar una jerarquía de dependencia (cliente → proyecto → tarea) con una N:M con atributos y una relación reflexiva.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1194,31 +1764,40 @@ Una consultora tecnológica quiere controlar sus proyectos y las horas de su equ
 
 #### Enunciado
 
-> De los **clientes** se registra el CIF, la razón social, el sitio web y el teléfono. Un cliente puede encargar varios proyectos, pero cada proyecto pertenece a un único cliente.
+> De los clientes se registra el CIF, la razón social, el sitio web y el teléfono. Un cliente puede encargar varios proyectos, pero cada proyecto pertenece a un único cliente.
 >
-> De cada **proyecto** se conoce el código, el nombre, la fecha de inicio y el presupuesto. Un proyecto se descompone en varias **tareas**, numeradas dentro del proyecto (1, 2, 3…). De cada tarea se guarda la descripción, las horas estimadas y su estado (*pendiente*, *en proceso* o *completada*).
+> De cada proyecto se conoce el código, el nombre, la fecha de inicio y el presupuesto. Un proyecto se descompone en varias tareas, numeradas dentro del proyecto (1, 2, 3…). De cada tarea se guarda la descripción, las horas estimadas y su estado (*pendiente*, *en proceso* o *completada*).
 >
-> De los **desarrolladores** se guarda el número de empleado, el DNI, el nombre, la especialidad y el nivel. Un desarrollador se asigna a varias tareas y en una tarea trabajan varios desarrolladores, con las **horas reales** dedicadas. Algunos desarrolladores senior ejercen de **mentores** de desarrolladores junior.
+> De los desarrolladores se guarda el número de empleado, el DNI, el nombre, la especialidad y el nivel. Un desarrollador se asigna a varias tareas y en una tarea trabajan varios desarrolladores, con las horas reales dedicadas. Algunos desarrolladores senior ejercen de mentores de desarrolladores junior.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. ¿Por qué `TAREA` es una entidad débil y `PROYECTO` no? Escribe el identificador de cada una.
 3. Explica por qué `horas_reales` está en la relación y `horas_estimadas` en la entidad.
 4. Escribe dos restricciones: una sobre el estado de la tarea y otra sobre los mentores.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `TAREA` depende de `PROYECTO`; `PROYECTO` depende (solo por relación) de `CLIENTE`.
 - [ ] *Trabaja en* tiene el atributo `horas_reales`.
 - [ ] *Tutela* es reflexiva sobre `DESARROLLADOR`.
 - [ ] El estado de la tarea tiene un dominio cerrado de tres valores y lo has anotado.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Hacer `PROYECTO` débil de `CLIENTE`. El código del proyecto ya lo identifica.
 > - Poner `horas_reales` en `TAREA`: ¿de qué desarrollador serían?
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -1250,9 +1829,12 @@ Se quiere que cada desarrollador tenga **un único rol** por proyecto (jefe de p
 
 {{< practica num="13" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Modelar un caso de reservas con entidad débil, N:M repetible entre las mismas entidades y supervisión reflexiva.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1260,33 +1842,42 @@ Una cadena hotelera estructura el sistema central de reservas de sus establecimi
 
 #### Enunciado
 
-> De cada **hotel** se conoce el código, el nombre, la categoría (estrellas), la dirección y la ciudad.
+> De cada hotel se conoce el código, el nombre, la categoría (estrellas), la dirección y la ciudad.
 >
-> Un hotel dispone de varias **habitaciones**. Cada habitación se identifica por su número dentro del hotel (101, 102, 201…); se guarda el tipo (*individual*, *doble* o *suite*) y el precio por noche.
+> Un hotel dispone de varias habitaciones. Cada habitación se identifica por su número dentro del hotel (101, 102, 201…); se guarda el tipo (*individual*, *doble* o *suite*) y el precio por noche.
 >
-> De los **clientes** se registra el DNI, el nombre, el correo y el teléfono. Un cliente **reserva** habitaciones concretas para un periodo, con la fecha de entrada, la fecha de salida y el precio total de la estancia. Un cliente puede alojarse varias veces en la misma habitación.
+> De los clientes se registra el DNI, el nombre, el correo y el teléfono. Un cliente reserva habitaciones concretas para un periodo, con la fecha de entrada, la fecha de salida y el precio total de la estancia. Un cliente puede alojarse varias veces en la misma habitación.
 >
-> De los **empleados** se conoce el código, el nombre y el puesto. Cada empleado está asignado a un hotel. Las **gobernantas** de planta supervisan al personal de limpieza de su hotel.
+> De los empleados se conoce el código, el nombre y el puesto. Cada empleado está asignado a un hotel. Las gobernantas de planta supervisan al personal de limpieza de su hotel.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Identifica por completo la entidad débil `HABITACIÓN` y razona por qué el número de habitación no basta.
 3. Un cliente reserva la misma habitación dos veces. ¿Qué atributo permite distinguir las reservas?
 4. Escribe tres restricciones que el diagrama no recoge (solapes de fechas, salida posterior a entrada, supervisión dentro del mismo hotel…).
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `HABITACIÓN` es débil de `HOTEL`.
 - [ ] *Reserva* es una N:M entre `CLIENTE` y `HABITACIÓN` con `fecha_entrada` como discriminador.
 - [ ] La supervisión es una relación reflexiva con roles.
 - [ ] Has anotado la restricción sobre solapes de fechas.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Relacionar `CLIENTE` con `HOTEL` y no con `HABITACIÓN`: no sabrías qué habitación se ha reservado.
 > - Usar el número de habitación como clave global: la 101 existe en todos los hoteles.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -1318,9 +1909,12 @@ Una reserva puede incluir **varias habitaciones** (una familia reserva dos). ¿Q
 
 {{< practica num="14" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Combinar una cadena de dependencias jerárquicas, una relación 1:1 con condiciones y una reflexiva.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1328,31 +1922,40 @@ Una universidad pública organiza su estructura académica e investigadora.
 
 #### Enunciado
 
-> De las **facultades** se guarda el código y el nombre. Una facultad engloba varios **departamentos**, de los que se conoce el código y el área de conocimiento.
+> De las facultades se guarda el código y el nombre. Una facultad engloba varios departamentos, de los que se conoce el código y el área de conocimiento.
 >
-> Dentro de cada departamento se crean **cátedras** de investigación. Cada cátedra se identifica por un número interno dentro de su departamento y tiene un nombre y un presupuesto.
+> Dentro de cada departamento se crean cátedras de investigación. Cada cátedra se identifica por un número interno dentro de su departamento y tiene un nombre y un presupuesto.
 >
-> De los **profesores** se guarda el número de registro, el DNI, el nombre, la categoría docente y la fecha de incorporación. Un profesor pertenece a un único departamento. Un profesor con categoría de *catedrático* puede ser nombrado **director** de una cátedra. Además, los profesores veteranos son **tutores** de los profesores noveles.
+> De los profesores se guarda el número de registro, el DNI, el nombre, la categoría docente y la fecha de incorporación. Un profesor pertenece a un único departamento. Un profesor con categoría de *catedrático* puede ser nombrado director de una cátedra. Además, los profesores veteranos son tutores de los profesores noveles.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Identifica la entidad débil, su propietaria y el identificador completo.
 3. Calcula las cardinalidades de *dirige* y razona por qué una cátedra siempre tiene director pero un profesor puede no dirigir ninguna.
 4. Escribe las restricciones textuales: quién puede dirigir una cátedra y de qué departamento.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `CATEDRA` es débil de `DEPARTAMENTO`.
 - [ ] *Dirige* es 1:1: la cátedra tiene (1,1) director y el profesor (0,1) cátedra.
 - [ ] *Tutoriza* es reflexiva con roles *veterano* y *novel*.
 - [ ] Has indicado que el director debe ser catedrático y del mismo departamento.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Convertir `CATEDRÁTICO` en una entidad sin plantearte que es un profesor con una categoría concreta.
 > - No exigir que el director pertenezca al departamento de la cátedra.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -1384,9 +1987,12 @@ Los **catedráticos** tienen datos propios (año de oposición, sexenios). Convi
 
 {{< practica num="15" etiqueta="Ejercicio" tipo="Autónoma" duracion="1 sesión" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + nota de protección de datos" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Modelar una entidad débil con borrado en cascada y valorar la protección de datos de menores.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1394,31 +2000,40 @@ Un centro de acogida de menores necesita un registro informatizado de residentes
 
 #### Enunciado
 
-> De cada **menor residente** se conoce el número de expediente, el nombre, los apellidos, la fecha de nacimiento y los datos de contacto de sus tutores legales (nombre del padre, nombre de la madre y teléfono).
+> De cada menor residente se conoce el número de expediente, el nombre, los apellidos, la fecha de nacimiento y los datos de contacto de sus tutores legales (nombre del padre, nombre de la madre y teléfono).
 >
-> De cada **educador** se registra el número de colegiado, el DNI, el nombre, los apellidos y la especialidad (*psicología*, *trabajo social* o *educación social*). Un educador tutela a varios menores, pero cada menor tiene un único educador tutor principal. Además, un **educador coordinador** supervisa al resto del equipo técnico.
+> De cada educador se registra el número de colegiado, el DNI, el nombre, los apellidos y la especialidad (*psicología*, *trabajo social* o *educación social*). Un educador tutela a varios menores, pero cada menor tiene un único educador tutor principal. Además, un educador coordinador supervisa al resto del equipo técnico.
 >
-> Para cada menor se abren **informes de seguimiento**. Cada informe se identifica con un número correlativo para ese menor (1, 2, 3…) y recoge la fecha, la valoración evolutiva y las incidencias. Si el expediente de un menor se cancela por cumplimiento de la medida, todos sus informes se eliminan.
+> Para cada menor se abren informes de seguimiento. Cada informe se identifica con un número correlativo para ese menor (1, 2, 3…) y recoge la fecha, la valoración evolutiva y las incidencias. Si el expediente de un menor se cancela por cumplimiento de la medida, todos sus informes se eliminan.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Explica qué significa «se eliminan todos sus informes» en el modelo y dónde se documenta.
 3. Clasifica `datos_tutores`: ¿atributo compuesto o entidad? Razona la decisión.
 4. Redacta una nota sobre qué datos serían **especialmente sensibles** y qué medidas pedirías (RGPD y LOPDGDD).
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `INFORME` es débil de `MENOR`.
 - [ ] *Coordina* es reflexiva: un educador supervisa a varios.
 - [ ] El educador tutor principal es obligatorio: (1,1) junto a `EDUCADOR`.
 - [ ] La nota de protección de datos cita al menos el principio de minimización.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Guardar la lista de informes como atributo multivaluado de `MENOR`: cada informe tiene atributos propios.
 > - Perder de vista que borrar un menor borra sus informes. Es una regla de integridad, no un detalle de implementación.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -1457,9 +2072,12 @@ Relaciones ternarias, agregación, dos relaciones entre las mismas entidades, li
 
 {{< practica num="16" etiqueta="Ejercicio" tipo="Autónoma" duracion="1-2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + análisis de la ternaria" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Introducir una relación **ternaria** junto a una entidad débil y una N:M reflexiva con atributos.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1467,33 +2085,42 @@ La empresa municipal de autobuses gestiona su red, su flota y los turnos de cond
 
 #### Enunciado
 
-> De las **líneas** se conoce el código (L1, L5…), el nombre del trayecto y la frecuencia de paso en minutos.
+> De las líneas se conoce el código (L1, L5…), el nombre del trayecto y la frecuencia de paso en minutos.
 >
-> Cada línea hace sus paradas en un orden. Cada **parada** se identifica por su número de orden dentro de la línea (1, 2, 3…); se guarda el nombre de la calle o marquesina y si tiene pantalla de información.
+> Cada línea hace sus paradas en un orden. Cada parada se identifica por su número de orden dentro de la línea (1, 2, 3…); se guarda el nombre de la calle o marquesina y si tiene pantalla de información.
 >
-> Entre líneas se habilitan **transbordos**, con el tiempo estimado a pie entre las dos líneas conectadas.
+> Entre líneas se habilitan transbordos, con el tiempo estimado a pie entre las dos líneas conectadas.
 >
-> De los **autobuses** se guarda la matrícula, el modelo y la capacidad de pasajeros de pie. De los **conductores**, el DNI, el nombre y el tipo de licencia. Un conductor conduce un autobús asignado a una línea en un **turno** de trabajo concreto.
+> De los autobuses se guarda la matrícula, el modelo y la capacidad de pasajeros de pie. De los conductores, el DNI, el nombre y el tipo de licencia. Un conductor conduce un autobús asignado a una línea en un turno de trabajo concreto.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Modela *conduce* como relación **ternaria** (conductor, autobús, línea) con el atributo `turno`. Indica su cardinalidad (N:M:P) y explica qué pasaría con tres relaciones binarias.
 3. Razona por qué `PARADA` es débil y por qué *transbordo* es reflexiva con atributo.
 4. Escribe dos restricciones: una sobre el número mínimo de paradas y otra sobre los turnos.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] *Conduce* es un único rombo conectado a tres entidades.
 - [ ] `PARADA` es débil de `LÍNEA`; su discriminador es el número de orden.
 - [ ] *Transbordo* tiene el atributo `tiempo_a_pie`.
 - [ ] Has explicado qué información se pierde con tres binarias.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Dibujar tres relaciones binarias (conductor–autobús, autobús–línea, conductor–línea): no sabrías quién conducía qué autobús en qué línea.
 > - Colocar `turno` en `CONDUCTOR`. El turno depende de la combinación de los tres.
+
+{{% /details %}}
 
 {{% details title="Pista: ¿ternaria o binarias?" %}}
 Si el hecho «el conductor C conduce el autobús A en la línea L en el turno T» no se puede reconstruir a partir de tres hechos parciales, necesitas la ternaria. Prueba con dos conductores, dos autobuses y dos líneas.
@@ -1529,9 +2156,12 @@ El transbordo se produce realmente **entre paradas**, no entre líneas. Redibuja
 
 {{< practica num="17" etiqueta="Ejercicio" tipo="Autónoma" duracion="1-2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Modelar **dos relaciones entre las mismas entidades** (local y visitante), una relación circular (capitán) y una entidad débil con discriminador compuesto.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1539,31 +2169,40 @@ Una federación deportiva informatiza el control de sus competiciones oficiales.
 
 #### Enunciado
 
-> De los **equipos** se conoce el código, el nombre del club y la ciudad. De los **jugadores**, el número de ficha federativa, el DNI, el nombre y el dorsal. Un jugador pertenece a un único equipo y cada equipo designa a uno de sus jugadores como **capitán**.
+> De los equipos se conoce el código, el nombre del club y la ciudad. De los jugadores, el número de ficha federativa, el DNI, el nombre y el dorsal. Un jugador pertenece a un único equipo y cada equipo designa a uno de sus jugadores como capitán.
 >
-> De los **partidos** se guarda el código, la fecha y hora y la jornada. En cada partido se enfrentan dos equipos distintos: uno como **local** y otro como **visitante**.
+> De los partidos se guarda el código, la fecha y hora y la jornada. En cada partido se enfrentan dos equipos distintos: uno como local y otro como visitante.
 >
-> En el acta de cada partido se registran las **incidencias**. Cada incidencia se identifica por el minuto de juego y un número de secuencia dentro del partido; se anota el tipo (*gol*, *tarjeta amarilla*, *expulsión* o *sustitución*) y el jugador que protagoniza la acción. Si se anula un partido, se eliminan las incidencias de su acta.
+> En el acta de cada partido se registran las incidencias. Cada incidencia se identifica por el minuto de juego y un número de secuencia dentro del partido; se anota el tipo (*gol*, *tarjeta amarilla*, *expulsión* o *sustitución*) y el jugador que protagoniza la acción. Si se anula un partido, se eliminan las incidencias de su acta.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Explica por qué entre `EQUIPO` y `PARTIDO` hay **dos** relaciones y no una con un atributo `rol`.
 3. Escribe el identificador de `INCIDENCIA` y razona por qué el discriminador tiene dos atributos.
 4. Escribe al menos tres restricciones que el diagrama no recoge (capitán del propio equipo, local distinto de visitante, jugador de uno de los dos equipos).
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] Hay dos relaciones con roles distintos entre `EQUIPO` y `PARTIDO`.
 - [ ] *Capitán* es 1:1 y distinta de *pertenece*.
 - [ ] `INCIDENCIA` es débil de `PARTIDO` con discriminador (minuto, número de secuencia).
 - [ ] Has escrito la restricción «el jugador pertenece a uno de los equipos del partido».
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Relacionar `PARTIDO` con `EQUIPO` mediante una sola N:M: no distingues quién juega en casa.
 > - Usar solo el minuto como discriminador: puede haber dos incidencias en el mismo minuto.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -1595,9 +2234,12 @@ La federación quiere guardar los **jugadores convocados** en cada partido y los
 
 {{< practica num="18" etiqueta="Ejercicio" tipo="Autónoma" duracion="1-2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Gestionar varias relaciones N:M con atributos repetibles junto a una entidad débil y una supervisión reflexiva.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1605,33 +2247,42 @@ Una cadena de gimnasios gestiona sus centros, sus socios y los entrenamientos pe
 
 #### Enunciado
 
-> De cada **gimnasio** se conoce el código, el nombre comercial, la dirección, la ciudad y la superficie en m².
+> De cada gimnasio se conoce el código, el nombre comercial, la dirección, la ciudad y la superficie en m².
 >
-> Cada gimnasio dispone de **salas**. Cada sala se identifica por un número o letra propio del gimnasio (101, Sala A…); se guarda el tipo de actividad (*musculación*, *cardio*, *pilates*, *spinning*) y el aforo máximo.
+> Cada gimnasio dispone de salas. Cada sala se identifica por un número o letra propio del gimnasio (101, Sala A…); se guarda el tipo de actividad (*musculación*, *cardio*, *pilates*, *spinning*) y el aforo máximo.
 >
-> De los **socios** se almacena el número, el DNI, el nombre, los apellidos, el teléfono y la fecha de alta. Un socio está inscrito en un gimnasio principal, pero puede reservar plaza en las salas de cualquier centro de la cadena (se registra la fecha, la hora y la plaza).
+> De los socios se almacena el número, el DNI, el nombre, los apellidos, el teléfono y la fecha de alta. Un socio está inscrito en un gimnasio principal, pero puede reservar plaza en las salas de cualquier centro de la cadena (se registra la fecha, la hora y la plaza).
 >
-> De los **entrenadores** se conoce el código de empleado, el nombre, la especialidad y la titulación. Cada entrenador trabaja en un gimnasio y diseña **rutinas** para los socios, con la fecha de asignación y el objetivo. En cada gimnasio, un **director técnico** coordina al resto de entrenadores.
+> De los entrenadores se conoce el código de empleado, el nombre, la especialidad y la titulación. Cada entrenador trabaja en un gimnasio y diseña rutinas para los socios, con la fecha de asignación y el objetivo. En cada gimnasio, un director técnico coordina al resto de entrenadores.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Distingue las dos relaciones entre `SOCIO` y `GIMNASIO`/`SALA`: la inscripción y la reserva. Justifica sus cardinalidades.
 3. Identifica qué atributos de las dos relaciones N:M permiten que se repitan entre las mismas entidades.
 4. Escribe tres restricciones textuales (aforo, un único director por gimnasio, reservas solapadas).
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `SALA` es débil de `GIMNASIO`.
 - [ ] *Reserva* conecta `SOCIO` con `SALA` y la fecha y la hora forman parte de su identificación.
 - [ ] *Diseña* es N:M con `fecha_asignación` y `objetivo`.
 - [ ] *Dirige* es una relación reflexiva sobre `ENTRENADOR`.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Relacionar `SOCIO` con `GIMNASIO` para las reservas. La reserva se hace sobre una sala concreta.
 > - Olvidar que un socio puede reservar la misma sala muchas veces.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -1663,9 +2314,12 @@ Las reservas de clase **tienen un entrenador** responsable. ¿La reserva pasa a 
 
 {{< practica num="19" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario de datos" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Resolver un caso con siete entidades, una composición con porcentajes y un formato dependiente del producto.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1673,37 +2327,46 @@ Una gran empresa de dulces necesita una base de datos centralizada para su produ
 
 #### Enunciado
 
-> La empresa elabora productos a partir de **ingredientes**. De cada ingrediente se conoce el nombre (único), la cantidad de vitaminas A, B y C por cada 100 g, las calorías y el coste por kilo.
+> La empresa elabora productos a partir de ingredientes. De cada ingrediente se conoce el nombre (único), la cantidad de vitaminas A, B y C por cada 100 g, las calorías y el coste por kilo.
 >
-> Con ellos fabrica **productos** («Filipondios», «Barridulces»…), conocidos por su nombre comercial. Interesa la composición de cada producto y el **porcentaje** de cada ingrediente en la receta.
+> Con ellos fabrica productos («Filipondios», «Barridulces»…), conocidos por su nombre comercial. Interesa la composición de cada producto y el porcentaje de cada ingrediente en la receta.
 >
-> Cada producto se comercializa en **formatos** de peso (40 g, 150 g, 250 g…), y cada formato tiene un precio de venta.
+> Cada producto se comercializa en formatos de peso (40 g, 150 g, 250 g…), y cada formato tiene un precio de venta.
 >
-> De los **clientes** se guarda el CIF, el nombre, la dirección, la población, la provincia y el teléfono. Los clientes hacen **pedidos** de unidades de productos en formatos concretos (200 unidades de Barridulces en formato de 250 g).
+> De los clientes se guarda el CIF, el nombre, la dirección, la población, la provincia y el teléfono. Los clientes hacen pedidos de unidades de productos en formatos concretos (200 unidades de Barridulces en formato de 250 g).
 >
-> La empresa prevé las **promociones** del año («2x1», «Vale descuento»). Cada tipo de promoción se pone en marcha una vez al año, con fecha de inicio, fecha de fin y la cantidad máxima de productos de cada formato que pueden beneficiarse.
+> La empresa prevé las promociones del año («2x1», «Vale descuento»). Cada tipo de promoción se pone en marcha una vez al año, con fecha de inicio, fecha de fin y la cantidad máxima de productos de cada formato que pueden beneficiarse.
 >
-> Por último, se registran los **productos competidores** (nombre comercial único, marca y año de lanzamiento), vinculando cada uno al producto de la empresa al que más se parece.
+> Por último, se registran los productos competidores (nombre comercial único, marca y año de lanzamiento), vinculando cada uno al producto de la empresa al que más se parece.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Decide si el formato es una entidad débil de `PRODUCTO` o una entidad independiente. Justifícalo con un ejemplo (40 g de Barridulces frente a 40 g de Filipondios).
 3. Elabora el **diccionario de datos** de `INGREDIENTE` y de la relación de composición.
 4. Escribe tres restricciones: suma de porcentajes, cantidad máxima de promoción y fechas.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] La composición es una N:M con atributo `porcentaje`.
 - [ ] El formato depende del producto: `FORMATO` es una entidad débil.
 - [ ] El pedido se relaciona con el **formato**, no solo con el producto.
 - [ ] *Se parece a* es 1:N desde el producto hacia los competidores.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Relacionar `PEDIDO` con `PRODUCTO` sin indicar el formato. No sabrías qué se ha pedido.
 > - Poner el precio en `PRODUCTO`: cada formato tiene el suyo.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -1735,9 +2398,12 @@ El **precio** de cada formato cambia con el tiempo y se quiere conservar el hist
 
 {{< practica num="20" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Modelar una estructura de **lista de materiales (BOM)** con una N:M reflexiva y detectar restricciones de integridad que el diagrama no recoge (ciclos y borrado).
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1745,31 +2411,40 @@ Una planta de maquinaria pesada gestiona su proceso de producción y sus control
 
 #### Enunciado
 
-> De las **fábricas** se conoce el código, la ubicación y el teléfono. Cada fábrica alberga varias **líneas de montaje**. El código de línea es correlativo dentro de cada fábrica (la línea 1 de Valencia y la línea 1 de Sevilla son distintas) y se guarda la denominación.
+> De las fábricas se conoce el código, la ubicación y el teléfono. Cada fábrica alberga varias líneas de montaje. El código de línea es correlativo dentro de cada fábrica (la línea 1 de Valencia y la línea 1 de Sevilla son distintas) y se guarda la denominación.
 >
-> De las **piezas** se registra el código, el nombre, el peso en gramos y el coste estándar. Una pieza se ensambla a partir de otras piezas componentes y una pieza puede formar parte de muchas piezas superiores. De cada componente interesa la **cantidad** de unidades necesarias. Cada pieza se fabrica en una línea de montaje.
+> De las piezas se registra el código, el nombre, el peso en gramos y el coste estándar. Una pieza se ensambla a partir de otras piezas componentes y una pieza puede formar parte de muchas piezas superiores. De cada componente interesa la cantidad de unidades necesarias. Cada pieza se fabrica en una línea de montaje.
 >
-> Cada pieza pasa **inspecciones** de calidad. Cada inspección se identifica con un número dentro de la pieza y guarda la fecha, el resultado (*aprobado* o *rechazado*) y las observaciones. Si una pieza se descataloga, sus inspecciones se eliminan automáticamente.
+> Cada pieza pasa inspecciones de calidad. Cada inspección se identifica con un número dentro de la pieza y guarda la fecha, el resultado (*aprobado* o *rechazado*) y las observaciones. Si una pieza se descataloga, sus inspecciones se eliminan automáticamente.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Explica la relación reflexiva *compone* con sus dos roles y su atributo.
 3. Identifica las **dos** entidades débiles y escribe sus identificadores completos.
 4. Escribe las restricciones: ausencia de ciclos en la lista de materiales, borrado en cascada y dominio del resultado.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] *Compone* es una N:M reflexiva con el atributo `cantidad`.
 - [ ] `LÍNEA` e `INSPECCIÓN` son entidades débiles.
 - [ ] La pieza se relaciona con la línea de montaje (que a su vez depende de la fábrica).
 - [ ] Entre las restricciones aparece «una pieza no puede contenerse a sí misma, directa o indirectamente».
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Dar a `LÍNEA` un código global: el enunciado dice que es correlativo por fábrica.
 > - Modelar la lista de materiales con una relación 1:N: una pieza componente participa en muchos ensamblajes.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -1801,9 +2476,12 @@ Algunas piezas se **compran a proveedores** en lugar de fabricarse. ¿Cómo mode
 
 {{< practica num="21" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Combinar siete relaciones con cardinalidades máximas concretas, atributos de N:M y una jerarquía reflexiva.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1811,35 +2489,44 @@ La comandancia de la fuerza de defensa quiere registrar su operativa interna.
 
 #### Enunciado
 
-> De los **troopers** se conoce el número de placa, el DNI, el nombre, la categoría y la función (piloto, agente…). Cada trooper tiene un único **jefe** directo y un trooper puede ser jefe de varios subordinados.
+> De los troopers se conoce el número de placa, el DNI, el nombre, la categoría y la función (piloto, agente…). Cada trooper tiene un único jefe directo y un trooper puede ser jefe de varios subordinados.
 >
-> El arsenal contiene **armas** con código único, clase y nombre. Un trooper puede usar varias armas; interesa la **habilidad** (de 1 a 10) de cada trooper con cada arma.
+> El arsenal contiene armas con código único, clase y nombre. Un trooper puede usar varias armas; interesa la habilidad (de 1 a 10) de cada trooper con cada arma.
 >
-> De los **bichos** capturados se conoce el identificador, la raza, la localización de origen y el peso. Un bicho es detenido por uno o varios troopers y se guarda la **fecha de detención**. El mismo trooper puede detener al mismo bicho en fechas distintas.
+> De los bichos capturados se conoce el identificador, la raza, la localización de origen y el peso. Un bicho es detenido por uno o varios troopers y se guarda la fecha de detención. El mismo trooper puede detener al mismo bicho en fechas distintas.
 >
-> Cada bicho que permanece en la comandancia se encierra en una **mazmorra** (código y ubicación). En una mazmorra puede haber varios bichos, **nunca más de cuatro**.
+> Cada bicho que permanece en la comandancia se encierra en una mazmorra (código y ubicación). En una mazmorra puede haber varios bichos, nunca más de cuatro.
 >
-> Los bichos participan en **delitos** (número de asalto y juzgado instructor), y se anota el **cargo principal** de cada bicho en cada delito. Uno o varios troopers investigan cada delito.
+> Los bichos participan en delitos (número de asalto y juzgado instructor), y se anota el cargo principal de cada bicho en cada delito. Uno o varios troopers investigan cada delito.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Escribe las cardinalidades (mín, máx) de las siete relaciones y justifica la de la mazmorra.
 3. Indica qué atributos pertenecen a relaciones N:M y por qué (habilidad, fecha de detención, cargo principal).
 4. Escribe las restricciones: la habilidad entre 1 y 10, y el máximo de cuatro bichos por mazmorra.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] La jerarquía de jefes es una reflexiva 1:N.
 - [ ] `cargo_principal` está en la relación *implicado en*.
 - [ ] La mazmorra tiene máximo 4 bichos en la cardinalidad.
 - [ ] `fecha_detención` forma parte de la identificación de *detiene*.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Poner `cargo_principal` en `BICHO`: un bicho puede estar implicado en varios delitos con cargos distintos.
 > - Expresar «máximo cuatro» solo en el texto y no en la cardinalidad.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -1871,9 +2558,12 @@ Cada trooper tiene una **especialidad** (piloto, agente, médico…) con datos p
 
 {{< practica num="22" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + justificación de la agregación" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Usar una **agregación** para relacionar una entidad con una relación N:M, junto con una entidad débil y una reflexiva.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1881,22 +2571,26 @@ George R. R. Martin quiere documentar los castillos de las grandes casas de Poni
 
 #### Enunciado
 
-> De cada **casa** (Stark, Tully, Lannister…) se guarda un número de orden según el año de fundación, el nombre (que es único), el año de fundación, la localización, la dirección (valle, montaña y arroyo) y los metros cuadrados.
+> De cada casa (Stark, Tully, Lannister…) se guarda un número de orden según el año de fundación, el nombre (que es único), el año de fundación, la localización, la dirección (valle, montaña y arroyo) y los metros cuadrados.
 >
-> Cada casa tiene una serie de **castillos**. De cada castillo se guarda un código **establecido por cada casa**, el nombre, las medidas, la fecha y el estilo de construcción (gótico, románico…) y una descripción de la técnica utilizada.
+> Cada casa tiene una serie de castillos. De cada castillo se guarda un código establecido por cada casa, el nombre, las medidas, la fecha y el estilo de construcción (gótico, románico…) y una descripción de la técnica utilizada.
 >
-> Cada castillo lo crea un **arquitecto**, del que se conoce el nombre, la nacionalidad, la fecha de nacimiento y la de fallecimiento. Un arquitecto puede tener como **maestro** a otro arquitecto de la base de datos; a su vez, un maestro puede serlo de varios o de ninguno. Los arquitectos pueden pertenecer o no a una **escuela** (nombre, país, fecha de aparición y estilo).
+> Cada castillo lo crea un arquitecto, del que se conoce el nombre, la nacionalidad, la fecha de nacimiento y la de fallecimiento. Un arquitecto puede tener como maestro a otro arquitecto de la base de datos; a su vez, un maestro puede serlo de varios o de ninguno. Los arquitectos pueden pertenecer o no a una escuela (nombre, país, fecha de aparición y estilo).
 >
-> Los arquitectos pueden tener uno o varios **mecenas** (nombre, que puede repetirse, país y ciudad de nacimiento, fecha de nacimiento y de fallecimiento), y un mecenas puede serlo de varios arquitectos. De cada **mecenazgo** se quiere saber la fecha de inicio, la de fin y la población donde tuvo lugar, y **qué castillos resultaron** de cada mecenazgo.
+> Los arquitectos pueden tener uno o varios mecenas (nombre, que puede repetirse, país y ciudad de nacimiento, fecha de nacimiento y de fallecimiento), y un mecenas puede serlo de varios arquitectos. De cada mecenazgo se quiere saber la fecha de inicio, la de fin y la población donde tuvo lugar, y qué castillos resultaron de cada mecenazgo.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Escribe el identificador completo de `CASTILLO`.
 3. Los castillos se relacionan con el **mecenazgo**, que es una relación. Compara dos soluciones: una ternaria (arquitecto, mecenas, castillo) y una **agregación**. ¿Cuál representa mejor el enunciado?
 4. ¿Qué identificador das a `MECENAS` si su nombre puede repetirse?
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `CASTILLO` es débil de `CASA` (etiqueta ID).
 - [ ] *Es maestro de* es una reflexiva 1:N sobre `ARQUITECTO`.
@@ -1904,12 +2598,17 @@ George R. R. Martin quiere documentar los castillos de las grandes casas de Poni
 - [ ] La relación *resulta de* une `CASTILLO` con la agregación, no con `ARQUITECTO` ni con `MECENAS` por separado.
 - [ ] `MECENAS` tiene un código artificial como identificador.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Usar una ternaria: obligaría a que todo mecenazgo tuviera un castillo, y el enunciado admite mecenazgos sin castillos.
 > - Relacionar `CASTILLO` solo con `MECENAS`: se pierde qué arquitecto trabajó para él en ese mecenazgo.
 > - Usar el nombre del mecenas como clave: se repite.
+
+{{% /details %}}
 
 {{% details title="Pista: relacionar algo con una relación" %}}
 En el modelo E/R una relación solo une entidades. Cuando necesitas relacionar una entidad con el **hecho** de que dos entidades estén relacionadas (el mecenazgo), encierra esa relación en una **agregación** y trátala como si fuera una entidad.
@@ -1947,9 +2646,12 @@ Un castillo puede ser fruto de **varios mecenazgos** (por ejemplo, empezado con 
 
 {{< practica num="23" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + clasificación de la jerarquía + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Integrar una **generalización** con atributos propios, dos entidades débiles, una reflexiva, un atributo multivaluado y una cardinalidad máxima concreta (2).
+
+{{% /details %}}
 
 #### Contexto
 
@@ -1957,28 +2659,32 @@ Se va a celebrar un campeonato de *quidditch* entre selecciones de distintos pa�
 
 #### Enunciado
 
-> En el campeonato participan **jugadores** y **árbitros**. De todos ellos se quiere conocer el número de mago, el nombre, la dirección y los **campeonatos** en los que han participado. De los jugadores se guarda además el nivel de juego (numérico) y de los árbitros, la categoría (nacional o internacional). Ningún árbitro puede participar como jugador.
+> En el campeonato participan jugadores y árbitros. De todos ellos se quiere conocer el número de mago, el nombre, la dirección y los campeonatos en los que han participado. De los jugadores se guarda además el nivel de juego (numérico) y de los árbitros, la categoría (nacional o internacional). Ningún árbitro puede participar como jugador.
 >
-> Los **países** envían al campeonato **equipos** y árbitros, aunque no todos los países envían selección. Todo equipo y todo árbitro es enviado por un único país. Un país puede estar **representado** por otro país. Cada país se identifica por un número correlativo según su orden alfabético y se guarda su nombre y el número de clubes de quidditch que existen en él. Cada equipo tiene un nombre y está formado por varios jugadores.
+> Los países envían al campeonato equipos y árbitros, aunque no todos los países envían selección. Todo equipo y todo árbitro es enviado por un único país. Un país puede estar representado por otro país. Cada país se identifica por un número correlativo según su orden alfabético y se guarda su nombre y el número de clubes de quidditch que existen en él. Cada equipo tiene un nombre y está formado por varios jugadores.
 >
-> Cada **juego** (partida) se identifica por un número correlativo (Cod-Q). Lo juegan **dos equipos** y lo arbitra un árbitro. Todo equipo participa al menos en un juego. Un árbitro no puede arbitrar a equipos enviados por su mismo país.
+> Cada juego (partida) se identifica por un número correlativo (Cod-Q). Lo juegan dos equipos y lo arbitra un árbitro. Todo equipo participa al menos en un juego. Un árbitro no puede arbitrar a equipos enviados por su mismo país.
 >
-> Los participantes se alojan en los **castillos** donde se desarrollan las partidas y se quiere saber en qué castillo y en qué fechas se ha alojado cada uno; pueden alojarse varias veces, en el mismo o en distinto castillo. De cada castillo se guarda el nombre, la dirección y el teléfono.
+> Los participantes se alojan en los castillos donde se desarrollan las partidas y se quiere saber en qué castillo y en qué fechas se ha alojado cada uno; pueden alojarse varias veces, en el mismo o en distinto castillo. De cada castillo se guarda el nombre, la dirección y el teléfono.
 >
-> El campeonato se desarrolla a lo largo de una serie de **jornadas** (fecha). Cada juego tiene lugar en una jornada, aunque puede haber jornadas de descanso.
+> El campeonato se desarrolla a lo largo de una serie de jornadas (fecha). Cada juego tiene lugar en una jornada, aunque puede haber jornadas de descanso.
 >
-> Cada juego se celebra en un **estadio** de uno de los castillos (los estadios se numeran dentro de cada castillo) y se guarda el número de entradas vendidas. De cada estadio se conoce la capacidad y los **medios** de que dispone para la retransmisión (radio, televisión, vídeo…).
+> Cada juego se celebra en un estadio de uno de los castillos (los estadios se numeran dentro de cada castillo) y se guarda el número de entradas vendidas. De cada estadio se conoce la capacidad y los medios de que dispone para la retransmisión (radio, televisión, vídeo…).
 >
-> De cada juego se registran todos los **movimientos**, identificados por un número de orden dentro del juego; de cada uno se guarda la jugada y un breve comentario de un experto.
+> De cada juego se registran todos los movimientos, identificados por un número de orden dentro del juego; de cada uno se guarda la jugada y un breve comentario de un experto.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Clasifica la generalización de `PARTICIPANTE` (total/parcial, disjunta/solapada) y justifícalo con frases del enunciado.
 3. ¿Qué cardinalidad tiene `EQUIPO` en la relación *juega*? ¿Qué color tiene esa mitad del rombo?
 4. Escribe las restricciones que el diagrama no puede expresar.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `PARTICIPANTE` se generaliza en `JUGADOR` y `ÁRBITRO` con **T,D**.
 - [ ] *Juega* tiene (2,2) junto a `EQUIPO`.
@@ -1986,13 +2692,18 @@ Se va a celebrar un campeonato de *quidditch* entre selecciones de distintos pa�
 - [ ] `campeonato` (de los participantes) y `medios` (de los estadios) son multivaluados.
 - [ ] *Se aloja* es N:M y la fecha de entrada forma parte de la identificación.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Repetir número de mago, nombre y dirección en `JUGADOR` y en `ÁRBITRO`: van en la superclase.
 > - Guardar las entradas vendidas en `ESTADIO`: dependen de cada juego.
 > - Hacer de la fecha un atributo de `JUEGO` y olvidar que el enunciado pide jornadas sin juegos (de descanso).
 > - Relacionar `JUGADOR` directamente con `PAÍS`: el país se obtiene a través del equipo.
+
+{{% /details %}}
 
 {{% details title="Pista: dos equipos por juego" %}}
 Cuando el número de participantes es fijo se escribe el número en la cardinalidad: (2,2) junto a `EQUIPO`. La mitad del rombo que mira a `EQUIPO` es negra, porque el máximo (2) es mayor que 1.
@@ -2038,9 +2749,12 @@ Varias especializaciones en un mismo modelo, cadenas de entidades débiles, tern
 
 {{< practica num="24" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Integrar una especialización con atributos propios, una ternaria con atributos, una reflexiva y un atributo derivado.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -2048,33 +2762,42 @@ La Policía y la asociación de entidades bancarias quieren una base de datos so
 
 #### Enunciado
 
-> De las **entidades bancarias** se conoce el código y la dirección de la sede. Una entidad tiene varias **sucursales**, identificadas por un código dentro de la entidad, con dirección y número de empleados.
+> De las entidades bancarias se conoce el código y la dirección de la sede. Una entidad tiene varias sucursales, identificadas por un código dentro de la entidad, con dirección y número de empleados.
 >
-> Las sucursales contratan **vigilantes**: código, DNI, nombre y fecha de nacimiento (la edad se calcula). Un vigilante es obligatoriamente **armado** (puntuación de tiro y calibre) o **no armado** (si tiene titulación en artes marciales). Un vigilante puede ser contratado por distintas sucursales en fechas diferentes y se registra si el contrato es con arma o no.
+> Las sucursales contratan vigilantes: código, DNI, nombre y fecha de nacimiento (la edad se calcula). Un vigilante es obligatoriamente armado (puntuación de tiro y calibre) o no armado (si tiene titulación en artes marciales). Un vigilante puede ser contratado por distintas sucursales en fechas diferentes y se registra si el contrato es con arma o no.
 >
-> Se controla a los **detenidos** por atracar sucursales (código y nombre completo). Algunos pertenecen a **bandas** (número y número de miembros). Una banda puede estar subordinada a otra banda matriz.
+> Se controla a los detenidos por atracar sucursales (código y nombre completo). Algunos pertenecen a bandas (número y número de miembros). Una banda puede estar subordinada a otra banda matriz.
 >
-> Cada **atraco** vincula al detenido, a la sucursal atracada y al **juez** instructor (clave del juzgado, nombre y años de servicio), con la fecha, la condena en años y la indemnización.
+> Cada atraco vincula al detenido, a la sucursal atracada y al juez instructor (clave del juzgado, nombre y años de servicio), con la fecha, la condena en años y la indemnización.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Clasifica la jerarquía de vigilantes y explica dónde se coloca cada atributo.
 3. Modela el atraco como **ternaria** y razona sus cardinalidades. ¿Qué atributo permite repetir la misma terna?
 4. Escribe el diccionario de datos de `VIGILANTE` y tres restricciones: contrato con arma solo para armados, `num_miembros` coherente y condena no negativa.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] La especialización es **total y disyunta**.
 - [ ] `edad` y `num_miembros` son atributos derivados.
 - [ ] *Atraco* es una ternaria con `fecha`, `condena` e `indemnización`.
 - [ ] `SUCURSAL` es débil de `ENTIDAD_BANCARIA`.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Guardar `edad` como atributo normal: cambia cada año.
 > - No relacionar el contrato con la especialización: un contrato «con arma» solo puede firmarlo un vigilante armado.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -2106,9 +2829,12 @@ Un detenido puede pertenecer a **varias bandas** a lo largo del tiempo. ¿Qué a
 
 {{< practica num="25" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Modelar dos especializaciones, una genealogía reflexiva, una cadena de entidad débil y una ternaria de lecciones.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -2116,33 +2842,42 @@ Un club hípico gestiona su cuadra, sus socios, sus instructores y las clases de
 
 #### Enunciado
 
-> De los **caballos** se conoce el microchip, el nombre, la raza y la fecha de nacimiento. Son **propios del club** (fecha de adquisición y coste mensual de mantenimiento) o **de un socio** (cuota de pupilaje y socio propietario). Se mantiene la **genealogía**: un caballo puede ser progenitor (padre o madre) de varios potros nacidos en el club.
+> De los caballos se conoce el microchip, el nombre, la raza y la fecha de nacimiento. Son propios del club (fecha de adquisición y coste mensual de mantenimiento) o de un socio (cuota de pupilaje y socio propietario). Se mantiene la genealogía: un caballo puede ser progenitor (padre o madre) de varios potros nacidos en el club.
 >
-> Los establos se dividen en **pabellones** (código y nombre). Cada pabellón tiene varios **boxes**, numerados correlativamente dentro del pabellón (Box 1, Box 2…). Cada caballo ocupa un único box y un box aloja como máximo un caballo.
+> Los establos se dividen en pabellones (código y nombre). Cada pabellón tiene varios boxes, numerados correlativamente dentro del pabellón (Box 1, Box 2…). Cada caballo ocupa un único box y un box aloja como máximo un caballo.
 >
-> De los **socios** se guarda el DNI y el nombre. De los **instructores**, el número de colegiado, el DNI, el nombre y la titulación. Son **titulares** o **en prácticas**; cada instructor en prácticas es supervisado por un titular.
+> De los socios se guarda el DNI y el nombre. De los instructores, el número de colegiado, el DNI, el nombre y la titulación. Son titulares o en prácticas; cada instructor en prácticas es supervisado por un titular.
 >
-> Las **lecciones** reúnen a un socio, un instructor y un caballo, con la fecha, la hora, la pista y el nivel (*iniciación*, *doma* o *salto*).
+> Las lecciones reúnen a un socio, un instructor y un caballo, con la fecha, la hora, la pista y el nivel (*iniciación*, *doma* o *salto*).
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Clasifica las dos jerarquías y justifica por qué la relación con el socio propietario sale de una subclase y no de `CABALLO`.
 3. Modela la lección como ternaria y calcula sus cardinalidades.
 4. Escribe el diccionario de datos de `CABALLO` y tres restricciones (dos progenitores como máximo, instructor en prácticas supervisado, box libre).
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] Hay dos jerarquías **totales y disyuntas**.
 - [ ] La genealogía es una reflexiva con máximo 2 progenitores por potro.
 - [ ] `BOX` es débil de `PABELLÓN`.
 - [ ] *Supervisa* sale de la subclase *en prácticas* hacia *titular*.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Relacionar `SOCIO` con todos los caballos: solo con los que son de socio.
 > - Dibujar la genealogía como 1:N: un potro tiene dos progenitores.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -2174,9 +2909,12 @@ Un caballo cambia de box con el tiempo y se quiere conservar el **historial de u
 
 {{< practica num="26" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Combinar dos especializaciones, una especialización parcial con reflexiva, una entidad débil y una ternaria con atributos.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -2184,33 +2922,42 @@ Un hotel-balneario termal automatiza la gestión de huéspedes, instalaciones y 
 
 #### Enunciado
 
-> De los **clientes** se almacena el DNI, el nombre, los apellidos y la fecha de nacimiento. Son **alojados** (tarjeta de crédito y fecha de salida prevista) o **ambulantes** (teléfono de emergencia), y no pueden ser ambas cosas.
+> De los clientes se almacena el DNI, el nombre, los apellidos y la fecha de nacimiento. Son alojados (tarjeta de crédito y fecha de salida prevista) o ambulantes (teléfono de emergencia), y no pueden ser ambas cosas.
 >
-> El hotel se divide en **plantas** (número, nombre y número de habitaciones). Las **habitaciones** se numeran correlativamente dentro de cada planta (existe la habitación 1 de la planta 3 y la habitación 1 de la 8) y tienen una capacidad. Son **suites** (jacuzzis y metros cuadrados) o **estándar** (si admiten cama supletoria y el tipo de baño). Un cliente alojado se asigna a una habitación en una fecha.
+> El hotel se divide en plantas (número, nombre y número de habitaciones). Las habitaciones se numeran correlativamente dentro de cada planta (existe la habitación 1 de la planta 3 y la habitación 1 de la 8) y tienen una capacidad. Son suites (jacuzzis y metros cuadrados) o estándar (si admiten cama supletoria y el tipo de baño). Un cliente alojado se asigna a una habitación en una fecha.
 >
-> De los **empleados** se conoce el código, el nombre y el puesto. Algunos son **terapeutas**, y entre ellos existe una jerarquía: un terapeuta *senior* coordina a terapeutas *junior*.
+> De los empleados se conoce el código, el nombre y el puesto. Algunos son terapeutas, y entre ellos existe una jerarquía: un terapeuta *senior* coordina a terapeutas *junior*.
 >
-> Los **tratamientos** (código y nombre) se prestan de forma conjunta entre el cliente, el terapeuta y el tratamiento, con la fecha, la hora, la duración y las observaciones médicas.
+> Los tratamientos (código y nombre) se prestan de forma conjunta entre el cliente, el terapeuta y el tratamiento, con la fecha, la hora, la duración y las observaciones médicas.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Clasifica las tres jerarquías (cliente, habitación, empleado) y justifica cada clasificación con una frase del enunciado.
 3. Razona por qué el número de habitaciones de la planta es un atributo derivado y por qué la habitación es débil.
 4. Escribe el diccionario de datos de `CLIENTE` y tres restricciones (solo los alojados se asignan a habitación, capacidad, fecha de salida).
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] La jerarquía de empleados es **parcial** y las otras dos son **totales y disyuntas**.
 - [ ] *Asignación* sale de la subclase `ALOJADO`.
 - [ ] `HABITACIÓN` es débil de `PLANTA`.
 - [ ] *Presta* es una ternaria con cuatro atributos.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Relacionar la habitación con `CLIENTE` en lugar de con `ALOJADO`: un ambulante no tiene habitación.
 > - Hacer que todos los empleados sean terapeutas: la jerarquía es parcial.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -2242,9 +2989,12 @@ Una suite puede **reformarse** y pasar a estándar. ¿Es compatible con una espe
 
 {{< practica num="27" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Resolver una especialización con tres subclases, una entidad débil, una reflexiva N:M con atributos y una ternaria.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -2252,33 +3002,42 @@ El Ministerio quiere un sistema para controlar la producción, el transporte y e
 
 #### Enunciado
 
-> Las **centrales** se identifican por un código; se guarda también el nombre (único), la producción media y la fecha de entrada en funcionamiento. Son obligatoriamente **hidroeléctricas** (río, embalse y volumen útil), **térmicas** (combustible y emisiones) o **renovables** (número de generadores y superficie de captación).
+> Las centrales se identifican por un código; se guarda también el nombre (único), la producción media y la fecha de entrada en funcionamiento. Son obligatoriamente hidroeléctricas (río, embalse y volumen útil), térmicas (combustible y emisiones) o renovables (número de generadores y superficie de captación).
 >
-> Cada central mantiene un registro de **partes de mantenimiento**, identificados por un número de incidencia dentro de la central (1, 2, 3…), con la fecha de la revisión, la empresa mantenedora y el coste.
+> Cada central mantiene un registro de partes de mantenimiento, identificados por un número de incidencia dentro de la central (1, 2, 3…), con la fecha de la revisión, la empresa mantenedora y el coste.
 >
-> La transmisión se realiza a través de **nodos** de la red (código y nombre) unidos entre sí por **líneas** de transmisión, con su capacidad en kV y la distancia en km.
+> La transmisión se realiza a través de nodos de la red (código y nombre) unidos entre sí por líneas de transmisión, con su capacidad en kV y la distancia en km.
 >
-> El suministro mayorista es un acuerdo conjunto entre la **central**, la **comercializadora** (CIF y nombre) y la **zona** de distribución (código y nombre), con los MWh contratados, la tarifa y la fecha del contrato.
+> El suministro mayorista es un acuerdo conjunto entre la central, la comercializadora (CIF y nombre) y la zona de distribución (código y nombre), con los MWh contratados, la tarifa y la fecha del contrato.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Clasifica la jerarquía de centrales y explica por qué el atributo común `producción_media` va en la superclase.
 3. Modela el suministro como ternaria. ¿Qué atributo permite repetir el acuerdo entre las mismas tres entidades?
 4. Escribe tres restricciones: el nombre único, la capacidad positiva y el parte con fecha posterior a la puesta en marcha.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] La jerarquía es **total y disyunta** con tres subclases.
 - [ ] *Línea* es una reflexiva N:M con dos atributos.
 - [ ] `PARTE` es débil de `CENTRAL`.
 - [ ] *Suministro* es una ternaria.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Crear una entidad `LÍNEA` aparte sin necesidad: es una relación entre nodos con atributos.
 > - Meter río y embalse en `CENTRAL`: solo tienen sentido en las hidroeléctricas.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -2310,9 +3069,12 @@ Las centrales renovables se dividen a su vez en **solares** y **eólicas** con a
 
 {{< practica num="28" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Modelar una **cadena de entidades débiles** (festival → edición → escenario), una especialización y una actuación repetible.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -2320,33 +3082,42 @@ Un promotor organiza un festival que se repite cada año y quiere guardar todo s
 
 #### Enunciado
 
-> Un **festival** (código, nombre y ciudad) se celebra cada año. Cada **edición** se identifica por el año dentro del festival y tiene fecha de inicio, fecha de fin y aforo.
+> Un festival (código, nombre y ciudad) se celebra cada año. Cada edición se identifica por el año dentro del festival y tiene fecha de inicio, fecha de fin y aforo.
 >
-> Cada edición monta varios **escenarios**, identificados por su nombre dentro de la edición (*Principal*, *Electrónica*…), con su capacidad.
+> Cada edición monta varios escenarios, identificados por su nombre dentro de la edición (*Principal*, *Electrónica*…), con su capacidad.
 >
-> Los **artistas** (código, nombre artístico y país) son **solistas** (instrumento) o **grupos** (número de componentes). Cada artista **actúa** en escenarios; de cada actuación se guarda la fecha, la hora de inicio, la duración y el caché. Un artista puede actuar varias veces en el mismo escenario.
+> Los artistas (código, nombre artístico y país) son solistas (instrumento) o grupos (número de componentes). Cada artista actúa en escenarios; de cada actuación se guarda la fecha, la hora de inicio, la duración y el caché. Un artista puede actuar varias veces en el mismo escenario.
 >
-> Los **asistentes** (DNI, nombre y correo) compran **entradas** para una edición. Cada entrada se numera dentro de la edición y tiene un tipo (*general*, *vip* o *abono*) y un precio. Una entrada la compra un único asistente, aunque puede estar sin vender.
+> Los asistentes (DNI, nombre y correo) compran entradas para una edición. Cada entrada se numera dentro de la edición y tiene un tipo (*general*, *vip* o *abono*) y un precio. Una entrada la compra un único asistente, aunque puede estar sin vender.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Escribe el identificador completo de `ESCENARIO` y explica por qué necesita tres componentes.
 3. Razona por qué la *actuación* es una relación con atributos y qué atributos forman parte de su identificación.
 4. Escribe tres restricciones: solapes de actuaciones en el mismo escenario, fechas dentro de la edición y entradas vendidas frente al aforo.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `EDICIÓN` es débil de `FESTIVAL` y `ESCENARIO` es débil de `EDICIÓN`.
 - [ ] `ENTRADA` es débil de `EDICIÓN`.
 - [ ] La especialización de artistas es **total y disyunta**.
 - [ ] *Actúa* tiene la fecha y la hora de inicio como discriminador.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Identificar el escenario solo por su nombre: «Principal» existe en todas las ediciones.
 > - Relacionar al artista con la edición y no con el escenario: pierdes dónde y cuándo actúa.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -2378,9 +3149,12 @@ Los festivales tienen **patrocinadores** que aportan un importe por edición. A�
 
 {{< practica num="29" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + clasificación de la jerarquía + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Combinar una especialización con atributos propios, un atributo derivado, una entidad débil y una reflexiva sobre la entidad débil.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -2388,17 +3162,18 @@ Año 2050: tras una invasión zombi, los supervivientes se organizan en grupos y
 
 #### Enunciado
 
-> Se necesita almacenar información sobre cada **grupo**, los **integrantes** que lo componen, las **tareas** (proyectos) que realiza y sus **trabajadores**.
+> Se necesita almacenar información sobre cada grupo, los integrantes que lo componen, las tareas (proyectos) que realiza y sus trabajadores.
 >
 > De los grupos se guarda el identificador, la denominación, la dirección, la provincia y el tipo (recolectores, creadores de munición, atacantes…).
 >
 > Cada grupo está formado por integrantes, de los que se conoce el DNI, el nombre, la dirección, la provincia, la fecha de alta en el grupo, la cuota mensual con que colaboran y la aportación anual (que se obtiene multiplicando la cuota mensual por los meses del año).
 >
-> Los grupos tienen también **trabajadores**. Cada trabajador se identifica por un ID y tiene un nombre y una fecha de ingreso. Los trabajadores son de dos tipos: **mantenidos**, que cobran un sueldo en especie y ocupan un cargo (se guarda la cantidad total que se les ha dado), y **voluntarios**, de los que se guarda la edad, la profesión y las horas que dedican al grupo. Un integrante no puede ser trabajador del grupo.
+> Los grupos tienen también trabajadores. Cada trabajador se identifica por un ID y tiene un nombre y una fecha de ingreso. Los trabajadores son de dos tipos: mantenidos, que cobran un sueldo en especie y ocupan un cargo (se guarda la cantidad total que se les ha dado), y voluntarios, de los que se guarda la edad, la profesión y las horas que dedican al grupo. Un integrante no puede ser trabajador del grupo.
 >
-> Los grupos realizan **tareas**. Cada tarea se identifica por un número **dentro del grupo** y se guarda en qué zona libre de zombis se realiza y en qué parte de ella, el objetivo y el número de beneficiarios. Una tarea se compone a su vez de **subtareas**, que también son tareas.
+> Los grupos realizan tareas. Cada tarea se identifica por un número dentro del grupo y se guarda en qué zona libre de zombis se realiza y en qué parte de ella, el objetivo y el número de beneficiarios. Una tarea se compone a su vez de subtareas, que también son tareas.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Clasifica la especialización de `TRABAJADOR` y justifícala.
@@ -2406,19 +3181,27 @@ Año 2050: tras una invasión zombi, los supervivientes se organizan en grupos y
 4. Modela las subtareas y escribe el identificador completo de `TAREA`.
 5. Escribe las restricciones que el diagrama no puede expresar.
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `TRABAJADOR` se especializa en `MANTENIDO` y `VOLUNTARIO` con **T,D**.
 - [ ] `aportación_anual` es derivado (óvalo discontinuo).
 - [ ] `TAREA` es débil de `GRUPO` (etiqueta ID).
 - [ ] *Se compone de* es una reflexiva 1:N sobre `TAREA`.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Crear una entidad `SUBTAREA`: una subtarea es una tarea, se modela con una relación reflexiva.
 > - Guardar la aportación anual: se calcula como `cuota_mensual × 12`.
 > - Poner `edad` y `profesión` en `TRABAJADOR`: solo los tienen los voluntarios.
+
+{{% /details %}}
 
 #### Ampliación
 
@@ -2451,9 +3234,12 @@ Un integrante puede pertenecer a **varios grupos** con una cuota distinta en cad
 
 {{< practica num="30" etiqueta="Ejercicio" tipo="Autónoma" duracion="2-3 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
-#### Objetivo
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
 
 Resolver un caso de integración con tres entidades débiles dependientes de la misma propietaria, una especialización y tres relaciones N:M, y justificar cada decisión.
+
+{{% /details %}}
 
 #### Contexto
 
@@ -2461,17 +3247,18 @@ Se organiza una muestra de platos típicos de España con información de las lo
 
 #### Enunciado
 
-> De las **provincias** se conoce el nombre, la extensión y la capital. De las **localidades** (nombre, tamaño y habitantes), dos localidades de provincias distintas pueden llamarse igual.
+> De las provincias se conoce el nombre, la extensión y la capital. De las localidades (nombre, tamaño y habitantes), dos localidades de provincias distintas pueden llamarse igual.
 >
-> De los **platos típicos** se guarda el nombre, los ingredientes básicos (varios) y la forma de preparación. Un plato puede ser típico de varias localidades y una localidad puede conservar varios platos típicos. Para cada pareja plato-localidad se anotan las **variaciones locales** de la receta.
+> De los platos típicos se guarda el nombre, los ingredientes básicos (varios) y la forma de preparación. Un plato puede ser típico de varias localidades y una localidad puede conservar varios platos típicos. Para cada pareja plato-localidad se anotan las variaciones locales de la receta.
 >
-> En las localidades hay **restaurantes** (nombre, dirección, teléfono, precio del menú del día y capacidad). Los nombres pueden repetirse entre localidades, nunca dentro de una. Cada restaurante debe estar especializado en **al menos uno** de los platos típicos.
+> En las localidades hay restaurantes (nombre, dirección, teléfono, precio del menú del día y capacidad). Los nombres pueden repetirse entre localidades, nunca dentro de una. Cada restaurante debe estar especializado en al menos uno de los platos típicos.
 >
-> En cada localidad se planifican **visitas guiadas** (nombre del lugar, único por localidad). Las visitas **culturales** tienen horario; las **industriales** (fábricas de embutidos, sidra…) tienen persona de contacto y teléfono.
+> En cada localidad se planifican visitas guiadas (nombre del lugar, único por localidad). Las visitas culturales tienen horario; las industriales (fábricas de embutidos, sidra…) tienen persona de contacto y teléfono.
 >
-> Las **bodegas** patrocinadoras (CIF, nombre del director, dirección de la sede y teléfono) ofrecen **vinos** (código, cosecha, grado, color y textura). Un grupo de expertos aconseja qué vinos servir con cada plato.
+> Las bodegas patrocinadoras (CIF, nombre del director, dirección de la sede y teléfono) ofrecen vinos (código, cosecha, grado, color y textura). Un grupo de expertos aconseja qué vinos servir con cada plato.
 
-#### Tareas
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Identifica las tres entidades débiles y escribe sus identificadores completos. Explica por qué `LOCALIDAD` es débil de `PROVINCIA`.
@@ -2479,18 +3266,26 @@ Se organiza una muestra de platos típicos de España con información de las lo
 4. Elabora el **diccionario de datos** de `LOCALIDAD`, `RESTAURANTE` y de la relación plato-localidad.
 5. Escribe cuatro restricciones y propón qué lista de tablas saldría al pasar al modelo relacional (adelanto de la UD03).
 
-#### Comprobación
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
 
 - [ ] `LOCALIDAD`, `RESTAURANTE` y `VISITA` son entidades débiles.
 - [ ] *Es típico de* es una N:M con el atributo `variación_local`.
 - [ ] La jerarquía de visitas es **total y disyunta**.
 - [ ] `ingredientes_básicos` es multivaluado.
 
-#### Errores habituales
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
 
 > [!WARNING]
 > - Identificar la localidad solo por su nombre: Villanueva existe en muchas provincias.
 > - Relacionar el restaurante con el plato sin exigir el mínimo 1: «debe estar especializado en al menos uno».
+
+{{% /details %}}
 
 #### Ampliación
 

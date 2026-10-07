@@ -1,428 +1,428 @@
 ---
-title: "Sistemas de almacenamiento y SGBD"
+title: "Sistemes d'emmagatzematge i SGBD"
 weight: 1
 bookToc: true
 math: true
 ---
 
-# UD01 · Sistemas de almacenamiento y SGBD
+# UD01 · Sistemes d'emmagatzematge i SGBD
 
 
-## Resumen del Tema
+## Resum del tema
 
-**Visión General:**
-Un **Sistema Gestor de Bases de Datos (SGBD)** es el componente software neurálgico que centraliza, organiza, consulta, mantiene y protege la información en las organizaciones modernas. En los albores de la informática, las aplicaciones gestionaban los datos directamente a través de **sistemas de archivos independientes**, lo que provocaba graves problemas de redundancia, inconsistencia, acoplamiento físico-lógico y fallos de seguridad.
+**Visió general:**
+Un **sistema gestor de bases de dades (SGBD)** és el component de programari essencial que centralitza, organitza, consulta, manté i protegix la informació en les organitzacions modernes. En els inicis de la informàtica, les aplicacions gestionaven les dades directament mitjançant **sistemes de fitxers independents**, cosa que provocava greus problemes de redundància, incoherència, acoblament físic i lògic, i fallades de seguretat.
 
-Esta unidad aborda en profundidad la transición histórica desde los soportes físicos primitivos (tarjetas perforadas, cintas magnéticas y discos planos) hacia los SGBD relacionales y NoSQL actuales. Se analizan detalladamente los métodos de organización de archivos (secuenciales, de acceso aleatorio por cálculo de *offset* e indexados mediante árboles B), la arquitectura estándar de tres niveles **ANSI/SPARC**, los componentes internos de un motor de base de datos, las reglas de integridad referencial y de dominio, la gestión de la concurrencia mediante **transacciones ACID**, las políticas de seguridad y recuperación, así como las topologías de despliegue y los subconjuntos del lenguaje SQL.
+Aquesta unitat tracta en profunditat la transició històrica des dels suports físics primitius (targetes perforades, cintes magnètiques i discos plans) fins als SGBD relacionals i NoSQL actuals. S'hi analitzen detalladament els mètodes d'organització de fitxers (seqüencials, d'accés aleatori mitjançant el càlcul de l'*offset* i indexats amb arbres B), l'arquitectura estàndard de tres nivells **ANSI/SPARC**, els components interns d'un motor de base de dades, les regles d'integritat referencial i de domini, la gestió de la concurrència mitjançant **transaccions ACID**, les polítiques de seguretat i recuperació, així com les topologies de desplegament i els subconjunts del llenguatge SQL.
 
 {{< ra "RA1:a,b,c,d,e,f,g,h,i,j" "RA2:a" "RA7:a" >}}
-### Temporalización
+### Temporalització
 
-La unidad ocupa **12 horas de aula** (8 de teoría y 4 de práctica).
+La unitat ocupa **12 hores d'aula** (8 de teoria i 4 de pràctica).
 
 {{< sesiones unidad="UD01" horas="12" >}}
 items:
-  - {h: 2, tipo: T, t: "Datos e información. Historia. Sistemas basados en archivos", ref: "§1 a §3"}
-  - {h: 1, tipo: P, t: "De la hoja de cálculo al SGBD", ref: "Práctica 1.1"}
-  - {h: 2, tipo: T, t: "Bases de datos y SGBD. Arquitectura y componentes", ref: "§4 y §5"}
-  - {h: 2, tipo: P, t: "Primer contacto con Oracle", ref: "Práctica 1.2"}
-  - {h: 2, tipo: T, t: "Integridad, concurrencia y transacciones. Seguridad. Modelos de datos y lenguajes", ref: "§6 a §8"}
-  - {h: 1, tipo: T, t: "Clasificación de los SGBD. Bases de datos distribuidas y fragmentación", ref: "§9 y §10"}
-  - {h: 1, tipo: T, t: "Big Data, inteligencia de negocios y protección de datos", ref: "§11 y §12"}
-  - {h: 1, tipo: P, t: "Informe de análisis de EduGest", ref: "Proyecto EduGest-1"}
+  - {h: 2, tipo: T, t: "Dades i informació. Història. Sistemes basats en fitxers", ref: "§1 a §3"}
+  - {h: 1, tipo: P, t: "Del full de càlcul al SGBD", ref: "Pràctica 1.1"}
+  - {h: 2, tipo: T, t: "Bases de dades i SGBD. Arquitectura i components", ref: "§4 i §5"}
+  - {h: 2, tipo: P, t: "Primer contacte amb Oracle", ref: "Pràctica 1.2"}
+  - {h: 2, tipo: T, t: "Integritat, concurrència i transaccions. Seguretat. Models de dades i llenguatges", ref: "§6 a §8"}
+  - {h: 1, tipo: T, t: "Classificació dels SGBD. Bases de dades distribuïdes i fragmentació", ref: "§9 i §10"}
+  - {h: 1, tipo: T, t: "Big Data, intel·ligència empresarial i protecció de dades", ref: "§11 i §12"}
+  - {h: 1, tipo: P, t: "Informe d'anàlisi d'EduGest", ref: "Projecte EduGest-1"}
 autonomo:
-  - "Prácticas 1.3 (elegir un SGBD), 1.4 (distribución de datos), 1.5 (auditoría de protección de datos) y 1.6"
-  - "Ejercicios resueltos y autoevaluación"
+  - "Pràctiques 1.3 (triar un SGBD), 1.4 (distribució de dades), 1.5 (auditoria de protecció de dades) i 1.6"
+  - "Exercicis resolts i autoavaluació"
 {{< /sesiones >}}
 
 
-### Objetivos de aprendizaje
+### Objectius d'aprenentatge
 
-Al terminar esta unidad serás capaz de:
+En acabar aquesta unitat, seràs capaç de:
 
-- Explicar la diferencia entre dato, información y conocimiento, y entre fichero y base de datos.
-- Analizar los problemas de los sistemas basados en ficheros y valorar la utilidad de un SGBD.
-- Describir la arquitectura ANSI/SPARC, los componentes de un SGBD y los perfiles de usuario.
-- Clasificar los SGBD según su modelo de datos, la ubicación de la información y otros criterios.
-- Reconocer la utilidad de las bases de datos distribuidas y las políticas de fragmentación.
-- Reconocer los conceptos de Big Data e inteligencia de negocios.
-- Identificar la legislación de protección de datos que afecta al diseño de una base de datos.
+- Explicar la diferència entre dada, informació i coneixement, i entre fitxer i base de dades.
+- Analitzar els problemes dels sistemes basats en fitxers i valorar la utilitat d'un SGBD.
+- Descriure l'arquitectura ANSI/SPARC, els components d'un SGBD i els perfils d'usuari.
+- Classificar els SGBD segons el model de dades, la ubicació de la informació i altres criteris.
+- Reconéixer la utilitat de les bases de dades distribuïdes i les polítiques de fragmentació.
+- Reconéixer els conceptes de Big Data i d'intel·ligència empresarial.
+- Identificar la legislació de protecció de dades que afecta el disseny d'una base de dades.
 
 > [!NOTE]
-> Esta unidad es **conceptual**: todavía no instalamos nada ni escribimos SQL de forma sistemática. Los fragmentos de SQL que aparecen son ilustrativos y usan una sintaxis genérica. A partir de la UD05 trabajaremos con Oracle.
+> Aquesta unitat és **conceptual**: encara no instal·lem res ni escrivim SQL de manera sistemàtica. Els fragments SQL que hi apareixen són il·lustratius i utilitzen una sintaxi genèrica. A partir de la UD05 treballarem amb Oracle.
 
-![Visión General de un SGBD](images/sgbd-overview.svg "Visión General del SGBD")
-
----
-
-
-{{< sesion n="1" h="2" tipo="t" >}}Datos, historia y archivos{{< /sesion >}}
-
-## 1. Datos, Información y Representación
-
-### 1.1 La cadena de valor: Dato, Información y Conocimiento
-
-En el ámbito de las ciencias de la computación y la gestión de bases de datos, es fundamental establecer una distinción conceptual rigurosa entre **dato**, **información** y **conocimiento**:
-
-- **Dato (Data):** Es una representación simbólica (numérica, alfabética, espacial o algorítmica) de un atributo, evento o hecho del mundo real. Por sí solo, un dato carece de contexto, semántica o propósito evaluable.
-  - *Ejemplos de datos:* `2026-10-01`, `1200`, `B`.
-- **Información (Information):** Nace cuando un conjunto de datos procesados, estructurados y contextualizados adquiere significado para un receptor humano o para un sistema informático, permitiendo reducir la incertidumbre y tomar decisiones.
-  - *Ejemplo de información:* "La cita médica del paciente Juan Pérez con el Dr. Martínez (`B`) está programada para el `2026-10-01` a las `12:00` horas".
-- **Conocimiento (Knowledge):** Es la integración de múltiples flujos de información combinados con experiencia, reglas de negocio e inferencias lógicas que permiten predecir comportamientos o automatizar acciones complejas.
-  - *Ejemplo de conocimiento:* "El 85% de los pacientes que programan citas a las 12:00 horas en el mes de octubre asisten puntualmente si reciben un recordatorio por SMS 24 horas antes".
+![Visió general d'un SGBD](images/sgbd-overview.svg "Visió general del SGBD")
 
 ---
 
-### 1.2 Representación Tabular y Tipado de Datos
 
-Para que un ordenador interprete y almacene la información eficientemente, los datos se organizan en modelos tabulares formados por **filas (registros, tuplas u ocurrencias)** y **columnas (atributos o campos)**:
+{{< sesion n="1" h="2" tipo="t" >}}Dades, història i fitxers{{< /sesion >}}
 
-| Atributo / Campo | Tipo de Dato Lógico | Restricción de Dominio / Regla | Ejemplo de Valor Válido |
+## 1. Dades, informació i representació
+
+### 1.1 La cadena de valor: dada, informació i coneixement
+
+En l'àmbit de les ciències de la computació i de la gestió de bases de dades, és fonamental distingir amb precisió entre **dada**, **informació** i **coneixement**:
+
+- **Dada (Data):** És una representació simbòlica (numèrica, alfabètica, espacial o algorítmica) d'un atribut, un esdeveniment o un fet del món real. Aïllada, una dada no té context, semàntica ni una finalitat que es puga avaluar.
+  - *Exemples de dades:* `2026-10-01`, `1200`, `B`.
+- **Informació (Information):** Apareix quan un conjunt de dades processades, estructurades i contextualitzades adquirix significat per a una persona o per a un sistema informàtic i permet reduir la incertesa i prendre decisions.
+  - *Exemple d'informació:* «La cita mèdica del pacient Juan Pérez amb el Dr. Martínez (`B`) està programada per al `2026-10-01` a les `12:00`».
+- **Coneixement (Knowledge):** És la integració de diversos fluxos d'informació combinats amb l'experiència, les regles de negoci i les inferències lògiques, que permet predir comportaments o automatitzar accions complexes.
+  - *Exemple de coneixement:* «El 85 % dels pacients que demanen cita a les 12.00 durant el mes d'octubre hi arriben puntualment si reben un recordatori per SMS 24 hores abans».
+
+---
+
+### 1.2 Representació tabular i tipatge de dades
+
+Perquè un ordinador interprete i emmagatzeme la informació de manera eficient, les dades s'organitzen en models tabulars formats per **files (registres, tuples o ocurrències)** i **columnes (atributs o camps)**:
+
+| Atribut / camp | Tipus de dada lògic | Restricció de domini / regla | Exemple de valor vàlid |
 | :--- | :--- | :--- | :--- |
-| `id_cliente` | Entero (`INT / BIGINT`) | Clave Primaria (`PRIMARY KEY`), Autoincremental, No Nulo. | `10045` |
-| `nombre` | Cadena Variable (`VARCHAR(100)`) | No Nulo (`NOT NULL`), Texto en formato UTF-8. | `'Laura Gomez'` |
-| `email` | Cadena (`VARCHAR(150)`) | Único (`UNIQUE`), Formato de e-mail válido. | `'laura@ejemplo.com'` |
-| `saldo_cuenta` | Decimal Fijo (`DECIMAL(12,2)`) | Mayor o igual a cero (`CHECK (saldo_cuenta >= 0)`). | `1250.75` |
-| `fecha_alta` | Fecha Estándar (`DATE`) | Formato ISO `YYYY-MM-DD`, no futura. | `'2026-10-01'` |
+| `id_cliente` | Enter (`INT / BIGINT`) | Clau primària (`PRIMARY KEY`), autoincremental, no nul·la. | `10045` |
+| `nombre` | Cadena variable (`VARCHAR(100)`) | No nul (`NOT NULL`), text en format UTF-8. | `'Laura Gomez'` |
+| `email` | Cadena (`VARCHAR(150)`) | Única (`UNIQUE`), adreça de correu vàlida. | `'laura@ejemplo.com'` |
+| `saldo_cuenta` | Decimal fix (`DECIMAL(12,2)`) | Major o igual que zero (`CHECK (saldo_cuenta >= 0)`). | `1250.75` |
+| `fecha_alta` | Data estàndard (`DATE`) | Format ISO `YYYY-MM-DD`, no futura. | `'2026-10-01'` |
 
-#### La Importancia Crítica del Tipado de Datos Correcto
+#### La importància de triar correctament els tipus de dades
 
-Elegir un tipo de dato inadecuado durante el diseño de la base de datos acarrea consecuencias graves:
+Triar un tipus de dada inadequat durant el disseny de la base de dades pot tindre conseqüències greus:
 
-1. **Pérdida de Capacidad de Filtrado y Ordenación:** Almacenar fechas como texto plano (`"01/10/2026"`) impide al SGBD aplicar operadores cronológicos (`WHERE fecha BETWEEN ...`) o realizar ordenaciones correctas (en texto, `"01/10/2026"` iría antes que `"02/01/2020"` por orden alfabético).
-2. **Desperdicio Masivo de Memoria Secundaria y RAM:** Usar `CHAR(255)` para guardar un código numérico pequeño de 2 dígitos desperdicia cientos de bytes por cada fila, penalizando la memoria caché del motor (*Buffer Pool*) y multiplicando los accesos a disco (*I/O Operations*).
-3. **Incapacidad de Garantizar la Integridad:** Permitir cadenas en campos numéricos impide aplicar operaciones aritméticas directas (`SUM`, `AVG`) y expone la base de datos a incoherencias de formato por errores de la aplicación cliente.
-
----
-
-## 2. Historia y Evolución de las Bases de Datos
-
-El almacenamiento de la información ha experimentado una transformación profunda a lo largo del último siglo, evolucionando desde dispositivos puramente mecánicos y analógicos hasta plataformas relacionales altamente optimizadas y arquitecturas distribuidas en la nube.
-
-![Línea del Tiempo: Evolución Histórica de las Bases de Datos](images/timeline-evolution.svg "Evolución de las Bases de Datos")
-
-### 2.1 Antecedentes Mecánicos y Cintas Magnéticas (1884 - 1950s)
-
-- **1884 — Máquina Tabuladora de Tarjetas Perforadas (Herman Hollerith):**
-  Desarrollada para procesar el censo de los Estados Unidos de 1890. Hollerith inventó un sistema donde los datos demográficos se codificaban mediante perforaciones en tarjetas de cartón que eran leídas eléctricamente. Este hito redujo el tiempo de cómputo del censo de 8 años a solo 2, dando origen a la compañía que posteriormente se convertiría en **IBM**.
-
-- **Años 50 — Cintas Magnéticas y Procesamiento en Lote (Batch):**
-  Con la llegada de los primeros ordenadores comerciales (como el UNIVAC I), las tarjetas fueron sustituidas por **cintas magnéticas**. Los datos se organizaban en **archivos secuenciales**. Para procesar las nóminas o la contabilidad, el ordenador debía leer la cinta de principio a fin de forma ininterrumpida. Si se requería buscar el registro número 5.000, era físicamente obligatorio avanzar y leer los 4.999 registros precedentes.
+1. **Pèrdua de capacitat de filtratge i ordenació:** Si les dates s'emmagatzemen com a text pla (`"01/10/2026"`), el SGBD no pot aplicar-hi operadors cronològics (`WHERE fecha BETWEEN ...`) ni ordenar-les correctament (en ordre alfabètic, `"01/10/2026"` apareixeria abans que `"02/01/2020"`).
+2. **Malbaratament de memòria secundària i RAM:** Utilitzar `CHAR(255)` per a guardar un codi numèric de dos dígits malbarata centenars de bytes per fila, penalitza la memòria cau del motor (*Buffer Pool*) i multiplica els accessos al disc (*I/O Operations*).
+3. **Impossibilitat de garantir la integritat:** Si es permeten cadenes de text en camps numèrics, no s'hi poden aplicar directament operacions aritmètiques (`SUM`, `AVG`) i la base de dades queda exposada a incoherències de format causades per errors de l'aplicació client.
 
 ---
 
-### 2.2 Soportes de Disco y Modelos Pre-Relacionales (1960s)
+## 2. Història i evolució de les bases de dades
 
-El invento del **disco magnético de cabeza móvil** (como el IBM 350) revolucionó la informática al permitir el **acceso aleatorio o directo**: el cabezal podía saltar a cualquier pista y sector de la superficie del disco en milisegundos sin necesidad de recorrer el resto del archivo.
+Al llarg del darrer segle, l'emmagatzematge de la informació ha experimentat una transformació profunda: ha passat de dispositius purament mecànics i analògics a plataformes relacionals molt optimitzades i arquitectures distribuïdes al núvol.
 
-Esta innovación técnica dio lugar a los primeros **Sistemas de Gestión de Bases de Datos (SGBD) pre-relacionales**:
+![Línia del temps: evolució històrica de les bases de dades](images/timeline-evolution.svg "Evolució de les bases de dades")
 
-- **Modelo Jerárquico (IBM IMS - 1966):** Los datos se organizaban en una estructura en árbol enraizado formado por registros "padre" y "hijos". Un registro hijo solo podía tener un único padre. Este sistema fue la columna vertebral del programa espacial **Apolo** de la NASA.
-- **Modelo en Red (CODASYL DBTG - 1969):** Permitió estructuras de grafos más complejas donde un registro "hijo" podía tener múltiples registros "padres" (relaciones $N:M$).
-- **Sistema SABRE (Semi-Automated Business Research Environment):** Creado conjuntamente por IBM y American Airlines, fue el primer sistema de base de datos OLTP (*Online Transaction Processing*) en tiempo real a escala global para la gestión de reservas de vuelos.
+### 2.1 Antecedents mecànics i cintes magnètiques (1884-1950)
 
-*Inconveniente principal:* Tanto el modelo jerárquico como el de red requerían que los programadores conocieran la estructura física exacta de punteros en el disco para escribir código de navegación (*navegación manual de enlaces*). Cualquier cambio en la estructura del disco rompía completamente las aplicaciones.
+- **1884 — Màquina tabuladora de targetes perforades (Herman Hollerith):**
+  Es va desenvolupar per a processar el cens dels Estats Units de 1890. Hollerith va inventar un sistema que codificava les dades demogràfiques mitjançant perforacions en targetes de cartó, que es llegien elèctricament. Aquesta fita va reduir de huit anys a només dos el temps necessari per a processar el cens i va donar origen a la companyia que més tard es convertiria en **IBM**.
 
----
-
-### 2.3 La Revolución Relacional de E. F. Codd (1970s)
-
-En junio de 1970, el matemático e investigador de IBM **Edgar Frank Codd** publicó un artículo histórico titulado *"A Relational Model of Data for Large Shared Data Banks"*. Codd propuso abstraer por completo el almacenamiento físico y representar los datos mediante **relaciones matemáticas (tablas)** formadas por filas y columnas.
-
-#### Principios de la Revolución Relacional
-
-1. **Independencia de Datos:** El usuario declara *QUÉ* datos desea obtener (lenguaje declarativo) y no *CÓMO* navegar físicamente por el disco para encontrarlos.
-2. **Fundamentación Matemática:** Basado en la teoría de conjuntos y la lógica de predicados de primer orden.
-3. **Prototipos Clave (1974-1979):**
-   - **System R (IBM):** Proyecto de investigación en San José que dio origen al lenguaje **SEQUEL** (posteriormente denominado **SQL**).
-   - **Ingres (UC Berkeley):** Liderado por Michael Stonebraker, desarrolló el lenguaje QUEL y demostró la viabilidad de los SGBD relacionales de código abierto (origen de PostgreSQL).
+- **Anys cinquanta — Cintes magnètiques i processament per lots (*batch*):**
+  Amb l'arribada dels primers ordinadors comercials, com l'UNIVAC I, les targetes es van substituir per **cintes magnètiques**. Les dades s'organitzaven en **fitxers seqüencials**. Per a processar les nòmines o la comptabilitat, l'ordinador havia de llegir la cinta de principi a fi, sense interrupcions. Per a trobar el registre número 5.000, calia avançar físicament i llegir abans els 4.999 registres anteriors.
 
 ---
 
-### 2.4 Consolidación de SQL, NoSQL y Cloud (1980s - Actualidad)
+### 2.2 Suports de disc i models prerelacionals (anys seixanta)
 
-- **Años 80 — Estandarización y Comercialización:** SQL fue adoptado como estándar oficial por **ANSI (1986)** e **ISO (1987)**. Empresas como **Oracle, IBM (DB2), Sybase y Microsoft (SQL Server)** convirtieron los SGBD relacionales en el estándar industrial indiscutible.
-- **Años 90 y 2000 — Código Abierto y Web:** Aparición de motores relacionales ligeros y de alto rendimiento de código abierto como **PostgreSQL, MySQL y SQLite**, que impulsaron la explosión de la World Wide Web y los sistemas CMS.
-- **Años 2010s — La Era NoSQL y Big Data:** El volumen masivo de datos no estructurados (*Big Data*), la necesidad de escalabilidad horizontal distribuida en miles de servidores y la baja latencia dieron origen a las bases de datos **NoSQL (Not Only SQL)**:
-  - *Documentales:* (MongoDB, CouchDB).
-  - *Clave-Valor:* (Redis, DynamoDB).
-  - *Orientadas a Grafos:* (Neo4j).
-  - *Columnares:* (Apache Cassandra).
-- **Actualidad — Bases de Datos Multimodelo y Cloud Native:** Motores modernos que combinan soporte SQL estricto con tipos semiestructurados (JSONB), extensiones vectoriales para Inteligencia Artificial (pgvector) y arquitectura escalable sin servidor en la nube (*Serverless/Distributed SQL* como CockroachDB o Amazon Aurora).
+La invenció del **disc magnètic de capçal mòbil**, com l'IBM 350, va revolucionar la informàtica perquè va fer possible l'**accés aleatori o directe**: en mil·lisegons, el capçal podia saltar a qualsevol pista i sector del disc sense haver de recórrer la resta del fitxer.
 
----
+Aquesta innovació tècnica va donar lloc als primers **sistemes de gestió de bases de dades (SGBD) prerelacionals**:
 
-## 3. Sistemas Basados en Archivos Tradicionales
+- **Model jeràrquic (IBM IMS, 1966):** Les dades s'organitzaven en forma d'arbre, amb registres «pare» i «fills». Cada registre fill només podia tindre un pare. Aquest sistema va ser la columna vertebral del programa espacial **Apollo** de la NASA.
+- **Model en xarxa (CODASYL DBTG, 1969):** Va permetre crear estructures de grafs més complexes, en què un registre «fill» podia tindre diversos registres «pare» (relacions $N:M$).
+- **Sistema SABRE (*Semi-Automated Business Research Environment*):** Creat conjuntament per IBM i American Airlines, va ser el primer sistema de base de dades OLTP (*Online Transaction Processing*) capaç de gestionar reserves de vols en temps real i a escala mundial.
 
-Antes de la consolidación de los SGBD, las organizaciones gestionaban sus datos mediante ficheros individuales independientes administrados directamente por las rutinas de entrada/salida del Sistema Operativo.
-
-### 3.1 Concepto de Archivo y Clasificación de Formatos
-
-Un **archivo o fichero** es una colección de información estructurada homogénea creada por una aplicación o usuario, almacenada de forma no volátil en un soporte de memoria secundaria (disco duro, SSD, cinta).
-
-#### Clasificación según su Contenido y Propósito
-
-- **Archivos de Configuración:** `.ini`, `.conf`, `.json`, `.yaml`, `.xml`.
-- **Código Fuente y Scripts:** `.sql`, `.py`, `.c`, `.java`, `.sh`.
-- **Documentos de Texto y Páginas Web:** `.html`, `.css`, `.docx`, `.pdf`, `.txt`.
-- **Formatos Multimedia:** `.jpg`, `.png`, `.svg`, `.mp4`, `.wav`.
-- **Ejecutables y Archivos de Datos:** `.exe`, `.bin`, `.dat`, `.zip`, `.tar.gz`.
+*Principal inconvenient:* tant el model jeràrquic com el model en xarxa exigien que els programadors conegueren l'estructura física exacta dels punters del disc per a escriure el codi de navegació (*navegació manual pels enllaços*). Qualsevol canvi en l'estructura del disc podia inutilitzar les aplicacions.
 
 ---
 
-### 3.2 Métodos de Organización y Acceso Físico
+### 2.3 La revolució relacional d'E. F. Codd (anys setanta)
 
-El método de organización física determina cómo se disponen los registros dentro del archivo y qué algoritmos se utilizan para recuperar la información.
+Al juny de 1970, el matemàtic i investigador d'IBM **Edgar Frank Codd** va publicar un article fonamental titulat *«A Relational Model of Data for Large Shared Data Banks»*. Codd proposava abstraure completament l'emmagatzematge físic i representar les dades per mitjà de **relacions matemàtiques (taules)** formades per files i columnes.
 
-![Métodos de Organización y Acceso a Archivos](images/file-access-methods.svg "Organización de Archivos")
+#### Principis de la revolució relacional
 
-#### 1. Archivos Secuenciales
+1. **Independència de les dades:** L'usuari indica *QUINES* dades vol obtindre (llenguatge declaratiu), no *COM* ha de recórrer físicament el disc per a trobar-les.
+2. **Fonament matemàtic:** Es basa en la teoria de conjunts i en la lògica de predicats de primer orde.
+3. **Prototips destacats (1974-1979):**
+   - **System R (IBM):** Projecte d'investigació a San José que va donar lloc al llenguatge **SEQUEL**, anomenat més tard **SQL**.
+   - **Ingres (UC Berkeley):** Sota la direcció de Michael Stonebraker, va desenvolupar el llenguatge QUEL i va demostrar la viabilitat dels SGBD relacionals de codi obert, precursors de PostgreSQL.
 
-Los registros se graban uno a continuación de otro en el orden en que son creados.
+---
 
-- **Mecanismo de Acceso:** Para leer el registro $N$, el sistema debe recorrer obligatoriamente los $N-1$ registros precedentes.
-- **Medio Físico Típico:** Cintas magnéticas y archivos de registro plano (*Logs*).
-- **Eficiencia:** Excelente para procesamientos en lote masivos (*Batch processing*) donde se debe procesar el 100% de los datos. Sin embargo, su rendimiento para consultas interactivas puntuales es desastroso ($\mathcal{O}(N)$).
+### 2.4 Consolidació de SQL, NoSQL i el núvol (des dels anys huitanta)
 
-#### 2. Archivos de Acceso Aleatorio (Directo)
+- **Anys huitanta — Estandardització i comercialització:** **ANSI (1986)** i **ISO (1987)** van adoptar SQL com a estàndard oficial. Empreses com **Oracle, IBM (DB2), Sybase i Microsoft (SQL Server)** van convertir els SGBD relacionals en l'estàndard indiscutible de la indústria.
+- **Anys noranta i dos mil — Codi obert i web:** Van aparéixer motors relacionals de codi obert, lleugers i d'alt rendiment, com **PostgreSQL, MySQL i SQLite**, que van impulsar l'expansió de la World Wide Web i dels sistemes CMS.
+- **Anys 2010 — L'era de NoSQL i Big Data:** El volum massiu de dades no estructurades (*Big Data*), la necessitat d'escalar horitzontalment entre milers de servidors i la demanda de baixa latència van donar lloc a les bases de dades **NoSQL (Not Only SQL)**:
+  - *Documentals:* MongoDB i CouchDB.
+  - *Clau-valor:* Redis i DynamoDB.
+  - *Orientats a grafs:* Neo4j.
+  - *Columnars:* Apache Cassandra.
+- **Actualment — Bases de dades multimodel i natives del núvol:** Els motors actuals combinen la compatibilitat estricta amb SQL amb tipus semiestructurats (JSONB), extensions vectorials per a la intel·ligència artificial (pgvector) i arquitectures escalables sense servidor (*Serverless/Distributed SQL*), com les de CockroachDB o Amazon Aurora.
 
-Permiten posicionar el cabezal de lectura/escritura directamente en la ubicación física deseada sin leer el resto del archivo.
+---
 
-- **Requisito Técnico:** Todos los registros dentro del archivo deben tener estrictamente la **misma longitud fija** ($L$).
-- **Fórmula Matemática del Desplazamiento Físico (Offset):**
-  $$Posición\_Byte = N \times L$$
-  *Donde $N$ es el índice del registro deseado (comenzando en 0) y $L$ es la longitud fija del registro expresada en bytes.*
+## 3. Sistemes tradicionals basats en fitxers
+
+Abans que es generalitzaren els SGBD, les organitzacions gestionaven les dades en fitxers independents i individuals, administrats directament per les rutines d'entrada i d'eixida del sistema operatiu.
+
+### 3.1 El concepte de fitxer i la classificació dels formats
+
+Un **fitxer** és un conjunt homogeni d'informació estructurada, creat per una aplicació o per un usuari i emmagatzemat de manera no volàtil en un suport de memòria secundària (disc dur, SSD o cinta).
+
+#### Classificació segons el contingut i la finalitat
+
+- **Fitxers de configuració:** `.ini`, `.conf`, `.json`, `.yaml`, `.xml`.
+- **Codi font i scripts:** `.sql`, `.py`, `.c`, `.java`, `.sh`.
+- **Documents de text i pàgines web:** `.html`, `.css`, `.docx`, `.pdf`, `.txt`.
+- **Formats multimèdia:** `.jpg`, `.png`, `.svg`, `.mp4`, `.wav`.
+- **Fitxers executables i de dades:** `.exe`, `.bin`, `.dat`, `.zip`, `.tar.gz`.
+
+---
+
+### 3.2 Mètodes d'organització i accés físic
+
+El mètode d'organització física determina com es disposen els registres dins del fitxer i quins algorismes s'utilitzen per a recuperar la informació.
+
+![Mètodes d'organització i accés a fitxers](images/file-access-methods.svg "Organització de fitxers")
+
+#### 1. Fitxers seqüencials
+
+Els registres s'escriuen l'un darrere de l'altre, en l'ordre en què es creen.
+
+- **Mecanisme d'accés:** Per a llegir el registre $N$, el sistema ha de recórrer necessàriament els $N-1$ registres anteriors.
+- **Suport físic habitual:** cintes magnètiques i fitxers de registre pla (*logs*).
+- **Eficiència:** Són molt adequats per a processar grans volums de dades per lots (*batch processing*), quan cal tractar-les totes. En canvi, el rendiment és molt baix per a consultes interactives puntuals ($\mathcal{O}(N)$).
+
+#### 2. Fitxers d'accés aleatori (directe)
+
+Permeten situar el capçal de lectura i escriptura directament en la posició física desitjada, sense llegir la resta del fitxer.
+
+- **Requisit tècnic:** Tots els registres del fitxer han de tindre exactament la **mateixa longitud fixa** ($L$).
+- **Fórmula per a calcular el desplaçament físic (*offset*):**
+  $$Posició\_Byte = N \times L$$
+  *On $N$ és l'índex del registre que es vol llegir (començant per 0) i $L$ és la longitud fixa del registre, expressada en bytes.*
 
   > [!WARNING]
-  > El índice comienza en **0**: el primer registro está en el byte 0 y el registro con índice 10 ocupa el desplazamiento de diez longitudes, no de nueve. La fórmula solo sirve si todos los registros tienen la misma longitud.
+  > L'índex comença en **0**: el primer registre està en el byte 0 i el registre amb índex 10 es troba a una distància de deu longituds, no de nou. La fórmula només és vàlida si tots els registres tenen la mateixa longitud.
 
-> **Ejemplo Detallado de Cálculo de Offset Físico:**
-> Supongamos que definimos la estructura de un cliente con codificación de caracteres ANSI (1 byte por carácter):
+> **Exemple detallat de càlcul del desplaçament físic:**
+> Suposem que definim l'estructura d'un client amb codificació de caràcters ANSI (1 byte per caràcter):
 >
-> - `nombre`: Cadena fija de 80 bytes.
-> - `direccion`: Cadena fija de 100 bytes.
-> - `localidad`: Cadena fija de 50 bytes.
+> - `nombre`: cadena fixa de 80 bytes.
+> - `direccion`: cadena fixa de 100 bytes.
+> - `localidad`: cadena fixa de 50 bytes.
 >
-> **Longitud total fija del registro ($L$):**
+> **Longitud fixa total del registre ($L$):**
 > $$L = 80 + 100 + 50 = 230\text{ bytes}$$
 >
-> Si la aplicación necesita leer de forma directa el **Registro número 10** (índice $N=10$):
-> $$Posición\_Byte = 10 \times 230 = 2300\text{ bytes}$$
-> El sistema operativo ejecuta una llamada al sistema `fseek(file_ptr, 2300, SEEK_SET)` y lee exactamente los 230 bytes comprendidos entre la posición 2300 y 2529.
+> Si l'aplicació necessita llegir directament el **registre número 10** (índex $N=10$):
+> $$Posició\_Byte = 10 \times 230 = 2300\text{ bytes}$$
+> El sistema operatiu executa la crida `fseek(file_ptr, 2300, SEEK_SET)` i llig exactament els 230 bytes compresos entre les posicions 2300 i 2529.
 >
-> *Inconveniente del borrado:* Al eliminar el registro 5, no se pueden desplazar todos los registros posteriores porque se rompería el índice $N$. Se suele emplear una técnica de **marca de borrado (Tombstone)** dejando el hueco vacío (relleno de ceros), lo que provoca una alta fragmentación del espacio en disco.
+> *Inconvenient de l'esborrament:* Si s'elimina el registre 5, no es poden desplaçar tots els registres posteriors perquè es desquadraria l'índex $N$. Se sol deixar un buit marcat amb una **marca d'esborrament (*tombstone*)** i omplir-lo de zeros, cosa que fragmenta molt l'espai del disc.
 
-#### 3. Archivos Indexados
+#### 3. Fitxers indexats
 
-Combinan un archivo de datos (que puede contener registros de longitud variable) con uno o varios archivos auxiliares denominados **Índices**.
+Combinen un fitxer de dades (que pot contindre registres de longitud variable) amb un o més fitxers auxiliars anomenats **índexs**.
 
-- **Índice:** Es un archivo secundario altamente optimizado formado por pares `(Clave_de_Búsqueda, Puntero_Físico_a_Disco)`.
-- **Estructura Física:** Se organizan mediante estructuras de datos avanzadas como **Árboles B (B-Trees / B+ Trees)** o Tablas Hash.
-- **Rendimiento:** Permite realizar búsquedas binarias o por árbol en el índice con complejidad logarítmica ($\mathcal{O}(\log N)$) y saltar inmediatamente a la posición exacta del dato en el disco.
-
----
-
-### 3.3 Inconvenientes Críticos de la Gestión por Archivos Tradicionales
-
-Cuando cada aplicación informática gestiona sus propios archivos independientes sin la mediación de un SGBD centralizado, surgen problemas de arquitectura insuperables:
-
-![Comparativa Sistemas de Archivos vs SGBD](images/file-vs-sgbd.svg "Archivos vs SGBD")
-
-1. **Redundancia e Inconsistencia de Datos:**
-   Los mismos datos se duplican en múltiples ficheros administrados por distintos departamentos (ej. el teléfono de un cliente se guarda en el archivo del programa de Ventas y en el archivo de Facturación). Si el cliente cambia su número y solo se actualiza en Ventas, la base de datos global entra en estado de **inconsistencia**.
-
-2. **Dependencia Física-Lógica (Acoplamiento Fuerte):**
-   La estructura exacta del archivo (campos, desplazamientos, tipos de datos) está codificada directamente en el código fuente de los programas de aplicación. Si el departamento de TI decide añadir el campo `codigo_postal` al fichero, **todos** los programas que leen dicho archivo deben ser modificados, recompilados y testeados de nuevo.
-
-3. **Rigidez y Dificultad para Obtener Nueva Información:**
-   Responder a una consulta no prevista en el diseño inicial exige escribir un nuevo programa completo en lenguaje de bajo nivel para recorrer los archivos.
-
-4. **Falta de Control de Concurrencia (Modificación Perdida):**
-   Si dos usuarios abren simultáneamente el mismo archivo plano e intentan actualizar el mismo registro al mismo tiempo, el último en guardar sobrescribirá completamente los cambios del primero sin que nadie se percate (*lost update*).
-
-5. **Vulnerabilidad ante Fallos y Pérdida de Atomicidad:**
-   Si el sistema sufre un corte de energía mientras la aplicación está modificando un archivo plano, el fichero queda a medio escribir en un estado inservible o corrupto, sin mecanismos automáticos de restauración (*Rollback*).
-
-6. **Seguridad Deficiente e Inexistencia de Reglas de Integridad:**
-   Los permisos son los básicos que ofrece el sistema operativo sobre el archivo completo (lectura/escritura). No es posible restringir el acceso a columnas específicas (ej. ocultar el salario) ni forzar reglas de negocio complejas (ej. "el precio no puede ser negativo").
+- **Índex:** Fitxer secundari molt optimitzat, format per parelles `(Clave_de_Búsqueda, Puntero_Físico_a_Disco)`.
+- **Estructura física:** S'organitzen amb estructures de dades avançades, com ara **arbres B (B-Trees / B+ Trees)** o taules hash.
+- **Rendiment:** Permeten buscar dades mitjançant una cerca binària o un arbre, amb complexitat logarítmica ($\mathcal{O}(\log N)$), i accedir immediatament a la posició exacta del disc.
 
 ---
 
-{{< sesion n="3" h="2" tipo="t" >}}SGBD y arquitectura{{< /sesion >}}
+### 3.3 Inconvenients de la gestió tradicional basada en fitxers
 
-## 4. Bases de Datos y Sistemas Gestores (SGBD)
+Quan cada aplicació informàtica gestiona els seus fitxers sense un SGBD centralitzat, apareixen problemes d'arquitectura difícils de resoldre:
 
-### 4.1 Definición, Conceptos Clave y Funciones de un SGBD
+![Comparació entre sistemes de fitxers i SGBD](images/file-vs-sgbd.svg "Fitxers i SGBD")
 
-Una **Base de Datos (BD)** es una colección integrada, estructurada e interrelacionada de datos compartidos, almacenados de forma persistente en memoria secundaria con la menor redundancia posible, sirviendo a múltiples aplicaciones de forma simultánea.
+1. **Redundància i inconsistència de les dades:**
+   Les mateixes dades es dupliquen en diversos fitxers gestionats per departaments diferents (per exemple, el telèfon d'un client es guarda tant al fitxer de vendes com al de facturació). Si el client canvia de número i només s'actualitza el fitxer de vendes, les dades globals esdevenen **incoherents**.
 
-Un **Sistema Gestor de Bases de Datos (SGBD / DBMS)** es el conjunto complejo de software especializado que se sitúa como capa intermedia entre la base de datos física, los usuarios y las aplicaciones clientes, proporcionando acceso controlado y seguro.
+2. **Dependència física i lògica (acoblament fort):**
+   L'estructura exacta del fitxer (camps, desplaçaments i tipus de dades) està codificada directament en els programes. Si el departament de TI decidix afegir-hi el camp `codigo_postal`, cal modificar, recompilar i tornar a provar **tots** els programes que el lligen.
+
+3. **Rigidesa i dificultat per a obtindre informació nova:**
+   Per a respondre una consulta no prevista en el disseny inicial, cal escriure un programa nou en un llenguatge de baix nivell que recórrega els fitxers.
+
+4. **Manca de control de concurrència (modificació perduda):**
+   Si dos usuaris obrin alhora el mateix fitxer i intenten actualitzar el mateix registre, qui el guarde en últim lloc pot sobreescriure els canvis de l'altre sense que ningú se n'adone (*lost update*).
+
+5. **Vulnerabilitat davant de fallades i pèrdua d'atomicitat:**
+   Si se'n va la llum mentre l'aplicació modifica un fitxer, aquest pot quedar escrit només a mitges, inutilitzable o corrupte, sense cap mecanisme automàtic per a desfer els canvis (*rollback*).
+
+6. **Seguretat deficient i absència de regles d'integritat:**
+   El sistema operatiu només oferix permisos bàsics sobre el fitxer sencer (lectura o escriptura). No permet restringir l'accés a columnes concretes (per exemple, amagar el salari) ni imposar regles de negoci complexes (com ara que el preu no puga ser negatiu).
+
+---
+
+{{< sesion n="3" h="2" tipo="t" >}}SGBD i arquitectura{{< /sesion >}}
+
+## 4. Bases de dades i sistemes gestors (SGBD)
+
+### 4.1 Definició, conceptes clau i funcions d'un SGBD
+
+Una **base de dades (BD)** és un conjunt integrat, estructurat i interrelacionat de dades compartides, emmagatzemades de manera permanent en memòria secundària amb la menor redundància possible, que dona servei simultàniament a diverses aplicacions.
+
+Un **sistema gestor de bases de dades (SGBD / DBMS)** és un conjunt complex de programari especialitzat que actua com a capa intermèdia entre la base de dades física, els usuaris i les aplicacions client, i que proporciona un accés controlat i segur.
 
 > [!NOTE]
-> Una **base de datos** es el conjunto organizado de datos; un **SGBD** es el software que permite definirlos, consultarlos y administrarlos. No son términos intercambiables.
+> Una **base de dades** és el conjunt organitzat de dades; un **SGBD** és el programari que permet definir-les, consultar-les i administrar-les. No són termes intercanviables.
 
 ```text
-[ Usuarios / Aplicaciones Web / Móviles ]
+[ Usuaris / aplicacions web / mòbils ]
                    │
-                   ▼ (Consultas SQL / APIs)
+                   ▼ (Consultes SQL / API)
 ┌─────────────────────────────────────────────────────────┐
 │         SGBD / DBMS (Engine, Parser, Optimizer)        │
 └─────────────────────────────────────────────────────────┘
                    │
-                   ▼ (Lectura / Escritura de Páginas)
-[ Archivos Físicos de Datos + Diccionario de Metadatos ]
+                   ▼ (Lectura / escriptura de pàgines)
+[ Fitxers físics de dades + diccionari de metadades ]
 ```
 
-#### Funciones Fundamentales que Otorga un SGBD
+#### Funcions fonamentals que oferix un SGBD
 
-- **Definición de Esquemas (Función DDL):** Permite especificar estructuras, campos, tipos, claves e índices.
-- **Manipulación de Datos (Función DML):** Proporciona un motor de consultas declarativo de alto nivel (SQL) para buscar, insertar, modificar y eliminar datos.
-- **Control de Seguridad y Permisos (Función DCL):** Autentica a los usuarios y verifica privilegios a nivel de tabla, fila o columna.
-- **Mantenimiento de la Integridad:** Aplica automáticamente las reglas de clave primaria, clave foránea y validaciones de rango.
-- **Gestión de Transacciones y Concurrencia:** Garantiza la ejecución segura de operaciones concurrentes mediante bloqueos y aislamiento.
-- **Resiliencia y Recuperación ante Fallos:** Mantiene registros de diario (*Write-Ahead Logging*) para asegurar que ningún cambio confirmado se pierda tras un fallo del servidor.
+- **Definició d'esquemes (funció DDL):** Permet especificar estructures, camps, tipus, claus i índexs.
+- **Manipulació de dades (funció DML):** Proporciona un motor de consultes declaratiu d'alt nivell (SQL) per a cercar, inserir, modificar i eliminar dades.
+- **Control de seguretat i permisos (funció DCL):** Autentica els usuaris i verifica els privilegis a escala de taula, fila o columna.
+- **Manteniment de la integritat:** Aplica automàticament les regles de clau primària i forana, així com les validacions de rang.
+- **Gestió de transaccions i concurrència:** Garantix l'execució segura d'operacions concurrents mitjançant bloquejos i aïllament.
+- **Resiliència i recuperació davant de fallades:** Manté registres de diari (*Write-Ahead Logging*) per a evitar que es perda cap canvi confirmat si falla el servidor.
 
 ---
 
-### 4.2 Análisis Comparativo: Archivos Tradicionales vs SGBD
+### 4.2 Comparació: fitxers tradicionals i SGBD
 
-| Característica / Criterio | Gestión Tradicional por Archivos Planos | Sistema Gestor de Bases de Datos (SGBD) |
+| Característica / criteri | Gestió tradicional amb fitxers plans | Sistema gestor de bases de dades (SGBD) |
 | :--- | :--- | :--- |
-| **Redundancia de Datos** | Alta e incontrolada (ficheros duplicados por app). | Mínima, centralizada y estrictamente controlada. |
-| **Coherencia / Consistencia** | Muy baja; riesgo constante de incoherencias. | Garantizada mediante transacciones y reglas centralizadas. |
-| **Acoplamiento Físico-Lógico** | Total; los cambios físicos exigen reescritura de código. | Inexistente; independencia física y lógica de datos. |
-| **Acceso Concurrente** | Inseguro; bloqueos rudimentarios de archivo entero. | Control fino y granular (filas/páginas) mediante ACID/MVCC. |
-| **Seguridad y Privacidad** | Control tosco a nivel de fichero por el SO. | Control avanzado por roles, usuarios, vistas y columnas. |
-| **Consultas Ad-hoc** | Muy complejas; requieren programar rutinas completas. | Sencillas, rápidas y declarativas mediante lenguaje SQL. |
-| **Recuperación ante Fallos** | Manual, lenta y dependiente de copias de seguridad. | Automática e instantánea mediante archivos de diario (*Logs*). |
+| **Redundància de dades** | Alta i descontrolada (fitxers duplicats per aplicació). | Mínima, centralitzada i estrictament controlada. |
+| **Coherència / consistència** | Molt baixa; risc constant d'incoherències. | Garantida amb transaccions i regles centralitzades. |
+| **Acoblament físic i lògic** | Total; els canvis físics obliguen a reescriure el codi. | Inexistent; independència física i lògica de les dades. |
+| **Accés concurrent** | Insegur; bloquejos rudimentaris de tot el fitxer. | Control detallat i granular (files/pàgines) mitjançant ACID/MVCC. |
+| **Seguretat i privacitat** | Control bàsic del sistema operatiu sobre el fitxer. | Control avançat per rols, usuaris, vistes i columnes. |
+| **Consultes ad hoc** | Molt complexes; cal programar rutines senceres. | Senzilles, ràpides i declaratives, amb SQL. |
+| **Recuperació davant de fallades** | Manual, lenta i dependent de còpies de seguretat. | Automàtica i immediata, mitjançant fitxers de registre (*logs*). |
 
 ---
 
-### 4.3 Casos de Uso e Impacto Sectorial en el Mundo Real
+### 4.3 Aplicacions i impacte en diferents sectors
 
-1. **Banca y Plataformas Financieras:**
-   Procesamiento de transferencias bancarias internacionales en tiempo real. Se exige cumplimiento estricto de la propiedad de **Atomicidad**: restar el dinero de la cuenta origen y sumarlo en la cuenta destino debe ocurrir de forma indivisible.
+1. **Banca i plataformes financeres:**
+   Les transferències bancàries internacionals es processen en temps real. Cal respectar estrictament la propietat d'**atomicitat**: descomptar els diners del compte d'origen i ingressar-los en el compte de destinació ha de ser una única operació indivisible.
 
-2. **Cadenas de Supermercados y TPVs:**
-   Al escanear un código de barras en la caja registradora, el SGBD lee el precio actualizado de la tabla de productos, descuenta en tiempo real la unidad vendida del inventario del almacén e inserta el ticket en la tabla de ventas dentro de una única transacción.
+2. **Cadenes de supermercats i TPV:**
+   Quan es llija un codi de barres en caixa, el SGBD consulta el preu actualitzat de la taula de productes, descompta de l'inventari del magatzem la unitat venuda i registra la venda en una única transacció.
 
-3. **Sistemas Sanitarios y Hospitalarios:**
-   Centralización de la historia clínica electrónica del paciente. Permite que médicos de urgencias, especialistas y laboratorios accedan de forma concurrente a la misma información garantizando niveles de privacidad estrictos (un administrativo de recepción ve la cita pero no el historial médico detallado).
+3. **Sistemes sanitaris i hospitalaris:**
+   La història clínica electrònica centralitzada permet que el personal d'urgències, els especialistes i els laboratoris consulten alhora la mateixa informació, amb controls estrictes de privacitat. Per exemple, el personal administratiu de recepció pot veure la cita, però no la història clínica detallada.
 
-4. **Comercio Electrónico Global (E-Commerce):**
-   Gestión de catálogos con millones de referencias, carritos de compra persistentes, procesamiento de pagos con pasarelas externas y recomendaciones personalizadas en tiempo real.
-
----
-
-## 5. Arquitectura y Componentes de un SGBD
-
-### 5.1 La Arquitectura ANSI/SPARC a Tres Niveles
-
-En 1975, el comité **ANSI/X3/SPARC** (Study Group on Data Base Management Systems) propuso una arquitectura de referencia estructurada en tres niveles de abstracción con el objetivo primario de separar las aplicaciones del almacenamiento físico real:
-
-![Arquitectura ANSI/SPARC a 3 Niveles](images/ansi-sparc-architecture.svg "Arquitectura ANSI/SPARC")
-
-1. **Nivel Externo (Esquema Externo / Vistas de Usuario):**
-   Es el nivel más cercano a los usuarios finales y desarrolladores. Define múltiples **vistas externas** adaptadas a cada perfil. Cada vista muestra únicamente la parcela de la base de datos relevante para dicho usuario, ocultando el resto del esquema por razones de simplicidad y seguridad.
-
-2. **Nivel Conceptual (Esquema Conceptual):**
-   Es la representación lógica global y completa de la base de datos. Describe todas las entidades, sus atributos, relaciones, tipos de datos y restricciones de integridad. Es totalmente independiente de los detalles de almacenamiento físico en el disco.
-
-3. **Nivel Interno (Esquema Interno / Físico):**
-   Es la representación física de la base de datos en los soportes de almacenamiento secundario. Especifica cómo se organizan físicamente los archivos, el tamaño de las páginas de memoria, los punteros a disco, los índices (B-Tree/Hash), las técnicas de compresión y el cifrado físico.
+4. **Comerç electrònic global:**
+   Permet gestionar catàlegs amb milions de referències, carrets de compra persistents, pagaments a través de passarel·les externes i recomanacions personalitzades en temps real.
 
 ---
 
-### 5.2 Tipos de Independencia de Datos
+## 5. Arquitectura i components d'un SGBD
 
-El logro fundamental de la arquitectura ANSI/SPARC es la **independencia de datos**, definida como la capacidad de modificar el esquema en un nivel de abstracción sin tener que alterar el esquema del nivel inmediatamente superior:
+### 5.1 L'arquitectura ANSI/SPARC de tres nivells
+
+En 1975, el comité **ANSI/X3/SPARC** (Study Group on Data Base Management Systems) va proposar una arquitectura de referència amb tres nivells d'abstracció, per tal de separar les aplicacions de l'emmagatzematge físic:
+
+![Arquitectura ANSI/SPARC de tres nivells](images/ansi-sparc-architecture.svg "Arquitectura ANSI/SPARC")
+
+1. **Nivell extern (esquema extern / vistes d'usuari):**
+   És el nivell més pròxim als usuaris finals i als desenvolupadors. Definix diverses **vistes externes**, adaptades a cada perfil. Cada vista mostra només la part de la base de dades que interessa a l'usuari i n'amaga la resta per motius de simplicitat i seguretat.
+
+2. **Nivell conceptual (esquema conceptual):**
+   És la representació lògica global i completa de la base de dades. Descriu totes les entitats, els atributs i les relacions, així com els tipus de dades i les restriccions d'integritat. És independent dels detalls de l'emmagatzematge físic al disc.
+
+3. **Nivell intern (esquema intern / físic):**
+   És la representació física de la base de dades en els suports d'emmagatzematge secundari. Especifica com s'organitzen els fitxers, la mida de les pàgines de memòria, els punters del disc, els índexs (B-Tree/Hash), les tècniques de compressió i el xifratge físic.
+
+---
+
+### 5.2 Tipus d'independència de les dades
+
+La principal aportació de l'arquitectura ANSI/SPARC és la **independència de les dades**: la capacitat de modificar l'esquema d'un nivell d'abstracció sense haver de canviar el del nivell immediatament superior:
 
 ```text
-[ NIVEL EXTERNO ]   <--- (Vistas / Aplicaciones)
+[ NIVELL EXTERN ]   <--- (Vistes / Aplicacions)
        ▲
-       │  ===> INDEPENDENCIA LÓGICA DE DATOS
+       │  ===> INDEPENDÈNCIA LÒGICA DE LES DADES
        ▼
-[ NIVEL CONCEPTUAL ] <--- (Tablas / Relaciones / Reglas)
+[ NIVELL CONCEPTUAL ] <--- (Taules / Relacions / Regles)
        ▲
-       │  ===> INDEPENDENCIA FÍSICA DE DATOS
+       │  ===> INDEPENDÈNCIA FÍSICA DE LES DADES
        ▼
-[ NIVEL INTERNO ]   <--- (Archivos / Páginas / Índices B-Tree)
+[ NIVELL INTERN ]   <--- (Fitxers / Pàgines / Índexs B-Tree)
 ```
 
-- **Independencia Lógica de Datos:**
-  Es la capacidad de modificar el esquema conceptual (ej. añadir una nueva tabla, agregar una columna a una tabla existente o modificar una regla de dominio) sin obligar a cambiar las vistas externas ni reescribir las aplicaciones clientes que no utilizan dichos campos modificados.
+- **Independència lògica de les dades:**
+  És la possibilitat de modificar l'esquema conceptual (per exemple, afegir una taula o una columna, o canviar una regla de domini) sense haver de modificar les vistes externes ni reescriure les aplicacions client que no utilitzen els camps afectats.
 
-- **Independencia Física de Datos:**
-  Es la capacidad de modificar el esquema interno de almacenamiento físico (ej. cambiar los archivos a una nueva unidad SSD más rápida, reorganizar los índices B-Tree, cambiar el factor de empaquetamiento o comprimir datos) sin tener que alterar en absoluto el esquema conceptual ni los programas SQL de las aplicaciones.
-
----
-
-### 5.3 Módulos y Componentes Internos del Motor
-
-Un motor de base de datos relacional moderno se divide en varios componentes internos altamente optimizados:
-
-1. **Diccionario de Datos (Catálogo del Sistema / Metadatos):**
-   Es la "base de datos de la propia base de datos". Guarda información crítica sobre la estructura del sistema: nombres de tablas, columnas, tipos de datos, claves primarias y foráneas, definiciones de vistas, usuarios, roles, privilegios y estadísticas de distribución de datos.
-
-2. **Compilador y Procesador de Consultas (SQL Parser & Translator):**
-   Recibe las sentencias SQL escritas por usuarios o aplicaciones, comprueba la sintaxis, valida los nombres de tablas y columnas consultando el Diccionario de Datos y verifica los permisos de ejecución.
-
-3. **Optimizador de Consultas (Query Optimizer):**
-   Es el "cerebro" del SGBD. Analiza la consulta SQL y genera múltiples planes de ejecución posibles. Utilizando estadísticas del catálogo (número de filas, cardinalidad, índices disponibles), calcula el coste estimado de E/S y CPU de cada plan y selecciona el **plan de ejecución de menor coste**.
-
-4. **Gestor de Almacenamiento (Storage Engine / Buffer Manager):**
-   Administra el intercambio de páginas de datos entre el almacenamiento secundario en disco/SSD y el área de memoria RAM dinámica de alta velocidad del servidor (**Buffer Pool**).
-
-5. **Gestor de Transacciones y Bloqueos (Transaction & Lock Manager):**
-   Coordina la ejecución simultánea de transacciones concurrentes aplicando algoritmos de bloqueo (*Locking*) o control de versiones múltiples (*MVCC*) para garantizar el aislamiento.
-
-6. **Gestor de Recuperación y Registro de Diario (Recovery Manager & WAL):**
-   Garantiza la durabilidad y la atomicidad escribiendo cada modificación en un archivo de diario persistente en disco (*Write-Ahead Log*) antes de actualizar la página de datos definitiva en la base de datos.
+- **Independència física de les dades:**
+  És la possibilitat de modificar l'esquema intern d'emmagatzematge (per exemple, traslladar els fitxers a una unitat SSD més ràpida, reorganitzar els índexs B-Tree, canviar el factor d'empaquetament o comprimir les dades) sense alterar l'esquema conceptual ni els programes SQL de les aplicacions.
 
 ---
 
-### 5.4 Perfiles de Usuarios y Roles de Trabajo
+### 5.3 Mòduls i components interns del motor
 
-En la gestión de bases de datos intervienen diferentes perfiles profesionales con distintas responsabilidades:
+Un motor de base de dades relacional actual es compon de diversos mòduls interns optimitzats:
 
-- **Administrador de la Base de Datos (DBA - Database Administrator):**
-  Responsable técnico de la instalación, configuración, tuning de rendimiento, políticas de seguridad, estrategia de copias de seguridad (backups), actualización de parches y disponibilidad continua del SGBD.
+1. **Diccionari de dades (catàleg del sistema / metadades):**
+   És la «base de dades de la base de dades». Guarda informació essencial sobre l'estructura del sistema: noms de taules i columnes, tipus de dades, claus primàries i foranes, definicions de vistes, usuaris, rols, privilegis i estadístiques sobre la distribució de les dades.
 
-- **Diseñadores de Bases de Datos:**
-  Encargados del análisis de requisitos del negocio y de la elaboración de los esquemas conceptuales (diagramas EER) y lógicos (normalización relacional).
+2. **Compilador i processador de consultes (SQL Parser & Translator):**
+   Rep les instruccions SQL dels usuaris o de les aplicacions, en comprova la sintaxi, valida els noms de les taules i les columnes consultant el diccionari de dades i verifica que es tenen els permisos necessaris per a executar-les.
 
-- **Programadores de Aplicaciones:**
-  Desarrolladores que construyen la lógica de negocio en lenguajes como Python, Java, C# o Go, interactuando con la base de datos mediante sentencias SQL o librerías ORM (Object-Relational Mapping).
+3. **Optimitzador de consultes (Query Optimizer):**
+   És el «cervell» del SGBD. Analitza la consulta SQL i genera diversos plans d'execució possibles. Amb les estadístiques del catàleg (nombre de files, cardinalitat i índexs disponibles), estima el cost d'entrada/eixida i de CPU de cada pla, i tria el **pla d'execució de cost més baix**.
 
-- **Usuarios Avanzados / Analistas de Datos:**
-  Profesionales que formulan consultas SQL complejas de forma ad-hoc para extraer métricas, informes de Business Intelligence (BI) y modelos analíticos.
+4. **Gestor d'emmagatzematge (Storage Engine / Buffer Manager):**
+   Gestiona l'intercanvi de pàgines de dades entre l'emmagatzematge secundari (disc o SSD) i la zona de memòria RAM d'alta velocitat del servidor (**Buffer Pool**).
 
-- **Usuarios Finales:**
-  Personas que interactúan de forma indirecta con la base de datos a través de formularios e interfaces gráficas web o móviles sin necesidad de conocer la sintaxis SQL.
+5. **Gestor de transaccions i bloquejos (Transaction & Lock Manager):**
+   Coordina l'execució simultània de transaccions mitjançant algorismes de bloqueig (*Locking*) o de control de versions múltiples (*MVCC*), per a garantir-ne l'aïllament.
+
+6. **Gestor de recuperació i registre de diari (Recovery Manager & WAL):**
+   Garantix la durabilitat i l'atomicitat: abans d'actualitzar definitivament una pàgina de dades, anota cada modificació en un fitxer de diari persistent al disc (*Write-Ahead Log*).
 
 ---
 
-{{< sesion n="5" h="2" tipo="t" >}}Integridad, seguridad y modelos{{< /sesion >}}
+### 5.4 Perfils d'usuari i rols professionals
 
-## 6. Integridad, Concurrencia y Transacciones
+En la gestió de bases de dades participen professionals amb perfils i responsabilitats diferents:
 
-### 6.1 Reglas de Integridad del Modelo Relacional
+- **Administrador de bases de dades (DBA - Database Administrator):**
+  S'encarrega de la instal·lació i configuració, de l'ajust del rendiment, de les polítiques de seguretat i de les còpies de seguretat (*backups*), així com d'instal·lar actualitzacions i mantindre el SGBD disponible.
 
-Las reglas de integridad son restricciones semánticas fijadas en la definición del esquema para asegurar que los datos almacenados sean siempre exactos, válidos y coherentes:
+- **Dissenyadors de bases de dades:**
+  Analitzen les necessitats del negoci i elaboren els esquemes conceptuals (diagrames EER) i lògics (normalització relacional).
 
-1. **Regla de Integridad de Entidad (Clave Primaria):**
-   Toda tabla relacional debe poseer obligatoriamente una **Clave Primaria (Primary Key - PK)**. Ningún atributo que forme parte de la clave primaria puede tomar valores nulos (`NULL`) ni repetidos en distintas filas.
+- **Programadors d'aplicacions:**
+  Desenvolupen la lògica de negoci amb llenguatges com Python, Java, C# o Go, i interactuen amb la base de dades mitjançant instruccions SQL o biblioteques ORM (*Object-Relational Mapping*).
 
-2. **Regla de Integridad Referencial (Clave Foránea):**
-   Si una tabla $B$ contiene una **Clave Foránea (Foreign Key - FK)** que referencia a la clave primaria de una tabla $A$, cualquier valor almacenado en dicha clave foránea debe existir obligatoriamente en la clave primaria de $A$, o bien ser nulo (`NULL`) si la participación es opcional.
+- **Usuaris avançats / analistes de dades:**
+  Formulen consultes SQL complexes per a obtindre mètriques, informes d'intel·ligència empresarial (BI) i models analítics.
 
-3. **Regla de Integridad de Dominio:**
-   Todos los valores almacenados en una columna deben pertenecer estrictamente al conjunto de valores permitidos para su tipo de dato y cumplir las restricciones específicas definidas (ej. `NOT NULL`, `CHECK (precio > 0)`, `UNIQUE`).
+- **Usuaris finals:**
+  Interactuen amb la base de dades a través de formularis i interfícies gràfiques web o mòbils, sense necessitat de conéixer la sintaxi SQL.
 
-![El Modelo Relacional: Tablas, Claves Primarias y Foráneas](images/relational-model-keys.svg "Modelo Relacional y Claves")
+---
+
+{{< sesion n="5" h="2" tipo="t" >}}Integritat, seguretat i models{{< /sesion >}}
+
+## 6. Integritat, concurrència i transaccions
+
+### 6.1 Regles d'integritat del model relacional
+
+Les regles d'integritat són restriccions semàntiques definides en l'esquema per a garantir que les dades emmagatzemades siguen sempre exactes, vàlides i coherents:
+
+1. **Regla d'integritat d'entitat (clau primària):**
+   Tota taula relacional ha de tindre una **clau primària (*Primary Key* - PK)**. Cap atribut que en forme part no pot tindre un valor nul (`NULL`) ni repetir-se en diverses files.
+
+2. **Regla d'integritat referencial (clau forana):**
+   Si una taula $B$ conté una **clau forana (*Foreign Key* - FK)** que fa referència a la clau primària d'una taula $A$, qualsevol valor que s'hi emmagatzeme ha d'existir en la clau primària de $A$. També pot ser nul (`NULL`) si la participació és opcional.
+
+3. **Regla d'integritat de domini:**
+   Tots els valors d'una columna han de pertànyer al conjunt permés pel tipus de dada i complir les restriccions establides (per exemple, `NOT NULL`, `CHECK (precio > 0)` o `UNIQUE`).
+
+![El model relacional: taules, claus primàries i foranes](images/relational-model-keys.svg "Model relacional i claus")
 
 ```sql
--- Ejemplo completo en SQL DDL aplicando reglas de integridad
+-- Exemple complet en SQL DDL amb regles d'integritat
 CREATE TABLE departamento (
     id_departamento INT PRIMARY KEY,
     nombre_dep VARCHAR(100) NOT NULL UNIQUE
@@ -442,182 +442,182 @@ CREATE TABLE empleado (
 
 ---
 
-### 6.2 Control de Concurrencia y Anomalías de Lectura/Escritura
+### 6.2 Control de concurrència i anomalies de lectura i escriptura
 
-Cuando decenas o cientos de usuarios ejecutan operaciones de lectura y escritura de forma simultánea sobre la misma base de datos, el SGBD debe intervenir para evitar **anomalías de concurrencia**:
+Quan desenes o centenars d'usuaris lligen i escriuen alhora en una mateixa base de dades, el SGBD ha d'intervindre per a evitar **anomalies de concurrència**:
 
-- **Modificación Perdida (Lost Update):**
-  Ocurre cuando la transacción $T_1$ lee un registro y la transacción $T_2$ lee el mismo registro inmediatamente después. $T_1$ modifica el registro y guarda. Acto seguido, $T_2$ guarda su modificación basada en la lectura inicial, **sobrescribiendo y anulando** completamente el trabajo realizado por $T_1$.
+- **Modificació perduda (*Lost Update*):**
+  Es produïx quan la transacció $T_1$ llig un registre i, tot seguit, la transacció $T_2$ llig el mateix registre. $T_1$ el modifica i guarda els canvis; després, $T_2$ guarda la seua modificació, basada en la lectura inicial, i **sobreescriu i anul·la** el treball de $T_1$.
 
-- **Lectura Sucia (Dirty Read):**
-  Ocurre cuando la transacción $T_1$ modifica una fila pero aún no ha confirmado los cambios (`COMMIT`). La transacción $T_2$ lee dicha fila modificada. Si posteriormente $T_1$ sufre un error y ejecuta un `ROLLBACK`, la transacción $T_2$ habrá trabajado con datos falsos que nunca llegaron a existir en la base de datos.
+- **Lectura bruta (*Dirty Read*):**
+  Es produïx quan $T_1$ modifica una fila però encara no ha confirmat els canvis (`COMMIT`) i $T_2$ llig la fila modificada. Si després es produïx un error i $T_1$ executa `ROLLBACK`, $T_2$ haurà treballat amb dades que mai no han arribat a formar part de la base de dades.
 
-- **Lectura No Repetible (Unrepeatable Read):**
-  La transacción $T_1$ lee una fila. A continuación, $T_2$ modifica o elimina esa fila y ejecuta `COMMIT`. Si $T_1$ vuelve a leer la misma fila dentro de su misma sesión, obtendrá valores distintos a los de su primera lectura.
+- **Lectura no repetible (*Unrepeatable Read*):**
+  $T_1$ llig una fila. Després, $T_2$ la modifica o l'elimina i executa `COMMIT`. Si $T_1$ torna a llegir-la durant la mateixa sessió, obté valors diferents dels de la primera lectura.
 
-- **Lectura Fantasma (Phantom Read):**
-  La transacción $T_1$ ejecuta una consulta que devuelve un conjunto de filas que cumplen una condición (ej. `WHERE salario > 2000`). La transacción $T_2$ inserta una nueva fila que cumple esa condición y confirma. Si $T_1$ repite la consulta, verá aparecer una nueva fila "fantasma".
+- **Lectura fantasma (*Phantom Read*):**
+  $T_1$ executa una consulta que retorna les files que complixen una condició (per exemple, `WHERE salario > 2000`). $T_2$ inserix una fila nova que també la complix i confirma els canvis. Si $T_1$ repetix la consulta, hi apareix una fila «fantasma».
 
 ---
 
-### 6.3 Transacciones y Propiedades ACID
+### 6.3 Transaccions i propietats ACID
 
-Una **transacción** es una unidad lógica de trabajo (ULT) constituida por un conjunto de sentencias SQL que deben ejecutarse como un bloque atómico e indivisible.
+Una **transacció** és una unitat lògica de treball (ULT) formada per un conjunt d'instruccions SQL que s'han d'executar com un bloc atòmic i indivisible.
 
-![Propiedades ACID de las Transacciones](images/acid-transactions.svg "Propiedades ACID")
+![Propietats ACID de les transaccions](images/acid-transactions.svg "Propietats ACID")
 
-Para garantizar la fiabilidad absoluta, todo SGBD transaccional debe asegurar el cumplimiento estricto de las 4 **propiedades ACID**:
+Per a garantir la fiabilitat, tot SGBD transaccional ha de complir estrictament les quatre **propietats ACID**:
 
-- **A — Atomicidad (Atomicity):**
-  Principio del "todo o nada". O se ejecutan con éxito el 100% de las operaciones de la transacción o el SGBD revierte el 100% de las modificaciones mediante un `ROLLBACK`, dejando la base de datos intacta.
+- **A — Atomicitat (*Atomicity*):**
+  Principi del «tot o res»: o s'executen correctament totes les operacions de la transacció, o el SGBD les desfà amb `ROLLBACK` i deixa intacta la base de dades.
 
-- **C — Consistencia (Consistency):**
-  La transacción hace pasar la base de datos de un estado consistente válido a otro estado consistente válido. Durante la ejecución de la transacción no se puede violar ninguna regla de integridad de la base de datos.
+- **C — Consistència (*Consistency*):**
+  La transacció porta la base de dades d'un estat vàlid i coherent a un altre. Durant l'execució no es pot incomplir cap regla d'integritat.
 
-- **I — Aislamiento (Isolation):**
-  Las transacciones ejecutadas de forma concurrente deben ser invisibles entre sí hasta que sean confirmadas. El resultado de ejecutar múltiples transacciones simultáneamente debe ser exactamente el mismo que si se hubieran ejecutado de forma secuencial una tras otra.
+- **I — Aïllament (*Isolation*):**
+  Les transaccions concurrents no han de poder interferir entre elles abans de confirmar-se. El resultat d'executar-ne diverses alhora ha de ser el mateix que si s'hagueren executat una darrere de l'altra.
 
-- **D — Durabilidad (Durability):**
-  Una vez que una transacción se confirma con éxito (`COMMIT`), sus cambios se convierten en permanentes e irreversibles en el almacenamiento persistente, sobreviviendo incluso a caídas totales de alimentación eléctrica o fallos del sistema operativo.
+- **D — Durabilitat (*Durability*):**
+  Quan una transacció es confirma (`COMMIT`), els canvis esdevenen permanents en l'emmagatzematge i es conserven fins i tot si es produïx un tall elèctric o falla el sistema operatiu.
 
-#### Control Práctico de Transacciones mediante SQL
+#### Control pràctic de transaccions amb SQL
 
 {{< sgbd "SQL Server / SQLite" >}}
 
 ```sql
--- Inicio explícito de transacción bancaria
+-- Inici explícit d'una transacció bancària
 BEGIN TRANSACTION;
 
--- Paso 1: Restar 500€ de la Cuenta de Origen
+-- Pas 1: restar 500 € del compte d'origen
 UPDATE cuenta 
 SET saldo = saldo - 500.00 
 WHERE id_cuenta = 101 AND saldo >= 500.00;
 
--- Paso 2: Sumar 500€ a la Cuenta de Destino
+-- Pas 2: sumar 500 € al compte de destinació
 UPDATE cuenta 
 SET saldo = saldo + 500.00 
 WHERE id_cuenta = 202;
 
--- Comprobación de seguridad: Si todo ha ido bien
+-- Comprovació de seguretat: si tot ha anat bé
 COMMIT;
 
--- Si ha ocurrido un fallo de red o falta de saldo:
+-- Si hi ha hagut una fallada de xarxa o no hi ha prou saldo:
 -- ROLLBACK;
 ```
 
 > [!NOTE]
-> La forma de **iniciar** una transacción depende del SGBD: `BEGIN TRANSACTION` (SQL Server), `START TRANSACTION` (MySQL/MariaDB) o `BEGIN` (PostgreSQL). En **Oracle** no existe esa orden: la transacción empieza sola con la primera sentencia DML y termina con `COMMIT` o `ROLLBACK`. Lo veremos en la UD08.
+> La manera d'**iniciar** una transacció depén del SGBD: `BEGIN TRANSACTION` (SQL Server), `START TRANSACTION` (MySQL/MariaDB) o `BEGIN` (PostgreSQL). **Oracle** no té cap d'aquestes ordres: la transacció comença automàticament amb la primera instrucció DML i acaba amb `COMMIT` o `ROLLBACK`. Ho veurem en la UD08.
 
 > [!IMPORTANT]
-> Antes de ejecutar `COMMIT`, la aplicación debe comprobar que **ambas actualizaciones** afectaron a una fila. Si falla cualquiera de ellas, debe ejecutar `ROLLBACK`; abrir una transacción por sí solo no valida el resultado de las operaciones.
+> Abans d'executar `COMMIT`, l'aplicació ha de comprovar que **les dues actualitzacions** han afectat una fila. Si alguna falla, cal executar `ROLLBACK`: obrir una transacció no valida per si mateix el resultat de les operacions.
 
 ---
 
-## 7. Seguridad, Recuperación y Administración
+## 7. Seguretat, recuperació i administració
 
-### 7.1 Control de Acceso, Autenticación y Cifrado
+### 7.1 Control d'accés, autenticació i xifratge
 
-El SGBD protege la confidencialidad, disponibilidad e integridad de los datos mediante mecanismos multicapa:
+El SGBD protegix la confidencialitat, la disponibilitat i la integritat de les dades amb mecanismes de diverses capes:
 
-- **Autenticación:** Comprobación rigurosa de la identidad de los usuarios mediante usuario/contraseña, certificados digitales SSL/TLS, tokens de acceso o integración con servicios de directorio LDAP/Active Directory.
-- **Autorización y Control de Acceso Basado en Roles (RBAC):** Definición de privilegios granulares. Se crean roles específicos (ej. `rol_ventas`, `rol_auditor`) asignándoles permisos sobre tablas o vistas concretas (`GRANT SELECT, INSERT ON ventas TO rol_ventas`).
-- **Cifrado de Datos:**
-  - *Cifrado en Tránsito:* Protección de los datos que viajan por la red entre la aplicación y la base de datos mediante TLS/SSL.
-  - *Cifrado en Reposo (TDE - Transparent Data Encryption):* Cifrado de los archivos físicos de datos y logs en el disco duro para evitar lecturas si el disco es robado físicamente.
+- **Autenticació:** Verificació rigorosa de la identitat dels usuaris mitjançant un nom d'usuari i una contrasenya, certificats digitals SSL/TLS, tokens d'accés o integració amb serveis de directori LDAP/Active Directory.
+- **Autorització i control d'accés basat en rols (RBAC):** Definició de privilegis detallats. Es creen rols específics (per exemple, `rol_ventas` o `rol_auditor`) i se'ls assignen permisos sobre taules o vistes concretes (`GRANT SELECT, INSERT ON ventas TO rol_ventas`).
+- **Xifratge de les dades:**
+  - *Xifratge en trànsit:* Protegix les dades que viatgen per la xarxa entre l'aplicació i la base de dades mitjançant TLS/SSL.
+  - *Xifratge en repòs (TDE - Transparent Data Encryption):* Xifra els fitxers de dades i els registres del disc dur per a impedir-ne la lectura si algú sostrau físicament el disc.
 
 ---
 
-### 7.2 Gestión Segura de Contraseñas (Hashing y Sal)
+### 7.2 Gestió segura de les contrasenyes (*hashing* i sal)
 
 > [!CAUTION]
-> **Regla de oro en seguridad de bases de datos:** las contraseñas de los usuarios **NUNCA** deben almacenarse en texto claro ni cifradas mediante algoritmos simétricos reversibles (como AES o RSA) que puedan ser desencriptados si la clave maestra es expuesta.
+> **Regla d'or de la seguretat de les bases de dades:** les contrasenyes dels usuaris **MAI** no s'han de guardar en text pla ni xifrar amb algoritmes simètrics reversibles (com AES o RSA), perquè es podrien desxifrar si s'exposara la clau mestra.
 
-#### El Esquema Correcto de Almacenamiento de Contraseñas
+#### La manera correcta d'emmagatzemar les contrasenyes
 
-1. **Uso de Funciones Hash Criptográficas Unidireccionales:** Se aplican funciones diseñadas específicamente para contraseñas como **Argon2id, bcrypt o PBKDF2**.
-2. **Inclusión de Sal Aleatoria (Salt):** Antes de calcular el hash, el sistema genera una cadena aleatoria única (*Sal*) para cada usuario y la concatena con la contraseña. Esto evita el uso de **Tablas Rainbow** (tablas precomputadas de contraseñas) y garantiza que dos usuarios con la misma contraseña tengan hashes completamente diferentes almacenados en la base de datos.
+1. **Ús de funcions criptogràfiques *hash* unidireccionals:** S'utilitzen funcions dissenyades específicament per a contrasenyes, com **Argon2id, bcrypt o PBKDF2**.
+2. **Addició d'una sal aleatòria (*salt*):** Abans de calcular el *hash*, el sistema genera una cadena aleatòria única per a cada usuari i la concatena amb la contrasenya. Així s'evita l'ús de **taules *rainbow*** (taules de contrasenyes precalculades) i s'aconseguix que dos usuaris amb la mateixa contrasenya tinguen *hashes* diferents en la base de dades.
 
 ```text
-Contraseña Usuario ("Secreta123") + Sal Aleatoria ("x9$kL2") 
+Contrasenya de l'usuari ("Secreta123") + sal aleatòria ("x9$kL2")
                       │
                       ▼
-       [ Función Hash Especializada: Argon2id ]
+       [ Funció hash especialitzada: Argon2id ]
                       │
                       ▼
- Hash Resultante: "$argon2id$v=19$m=65536,t=3,p=4$x9$kL2$..."
+ Hash resultant: "$argon2id$v=19$m=65536,t=3,p=4$x9$kL2$..."
 ```
 
 ---
 
-### 7.3 Estrategias de Backup, Logs (WAL) y Recuperación ante Desastres
+### 7.3 Còpies de seguretat, registres (WAL) i recuperació davant de desastres
 
-Un plan de administración profesional debe combinar varios tipos de copias de seguridad:
+Un pla professional d'administració ha de combinar diversos tipus de còpies de seguretat:
 
-1. **Copia de Seguridad Completa (Full Backup):** Copia íntegra de toda la base de datos y metadatos.
-2. **Copia Diferencial:** Guarda únicamente los bloques de datos modificados desde la última copia completa.
-3. **Copia Incremental:** Guarda únicamente los cambios producidos desde la última copia (ya sea completa o incremental).
-4. **Archivos de Diario y Recuperación en el Punto en el Tiempo (PITR):** El SGBD guarda de forma continua los archivos de transacciones (**Write-Ahead Log - WAL**). En caso de desastre, se restaura la última copia completa y se aplican secuencialmente los logs WAL para recuperar la base de datos exactamente al milisegundo previo a la avería.
+1. **Còpia de seguretat completa (*Full Backup*):** Còpia íntegra de la base de dades i de les metadades.
+2. **Còpia diferencial:** Guarda només els blocs de dades modificats des de l'última còpia completa.
+3. **Còpia incremental:** Guarda només els canvis fets des de l'última còpia, completa o incremental.
+4. **Registres de diari i recuperació fins a un instant determinat (PITR):** El SGBD guarda contínuament els registres de transaccions (**Write-Ahead Log - WAL**). Si es produïx un desastre, es restaura l'última còpia completa i s'hi apliquen els registres WAL en ordre, per a recuperar la base de dades fins a l'instant immediatament anterior a l'avaria.
 
 > [!IMPORTANT]
-> **Principio de verificación:** una copia de seguridad no existe realmente hasta que se prueba periódicamente su procedimiento de **restauración completa** en un servidor de pruebas aislado.
+> **Principi de verificació:** una còpia de seguretat no és fiable fins que se n'ha provat periòdicament la **restauració completa** en un servidor de proves aïllat.
 
 ---
 
-## 8. Modelos de Datos, Arquitecturas y Lenguajes
+## 8. Models de dades, arquitectures i llenguatges
 
-### 8.1 Modelos de Datos (Relacional vs NoSQL)
+### 8.1 Models de dades (relacional i NoSQL)
 
 ```mermaid
 graph TD
-    MD[Modelos de Datos] --> Rel[Modelo Relacional SQL]
-    MD --> NoSQL[Modelos NoSQL]
+    MD[Models de dades] --> Rel[Model relacional SQL]
+    MD --> NoSQL[Models NoSQL]
 
     Rel --> Rel_Ex[PostgreSQL, MariaDB, Oracle, SQL Server]
 
-    NoSQL --> Doc[Documentales: MongoDB]
-    NoSQL --> KV[Clave-Valor: Redis]
-    NoSQL --> Graph[Grafos: Neo4j]
-    NoSQL --> Col[Columnares: Cassandra]
+    NoSQL --> Doc[Documentals: MongoDB]
+    NoSQL --> KV[Clau-valor: Redis]
+    NoSQL --> Graph[Grafs: Neo4j]
+    NoSQL --> Col[Columnars: Cassandra]
 ```
 
-- **Modelo Relacional (SQL):** Basado en tablas, esquemas estrictos y cumplimiento de las propiedades ACID. Ideal para datos estructurados de alta integridad (sistemas bancarios, ERPs, CRM).
-- **Modelos NoSQL:** Priorizan, según el sistema y el caso de uso, la escalabilidad horizontal o la flexibilidad de datos semiestructurados frente a algunas garantías transaccionales o a un esquema rígido:
-  - *Documentales:* Almacenan información en formato JSON/BSON (MongoDB).
-  - *Clave-Valor:* Estructuras Hash en memoria de ultra-alta velocidad (Redis).
-  - *Orientados a Grafos:* Modelan nodos y relaciones de forma nativa (Neo4j).
-  - *Columnares:* Agrupan los datos por familias de columnas para escribir y leer a gran escala (Cassandra).
+- **Model relacional (SQL):** Es basa en taules i esquemes estrictes, i complix les propietats ACID. És ideal per a dades estructurades que requerixen molta integritat, com les dels sistemes bancaris, ERP i CRM.
+- **Models NoSQL:** Segons el sistema i el cas d'ús, prioritzen l'escalabilitat horitzontal o la flexibilitat per a gestionar dades semiestructurades, encara que poden oferir garanties transaccionals diferents o no requerir un esquema rígid:
+  - *Documentals:* Emmagatzemen informació en format JSON/BSON (MongoDB).
+  - *Clau-valor:* Utilitzen estructures hash en memòria d'alta velocitat (Redis).
+  - *Orientats a grafs:* Representen de manera nativa els nodes i les relacions (Neo4j).
+  - *Columnars:* Agrupen les dades en famílies de columnes per a llegir-les i escriure-les a gran escala (Cassandra).
 
-La UD10 estudia en detalle los modelos NoSQL y cuándo conviene usar cada uno.
+La UD10 estudia amb detall els models NoSQL i en quins casos convé utilitzar-los.
 
 > [!WARNING]
-> **NoSQL no significa necesariamente "sin ACID"**: las garantías transaccionales varían entre productos y configuraciones. Comprueba las propiedades concretas del sistema antes de elegirlo.
+> **NoSQL no vol dir necessàriament «sense ACID»**: les garanties transaccionals varien segons el producte i la configuració. Abans de triar un sistema, comprova quines propietats oferix.
 
 ---
 
-### 8.2 Topologías y Arquitecturas de Despliegue
+### 8.2 Topologies i arquitectures de desplegament
 
-![Arquitecturas de Despliegue de Bases de Datos](images/db-architectures.svg "Arquitecturas de Despliegue")
+![Arquitectures de desplegament de bases de dades](images/db-architectures.svg "Arquitectures de desplegament")
 
-1. **Arquitectura Centralizada:**
-   El SGBD, la base de datos física y las aplicaciones residen en un único servidor físico. Típica de entornos legados o de pruebas. Inconveniente: Punto único de fallo (*Single Point of Failure*).
+1. **Arquitectura centralitzada:**
+   El SGBD, la base de dades física i les aplicacions residixen en un únic servidor. És habitual en entorns antics o de proves. El principal inconvenient és que hi ha un únic punt de fallada (*Single Point of Failure*).
 
-2. **Arquitectura Cliente-Servidor (2 Niveles / 3 Niveles):**
-   Los usuarios ejecutan clientes ligeros o aplicaciones web en sus dispositivos (Nivel 1). Estas aplicaciones se conectan a través de la red a un servidor de aplicaciones (Nivel 2) que consulta de forma centralizada al servidor de base de datos (Nivel 3).
+2. **Arquitectura client-servidor (dos o tres nivells):**
+   Els usuaris executen clients lleugers o aplicacions web als seus dispositius (nivell 1). Aquestes aplicacions es connecten per xarxa a un servidor d'aplicacions (nivell 2), que consulta de manera centralitzada el servidor de bases de dades (nivell 3).
 
-3. **Arquitectura Distribuida (Replicación y Fragmentación):**
-   La base de datos se distribuye entre múltiples nodos interconectados en red en distintas ubicaciones geográficas. Soporta **Replicación Primario-Réplica** (para lectura intensiva) y **Fragmentación Horizontales/Sharding** (para distribuir grandes volúmenes de datos).
+3. **Arquitectura distribuïda (replicació i fragmentació):**
+   La base de dades es reparteix entre diversos nodes connectats per xarxa i situats en diferents llocs. Pot utilitzar **replicació primària-rèplica** per a càrregues amb moltes lectures i **fragmentació horitzontal (*sharding*)** per a repartir grans volums de dades.
 
 ---
 
-### 8.3 El Lenguaje Estándar SQL: DDL, DML y DCL
+### 8.3 El llenguatge estàndard SQL: DDL, DML i DCL
 
-El lenguaje **SQL (Structured Query Language)** es el estándar universal para interactuar con bases de datos relacionales. Se estructura en tres subconjuntos funcionales:
+El llenguatge **SQL (Structured Query Language)** és l'estàndard universal per a treballar amb bases de dades relacionals. S'estructura en tres subconjunts funcionals:
 
-#### 1. DDL (Data Definition Language - Lenguaje de Definición de Datos)
+#### 1. DDL (*Data Definition Language* - llenguatge de definició de dades)
 
-Utilizado para crear, alterar o eliminar las estructuras y esquemas de la base de datos:
+S'utilitza per a crear, modificar o eliminar les estructures i els esquemes de la base de dades:
 
-{{< sgbd "SQL genérico (MySQL / PostgreSQL)" >}}
+{{< sgbd "SQL genèric (MySQL / PostgreSQL)" >}}
 
 ```sql
 CREATE TABLE producto (
@@ -631,11 +631,11 @@ DROP TABLE producto;
 ```
 
 > [!WARNING]
-> Este ejemplo usa tipos y sintaxis genéricos. En Oracle los tipos habituales son `NUMBER` y `VARCHAR2`, y `ALTER TABLE ... ADD` no lleva la palabra `COLUMN`. Lo verás en la UD05.
+> Aquest exemple utilitza tipus i sintaxi genèrics. En Oracle, els tipus habituals són `NUMBER` i `VARCHAR2`, i `ALTER TABLE ... ADD` no inclou la paraula `COLUMN`. Ho veuràs en la UD05.
 
-#### 2. DML (Data Manipulation Language - Lenguaje de Manipulación de Datos)
+#### 2. DML (*Data Manipulation Language* - llenguatge de manipulació de dades)
 
-Utilizado para consultar, insertar, modificar y borrar las filas de datos:
+S'utilitza per a consultar, inserir, modificar i eliminar files de dades:
 
 ```sql
 INSERT INTO producto (id_producto, nombre, precio, stock) 
@@ -648,9 +648,9 @@ UPDATE producto SET precio = 49.90 WHERE id_producto = 1;
 DELETE FROM producto WHERE stock = 0;
 ```
 
-#### 3. DCL (Data Control Language - Lenguaje de Control de Datos)
+#### 3. DCL (*Data Control Language* - llenguatge de control de dades)
 
-Utilizado para administrar permisos y seguridad de acceso de los usuarios:
+S'utilitza per a administrar els permisos i controlar l'accés dels usuaris:
 
 ```sql
 GRANT SELECT, INSERT ON producto TO usuario_ventas;
@@ -660,69 +660,69 @@ REVOKE DELETE ON producto FROM usuario_ventas;
 
 ---
 
-{{< sesion n="6" h="1" tipo="t" >}}Clasificación y distribución{{< /sesion >}}
+{{< sesion n="6" h="1" tipo="t" >}}Classificació i distribució{{< /sesion >}}
 
-## 9. Clasificación de los Sistemas Gestores de Bases de Datos
+## 9. Classificació dels sistemes gestors de bases de dades
 
-Hay cientos de SGBD. Para elegir uno hay que saber **clasificarlos** según criterios que respondan a las necesidades del proyecto (RA1.f).
+Hi ha centenars de SGBD. Per a triar-ne un, cal saber **classificar-los** segons criteris que responguen a les necessitats del projecte (RA1.f).
 
-| Criterio | Tipos | Ejemplos |
+| Criteri | Tipus | Exemples |
 |---|---|---|
-| **Modelo de datos** | Jerárquico, en red, relacional, objeto-relacional, documental, clave-valor, columnar, grafos, multimodelo | IMS (jerárquico), Oracle y PostgreSQL (objeto-relacionales), MongoDB (documental), Redis (clave-valor), Cassandra (columnar), Neo4j (grafos) |
-| **Número de usuarios** | Monousuario o multiusuario | SQLite (embebido, una aplicación) frente a Oracle o SQL Server (miles de sesiones) |
-| **Ubicación de los datos** | Centralizados o distribuidos | Una instancia de MariaDB frente a CockroachDB o Oracle RAC/Sharding |
-| **Arquitectura de ejecución** | Embebido (biblioteca dentro de la aplicación) o cliente/servidor (proceso independiente) | SQLite, H2 o DuckDB (embebidos) frente a MySQL o PostgreSQL (servidor) |
-| **Licencia** | Propietario, libre (*open source*) o doble licencia | Oracle, SQL Server (propietarios, con ediciones gratuitas); PostgreSQL, MariaDB (libres); MySQL (doble licencia) |
-| **Modelo de despliegue** | Local (*on-premise*) o en la nube como servicio (*DBaaS*) | Instalación propia frente a Amazon RDS, Azure SQL Database, Oracle Autonomous Database o MongoDB Atlas |
-| **Propósito** | Transaccional (OLTP), analítico (OLAP), de propósito específico (series temporales, búsqueda, vectores) | Oracle o PostgreSQL (OLTP), Snowflake o ClickHouse (OLAP), InfluxDB (series temporales), Elasticsearch (búsqueda) |
+| **Model de dades** | Jeràrquic, en xarxa, relacional, objecte-relacional, documental, clau-valor, columnar, grafs, multimodel | IMS (jeràrquic), Oracle i PostgreSQL (objecte-relacionals), MongoDB (documental), Redis (clau-valor), Cassandra (columnar), Neo4j (grafs) |
+| **Nombre d'usuaris** | Monousuari o multiusuari | SQLite (incrustat, una aplicació) davant d'Oracle o SQL Server (milers de sessions) |
+| **Ubicació de les dades** | Centralitzades o distribuïdes | Una instància de MariaDB davant de CockroachDB o Oracle RAC/Sharding |
+| **Arquitectura d'execució** | Incrustada (biblioteca dins de l'aplicació) o client/servidor (procés independent) | SQLite, H2 o DuckDB (incrustats) davant de MySQL o PostgreSQL (servidor) |
+| **Llicència** | Propietària, lliure (*open source*) o doble llicència | Oracle, SQL Server (propietaris, amb edicions gratuïtes); PostgreSQL, MariaDB (lliures); MySQL (doble llicència) |
+| **Model de desplegament** | Local (*on-premise*) o al núvol com a servei (*DBaaS*) | Instal·lació pròpia davant d'Amazon RDS, Azure SQL Database, Oracle Autonomous Database o MongoDB Atlas |
+| **Propòsit** | Transaccional (OLTP), analític (OLAP), d'ús específic (sèries temporals, cerca, vectors) | Oracle o PostgreSQL (OLTP), Snowflake o ClickHouse (OLAP), InfluxDB (sèries temporals), Elasticsearch (cerca) |
 
 > [!TIP]
-> Un mismo producto puede pertenecer a varias categorías. Oracle AI Database 26ai es relacional, pero también almacena documentos JSON, grafos y vectores: es **multimodelo**. Al comparar productos, fíjate en el **uso principal** y en las garantías que ofrece (transacciones, escalabilidad, licencia).
+> Un mateix producte pot pertànyer a diverses categories. Oracle AI Database 26ai és relacional, però també emmagatzema documents JSON, grafs i vectors: és **multimodel**. En comparar productes, fixa't en l'**ús principal** i en les garanties que oferix (transaccions, escalabilitat, llicència).
 
-### 9.1 ¿Cómo se elige un SGBD?
+### 9.1 Com es tria un SGBD?
 
-Elegir un SGBD es una decisión técnica **y** económica. Estas preguntas ayudan a justificarla:
+Triar un SGBD és una decisió tècnica **i** econòmica. Estes preguntes ajuden a justificar-la:
 
-1. **¿Cómo son los datos?** Muy estructurados y relacionados (relacional) o de estructura variable (documental).
-2. **¿Qué garantías necesito?** Transacciones ACID estrictas (banca, matrículas) o disponibilidad con consistencia eventual (redes sociales, catálogos).
-3. **¿Qué volumen y qué crecimiento espero?** Unos miles de filas o miles de millones repartidos entre varios servidores.
-4. **¿Qué coste total tiene?** Licencias, soporte, hardware, nube y formación del equipo.
-5. **¿Qué conoce el equipo y qué exige el cliente?** Existe la tecnología que ya está implantada y la que la empresa puede mantener.
+1. **Com són les dades?** Molt estructurades i relacionades (relacional) o d'estructura variable (documental).
+2. **Quines garanties necessite?** Transaccions ACID estrictes (banca, matrícules) o disponibilitat amb consistència eventual (xarxes socials, catàlegs).
+3. **Quin volum i quin creixement espere?** Uns quants milers de files o milers de milions repartides entre diversos servidors.
+4. **Quin cost total té?** Llicències, suport, maquinari, núvol i formació de l'equip.
+5. **Què coneix l'equip i què exigix el client?** Cal tindre en compte tant la tecnologia ja implantada com la que l'empresa pot mantindre.
 
 ---
 
-## 10. Bases de Datos Distribuidas y Fragmentación
+## 10. Bases de dades distribuïdes i fragmentació
 
-### 10.1 Bases de datos según la ubicación de la información
+### 10.1 Bases de dades segons la ubicació de la informació
 
-Según **dónde** se almacenan los datos (RA1.c), una base de datos puede ser:
+Segons **on** s'emmagatzemen les dades (RA1.c), una base de dades pot ser:
 
-- **Centralizada:** todos los datos están en un único servidor o emplazamiento. Es sencilla de administrar, pero el servidor es un **punto único de fallo** y su capacidad tiene un límite.
-- **Distribuida:** los datos están repartidos en varios **nodos** conectados por red, a menudo en ubicaciones geográficas distintas. Para el usuario funciona como **una sola base de datos lógica**: no necesita saber en qué nodo está cada dato. Esta propiedad se llama **transparencia de ubicación**.
+- **Centralitzada:** totes les dades estan en un únic servidor o emplaçament. És senzilla d'administrar, però el servidor és un **punt únic de fallada** i la seua capacitat té un límit.
+- **Distribuïda:** les dades estan repartides en diversos **nodes** connectats per xarxa, sovint en ubicacions geogràfiques diferents. Per a l'usuari funciona com **una única base de dades lògica**: no necessita saber en quin node està cada dada. Esta propietat s'anomena **transparència d'ubicació**.
 
-### 10.2 Utilidad de las bases de datos distribuidas
+### 10.2 Utilitat de les bases de dades distribuïdes
 
-Una base de datos distribuida tiene sentido cuando (RA1.g):
+Una base de dades distribuïda és útil quan (RA1.g):
 
-- La organización está **geográficamente repartida** (sedes, delegaciones, países) y cada sede trabaja sobre todo con sus propios datos.
-- Se necesita **alta disponibilidad**: si un nodo falla, los demás siguen dando servicio.
-- El **volumen** de datos o de peticiones supera lo que puede atender un solo servidor (escalabilidad horizontal).
-- Se quiere **reducir la latencia** acercando los datos a los usuarios.
+- L'organització està **repartida geogràficament** (seus, delegacions, països) i cada seu treballa sobretot amb les seues pròpies dades.
+- Es necessita **alta disponibilitat**: si un node falla, els altres continuen donant servei.
+- El **volum** de dades o de peticions supera el que pot atendre un únic servidor (escalabilitat horitzontal).
+- Es vol **reduir la latència** acostant les dades als usuaris.
 
-A cambio, el sistema es más complejo: hay que coordinar las transacciones entre nodos (por ejemplo, con el protocolo de **confirmación en dos fases**, *two-phase commit*), mantener la coherencia de las copias y tolerar los fallos de red.
+A canvi, el sistema és més complex: cal coordinar les transaccions entre nodes (per exemple, amb el protocol de **confirmació en dues fases**, *two-phase commit*), mantindre la coherència de les còpies i tolerar les fallades de xarxa.
 
 > [!IMPORTANT]
-> **Teorema CAP.** Cuando la red entre nodos falla (*Partition*), un sistema distribuido debe elegir entre seguir respondiendo con datos posiblemente desactualizados (*Availability*) o rechazar peticiones hasta garantizar que todos los nodos coinciden (*Consistency*). No existe un sistema distribuido que garantice las tres cosas a la vez. Esta decisión explica muchas diferencias entre los SGBD relacionales y los NoSQL (UD10).
+> **Teorema CAP.** Quan falla la xarxa entre nodes (*Partition*), un sistema distribuït ha de triar entre continuar responent amb dades possiblement desactualitzades (*Availability*) o rebutjar peticions fins que es garantisca que tots els nodes coincidixen (*Consistency*). No hi ha cap sistema distribuït que garantisca les tres propietats alhora. Esta decisió explica moltes diferències entre els SGBD relacionals i els NoSQL (UD10).
 
-### 10.3 Políticas de fragmentación
+### 10.3 Polítiques de fragmentació
 
-**Fragmentar** es dividir una tabla en trozos (*fragmentos*) que se almacenan en nodos distintos (RA1.h). Toda fragmentación debe cumplir tres reglas:
+**Fragmentar** és dividir una taula en parts (*fragments*) que s'emmagatzemen en nodes diferents (RA1.h). Tota fragmentació ha de complir tres regles:
 
-1. **Completitud:** cada dato de la tabla original está en algún fragmento.
-2. **Reconstrucción:** la tabla original se puede recomponer a partir de los fragmentos.
-3. **Disyunción:** un dato no se repite en varios fragmentos (salvo la clave en la fragmentación vertical).
+1. **Completitud:** cada dada de la taula original està en algun fragment.
+2. **Reconstrucció:** la taula original es pot recompondre a partir dels fragments.
+3. **Disjunció:** una dada no es repetix en diversos fragments (excepte la clau en la fragmentació vertical).
 
-Tomemos la tabla `ALUMNO` de una red de institutos con sedes en Alicante y Elche:
+Considerem la taula `ALUMNO` d'una xarxa d'instituts amb seus a Alacant i Elx:
 
 | id_alumno | nombre | sede | expediente_medico | foto |
 |---|---|---|---|---|
@@ -732,221 +732,221 @@ Tomemos la tabla `ALUMNO` de una red de institutos con sedes en Alicante y Elche
 
 ```mermaid
 flowchart LR
-    T[(ALUMNO)] --> H{Fragmentación<br/>horizontal}
-    T --> V{Fragmentación<br/>vertical}
-    H --> H1["Nodo Alicante<br/>filas con sede = 'ALC'"]
-    H --> H2["Nodo Elche<br/>filas con sede = 'ELX'"]
-    V --> V1["Nodo Secretaría<br/>id_alumno, nombre, sede"]
-    V --> V2["Nodo Orientación<br/>id_alumno, expediente_medico"]
+    T[(ALUMNO)] --> H{Fragmentació<br/>horitzontal}
+    T --> V{Fragmentació<br/>vertical}
+    H --> H1["Node Alacant<br/>files amb seu = 'ALC'"]
+    H --> H2["Node Elx<br/>files amb seu = 'ELX'"]
+    V --> V1["Node Secretaria<br/>id_alumno, nombre, sede"]
+    V --> V2["Node Orientació<br/>id_alumno, expediente_medico"]
 ```
 
-| Política | Cómo divide | Cómo se reconstruye | Cuándo se usa |
+| Política | Com dividix | Com es reconstruïx | Quan s'utilitza |
 |---|---|---|---|
-| **Horizontal** | Por **filas**, según una condición (`sede = 'ALC'`) | Unión (`UNION ALL`) de los fragmentos | Cada sede consulta sobre todo sus propias filas. En NoSQL se llama *sharding*. |
-| **Vertical** | Por **columnas**. Cada fragmento lleva la clave primaria | Composición (`JOIN`) por la clave | Grupos de columnas con distinto uso o distinta confidencialidad |
-| **Mixta** | Primero una y después la otra | Combinación de uniones y composiciones | Sistemas grandes con necesidades combinadas |
+| **Horitzontal** | Per **files**, segons una condició (`sede = 'ALC'`) | Unió (`UNION ALL`) dels fragments | Cada seu consulta sobretot les seues pròpies files. En NoSQL s'anomena *sharding*. |
+| **Vertical** | Per **columnes**. Cada fragment conté la clau primària | Composició (`JOIN`) per la clau | Grups de columnes amb usos o nivells de confidencialitat diferents |
+| **Mixta** | Primer s'aplica una i després l'altra | Combinació d'unions i composicions | Sistemes grans amb necessitats combinades |
 
-Además de fragmentar, se puede **replicar**: guardar copias completas o parciales de los datos en varios nodos. La replicación mejora la disponibilidad y la velocidad de lectura, pero cada escritura se tiene que propagar a todas las copias.
+A més de fragmentar, es poden **replicar** les dades: guardar-ne còpies completes o parcials en diversos nodes. La replicació millora la disponibilitat i la velocitat de lectura, però cada escriptura s'ha de propagar a totes les còpies.
 
 > [!NOTE]
-> La **partición** de tablas (*partitioning*) es una idea muy parecida que se aplica **dentro de un único servidor**: Oracle puede dividir una tabla de matrículas por curso académico para que las consultas de un curso solo lean su partición. Es una decisión de diseño físico.
+> La **partició** de taules (*partitioning*) és una idea molt semblant que s'aplica **dins d'un únic servidor**: Oracle pot dividir una taula de matrícules per curs acadèmic perquè les consultes d'un curs només lligen la seua partició. És una decisió de disseny físic.
 
 ---
 
-{{< sesion n="7" h="1" tipo="t" >}}Big Data y protección de datos{{< /sesion >}}
+{{< sesion n="7" h="1" tipo="t" >}}Big Data i protecció de dades{{< /sesion >}}
 
-## 11. Big Data e Inteligencia de Negocios
+## 11. Big Data i intel·ligència empresarial
 
 ### 11.1 Big Data
 
-**Big Data** es el conjunto de técnicas y tecnologías que permiten almacenar y analizar volúmenes de datos tan grandes, rápidos o variados que no pueden tratarse con las herramientas tradicionales (RA1.j). Se suele describir con las **V**:
+**Big Data** és el conjunt de tècniques i tecnologies que permeten emmagatzemar i analitzar volums de dades tan grans, ràpids o variats que no es poden tractar amb les eines tradicionals (RA1.j). Se sol descriure amb les **V**:
 
-| V | Significado | Ejemplo |
+| V | Significat | Exemple |
 |---|---|---|
-| **Volumen** | Terabytes o petabytes de datos | Historial de todas las compras de una cadena de supermercados |
-| **Velocidad** | Datos que llegan de forma continua y deben procesarse casi en tiempo real | Sensores de una fábrica, clics en una web |
-| **Variedad** | Datos estructurados, semiestructurados (JSON, XML) y no estructurados (texto, imágenes) | Tickets, reseñas, fotos de productos |
-| **Veracidad** | Calidad y fiabilidad de los datos | Datos duplicados o erróneos que distorsionan el análisis |
-| **Valor** | Utilidad real para la organización | Predecir la demanda para reducir el stock |
+| **Volum** | Terabytes o petabytes de dades | Historial de totes les compres d'una cadena de supermercats |
+| **Velocitat** | Dades que arriben contínuament i s'han de processar quasi en temps real | Sensors d'una fàbrica, clics en una web |
+| **Varietat** | Dades estructurades, semiestructurades (JSON, XML) i no estructurades (text, imatges) | Tiquets, ressenyes, fotos de productes |
+| **Veracitat** | Qualitat i fiabilitat de les dades | Dades duplicades o errònies que distorsionen l'anàlisi |
+| **Valor** | Utilitat real per a l'organització | Predir la demanda per a reduir l'estoc |
 
-Las tecnologías de Big Data se basan en el **procesamiento distribuido**: sistemas de ficheros distribuidos, motores de procesamiento como Apache Spark, bases de datos NoSQL y almacenamiento en la nube (*data lakes*).
+Les tecnologies de Big Data es basen en el **processament distribuït**: sistemes de fitxers distribuïts, motors de processament com Apache Spark, bases de dades NoSQL i emmagatzematge al núvol (*data lakes*).
 
-### 11.2 Inteligencia de negocios (BI)
+### 11.2 Intel·ligència empresarial (BI)
 
-La **inteligencia de negocios** (*Business Intelligence*) es el proceso de transformar los datos de una organización en **información útil para tomar decisiones**. Un sistema de BI típico tiene estas piezas:
+La **intel·ligència empresarial** (*Business Intelligence*) és el procés de transformar les dades d'una organització en **informació útil per a prendre decisions**. Un sistema de BI típic té estes parts:
 
 ```mermaid
 flowchart LR
-    A[(BD transaccional<br/>OLTP)] --> E[ETL<br/>extraer · transformar · cargar]
-    B[Hojas de cálculo] --> E
-    C[Ficheros CSV / API] --> E
-    E --> DW[(Almacén de datos<br/>data warehouse · OLAP)]
-    DW --> R[Informes y<br/>cuadros de mando]
-    DW --> M[Análisis y<br/>modelos predictivos]
+    A[(BD transaccional<br/>OLTP)] --> E[ETL<br/>extraure · transformar · carregar]
+    B[Fulls de càlcul] --> E
+    C[Fitxers CSV / API] --> E
+    E --> DW[(Magatzem de dades<br/>data warehouse · OLAP)]
+    DW --> R[Informes i<br/>quadres de comandament]
+    DW --> M[Anàlisi i<br/>models predictius]
 ```
 
-| | Sistemas transaccionales (OLTP) | Sistemas analíticos (OLAP) |
+| | Sistemes transaccionals (OLTP) | Sistemes analítics (OLAP) |
 |---|---|---|
-| **Uso** | Operaciones del día a día: matricular, facturar | Análisis y toma de decisiones |
-| **Operaciones** | Muchas inserciones y modificaciones pequeñas | Consultas complejas de lectura sobre muchos datos |
-| **Diseño** | Normalizado (UD04) para evitar redundancias | Desnormalizado (esquemas en estrella) para consultar rápido |
-| **Datos** | Actuales | Históricos e integrados de varias fuentes |
-| **Ejemplo en EduGest** | Registrar una falta de asistencia | Evolución de la tasa de abandono por ciclo en los últimos 10 años |
+| **Ús** | Operacions del dia a dia: matricular, facturar | Anàlisi i presa de decisions |
+| **Operacions** | Moltes insercions i modificacions menudes | Consultes complexes de lectura sobre moltes dades |
+| **Disseny** | Normalitzat (UD04) per a evitar redundàncies | Desnormalitzat (esquemes en estrela) per a consultar més de pressa |
+| **Dades** | Actuals | Històriques i integrades de diverses fonts |
+| **Exemple en EduGest** | Registrar una falta d'assistència | Evolució de la taxa d'abandonament per cicle durant els últims 10 anys |
 
 > [!TIP]
-> Las consultas resumen con `GROUP BY` que harás en la UD07 son la base de cualquier informe de BI. Herramientas como Power BI, Tableau o Looker Studio generan por debajo consultas SQL muy parecidas.
+> Les consultes de resum amb `GROUP BY` que faràs en la UD07 són la base de qualsevol informe de BI. Eines com Power BI, Tableau o Looker Studio generen internament consultes SQL molt semblants.
 
 ---
 
-## 12. Legislación sobre Protección de Datos
+## 12. Legislació sobre protecció de dades
 
-Las bases de datos almacenan muchos **datos personales**: nombre, DNI, correo, notas, salud... Su tratamiento está regulado por ley (RA1.i). Como desarrollador o administrador, eres responsable de diseñar sistemas que cumplan la normativa.
+Les bases de dades emmagatzemen moltes **dades personals**: nom, DNI, correu electrònic, notes, salut... El seu tractament està regulat per llei (RA1.i). Com a desenvolupador o administrador, eres responsable de dissenyar sistemes que complisquen la normativa.
 
-### 12.1 Normativa vigente
+### 12.1 Normativa vigent
 
-| Norma | Ámbito | Idea clave |
+| Norma | Àmbit | Idea clau |
 |---|---|---|
-| **Reglamento (UE) 2016/679, Reglamento General de Protección de Datos (RGPD)** | Toda la Unión Europea, desde el 25 de mayo de 2018 | Regula el tratamiento de datos de personas físicas y los derechos de los interesados |
-| **Ley Orgánica 3/2018, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD)** | España | Adapta el RGPD al ordenamiento español y añade derechos digitales |
-| **Agencia Española de Protección de Datos (AEPD)** | Autoridad de control en España | Supervisa el cumplimiento, atiende reclamaciones y sanciona |
+| **Reglamento (UE) 2016/679, Reglamento General de Protección de Datos (RGPD)** | Tota la Unió Europea, des del 25 de maig de 2018 | Regula el tractament de dades de persones físiques i els drets de les persones interessades |
+| **Ley Orgánica 3/2018, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD)** | Espanya | Adapta el RGPD a l'ordenament espanyol i incorpora drets digitals |
+| **Agencia Española de Protección de Datos (AEPD)** | Autoritat de control a Espanya | Supervisa el compliment, atén reclamacions i imposa sancions |
 
-### 12.2 Conceptos que afectan al diseño de una base de datos
+### 12.2 Conceptes que afecten el disseny d'una base de dades
 
-- **Dato personal:** cualquier información sobre una persona física identificada o identificable (nombre, DNI, correo, dirección IP, fotografía...).
-- **Categorías especiales de datos:** salud, origen étnico, religión, datos biométricos, orientación sexual... Tienen una protección reforzada. En EduGest, un informe médico de un alumno sería una categoría especial.
-- **Responsable del tratamiento:** quien decide para qué y cómo se tratan los datos (el instituto). **Encargado del tratamiento:** quien los trata por cuenta del responsable (la empresa que desarrolla o aloja EduGest).
+- **Dada personal:** qualsevol informació sobre una persona física identificada o identificable (nom, DNI, correu electrònic, adreça IP, fotografia...).
+- **Categories especials de dades:** salut, origen ètnic, religió, dades biomètriques, orientació sexual... Tenen una protecció reforçada. En EduGest, un informe mèdic d'un alumne seria una categoria especial.
+- **Responsable del tractament:** qui decidix per a què i com es tracten les dades (l'institut). **Encarregat del tractament:** qui les tracta per compte del responsable (l'empresa que desenvolupa o allotja EduGest).
 
-### 12.3 Principios del RGPD y su traducción técnica
+### 12.3 Principis del RGPD i la seua aplicació tècnica
 
-| Principio (art. 5 RGPD) | Qué significa | Cómo se refleja en la base de datos |
+| Principi (art. 5 RGPD) | Què significa | Com es reflectix en la base de dades |
 |---|---|---|
-| Licitud, lealtad y transparencia | Tratar los datos con una base legal e informando al interesado | Registrar el consentimiento o la base legal |
-| Limitación de la finalidad | Usar los datos solo para el fin para el que se recogieron | Vistas y privilegios por perfil de usuario (UD05) |
-| **Minimización de datos** | Recoger solo los datos necesarios | No crear columnas «por si acaso» en el diseño (UD02) |
-| Exactitud | Mantener los datos correctos y actualizados | Restricciones `CHECK`, validaciones y procesos de actualización |
-| Limitación del plazo de conservación | No guardar los datos más tiempo del necesario | Procedimientos de borrado o anonimización periódica (UD09) |
-| Integridad y confidencialidad | Proteger los datos frente a accesos no autorizados y pérdidas | Usuarios, roles, cifrado, copias de seguridad, auditoría |
-| Responsabilidad proactiva | Poder demostrar que se cumple | Documentación del diseño, registro de accesos |
+| Licitud, lleialtat i transparència | Tractar les dades amb una base legal i informar-ne la persona interessada | Registrar el consentiment o la base legal |
+| Limitació de la finalitat | Utilitzar les dades només per a la finalitat per a la qual s'han recollit | Vistes i privilegis segons el perfil d'usuari (UD05) |
+| **Minimització de dades** | Recollir només les dades necessàries | No crear columnes «per si de cas» en el disseny (UD02) |
+| Exactitud | Mantindre les dades correctes i actualitzades | Restriccions `CHECK`, validacions i processos d'actualització |
+| Limitació del termini de conservació | No guardar les dades més temps del necessari | Procediments d'esborrament o anonimització periòdica (UD09) |
+| Integritat i confidencialitat | Protegir les dades davant d'accessos no autoritzats i pèrdues | Usuaris, rols, xifratge, còpies de seguretat, auditoria |
+| Responsabilitat proactiva | Poder demostrar que es complix la normativa | Documentació del disseny, registre d'accessos |
 
-**Protección de datos desde el diseño y por defecto** (art. 25 RGPD): la privacidad se tiene en cuenta **desde el primer diagrama**, no se añade al final. Algunas técnicas son la **seudonimización** (sustituir el DNI por un identificador interno, como hace `id_alumno` en EduGest), el cifrado de columnas sensibles y la separación de los datos sensibles en tablas con acceso restringido (fragmentación vertical).
+**Protecció de dades des del disseny i per defecte** (art. 25 RGPD): la privacitat es té en compte **des del primer diagrama**, no s'afig al final. Algunes tècniques són la **seudonimització** (substituir el DNI per un identificador intern, com fa `id_alumno` en EduGest), el xifratge de columnes sensibles i la separació de les dades sensibles en taules amb accés restringit (fragmentació vertical).
 
-### 12.4 Derechos de las personas interesadas
+### 12.4 Drets de les persones interessades
 
-El sistema debe permitir atender los derechos de **acceso**, **rectificación**, **supresión** («derecho al olvido»), **limitación del tratamiento**, **portabilidad** y **oposición**. En la práctica, esto significa que la base de datos debe poder localizar, exportar, corregir y borrar todos los datos de una persona.
+El sistema ha de permetre atendre els drets d'**accés**, **rectificació**, **supressió** («dret a l'oblit»), **limitació del tractament**, **portabilitat** i **oposició**. En la pràctica, això significa que la base de dades ha de poder localitzar, exportar, corregir i esborrar totes les dades d'una persona.
 
 > [!CAUTION]
-> Una **brecha de seguridad** (pérdida, robo o acceso no autorizado a datos personales) debe notificarse a la AEPD en un plazo máximo de **72 horas** desde que se conoce, salvo que sea improbable que suponga un riesgo para las personas. Un servidor de bases de datos expuesto a Internet sin contraseña es una de las causas más habituales de estas brechas.
+> Una **bretxa de seguretat** (pèrdua, robatori o accés no autoritzat a dades personals) s'ha de notificar a l'AEPD en un termini màxim de **72 hores** des que se'n té coneixement, llevat que siga improbable que supose un risc per a les persones. Un servidor de bases de dades exposat a Internet sense contrasenya és una de les causes més habituals d'estes bretxes.
 
 ---
 
-## 13. Resumen y Conclusiones
+## 13. Resum i conclusions
 
-- Los **SGBD** sustituyeron con éxito a la gestión tradicional por archivos independientes al eliminar la redundancia incontrolada, garantizar la consistencia y desacoplar la estructura física del código de las aplicaciones.
-- Los métodos de acceso a archivos evolucionaron desde la lectura **secuencial** estricta hasta el **acceso directo** por cálculo de offset ($Posición = N \times L$) y los **archivos indexados** estructurados mediante árboles B.
-- La **arquitectura ANSI/SPARC a 3 niveles** establece la independencia lógica y física de datos, permitiendo evolucionar el almacenamiento sin romper las aplicaciones existentes.
-- La integridad de los datos se sostiene sobre las reglas de **Clave Primaria (PK)**, **Clave Foránea (FK)** y **restricciones de Dominio**.
-- Las **transacciones ACID** son la garantía absoluta contra las anomalías de concurrencia y los fallos de energía en sistemas críticos.
-- Los SGBD se **clasifican** por modelo de datos, número de usuarios, ubicación, arquitectura, licencia, despliegue y propósito. Elegir uno es una decisión técnica y económica que hay que justificar.
-- Las **bases de datos distribuidas** aportan disponibilidad y escalabilidad a cambio de complejidad. Los datos se reparten mediante **fragmentación** horizontal, vertical o mixta, y se copian mediante **replicación**.
-- **Big Data** y la **inteligencia de negocios** aprovechan grandes volúmenes de datos para tomar decisiones; los sistemas analíticos (OLAP) se diseñan de forma distinta a los transaccionales (OLTP).
-- El **RGPD** y la **LOPDGDD** obligan a diseñar las bases de datos con protección de datos desde el diseño: minimización, control de acceso, conservación limitada y seguridad.
+- Els **SGBD** van substituir amb èxit la gestió tradicional amb fitxers independents en eliminar la redundància descontrolada, garantir la consistència i desacoblar l'estructura física del codi de les aplicacions.
+- Els mètodes d'accés als fitxers han evolucionat des de la lectura **seqüencial** estricta fins a l'**accés directe** mitjançant el càlcul de l'offset ($Posició = N \times L$) i els **fitxers indexats** estructurats amb arbres B.
+- L'**arquitectura ANSI/SPARC de 3 nivells** establix la independència lògica i física de les dades i permet evolucionar l'emmagatzematge sense trencar les aplicacions existents.
+- La integritat de les dades es basa en les regles de **clau primària (PK)**, **clau forana (FK)** i les **restriccions de domini**.
+- Les **transaccions ACID** són la garantia contra les anomalies de concurrència i les fallades d'alimentació en sistemes crítics.
+- Els SGBD es **classifiquen** segons el model de dades, el nombre d'usuaris, la ubicació, l'arquitectura, la llicència, el desplegament i el propòsit. Triar-ne un és una decisió tècnica i econòmica que cal justificar.
+- Les **bases de dades distribuïdes** aporten disponibilitat i escalabilitat a canvi d'una complexitat més gran. Les dades es reparteixen mitjançant **fragmentació** horitzontal, vertical o mixta, i se'n guarden còpies amb la **replicació**.
+- **Big Data** i la **intel·ligència empresarial** aprofiten grans volums de dades per a prendre decisions; els sistemes analítics (OLAP) es dissenyen de manera diferent dels transaccionals (OLTP).
+- El **RGPD** i la **LOPDGDD** obliguen a dissenyar les bases de dades amb la protecció de dades incorporada des del principi: minimització, control d'accés, conservació limitada i seguretat.
 
 ---
 
-## 14. Ejercicios Resueltos
+## 14. Exercicis resolts
 
-### 1. Pregunta Teórica: Justificación de SGBD vs Archivos
+### 1. Pregunta teòrica: justificació dels SGBD davant dels fitxers
 
-**Pregunta:** Explique dos razones fundamentales por las cuales una aplicación bancaria no puede implementar su almacenamiento directamente sobre archivos planos `.dat`.
-{{% details title="Solución Explicada" %}}
-1. *Falta de Control de Concurrencia y Transacciones (ACID):* Si dos clientes realizan reintegros simultáneos sobre la misma cuenta en archivos planos, se produciría la anomalía de *Modificación Perdida* (*Lost Update*), o si el servidor sufre un apagón durante la escritura, el archivo quedaría corrupto sin posibilidad de `ROLLBACK`.
-2. *Inexistencia de Reglas de Integridad Centralizadas:* En archivos planos, la validación de que el saldo no sea negativo debe programarse manualmente en cada aplicación. Si se crea un nuevo programa y se olvida dicha validación, la base de datos queda expuesta a inconsistencias insalvables.
+**Pregunta:** Expliqueu dues raons fonamentals per les quals una aplicació bancària no pot emmagatzemar directament les dades en fitxers plans `.dat`.
+{{% details title="Solució explicada" %}}
+1. *Falta de control de concurrència i de transaccions (ACID):* Si dos clients retiren diners alhora del mateix compte en fitxers plans, es produiria l'anomalia de la *modificació perduda* (*Lost Update*). Si el servidor es queda sense alimentació durant l'escriptura, el fitxer podria quedar corrupte i no hi hauria cap possibilitat de fer `ROLLBACK`.
+2. *Absència de regles d'integritat centralitzades:* En els fitxers plans, la validació perquè el saldo no siga negatiu s'ha de programar manualment en cada aplicació. Si es crea un programa nou i s'oblida esta validació, la base de dades queda exposada a incoherències difícils de corregir.
 {{% /details %}}
 
 ---
 
-### 2. Ejercicio Práctico de Cálculo Físico de Offset
+### 2. Exercici pràctic de càlcul físic de l'offset
 
-**Enunciado:** Un archivo de datos de acceso aleatorio almacena registros de clientes con una longitud fija de $180\text{ bytes}$ por registro (indexados a partir del registro $0$).
+**Enunciat:** Un fitxer de dades d'accés aleatori emmagatzema registres de clients amb una longitud fixa de $180\text{ bytes}$ per registre (indexats a partir del registre $0$).
 
-- a) Calcule el byte exacto donde comienza el registro número 15.
-- b) Muestre la fórmula aplicada y explique qué requisito técnico es obligatorio para que este cálculo sea válido.
+- a) Calculeu el byte exacte on comença el registre número 15.
+- b) Mostreu la fórmula aplicada i expliqueu quin requisit tècnic és imprescindible perquè este càlcul siga vàlid.
 
-{{% details title="Solución Paso a Paso" %}}
-- a) **Cálculo del desplazamiento (Offset):**
-  $$Posición\_Byte = N \times L$$
-  $$Posición\_Byte = 15 \times 180 = 2700\text{ bytes}$$
-  *El registro número 15 comienza exactamente en el byte 2700 de la estructura del archivo.*
+{{% details title="Solució pas a pas" %}}
+- a) **Càlcul del desplaçament (offset):**
+  $$Posició\_Byte = N \times L$$
+  $$Posició\_Byte = 15 \times 180 = 2700\text{ bytes}$$
+  *El registre número 15 comença exactament en el byte 2700 de l'estructura del fitxer.*
 
-- b) **Requisito Técnico:** Es estrictamente obligatorio que **TODOS los registros del archivo tengan exactamente la misma longitud fija ($L = 180\text{ bytes}$)**. Si existiera un solo registro de longitud variable, la fórmula matemática fallaría y el cabezal leería bytes corruptos.
+- b) **Requisit tècnic:** és imprescindible que **tots els registres del fitxer tinguen exactament la mateixa longitud fixa ($L = 180\text{ bytes}$)**. Si hi haguera un sol registre de longitud variable, la fórmula matemàtica no funcionaria i el capçal llegiria bytes corruptes.
 {{% /details %}}
 
 ---
 
-### 3. Análisis de Independencia en ANSI/SPARC
+### 3. Anàlisi de la independència en ANSI/SPARC
 
-**Pregunta:** Si un Administrador de Base de Datos (DBA) crea un nuevo índice B-Tree sobre la columna `email` para acelerar las consultas:
+**Pregunta:** Si un administrador de bases de dades (DBA) crea un índex B-Tree nou sobre la columna `email` per a accelerar les consultes:
 
-- ¿Qué nivel de la arquitectura ANSI/SPARC se modifica?
-- ¿Es necesario reescribir las sentencias SQL `SELECT` de las aplicaciones web que consultan por email? ¿Qué principio de independencia se cumple?
+- Quin nivell de l'arquitectura ANSI/SPARC es modifica?
+- Cal reescriure les instruccions SQL `SELECT` de les aplicacions web que consulten per correu electrònic? Quin principi d'independència es complix?
 
-{{% details title="Solución Explicada" %}}
-- Se modifica el **Nivel Interno (Esquema Físico)** al añadir una nueva estructura de acceso en el disco.
-- **NO** es necesario reescribir ninguna sentencia SQL. Las consultas siguen siendo exactamente iguales (`SELECT * FROM usuario WHERE email = ...`). El optimizador de consultas detectará automáticamente el nuevo índice y lo utilizará. Esto demuestra el principio de **Independencia Física de Datos**.
+{{% details title="Solució explicada" %}}
+- Es modifica el **nivell intern (esquema físic)** en afegir una estructura d'accés nova al disc.
+- **No** cal reescriure cap instrucció SQL. Les consultes continuen sent exactament iguals (`SELECT * FROM usuario WHERE email = ...`). L'optimitzador de consultes detectarà automàticament l'índex nou i l'utilitzarà. Això demostra el principi d'**independència física de les dades**.
 {{% /details %}}
 
 ---
 
-## 15. Autoevaluación
+## 15. Autoavaluació
 
-Responde a las preguntas y pulsa **Corregir**. Cada respuesta incluye una explicación.
+Respon les preguntes i prem el botó de correcció. Cada resposta inclou una explicació.
 
 {{< quiz >}}
-- q: "Una academia guarda los alumnos en una hoja de cálculo y las facturas en otra, copiando el nombre y la dirección del alumno en cada factura. ¿Qué problema de los sistemas de ficheros aparece **directamente**?"
-  options: ["Falta de independencia física", "Redundancia e inconsistencia de datos", "Bloqueo de registros", "Fragmentación vertical"]
+- q: "Una acadèmia guarda l'alumnat en un full de càlcul i les factures en un altre, i copia el nom i l'adreça de cada alumne en cada factura. Quin problema dels sistemes de fitxers es produïx **directament**?"
+  options: ["Falta d'independència física", "Redundància i incoherència de les dades", "Bloqueig de registres", "Fragmentació vertical"]
   answer: 1
-  explain: "Al repetir el nombre y la dirección en varios ficheros, un cambio de domicilio obliga a actualizar todas las copias. Si se olvida alguna, los datos quedan **inconsistentes**."
-- q: "Un DBA crea un índice sobre la columna `email`. Las aplicaciones siguen funcionando sin cambios. ¿Qué propiedad lo permite?"
-  options: ["Independencia lógica", "Atomicidad", "Independencia física", "Transparencia de ubicación"]
+  explain: "En repetir el nom i l'adreça en diversos fitxers, un canvi de domicili obliga a actualitzar-ne totes les còpies. Si se n'oblida alguna, les dades queden **incoherents**."
+- q: "Un DBA crea un índex sobre la columna `email`. Les aplicacions continuen funcionant sense canvis. Quina propietat ho permet?"
+  options: ["Independència lògica", "Atomicitat", "Independència física", "Transparència d'ubicació"]
   answer: 2
-  explain: "El índice es un cambio en el **nivel interno** de la arquitectura ANSI/SPARC. Que las aplicaciones no cambien demuestra la independencia física."
-- q: "¿Qué módulo del SGBD decide **cómo** se ejecuta una consulta, por ejemplo si usa un índice o recorre toda la tabla?"
-  options: ["El gestor de transacciones", "El optimizador de consultas", "El diccionario de datos", "El gestor de copias de seguridad"]
+  explain: "L'índex és un canvi en el **nivell intern** de l'arquitectura ANSI/SPARC. Que les aplicacions no canvien demostra la independència física."
+- q: "Quin mòdul del SGBD decidix **com** s'executa una consulta, per exemple, si utilitza un índex o recorre tota la taula?"
+  options: ["El gestor de transaccions", "L'optimitzador de consultes", "El diccionari de dades", "El gestor de còpies de seguretat"]
   answer: 1
-  explain: "El **optimizador** genera varios planes de ejecución posibles y elige el de menor coste estimado. Lo estudiarás en la UD07."
-- q: "Una cadena de clínicas guarda en el servidor de cada ciudad solo los pacientes de esa ciudad. ¿Qué política se aplica?"
-  options: ["Fragmentación vertical", "Replicación total", "Fragmentación horizontal", "Normalización"]
+  explain: "L'**optimitzador** genera diversos plans d'execució possibles i tria el de cost estimat més baix. Ho estudiaràs en la UD07."
+- q: "Una cadena de clíniques guarda en el servidor de cada ciutat només els pacients d'eixa ciutat. Quina política s'hi aplica?"
+  options: ["Fragmentació vertical", "Replicació total", "Fragmentació horitzontal", "Normalització"]
   answer: 2
-  explain: "Se reparten **filas** según una condición (la ciudad). Es una fragmentación horizontal. La tabla completa se reconstruye con la unión de los fragmentos."
-- q: "¿Cuál de estas afirmaciones sobre las bases de datos distribuidas es correcta?"
-  options: ["El usuario debe saber en qué nodo está cada dato", "Eliminan la necesidad de transacciones", "Mejoran la disponibilidad, pero complican la coordinación entre nodos", "Solo existen en las bases de datos NoSQL"]
+  explain: "Es repartixen **files** segons una condició (la ciutat). És una fragmentació horitzontal. La taula completa es reconstruïx amb la unió dels fragments."
+- q: "Quina d'estes afirmacions sobre les bases de dades distribuïdes és correcta?"
+  options: ["L'usuari ha de saber en quin node està cada dada", "Eliminen la necessitat de transaccions", "Milloren la disponibilitat, però compliquen la coordinació entre nodes", "Només existixen en les bases de dades NoSQL"]
   answer: 2
-  explain: "Si un nodo cae, los demás siguen dando servicio. A cambio, hay que coordinar transacciones y copias entre nodos. Gracias a la transparencia de ubicación, el usuario no necesita saber dónde está cada dato."
-- q: "SQLite se integra como una biblioteca dentro de la aplicación y no necesita un proceso servidor. ¿Cómo se clasifica según su arquitectura?"
-  options: ["SGBD distribuido", "SGBD embebido", "SGBD documental", "Almacén de datos OLAP"]
+  explain: "Si un node falla, els altres continuen donant servei. A canvi, cal coordinar les transaccions i les còpies entre nodes. Gràcies a la transparència d'ubicació, l'usuari no necessita saber on està cada dada."
+- q: "SQLite s'integra com una biblioteca dins de l'aplicació i no necessita cap procés servidor. Com es classifica segons la seua arquitectura?"
+  options: ["SGBD distribuït", "SGBD incrustat", "SGBD documental", "Magatzem de dades OLAP"]
   answer: 1
-  explain: "Un SGBD **embebido** se ejecuta dentro del proceso de la aplicación. Es habitual en aplicaciones móviles y de escritorio."
-- q: "Un cuadro de mando muestra la evolución de las matrículas por ciclo en los últimos diez años. ¿A qué tipo de sistema corresponde?"
-  options: ["OLTP", "OLAP / inteligencia de negocios", "Clave-valor", "Fichero secuencial"]
+  explain: "Un SGBD **incrustat** s'executa dins del procés de l'aplicació. És habitual en aplicacions mòbils i d'escriptori."
+- q: "Un quadre de comandament mostra l'evolució de les matrícules per cicle durant els últims deu anys. A quin tipus de sistema correspon?"
+  options: ["OLTP", "OLAP / intel·ligència empresarial", "Clau-valor", "Fitxer seqüencial"]
   answer: 1
-  explain: "Analiza datos **históricos** agregados para tomar decisiones: es un uso analítico (OLAP), propio de la inteligencia de negocios."
-- q: "Según el RGPD, el instituto decide para qué y cómo se tratan los datos del alumnado. ¿Qué figura es?"
-  options: ["Encargado del tratamiento", "Delegado de protección de datos", "Responsable del tratamiento", "Autoridad de control"]
+  explain: "Analitza dades **històriques** agregades per a prendre decisions: és un ús analític (OLAP), propi de la intel·ligència empresarial."
+- q: "Segons el RGPD, l'institut decidix per a què i com es tracten les dades de l'alumnat. De quina figura es tracta?"
+  options: ["Encarregat del tractament", "Delegat de protecció de dades", "Responsable del tractament", "Autoritat de control"]
   answer: 2
-  explain: "El **responsable** decide los fines y los medios del tratamiento. La empresa que desarrolla o aloja la aplicación sería la **encargada** del tratamiento."
-- q: "Al diseñar la tabla de alumnos, alguien propone añadir religión, peso y altura «por si algún día hacen falta». ¿Qué principio del RGPD incumple?"
-  options: ["Minimización de datos", "Portabilidad", "Exactitud", "Durabilidad"]
+  explain: "El **responsable** decidix les finalitats i els mitjans del tractament. L'empresa que desenvolupa o allotja l'aplicació seria l'**encarregada** del tractament."
+- q: "En dissenyar la taula de l'alumnat, algú proposa afegir-hi la religió, el pes i l'alçada «per si de cas algun dia fan falta». Quin principi del RGPD incomplix?"
+  options: ["Minimització de dades", "Portabilitat", "Exactitud", "Durabilitat"]
   answer: 0
-  explain: "Solo se deben recoger los datos **necesarios** para la finalidad. Además, la religión es una categoría especial de datos con protección reforzada."
-- q: "¿En qué plazo máximo hay que notificar a la AEPD una brecha de seguridad con riesgo para las personas?"
-  options: ["24 horas", "72 horas", "15 días", "No es obligatorio notificarla"]
+  explain: "Només s'han de recollir les dades **necessàries** per a la finalitat. A més, la religió és una categoria especial de dades amb protecció reforçada."
+- q: "En quin termini màxim cal notificar a l'AEPD una bretxa de seguretat que comporte un risc per a les persones?"
+  options: ["24 hores", "72 hores", "15 dies", "No és obligatori notificar-la"]
   answer: 1
-  explain: "El artículo 33 del RGPD fija un máximo de **72 horas** desde que el responsable tiene constancia de la brecha."
+  explain: "L'article 33 del RGPD establix un màxim de **72 hores** des que el responsable té constància de la bretxa."
 {{< /quiz >}}
 
-## Referencias
+## Referències
 
-- Silberschatz, A., Korth, H. F. y Sudarshan, S. *Fundamentos de bases de datos*. McGraw-Hill.
+- Silberschatz, A., Korth, H. F. i Sudarshan, S. *Fundamentos de bases de datos*. McGraw-Hill.
 - [Reglamento (UE) 2016/679 (RGPD)](https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679).
 - [Ley Orgánica 3/2018 (LOPDGDD)](https://www.boe.es/buscar/act.php?id=BOE-A-2018-16673).
 - [Agencia Española de Protección de Datos](https://www.aepd.es/).
