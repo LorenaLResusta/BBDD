@@ -1,0 +1,82 @@
+# Resultats d'Aprenentatge i Criteris d'Avaluació
+# Mòdul professional 0484. Bases de dades (DAM i DAW)
+# Font: Reial decret 405/2023, de 29 de maig (BOE-A-2023-13221)
+# Text de les ensenyances mínimes, en valencià (traducció de l'alumnat/docent; el text oficial és el del BOE).
+RA1:
+  titulo: "Reconeix els elements de les bases de dades analitzant-ne les funcions i valorant la utilitat dels sistemes gestors."
+  ce:
+    a: "S'han analitzat els sistemes lògics d'emmagatzematge i les seues característiques."
+    b: "S'han identificat els diferents tipus de bases de dades segons el model de dades utilitzat."
+    c: "S'han identificat els diferents tipus de bases de dades en funció de la ubicació de la informació."
+    d: "S'ha avaluat la utilitat d'un sistema gestor de bases de dades."
+    e: "S'ha reconegut la funció de cada un dels elements d'un sistema gestor de bases de dades."
+    f: "S'han classificat els sistemes gestors de bases de dades."
+    g: "S'ha reconegut la utilitat de les bases de dades distribuïdes."
+    h: "S'han analitzat les polítiques de fragmentació de la informació."
+    i: "S'ha identificat la legislació vigent sobre protecció de dades."
+    j: "S'han reconegut els conceptes de Big Data i de la intel·ligència de negocis."
+RA2:
+  titulo: "Crea bases de dades definint-ne l'estructura i les característiques dels elements segons el model relacional."
+  ce:
+    a: "S'ha analitzat el format d'emmagatzematge de la informació."
+    b: "S'han creat les taules i les relacions entre elles."
+    c: "S'han seleccionat els tipus de dades adequats."
+    d: "S'han definit els camps clau a les taules."
+    e: "S'han implantat les restriccions reflectides en el disseny lògic."
+    f: "S'han creat vistes."
+    g: "S'han creat els usuaris i se'ls han assignat privilegis."
+    h: "S'han utilitzat assistents, eines gràfiques i els llenguatges de definició i control de dades."
+RA3:
+  titulo: "Consulta la informació emmagatzemada en una base de dades emprant assistents, eines gràfiques i el llenguatge de manipulació de dades."
+  ce:
+    a: "S'han identificat les eines i sentències per a realitzar consultes."
+    b: "S'han realitzat consultes simples sobre una taula."
+    c: "S'han realitzat consultes sobre el contingut de diverses taules mitjançant composicions internes."
+    d: "S'han realitzat consultes sobre el contingut de diverses taules mitjançant composicions externes."
+    e: "S'han realitzat consultes resum."
+    f: "S'han realitzat consultes amb subconsultes."
+    g: "S'han realitzat consultes que impliquen múltiples seleccions."
+    h: "S'han aplicat criteris d'optimització de consultes."
+RA4:
+  titulo: "Modifica la informació emmagatzemada en la base de dades utilitzant assistents, eines gràfiques i el llenguatge de manipulació de dades."
+  ce:
+    a: "S'han identificat les eines i sentències per a modificar el contingut de la base de dades."
+    b: "S'han inserit, esborrat i actualitzat dades a les taules."
+    c: "S'ha inclòs en una taula la informació resultant de l'execució d'una consulta."
+    d: "S'han dissenyat guions de sentències per a dur a terme tasques complexes."
+    e: "S'ha reconegut el funcionament de les transaccions."
+    f: "S'han anul·lat parcial o totalment els canvis produïts per una transacció."
+    g: "S'han identificat els efectes de les diferents polítiques de bloqueig de registres."
+    h: "S'han adoptat mesures per a mantindre la integritat i consistència de la informació."
+RA5:
+  titulo: "Desenvolupa procediments emmagatzemats avaluant i utilitzant les sentències del llenguatge incorporat en el sistema gestor de bases de dades."
+  ce:
+    a: "S'han identificat les diverses formes d'automatitzar tasques."
+    b: "S'han reconegut els mètodes d'execució de guions."
+    c: "S'han identificat les eines disponibles per a editar guions."
+    d: "S'han definit i utilitzat guions per a automatitzar tasques."
+    e: "S'ha fet ús de les funcions proporcionades pel sistema gestor."
+    f: "S'han definit procediments i funcions d'usuari."
+    g: "S'han utilitzat estructures de control de flux."
+    h: "S'han definit esdeveniments i disparadors."
+    i: "S'han utilitzat cursors."
+    j: "S'han utilitzat excepcions."
+RA6:
+  titulo: "Dissenya models relacionals normalitzats interpretant diagrames entitat/relació."
+  ce:
+    a: "S'han utilitzat eines gràfiques per a representar el disseny lògic."
+    b: "S'han identificat les taules del disseny lògic."
+    c: "S'han identificat els camps que formen part de les taules del disseny lògic."
+    d: "S'han analitzat les relacions entre les taules del disseny lògic."
+    e: "S'han identificat els camps clau."
+    f: "S'han aplicat regles d'integritat."
+    g: "S'han aplicat regles de normalització."
+    h: "S'han analitzat i documentat les restriccions que no poden plasmar-se en el disseny lògic."
+RA7:
+  titulo: "Gestiona la informació emmagatzemada en bases de dades no relacionals, avaluant i utilitzant les possibilitats que proporciona el sistema gestor."
+  ce:
+    a: "S'han caracteritzat les bases de dades no relacionals."
+    b: "S'han avaluat els principals tipus de bases de dades no relacionals."
+    c: "S'han identificat els elements utilitzats en aquestes bases de dades."
+    d: "S'han identificat diferents formes de gestió de la informació segons el tipus de base de dades no relacionals."
+    e: "S'han utilitzat les eines del sistema gestor per a la gestió de la informació emmagatzemada."

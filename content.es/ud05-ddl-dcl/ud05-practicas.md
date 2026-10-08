@@ -42,7 +42,7 @@ Crear tablas relacionadas en Oracle, comprobar que las restricciones protegen lo
 
 Una tienda online necesita guardar sus **clientes** y sus **pedidos**. Un cliente puede hacer muchos pedidos y cada pedido es de un único cliente.
 
-![Diagrama de Chen de la relación 1:N entre CLIENTE y PEDIDO](images/chen-cliente-pedido.svg "CLIENTE realiza PEDIDO")
+{{< diagrama src="chen-cliente-pedido.svg" caption="Diagrama de Chen de la relación 1:N entre CLIENTE y PEDIDO" >}}
 
 #### Desarrollo
 
@@ -174,7 +174,7 @@ Un compañero ha escrito estos ejemplos para **MySQL 8**. Hay que portarlos a **
 
 ### Caso A · Relación N:M con atributos
 
-![Diagrama de Chen de la relación N:M entre ALUMNO y ASIGNATURA con atributos](images/chen-alumno-asignatura.svg "Matrícula N:M")
+{{< diagrama src="chen-alumno-asignatura.svg" caption="Diagrama de Chen de la relación N:M entre ALUMNO y ASIGNATURA con atributos" >}}
 
 {{< tabs >}}
 {{% tab "MySQL 8 (original)" %}}
@@ -234,7 +234,7 @@ CREATE INDEX ix_matricula_asignatura ON matricula (id_asignatura);
 
 ### Caso B · Entidad débil con clave compuesta
 
-![Diagrama de Chen de la entidad débil AULA dependiente de EDIFICIO](images/chen-edificio-aula.svg "Entidad débil AULA")
+{{< diagrama src="chen-edificio-aula.svg" caption="Diagrama de Chen de la entidad débil AULA dependiente de EDIFICIO" >}}
 
 {{< tabs >}}
 {{% tab "MySQL 8 (original)" %}}
@@ -274,7 +274,7 @@ Aquí `ON DELETE CASCADE` **sí** tiene sentido: un aula no existe sin su edific
 
 ### Caso C · Relación 1:1 opcional
 
-![Diagrama de Chen de la relación 1:1 opcional entre EMPLEADO y VEHICULO](images/chen-empleado-vehiculo.svg "Asignación 1:1 opcional")
+{{< diagrama src="chen-empleado-vehiculo.svg" caption="Diagrama de Chen de la relación 1:1 opcional entre EMPLEADO y VEHICULO" >}}
 
 Escribe tú la versión Oracle a partir de la MySQL y después compárala con la solución.
 
@@ -310,7 +310,7 @@ CREATE TABLE vehiculo (
 
 ### Caso D · Jerarquía (tabla para la superclase y para cada subclase)
 
-![Diagrama EER de especialización de EMPLEADO](images/chen-jerarquia-empleados.svg "Especialización de EMPLEADO")
+{{< diagrama src="chen-jerarquia-empleados.svg" caption="Diagrama EER de especialización de EMPLEADO" >}}
 
 ```sql
 CREATE TABLE personal (
@@ -373,7 +373,7 @@ Construir un script de creación profesional (relanzable, ordenado y comentado) 
 
 Implementamos el esquema relacional de la biblioteca de la [práctica 3.1](/ud03-modelo-relacional/ud03-practicas#práctica-31--biblioteca-del-er-a-las-tablas).
 
-![Diagrama de Chen de la biblioteca](images/chen-biblioteca.svg "Autores, libros y ejemplares")
+{{< diagrama src="chen-biblioteca.svg" caption="Diagrama de Chen de la biblioteca" >}}
 
 #### Desarrollo
 
@@ -487,10 +487,12 @@ Implementamos el esquema relacional de la biblioteca de la [práctica 3.1](/ud03
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] El script de creación se puede ejecutar **dos veces seguidas** sin más errores que los `ORA-00942` de los `DROP` iniciales la primera vez.
 - [ ] La batería tiene al menos **12 pruebas**: como mínimo una por cada restricción `CHECK`, `UNIQUE` y `FOREIGN KEY`.
 - [ ] Cada prueba indica el resultado esperado, y el obtenido coincide.
 - [ ] Opcional: importas el esquema en SQL Developer Data Modeler (*Archivo → Importar → Diccionario de datos*) y adjuntas el diagrama relacional generado.
+{{% /comprobacion %}}
 
 #### Ampliación
 
@@ -521,15 +523,15 @@ Para cada caso: decide tablas, tipos, claves primarias y ajenas, restricciones y
 
 **1. Clínica: consultas y pacientes.** Una consulta corresponde a un único paciente; un paciente puede tener varias consultas. De cada consulta se guarda fecha, motivo e importe. El importe no puede ser negativo. No se permite borrar pacientes con consultas registradas.
 
-![Diagrama de Chen de PACIENTE y CONSULTA](images/chen-paciente-consulta.svg "Paciente y consultas")
+{{< diagrama src="chen-paciente-consulta.svg" caption="Diagrama de Chen de PACIENTE y CONSULTA" >}}
 
 **2. Cine: películas y actores.** Una película tiene varios actores y un actor puede actuar en muchas películas. En la relación se guarda el personaje y el orden de aparición. El mismo actor no puede aparecer dos veces en una película ni dos actores pueden tener el mismo orden en una película.
 
-![Diagrama de Chen de ACTOR y PELICULA](images/chen-actor-pelicula.svg "Actores y películas")
+{{< diagrama src="chen-actor-pelicula.svg" caption="Diagrama de Chen de ACTOR y PELICULA" >}}
 
 **3. Hotel: habitaciones débiles.** Cada habitación se identifica por su número dentro de un hotel. Guarda capacidad y precio por noche, ambos mayores que cero. Si se elimina un hotel, se eliminan sus habitaciones.
 
-![Diagrama de Chen de HOTEL y HABITACION](images/chen-hotel-habitacion.svg "Habitación débil")
+{{< diagrama src="chen-hotel-habitacion.svg" caption="Diagrama de Chen de HOTEL y HABITACION" >}}
 
 **4. Empresa: empleados y departamentos.** Cada empleado trabaja en un departamento, que puede existir antes de contratar empleados. Cada departamento tiene un jefe, que es uno de los empleados (¡dependencia circular!). Guarda el nombre del departamento y la fecha de contratación del empleado, que no puede ser anterior a 1990.
 
@@ -539,6 +541,7 @@ Para cada caso: decide tablas, tipos, claves primarias y ajenas, restricciones y
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Todas las restricciones tienen nombre con el prefijo correcto.
 - [ ] El caso 4 crea la clave ajena del jefe con `ALTER TABLE` después de crear las dos tablas.
 - [ ] El caso 5 usa `GENERATED ALWAYS AS (cantidad * precio_unitario) VIRTUAL`.
@@ -547,6 +550,7 @@ Para cada caso: decide tablas, tipos, claves primarias y ajenas, restricciones y
 {{% details title="Pista: caso 4 (dependencia circular)" %}}
 Crea `DEPARTAMENTO` sin la columna del jefe o con la columna pero sin la clave ajena. Crea `EMPLEADO` con su clave ajena a `DEPARTAMENTO`. Por último: `ALTER TABLE departamento ADD CONSTRAINT fk_departamento_jefe FOREIGN KEY (id_jefe) REFERENCES empleado (id_empleado);`. Para **insertar** los datos tendrás el mismo problema: inserta el departamento sin jefe, después el empleado y por último actualiza el jefe.
 {{% /details %}}
+{{% /comprobacion %}}
 
 ---
 
@@ -682,11 +686,13 @@ Carga el esquema de referencia: ejecuta [los scripts del proyecto](/guia/proyect
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] `SELECT COUNT(*) FROM v_alumno_listado;` devuelve **32**.
 - [ ] `SELECT COUNT(*) FROM v_matricula_detalle;` devuelve **143**.
 - [ ] `UPDATE v_alumno_listado SET nombre = 'X' WHERE id_alumno = 1;` falla con ORA-42399 (*cannot perform a DML operation on a read-only view*).
 - [ ] La inserción del paso 5 falla con ORA-01402.
 - [ ] `SELECT view_name FROM user_views;` muestra las tres vistas.
+{{% /comprobacion %}}
 
 #### Ampliación
 
@@ -880,9 +886,11 @@ Sintaxis de otro SGBD (2), orden de creación (1), coma olvidada (1), `CHECK` no
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Los scripts se ejecutan de principio a fin en un esquema vacío.
 - [ ] `SELECT COUNT(*) FROM user_constraints WHERE constraint_name LIKE 'SYS%';` devuelve 0 en tu esquema (todas las restricciones tienen nombre).
 - [ ] La matriz de seguridad está completa y coincide con lo esperado.
 
 > [!TIP]
 > A partir de la UD06, **todo el grupo** trabaja sobre el esquema de referencia `EDUGEST` cargado con los scripts 01 y 02, para que los resultados de las consultas coincidan con los de los apuntes.
+{{% /comprobacion %}}

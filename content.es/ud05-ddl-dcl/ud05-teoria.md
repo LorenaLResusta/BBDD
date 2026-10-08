@@ -61,6 +61,10 @@ Al terminar esta unidad serás capaz de:
 
 {{< sesion n="1" h="1" tipo="t" >}}SQL, Oracle y almacenamiento{{< /sesion >}}
 
+{{% curiosidad titulo="¿De dónde viene el nombre «Oracle»?" %}}
+Antes de ser una empresa de bases de datos, Larry Ellison, Bob Miner y Ed Oates trabajaron en un proyecto para la CIA con el nombre en clave **Oracle**. Cuando fundaron su propia compañía en 1977 (entonces Software Development Laboratories) reutilizaron el nombre para el producto.
+{{% /curiosidad %}}
+
 ## 1. SQL y Oracle
 
 ### 1.1 Sublenguajes de SQL
@@ -169,6 +173,10 @@ SELECT ROWID, nombre FROM alumno FETCH FIRST 3 ROWS ONLY;
 ---
 
 {{< sesion n="2" h="2" tipo="t" >}}Tipos de datos de Oracle{{< /sesion >}}
+
+{{% curiosidad titulo="En Oracle, la cadena vacía es NULL" %}}
+A diferencia del estándar SQL, Oracle trata `''` (cadena de longitud cero) como `NULL`. Por eso `WHERE nombre = ''` nunca devuelve filas y hay que escribir `WHERE nombre IS NULL`.
+{{% /curiosidad %}}
 
 ## 3. Tipos de datos
 
@@ -439,6 +447,10 @@ Define columnas, tipos y restricciones y observa el script que genera. Las restr
 
 {{< sesion n="6" h="1" tipo="t" >}}Modificar y eliminar la estructura{{< /sesion >}}
 
+{{% curiosidad titulo="DDL confirma solo" %}}
+En Oracle, cada sentencia DDL (`CREATE`, `ALTER`, `DROP`) hace un `COMMIT` implícito antes y después. No se puede deshacer con `ROLLBACK`: por eso se prueba primero en un esquema de pruebas.
+{{% /curiosidad %}}
+
 ## 6. Modificar y eliminar la estructura
 
 ### 6.1 `ALTER TABLE`
@@ -577,6 +589,12 @@ DROP INDEX ix_alumno_apellidos_nombre;
 > Un índice **acelera las lecturas** pero **ralentiza las escrituras**: cada `INSERT`, `UPDATE` o `DELETE` tiene que actualizar también todos los índices de la tabla, y además ocupa espacio. Indexar es una decisión de **diseño físico**: la UD07 enseña a comprobar con el plan de ejecución si un índice se usa.
 
 ---
+
+### Laboratorio: ¿cuánto ayuda un índice?
+
+Mueve el deslizador para ver cuántos bloques lee una búsqueda con y sin índice.
+
+{{< coste-busqueda >}}
 
 ## 9. Vistas
 
@@ -820,6 +838,23 @@ El criterio RA2.h pide usar **asistentes, herramientas gráficas y los lenguajes
 
 ---
 
+{{< tarjetas titulo="Repasa los términos de la UD05" >}}
+- t: "DDL"
+  d: "Lenguaje de definición de datos: CREATE, ALTER, DROP."
+- t: "DCL"
+  d: "Lenguaje de control de datos: GRANT y REVOKE."
+- t: "Clave primaria"
+  d: "Restricción que identifica cada fila: única y no nula."
+- t: "Clave ajena"
+  d: "Restricción que obliga a que el valor exista en la tabla referenciada."
+- t: "CHECK"
+  d: "Restricción que valida una condición sobre los valores de la fila."
+- t: "Vista"
+  d: "Consulta guardada con nombre que se usa como si fuera una tabla."
+- t: "Mínimo privilegio"
+  d: "Dar a cada usuario solo los permisos que necesita."
+{{< /tarjetas >}}
+
 ## 14. Resumen
 
 - El DDL define la estructura y el DCL controla el acceso. En Oracle, cada sentencia DDL confirma la transacción en curso.
@@ -883,4 +918,3 @@ El criterio RA2.h pide usar **asistentes, herramientas gráficas y los lenguajes
 - [Oracle AI Database 26ai: SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/).
 - [Oracle AI Database 26ai: Database Concepts, *Logical Storage Structures*](https://docs.oracle.com/en/database/oracle/oracle-database/26/cncpt/).
 - [Oracle AI Database 26ai: Security Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/dbseg/).
-- [Curso de Bases de Datos de F. M. García: bloque 4 (DDL) y módulo 37 (DCL)](https://fmgarcia.github.io/CursosGithubIO/CursoBasesDatos/).

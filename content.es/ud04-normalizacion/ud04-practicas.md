@@ -90,10 +90,12 @@ Reglas del negocio (confirmadas con el taller):
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Obtienes 7 tablas y todas tienen clave primaria.
 - [ ] Ninguna tabla contiene a la vez `cliente` y `num_factura`.
 - [ ] El cliente de una factura se obtiene a través del vehículo (factura → vehículo → cliente).
 - [ ] Explicas por qué `precio_actual` y `precio_aplicado` están en tablas distintas.
+{{% /comprobacion %}}
 
 #### Errores habituales
 
@@ -155,6 +157,7 @@ Indica la forma normal más alta de cada relación (la clave primaria está subr
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] La relación 1 no está en 1FN.
 - [ ] Las relaciones 2 y 6 están en 1FN (dependencias parciales).
 - [ ] Las relaciones 3 y 4 están en 2FN (dependencias transitivas).
@@ -163,6 +166,7 @@ Indica la forma normal más alta de cada relación (la clave primaria está subr
 {{% details title="Pista para la relación 4" %}}
 La clave es compuesta (num_vuelo, fecha). `avion` depende de toda la clave (el mismo número de vuelo puede usar aviones distintos en días distintos), pero `plazas_avion` depende de `avion`, que no es clave: dependencia transitiva.
 {{% /details %}}
+{{% /comprobacion %}}
 
 ---
 
@@ -193,9 +197,11 @@ Una reserva puede incluir varias habitaciones, cada una con sus propios extras. 
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] `extras` se trata como multivaluado en 1FN y termina en una tabla con su propia clave.
 - [ ] El precio por noche se asocia al **tipo** de habitación, no a la reserva.
 - [ ] El esquema final tiene entre 6 y 8 tablas, y todas están en 3FN.
+{{% /comprobacion %}}
 
 ---
 
@@ -238,9 +244,11 @@ Para cada propuesta de un compañero, decide si la aceptas, la rechazas o la ace
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] El caso 3 se identifica como un dato **histórico** (la dirección puede cambiar después del pedido).
 - [ ] El caso 4 se relaciona con los sistemas OLAP de la UD01.
 - [ ] Cuando aceptas una redundancia, explicas **cómo** se mantiene sincronizada.
+{{% /comprobacion %}}
 
 ---
 
@@ -257,9 +265,11 @@ Para cada propuesta de un compañero, decide si la aceptas, la rechazas o la ace
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] `faltas_totales` se identifica como un atributo **derivado** y se justifica si se guarda o se calcula.
 - [ ] Ninguna tabla del esquema final tiene dependencias parciales ni transitivas.
 - [ ] Las diferencias con la referencia están argumentadas, no solo listadas.
 
 > [!TIP]
 > A partir de la UD05 todo el grupo trabajará con el esquema de referencia para que los resultados de las consultas coincidan. Si tu diseño era distinto pero correcto, menciónalo en tu documentación: esa capacidad de justificar alternativas es exactamente lo que evalúa RA6.
+{{% /comprobacion %}}

@@ -17,7 +17,7 @@ Durante el curso usaremos dos sistemas gestores:
 | **Modelado** | Oracle SQL Developer Data Modeler, draw.io, Mermaid | — |
 
 > [!NOTE]
-> **¿Por qué Oracle?** Es uno de los SGBD relacionales más implantados en grandes organizaciones. Su lenguaje procedimental (PL/SQL) es la referencia para el RA5. La edición *Free* no tiene coste, incluye las funciones de la versión comercial con límites de tamaño (2 CPU, 2 GB de RAM y 12 GB de datos de usuario) y es la misma que usa el curso de referencia de F. M. García.
+> **¿Por qué Oracle?** Es uno de los SGBD relacionales más implantados en grandes organizaciones. Su lenguaje procedimental (PL/SQL) es la referencia para el RA5. La edición *Free* no tiene coste, incluye las funciones de la versión comercial con límites de tamaño (2 CPU, 2 GB de RAM y 12 GB de datos de usuario).
 >
 > **¿Por qué MongoDB?** Es la base de datos documental más utilizada en el desarrollo web y multiplataforma. Su modelo de documentos JSON permite comparar de forma muy clara con el modelo relacional.
 

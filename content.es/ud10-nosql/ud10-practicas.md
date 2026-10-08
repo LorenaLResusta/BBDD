@@ -76,9 +76,11 @@ Instalar el servidor, conectar con las dos herramientas cliente y reconocer los 
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] `db.expedientes.countDocuments()` devuelve 32.
 - [ ] Identificas que el único índice es el de `_id`, creado automáticamente.
 - [ ] `dni` aparece en el 87,5 % de los documentos (28 de 32) y `grupo` en el 90,6 % (29 de 32).
+{{% /comprobacion %}}
 
 ---
 
@@ -141,10 +143,12 @@ Realizar las cuatro operaciones básicas sobre documentos con subdocumentos y ar
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] El alumno insertado sin `_id` recibe un `ObjectId("...")`.
 - [ ] 3b informa `matchedCount: 5, modifiedCount: 5` y 3e `modifiedCount: 5`.
 - [ ] Tras el paso 3c, la matrícula de 0484 de Adrián tiene `nota: 5` y el resto de sus matrículas no ha cambiado.
 - [ ] Al final, `countDocuments()` vuelve a ser 32.
+{{% /comprobacion %}}
 
 #### Errores habituales
 
@@ -199,9 +203,11 @@ db.profesores.find({ "imparte.grupo": "2DAM" }, { nombre: 1, apellidos: 1 })
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Las doce consultas dan el resultado esperado.
 - [ ] Explicas con tus palabras la diferencia entre N5 con y sin `$elemMatch`.
 - [ ] Para N4 y N10 explicas qué equivalente tendrían en SQL (`IS NULL`, `NOT EXISTS`/`LEFT JOIN`).
+{{% /comprobacion %}}
 
 ---
 
@@ -279,12 +285,14 @@ Construir pipelines de agregación etapa a etapa y comparar su resultado y su le
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Los cinco pipelines dan los resultados indicados, y las consultas SQL dan los mismos.
 - [ ] Sabes explicar por qué el `$match` del paso 2 va **después** del `$unwind`.
 - [ ] En el paso 3 explicas por qué hace falta `$sort` por `_id` además de por `horas` (hay un empate en el quinto puesto).
 
 > [!WARNING]
 > `$round` de MongoDB redondea los valores que están **exactamente** a mitad de camino hacia el número **par** (*round half to even*): `$round: [2.345, 2]` da 2.34. El `ROUND` de Oracle redondea hacia arriba (2.35). Con los datos de EduGest no hay empates de este tipo, pero tenlo en cuenta al comparar informes.
+{{% /comprobacion %}}
 
 ---
 
@@ -323,6 +331,7 @@ Consultas más frecuentes:
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Las opiniones **no** están incrustadas sin límite en el producto (problema de los 16 MB); como mucho, las 5 últimas.
 - [ ] El validador rechaza un producto con precio negativo.
 - [ ] Las consultas usan índices.
@@ -330,6 +339,7 @@ Consultas más frecuentes:
 {{% details title="Pista: patrón «subconjunto»" %}}
 Guarda todas las opiniones en una colección `opiniones` (con la referencia del producto) y, además, incrusta en el producto un array `ultimasOpiniones` con las 5 más recientes. Al añadir una opinión: insértala en `opiniones` y actualiza el producto con `$push` + `$each` + `$sort` + `$slice: 5`, y `$inc` del número de opiniones y de la suma de puntuaciones.
 {{% /details %}}
+{{% /comprobacion %}}
 
 ---
 
@@ -398,9 +408,11 @@ Para cada caso, recomienda el modelo (o la combinación de modelos) y justifíca
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Ninguna recomendación se basa en «es más moderno» o «es más rápido» sin explicar por qué.
 - [ ] Al menos un caso propone **persistencia políglota** (dos modelos a la vez) y explica cómo se sincronizan.
 - [ ] Usas la tabla de decisión de la teoría como punto de partida, no como regla automática.
+{{% /comprobacion %}}
 
 ---
 
@@ -434,6 +446,7 @@ Para cada caso, recomienda el modelo (o la combinación de modelos) y justifíca
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Los 32 expedientes importados coinciden con los datos de Oracle.
 - [ ] El validador rechaza una nota de 11.
 - [ ] Las cinco consultas dan los mismos resultados en los dos sistemas.
@@ -441,3 +454,4 @@ Para cada caso, recomienda el modelo (o la combinación de modelos) y justifíca
 
 > [!TIP]
 > Oracle 23ai y 26ai incluyen **JSON Relational Duality Views**, que permiten consultar y modificar datos relacionales **como si fueran documentos JSON**, con todas las garantías de integridad del modelo relacional. Investiga esta característica: es un buen ejemplo de que la frontera entre SQL y NoSQL es cada vez más difusa.
+{{% /comprobacion %}}

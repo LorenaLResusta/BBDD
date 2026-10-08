@@ -141,6 +141,5 @@ Consulta también la [guía del módulo](/guia): el proyecto EduGest, la instala
 ## Fuentes
 
 - [Real Decreto 405/2023, de 29 de mayo](https://www.boe.es/buscar/act.php?id=BOE-A-2023-13221). Texto consolidado en el BOE.
-- [Curso de Bases de Datos de Francisco Miguel García](https://fmgarcia.github.io/CursosGithubIO/CursoBasesDatos/). Referencia didáctica complementaria.
 - [Documentación de Oracle AI Database 26ai](https://docs.oracle.com/en/database/oracle/oracle-database/26/).
 - [Manual de MongoDB](https://www.mongodb.com/docs/manual/).

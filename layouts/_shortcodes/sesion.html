@@ -4,10 +4,10 @@
   tipo: t (teoría), p (práctica en el aula), e (evaluación)
 */ -}}
 {{- $t := lower (default "t" (.Get "tipo")) -}}
-{{- $lab := dict "t" "Teoría" "p" "Práctica en el aula" "e" "Evaluación" -}}
+{{- $lab := dict "t" (i18n "ses_teoria") "p" (i18n "ses_practica_aula") "e" (i18n "ses_eval") -}}
 <div class="bd-ses bd-ses--{{ $t }}">
-  <span class="bd-ses-n">Sesión {{ .Get "n" }}</span>
+  <span class="bd-ses-n">{{ i18n "sesion" }} {{ .Get "n" }}</span>
   <span class="bd-ses-h">{{ .Get "h" }} h</span>
   <span class="bd-ses-t">{{ index $lab $t }}{{ with .Inner | strings.TrimSpace }} · {{ . | markdownify }}{{ end }}</span>
-  {{- with .Get "practica" }}<span class="bd-ses-x">Práctica {{ . }} en la página de prácticas</span>{{ end -}}
+  {{- with .Get "practica" }}<span class="bd-ses-x">{{ i18n "practica_en_pagina" (dict "n" .) }}</span>{{ end -}}
 </div>

@@ -160,9 +160,11 @@ Usar funciones de agregado, `GROUP BY` y `HAVING`, y entender cómo influyen los
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] En el paso 1 entiendes por qué `COUNT(*)` y `COUNT(cod_grupo)` dan resultados distintos.
 - [ ] En el paso 5, la suma de aprobadas, suspensas y sin calificar coincide con el total de cada convocatoria.
 - [ ] Sabes corregir cada uno de los tres errores del paso 6.
+{{% /comprobacion %}}
 
 #### Ampliación
 
@@ -298,10 +300,12 @@ Construir composiciones de varias tablas siguiendo el camino de claves ajenas, y
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Las tres consultas del paso 2 devuelven 46 filas.
 - [ ] En el paso 4 obtienes 46 × 24 = 1104 filas y sabes explicarlo.
 - [ ] Sabes explicar por qué SMR solo aparece con `LEFT JOIN` y por qué el `COUNT` da 0 y no 1.
 - [ ] En el paso 6, la versión (b) devuelve los 12 profesores.
+{{% /comprobacion %}}
 
 ---
 
@@ -538,9 +542,11 @@ Esta técnica (pasar filas a columnas) se llama **pivotar**. Oracle también tie
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Has elegido composición interna o externa según la pregunta y lo justificas en un comentario.
 - [ ] J4 muestra 2ASIR con 0 alumnos y «(sin tutor)».
 - [ ] J5 no divide entre las matrículas sin calificar.
+{{% /comprobacion %}}
 
 ---
 
@@ -912,6 +918,7 @@ EduGest tiene muy pocos datos para notar diferencias. Simularemos el **históric
 
 #### Comprobación
 
+{{% comprobacion %}}
 Completa la tabla de mediciones con tus datos (los valores exactos dependen de tu equipo):
 
 | Consulta | Sin índice: operación / coste / tiempo | Con índice: operación / coste / tiempo |
@@ -928,6 +935,7 @@ Completa la tabla de mediciones con tus datos (los valores exactos dependen de t
 
 > [!WARNING]
 > Las mediciones de tiempo varían entre ejecuciones porque Oracle guarda en caché los bloques leídos. Ejecuta cada consulta **dos o tres veces** y anota el tiempo de las últimas. El **coste** del plan es una estimación del optimizador, no un tiempo.
+{{% /comprobacion %}}
 
 #### Ampliación
 
@@ -952,6 +960,7 @@ La dirección quiere un **cuadro de mando** con una sola consulta por indicador.
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] El indicador 1 tiene 4 filas y SMR aparece con ceros.
 - [ ] El indicador 3 no mezcla alumnos de otros grupos con el mismo módulo.
 - [ ] Puedes defender cada consulta y explicar su plan de ejecución.
@@ -959,6 +968,7 @@ La dirección quiere un **cuadro de mando** con una sola consulta por indicador.
 {{% details title="Pista para el indicador 4" %}}
 «Todos suspendidos» equivale a «no existe ninguno aprobado» y «tiene al menos uno calificado»: `NOT EXISTS (... nota_final >= 5)` y `EXISTS (... nota_final IS NOT NULL)`. Otra forma: `GROUP BY` alumno con `HAVING MAX(nota_final) < 5`.
 {{% /details %}}
+{{% /comprobacion %}}
 
 ---
 
@@ -974,6 +984,8 @@ La dirección quiere un **cuadro de mando** con una sola consulta por indicador.
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Cada informe tiene un comentario con el perfil que lo usa, la pregunta que responde y el número de filas.
 - [ ] Las vistas se pueden consultar desde el usuario del rol correspondiente.
 - [ ] El documento de optimización incluye los planes antes y después.
+{{% /comprobacion %}}

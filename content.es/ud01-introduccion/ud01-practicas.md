@@ -80,6 +80,7 @@ Analiza la hoja y responde de forma razonada:
 
 #### Comprobación
 
+{{% comprobacion %}}
 Tu respuesta es completa si:
 
 - [ ] Encuentras las inconsistencias del correo de Ana (filas 1 y 2), del nombre y el teléfono del profesor (fila 4), del precio de inglés B1 (fila 4) y del formato del precio (fila 5, sin «€»).
@@ -95,6 +96,7 @@ Tu respuesta es completa si:
 5. **Acceso simultáneo:** quien guarde el último sobrescribe los cambios del otro (**actualización perdida**). Una hoja de cálculo no tiene control de concurrencia.
 6. Un SGBD guarda cada dato **una sola vez** y lo relaciona con los demás; valida los datos con **restricciones** (el precio es un número, «pagado» es S o N); permite que varias personas trabajen a la vez con **control de concurrencia y transacciones**; da a cada usuario solo los **permisos** que necesita (la secretaria ve los pagos; el profesor, las notas); hace **copias de seguridad** y permite recuperar los datos tras un fallo; y separa los datos de las aplicaciones (**independencia**), de modo que se pueden crear nuevas aplicaciones sin cambiar los datos.
 {{% /details %}}
+{{% /comprobacion %}}
 
 #### Errores habituales
 
@@ -228,6 +230,7 @@ Te incorporas al departamento de sistemas de EduGest. Antes de empezar a desarro
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] `v$version` muestra *Oracle AI Database 26ai Free*.
 - [ ] `v$pdbs` muestra `FREEPDB1` en modo `READ WRITE`.
 - [ ] Aparecen al menos los procesos `PMON`, `SMON`, `DBW0`, `LGWR` y `CKPT`.
@@ -241,6 +244,7 @@ Te incorporas al departamento de sistemas de EduGest. Antes de empezar a desarro
 4. Los ficheros `.dbf` pertenecen al **nivel interno o físico**. `USER_TABLES` es una vista del diccionario que describe el **nivel conceptual** (las tablas que existen).
 5. Depende de la instalación (como mínimo `PDBADMIN`). Para el proyecto se usa `EDUGEST`. `SYSTEM` es una cuenta de administración con privilegios muy amplios: trabajar con ella incumple el **principio de mínimo privilegio** y un error podría dañar el diccionario de datos.
 {{% /details %}}
+{{% /comprobacion %}}
 
 #### Errores habituales
 
@@ -287,6 +291,7 @@ Termina con una tabla resumen y una conclusión: ¿existe un SGBD que sea el mej
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Cada caso tiene clasificación, comparativa, recomendación y la desventaja de la alternativa.
 - [ ] Las versiones y licencias proceden de fuentes oficiales y están citadas con fecha de consulta.
 - [ ] Al menos un caso usa un SGBD relacional y al menos otro uno no relacional.
@@ -296,6 +301,7 @@ Termina con una tabla resumen y una conclusión: ¿existe un SGBD que sea el mej
 - Fíjate en las palabras clave de cada enunciado: «sin conexión» y «un único usuario» → embebido; «pagos no pueden quedar a medias» → transacciones; «amigos de amigos» → relaciones entre nodos; «cada 10 segundos» y «rangos de tiempo» → series temporales.
 - [DB-Engines](https://db-engines.com/en/ranking) clasifica cientos de SGBD por modelo y popularidad. Úsalo como punto de partida, pero contrasta los datos en la web oficial de cada producto.
 {{% /details %}}
+{{% /comprobacion %}}
 
 #### Errores habituales
 
@@ -402,6 +408,7 @@ Elabora un informe con:
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Se citan correctamente el Reglamento (UE) 2016/679 y la Ley Orgánica 3/2018.
 - [ ] Los diagnósticos se identifican como **datos de salud** (categoría especial).
 - [ ] Se rechaza la cesión a la autoescuela y se explica por qué.
@@ -411,6 +418,7 @@ Elabora un informe con:
 {{% details title="Pista: dónde encontrar la información" %}}
 La AEPD publica guías prácticas para centros educativos y modelos de registro de actividades de tratamiento. Busca en [aepd.es](https://www.aepd.es/) la sección dedicada a educación. Recuerda que la **base legal** del tratamiento de los datos académicos en un centro público es el cumplimiento de una misión de interés público, no el consentimiento.
 {{% /details %}}
+{{% /comprobacion %}}
 
 #### Ampliación
 
@@ -440,12 +448,14 @@ La jefatura de estudios quiere saber si el porcentaje de aprobados en *Bases de 
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] La tabla dinámica agrupa por dos dimensiones (ciclo y turno).
 - [ ] Las conclusiones se apoyan en los datos y no en opiniones.
 - [ ] La respuesta del punto 5 menciona el impacto en el rendimiento y los datos históricos.
 
 > [!TIP]
 > Lo que acabas de hacer con la tabla dinámica es una **consulta resumen**. En la UD07 la escribirás en SQL con `GROUP BY` y `AVG`.
+{{% /comprobacion %}}
 
 ---
 
@@ -469,6 +479,8 @@ Lee el [enunciado de EduGest](/guia/proyecto-edugest) y redacta `01-analisis.md`
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] El documento está en el repositorio, en Markdown, y se lee bien en GitHub o GitLab.
 - [ ] Cada perfil de usuario tiene al menos dos operaciones concretas.
 - [ ] La elección del SGBD se apoya en características del caso, no en preferencias.
+{{% /comprobacion %}}

@@ -301,6 +301,30 @@ ORDER  BY localidad;
 
 *2 filas*
 
+{{% paso-a-paso titulo="Orden lógico de ejecución de un SELECT completo" %}}
+{{% etapa titulo="1. FROM y JOIN" %}}
+Se construye el conjunto de filas de partida uniendo las tablas indicadas.
+{{% /etapa %}}
+{{% etapa titulo="2. WHERE" %}}
+Filtra filas **antes** de agrupar. No puede usar funciones de agregado.
+{{% /etapa %}}
+{{% etapa titulo="3. GROUP BY" %}}
+Forma los grupos con las filas que quedan.
+{{% /etapa %}}
+{{% etapa titulo="4. HAVING" %}}
+Filtra grupos **después** de agrupar. Aquí sí se pueden usar `COUNT`, `AVG`…
+{{% /etapa %}}
+{{% etapa titulo="5. SELECT" %}}
+Calcula las expresiones y los alias del resultado.
+{{% /etapa %}}
+{{% etapa titulo="6. ORDER BY" %}}
+Ordena. Es la única fase que ve los alias del SELECT.
+{{% /etapa %}}
+{{% etapa titulo="7. FETCH FIRST" %}}
+Limita el número de filas devueltas.
+{{% /etapa %}}
+{{% /paso-a-paso %}}
+
 ### 2.3 Orden de evaluación: WHERE frente a HAVING
 
 Ya conoces el orden lógico de las cláusulas; ahora se completa con `GROUP BY` y `HAVING`:
@@ -507,6 +531,10 @@ flowchart LR
     M["MATRICULA<br/>id_alumno = 3<br/>nota = 8"] -->|id_alumno| A["ALUMNO<br/>id_alumno = 3<br/>Noelia Verdú Espí"]
     M -->|id_modulo| MO["MODULO<br/>id_modulo = 2<br/>Bases de datos"]
 ```
+
+{{% curiosidad titulo="El coste de un producto cartesiano" %}}
+Un `FROM a, b` sin condición de unión combina cada fila de `a` con cada fila de `b`. Con dos tablas de 1.000 filas salen **1.000.000** de filas, y con tres de 1.000 filas, mil millones. Por eso olvidar la condición del `JOIN` es uno de los errores que más tardan en ejecutarse.
+{{% /curiosidad %}}
 
 ### 3.2 El punto de partida: el producto cartesiano
 
@@ -1843,6 +1871,10 @@ El criterio general: si las dos consultas son **estructuralmente distintas** (ta
 
 {{< sesion n="11" h="1" tipo="t" >}}Funciones analíticas y optimización{{< /sesion >}}
 
+{{% curiosidad titulo="Las funciones analíticas llegaron antes que el estándar" %}}
+Oracle incorporó las funciones analíticas (`RANK`, `LAG`, `SUM … OVER`) en la versión 8i, hacia 1999. El estándar SQL no las recogió hasta SQL:2003.
+{{% /curiosidad %}}
+
 ## 9. Funciones analíticas
 
 > [!NOTE]
@@ -2163,6 +2195,14 @@ El coste estimado baja en dos órdenes de magnitud, y el tiempo también. Pero e
 > [!WARNING]
 > Mide siempre **dos o tres veces** cada consulta y quédate con las últimas: la primera ejecución carga los bloques en la caché de Oracle y es artificialmente lenta. Y recuerda que `Cost` es una **estimación**, no un tiempo: la prueba definitiva es el tiempo de respuesta y el número de bloques leídos (`SET AUTOTRACE ON STATISTICS`).
 
+### Gráfico: lecturas de bloque con y sin índice
+
+{{< grafico tipo="barras" titulo="Bloques leídos para localizar una fila (modelo simplificado)" datos="Sin índice · 1 millón de filas=10000;Con índice · 1 millón=4;Sin índice · 100 millones=1000000;Con índice · 100 millones=5" unidad="bloques" log="true" nota="Modelo: 100 filas por bloque y un B-tree con unas 200 claves por nodo. Pulsa el botón para cambiar a escala logarítmica." >}}
+
+Probar el modelo con otros tamaños:
+
+{{< coste-busqueda >}}
+
 ### 10.8 Lista de comprobación antes de dar por buena una consulta
 
 - [ ] Devuelve el número de filas que había predicho.
@@ -2218,6 +2258,23 @@ El coste estimado baja en dos órdenes de magnitud, y el tiempo también. Pero e
 - **Comenta las consultas que entregues**: qué responden, qué decisiones has tomado y cuántas filas devuelven.
 
 ---
+
+{{< tarjetas titulo="Repasa los términos de la UD07" >}}
+- t: "INNER JOIN"
+  d: "Devuelve solo las filas que tienen pareja en ambas tablas."
+- t: "LEFT JOIN"
+  d: "Conserva todas las filas de la tabla izquierda, con NULL si no hay pareja."
+- t: "HAVING"
+  d: "Filtro que se aplica a los grupos, después de GROUP BY."
+- t: "Subconsulta correlacionada"
+  d: "Subconsulta que usa columnas de la consulta externa y se evalúa fila a fila."
+- t: "CTE (WITH)"
+  d: "Consulta con nombre que se define antes de la principal y la hace más legible."
+- t: "UNION ALL"
+  d: "Une resultados sin eliminar duplicados (más rápido que UNION)."
+- t: "Función analítica"
+  d: "Calcula sobre un conjunto de filas sin reducirlas a una sola (OVER)."
+{{< /tarjetas >}}
 
 ## 13. Resumen
 
@@ -2302,4 +2359,3 @@ Ideas que conviene llevarse grabadas:
 - [Oracle AI Database 26ai: SQL Tuning Guide](https://docs.oracle.com/en/database/oracle/oracle-database/26/tgsql/) — optimizador, planes de ejecución, índices y estadísticas.
 - [Oracle AI Database 26ai: Database PL/SQL Packages and Types Reference, *DBMS_XPLAN*](https://docs.oracle.com/en/database/oracle/oracle-database/26/arpls/DBMS_XPLAN.html).
 - [Real Decreto 405/2023, de 29 de mayo](https://www.boe.es/buscar/act.php?id=BOE-A-2023-13221) — enseñanzas mínimas del módulo 0484 Bases de datos (RA3 y RA2).
-- [Curso de Bases de Datos de F. M. García: consultas multitabla y resumen](https://fmgarcia.github.io/CursosGithubIO/CursoBasesDatos/).

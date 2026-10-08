@@ -11,7 +11,7 @@
 {{- $qid := printf "quiz-%d" .Ordinal -}}
 {{- $page := .Page -}}
 <form class="bd-quiz" id="{{ $qid }}" onsubmit="return false;">
-  <div class="bd-quiz-head">Autoevaluación <span>{{ len $items }} preguntas</span></div>
+  <div class="bd-quiz-head">{{ i18n "autoevaluacion" }} <span>{{ i18n "n_preguntas" (dict "n" (len $items)) }}</span></div>
   {{- range $i, $it := $items -}}
   <fieldset class="bd-quiz-q" data-answer="{{ $it.answer }}">
     <legend><span class="bd-quiz-n">{{ add $i 1 }}</span> {{ $page.RenderString $it.q }}</legend>
@@ -22,8 +22,8 @@
   </fieldset>
   {{- end -}}
   <div class="bd-quiz-actions">
-    <button type="button" class="bd-btn" data-quiz-check>Corregir</button>
-    <button type="button" class="bd-btn bd-btn--ghost" data-quiz-reset>Reiniciar</button>
+    <button type="button" class="bd-btn" data-quiz-check>{{ i18n "corregir" }}</button>
+    <button type="button" class="bd-btn bd-btn--ghost" data-quiz-reset>{{ i18n "reiniciar" }}</button>
     <output class="bd-quiz-score" aria-live="polite"></output>
   </div>
 </form>
@@ -58,7 +58,7 @@ document.addEventListener('click', function (ev) {
     q.querySelector('.bd-quiz-explain').hidden = false;
   });
   var nota = (ok * 10 / qs.length).toFixed(1).replace('.', ',');
-  out.textContent = 'Aciertos: ' + ok + ' / ' + qs.length + ' · Nota: ' + nota;
+  out.textContent = {{ i18n "aciertos" }} + ': ' + ok + ' / ' + qs.length + ' · ' + {{ i18n "nota" }} + ': ' + nota;
 });
 </script>
 {{- end -}}

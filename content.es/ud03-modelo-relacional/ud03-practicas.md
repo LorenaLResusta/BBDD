@@ -44,7 +44,7 @@ Aplicar una a una las reglas de transformación al modelo conceptual de la prác
 
 Partimos del diagrama de la biblioteca municipal de la [práctica 2.1](/ud02-modelo-er/ud02-practicas#práctica-21--biblioteca-municipal-del-enunciado-al-diagrama):
 
-![Diagrama de Chen de la biblioteca: autores, libros y ejemplares](images/chen-biblioteca.svg "Biblioteca: AUTOR escribe LIBRO, LIBRO tiene EJEMPLAR")
+{{< diagrama src="chen-biblioteca.svg" caption="Diagrama de Chen de la biblioteca: autores, libros y ejemplares" >}}
 
 #### Desarrollo
 
@@ -122,10 +122,12 @@ erDiagram
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Hay **6** tablas: 4 por las entidades y 2 por las relaciones N:M.
 - [ ] La clave primaria de `PRESTAMO` tiene 4 columnas, o has justificado una clave artificial con `UNIQUE` sobre esas 4 columnas.
 - [ ] La clave ajena de `PRESTAMO` a `EJEMPLAR` es **compuesta**.
 - [ ] Has indicado qué columnas admiten nulos.
+{{% /comprobacion %}}
 
 #### Errores habituales
 
@@ -221,7 +223,7 @@ Comparar las alternativas de transformación de una jerarquía y elegir la más 
 
 Usa la jerarquía de empleados de la clínica veterinaria de la [práctica 2.4](/ud02-modelo-er/ud02-practicas#práctica-24--clínica-veterinaria-con-jerarquías): `EMPLEADO` (total y disyunta) con `VETERINARIO`, `AUXILIAR` y `ADMINISTRATIVO`.
 
-![Jerarquía de especialización en notación de Chen](images/chen-jerarquia-empleados.svg "Especialización de EMPLEADO")
+{{< diagrama src="chen-jerarquia-empleados.svg" caption="Jerarquía de especialización en notación de Chen" >}}
 
 1. **Opción 1. Una sola tabla** con todos los atributos y un discriminador `tipo`.
 2. **Opción 2. Una tabla para la superclase y una por subclase**, cada una con la clave primaria de la superclase como clave ajena.
@@ -329,9 +331,11 @@ Clasifica cada regla en una de estas categorías: **PK/UNIQUE**, **FK**, **NOT N
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Las reglas 3, 4, 6 y 7 están clasificadas como no representables o justificadas como tales.
 - [ ] La regla 2 es un `CHECK (fecha_salida > fecha_entrada)`.
 - [ ] Para la regla 7 se discute si conviene **guardar** el importe o **calcularlo**.
+{{% /comprobacion %}}
 
 ---
 
@@ -351,9 +355,11 @@ Transforma **tu** modelo E/R de EduGest (práctica EduGest-2) en un modelo relac
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Todas las relaciones N:M del E/R se han convertido en tablas.
 - [ ] La relación «imparte» conserva la información de profesor, módulo, grupo y curso académico.
 - [ ] Ninguna clave ajena de matrículas o notas usa `ON DELETE CASCADE` sin justificarlo.
+{{% /comprobacion %}}
 
 ---
 
@@ -468,8 +474,10 @@ Fíjate en que **ninguna** combinación de PK, UK, FK y VNN obliga a que una asi
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Para cada caso has escrito las cuatro respuestas y la cardinalidad (mín, máx) de cada lado.
 - [ ] Has relacionado cada respuesta con una restricción concreta (PK, UK, FK o VNN).
+{{% /comprobacion %}}
 
 #### Errores habituales
 
@@ -510,9 +518,11 @@ Obtén el esquema relacional del diagrama, indicando para cada tabla su PK, sus 
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Hay 5 tablas.
 - [ ] `CONTENEDOR` tiene dos FK, ambas con VNN.
 - [ ] La PK de `GOBIERNA` incluye `fecha_inicio`.
+{{% /comprobacion %}}
 
 #### Errores habituales
 
@@ -585,9 +595,11 @@ Obtén el esquema relacional completo con PK, FK, UK y VNN, y anota las pérdida
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Hay 7 tablas.
 - [ ] El delegado es una FK de `ALUMNO` a la propia tabla `ALUMNO`.
 - [ ] `TIENE` tiene una PK y una UK.
+{{% /comprobacion %}}
 
 #### Errores habituales
 
@@ -666,9 +678,11 @@ Obtén el esquema relacional con PK, FK, UK y VNN. Indica qué columnas de `REVI
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] La PK de `REVISION` es compuesta e incluye la matrícula.
 - [ ] `nif` y `dni` son UK.
 - [ ] La FK del cliente en `COCHE` admite nulos (coche sin vender).
+{{% /comprobacion %}}
 
 #### Errores habituales
 
@@ -740,9 +754,11 @@ Obtén el esquema relacional de los dos diagramas.
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Todas las FK que apuntan a `CIUDAD` tienen **dos** columnas.
 - [ ] La PK de `SE_ALOJA` incluye la fecha de entrada.
 - [ ] En 4.2, `CASA` tiene PK propia y su FK a `CIUDAD` lleva VNN.
+{{% /comprobacion %}}
 
 #### Errores habituales
 

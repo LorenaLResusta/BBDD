@@ -188,6 +188,10 @@ Una base documental trabaja sobre todo con datos **semiestructurados**.
 
 ---
 
+{{% curiosidad titulo="El término «NoSQL» es anterior a MongoDB" %}}
+Carlo Strozzi lo usó en 1998 para una base de datos relacional ligera que no usaba SQL. El significado actual nació en 2009, en un encuentro en San Francisco organizado por Johan Oskarsson sobre bases de datos distribuidas no relacionales.
+{{% /curiosidad %}}
+
 ## 2. Transacciones distribuidas: BASE y el teorema CAP
 
 ### 2.1 Recordatorio: ACID
@@ -281,6 +285,10 @@ try {
 {{< /quiz >}}
 
 ---
+
+{{% curiosidad titulo="El teorema CAP, de conjetura a teorema" %}}
+Eric Brewer lo planteó como conjetura en el año 2000 y Seth Gilbert y Nancy Lynch lo demostraron en 2002: un sistema distribuido no puede garantizar a la vez consistencia, disponibilidad y tolerancia a particiones.
+{{% /curiosidad %}}
 
 ## 3. Tipos de bases de datos NoSQL
 
@@ -389,6 +397,10 @@ alumno:1:nota:0485       -> "7.25"
 > El dato es el mismo; lo que cambia es **qué pregunta resulta barata**. El modelo relacional contesta bien a casi cualquier pregunta. El documental contesta instantáneamente a «dame el expediente de este alumno». El de clave-valor solo a «dame este valor concreto». El columnar a «dame todas las notas de este alumno por orden de módulo». El de grafos a «qué alumnos comparten módulos con este». Elegir el modelo es elegir **qué preguntas quieres que sean baratas**.
 
 ---
+
+{{% curiosidad titulo="¿Por qué «Mongo»?" %}}
+El nombre de MongoDB viene de *humongous* («enorme»), en referencia a su pensamiento para manejar grandes volúmenes de datos.
+{{% /curiosidad %}}
 
 ## 4. MongoDB: elementos y herramientas
 
@@ -1375,6 +1387,24 @@ Devuelve un único documento con tres arrays, uno por cada subtubería. En SQL e
 
 {{< sesion n="6" h="1" tipo="p" practica="10.5" >}}Modelado documental y decisión razonada{{< /sesion >}}
 
+{{% paso-a-paso titulo="De tablas a documento: ¿embeber o referenciar?" %}}
+{{% etapa titulo="1. El modelo relacional" %}}
+Un pedido se guarda en `PEDIDO` y sus líneas en `LINEA_PEDIDO`; para ver un pedido completo hace falta un **join**.
+{{% /etapa %}}
+{{% etapa titulo="2. Embeber" %}}
+En un documento, las líneas pueden ir **dentro** del pedido: `{ _id: 1, cliente: 'Ana', lineas: [ { producto: 'P1', cantidad: 2 } ] }`. Se lee todo en una sola operación.
+{{% /etapa %}}
+{{% etapa titulo="3. Cuándo embeber" %}}
+Cuando los datos hijos **se leen siempre junto al padre**, son pocos y no tienen vida propia.
+{{% /etapa %}}
+{{% etapa titulo="4. Cuándo referenciar" %}}
+Cuando el dato hijo es compartido por muchos documentos (el catálogo de productos) o puede crecer sin límite. Se guarda su `_id` y se consulta aparte o con `$lookup`.
+{{% /etapa %}}
+{{% etapa titulo="5. La regla" %}}
+Se diseña según **cómo se consulta**, no según cómo se normaliza. En NoSQL es habitual duplicar algo de información a cambio de lecturas más rápidas.
+{{% /etapa %}}
+{{% /paso-a-paso %}}
+
 ## 8. Modelado de información en una base documental
 
 ### 8.1 La pregunta central: ¿embebido o referenciado?
@@ -1763,6 +1793,25 @@ Y a la vez hay partes de un centro educativo donde el modelo documental encaja m
 
 ---
 
+{{< tarjetas titulo="Repasa los términos de la UD10" >}}
+- t: "Documento"
+  d: "Registro JSON/BSON con campos y valores, que puede anidar otros documentos."
+- t: "Colección"
+  d: "Conjunto de documentos; equivale a una tabla, pero sin esquema fijo."
+- t: "_id"
+  d: "Campo obligatorio y único que identifica cada documento de una colección."
+- t: "BSON"
+  d: "Formato binario de JSON que usa MongoDB."
+- t: "Embeber"
+  d: "Guardar datos relacionados dentro del mismo documento."
+- t: "Pipeline de agregación"
+  d: "Secuencia de etapas ($match, $group…) que transforma documentos."
+- t: "CAP"
+  d: "Teorema: en un fallo de red hay que elegir entre consistencia y disponibilidad."
+- t: "BASE"
+  d: "Disponibilidad básica, estado flexible y consistencia eventual."
+{{< /tarjetas >}}
+
 ## 14. Resumen
 
 | Idea clave | Detalle |
@@ -1843,4 +1892,3 @@ Y a la vez hay partes de un centro educativo donde el modelo documental encaja m
 - [Oracle AI Database 26ai: *JSON Developer's Guide*](https://docs.oracle.com/en/database/oracle/oracle-database/26/adjsn/index.html): tipo `JSON`, SQL/JSON y vistas duales JSON-relacional.
 - [Oracle AI Database 26ai: SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/index.html).
 - [Real Decreto 405/2023, de 29 de mayo](https://www.boe.es/buscar/act.php?id=BOE-A-2023-13221): RA7 y sus criterios de evaluación del módulo 0484.
-- [Curso de Bases de Datos de F. M. García](https://fmgarcia.github.io/CursosGithubIO/CursoBasesDatos/): módulos finales dedicados a NoSQL.

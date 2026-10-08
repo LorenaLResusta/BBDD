@@ -4,9 +4,9 @@
   Uso:  {{< ra "RA6:a,b,c" "RA2:b,d" >}}
         {{< ra "RA1" >}}            (todos los CE del RA)
 */ -}}
-{{- $cur := hugo.Data.curriculo -}}
+{{- $cur := cond (eq site.Language.Lang "val") site.Data.curriculo_val site.Data.curriculo -}}
 <div class="bd-ra">
-  <div class="bd-ra-head">Resultados de aprendizaje y criterios de evaluación</div>
+  <div class="bd-ra-head">{{ i18n "ra_head" }}</div>
   {{- range .Params -}}
     {{- $parts := split . ":" -}}
     {{- $ra := trim (index $parts 0) " " -}}

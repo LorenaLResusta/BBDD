@@ -139,11 +139,13 @@ erDiagram
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
+{{% comprobacion %}}
 - [ ] Hay 4 entidades y `EJEMPLAR` está marcada como débil (doble rectángulo en Chen).
 - [ ] Las dos relaciones N:M tienen la cardinalidad máxima N en los dos lados.
 - [ ] Las fechas del préstamo están en la relación, no en `SOCIO` ni en `EJEMPLAR`.
 - [ ] Has descartado la información que no genera datos.
 - [ ] Has escrito al menos tres supuestos semánticos.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -241,12 +243,14 @@ Tres amigos preparan el lanzamiento de un servicio de vídeo bajo demanda y te p
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
+{{% comprobacion %}}
 - [ ] `género` está modelado como **entidad** o como **atributo multivaluado**, y justificas la elección.
 - [ ] `personaje` es un atributo de la relación actor–película.
 - [ ] *Visualización* y *valoración* son relaciones **distintas**: una se repite y la otra no.
 - [ ] La dirección aparece como atributo **compuesto**.
 - [ ] La tarifa es una entidad con sus propios datos, no un texto en el cliente.
 - [ ] Entre las restricciones textuales está «la puntuación está entre 1 y 5» u otra similar.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -290,11 +294,13 @@ Una clínica veterinaria de tamaño medio estrena sistema de gestión. La gerent
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
+{{% comprobacion %}}
 - [ ] La jerarquía de empleados es **total y disyunta**.
 - [ ] La jerarquía de mascotas es **parcial y disyunta**.
 - [ ] Los atributos comunes están en la superclase y solo los específicos en las subclases.
 - [ ] El cliente aparece como entidad aunque el texto «lo conoce por sus mascotas».
 - [ ] La dosis es un atributo de la relación consulta–medicamento.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -392,10 +398,12 @@ Identificadores inestables, atributos derivados, atributos multivaluados escondi
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
+{{% comprobacion %}}
 - [ ] La ternaria incluye la fecha y la hora como atributos y justificas su cardinalidad (con varios alumnos, profesores y vehículos suele ser N:M:P).
 - [ ] La agregación permite que haya parejas alumno–profesor **sin** examen.
 - [ ] Has identificado cada examen con algo más que la pareja alumno–profesor (la fecha).
 - [ ] Se explica con un ejemplo concreto la pérdida de información de las binarias.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -450,11 +458,13 @@ Una cooperativa de aceite quiere registrar la trazabilidad de su producción. Es
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
+{{% comprobacion %}}
 - [ ] Hay una relación entre `SOCIO` y `FINCA` que admite el reparto del porcentaje de propiedad.
 - [ ] La entrega y la molturación son **relaciones N:M con atributos**: una entrega puede alimentar varios lotes y un lote recoge varias entregas.
 - [ ] La relación entre lote y depósito se ha justificado con una pregunta al cliente.
 - [ ] La venta y la facturación no aparecen en el diagrama.
 - [ ] Has identificado el tramo del camino botella → finca que pierde precisión y por qué.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -569,11 +579,13 @@ Un diseño que solo guarda «lo que es verdad ahora» olvida lo que ya pasó. Un
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
+{{% comprobacion %}}
 - [ ] La asignación coche–sucursal es una relación **N:M con fecha de inicio y de fin** (o una entidad histórica), no un atributo del coche.
 - [ ] La tarifa es una entidad vinculada a la categoría con una fecha de vigencia, y el contrato guarda su propia copia del precio.
 - [ ] La dirección de facturación está versionada, o copiada en la factura.
 - [ ] La categoría profesional del empleado tiene historial.
 - [ ] Has escrito la restricción de no solapamiento de periodos.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -645,11 +657,13 @@ Base imponible: 267,60 € · IVA 10 % sobre 23,40 €: 2,34 € · IVA 21 % sob
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
+{{% comprobacion %}}
 - [ ] El albarán es una entidad y sus líneas forman una relación N:M con atributos entre albarán y producto (o una entidad débil de línea).
 - [ ] `importe`, `base imponible`, `IVA` y `total` están marcados como derivados.
 - [ ] El precio de la línea se trata como copia del precio de catálogo en el momento de la entrega.
 - [ ] Repartidor, furgoneta y ruta forman un conjunto que se repite en los dos documentos y no se repite como texto.
 - [ ] Has señalado qué hace que los dos documentos describan dos hechos distintos (entrega y visita).
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -745,10 +759,12 @@ erDiagram
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
+{{% comprobacion %}}
 - [ ] Has detectado que A contiene un grupo repetido (`jugador1..4`) y que no admite partidos de dos ni de cinco.
 - [ ] Has visto que B resuelve «¿cuántas veces ha jugado cada persona?», pero no distingue quién pagó por quién.
 - [ ] Tu diseño final trata a socios e invitados como **especialización** de persona (o con un atributo de condición).
 - [ ] Has propuesto cómo registrar que un invitado se hace socio sin perder su historial.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -802,10 +818,12 @@ Lee la [entrevista con la jefatura de estudios](/guia/proyecto-edugest#1-enuncia
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
+{{% comprobacion %}}
 - [ ] La relación *es jefe de* entre `PROFESOR` y `DEPARTAMENTO` es distinta de *pertenece a*.
 - [ ] *Imparte* relaciona profesor, módulo y grupo, e incluye el curso académico. Justificas si es ternaria.
 - [ ] Las faltas de asistencia dependen de la matrícula, no solo del alumno.
 - [ ] Todas las decisiones dudosas están en la lista de supuestos.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -883,11 +901,12 @@ Una pequeña empresa de distribución quiere informatizar sus ventas y sus compr
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] Hay tres entidades y dos relaciones, cada una con su rombo.
 - [ ] El máximo es 1 junto a `PROVEEDOR` (cada producto tiene un único proveedor) y N junto a `PRODUCTO`.
 - [ ] Cada entidad tiene su identificador subrayado.
 - [ ] Has escrito al menos dos supuestos.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -963,11 +982,12 @@ Una plataforma de cine bajo demanda quiere recomendar películas y avisar al cli
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] Hay cuatro entidades: `CLIENTE`, `PELÍCULA`, `ACTOR` y `GÉNERO`.
 - [ ] *Ve* es N:M y lleva `fecha` y `valoración`.
 - [ ] *Actúa en* es N:M y *pertenece a* es 1:N.
 - [ ] No existe ningún atributo booleano «vista».
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -1042,11 +1062,12 @@ Un ayuntamiento quiere gestionar las infracciones de tráfico y las multas asoci
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] Existen tres entidades: `PROPIETARIO`, `VEHÍCULO` e `INFRACCIÓN`.
 - [ ] `cuantía` está en `INFRACCIÓN`, no en la multa (es del catálogo).
 - [ ] Has resuelto la repetición de la misma infracción en el mismo vehículo.
 - [ ] `fecha_pago` puede estar vacía y lo has anotado.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -1120,11 +1141,12 @@ Una naviera internacional necesita gestionar su flota y las mercancías que tran
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] Hay cuatro entidades y tres relaciones.
 - [ ] Las fechas están en la relación *gobierna*, no en las entidades.
 - [ ] Has pensado qué ocurre si el **mismo** capitán gobierna el **mismo** barco en dos periodos distintos.
 - [ ] `dirección_remitente` y `dirección_destinatario` están en `CONTENEDOR`.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -1200,11 +1222,12 @@ Un registro genealógico quiere guardar quién es progenitor de quién.
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] Solo hay una entidad y la relación sale y vuelve a ella.
 - [ ] Los dos extremos de la relación tienen **rol**.
 - [ ] El máximo del rol *progenitor* es **2** (padre y madre), no 1 ni N.
 - [ ] Has detectado el problema de las personas sin ascendientes registrados y el mínimo del rol *progenitor* es 0.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -1294,11 +1317,12 @@ Un instituto de Educación Secundaria y Formación Profesional diseña su base d
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] *Es requisito de* es una N:M **reflexiva** sobre `MÓDULO` con dos roles.
 - [ ] *Es delegado de* es una 1:N **reflexiva** sobre `ALUMNO`.
 - [ ] La relación alumno–casillero es 1:1 con (0,1) en los dos lados: el rombo es blanco entero.
 - [ ] `fecha_matrícula` está en la relación *se matricula*, no en `ALUMNO`.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -1380,11 +1404,12 @@ Una clínica quiere controlar los ingresos de sus pacientes y los médicos que l
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `INGRESO` es una entidad débil (doble rectángulo) y depende de `PACIENTE` en identificación (etiqueta ID junto a la entidad débil).
 - [ ] El número de ingreso es un discriminador (subrayado discontinuo).
 - [ ] `dirección` es un atributo compuesto.
 - [ ] *Atiende* es 1:N entre `MÉDICO` e `INGRESO`.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -1464,11 +1489,12 @@ Una clínica veterinaria quiere avisar a los dueños de las vacunas pendientes d
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `edad` y `próxima_fecha` son derivados (óvalo discontinuo).
 - [ ] *Se vacuna* es N:M entre `ANIMAL` y `VACUNA` y la fecha permite repetir la misma vacuna.
 - [ ] `NOTIFICACIÓN` se relaciona con `ANIMAL` y con `VACUNA`, no con `CLIENTE`.
 - [ ] `VISITA` es débil de `ANIMAL` (etiqueta ID).
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -1544,11 +1570,12 @@ Una tienda de ropa online quiere sustituir su hoja de cálculo por una base de d
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `LÍNEA_PEDIDO` es una entidad débil de `PEDIDO`.
 - [ ] `teléfono` es multivaluado y `dirección` es compuesto.
 - [ ] `importe_total` es un atributo derivado.
 - [ ] La relación entre categorías es reflexiva con los roles *categoría* y *subcategoría*.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -1622,11 +1649,12 @@ Un concesionario gestiona la venta de coches y las revisiones de su taller.
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `REVISIÓN` es débil de `COCHE` y su discriminador es el número de revisión.
 - [ ] El supervisor se modela con una relación **reflexiva** sobre `MECÁNICO`.
 - [ ] Has indicado qué clave es candidata y cuál es alternativa en `CLIENTE`.
 - [ ] Un coche recién fabricado, no vendido aún, es posible en tu modelo.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -1702,11 +1730,12 @@ Una central de reservas de turismo rural quiere gestionar su oferta de alojamien
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `CIUDAD` es débil de `PROVINCIA` y `HABITACIÓN` es débil de `CASA_RURAL` (etiqueta ID).
 - [ ] *Está en* (casa–ciudad) es 1:N y **no** es identificadora: el nombre de la casa ya es único.
 - [ ] *Se aloja* es N:M y `fecha_entrada` forma parte de la identificación.
 - [ ] `desayuno` es un atributo de `CASA_RURAL`.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -1782,11 +1811,12 @@ Una consultora tecnológica quiere controlar sus proyectos y las horas de su equ
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `TAREA` depende de `PROYECTO`; `PROYECTO` depende (solo por relación) de `CLIENTE`.
 - [ ] *Trabaja en* tiene el atributo `horas_reales`.
 - [ ] *Tutela* es reflexiva sobre `DESARROLLADOR`.
 - [ ] El estado de la tarea tiene un dominio cerrado de tres valores y lo has anotado.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -1862,11 +1892,12 @@ Una cadena hotelera estructura el sistema central de reservas de sus establecimi
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `HABITACIÓN` es débil de `HOTEL`.
 - [ ] *Reserva* es una N:M entre `CLIENTE` y `HABITACIÓN` con `fecha_entrada` como discriminador.
 - [ ] La supervisión es una relación reflexiva con roles.
 - [ ] Has anotado la restricción sobre solapes de fechas.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -1940,11 +1971,12 @@ Una universidad pública organiza su estructura académica e investigadora.
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `CATEDRA` es débil de `DEPARTAMENTO`.
 - [ ] *Dirige* es 1:1: la cátedra tiene (1,1) director y el profesor (0,1) cátedra.
 - [ ] *Tutoriza* es reflexiva con roles *veterano* y *novel*.
 - [ ] Has indicado que el director debe ser catedrático y del mismo departamento.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -2018,11 +2050,12 @@ Un centro de acogida de menores necesita un registro informatizado de residentes
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `INFORME` es débil de `MENOR`.
 - [ ] *Coordina* es reflexiva: un educador supervisa a varios.
 - [ ] El educador tutor principal es obligatorio: (1,1) junto a `EDUCADOR`.
 - [ ] La nota de protección de datos cita al menos el principio de minimización.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -2105,11 +2138,12 @@ La empresa municipal de autobuses gestiona su red, su flota y los turnos de cond
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] *Conduce* es un único rombo conectado a tres entidades.
 - [ ] `PARADA` es débil de `LÍNEA`; su discriminador es el número de orden.
 - [ ] *Transbordo* tiene el atributo `tiempo_a_pie`.
 - [ ] Has explicado qué información se pierde con tres binarias.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -2187,11 +2221,12 @@ Una federación deportiva informatiza el control de sus competiciones oficiales.
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] Hay dos relaciones con roles distintos entre `EQUIPO` y `PARTIDO`.
 - [ ] *Capitán* es 1:1 y distinta de *pertenece*.
 - [ ] `INCIDENCIA` es débil de `PARTIDO` con discriminador (minuto, número de secuencia).
 - [ ] Has escrito la restricción «el jugador pertenece a uno de los equipos del partido».
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -2267,11 +2302,12 @@ Una cadena de gimnasios gestiona sus centros, sus socios y los entrenamientos pe
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `SALA` es débil de `GIMNASIO`.
 - [ ] *Reserva* conecta `SOCIO` con `SALA` y la fecha y la hora forman parte de su identificación.
 - [ ] *Diseña* es N:M con `fecha_asignación` y `objetivo`.
 - [ ] *Dirige* es una relación reflexiva sobre `ENTRENADOR`.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -2351,11 +2387,12 @@ Una gran empresa de dulces necesita una base de datos centralizada para su produ
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] La composición es una N:M con atributo `porcentaje`.
 - [ ] El formato depende del producto: `FORMATO` es una entidad débil.
 - [ ] El pedido se relaciona con el **formato**, no solo con el producto.
 - [ ] *Se parece a* es 1:N desde el producto hacia los competidores.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -2429,11 +2466,12 @@ Una planta de maquinaria pesada gestiona su proceso de producción y sus control
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] *Compone* es una N:M reflexiva con el atributo `cantidad`.
 - [ ] `LÍNEA` e `INSPECCIÓN` son entidades débiles.
 - [ ] La pieza se relaciona con la línea de montaje (que a su vez depende de la fábrica).
 - [ ] Entre las restricciones aparece «una pieza no puede contenerse a sí misma, directa o indirectamente».
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -2511,11 +2549,12 @@ La comandancia de la fuerza de defensa quiere registrar su operativa interna.
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] La jerarquía de jefes es una reflexiva 1:N.
 - [ ] `cargo_principal` está en la relación *implicado en*.
 - [ ] La mazmorra tiene máximo 4 bichos en la cardinalidad.
 - [ ] `fecha_detención` forma parte de la identificación de *detiene*.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -2591,12 +2630,13 @@ George R. R. Martin quiere documentar los castillos de las grandes casas de Poni
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `CASTILLO` es débil de `CASA` (etiqueta ID).
 - [ ] *Es maestro de* es una reflexiva 1:N sobre `ARQUITECTO`.
 - [ ] *Mecenazgo* es N:M y queda dentro de un recuadro de **agregación**.
 - [ ] La relación *resulta de* une `CASTILLO` con la agregación, no con `ARQUITECTO` ni con `MECENAS` por separado.
 - [ ] `MECENAS` tiene un código artificial como identificador.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -2685,12 +2725,13 @@ Se va a celebrar un campeonato de *quidditch* entre selecciones de distintos pa�
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `PARTICIPANTE` se generaliza en `JUGADOR` y `ÁRBITRO` con **T,D**.
 - [ ] *Juega* tiene (2,2) junto a `EQUIPO`.
 - [ ] `ESTADIO` es débil de `CASTILLO` y `MOVIMIENTO` es débil de `JUEGO` (etiqueta ID).
 - [ ] `campeonato` (de los participantes) y `medios` (de los estadios) son multivaluados.
 - [ ] *Se aloja* es N:M y la fecha de entrada forma parte de la identificación.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -2782,11 +2823,12 @@ La Policía y la asociación de entidades bancarias quieren una base de datos so
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] La especialización es **total y disyunta**.
 - [ ] `edad` y `num_miembros` son atributos derivados.
 - [ ] *Atraco* es una ternaria con `fecha`, `condena` e `indemnización`.
 - [ ] `SUCURSAL` es débil de `ENTIDAD_BANCARIA`.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -2862,11 +2904,12 @@ Un club hípico gestiona su cuadra, sus socios, sus instructores y las clases de
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] Hay dos jerarquías **totales y disyuntas**.
 - [ ] La genealogía es una reflexiva con máximo 2 progenitores por potro.
 - [ ] `BOX` es débil de `PABELLÓN`.
 - [ ] *Supervisa* sale de la subclase *en prácticas* hacia *titular*.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -2942,11 +2985,12 @@ Un hotel-balneario termal automatiza la gestión de huéspedes, instalaciones y 
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] La jerarquía de empleados es **parcial** y las otras dos son **totales y disyuntas**.
 - [ ] *Asignación* sale de la subclase `ALOJADO`.
 - [ ] `HABITACIÓN` es débil de `PLANTA`.
 - [ ] *Presta* es una ternaria con cuatro atributos.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -3022,11 +3066,12 @@ El Ministerio quiere un sistema para controlar la producción, el transporte y e
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] La jerarquía es **total y disyunta** con tres subclases.
 - [ ] *Línea* es una reflexiva N:M con dos atributos.
 - [ ] `PARTE` es débil de `CENTRAL`.
 - [ ] *Suministro* es una ternaria.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -3102,11 +3147,12 @@ Un promotor organiza un festival que se repite cada año y quiere guardar todo s
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `EDICIÓN` es débil de `FESTIVAL` y `ESCENARIO` es débil de `EDICIÓN`.
 - [ ] `ENTRADA` es débil de `EDICIÓN`.
 - [ ] La especialización de artistas es **total y disyunta**.
 - [ ] *Actúa* tiene la fecha y la hora de inicio como discriminador.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -3185,11 +3231,12 @@ Año 2050: tras una invasión zombi, los supervivientes se organizan en grupos y
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `TRABAJADOR` se especializa en `MANTENIDO` y `VOLUNTARIO` con **T,D**.
 - [ ] `aportación_anual` es derivado (óvalo discontinuo).
 - [ ] `TAREA` es débil de `GRUPO` (etiqueta ID).
 - [ ] *Se compone de* es una reflexiva 1:N sobre `TAREA`.
+{{% /comprobacion %}}
 
 {{% /details %}}
 
@@ -3270,11 +3317,12 @@ Se organiza una muestra de platos típicos de España con información de las lo
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
-
+{{% comprobacion %}}
 - [ ] `LOCALIDAD`, `RESTAURANTE` y `VISITA` son entidades débiles.
 - [ ] *Es típico de* es una N:M con el atributo `variación_local`.
 - [ ] La jerarquía de visitas es **total y disyunta**.
 - [ ] `ingredientes_básicos` es multivaluado.
+{{% /comprobacion %}}
 
 {{% /details %}}
 

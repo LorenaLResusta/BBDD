@@ -189,6 +189,10 @@ SELECT DISTINCT localidad FROM alumno ORDER BY localidad;
 
 `DISTINCT` se aplica a la **fila completa** del resultado: `SELECT DISTINCT localidad, cod_grupo` devuelve las combinaciones distintas de las dos columnas.
 
+{{% curiosidad titulo="La tabla DUAL tiene un nombre por una razón" %}}
+Según su creador, Chuck Weiss, `DUAL` se diseñó al principio con **dos filas**, para poder duplicar filas con un join. Hoy tiene una sola, pero conserva el nombre: sirve para evaluar expresiones, como `SELECT SYSDATE FROM DUAL`.
+{{% /curiosidad %}}
+
 ### 2.5 La tabla DUAL
 
 `DUAL` es una tabla especial de Oracle con una sola fila. Sirve para evaluar expresiones que no dependen de ninguna tabla:
@@ -254,6 +258,24 @@ ORDER  BY horas DESC, codigo;
 > Además, la ordenación de textos con tildes depende del parámetro de sesión `NLS_SORT`. Con el valor por defecto (`BINARY`), «Álex» se ordena **después** de «Zoe». Con `ALTER SESSION SET NLS_SORT = SPANISH;` se ordena como en un diccionario. Si tus resultados aparecen en otro orden que en los apuntes, revisa este parámetro.
 
 ---
+
+{{% paso-a-paso titulo="En qué orden evalúa Oracle un SELECT sencillo" %}}
+{{% etapa titulo="1. FROM" %}}
+Primero decide **de dónde** salen las filas: `FROM alumno`. Por eso el alias de una columna definido en el SELECT no se puede usar todavía.
+{{% /etapa %}}
+{{% etapa titulo="2. WHERE" %}}
+Descarta las filas que no cumplen la condición: `WHERE nota >= 5`. Aquí solo existen las columnas de la tabla.
+{{% /etapa %}}
+{{% etapa titulo="3. SELECT" %}}
+Calcula las expresiones y los alias de las columnas que se muestran: `SELECT nombre, nota * 10 AS sobre_100`.
+{{% /etapa %}}
+{{% etapa titulo="4. ORDER BY" %}}
+Ordena el resultado. Es la **única** cláusula que puede usar los alias del SELECT.
+{{% /etapa %}}
+{{% etapa titulo="5. Límite de filas" %}}
+Por último se recorta con `FETCH FIRST n ROWS ONLY`. En la UD07 se añadirán `GROUP BY` y `HAVING` entre el WHERE y el SELECT.
+{{% /etapa %}}
+{{% /paso-a-paso %}}
 
 ## 4. Selección: filtrar filas con WHERE
 
@@ -369,6 +391,10 @@ Construye una consulta sobre la tabla `ALUMNO` eligiendo columnas, condiciones y
 ---
 
 {{< sesion n="5" h="2" tipo="t" >}}El valor NULL{{< /sesion >}}
+
+{{% curiosidad titulo="NULL no es cero ni «vacío»" %}}
+`NULL` significa «valor desconocido». Por eso `NULL = NULL` no es verdadero, sino desconocido, y por eso SQL usa una lógica de **tres valores**: verdadero, falso y desconocido.
+{{% /curiosidad %}}
 
 ## 5. El valor NULL
 
@@ -744,6 +770,21 @@ SELECT nombre, dni FROM profesor WHERE REGEXP_LIKE(dni, '^2[0-9]{7}[CE]$') ORDER
 
 ---
 
+{{< tarjetas titulo="Repasa los términos de la UD06" >}}
+- t: "Proyección"
+  d: "Elegir columnas: la lista del SELECT."
+- t: "Selección"
+  d: "Elegir filas: la condición del WHERE."
+- t: "Alias"
+  d: "Nombre alternativo para una columna o una tabla en la consulta."
+- t: "DISTINCT"
+  d: "Elimina del resultado las filas duplicadas."
+- t: "LIKE"
+  d: "Compara con un patrón: % (cualquier texto) y _ (un carácter)."
+- t: "IS NULL"
+  d: "Único modo correcto de comprobar si un valor es nulo."
+{{< /tarjetas >}}
+
 ## 10. Resumen
 
 - `SELECT` elige columnas (**proyección**), `WHERE` filtra filas (**selección**) y `ORDER BY` ordena.
@@ -796,4 +837,3 @@ SELECT nombre, dni FROM profesor WHERE REGEXP_LIKE(dni, '^2[0-9]{7}[CE]$') ORDER
 - [Oracle AI Database 26ai: SQL Language Reference, *SELECT*](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/SELECT.html).
 - [Oracle AI Database 26ai: SQL Language Reference, *Single-Row Functions*](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/Single-Row-Functions.html).
 - [Oracle AI Database 26ai: *Format Models*](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/Format-Models.html).
-- [Curso de Bases de Datos de F. M. García: módulos 27 y 28](https://fmgarcia.github.io/CursosGithubIO/CursoBasesDatos/).

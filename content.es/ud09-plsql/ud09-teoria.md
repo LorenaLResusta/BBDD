@@ -307,6 +307,10 @@ ORDER  BY sequence;
 
 ---
 
+{{% curiosidad titulo="PL/SQL se parece a Ada" %}}
+La sintaxis de PL/SQL (`BEGIN … END;`, `:=`, `IF … THEN … END IF;`, las excepciones) está inspirada en el lenguaje **Ada**. Apareció a finales de los años ochenta, para poder meter lógica de programa dentro del servidor y no solo sentencias sueltas.
+{{% /curiosidad %}}
+
 ## 3. Estructura de un bloque PL/SQL
 
 ### 3.1 Las cuatro secciones
@@ -2056,6 +2060,27 @@ Un subprograma pasa a `INVALID` cuando cambia algo de lo que depende (una tabla,
 
 {{< sesion n="7" h="1" tipo="t" >}}Disparadores: auditoría, integridad, tabla mutante y disparador compuesto{{< /sesion >}}
 
+{{% paso-a-paso titulo="Qué dispara un trigger y en qué orden" %}}
+{{% etapa titulo="1. Llega la sentencia" %}}
+Un usuario ejecuta `UPDATE empleado SET sueldo = sueldo * 1.05 WHERE id_dep = 10;` y afecta, por ejemplo, a 3 filas.
+{{% /etapa %}}
+{{% etapa titulo="2. BEFORE STATEMENT" %}}
+Se ejecuta **una vez**, antes de tocar ninguna fila.
+{{% /etapa %}}
+{{% etapa titulo="3. BEFORE EACH ROW" %}}
+Se ejecuta **por cada fila afectada**, justo antes de cambiarla. Aquí se puede modificar `:NEW`.
+{{% /etapa %}}
+{{% etapa titulo="4. Se modifica la fila" %}}
+Oracle aplica el cambio a esa fila.
+{{% /etapa %}}
+{{% etapa titulo="5. AFTER EACH ROW" %}}
+Se ejecuta por cada fila, justo después. Los pasos 3-5 se repiten para las 3 filas.
+{{% /etapa %}}
+{{% etapa titulo="6. AFTER STATEMENT" %}}
+Se ejecuta **una vez** al final. Si algo falla en cualquier punto, se deshace toda la sentencia.
+{{% /etapa %}}
+{{% /paso-a-paso %}}
+
 ## 11. Disparadores (triggers)
 
 ### 11.1 Qué es un disparador y cómo se construye
@@ -3047,6 +3072,23 @@ END;
 
 ---
 
+{{< tarjetas titulo="Repasa los términos de la UD09" >}}
+- t: "Bloque anónimo"
+  d: "Código PL/SQL sin nombre: DECLARE, BEGIN, EXCEPTION, END."
+- t: "Procedimiento"
+  d: "Subprograma almacenado con nombre que realiza una acción."
+- t: "Función"
+  d: "Subprograma almacenado que devuelve un valor y puede usarse en SQL."
+- t: "Cursor"
+  d: "Puntero que recorre las filas de una consulta una a una."
+- t: "Excepción"
+  d: "Error controlado en la sección EXCEPTION."
+- t: "Trigger"
+  d: "Código que se ejecuta automáticamente ante un evento DML, DDL o de sistema."
+- t: "Paquete"
+  d: "Agrupación de procedimientos, funciones y variables relacionados."
+{{< /tarjetas >}}
+
 ## 17. Resumen
 
 | Concepto | Idea clave | Sintaxis esencial |
@@ -3137,4 +3179,3 @@ Ideas que conviene llevarse grabadas:
 - [MySQL: Stored Objects](https://dev.mysql.com/doc/refman/8.4/en/stored-objects.html) y [MariaDB: Events](https://mariadb.com/kb/en/events/).
 - [Microsoft: Transact-SQL, disparadores y SQL Server Agent](https://learn.microsoft.com/sql/t-sql/).
 - [Real Decreto 405/2023, de 29 de mayo](https://www.boe.es/buscar/act.php?id=BOE-A-2023-13221) — enseñanzas mínimas del módulo 0484 Bases de datos (RA5, y los criterios RA4.d, RA4.h y RA6.h).
-- [Curso de Bases de Datos de F. M. García: programación de la base de datos](https://fmgarcia.github.io/CursosGithubIO/CursoBasesDatos/).

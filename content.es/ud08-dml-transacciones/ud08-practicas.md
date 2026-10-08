@@ -93,9 +93,11 @@ Insertar, modificar y borrar datos con SQL y con la herramienta gráfica, compro
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] El paso 4 produce ORA-00001 (`UQ_MATRICULA`), ORA-02290 (`CK_MATRICULA_CURSO`) y ORA-02290 (`CK_MATRICULA_NOTA`).
 - [ ] La matrícula del paso 3 tiene `convocatoria = 1` (valor por defecto) y `nota_final` a `NULL`.
 - [ ] Tras el paso 7, `SELECT COUNT(*) FROM alumno;` devuelve 32.
+{{% /comprobacion %}}
 
 #### Errores habituales
 
@@ -192,9 +194,11 @@ Guardar en tablas el resultado de consultas: copias de seguridad rápidas, tabla
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] `BAK_MATRICULA` solo conserva las restricciones `NOT NULL`.
 - [ ] `HISTORICO_NOTA` tiene 143 filas y su clave primaria impide archivar dos veces el mismo curso: repite el `INSERT` y comprueba que falla con ORA-00001.
 - [ ] Tras el paso 4, las notas vuelven a ser las originales.
+{{% /comprobacion %}}
 
 #### Ampliación
 
@@ -260,12 +264,14 @@ DELETE FROM alumno WHERE id_alumno = 1;
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Las filas afectadas coinciden con la tabla. Si no coinciden, **no** confirmes: haz `ROLLBACK` y revisa la condición.
 - [ ] Al final, `SELECT COUNT(*) FROM alumno;` devuelve 32 (33 con Marina menos Adrián) y `SELECT COUNT(*) FROM matricula;` devuelve 143 (+5 −5).
 - [ ] Ninguna sentencia usa identificadores escritos a mano cuando el enunciado pide obtenerlos.
 
 > [!CAUTION]
 > M10 elimina documentos académicos en cascada. En un sistema real no se borraría al alumno: se marcaría como **baja** (por ejemplo, con una columna `fecha_baja`) para conservar su expediente. Escribe en tu script un comentario que proponga esta alternativa.
+{{% /comprobacion %}}
 
 ---
 
@@ -318,8 +324,10 @@ Ejecuta cada experimento y **predice** los saldos finales antes de consultar `SE
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Has predicho correctamente al menos 5 de los 6 experimentos. Si no, explica en qué te equivocaste.
 - [ ] Puedes explicar con tus palabras la **atomicidad de sentencia** (experimento 4) y por qué es peligrosa si la aplicación confirma sin comprobar los errores.
+{{% /comprobacion %}}
 
 #### Ampliación: la transferencia segura
 
@@ -439,9 +447,11 @@ A los pocos segundos, Oracle detecta el ciclo y una de las sesiones (normalmente
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Has completado los seis cronogramas con los resultados obtenidos.
 - [ ] Has capturado la consulta de `v$session` del experimento 2 mostrando la sesión bloqueada.
 - [ ] Explicas, para cada experimento, qué problema de concurrencia aparece o se evita.
+{{% /comprobacion %}}
 
 ---
 
@@ -582,6 +592,8 @@ Con `WHENEVER SQLERROR EXIT`, el error termina el guion.
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Todos los guiones son transaccionales: un error deja la base de datos como estaba.
 - [ ] Ningún guion contiene DDL entre sentencias DML de la misma transacción.
 - [ ] La estrategia de concurrencia está justificada con argumentos de la práctica 8.5.
+{{% /comprobacion %}}

@@ -51,6 +51,13 @@ Cada unidad tiene `_index.md` (presentación y RA/CE), `udXX-teoria.md` y `udXX-
 | `{{%/* details title="Solución" */%}} … {{%/* /details */%}}` | Bloque desplegable (pistas y soluciones) |
 | `{{</* tabs */>}}{{%/* tab "Oracle" */%}} … {{%/* /tab */%}}{{</* /tabs */>}}` | Pestañas (por ejemplo, Oracle / MySQL / PostgreSQL) |
 | `{{</* figura src="ud02/ej01.svg" alt="Descripción" caption="Pie" */>}}` | Imagen de `assets/images` que se abre a tamaño completo al pulsarla (diagramas grandes) |
+| `{{</* diagrama src="acid-transactions.svg" caption="Pie" */>}}` | Diagrama SVG de `assets/images` incrustado e **interactivo**: al pasar el ratón o pulsar un elemento (`class="hot"` + `data-tip`) aparece su explicación |
+| `{{%/* curiosidad titulo="¿Sabías que…?" */%}} … {{%/* /curiosidad */%}}` | Curiosidad desplegable |
+| `{{%/* paso-a-paso titulo="…" */%}}{{%/* etapa titulo="1. …" */%}} … {{%/* /etapa */%}}{{%/* /paso-a-paso */%}}` | Explicación interactiva por etapas, con navegación y barra de progreso |
+| `{{</* grafico tipo="barras" titulo="…" datos="A=10;B=250" unidad="bloques" log="true" */>}}` | Gráfico interactivo sin dependencias (`barras` o `lineas`; `horizontal="true"`; `log="true"` añade el conmutador de escala) |
+| `{{</* coste-busqueda */>}}` | Laboratorio: bloques leídos con y sin índice según el tamaño de la tabla |
+| `{{</* tarjetas titulo="…" */>}}` + YAML `- t:` / `d:` | Tarjetas de vocabulario que se giran |
+| `{{%/* comprobacion */%}}` + lista | Lista de comprobación de una práctica con casillas y progreso (se guarda en el navegador del alumno) |
 | Bloques ` ```mermaid ` | Diagramas E/R, de flujo y de secuencia |
 | `$...$` y `$$...$$` con `math: true` en la cabecera | Fórmulas con KaTeX |
 
@@ -60,6 +67,12 @@ Para crear una página nueva con la estructura de las demás:
 hugo new --kind teoria   content.es/ud11-ejemplo/ud11-teoria.md
 hugo new --kind practicas content.es/ud11-ejemplo/ud11-practicas.md
 ```
+
+## Diagramas explicativos (UD01-UD04)
+
+Los diagramas de `assets/images/*.svg` (arquitectura, ACID, E/R, relacional, ejemplos de Chen…) se generan con `tools/gen_infografias.py` (necesita `Pillow`). El generador ajusta el texto al ancho de cada caja, así que no se desborda ni se corta. Para cambiar uno, edita su función y ejecuta `python3 tools/gen_infografias.py <nombre>`. Los elementos con `data-tip` se vuelven interactivos con el shortcode `diagrama`.
+
+Las imágenes escritas como `![…](images/x.svg)` se resuelven desde `assets/images` mediante el *render hook* `layouts/_markup/render-image.html`, de modo que funcionan en cualquier página y con cualquier `baseURL`.
 
 ## Diagramas EER del banco de ejercicios (UD02)
 
@@ -371,3 +384,9 @@ jobs:
 # **Despliegue**:
    - Haz `git add .`, `git commit -m "Mensaje descriptivo"` y `git push` para actualizar el repositorio.
    - GitLab CI/CD o Github Actions (según cual se use) se encargará de generar el sitio y desplegarlo en GitLab Pages / Github Pages.
+
+## Idiomas
+
+- `content.es/` (castellano, idioma por defecto) y `content.val/` (valenciano, ruta `/val/`) tienen la misma estructura de archivos y el mismo número de líneas, de modo que un cambio en uno se localiza fácilmente en el otro.
+- Textos de interfaz de los componentes: `i18n/es.toml` y `i18n/val.toml`. Currículo oficial: `data/curriculo.yaml` (es) y `data/curriculo_val.yaml` (val).
+- Los laboratorios interactivos (`layouts/_shortcodes/*-lab.html`, calendario, etc.) y los SVG de `assets/images` siguen en castellano.

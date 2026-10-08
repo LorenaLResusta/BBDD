@@ -1077,6 +1077,10 @@ UPDATE plaza_grupo SET plazas_libres = plazas_libres - 1 WHERE cod_grupo = '1DAM
 
 Una **transacción** es una **unidad lógica de trabajo**: un conjunto de sentencias que se aplican **todas o ninguna**. Mientras no se confirme, los cambios son provisionales; cuando se confirma, pasan a formar parte permanente de la base de datos.
 
+{{% curiosidad titulo="De dónde sale la sigla ACID" %}}
+El acrónimo **ACID** lo acuñaron Theo Härder y Andreas Reuter en 1983. La teoría de las transacciones se debe en gran parte a Jim Gray, que recibió el Premio Turing en 1998 por este trabajo.
+{{% /curiosidad %}}
+
 ### 6.2 Las cuatro propiedades ACID
 
 | Propiedad | Qué garantiza | En el caso de la matrícula |
@@ -1155,6 +1159,24 @@ flowchart LR
 Y un último mecanismo que conviene conocer: la **autoconfirmación de la herramienta**. No es una característica de Oracle, sino del cliente: si está activada, el cliente lanza un `COMMIT` después de cada sentencia. Desactívala (§1.4).
 
 ---
+
+{{% paso-a-paso titulo="Transferencia bancaria: qué pasa paso a paso" %}}
+{{% etapa titulo="0. Estado inicial" %}}
+Cuenta A: **1.000 €**. Cuenta B: **500 €**. Queremos mover 100 € de A a B.
+{{% /etapa %}}
+{{% etapa titulo="1. `UPDATE` cuenta A" %}}
+`UPDATE cuenta SET saldo = saldo - 100 WHERE id = 'A';` Dentro de la transacción A vale 900 €, pero **otras sesiones siguen viendo 1.000 €** (aislamiento).
+{{% /etapa %}}
+{{% etapa titulo="2. Fallo" %}}
+Antes del segundo `UPDATE` se cae la conexión o salta un error. Si no hubiera transacciones, se habrían perdido 100 €.
+{{% /etapa %}}
+{{% etapa titulo="3. `ROLLBACK`" %}}
+El SGBD deshace el primer `UPDATE`. A vuelve a **1.000 €** y B sigue en **500 €**: la suma total no cambia (atomicidad y consistencia).
+{{% /etapa %}}
+{{% etapa titulo="4. El camino feliz" %}}
+Si el segundo `UPDATE` (B = 600 €) funciona, se ejecuta `COMMIT`: ambos cambios se confirman a la vez y son **permanentes** (durabilidad).
+{{% /etapa %}}
+{{% /paso-a-paso %}}
 
 ## 7. Control de la transacción: `COMMIT`, `ROLLBACK` y `SAVEPOINT`
 
@@ -1298,6 +1320,10 @@ En EduGest trabajan a la vez secretaría, el profesorado poniendo notas, los tut
 | **Lectura no repetible** (*non-repeatable read*) | La misma consulta, dentro de la misma transacción, devuelve valores distintos porque otra confirmó un cambio | Un informe calcula la media dos veces y obtiene dos resultados |
 | **Lectura fantasma** (*phantom read*) | Una consulta repetida devuelve **filas nuevas** que otra transacción ha insertado | Un recuento de matriculados crece a mitad de informe |
 | **Actualización perdida** (*lost update*) | Dos sesiones leen el mismo dato, calculan un valor nuevo y escriben: el segundo pisa al primero | Dos profesores suben la nota de la misma matrícula y solo queda un cambio |
+
+{{% curiosidad titulo="En Oracle, leer no bloquea" %}}
+Gracias a la consistencia de lectura multiversión, en Oracle las lecturas no bloquean a las escrituras ni las escrituras a las lecturas: una consulta ve una «foto» coherente de los datos del instante en que empezó.
+{{% /curiosidad %}}
 
 ### 8.2 Qué permite Oracle: consistencia de lectura multiversión
 
@@ -1661,7 +1687,7 @@ SPOOL OFF
 
 | Elemento | Para qué sirve |
 |---|---|
-Cabecera con autor, fecha, entorno y objetivo | Que quien lo lea en 2029 sepa qué hace y quién responde |
+| Cabecera con autor, fecha, entorno y objetivo | Que quien lo lea en 2029 sepa qué hace y quién responde |
 | `WHENEVER SQLERROR EXIT ... ROLLBACK` | Que un error **detenga** el guion y no deje medias tintas |
 | `SPOOL` | Dejar traza de todo lo ejecutado y de sus resultados: es la evidencia de la intervención |
 | Copia previa con CTAS | Poder volver atrás después del `COMMIT` |
@@ -1726,6 +1752,21 @@ END;
 > En la UD09 estos guiones se convertirán en **procedimientos almacenados** con `EXCEPTION ... WHEN OTHERS THEN ROLLBACK`, parámetros y control de errores. La diferencia práctica es grande: un guion lo ejecuta una persona desde su equipo; un procedimiento lo puede invocar la aplicación, un trabajo programado o un disparador, siempre con el mismo comportamiento.
 
 ---
+
+{{< tarjetas titulo="Repasa los términos de la UD08" >}}
+- t: "Transacción"
+  d: "Secuencia de operaciones que se ejecuta como una unidad: todo o nada."
+- t: "COMMIT"
+  d: "Confirma los cambios de la transacción y los hace permanentes."
+- t: "ROLLBACK"
+  d: "Deshace todos los cambios no confirmados de la transacción."
+- t: "SAVEPOINT"
+  d: "Punto intermedio al que se puede volver sin deshacer toda la transacción."
+- t: "Bloqueo"
+  d: "Reserva de una fila para que otra sesión no la modifique a la vez."
+- t: "Interbloqueo"
+  d: "Dos sesiones que se esperan mutuamente: el SGBD aborta una."
+{{< /tarjetas >}}
 
 ## 12. Errores frecuentes
 
@@ -1844,4 +1885,3 @@ END;
 - [Oracle AI Database 26ai: Database Concepts, *Data Concurrency and Consistency*](https://docs.oracle.com/en/database/oracle/oracle-database/26/cncpt/data-concurrency-and-consistency.html).
 - [Oracle AI Database 26ai: Database Development Guide, *Maintaining Data Integrity in Database Applications*](https://docs.oracle.com/en/database/oracle/oracle-database/26/adfns/maintaining-data-integrity.html).
 - [Real Decreto 405/2023, de 29 de mayo (módulo profesional 0484 Bases de datos)](https://www.boe.es/buscar/act.php?id=BOE-A-2023-13221).
-- [Curso de Bases de Datos de F. M. García: bloque de manipulación de datos y transacciones](https://fmgarcia.github.io/CursosGithubIO/CursoBasesDatos/).

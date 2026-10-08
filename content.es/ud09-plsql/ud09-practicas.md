@@ -250,6 +250,7 @@ Implementar un procedimiento almacenado que valida reglas de negocio y comunica 
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Las ocho pruebas dan el resultado esperado.
 - [ ] Tras las pruebas y antes del `ROLLBACK` hay 4 matrículas nuevas del alumno 1: módulo 2 (convocatoria 2) y módulo 4 (convocatorias 2, 3 y 4).
 - [ ] Puedes explicar por qué el procedimiento no hace `COMMIT`.
@@ -257,6 +258,7 @@ Implementar un procedimiento almacenado que valida reglas de negocio y comunica 
 {{% details title="¿Por qué P8 falla en la cuarta llamada?" %}}
 El alumno 1 ya tenía una matrícula del módulo 4 en 2025-26 (convocatoria 1). El procedimiento calcula la convocatoria como `MAX(convocatoria) + 1`, así que las llamadas para 2026-27, 2027-28 y 2028-29 crean las convocatorias 2, 3 y 4. La quinta convocatoria no está permitida.
 {{% /details %}}
+{{% /comprobacion %}}
 
 #### Ampliación
 
@@ -292,10 +294,12 @@ Pistas: `RPAD(nombre, 45)` alinea columnas; `TO_CHAR(nota, '90.00')` formatea la
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] `EXEC pr_alerta_faltas(5);` encuentra 2 alumnos: Martina Alemany Vidal (6) y Valeria Quiles Marco (5).
 - [ ] `EXEC pr_alerta_faltas;` (umbral por defecto, 4) encuentra 5 alumnos.
 - [ ] `EXEC pr_boletines_grupo('2ASIR');` no da error y muestra que el grupo no tiene alumnado.
 - [ ] El cursor explícito se cierra también si se produce un error (sección `EXCEPTION` que comprueba `%ISOPEN`).
+{{% /comprobacion %}}
 
 ---
 
@@ -360,12 +364,14 @@ Implementar con disparadores la auditoría de cambios y las restricciones de Edu
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] La matriz completa coincide con lo esperado.
 - [ ] `SELECT trigger_name, status FROM user_triggers;` muestra todos los disparadores `ENABLED`.
 - [ ] Cada disparador tiene un comentario que cita la restricción del catálogo (R1, R3...) que implementa.
 
 > [!WARNING]
 > Si al cargar de nuevo los datos con el script 02 aparecen errores `ORA-200xx`, es que tus disparadores rechazan algún dato de ejemplo o el orden de carga. Desactívalos antes de una carga masiva (`ALTER TABLE ... DISABLE ALL TRIGGERS`) y actívalos después… **comprobando** luego los datos con una consulta.
+{{% /comprobacion %}}
 
 ---
 
@@ -422,12 +428,14 @@ Automatizar tareas periódicas en el servidor y comprobar su ejecución.
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] `LOG_TAREA` tiene una fila por minuto mientras la tarea está activa.
 - [ ] El historial muestra al menos una ejecución `SUCCEEDED` y una `FAILED`.
 - [ ] El calendario final es `FREQ=WEEKLY; BYDAY=MON,TUE,WED,THU,FRI; BYHOUR=7; BYMINUTE=30`.
 
 > [!TIP]
 > Las tareas que no hagas desaparecer siguen ejecutándose en tu contenedor. Al terminar: `EXEC DBMS_SCHEDULER.DROP_JOB('JOB_RESUMEN_PRUEBA');`
+{{% /comprobacion %}}
 
 ---
 
@@ -459,9 +467,11 @@ END pkg_secretaria;
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] La promoción devuelve 12 alumnos promocionados y 18 matrículas de pendientes, igual que el guion de la UD08.
 - [ ] Una segunda llamada lanza el error propio.
 - [ ] El cuerpo del paquete no tiene `COMMIT`.
+{{% /comprobacion %}}
 
 ---
 
@@ -479,6 +489,8 @@ END pkg_secretaria;
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Todos los objetos están `VALID` en `USER_OBJECTS`.
 - [ ] El usuario de secretaría puede matricular con `EXEC edugest.pkg_secretaria.matricular(...)` pero no con un `INSERT` directo.
 - [ ] Cada restricción del catálogo tiene su prueba.
+{{% /comprobacion %}}

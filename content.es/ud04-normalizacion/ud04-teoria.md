@@ -167,6 +167,10 @@ De ellas se derivan la **unión** (si $X \rightarrow Y$ y $X \rightarrow Z$, ent
 
 {{< sesion n="3" h="2" tipo="t" >}}Formas normales{{< /sesion >}}
 
+{{% curiosidad titulo="«La clave, toda la clave y nada más que la clave»" %}}
+Es la frase que se usa para recordar la 3FN: cada atributo depende de **la clave** (1FN), **toda la clave** (2FN) y **nada más que la clave** (3FN). A menudo se completa con «…, así me ayude Codd».
+{{% /curiosidad %}}
+
 ## 3. Las formas normales
 
 Las **formas normales** son niveles de calidad de un esquema. Cada una incluye a la anterior: una relación en 3FN también está en 2FN y en 1FN.
@@ -235,6 +239,10 @@ Ahora cambiar el tutor de 1DAM es modificar **una** fila, se puede dar de alta S
 > [!IMPORTANT]
 > **Regla mnemotécnica (William Kent):** en 3FN cada atributo no clave depende de «**la clave, toda la clave y nada más que la clave**». *La clave* → 1FN; *toda la clave* → 2FN; *nada más que la clave* → 3FN.
 
+{{% curiosidad titulo="Boyce y Codd" %}}
+La forma normal de Boyce-Codd la propusieron Raymond F. Boyce y Edgar F. Codd en 1974, ambos en IBM, para cubrir casos que la 3FN dejaba pasar.
+{{% /curiosidad %}}
+
 ### 3.4 Forma normal de Boyce-Codd (FNBC)
 
 > Una relación está en **FNBC** si, para toda dependencia no trivial $X \rightarrow Y$, $X$ es una **superclave** (contiene una clave candidata).
@@ -273,6 +281,24 @@ Existen la **cuarta forma normal** (4FN), que trata las *dependencias multivalua
 ---
 
 {{< sesion n="5" h="1" tipo="t" >}}Descomposición y desnormalización{{< /sesion >}}
+
+{{% paso-a-paso titulo="Normalizar un pedido hasta 3FN" %}}
+{{% etapa titulo="0. Punto de partida" %}}
+`PEDIDO(id_pedido, id_producto, nombre_producto, cantidad, id_cliente, nombre_cliente)` con clave `(id_pedido, id_producto)`. Cada fila repite el nombre del producto y del cliente: hay anomalías.
+{{% /etapa %}}
+{{% etapa titulo="1. 1FN" %}}
+Todos los atributos son atómicos y no hay grupos repetidos: **ya está en 1FN**.
+{{% /etapa %}}
+{{% etapa titulo="2. 2FN" %}}
+`nombre_producto` depende solo de `id_producto` (parte de la clave) y `id_cliente`, `nombre_cliente` solo de `id_pedido`. Se separan: `PRODUCTO(id_producto, nombre_producto)`, `PEDIDO(id_pedido, id_cliente, nombre_cliente)` y `LINEA(id_pedido, id_producto, cantidad)`.
+{{% /etapa %}}
+{{% etapa titulo="3. 3FN" %}}
+En `PEDIDO`, `nombre_cliente` depende de `id_cliente`, que no es clave (dependencia transitiva). Se separa: `CLIENTE(id_cliente, nombre_cliente)` y `PEDIDO(id_pedido, id_cliente)`.
+{{% /etapa %}}
+{{% etapa titulo="4. Resultado" %}}
+`CLIENTE`, `PRODUCTO`, `PEDIDO(id_cliente FK)` y `LINEA(id_pedido FK, id_producto FK)`. Cada hecho se guarda **una sola vez**.
+{{% /etapa %}}
+{{% /paso-a-paso %}}
 
 ## 4. Descomposición sin pérdida
 
@@ -336,6 +362,19 @@ La normalización elimina las redundancias, pero **no** resuelve todas las regla
 {{% /steps %}}
 
 ---
+
+{{< tarjetas titulo="Repasa los términos de la UD04" >}}
+- t: "Anomalía"
+  d: "Problema de inserción, borrado o modificación causado por datos repetidos."
+- t: "Dependencia funcional"
+  d: "X → Y: el valor de X determina el de Y."
+- t: "Dependencia parcial"
+  d: "Atributo que depende solo de una parte de una clave compuesta (rompe la 2FN)."
+- t: "Dependencia transitiva"
+  d: "A → B y B → C con B no clave (rompe la 3FN)."
+- t: "Descomposición sin pérdida"
+  d: "Dividir una relación de modo que el join de las partes recupere la original."
+{{< /tarjetas >}}
 
 ## 8. Errores frecuentes
 
@@ -431,4 +470,3 @@ Claves candidatas: **AC, BC, CD y CE**. Todos los atributos son primos, así que
 - Codd, E. F. (1972). «Further Normalization of the Data Base Relational Model». *Data Base Systems*, Prentice-Hall.
 - Kent, W. (1983). «A Simple Guide to Five Normal Forms in Relational Database Theory». *Communications of the ACM*, 26(2).
 - Elmasri, R. y Navathe, S. B. *Fundamentos de sistemas de bases de datos*. Pearson. Capítulos de dependencias funcionales y normalización.
-- [Curso de Bases de Datos de F. M. García: módulos 19 y 20](https://fmgarcia.github.io/CursosGithubIO/CursoBasesDatos/).

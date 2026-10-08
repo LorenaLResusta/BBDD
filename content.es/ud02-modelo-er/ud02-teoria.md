@@ -54,7 +54,7 @@ Al terminar esta unidad serás capaz de:
 - Representar el modelo con herramientas gráficas y en distintas notaciones.
 - Documentar los supuestos y las restricciones que el diagrama no puede expresar.
 
-![Componentes Principales del Modelo Entidad-Relación](images/er-components.svg "Componentes del Modelo E/R")
+{{< diagrama src="er-components.svg" caption="Componentes Principales del Modelo Entidad-Relación" >}}
 
 ---
 
@@ -97,6 +97,10 @@ graph TD
 ---
 
 ## 2. El Modelo Conceptual Entidad-Relación (E/R)
+
+{{% curiosidad titulo="Un artículo de 1976 que sigue citándose" %}}
+Peter Chen publicó «The Entity-Relationship Model: Toward a Unified View of Data» en 1976 en la revista *ACM Transactions on Database Systems*. Casi medio siglo después, sus rectángulos, rombos y elipses siguen siendo el idioma común del diseño conceptual.
+{{% /curiosidad %}}
 
 ### 2.1 Entidades: Fuertes, Débiles e Instancias
 
@@ -271,7 +275,7 @@ En modelos conceptuales complejos donde existen múltiples relaciones cruzadas e
 
 El Modelo Entidad-Relación Extendido (EER) incorpora conceptos orientados a objetos para gestionar jerarquías de clases de entidades:
 
-![Jerarquías EER: Generalización y Especialización](images/generalization-hierarchy.svg "Jerarquías EER")
+{{< diagrama src="generalization-hierarchy.svg" caption="Jerarquías EER: Generalización y Especialización" >}}
 
 - **Supertipo (Entidad Genérica):** Es la entidad de nivel superior que contiene los atributos comunes (incluyendo la clave primaria) y las relaciones generales que comparten todas las variantes.
 - **Subtipo (Entidad Especializada):** Es una entidad de nivel inferior que representa una subclase o variante específica del supertipo.
@@ -324,7 +328,7 @@ Fija las reglas (cobertura y solapamiento) y marca a qué subtipos pertenece cad
 
 ### 4.3 Agregación: Modelado de Asociaciones como Entidades
 
-![Agregación y Relación Ternaria](images/aggregation-ternary.svg "Agregación y Ternarias")
+{{< diagrama src="aggregation-ternary.svg" caption="Agregación y Relación Ternaria" >}}
 
 La **agregación** es una abstracción que permite considerar una relación entre dos entidades junto con dichas entidades como si fuera una **entidad de orden superior (entidad agregada)**, haciendo posible que esta estructura completa se relacione a su vez con otra tercera entidad.
 
@@ -390,6 +394,27 @@ Para elaborar un esquema conceptual EER profesional a partir de un texto de requ
    Revisar el diagrama para detectar relaciones transitivas redundantes (relaciones que pueden deducirse combinando otras asociaciones) y simplificar el modelo.
 
 ---
+
+{{% paso-a-paso titulo="De un enunciado a un diagrama E/R" %}}
+{{% etapa titulo="1. Lee el enunciado" %}}
+«La biblioteca presta libros a socios. De cada libro se guardan varios ejemplares físicos. Un libro puede tener varios autores.» Subraya los **sustantivos** (candidatos a entidad) y los **verbos** (candidatos a relación).
+{{% /etapa %}}
+{{% etapa titulo="2. Entidades" %}}
+Candidatas: biblioteca, libro, socio, ejemplar, autor. ¿La biblioteca es una entidad? Si solo hay una, es el contexto, no una entidad: se descarta. Quedan **LIBRO, EJEMPLAR, SOCIO, AUTOR**.
+{{% /etapa %}}
+{{% etapa titulo="3. Identificadores" %}}
+LIBRO se identifica por `isbn`; SOCIO por `num_socio`; AUTOR por `id_autor`. EJEMPLAR solo se distingue dentro de su libro: es una **entidad débil** con clave parcial `num_ejemplar`.
+{{% /etapa %}}
+{{% etapa titulo="4. Relaciones" %}}
+AUTOR–LIBRO (*escribe*), LIBRO–EJEMPLAR (*identifica*), SOCIO–EJEMPLAR (*toma prestado*).
+{{% /etapa %}}
+{{% etapa titulo="5. Cardinalidades" %}}
+Un autor escribe (0,N) libros y un libro lo escriben (1,N) autores → **N:M**. Un libro tiene (1,N) ejemplares y cada ejemplar es de (1,1) libro → **1:N**. Un socio toma prestados (0,N) ejemplares y un ejemplar está en préstamo con (0,N) socios a lo largo del tiempo → **N:M** con atributo `fecha`.
+{{% /etapa %}}
+{{% etapa titulo="6. Revisa" %}}
+¿Cada entidad tiene identificador? ¿Hay atributos que en realidad son entidades? ¿Falta alguna relación? Compáralo con el diagrama de la biblioteca de más arriba.
+{{% /etapa %}}
+{{% /paso-a-paso %}}
 
 ## 6. Ejemplos Prácticos Completos Resueltos
 
@@ -462,7 +487,7 @@ Un congreso científico necesita organizar sus actividades. Se registran los `PA
 
 ### 6.4 Ejemplo 4: Empresa de Repostería "PAVA S.A."
 
-![Diagrama EER PAVA S.A.](images/eer-example-pava.svg "Diagrama EER PAVA S.A.")
+{{< diagrama src="eer-example-pava.svg" caption="Diagrama EER PAVA S.A." >}}
 
 #### Especificaciones del Modelo PAVA S.A
 
@@ -613,6 +638,21 @@ erDiagram
 
 ---
 
+{{< tarjetas titulo="Repasa los términos de la UD02" >}}
+- t: "Entidad"
+  d: "Objeto del mundo real sobre el que se guarda información."
+- t: "Entidad débil"
+  d: "Entidad que no se identifica por sí sola: depende de otra."
+- t: "Atributo multivaluado"
+  d: "Atributo que puede tener varios valores para una misma instancia."
+- t: "Cardinalidad (mín,máx)"
+  d: "Número mínimo y máximo de instancias con que participa una entidad en una relación."
+- t: "Generalización"
+  d: "Agrupar entidades parecidas en un supertipo con los atributos comunes."
+- t: "Agregación"
+  d: "Tratar una relación como si fuera una entidad para poder relacionarla con otra."
+{{< /tarjetas >}}
+
 ## 10. Resumen y Conclusiones
 
 - El **Modelo EER** es el lenguaje gráfico conceptual estándar para abstraer los requisitos del mundo real hacia un esquema de base de datos riguroso.
@@ -710,5 +750,4 @@ Responde a las preguntas y pulsa **Corregir**. Cada respuesta incluye una explic
 
 - Chen, P. P. (1976). «The Entity-Relationship Model: Toward a Unified View of Data». *ACM Transactions on Database Systems*, 1(1).
 - Elmasri, R. y Navathe, S. B. *Fundamentos de sistemas de bases de datos*. Pearson.
-- [Curso de Bases de Datos de F. M. García: bloque 2, diseño conceptual](https://fmgarcia.github.io/CursosGithubIO/CursoBasesDatos/).
 - [Mermaid: sintaxis de los diagramas entidad-relación](https://mermaid.js.org/syntax/entityRelationshipDiagram.html).

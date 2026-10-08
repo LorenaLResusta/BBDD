@@ -68,9 +68,11 @@ Conocer las herramientas de consulta (hoja de trabajo, generador de consultas, p
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Las cuatro consultas devuelven 6, 5, 2 y 12 filas.
 - [ ] La consulta del generador es equivalente a `SELECT nombre, apellidos, especialidad FROM profesor WHERE id_departamento = 1;` y devuelve 8 filas.
 - [ ] Sabes explicar la diferencia entre ejecutar con `Ctrl+Intro` y con `F5`.
+{{% /comprobacion %}}
 
 ---
 
@@ -441,10 +443,12 @@ FETCH FIRST 2 ROWS ONLY;
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] Cada consulta empieza con un comentario que repite la pregunta.
 - [ ] Ninguna consulta compara con `= NULL` ni usa fechas como texto.
 - [ ] Todas las consultas que devuelven listados tienen `ORDER BY`.
 - [ ] El número de filas de cada consulta coincide con la solución.
+{{% /comprobacion %}}
 
 #### Errores habituales
 
@@ -679,9 +683,11 @@ ORDER  BY id_modulo;
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] F1 funciona aunque un apellido tenga tildes.
 - [ ] F3 calcula años **completos**, no la diferencia de años del calendario.
 - [ ] F5 muestra los días en castellano aunque tu sesión esté en inglés.
+{{% /comprobacion %}}
 
 ---
 
@@ -738,6 +744,8 @@ Incluye también una consulta creada con el **generador de consultas** de SQL De
 
 #### Comprobación
 
+{{% comprobacion %}}
 - [ ] 15 consultas, todas ejecutables sin errores.
 - [ ] Las técnicas indicadas aparecen al menos una vez cada una.
 - [ ] Las preguntas son realistas y distintas a las de la práctica 6.2.
+{{% /comprobacion %}}

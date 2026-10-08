@@ -6,11 +6,11 @@
 {{- $src := .Get "src" -}}
 {{- with resources.Get (printf "images/%s" $src) -}}
 <figure class="bd-figura">
-  <a href="{{ .RelPermalink }}" target="_blank" rel="noopener" title="Abrir a tamaño completo">
+  <a href="{{ .RelPermalink }}" target="_blank" rel="noopener" title="{{ i18n "ampliar" }}">
     <img src="{{ .RelPermalink }}" alt="{{ $.Get "alt" }}" loading="lazy">
   </a>
   {{- with $.Get "caption" }}
-  <figcaption>{{ . }} <span>Pulsa la imagen para verla a tamaño completo.</span></figcaption>
+  <figcaption>{{ . }} <span>{{ i18n "ampliar_pie" }}</span></figcaption>
   {{- end }}
 </figure>
 {{- else -}}

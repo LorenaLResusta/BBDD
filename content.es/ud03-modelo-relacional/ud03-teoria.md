@@ -52,7 +52,7 @@ Al terminar esta unidad serás capaz de:
 - Transformar un diagrama E/R extendido en un esquema relacional aplicando reglas sistemáticas.
 - Documentar las restricciones que el modelo lógico no puede expresar.
 
-![Anatomía de una Relación en el Modelo Relacional](images/relational-table-anatomy.svg "Anatomía de una Relación")
+{{< diagrama src="relational-table-anatomy.svg" caption="Anatomía de una Relación en el Modelo Relacional" >}}
 
 ---
 
@@ -82,6 +82,10 @@ Para caracterizar matemáticamente una tabla se utilizan los siguientes concepto
 
 ---
 
+{{% curiosidad titulo="Codd y los dos tipos de «dato ausente»" %}}
+El propio Codd propuso más tarde distinguir entre un valor **ausente pero aplicable** y otro **no aplicable**. SQL se quedó con un único `NULL`, y de ahí vienen muchas de sus sorpresas: `NULL = NULL` no es verdadero.
+{{% /curiosidad %}}
+
 ### 1.3 Tuplas (Filas) y Semántica de Valores Nulos (NULL)
 
 - **Tupla (Fila, Registro u Ocurrencia):** Cada fila individual de la tabla representa una instancia concreta de la entidad o relación del mundo real. Cada tupla está formada por una lista ordenada de valores, donde cada valor corresponde a un atributo específico.
@@ -90,11 +94,15 @@ Para caracterizar matemáticamente una tabla se utilizan los siguientes concepto
 
 ---
 
+{{% curiosidad titulo="Las reglas de Codd" %}}
+En 1985 Codd publicó una lista de 12 reglas (numeradas de la 1 a la 12, más una «regla 0») que un sistema debía cumplir para llamarse realmente relacional. Casi ningún SGBD comercial las cumple todas, pero siguen siendo el listón de referencia.
+{{% /curiosidad %}}
+
 ## 2. Estudio Exhaustivo de Claves
 
 Las claves constituyen el pilar fundamental para garantizar la unicidad de las filas y establecer vínculos de integridad entre tablas.
 
-![Reglas de Transformación de EER a Relacional](images/eer-to-relational-rules.svg "Reglas de Transformación EER")
+{{< diagrama src="eer-to-relational-rules.svg" caption="Reglas de Transformación de EER a Relacional" >}}
 
 ### 2.1 Clave Candidata y Clave Primaria (Primary Key - PK)
 
@@ -291,6 +299,27 @@ Este transformador aplica las reglas del apartado 4 y produce el esquema formal 
 - Si la participación del lado "N" es obligatoria (cardinalidad mínima 1), la `FK` debe configurarse como `NOT NULL`.
 
 ---
+
+{{% paso-a-paso titulo="De N:M a tablas: ALUMNO y ASIGNATURA" %}}
+{{% etapa titulo="1. El diagrama" %}}
+Un alumno se matricula en muchas asignaturas y una asignatura tiene muchos alumnos: relación **N:M** con el atributo `nota`.
+{{% /etapa %}}
+{{% etapa titulo="2. Las entidades pasan a tablas" %}}
+`ALUMNO(id_alumno PK, nombre)` y `ASIGNATURA(id_asig PK, titulo)`. Cada entidad fuerte se convierte en una tabla con su clave.
+{{% /etapa %}}
+{{% etapa titulo="3. La relación N:M pasa a tabla" %}}
+No se puede poner una FK en ninguna de las dos tablas sin repetir filas, así que se crea una **tabla intermedia** `MATRICULA`.
+{{% /etapa %}}
+{{% etapa titulo="4. Su clave" %}}
+Las dos claves ajenas forman juntas la PK compuesta: `PRIMARY KEY (id_alumno, id_asig)`. Así un alumno no se matricula dos veces en la misma asignatura.
+{{% /etapa %}}
+{{% etapa titulo="5. Los atributos de la relación" %}}
+`nota` y `fecha` van en `MATRICULA`: dependen de la pareja alumno-asignatura, no de uno solo.
+{{% /etapa %}}
+{{% etapa titulo="6. Resultado" %}}
+`MATRICULA(id_alumno PK,FK → ALUMNO · id_asig PK,FK → ASIGNATURA · nota)`
+{{% /etapa %}}
+{{% /paso-a-paso %}}
 
 ### 4.5 Transformación de Relaciones Binarias N:M
 
@@ -733,6 +762,21 @@ erDiagram
 
 {{< sesion n="10" h="2" tipo="p" practica="EduGest-3" >}}Modelo lógico de EduGest{{< /sesion >}}
 
+{{< tarjetas titulo="Repasa los términos de la UD03" >}}
+- t: "Relación"
+  d: "Tabla del modelo relacional: conjunto de tuplas con los mismos atributos."
+- t: "Tupla"
+  d: "Fila de una relación."
+- t: "Grado"
+  d: "Número de atributos (columnas) de una relación."
+- t: "Cardinalidad"
+  d: "Número de tuplas (filas) de una relación."
+- t: "Clave candidata"
+  d: "Conjunto mínimo de atributos que identifica cada tupla."
+- t: "Clave ajena"
+  d: "Atributo(s) que referencian la clave primaria de otra relación."
+{{< /tarjetas >}}
+
 ## 9. Resumen y Conclusiones
 
 - El **Modelo Relacional** estructura lógicamente la información mediante relaciones (tablas), tuplas (filas) y atributos (columnas), basándose en la teoría matemática de conjuntos.
@@ -843,4 +887,3 @@ Responde a las preguntas y pulsa **Corregir**. Cada respuesta incluye una explic
 
 - Codd, E. F. (1970). «A Relational Model of Data for Large Shared Data Banks». *Communications of the ACM*, 13(6).
 - [Oracle AI Database 26ai: SQL Language Reference, *constraint*](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/constraint.html).
-- [Curso de Bases de Datos de F. M. García: bloque 3, diseño lógico](https://fmgarcia.github.io/CursosGithubIO/CursoBasesDatos/).

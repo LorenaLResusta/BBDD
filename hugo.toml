@@ -2,7 +2,6 @@ baseURL = "https://lorenalresusta.github.io/BBDD/"
 locale = "es-es"
 title = "Bases de Datos · DAM / DAW"
 theme = "hugo-book"
-copyright = "Apuntes del módulo 0484 Bases de Datos · Curso 2026/27"
 
 # Configuración multilingüe
 defaultContentLanguage = "es"
@@ -12,11 +11,17 @@ defaultContentLanguage = "es"
     label = "Castellano"
     weight = 1
     contentDir = "content.es"
+    title = "Bases de Datos · DAM / DAW"
+    locale = "es-es"
+    copyright = "Apuntes del módulo 0484 Bases de Datos · Curso 2026/27"
 
   [languages.val]
     label = "Valencià"
     weight = 2
     contentDir = "content.val"
+    title = "Bases de dades · DAM / DAW"
+    locale = "ca-valencia"
+    copyright = "Apunts del mòdul 0484 Bases de dades · Curs 2026/27"
 
 [markup]
   [markup.goldmark.renderer]
@@ -48,21 +53,31 @@ defaultContentLanguage = "es"
   BookDateFormat = '02/01/2006'
   BookRepo = 'https://github.com/lorenalresusta/BBDD'
 
-[menu]
-  [[menu.after]]
-    name = "Curso de referencia (F. M. García)"
-    url = "https://fmgarcia.github.io/CursosGithubIO/CursoBasesDatos/"
-    weight = 10
-  [[menu.after]]
+[languages.es.menus]
+  [[languages.es.menus.after]]
     name = "RD 405/2023 (BOE)"
     url = "https://www.boe.es/buscar/act.php?id=BOE-A-2023-13221"
     weight = 20
-  [[menu.after]]
+  [[languages.es.menus.after]]
     name = "Documentación Oracle 26ai"
     url = "https://docs.oracle.com/en/database/oracle/oracle-database/26/"
     weight = 30
-  [[menu.after]]
+  [[languages.es.menus.after]]
     name = "Documentación MongoDB"
+    url = "https://www.mongodb.com/docs/manual/"
+    weight = 40
+
+[languages.val.menus]
+  [[languages.val.menus.after]]
+    name = "RD 405/2023 (BOE)"
+    url = "https://www.boe.es/buscar/act.php?id=BOE-A-2023-13221"
+    weight = 20
+  [[languages.val.menus.after]]
+    name = "Documentació d'Oracle 26ai"
+    url = "https://docs.oracle.com/en/database/oracle/oracle-database/26/"
+    weight = 30
+  [[languages.val.menus.after]]
+    name = "Documentació de MongoDB"
     url = "https://www.mongodb.com/docs/manual/"
     weight = 40
 
