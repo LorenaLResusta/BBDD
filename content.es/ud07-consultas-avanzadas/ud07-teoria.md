@@ -35,16 +35,16 @@ Al terminar esta unidad serás capaz de:
 
 ### Temporalización
 
-La unidad ocupa **17 horas de aula** (10 de teoría y 7 de práctica). Las composiciones
+La unidad ocupa **16 horas de aula** (10 de teoría y 6 de práctica). Las composiciones
 y las subconsultas son el núcleo del RA3: conviene no avanzar hasta que cada consulta
 se pueda escribir sin consultar los apuntes.
 
-{{< sesiones unidad="UD07" horas="17" >}}
+{{< sesiones unidad="UD07" horas="16" >}}
 items:
   - {h: 2, tipo: T, t: "Funciones de agregado, GROUP BY y HAVING", ref: "§1 y §2 · laboratorio de agrupamiento"}
   - {h: 1, tipo: P, t: "Consultas resumen", ref: "Práctica 7.1"}
   - {h: 2, tipo: T, t: "Composiciones internas: INNER JOIN y varias tablas", ref: "§3 · laboratorio de composiciones"}
-  - {h: 2, tipo: P, t: "Composiciones paso a paso", ref: "Práctica 7.2"}
+  - {h: 1, tipo: P, t: "Composiciones paso a paso", ref: "Práctica 7.2"}
   - {h: 2, tipo: T, t: "Composiciones externas y autocomposición", ref: "§4 y §5"}
   - {h: 1, tipo: P, t: "Informes para jefatura", ref: "Práctica 7.3"}
   - {h: 2, tipo: T, t: "Subconsultas, EXISTS y WITH", ref: "§6"}

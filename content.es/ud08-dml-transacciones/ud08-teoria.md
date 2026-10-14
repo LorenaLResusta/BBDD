@@ -34,21 +34,20 @@ Al terminar esta unidad serás capaz de:
 
 ### Temporalización
 
-La unidad ocupa **9 horas de aula** (5 de teoría y 4 de práctica). Es la unidad más
-corta del curso en relación con su importancia profesional: aprovecha las sesiones
+La unidad ocupa **6 horas de aula** (3 de teoría y 3 de práctica). Es una unidad corta
+en relación con su importancia profesional: aprovecha las sesiones
 prácticas, que requieren **dos sesiones de Oracle abiertas a la vez**.
 
-{{< sesiones unidad="UD08" horas="9" >}}
+{{< sesiones unidad="UD08" horas="6" >}}
 items:
-  - {h: 2, tipo: T, t: "DML: INSERT, UPDATE, DELETE y TRUNCATE", ref: "§1 a §4"}
+  - {h: 1, tipo: T, t: "DML: INSERT, UPDATE, DELETE y TRUNCATE", ref: "§1 a §4"}
   - {h: 1, tipo: P, t: "Altas, cambios y bajas en EduGest", ref: "Práctica 8.1"}
-  - {h: 1, tipo: T, t: "INSERT … SELECT y MERGE", ref: "§5"}
-  - {h: 1, tipo: P, t: "Copias, históricos y carga de notas con MERGE", ref: "Prácticas 8.2 y 8.6"}
-  - {h: 1, tipo: T, t: "Transacciones, ACID y SAVEPOINT", ref: "§6 y §7 · laboratorio de transacciones"}
+  - {h: 1, tipo: T, t: "INSERT … SELECT, MERGE, transacciones, ACID y SAVEPOINT", ref: "§5 a §7 · laboratorio de transacciones"}
   - {h: 1, tipo: P, t: "Laboratorio de transacciones", ref: "Práctica 8.4"}
   - {h: 1, tipo: T, t: "Concurrencia, bloqueos, interbloqueos y restricciones diferidas", ref: "§8 a §10"}
   - {h: 1, tipo: P, t: "Dos sesiones, un dato: concurrencia y bloqueos", ref: "Práctica 8.5"}
 autonomo:
+  - "Prácticas 8.2 y 8.6 (copias, históricos y carga de notas con MERGE)"
   - "Práctica 8.3 (modificaciones con subconsultas)"
   - "Práctica 8.7 (reto: guion de promoción de curso)"
   - "Proyecto EduGest · UD08 (guiones de mantenimiento)"
@@ -59,7 +58,7 @@ autonomo:
 
 ---
 
-{{< sesion n="1" h="2" tipo="t" >}}DML: INSERT, UPDATE, DELETE y TRUNCATE{{< /sesion >}}
+{{< sesion n="1" h="1" tipo="t" >}}DML: INSERT, UPDATE, DELETE y TRUNCATE{{< /sesion >}}
 
 ## 1. Modificar datos: herramientas y responsabilidad
 
@@ -763,7 +762,7 @@ La clave ajena de `IMPARTE` **no** tiene regla de borrado, así que protege al p
 
 ---
 
-{{< sesion n="3" h="1" tipo="t" >}}INSERT … SELECT y MERGE{{< /sesion >}}
+{{< sesion n="3" h="1" tipo="t" >}}INSERT … SELECT, MERGE y transacciones{{< /sesion >}}
 
 ## 5. Insertar desde consultas y `MERGE`
 
@@ -1024,7 +1023,6 @@ WHEN NOT MATCHED THEN
 
 ---
 
-{{< sesion n="5" h="1" tipo="t" >}}Transacciones, ACID y SAVEPOINT{{< /sesion >}}
 
 ## 6. Transacciones y propiedades ACID
 
@@ -1306,7 +1304,7 @@ Una consulta que lleva minutos ejecutándose necesita ver los datos **tal como e
 
 ---
 
-{{< sesion n="7" h="1" tipo="t" >}}Concurrencia, bloqueos, interbloqueos y restricciones diferidas{{< /sesion >}}
+{{< sesion n="5" h="1" tipo="t" >}}Concurrencia, bloqueos, interbloqueos y restricciones diferidas{{< /sesion >}}
 
 ## 8. Concurrencia y bloqueos
 

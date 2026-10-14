@@ -952,7 +952,7 @@ El sistema debe permitir atender los derechos de **acceso**, **rectificación**,
 
 ## 15. Autoevaluación
 
-Responde a las preguntas y pulsa el botón de corrección. Cada respuesta incluye una explicación.
+Responde a las preguntas y pulsa el botón de comprobar. Cada respuesta incluye una explicación.
 
 {{< quiz >}}
 - q: "Una academia guarda al alumnado en una hoja de cálculo y las facturas en otra, y copia el nombre y la dirección de cada alumno en cada factura. ¿Qué problema de los sistemas de ficheros se produce **directamente**?"

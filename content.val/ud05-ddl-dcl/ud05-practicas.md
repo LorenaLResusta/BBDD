@@ -289,24 +289,7 @@ CREATE TABLE vehiculo (
 ) ENGINE = InnoDB;
 ```
 
-{{% details title="Solució en Oracle" %}}
-```sql
-CREATE TABLE empleado (
-    id_empleado  NUMBER(6)     CONSTRAINT pk_empleado PRIMARY KEY,
-    nombre       VARCHAR2(100) CONSTRAINT nn_empleado_nombre NOT NULL
-);
-
-CREATE TABLE vehiculo (
-    matricula    VARCHAR2(10) CONSTRAINT pk_vehiculo PRIMARY KEY,
-    modelo       VARCHAR2(80) CONSTRAINT nn_vehiculo_modelo NOT NULL,
-    id_empleado  NUMBER(6),
-    CONSTRAINT uq_vehiculo_empleado UNIQUE (id_empleado),
-    CONSTRAINT fk_vehiculo_empleado FOREIGN KEY (id_empleado)
-        REFERENCES empleado (id_empleado) ON DELETE SET NULL
-);
-```
-`UNIQUE` sobre la clau aliena convertix la relació 1:N en 1:1, i com que admet diversos `NULL` permet molts vehicles sense assignar.
-{{% /details %}}
+{{< solucion id="ud05-001" title="Solució en Oracle" />}}
 
 ### Cas D · Jerarquia (taula per a la superclasse i per a cada subclasse)
 
@@ -580,23 +563,7 @@ Per a cada canvi, escriu la sentència i comprova el resultat amb `DESC` o amb e
 | 6 | L'email deixa de ser únic (diversos comptes d'una empresa) | `DROP CONSTRAINT` |
 | 7 | Esborrar per error la taula `pedido` i recuperar-la | `DROP` sense `PURGE` + `FLASHBACK TABLE` |
 
-{{% details title="Solució" %}}
-```sql
-ALTER TABLE cliente ADD (telefono VARCHAR2(15));
-ALTER TABLE cliente MODIFY (nombre VARCHAR2(150));
-ALTER TABLE pedido ADD (direccion_envio VARCHAR2(200) DEFAULT 'PENDIENTE DE INDICAR' NOT NULL);
-ALTER TABLE cliente RENAME COLUMN telefono TO telefono_contacto;
-ALTER TABLE pedido DROP CONSTRAINT ck_pedido_estado;
-ALTER TABLE pedido ADD CONSTRAINT ck_pedido_estado
-    CHECK (estado IN ('PENDIENTE', 'ENVIADO', 'ENTREGADO', 'CANCELADO', 'DEVUELTO'));
-ALTER TABLE cliente DROP CONSTRAINT uq_cliente_email;
-
-DROP TABLE pedido;
-SELECT object_name, original_name, droptime FROM user_recyclebin;
-FLASHBACK TABLE pedido TO BEFORE DROP;
-```
-Després del `FLASHBACK`, els índexs recuperats conserven un nom del sistema (`BIN$...`). Renomena'ls amb `ALTER INDEX "BIN$..." RENAME TO ix_pedido_cliente;`. Les claus alienes que **altres** taules tenien cap a la taula esborrada no es recuperen.
-{{% /details %}}
+{{< solucion id="ud05-002" title="Solució" />}}
 
 #### Errors habituals
 

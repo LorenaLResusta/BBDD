@@ -238,29 +238,7 @@ Ejecuta las tareas **en orden** sobre los datos originales. Para cada una escrib
 - **M10:** las faltas desaparecen porque `fk_falta_matricula` también tiene `ON DELETE CASCADE`.
 {{% /details %}}
 
-{{% details title="Solución (M3, M5 y M10)" %}}
-```sql
--- M3
-UPDATE matricula
-SET    nota_final = 5
-WHERE  nota_final >= 4.5 AND nota_final < 5
-AND    id_modulo = (SELECT id_modulo FROM modulo WHERE codigo = '0484' AND cod_ciclo = 'DAM');
-
--- M5
-UPDATE grupo
-SET    id_tutor = (SELECT p.id_profesor FROM profesor p
-                   WHERE  p.id_departamento = 1
-                   AND    NOT EXISTS (SELECT 1 FROM imparte i WHERE i.id_profesor = p.id_profesor))
-WHERE  cod_grupo = '2ASIR';
-
--- M10: comprobación previa
-SELECT 'matricula' AS tabla, COUNT(*) FROM matricula WHERE id_alumno = 1
-UNION ALL
-SELECT 'falta_asistencia', COUNT(*) FROM falta_asistencia f
-       JOIN matricula m ON m.id_matricula = f.id_matricula WHERE m.id_alumno = 1;
-DELETE FROM alumno WHERE id_alumno = 1;
-```
-{{% /details %}}
+{{< solucion id="ud08-001" title="Solución (M3, M5 y M10)" />}}
 
 #### Comprobación
 
@@ -310,17 +288,7 @@ Ejecuta cada experimento y **predice** los saldos finales antes de consultar `SE
 | 5 | `UPDATE cuenta SET saldo = saldo + 1000 WHERE id_cuenta = 'A';` `CREATE TABLE prueba (x NUMBER);` `ROLLBACK;` | | | |
 | 6 | `UPDATE cuenta SET saldo = saldo - 10;` y cierra la sesión **de forma anómala** (cierra la ventana de la terminal o mata el proceso). Vuelve a conectar | | | |
 
-{{% details title="Resultados esperados" %}}
-| Exp. | A | B | C | Explicación |
-|---|---|---|---|---|
-| Inicio | 1000 | 200 | 50 | |
-| 1 | 1000 | 200 | 50 | `ROLLBACK` deshace las dos actualizaciones |
-| 2 | 900 | 300 | 50 | `COMMIT` las hace permanentes |
-| 3 | 900 | 300 | 60 | Se deshace solo lo posterior a `s1`; el +10 de C se confirma |
-| 4 | 900 | 250 | 60 | La segunda sentencia falla (C quedaría en −40) y **solo ella** se deshace; el `COMMIT` confirma el −50 de B |
-| 5 | 1900 | 250 | 60 | El `CREATE TABLE` hace un `COMMIT` implícito: el `ROLLBACK` llega tarde |
-| 6 | 1900 | 250 | 60 | Una sesión que termina de forma anómala hace `ROLLBACK` automático |
-{{% /details %}}
+{{< solucion id="ud08-002" title="Resultados esperados" />}}
 
 #### Comprobación
 

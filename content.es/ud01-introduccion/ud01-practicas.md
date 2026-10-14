@@ -88,14 +88,7 @@ Tu respuesta es completa si:
 - [ ] Las tres anomalías se explican con un ejemplo de la hoja, no con una definición genérica.
 - [ ] El párrafo final menciona concurrencia, integridad, seguridad, independencia de los datos y copias de seguridad.
 
-{{% details title="Solución orientativa" %}}
-1. **Inconsistencias:** el correo de Ana Ruiz es distinto en las filas 1 y 2; en la fila 4 el profesor aparece como «Jhon Smith», con otro teléfono, y el precio del inglés B1 es 95 € en lugar de 90 €; en la fila 5 falta el profesor y el precio no sigue el mismo formato. Además, «pagado» admite cualquier texto: nada impide escribir «sí», «S» o «pendiente».
-2. **Redundancia:** los datos de Ana y de Luis se repiten 2 veces, los de John Smith 3 veces y el precio de cada curso tantas veces como alumnos tenga. Si John cambia de teléfono, hay que modificar 3 filas.
-3. **Anomalías:** *inserción*: no se puede dar de alta *Italiano A1* sin inventar un alumno; *modificación*: subir el precio del B1 exige cambiar todas sus filas, y si se olvida una el curso tendrá dos precios; *borrado*: al eliminar la fila 5 se pierde que existe el curso de alemán y su precio.
-4. **Copia propia:** hay dos versiones de los datos que evolucionan por separado. Nadie sabe cuál es la buena, las notas no están disponibles para secretaría y, si se pierde el portátil, se pierden las notas y los datos personales (problema de seguridad y de protección de datos).
-5. **Acceso simultáneo:** quien guarde el último sobrescribe los cambios del otro (**actualización perdida**). Una hoja de cálculo no tiene control de concurrencia.
-6. Un SGBD guarda cada dato **una sola vez** y lo relaciona con los demás; valida los datos con **restricciones** (el precio es un número, «pagado» es S o N); permite que varias personas trabajen a la vez con **control de concurrencia y transacciones**; da a cada usuario solo los **permisos** que necesita (la secretaria ve los pagos; el profesor, las notas); hace **copias de seguridad** y permite recuperar los datos tras un fallo; y separa los datos de las aplicaciones (**independencia**), de modo que se pueden crear nuevas aplicaciones sin cambiar los datos.
-{{% /details %}}
+{{< solucion id="ud01-001" title="Solución orientativa" />}}
 {{% /comprobacion %}}
 
 #### Errores habituales
@@ -237,13 +230,7 @@ Te incorporas al departamento de sistemas de EduGest. Antes de empezar a desarro
 - [ ] El fichero `p1_2_salida.txt` contiene la salida de todas las consultas.
 - [ ] Al abrir la segunda conexión aparece una sesión más en `v$session`.
 
-{{% details title="Solución de las preguntas" %}}
-1. La **instancia** son los procesos y las estructuras de memoria (SGA y PGA) que se ejecutan en el servidor. La **base de datos** son los ficheros en disco. En la arquitectura *multitenant*, la instancia da servicio a la base de datos contenedora `FREE`, que aloja la base de datos conectable `FREEPDB1`.
-2. `DBW0` (*Database Writer*) escribe en disco los bloques modificados; `LGWR` (*Log Writer*) escribe el registro de transacciones (*redo*) y es clave para la **durabilidad**; `CKPT` marca los puntos de control; `SMON` recupera la instancia tras una caída; `PMON` limpia los recursos de las sesiones que terminan mal; `RECO` resuelve transacciones distribuidas pendientes.
-3. Normalmente 8192 bytes (8 KB). El disco es mucho más lento que la memoria; leer bloques completos permite aprovechar cada acceso y guardarlos en la caché (*buffer cache*) de la SGA.
-4. Los ficheros `.dbf` pertenecen al **nivel interno o físico**. `USER_TABLES` es una vista del diccionario que describe el **nivel conceptual** (las tablas que existen).
-5. Depende de la instalación (como mínimo `PDBADMIN`). Para el proyecto se usa `EDUGEST`. `SYSTEM` es una cuenta de administración con privilegios muy amplios: trabajar con ella incumple el **principio de mínimo privilegio** y un error podría dañar el diccionario de datos.
-{{% /details %}}
+{{< solucion id="ud01-002" title="Solución de las preguntas" />}}
 {{% /comprobacion %}}
 
 #### Errores habituales
@@ -352,24 +339,7 @@ CLIENTE(id_cliente, dni, nombre, apellidos, telefono, provincia,
 - [ ] La reconstrucción usa `UNION ALL` para los fragmentos horizontales y `JOIN` para los verticales.
 - [ ] El diseño tiene en cuenta que los datos sanitarios son una **categoría especial** según el RGPD.
 
-{{% details title="Solución parcial: reconstrucción" %}}
-```sql
--- Fragmentos verticales en cada nodo:
---   CLI_ADMIN_xx(id_cliente, dni, nombre, apellidos, telefono, provincia, puntos_fidelidad)
---   CLI_SALUD_xx(id_cliente, historial_dispensaciones, alergias)
--- Fragmentos horizontales: xx = VAL, ALI, CAS según la provincia
-
-SELECT a.*, s.historial_dispensaciones, s.alergias
-FROM   cli_admin_val a JOIN cli_salud_val s ON s.id_cliente = a.id_cliente
-UNION ALL
-SELECT a.*, s.historial_dispensaciones, s.alergias
-FROM   cli_admin_ali a JOIN cli_salud_ali s ON s.id_cliente = a.id_cliente
-UNION ALL
-SELECT a.*, s.historial_dispensaciones, s.alergias
-FROM   cli_admin_cas a JOIN cli_salud_cas s ON s.id_cliente = a.id_cliente;
-```
-Una opción razonable para marketing es **replicar** en Valencia una copia de solo lectura de `id_cliente`, `nombre`, `provincia` y `puntos_fidelidad` de las tres provincias. Así sus consultas no dependen de la red.
-{{% /details %}}
+{{< solucion id="ud01-003" title="Solución parcial: reconstrucción" />}}
 
 #### Ampliación
 

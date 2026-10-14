@@ -191,15 +191,7 @@ db.expedientes.find({ matriculas: { $elemMatch: { nota: { $exists: false } } } }
 ```
 {{% /details %}}
 
-{{% details title="Solució de N7 y N9" %}}
-```javascript
-// N7
-db.expedientes.find({ $expr: { $gt: [ { $size: "$matriculas" }, 5 ] } }, { nombre: 1 })
-
-// N9
-db.profesores.find({ "imparte.grupo": "2DAM" }, { nombre: 1, apellidos: 1 })
-```
-{{% /details %}}
+{{< solucion id="ud10-001" title="Solució de N7 y N9" />}}
 
 #### Comprovació
 

@@ -147,36 +147,7 @@ Crea estes funcions (les dues primeres estan en la [teoria](/ud09-plsql/ud09-teo
 | `fn_horas_falta` | id de l'alumne, només no justificades (`'S'`/`'N'`, per defecte `'N'`) | Total d'hores de falta (0 si no en té) |
 | `fn_nombre_completo` | id de l'alumne | `'Apellidos, Nombre'` o `NULL` si no existix (sense llançar error) |
 
-{{% details title="Solució de fn_media_alumno y fn_nombre_completo" %}}
-```sql
-CREATE OR REPLACE FUNCTION fn_media_alumno (
-    p_id_alumno IN alumno.id_alumno%TYPE,
-    p_curso     IN matricula.curso_academico%TYPE DEFAULT '2025-26'
-) RETURN NUMBER
-IS
-    v_media NUMBER;
-BEGIN
-    SELECT ROUND(AVG(nota_final), 2) INTO v_media
-    FROM   matricula
-    WHERE  id_alumno = p_id_alumno AND curso_academico = p_curso;
-    RETURN v_media;          -- AVG de cap fila torna NULL: no hi ha NO_DATA_FOUND
-END fn_media_alumno;
-/
-
-CREATE OR REPLACE FUNCTION fn_nombre_completo (p_id_alumno IN alumno.id_alumno%TYPE)
-RETURN VARCHAR2
-IS
-    v_nombre VARCHAR2(130);
-BEGIN
-    SELECT apellidos || ', ' || nombre INTO v_nombre FROM alumno WHERE id_alumno = p_id_alumno;
-    RETURN v_nombre;
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        RETURN NULL;
-END fn_nombre_completo;
-/
-```
-{{% /details %}}
+{{< solucion id="ud09-001" title="Solució de fn_media_alumno y fn_nombre_completo" />}}
 
 #### Comprovació
 

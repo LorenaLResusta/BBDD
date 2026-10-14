@@ -36,7 +36,7 @@
 
 {{ define "book-menu-title" }}
 {{- with .Params.BookIcon -}}
-  <img src="{{ partial "docs/icon" . }}" class="book-icon" alt="{{ partial "docs/text/i18n" . }}" />
+  {{ partial "docs/menu-icon" . }}
 {{- end -}}
 {{- if .Name -}}
   {{- .Name -}}

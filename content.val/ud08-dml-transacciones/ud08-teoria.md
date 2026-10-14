@@ -34,21 +34,20 @@ En acabar esta unitat seràs capaç de:
 
 ### Temporalització
 
-La unitat ocupa **9 hores d'aula** (5 de teoria i 4 de pràctica). És la unitat més
-curta del curs en relació amb la seua importància professional: aprofita les sessions
+La unitat ocupa **6 hores d'aula** (3 de teoria i 3 de pràctica). És una unitat curta
+en relació amb la seua importància professional: aprofita les sessions
 pràctiques, que requerixen **dues sessions d'Oracle obertes alhora**.
 
-{{< sesiones unidad="UD08" horas="9" >}}
+{{< sesiones unidad="UD08" horas="6" >}}
 items:
-  - {h: 2, tipo: T, t: "DML: INSERT, UPDATE, DELETE i TRUNCATE", ref: "§1 a §4"}
+  - {h: 1, tipo: T, t: "DML: INSERT, UPDATE, DELETE i TRUNCATE", ref: "§1 a §4"}
   - {h: 1, tipo: P, t: "Altes, canvis i baixes en EduGest", ref: "Pràctica 8.1"}
-  - {h: 1, tipo: T, t: "INSERT … SELECT i MERGE", ref: "§5"}
-  - {h: 1, tipo: P, t: "Còpies, històrics i càrrega de notes amb MERGE", ref: "Pràctiques 8.2 i 8.6"}
-  - {h: 1, tipo: T, t: "Transaccions, ACID i SAVEPOINT", ref: "§6 i §7 · laboratori de transaccions"}
+  - {h: 1, tipo: T, t: "INSERT … SELECT, MERGE, transaccions, ACID i SAVEPOINT", ref: "§5 a §7 · laboratori de transaccions"}
   - {h: 1, tipo: P, t: "Laboratori de transaccions", ref: "Pràctica 8.4"}
   - {h: 1, tipo: T, t: "Concurrència, bloquejos, interbloquejos i restriccions diferides", ref: "§8 a §10"}
   - {h: 1, tipo: P, t: "Dues sessions, una dada: concurrència i bloquejos", ref: "Pràctica 8.5"}
 autonomo:
+  - "Pràctiques 8.2 i 8.6 (còpies, històrics i càrrega de notes amb MERGE)"
   - "Pràctica 8.3 (modificacions amb subconsultes)"
   - "Pràctica 8.7 (repte: guió de promoció de curs)"
   - "Projecte EduGest · UD08 (guions de manteniment)"
@@ -59,7 +58,7 @@ autonomo:
 
 ---
 
-{{< sesion n="1" h="2" tipo="t" >}}DML: INSERT, UPDATE, DELETE i TRUNCATE{{< /sesion >}}
+{{< sesion n="1" h="1" tipo="t" >}}DML: INSERT, UPDATE, DELETE i TRUNCATE{{< /sesion >}}
 
 ## 1. Modificar dades: eines i responsabilitat
 
@@ -763,7 +762,7 @@ La clau aliena d'`IMPARTE` **no** té regla d'esborrat, així que protegix el pr
 
 ---
 
-{{< sesion n="3" h="1" tipo="t" >}}INSERT … SELECT i MERGE{{< /sesion >}}
+{{< sesion n="3" h="1" tipo="t" >}}INSERT … SELECT, MERGE i transaccions{{< /sesion >}}
 
 ## 5. Inserir des de consultes i `MERGE`
 
@@ -1024,7 +1023,6 @@ WHEN NOT MATCHED THEN
 
 ---
 
-{{< sesion n="5" h="1" tipo="t" >}}Transaccions, ACID i SAVEPOINT{{< /sesion >}}
 
 ## 6. Transaccions i propietats ACID
 
@@ -1306,7 +1304,7 @@ Una consulta que porta minuts executant-se necessita veure les dades **tal com e
 
 ---
 
-{{< sesion n="7" h="1" tipo="t" >}}Concurrència, bloquejos, interbloquejos i restriccions diferides{{< /sesion >}}
+{{< sesion n="5" h="1" tipo="t" >}}Concurrència, bloquejos, interbloquejos i restriccions diferides{{< /sesion >}}
 
 ## 8. Concurrència i bloquejos
 

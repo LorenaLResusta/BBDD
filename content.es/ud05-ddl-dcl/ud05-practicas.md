@@ -289,24 +289,7 @@ CREATE TABLE vehiculo (
 ) ENGINE = InnoDB;
 ```
 
-{{% details title="Solución en Oracle" %}}
-```sql
-CREATE TABLE empleado (
-    id_empleado  NUMBER(6)     CONSTRAINT pk_empleado PRIMARY KEY,
-    nombre       VARCHAR2(100) CONSTRAINT nn_empleado_nombre NOT NULL
-);
-
-CREATE TABLE vehiculo (
-    matricula    VARCHAR2(10) CONSTRAINT pk_vehiculo PRIMARY KEY,
-    modelo       VARCHAR2(80) CONSTRAINT nn_vehiculo_modelo NOT NULL,
-    id_empleado  NUMBER(6),
-    CONSTRAINT uq_vehiculo_empleado UNIQUE (id_empleado),
-    CONSTRAINT fk_vehiculo_empleado FOREIGN KEY (id_empleado)
-        REFERENCES empleado (id_empleado) ON DELETE SET NULL
-);
-```
-`UNIQUE` sobre la clave ajena convierte la relación 1:N en 1:1, y como admite varios `NULL` permite muchos vehículos sin asignar.
-{{% /details %}}
+{{< solucion id="ud05-001" title="Solución en Oracle" />}}
 
 ### Caso D · Jerarquía (tabla para la superclase y para cada subclase)
 
@@ -580,23 +563,7 @@ Para cada cambio, escribe la sentencia y comprueba el resultado con `DESC` o con
 | 6 | El email deja de ser único (varias cuentas de una empresa) | `DROP CONSTRAINT` |
 | 7 | Borrar por error la tabla `pedido` y recuperarla | `DROP` sin `PURGE` + `FLASHBACK TABLE` |
 
-{{% details title="Solución" %}}
-```sql
-ALTER TABLE cliente ADD (telefono VARCHAR2(15));
-ALTER TABLE cliente MODIFY (nombre VARCHAR2(150));
-ALTER TABLE pedido ADD (direccion_envio VARCHAR2(200) DEFAULT 'PENDIENTE DE INDICAR' NOT NULL);
-ALTER TABLE cliente RENAME COLUMN telefono TO telefono_contacto;
-ALTER TABLE pedido DROP CONSTRAINT ck_pedido_estado;
-ALTER TABLE pedido ADD CONSTRAINT ck_pedido_estado
-    CHECK (estado IN ('PENDIENTE', 'ENVIADO', 'ENTREGADO', 'CANCELADO', 'DEVUELTO'));
-ALTER TABLE cliente DROP CONSTRAINT uq_cliente_email;
-
-DROP TABLE pedido;
-SELECT object_name, original_name, droptime FROM user_recyclebin;
-FLASHBACK TABLE pedido TO BEFORE DROP;
-```
-Tras el `FLASHBACK`, los índices recuperados conservan un nombre del sistema (`BIN$...`). Renómbralos con `ALTER INDEX "BIN$..." RENAME TO ix_pedido_cliente;`. Las claves ajenas que **otras** tablas tenían hacia la tabla borrada no se recuperan.
-{{% /details %}}
+{{< solucion id="ud05-002" title="Solución" />}}
 
 #### Errores habituales
 

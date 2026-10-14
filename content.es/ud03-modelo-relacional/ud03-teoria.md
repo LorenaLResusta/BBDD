@@ -13,7 +13,7 @@ math: true
 **Visión General:**
 El **Modelo Relacional**, ideado por Edgar F. Codd en IBM en 1970, es el modelo de datos lógico más extendido y utilizado comercialmente en el mundo de las bases de datos. A diferencia del Modelo Entidad-Relación (EER), que es una herramienta de abstracción conceptual para representar la información del mundo real de forma independiente del software, el Modelo Relacional representa la estructura lógica de los datos mediante **relaciones (tablas)** compuestas por **tuplas (filas)** y **atributos (columnas)**.
 
-En esta unidad se estudian minuciosamente los conceptos matemáticos y pragmáticos que sustentan el modelo relacional: la estructura formal de una tabla, el dominio y tipado de atributos, el grado y la cardinalidad, las claves (candidatas, primarias, alternativas y foráneas), la semántica de los valores nulos (`NULL`) y las reglas de integridad (inherentes y semánticas). Además, se detalla un catálogo completo de **reglas de transformación para convertir esquemas conceptuales EER en esquemas relacionales lógicos**, ilustrado con abundantes ejemplos reales, esquemas formales, sentencias SQL DDL y tablas con datos reales.
+En esta unidad se estudian minuciosamente los conceptos matemáticos y pragmáticos que sustentan el modelo relacional: la estructura formal de una tabla, el dominio y tipado de atributos, el grado y la cardinalidad, las claves (candidatas, primarias, alternativas y foráneas), la semántica de los valores nulos (`NULL`) y las reglas de integridad (inherentes y semánticas). Además, se detalla un catálogo completo de **reglas de transformación para convertir esquemas conceptuales EER en esquemas relacionales lógicos**, ilustrado con abundantes ejemplos reales, esquemas formales y tablas con datos reales.
 
 {{< ra "RA6:a,b,c,d,e,f,h" "RA2:a,d,e" >}}
 
@@ -40,7 +40,7 @@ autonomo:
 {{< /sesiones >}}
 
 > [!IMPORTANT]
-> Esta unidad es el **puente** entre el diseño y la implementación: lo que decidas aquí (claves, nulos, políticas de borrado) determina las sentencias `CREATE TABLE` de la UD05. Un error de diseño que no detectes ahora se paga después con datos incorrectos.
+> Esta unidad es el **puente** entre el diseño y la implementación: lo que decidas aquí (claves, nulos, políticas de borrado) determina la creación de las tablas en la UD05. Un error de diseño que no detectes ahora se paga después con datos incorrectos.
 
 ### Objetivos de aprendizaje
 
@@ -83,7 +83,7 @@ Para caracterizar matemáticamente una tabla se utilizan los siguientes concepto
 ---
 
 {{% curiosidad titulo="Codd y los dos tipos de «dato ausente»" %}}
-El propio Codd propuso más tarde distinguir entre un valor **ausente pero aplicable** y otro **no aplicable**. SQL se quedó con un único `NULL`, y de ahí vienen muchas de sus sorpresas: `NULL = NULL` no es verdadero.
+El propio Codd propuso más tarde distinguir entre un valor **ausente pero aplicable** y otro **no aplicable**. Los gestores reales se quedaron con un único valor nulo (`NULL`), y de ahí vienen muchas sorpresas: dos nulos no pueden considerarse iguales entre sí.
 {{% /curiosidad %}}
 
 ### 1.3 Tuplas (Filas) y Semántica de Valores Nulos (NULL)
@@ -113,10 +113,10 @@ Las claves constituyen el pilar fundamental para garantizar la unicidad de las f
 
 ### 2.2 Claves Alternativas
 
-Cualquier clave candidata que no haya sido elegida como clave primaria pasa a ser una **clave alternativa**. En el esquema relacional y en la implementación SQL, las claves alternativas se protegen mediante la restricción de unicidad `UNIQUE`.
+Cualquier clave candidata que no haya sido elegida como clave primaria pasa a ser una **clave alternativa**. En el esquema relacional, las claves alternativas se señalan con la restricción de unicidad (UK, *unique key*): impiden que dos filas repitan el mismo valor.
 
 > [!NOTE]
-> **Ejemplo:** En la tabla `CLIENTE`, si disponemos del campo `id_cliente` (autoincremental interno) y del campo `dni`, ambos son claves candidatas. Elegimos `id_cliente` como **Clave Primaria (PK)** e indicamos que `dni` es una **Clave Alternativa (`UNIQUE`)**.
+> **Ejemplo:** En la tabla `CLIENTE`, si disponemos del campo `id_cliente` (autoincremental interno) y del campo `dni`, ambos son claves candidatas. Elegimos `id_cliente` como **Clave Primaria (PK)** e indicamos que `dni` es una **Clave Alternativa (UK)**.
 
 ---
 
@@ -147,13 +147,13 @@ Con datos reales de la tabla `ALUMNO` de EduGest, prueba qué conjuntos de colum
 
 {{< quiz >}}
 - q: "En la muestra de arriba, `(nombre, apellidos)` no se repite. ¿Es una buena clave primaria para `ALUMNO`?"
-  options: ["Sí, identifica a todas las filas", "No: dos alumnos distintos pueden llamarse igual y los nombres cambian", "Sí, siempre que se añada `NOT NULL`", "Solo si se añade también `localidad`"]
+  options: ["Sí, identifica a todas las filas", "No: dos alumnos distintos pueden llamarse igual y los nombres cambian", "Sí, siempre que se declare obligatorio", "Solo si se añade también `localidad`"]
   answer: 1
-  explain: "Que no se repita **hoy** no la convierte en clave. Una clave primaria debe ser estable, no nula y única por significado. Por eso se usa `id_alumno` (artificial) y se protege el NIA con `UNIQUE`."
+  explain: "Que no se repita **hoy** no la convierte en clave. Una clave primaria debe ser estable, no nula y única por significado. Por eso se usa `id_alumno` (artificial) y se protege el NIA con una restricción de unicidad (UK)."
 - q: "`dni` contiene algún `NULL` en la muestra. ¿Qué papel puede tener esa columna?"
-  options: ["Clave primaria", "Clave alternativa con `UNIQUE`, pero no clave primaria", "Ninguno: no puede ser clave de ningún tipo", "Clave ajena"]
+  options: ["Clave primaria", "Clave alternativa (UK), pero no clave primaria", "Ninguno: no puede ser clave de ningún tipo", "Clave ajena"]
   answer: 1
-  explain: "Una clave primaria no admite nulos (integridad de entidad). Una clave alternativa con `UNIQUE` sí admite `NULL`, aunque en la práctica conviene que el DNI sea obligatorio si es un dato del negocio."
+  explain: "Una clave primaria no admite nulos (integridad de entidad). Una clave alternativa (UK) sí admite nulos, aunque en la práctica conviene que el DNI sea obligatorio si es un dato del negocio."
 {{< /quiz >}}
 
 ---
@@ -173,14 +173,14 @@ Son reglas estructurales impuestas automáticamente por la propia definición ma
 
 ---
 
-### 3.2 Restricciones Semánticas o de Usuario (PK, UNIQUE, NOT NULL, CHECK)
+### 3.2 Restricciones Semánticas o de Usuario (PK, UK, obligatoriedad, reglas de fila)
 
-Son reglas de negocio definidas explícitamente por el diseñador de la base de datos utilizando el lenguaje SQL DDL:
+Son reglas de negocio definidas explícitamente por el diseñador de la base de datos (más adelante, en la UD05, aprenderás a declararlas en un gestor):
 
-- `PRIMARY KEY`: Define la clave primaria (garantiza unicidad y no nulidad).
-- `UNIQUE`: Define claves alternativas (garantiza que no haya valores duplicados, aunque admite nulos si la norma del SGBD lo permite).
-- `NOT NULL`: Obliga a que un atributo sea siempre informado.
-- `CHECK`: Define una condición lógica que debe cumplirse para cada fila (ej. `CHECK (precio > 0)` o `CHECK (edad >= 18)`).
+- **Clave primaria (PK):** identifica cada fila (garantiza unicidad y no nulidad).
+- **Clave alternativa (UK):** garantiza que no haya valores duplicados (admite nulos salvo que se indique lo contrario).
+- **Atributo obligatorio:** el atributo debe tener siempre un valor.
+- **Regla de fila:** una condición lógica que debe cumplir cada fila por sí sola (por ejemplo, «el precio es mayor que 0» o «la edad es como mínimo 18»).
 
 ---
 
@@ -190,51 +190,51 @@ La **Integridad Referencial** exige que los valores almacenados en una clave for
 
 Cuando se intenta eliminar o actualizar una fila en la tabla padre (la tabla que contiene la `PK`), el SGBD puede aplicar una de las siguientes 4 **políticas de integridad referencial**:
 
-1. **En Cascada (`ON DELETE CASCADE / ON UPDATE CASCADE`):**
+1. **En Cascada:**
    Al borrar o modificar una tupla en la tabla padre, el SGBD borra o actualiza automáticamente todas las tuplas de la tabla hija que contenían esa clave foránea.
 
-2. **Restringido (`ON DELETE RESTRICT / ON UPDATE RESTRICT`):**
+2. **Restringido:**
    El SGBD impide y rechaza el borrado o modificación de la tupla padre mientras existan tuplas hijas que la estén referenciando.
 
-3. **Puesta a Nulos (`ON DELETE SET NULL / ON UPDATE SET NULL`):**
+3. **Puesta a Nulos:**
    Al borrar o actualizar la tupla padre, el SGBD establece automáticamente a `NULL` el valor de la clave foránea en todas las tuplas hijas afectadas.
 
-4. **Puesta a Valor por Defecto (`ON DELETE SET DEFAULT / ON UPDATE SET DEFAULT`):**
+4. **Puesta a Valor por Defecto:**
    Al borrar o actualizar la tupla padre, el SGBD asigna un valor por defecto previamente configurado a la clave foránea en las tuplas hijas.
 
 ---
 
 > [!WARNING]
-> **Diferencias entre SGBD.** El estándar SQL define `CASCADE`, `SET NULL`, `SET DEFAULT`, `RESTRICT` y `NO ACTION` tanto para `ON DELETE` como para `ON UPDATE`. **Oracle** solo implementa `ON DELETE CASCADE` y `ON DELETE SET NULL`; si no se indica nada, rechaza el borrado (equivale a `NO ACTION`). No admite `ON UPDATE`. Los ejemplos SQL de esta unidad usan la sintaxis estándar; en la UD05 los escribiremos en Oracle.
+> **No todos los gestores ofrecen todas las políticas.** Casi todos permiten el borrado en cascada y la puesta a nulos, pero muchos no permiten propagar el cambio de una clave primaria. Por eso conviene diseñar claves primarias **estables**. En la UD05 comprobarás qué ofrece el gestor que usaremos.
 
 > [!TIP]
 > **¿Qué política elijo?** Hazte esta pregunta sobre la fila hija: *¿tiene sentido que siga existiendo sin la fila padre?*
 > - **No** (una matrícula sin alumno) → `CASCADE`.
 > - **Sí, pero hay que revisarla** (un alumno cuyo grupo desaparece) → `SET NULL`, con la columna opcional.
-> - **No debe pasar nunca por accidente** (un departamento con empleados) → rechazar (la opción por defecto de Oracle).
+> - **No debe pasar nunca por accidente** (un departamento con empleados) → rechazar (la opción más prudente).
 
 #### Laboratorio: simulador de integridad referencial
 
-Cambia la política de la clave ajena, intenta borrar, cambiar y insertar filas, y lee los mensajes de error **reales de Oracle**. Después, repite el experimento con la columna `NOT NULL`.
+Cambia la política de la clave ajena, intenta borrar, cambiar y insertar filas, y lee los mensajes que explican por qué se rechaza cada operación. Después, repite el experimento haciendo el atributo obligatorio.
 
 {{< integridad >}}
 
 {{< quiz >}}
 - q: "La FK `matricula.id_alumno` debe eliminar la matrícula cuando se borra el alumno. ¿Qué política declaras?"
-  options: ["Sin cláusula", "`ON DELETE CASCADE`", "`ON DELETE SET NULL`", "`ON UPDATE CASCADE`"]
+  options: ["Restringido", "Borrado en cascada", "Puesta a nulos", "Puesta a valor por defecto"]
   answer: 1
-  explain: "La matrícula carece de sentido sin su alumno: se borra en cascada. `SET NULL` dejaría matrículas huérfanas y `ON UPDATE` no existe en Oracle."
-- q: "En el simulador, ¿por qué `ON DELETE SET NULL` falla si `cod_grupo` es `NOT NULL`?"
-  options: ["Porque Oracle no soporta SET NULL", "Porque la política exige poner NULL en una columna que no lo admite", "Porque el grupo no existe", "Porque falta el `COMMIT`"]
+  explain: "La matrícula carece de sentido sin su alumno: se borra en cascada. La puesta a nulos dejaría matrículas sin alumno y el borrado restringido impediría eliminar al alumno."
+- q: "En el simulador, ¿por qué la puesta a nulos falla si `cod_grupo` es obligatorio?"
+  options: ["Porque ningún gestor admite la puesta a nulos", "Porque la política exige poner NULL en una columna que no lo admite", "Porque el grupo no existe", "Porque falta confirmar los cambios"]
   answer: 1
-  explain: "SET NULL y NOT NULL se contradicen: el SGBD no puede cumplir las dos reglas a la vez (ORA-01407). Hay que elegir entre una política o la otra."
+  explain: "Puesta a nulos y obligatoriedad se contradicen: el SGBD no puede cumplir las dos reglas a la vez. Hay que elegir entre una política o la otra."
 {{< /quiz >}}
 
 ---
 
 {{< sesion n="3" h="1" tipo="p" practica="3.2" >}}Simulador de integridad referencial{{< /sesion >}}
 
-La práctica 3.2 se hace en la [página de prácticas](/ud03-modelo-relacional/ud03-practicas), con lápiz y papel, y se comprueba en la UD05 en Oracle.
+La práctica 3.2 se hace en la [página de prácticas](/ud03-modelo-relacional/ud03-practicas), con lápiz y papel, y se implementará en la UD05.
 
 ---
 
@@ -251,7 +251,7 @@ Para transformar de forma metódica un diagrama EER conceptual a un esquema rela
 - **Regla:** Cada entidad fuerte del diagrama EER se convierte en una **tabla (relación)** independiente.
   - Los atributos simples de la entidad pasan a ser **columnas** de la tabla.
   - El atributo identificador principal de la entidad pasa a ser la **Clave Primaria (PK)** de la tabla.
-  - Las claves alternativas pasan a protegerse con la restricción `UNIQUE`.
+  - Las claves alternativas pasan a protegerse con una restricción de unicidad (UK).
 
 #### Esquema Notacional Formal
 
@@ -263,12 +263,12 @@ $$\text{ENTIDAD}(\underline{\text{id\_entidad}}, \text{atributo1}, \text{atribut
 
 - **Regla:** Una entidad débil se convierte en una **tabla independiente**.
   - **Débil por Identificación:** La clave primaria de la tabla resultante es una **clave compuesta** formada por la clave primaria de la entidad fuerte propietaria (que se propaga como `FK`) combinada con el discriminador parcial de la entidad débil.
-  - **Débil por Existencia:** Si la entidad débil posee su propio identificador único, la clave primaria de la entidad fuerte se propaga como `FK NOT NULL` con política de borrado en cascada (`ON DELETE CASCADE`).
+  - **Débil por Existencia:** Si la entidad débil posee su propio identificador único, la clave primaria de la entidad fuerte se propaga como FK obligatoria (no admite nulos) con política de borrado en cascada.
 
 #### Esquema Notacional Formal (Débil por Identificación)
 
 $$\text{ENTIDAD\_DÉBIL}(\underline{\text{id\_padre}}, \underline{\text{id\_parcial\_débil}}, \text{atributo1})$$
-$$\text{FK: id\_padre } \rightarrow \text{ENTIDAD\_PADRE}(\text{id\_padre}) \text{ ON DELETE CASCADE}$$
+$$\text{FK: id\_padre } \rightarrow \text{ENTIDAD\_PADRE}(\text{id\_padre}) \text{ (borrado en cascada)}$$
 
 ---
 
@@ -280,11 +280,11 @@ $$\text{FK: id\_padre } \rightarrow \text{ENTIDAD\_PADRE}(\text{id\_padre}) \tex
 #### Esquema Notacional Formal (Atributo Multivaluado)
 
 $$\text{ENTIDAD\_TELÉFONO}(\underline{\text{id\_persona}}, \underline{\text{numero\_telefono}}, \text{tipo\_linea})$$
-$$\text{FK: id\_persona } \rightarrow \text{PERSONA}(\text{id\_persona}) \text{ ON DELETE CASCADE}$$
+$$\text{FK: id\_persona } \rightarrow \text{PERSONA}(\text{id\_persona}) \text{ (borrado en cascada)}$$
 
 #### Laboratorio: del E/R a las tablas
 
-Este transformador aplica las reglas del apartado 4 y produce el esquema formal y el DDL de Oracle. Empieza por los casos de esta sesión (débil, multivaluado) y vuelve a él en la siguiente.
+Este transformador aplica las reglas del apartado 4 y produce el esquema relacional formal. Empieza por los casos de esta sesión (débil, multivaluado) y vuelve a él en la siguiente.
 
 {{< er-a-relacional >}}
 
@@ -296,7 +296,7 @@ Este transformador aplica las reglas del apartado 4 y produce el esquema formal 
 
 - **Regla (Propagación de Clave):** No se crea una nueva tabla. Se toma la clave primaria de la entidad del lado "1" y se **propaga como clave foránea (`FK`)** a la tabla resultante de la entidad del lado "N".
 - Si la relación contenía atributos descriptores propios, estos se trasladan también como columnas a la tabla del lado "N".
-- Si la participación del lado "N" es obligatoria (cardinalidad mínima 1), la `FK` debe configurarse como `NOT NULL`.
+- Si la participación del lado "N" es obligatoria (cardinalidad mínima 1), la FK debe ser obligatoria (no admite nulos).
 
 ---
 
@@ -311,7 +311,7 @@ Un alumno se matricula en muchas asignaturas y una asignatura tiene muchos alumn
 No se puede poner una FK en ninguna de las dos tablas sin repetir filas, así que se crea una **tabla intermedia** `MATRICULA`.
 {{% /etapa %}}
 {{% etapa titulo="4. Su clave" %}}
-Las dos claves ajenas forman juntas la PK compuesta: `PRIMARY KEY (id_alumno, id_asig)`. Así un alumno no se matricula dos veces en la misma asignatura.
+Las dos claves ajenas forman juntas la PK compuesta `(id_alumno, id_asig)`. Así un alumno no se matricula dos veces en la misma asignatura.
 {{% /etapa %}}
 {{% etapa titulo="5. Los atributos de la relación" %}}
 `nota` y `fecha` van en `MATRICULA`: dependen de la pareja alumno-asignatura, no de uno solo.
@@ -334,8 +334,8 @@ Las dos claves ajenas forman juntas la PK compuesta: `PRIMARY KEY (id_alumno, id
 
 Existen 3 alternativas según las cardinalidades mínimas de participación:
 
-1. **Participación opcional en ambos lados:** hay dos soluciones válidas. La más simple propaga la clave de una entidad a la tabla de la otra como `FK` con `UNIQUE` que **admite `NULL`** (es la que usa EduGest para la tutoría). Si se quieren evitar los nulos, se crea una tabla intermedia con la clave de una entidad como `PK` y la de la otra como `UNIQUE NOT NULL`.
-2. **Participación obligatoria en un lado y opcional en el otro:** la clave ajena se coloca en la tabla de la entidad cuya participación es **obligatoria**, referenciando a la otra, como `FK NOT NULL UNIQUE`. Así no necesita admitir nulos.
+1. **Participación opcional en ambos lados:** hay dos soluciones válidas. La más simple propaga la clave de una entidad a la tabla de la otra como FK con restricción de unicidad (UK) que **admite nulos** (es la que usa EduGest para la tutoría). Si se quieren evitar los nulos, se crea una tabla intermedia con la clave de una entidad como PK y la de la otra como UK obligatoria.
+2. **Participación obligatoria en un lado y opcional en el otro:** la clave ajena se coloca en la tabla de la entidad cuya participación es **obligatoria**, referenciando a la otra, como FK obligatoria y única (UK). Así no necesita admitir nulos.
 3. **Participación obligatoria en ambos lados:** ambas entidades pueden unificarse en una **única tabla** que agrupa todos los atributos, siempre que describan de verdad el mismo objeto.
 
 > [!NOTE]
@@ -367,9 +367,9 @@ Existen 3 estrategias relacionales para transformar jerarquías EER:
 
 {{< quiz >}}
 - q: "Todo `PASAPORTE` pertenece a una persona, pero no toda `PERSONA` tiene pasaporte. ¿Dónde va la clave ajena?"
-  options: ["En `PERSONA`, `NOT NULL UNIQUE`", "En `PASAPORTE`, `NOT NULL UNIQUE`", "En ambas tablas", "En una tabla nueva obligatoriamente"]
+  options: ["En `PERSONA`, obligatoria y única", "En `PASAPORTE`, obligatoria y única", "En ambas tablas", "En una tabla nueva obligatoriamente"]
   answer: 1
-  explain: "La clave ajena va en la tabla de la entidad con participación obligatoria (`PASAPORTE`): nunca es nula y `UNIQUE` garantiza el «1» del otro lado."
+  explain: "La clave ajena va en la tabla de la entidad con participación obligatoria (`PASAPORTE`): nunca es nula y la unicidad garantiza el «1» del otro lado."
 - q: "`AULA` es débil por identificación respecto a `EDIFICIO`. ¿Cuál es su clave primaria?"
   options: ["`num_aula`", "`id_edificio`", "`(id_edificio, num_aula)`", "No tiene clave primaria"]
   answer: 2
@@ -394,29 +394,7 @@ Un `DEPARTAMENTO` (identificado por `id_dep`, con `nombre_dep`) emplea a múltip
 
 - $\text{DEPARTAMENTO}(\underline{\text{id\_dep}}, \text{nombre\_dep})$
 - $\text{EMPLEADO}(\underline{\text{id\_emp}}, \text{nombre}, \text{salario}, \text{fecha\_alta}, \text{id\_dep*})$
-  - $\text{FK: id\_dep } \rightarrow \text{DEPARTAMENTO}(\text{id\_dep}) \text{ ON DELETE RESTRICT}$
-
-#### Sentencias SQL DDL (5.1)
-
-{{< sgbd "SQL estándar (MySQL / PostgreSQL)" >}}
-
-```sql
-CREATE TABLE departamento (
-    id_dep INT PRIMARY KEY,
-    nombre_dep VARCHAR(100) NOT NULL UNIQUE
-);
-
-CREATE TABLE empleado (
-    id_emp INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    salario DECIMAL(10,2) CHECK (salario >= 1080.00),
-    fecha_alta DATE NOT NULL,
-    id_dep INT NOT NULL,
-    CONSTRAINT fk_empleado_departamento FOREIGN KEY (id_dep)
-        REFERENCES departamento(id_dep)
-        ON DELETE RESTRICT ON UPDATE CASCADE
-);
-```
+  - $\text{FK: id\_dep } \rightarrow \text{DEPARTAMENTO}(\text{id\_dep}) \text{ (borrado restringido)}$
 
 #### Contenido de Datos Reales en Tablas (5.1)
 
@@ -449,35 +427,8 @@ Un `ALUMNO` (`id_alumno`, `nombre`, `email`) se matricula en múltiples `ASIGNAT
 - $\text{ALUMNO}(\underline{\text{id\_alumno}}, \text{nombre}, \text{email})$
 - $\text{ASIGNATURA}(\underline{\text{id\_asig}}, \text{nombre\_asig}, \text{creditos})$
 - $\text{MATRICULA}(\underline{\text{id\_alumno*}}, \underline{\text{id\_asig*}}, \text{nota\_final})$
-  - $\text{FK1: id\_alumno } \rightarrow \text{ALUMNO}(\text{id\_alumno}) \text{ ON DELETE CASCADE}$
-  - $\text{FK2: id\_asig } \rightarrow \text{ASIGNATURA}(\text{id\_asig}) \text{ ON DELETE CASCADE}$
-
-#### Sentencias SQL DDL (5.2)
-
-{{< sgbd "SQL estándar (MySQL / PostgreSQL)" >}}
-
-```sql
-CREATE TABLE alumno (
-    id_alumno INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(150) NOT NULL UNIQUE
-);
-
-CREATE TABLE asignatura (
-    id_asig INT PRIMARY KEY,
-    nombre_asig VARCHAR(100) NOT NULL,
-    creditos INT CHECK (creditos > 0)
-);
-
-CREATE TABLE matricula (
-    id_alumno INT,
-    id_asig INT,
-    nota_final DECIMAL(4,2) CHECK (nota_final BETWEEN 0.00 AND 10.00),
-    PRIMARY KEY (id_alumno, id_asig),
-    CONSTRAINT fk_mat_alumno FOREIGN KEY (id_alumno) REFERENCES alumno(id_alumno) ON DELETE CASCADE,
-    CONSTRAINT fk_mat_asig FOREIGN KEY (id_asig) REFERENCES asignatura(id_asig) ON DELETE CASCADE
-);
-```
+  - $\text{FK1: id\_alumno } \rightarrow \text{ALUMNO}(\text{id\_alumno}) \text{ (borrado en cascada)}$
+  - $\text{FK2: id\_asig } \rightarrow \text{ASIGNATURA}(\text{id\_asig}) \text{ (borrado en cascada)}$
 
 #### Contenido de Datos Reales en Tablas (5.2)
 
@@ -515,28 +466,7 @@ Un `EDIFICIO` (`id_edificio`, `nombre_edificio`, `direccion`) contiene múltiple
 
 - $\text{EDIFICIO}(\underline{\text{id\_edificio}}, \text{nombre\_edificio}, \text{direccion})$
 - $\text{AULA}(\underline{\text{id\_edificio*}}, \underline{\text{num\_aula}}, \text{capacidad})$
-  - $\text{FK: id\_edificio } \rightarrow \text{EDIFICIO}(\text{id\_edificio}) \text{ ON DELETE CASCADE}$
-
-#### Sentencias SQL DDL (5.3)
-
-{{< sgbd "SQL estándar (MySQL / PostgreSQL)" >}}
-
-```sql
-CREATE TABLE edificio (
-    id_edificio INT PRIMARY KEY,
-    nombre_edificio VARCHAR(100) NOT NULL,
-    direccion VARCHAR(200) NOT NULL
-);
-
-CREATE TABLE aula (
-    id_edificio INT,
-    num_aula INT,
-    capacidad INT CHECK (capacidad > 0),
-    PRIMARY KEY (id_edificio, num_aula),
-    CONSTRAINT fk_aula_edificio FOREIGN KEY (id_edificio) 
-        REFERENCES edificio(id_edificio) ON DELETE CASCADE
-);
-```
+  - $\text{FK: id\_edificio } \rightarrow \text{EDIFICIO}(\text{id\_edificio}) \text{ (borrado en cascada)}$
 
 #### Contenido de Datos Reales en Tablas (5.3)
 
@@ -566,22 +496,7 @@ En una empresa, de cada `EMPLEADO` (`id_emp`, `nombre`, `cargo`) se conoce su je
 #### Esquema Relacional Formal (5.4)
 
 - $\text{EMPLEADO}(\underline{\text{id\_emp}}, \text{nombre}, \text{cargo}, \text{id\_jefe*})$
-  - $\text{FK: id\_jefe } \rightarrow \text{EMPLEADO}(\text{id\_emp}) \text{ ON DELETE SET NULL}$
-
-#### Sentencias SQL DDL (5.4)
-
-{{< sgbd "SQL estándar (MySQL / PostgreSQL)" >}}
-
-```sql
-CREATE TABLE empleado (
-    id_emp INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    cargo VARCHAR(100) NOT NULL,
-    id_jefe INT,
-    CONSTRAINT fk_empleado_jefe FOREIGN KEY (id_jefe)
-        REFERENCES empleado(id_emp) ON DELETE SET NULL
-);
-```
+  - $\text{FK: id\_jefe } \rightarrow \text{EMPLEADO}(\text{id\_emp}) \text{ (puesta a nulos)}$
 
 #### Contenido de Datos Reales en Tablas (5.4)
 
@@ -606,40 +521,9 @@ Un concesionario vende `COCHE` (`matricula`, `modelo`, `precio`) a `CLIENTE` (`i
 
 - $\text{CLIENTE}(\underline{\text{id\_cliente}}, \text{nombre}, \text{telefono})$
 - $\text{COCHE}(\underline{\text{matricula}}, \text{modelo}, \text{precio}, \text{id\_cliente*})$
-  - $\text{FK: id\_cliente } \rightarrow \text{CLIENTE}(\text{id\_cliente}) \text{ ON DELETE RESTRICT}$
+  - $\text{FK: id\_cliente } \rightarrow \text{CLIENTE}(\text{id\_cliente}) \text{ (borrado restringido)}$
 - $\text{REVISION}(\underline{\text{matricula*}}, \underline{\text{num\_revision}}, \text{fecha\_revision}, \text{coste})$
-  - $\text{FK: matricula } \rightarrow \text{COCHE}(\text{matricula}) \text{ ON DELETE CASCADE}$
-
-#### Sentencias SQL DDL (5.5)
-
-{{< sgbd "SQL estándar (MySQL / PostgreSQL)" >}}
-
-```sql
-CREATE TABLE cliente (
-    id_cliente INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    telefono VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE coche (
-    matricula VARCHAR(15) PRIMARY KEY,
-    modelo VARCHAR(100) NOT NULL,
-    precio DECIMAL(10,2) CHECK (precio > 0),
-    id_cliente INT NOT NULL,
-    CONSTRAINT fk_coche_cliente FOREIGN KEY (id_cliente)
-        REFERENCES cliente(id_cliente) ON DELETE RESTRICT
-);
-
-CREATE TABLE revision (
-    matricula VARCHAR(15),
-    num_revision INT,
-    fecha_revision DATE NOT NULL,
-    coste DECIMAL(8,2) CHECK (coste >= 0),
-    PRIMARY KEY (matricula, num_revision),
-    CONSTRAINT fk_revision_coche FOREIGN KEY (matricula)
-        REFERENCES coche(matricula) ON DELETE CASCADE
-);
-```
+  - $\text{FK: matricula } \rightarrow \text{COCHE}(\text{matricula}) \text{ (borrado en cascada)}$
 
 #### Contenido de Datos Reales en Tablas (5.5)
 
@@ -670,7 +554,7 @@ CREATE TABLE revision (
 
 ## 6. Restricciones que el Modelo Lógico no Puede Expresar
 
-El modelo relacional expresa muy bien las restricciones **de una fila** (`NOT NULL`, `CHECK`) y **de clave** (`PRIMARY KEY`, `UNIQUE`, `FOREIGN KEY`). Pero muchas reglas de negocio afectan a **varias filas o varias tablas** y no se pueden declarar así. El criterio RA6.h exige **analizarlas y documentarlas** para que no se pierdan entre el diseño y la implementación.
+El modelo relacional expresa muy bien las restricciones **de una fila** (atributo obligatorio, regla de fila) y **de clave** (clave primaria, clave alternativa, clave ajena). Pero muchas reglas de negocio afectan a **varias filas o varias tablas** y no se pueden declarar así. El criterio RA6.h exige **analizarlas y documentarlas** para que no se pierdan entre el diseño y la implementación.
 
 | Regla de negocio (EduGest) | ¿Por qué no basta con una restricción declarativa? | Dónde se implementará |
 |---|---|---|
@@ -678,7 +562,7 @@ El modelo relacional expresa muy bien las restricciones **de una fila** (`NOT NU
 | Un alumno solo se matricula en módulos del ciclo de su grupo | Implica `ALUMNO`, `GRUPO` y `MODULO` | Trigger o procedimiento de matrícula (UD09) |
 | Un profesor no supera 20 horas lectivas semanales | Es una **suma** sobre varias filas de `IMPARTE` | Trigger compuesto o procedimiento (UD09) |
 | No hay faltas anteriores a la fecha de matrícula | Compara dos tablas | Trigger (UD09) |
-| La nota final se pone en múltiplos de 0,25 | Es una regla de **una fila** | `CHECK (MOD(nota_final * 4, 1) = 0)` (UD05) |
+| La nota final se pone en múltiplos de 0,25 | Es una regla de **una fila** | Regla de fila: `nota_final` múltiplo de 0,25 (se declara en la UD05) |
 | Un grupo no supera 30 alumnos | Es un **recuento** sobre varias filas | Procedimiento de matrícula o trigger (UD09) |
 
 Cada restricción se documenta con un formato fijo:
@@ -703,17 +587,16 @@ El diseño lógico se representa con un **diagrama relacional**: un rectángulo 
 
 | Herramienta | Qué aporta |
 |---|---|
-| **Oracle SQL Developer Data Modeler** | Diseña el modelo lógico (Barker) y el relacional, y **genera el DDL de Oracle**. También hace ingeniería inversa: dibuja el diagrama de un esquema existente |
-| **SQL Developer → Data Modeler** | Arrastrando las tablas de una conexión se obtiene su diagrama |
+| **Oracle SQL Developer Data Modeler** | Diseña el modelo lógico (Barker) y el relacional. Más adelante permitirá también la ingeniería inversa de un esquema existente |
 | **draw.io** | Plantillas de tablas (*Entity Relation* → *Table*) |
 | **dbdiagram.io / DBML** | Diagrama a partir de una descripción en texto |
 | **Mermaid** | Diagramas `erDiagram` en Markdown, ideales para documentar en el repositorio |
 
 > [!TIP]
-> Cuando termines el proyecto en la UD05, usa la **ingeniería inversa** de SQL Developer Data Modeler (*Archivo → Importar → Diccionario de datos*) sobre el esquema `EDUGEST`. Si el diagrama obtenido no coincide con tu diseño lógico, hay un error en uno de los dos.
+> Cuando termines el proyecto en la UD05, dibuja el diagrama de las tablas que hayas creado y compáralo con tu diseño lógico. Si no coinciden, hay un error en uno de los dos.
 
 {{% details title="Pista: ¿dónde se comprueba una regla de negocio?" %}}
-Hazte tres preguntas, en este orden: ¿se decide mirando **una sola fila**? → `CHECK`. ¿Compara una columna con la **clave de otra tabla**? → clave ajena. ¿Necesita **sumar, contar o comparar varias filas** o tablas? → trigger o procedimiento en el servidor (UD09). Solo si ninguna de las tres sirve debe vivir en la aplicación.
+Hazte tres preguntas, en este orden: ¿se decide mirando **una sola fila**? → regla de fila (se declara en el propio esquema). ¿Compara una columna con la **clave de otra tabla**? → clave ajena. ¿Necesita **sumar, contar o comparar varias filas** o tablas? → trigger o procedimiento en el servidor (UD09). Solo si ninguna de las tres sirve debe vivir en la aplicación.
 {{% /details %}}
 
 ---
@@ -729,16 +612,16 @@ Aplicamos las reglas del apartado 4 al diagrama de la UD02. Cada paso cita la re
 | Elemento del modelo E/R | Regla | Resultado en el modelo relacional |
 |---|---|---|
 | Entidad `CICLO` | 4.1 Entidad fuerte | CICLO(<u>cod_ciclo</u>, nombre, grado, horas_totales) |
-| Entidad `MODULO` con (codigo, ciclo) único | 4.1 + clave alternativa | MODULO(<u>id_modulo</u>, codigo, nombre, curso, horas, *cod_ciclo*) · UNIQUE(codigo, cod_ciclo) |
-| CICLO 1:N MODULO | 4.4 La FK va al lado N | `cod_ciclo` en MODULO, NOT NULL porque la participación es (1, 1) |
+| Entidad `MODULO` con (codigo, ciclo) único | 4.1 + clave alternativa | MODULO(<u>id_modulo</u>, codigo, nombre, curso, horas, *cod_ciclo*) · UK(codigo, cod_ciclo) |
+| CICLO 1:N MODULO | 4.4 La FK va al lado N | `cod_ciclo` en MODULO, obligatoria porque la participación es (1, 1) |
 | CICLO 1:N GRUPO | 4.4 | GRUPO(<u>cod_grupo</u>, *cod_ciclo*, curso, turno, ...) |
 | GRUPO 1:N ALUMNO, participación (0, 1) | 4.4 con FK opcional | ALUMNO(..., *cod_grupo*) **admite NULL** |
-| PROFESOR 1:1 GRUPO (tutoría), opcional en los dos lados | 4.6 | `id_tutor` en GRUPO, admite NULL y es **UNIQUE** |
-| ALUMNO N:M MODULO con atributos y curso académico | 4.5 | MATRICULA(<u>id_matricula</u>, *id_alumno*, *id_modulo*, curso_academico, ...) · UNIQUE(id_alumno, id_modulo, curso_academico) |
+| PROFESOR 1:1 GRUPO (tutoría), opcional en los dos lados | 4.6 | `id_tutor` en GRUPO, admite nulos y es **UK** |
+| ALUMNO N:M MODULO con atributos y curso académico | 4.5 | MATRICULA(<u>id_matricula</u>, *id_alumno*, *id_modulo*, curso_academico, ...) · UK(id_alumno, id_modulo, curso_academico) |
 | PROFESOR–MODULO–GRUPO (imparte) | 4.8 Ternaria | IMPARTE(<u>*id_modulo*, *cod_grupo*, curso_academico</u>, *id_profesor*, horas_semanales) |
 
 > [!NOTE]
-> En `MATRICULA` se ha usado una **clave artificial** (`id_matricula`) en lugar de la clave compuesta (id_alumno, id_modulo, curso_academico). Las dos opciones son correctas. La clave artificial simplifica las claves ajenas que apuntan a la matrícula (como las faltas de asistencia), pero **obliga** a declarar la clave natural como `UNIQUE`; si no, se podrían duplicar matrículas.
+> En `MATRICULA` se ha usado una **clave artificial** (`id_matricula`) en lugar de la clave compuesta (id_alumno, id_modulo, curso_academico). Las dos opciones son correctas. La clave artificial simplifica las claves ajenas que apuntan a la matrícula (como las faltas de asistencia), pero **obliga** a declarar la clave natural como clave alternativa (UK); si no, se podrían duplicar matrículas.
 
 {{% details title="Ver el diagrama relacional completo de EduGest" %}}
 ```mermaid
@@ -780,7 +663,7 @@ erDiagram
 ## 9. Resumen y Conclusiones
 
 - El **Modelo Relacional** estructura lógicamente la información mediante relaciones (tablas), tuplas (filas) y atributos (columnas), basándose en la teoría matemática de conjuntos.
-- Las **claves primarias (PK)** y **claves alternativas (`UNIQUE`)** garantizan la unicidad de las tuplas, mientras que las **claves foráneas (FK)** representan los vínculos e imponen integridad referencial.
+- Las **claves primarias (PK)** y **claves alternativas (UK)** garantizan la unicidad de las tuplas, mientras que las **claves foráneas (FK)** representan los vínculos e imponen integridad referencial.
 - Las políticas de integridad referencial (`CASCADE`, `RESTRICT`, `SET NULL`) determinan la respuesta del SGBD ante borrados o modificaciones de claves primarias.
 - El paso de EER a Relacional se rige por un catálogo estricto de reglas de transformación que mapea entidades a tablas, relaciones $1:N$ a propagaciones de clave, relaciones $N:M$ a tablas intermedias de enlace y entidades débiles a claves compuestas.
 
@@ -801,7 +684,7 @@ erDiagram
 
 ### 2. Análisis de Políticas de Integridad Referencial
 
-**Pregunta:** Si eliminamos la fila de un `DEPARTAMENTO` con `id_dep = 10` y la clave foránea en la tabla `EMPLEADO` tiene configurada la política `ON DELETE CASCADE`, ¿qué ocurre con los empleados pertenecientes a dicho departamento?
+**Pregunta:** Si eliminamos la fila de un `DEPARTAMENTO` con `id_dep = 10` y la clave foránea en la tabla `EMPLEADO` tiene configurada la política de borrado en cascada, ¿qué ocurre con los empleados pertenecientes a dicho departamento?
 {{% details title="Solución Explicada" %}}
 El SGBD eliminará automáticamente de la tabla `EMPLEADO` todas las tuplas que tengan `id_dep = 10`.
 {{% /details %}}
@@ -810,7 +693,7 @@ El SGBD eliminará automáticamente de la tabla `EMPLEADO` todas las tuplas que 
 
 ### 3. Ejercicio Práctico de Transformación Relacional
 
-**Enunciado:** Un `AUTOR` (`id_autor`, `nombre`) escribe múltiples `LIBRO` (`isbn`, `titulo`, `precio`). Un libro puede ser escrito por varios autores. Exprese el esquema relacional formal resultante y las sentencias SQL DDL para implementar esta relación $N:M$.
+**Enunciado:** Un `AUTOR` (`id_autor`, `nombre`) escribe múltiples `LIBRO` (`isbn`, `titulo`, `precio`). Un libro puede ser escrito por varios autores. Exprese el esquema relacional formal resultante y justifique dónde van las claves ajenas y qué política de borrado conviene en esta relación $N:M$.
 
 **Solución Paso a Paso:**
 
@@ -819,28 +702,7 @@ El SGBD eliminará automáticamente de la tabla `EMPLEADO` todas las tuplas que 
    - $\text{LIBRO}(\underline{\text{isbn}}, \text{titulo}, \text{precio})$
    - $\text{ESCRIBE}(\underline{\text{id\_autor*}}, \underline{\text{isbn*}})$
 
-2. **Sentencias SQL DDL:**
-
-```sql
-CREATE TABLE autor (
-    id_autor INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE libro (
-    isbn VARCHAR(20) PRIMARY KEY,
-    titulo VARCHAR(150) NOT NULL,
-    precio DECIMAL(8,2) CHECK (precio > 0)
-);
-
-CREATE TABLE escribe (
-    id_autor INT,
-    isbn VARCHAR(20),
-    PRIMARY KEY (id_autor, isbn),
-    CONSTRAINT fk_esc_autor FOREIGN KEY (id_autor) REFERENCES autor(id_autor) ON DELETE CASCADE,
-    CONSTRAINT fk_esc_libro FOREIGN KEY (isbn) REFERENCES libro(isbn) ON DELETE CASCADE
-);
-```
+2. **Claves ajenas y políticas de borrado:** `id_autor` e `isbn` son claves ajenas en `ESCRIBE` y forman su clave primaria compuesta. Si se borra un autor o un libro, tiene sentido borrar también sus filas de `ESCRIBE` (borrado en cascada). Además, `precio` debe cumplir una regla de fila: ser mayor que 0.
 
 ---
 
@@ -856,7 +718,7 @@ Responde a las preguntas y pulsa **Corregir**. Cada respuesta incluye una explic
 - q: "En la tabla CLIENTE, tanto `id_cliente` como `dni` identifican a cada cliente. Se elige `id_cliente` como clave primaria. ¿Qué es `dni`?"
   options: ["Una clave ajena", "Una clave alternativa", "Una superclave no mínima", "Un atributo derivado"]
   answer: 1
-  explain: "Es una clave **candidata** que no se ha elegido como primaria: una clave alternativa. Se declara con `UNIQUE`."
+  explain: "Es una clave **candidata** que no se ha elegido como primaria: una clave alternativa. Se marca como UK."
 - q: "¿Qué regla de integridad impide que una clave primaria tome el valor NULL?"
   options: ["Integridad referencial", "Integridad de entidad", "Integridad de dominio", "Regla de negocio"]
   answer: 1
@@ -869,21 +731,20 @@ Responde a las preguntas y pulsa **Corregir**. Cada respuesta incluye una explic
   options: ["Una clave ajena en ALUMNO", "Una clave ajena en ASIGNATURA", "Una tabla nueva con las dos claves ajenas y la nota", "Un atributo multivaluado"]
   answer: 2
   explain: "Toda relación N:M genera una **tabla propia** con las claves de ambas entidades (normalmente como clave primaria compuesta) y los atributos de la relación."
-- q: "Se borra un departamento que tiene empleados. La FK de EMPLEADO tiene `ON DELETE SET NULL`. ¿Qué ocurre?"
+- q: "Se borra un departamento que tiene empleados. La FK de EMPLEADO tiene política de puesta a nulos. ¿Qué ocurre?"
   options: ["Se rechaza el borrado", "Se borran también los empleados", "Los empleados quedan con id_dep a NULL", "Los empleados pasan a otro departamento"]
   answer: 2
-  explain: "SET NULL conserva las filas hijas y pone su clave ajena a NULL. Solo es posible si la columna admite nulos."
-- q: "¿Qué opción de integridad referencial **no** está disponible en Oracle?"
-  options: ["ON DELETE CASCADE", "ON DELETE SET NULL", "ON UPDATE CASCADE", "La opción por defecto (rechazar el borrado)"]
+  explain: "La puesta a nulos conserva las filas hijas y deja su clave ajena vacía. Solo es posible si la columna admite nulos."
+- q: "¿Por qué conviene que las claves primarias sean **estables** (que no cambien)?"
+  options: ["Porque no se pueden escribir dos veces", "Porque cambiar una clave referenciada obliga a actualizar todas las claves ajenas que la apuntan, y muchos gestores no lo propagan", "Porque las claves primarias no admiten texto", "Porque así se evitan los nulos"]
   answer: 2
-  explain: "Oracle no implementa `ON UPDATE`: no permite modificar en cascada una clave primaria referenciada. Es otra razón para usar claves primarias **estables** que no cambien."
+  explain: "Cambiar una clave primaria referenciada rompe la integridad referencial si el gestor no propaga el cambio. Por eso se prefieren claves **estables**, que no cambien nunca."
 - q: "La regla «un profesor no puede impartir más de 20 horas semanales» se debe..."
-  options: ["Expresar con un CHECK en la tabla IMPARTE", "Documentar como restricción no representable e implementar con PL/SQL", "Ignorar, ya que no forma parte del modelo", "Resolver con una clave ajena"]
+  options: ["Expresar con una regla de fila en la tabla IMPARTE", "Documentar como restricción no representable e implementar con programación en el servidor (UD09)", "Ignorar, ya que no forma parte del modelo", "Resolver con una clave ajena"]
   answer: 1
-  explain: "Afecta a la **suma** de varias filas. Un `CHECK` solo ve la fila actual. Se documenta (RA6.h) y se implementa con un trigger o un procedimiento (UD09)."
+  explain: "Afecta a la **suma** de varias filas. Una regla de fila solo ve la fila actual. Se documenta (RA6.h) y se implementa con un trigger o un procedimiento (UD09)."
 {{< /quiz >}}
 
 ## Referencias
 
 - Codd, E. F. (1970). «A Relational Model of Data for Large Shared Data Banks». *Communications of the ACM*, 13(6).
-- [Oracle AI Database 26ai: SQL Language Reference, *constraint*](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/constraint.html).

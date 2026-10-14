@@ -74,19 +74,18 @@ Los diagramas de `assets/images/*.svg` (arquitectura, ACID, E/R, relacional, eje
 
 Las imágenes escritas como `![…](images/x.svg)` se resuelven desde `assets/images` mediante el *render hook* `layouts/_markup/render-image.html`, de modo que funcionan en cualquier página y con cualquier `baseURL`.
 
-## Diagramas EER del banco de ejercicios (UD02)
+## Soluciones protegidas
 
-Las soluciones del banco de ejercicios de la UD02 son SVG en notación de Chen generados con Python (necesita `graphviz`, `Pillow`):
+Las soluciones de las páginas de prácticas **no están en el repositorio**: cada una es un candado que pide una clave y descifra en el navegador. El texto en claro vive en `privado/` (ignorada por Git; ver `privado/README.md`), y en `static/soluciones/` solo hay los ficheros cifrados.
 
 | Fichero | Función |
 |---|---|
-| `tools/chen_eer.py` | Motor: describe entidades, relaciones y jerarquías y calcula la disposición |
-| `tools/ud02_banco_1.py`, `tools/ud02_banco_2.py` | Datos de los 25 ejercicios (enunciado, tareas, solución y modelo) |
-| `tools/gen_svgs.py` | Genera `assets/images/ud02/ejNN.svg` (admite números: `python3 tools/gen_svgs.py 5 12`) |
-| `tools/gen_leyenda.py` | Genera la leyenda `chen-eer-leyenda.svg` |
-| `tools/build_banco.py` | Reescribe la sección «Banco de ejercicios» de `ud02-practicas.md` |
+| `layouts/_shortcodes/solucion.html` | Candado (`{{< solucion id=".." title=".." />}}`) y, en la carpeta privada, bloque en claro |
+| `static/js/solucion.js` | Descifrado en el navegador (Web Crypto) |
+| `tools/soluciones.py` | `separar` (saca las soluciones al directorio privado) y `cifrar` (genera `static/soluciones/*.json`) |
+| `tools/chen_eer.py`, `tools/gen_leyenda.py` | Motor de los diagramas de Chen y su leyenda |
 
-Para cambiar un ejercicio: edita su entrada en `ud02_banco_*.py`, ejecuta `gen_svgs.py <n>` y `build_banco.py`. **No edites a mano la sección del banco** en `ud02-practicas.md`: se sobrescribe al ejecutar el script.
+Para volver a cifrar tras cambiar una solución o la clave: `BD_CLAVE='…' python3 tools/soluciones.py cifrar --hugo ruta/hugo`.
 
 ## Probar en local
 

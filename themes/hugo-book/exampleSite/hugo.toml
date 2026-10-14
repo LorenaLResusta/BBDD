@@ -61,37 +61,51 @@ enableGitInfo = true
 [[menu.home]]
   name = 'Documentation'
   pageRef = '/docs/getting-started/introduction'
-  weight = 2
-
+  weight = 10
 [[menu.home]]
   name = 'Showcases'
   pageRef = '/showcases/'
-  weight = 3
-
+  weight = 20
 [[menu.home]]
   name = 'Github'
   url = 'https://github.com/alex-shpak/hugo-book/'
-  weight = 4
+  weight = 30
 
 # [[menu.before]]
 [[menu.after]]
+  name = 'Single Page'
+  url = '/docs/'
+  weight = 10
+[[menu.after]]
   name = 'Github'
   url = 'https://github.com/alex-shpak/hugo-book/'
-  weight = 10
+  weight = 20
+[[menu.after]]
+  name = 'Codeberg'
+  url = 'https://codeberg.org/alex-shpak/hugo-book'
+  weight = 30
 
 [params]
   # (Optional, default light) Sets color theme: light, dark or auto.
   # Theme 'auto' switches between dark and light modes based on browser/os preferences
   BookTheme = 'light'
 
-  # (Optional, default none) Controls table of contents visibility on right side of pages.
+  # (Optional, default true) Controls table of contents visibility on right side of pages.
   # Start and end levels can be controlled globally with markup.tableOfContents setting.
   # You can also specify this parameter per page in front matter.
-  # BookToC = true
+  BookToC = true
+
+  # (Optional, default false) Controlls breadcurms, if true breadcrumbs are displayed at the beginning of the document.
+  # You can also specify this parameter per page in front matter.
+  BookBreadcrumbs = true
+
+  # (Optional, default false) Enableds incoming and outgoing links display next to table of contents on a page
+  # You can also specify this parameter per page in front matter.
+  BookPageLinks = true
 
   # (Optional, default none) Set the path to a logo for the book.
   # If the logo is /static/logo.png then the path would be logo.png
-  # BookLogo = 'logo.png'
+  # BookLogo = 'favicon.svg'
 
   # (Optional, default docs) Specify root page to render child pages as menu.
   # Page is resoled by .GetPage function: https://gohugo.io/functions/getpage/
@@ -123,11 +137,11 @@ enableGitInfo = true
   # Configuration for indexing can be adjusted in i18n folder per language.
   BookSearch = true
 
-  # (Optional, default true) Enables comments template on pages
+  # (Optional, default false) Enables comments template on pages
   # By default partials/docs/comments.html includes Disqus template
   # See https://gohugo.io/content-management/comments/#configure-disqus
   # Can be overwritten by same param in page frontmatter
-  BookComments = true
+  BookComments = false
 
   # /!\ This is an experimental feature, might be removed or changed at any time
   # (Optional, experimental, default false) Enables portable links and link checks in markdown pages.

@@ -1,10 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 350" role="img" aria-labelledby="title desc">
-  <title id="title">ACTOR participa en PELICULA, diagrama Chen</title>
-  <desc id="desc">Relación N a M PARTICIPA entre ACTOR y PELICULA. personaje y orden de aparición son atributos ovalados de la relación.</desc>
-  <rect width="1000" height="350" fill="#0f172a"/>
-  <g fill="none" stroke="#94a3b8" stroke-width="2"><path d="M260 145H370M530 145H640M170 118L125 55M210 172L220 285M730 118L775 55M690 172L670 285M415 180L350 275M485 180L550 275"/></g>
-  <g fill="#075985" stroke="#38bdf8" stroke-width="2"><rect x="90" y="118" width="170" height="54"/><rect x="640" y="118" width="170" height="54"/></g>
-  <polygon points="450,98 530,145 450,192 370,145" fill="#047857" stroke="#34d399" stroke-width="2"/>
-  <g fill="#312e81" stroke="#a5b4fc" stroke-width="2"><ellipse cx="125" cy="47" rx="75" ry="25"/><ellipse cx="220" cy="310" rx="72" ry="25"/><ellipse cx="350" cy="300" rx="78" ry="25"/><ellipse cx="550" cy="300" rx="82" ry="25"/><ellipse cx="670" cy="310" rx="80" ry="25"/><ellipse cx="775" cy="47" rx="84" ry="25"/></g>
-  <g fill="#f8fafc" font-family="Arial, sans-serif" text-anchor="middle"><text x="175" y="151" font-size="16" font-weight="700">ACTOR</text><text x="725" y="151" font-size="16" font-weight="700">PELICULA</text><text x="450" y="149" font-size="14" font-weight="700">PARTICIPA</text><text x="125" y="52" font-size="12" text-decoration="underline">id_actor (PK)</text><text x="220" y="315" font-size="14">nombre</text><text x="350" y="305" font-size="14">personaje</text><text x="550" y="305" font-size="13">orden_aparicion</text><text x="670" y="315" font-size="12" text-decoration="underline">id_pelicula (PK)</text><text x="775" y="52" font-size="14">titulo</text><text x="305" y="133" font-size="14" font-weight="700">N</text><text x="590" y="133" font-size="14" font-weight="700">M</text></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 390" width="1000" height="390" role="img" aria-labelledby="t d" font-family='system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'>
+<title id="t">ACTOR participa en PELICULA (N:M)</title><desc id="d">ACTOR participa en PELICULA (N:M)</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e293b"/></linearGradient></defs>
+<style>.hot{cursor:pointer;transition:filter .15s}.hot:hover,.hot:focus,.hot.on{filter:brightness(1.35) drop-shadow(0 0 6px rgba(255,255,255,.35));outline:none}</style>
+<rect width="1000" height="390" rx="12" fill="url(#bg)"/>
+<rect x="65.0" y="162.0" width="170.0" height="56.0" rx="2" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+<text x="150.0" y="195.6" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">ACTOR</text>
+<rect x="765.0" y="162.0" width="170.0" height="56.0" rx="2" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+<text x="850.0" y="195.6" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">PELICULA</text>
+<line x1="235.0" y1="190.0" x2="415.0" y2="190.0" stroke="#94a3b8" stroke-width="2"/>
+<line x1="585.0" y1="190.0" x2="765.0" y2="190.0" stroke="#94a3b8" stroke-width="2"/>
+<g class="hot" tabindex="0" data-tip="N:M: un actor participa en muchas películas y una película tiene muchos actores. Los atributos de la relación (personaje, orden) pertenecen a la pareja.">
+<polygon points="500,149.0 585.0,190 500,231.0 415.0,190" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<text x="500.0" y="194.9" font-size="14" fill="#fff" text-anchor="middle" font-weight="700">PARTICIPA</text>
+</g>
+<text x="271.0" y="178.0" font-size="15" fill="#fbbf24" text-anchor="middle" font-weight="700">N</text>
+<text x="729.0" y="178.0" font-size="15" fill="#fbbf24" text-anchor="middle" font-weight="700">M</text>
+<line x1="150.0" y1="162.0" x2="150.0" y2="97.0" stroke="#94a3b8" stroke-width="1.6"/>
+<ellipse cx="150.0" cy="80.0" rx="38.2" ry="17" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.8"/>
+<text x="150.0" y="84.4" font-size="12.5" fill="#fff" text-anchor="middle" text-decoration="underline">id_actor</text>
+<line x1="150.0" y1="218.0" x2="150.0" y2="283.0" stroke="#94a3b8" stroke-width="1.6"/>
+<ellipse cx="150.0" cy="300.0" rx="37.4" ry="17" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.8"/>
+<text x="150.0" y="304.4" font-size="12.5" fill="#fff" text-anchor="middle">nombre</text>
+<line x1="850.0" y1="162.0" x2="850.0" y2="97.0" stroke="#94a3b8" stroke-width="1.6"/>
+<ellipse cx="850.0" cy="80.0" rx="45.8" ry="17" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.8"/>
+<text x="850.0" y="84.4" font-size="12.5" fill="#fff" text-anchor="middle" text-decoration="underline">id_pelicula</text>
+<line x1="850.0" y1="218.0" x2="850.0" y2="283.0" stroke="#94a3b8" stroke-width="1.6"/>
+<ellipse cx="850.0" cy="300.0" rx="30.0" ry="17" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.8"/>
+<text x="850.0" y="304.4" font-size="12.5" fill="#fff" text-anchor="middle">titulo</text>
+<line x1="476.0" y1="231.0" x2="431.4" y2="284.0" stroke="#94a3b8" stroke-width="1.6"/>
+<ellipse cx="431.4" cy="301.0" rx="43.7" ry="17" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.8"/>
+<text x="431.4" y="305.4" font-size="12.5" fill="#fff" text-anchor="middle">personaje</text>
+<line x1="517.7" y1="231.0" x2="550.7" y2="284.0" stroke="#94a3b8" stroke-width="1.6"/>
+<ellipse cx="550.7" cy="301.0" rx="61.6" ry="17" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.8"/>
+<text x="550.7" y="305.4" font-size="12.5" fill="#fff" text-anchor="middle">orden_aparicion</text>
 </svg>

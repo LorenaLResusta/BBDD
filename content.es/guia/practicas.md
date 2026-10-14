@@ -11,7 +11,7 @@ Cada unidad tiene una página de **prácticas**. Las prácticas son la parte pri
 
 | Tipo | Qué es | Cómo se trabaja |
 |---|---|---|
-| **Guiada** | Se presenta el procedimiento paso a paso. Su objetivo es aprender la técnica. | En clase, con apoyo del profesorado. Se comprueba al final de la sesión. |
+| **Guiada** | Se presenta el procedimiento paso a paso. Su objetivo es aprender la técnica. | En clase. Se comprueba al final de la sesión con la lista de comprobación. |
 | **Autónoma** | Se plantea un problema parecido sin el procedimiento. Su objetivo es aplicar la técnica. | Individual. Se entrega y se evalúa. |
 | **Reto** | Un problema abierto o con una dificultad extra. Exige analizar y decidir. | Opcional o para subir nota. Se defiende oralmente. |
 | **Proyecto** | La tarea de EduGest de la unidad. | Individual o por parejas. Forma parte del proyecto final. |
@@ -90,13 +90,13 @@ SELECT constraint_name, constraint_type FROM user_constraints WHERE table_name =
 - Identificadores en minúsculas y con guion bajo (`fecha_nacimiento`), sin tildes ni espacios.
 - Las evidencias de ejecución se guardan con `SPOOL` o con capturas en la carpeta `evidencias/`.
 
-## 5. Evaluación de las prácticas
+## 5. Autoevaluación de las prácticas
 
-Las prácticas autónomas y las de proyecto se evalúan con esta rúbrica común. Cada práctica indica qué criterios de evaluación (CE) califica.
+Las prácticas autónomas y las de proyecto se autoevalúan con esta rúbrica común. Cada práctica indica qué criterios de evaluación (CE) trabaja.
 
 | Aspecto | Excelente (4) | Adecuado (3) | Mejorable (2) | Insuficiente (1) |
 |---|---|---|---|---|
-| **Corrección** | Funciona y supera todas las comprobaciones | Errores menores que no afectan al resultado | Funciona parcialmente | No funciona o no se ejecuta |
+| **Resultado** | Funciona y supera todas las comprobaciones | Errores menores que no afectan al resultado | Funciona parcialmente | No funciona o no se ejecuta |
 | **Diseño y decisiones** | Justifica cada decisión y valora alternativas | Decisiones correctas con poca justificación | Decisiones discutibles sin justificar | Decisiones incorrectas |
 | **Calidad del código o del diagrama** | Legible, comentado, con nombres coherentes | Legible con pocos comentarios | Difícil de seguir | Desordenado |
 | **Comprobación y evidencias** | Pruebas propias además de las pedidas | Incluye las comprobaciones pedidas | Comprobaciones incompletas | Sin evidencias |

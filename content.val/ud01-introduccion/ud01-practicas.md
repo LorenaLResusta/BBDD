@@ -88,14 +88,7 @@ La teua resposta és completa si:
 - [ ] Les tres anomalies s'expliquen amb un exemple del full, no amb una definició genèrica.
 - [ ] El paràgraf final menciona concurrència, integritat, seguretat, independència de les dades i còpies de seguretat.
 
-{{% details title="Solució orientativa" %}}
-1. **Inconsistències:** el correu d'Ana Ruiz és distint en les files 1 i 2; en la fila 4 el professor apareix com «Jhon Smith», amb un altre telèfon, i el preu de l'anglés B1 és 95 € en lloc de 90 €; en la fila 5 falta el professor i el preu no seguix el mateix format. A més, «pagat» admet qualsevol text: res no impedix escriure «sí», «S» o «pendent».
-2. **Redundància:** les dades d'Ana i de Luis es repetixen 2 vegades, les de John Smith 3 vegades i el preu de cada curs tantes vegades com alumnes tinga. Si John canvia de telèfon, cal modificar 3 files.
-3. **Anomalies:** *inserció*: no es pot donar d'alta *Italià A1* sense inventar un alumne; *modificació*: pujar el preu del B1 exigix canviar totes les seues files, i si se n'oblida una el curs tindrà dos preus; *esborrat*: en eliminar la fila 5 es perd que existix el curs d'alemany i el seu preu.
-4. **Còpia pròpia:** hi ha dues versions de les dades que evolucionen per separat. Ningú no sap quina és la bona, les notes no estan disponibles per a secretaria i, si es perd el portàtil, es perden les notes i les dades personals (problema de seguretat i de protecció de dades).
-5. **Accés simultani:** qui guarde l'últim sobreescriu els canvis de l'altre (**actualització perduda**). Un full de càlcul no té control de concurrència.
-6. Un SGBD guarda cada dada **una sola vegada** i la relaciona amb les altres; valida les dades amb **restriccions** (el preu és un número, «pagat» és S o N); permet que diverses persones treballen alhora amb **control de concurrència i transaccions**; dona a cada usuari només els **permisos** que necessita (la secretària veu els pagaments; el professor, les notes); fa **còpies de seguretat** i permet recuperar les dades després d'una fallada; i separa les dades de les aplicacions (**independència**), de manera que es poden crear noves aplicacions sense canviar les dades.
-{{% /details %}}
+{{< solucion id="ud01-001" title="Solució orientativa" />}}
 {{% /comprobacion %}}
 
 #### Errors habituals
@@ -237,13 +230,7 @@ T'incorpores al departament de sistemes d'EduGest. Abans de començar a desenvol
 - [ ] El fitxer `p1_2_salida.txt` conté l'eixida de totes les consultes.
 - [ ] En obrir la segona connexió apareix una sessió més en `v$session`.
 
-{{% details title="Solució de les preguntes" %}}
-1. La **instància** són els processos i les estructures de memòria (SGA i PGA) que s'executen en el servidor. La **base de dades** són els fitxers en disc. En l'arquitectura *multitenant*, la instància dona servei a la base de dades contenidora `FREE`, que allotja la base de dades connectable `FREEPDB1`.
-2. `DBW0` (*Database Writer*) escriu en disc els blocs modificats; `LGWR` (*Log Writer*) escriu el registre de transaccions (*redo*) i és clau per a la **durabilitat**; `CKPT` marca els punts de control; `SMON` recupera la instància després d'una caiguda; `PMON` neteja els recursos de les sessions que acaben malament; `RECO` resol transaccions distribuïdes pendents.
-3. Normalment 8192 bytes (8 KB). El disc és molt més lent que la memòria; llegir blocs complets permet aprofitar cada accés i guardar-los en la caché (*buffer cache*) de la SGA.
-4. Els fitxers `.dbf` pertanyen al **nivell intern o físic**. `USER_TABLES` és una vista del diccionari que descriu el **nivell conceptual** (les taules que existixen).
-5. Depén de la instal·lació (com a mínim `PDBADMIN`). Per al projecte s'usa `EDUGEST`. `SYSTEM` és un compte d'administració amb privilegis molt amplis: treballar amb ella incompleix el **principi de mínim privilegi** i un error podria danyar el diccionari de dades.
-{{% /details %}}
+{{< solucion id="ud01-002" title="Solució de les preguntes" />}}
 {{% /comprobacion %}}
 
 #### Errors habituals
@@ -352,24 +339,7 @@ CLIENTE(id_cliente, dni, nombre, apellidos, telefono, provincia,
 - [ ] La reconstrucció usa `UNION ALL` per als fragments horitzontals i `JOIN` per als verticals.
 - [ ] El disseny té en compte que les dades sanitàries són una **categoria especial** segons el RGPD.
 
-{{% details title="Solució parcial: reconstrucció" %}}
-```sql
--- Fragments verticals en cada node:
---   CLI_ADMIN_xx(id_cliente, dni, nombre, apellidos, telefono, provincia, puntos_fidelidad)
---   CLI_SALUD_xx(id_cliente, historial_dispensaciones, alergias)
--- Fragments horitzontals: xx = VAL, ALI, CAS segons la província
-
-SELECT a.*, s.historial_dispensaciones, s.alergias
-FROM   cli_admin_val a JOIN cli_salud_val s ON s.id_cliente = a.id_cliente
-UNION ALL
-SELECT a.*, s.historial_dispensaciones, s.alergias
-FROM   cli_admin_ali a JOIN cli_salud_ali s ON s.id_cliente = a.id_cliente
-UNION ALL
-SELECT a.*, s.historial_dispensaciones, s.alergias
-FROM   cli_admin_cas a JOIN cli_salud_cas s ON s.id_cliente = a.id_cliente;
-```
-Una opció raonable per a màrqueting és **replicar** a València una còpia de només lectura d'`id_cliente`, `nombre`, `provincia` i `puntos_fidelidad` de les tres províncies. Així les seues consultes no depenen de la xarxa.
-{{% /details %}}
+{{< solucion id="ud01-003" title="Solució parcial: reconstrucció" />}}
 
 #### Ampliació
 

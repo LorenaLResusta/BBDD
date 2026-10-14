@@ -11,7 +11,7 @@ Cada unitat té una pàgina de **pràctiques**. Les pràctiques són la part pri
 
 | Tipus | Què és | Com es treballa |
 |---|---|---|
-| **Guiada** | Es presenta el procediment pas a pas. El seu objectiu és aprendre la tècnica. | A classe, amb el suport del professorat. Es comprova al final de la sessió. |
+| **Guiada** | Es presenta el procediment pas a pas. El seu objectiu és aprendre la tècnica. | A classe. Es comprova al final de la sessió amb la llista de comprovació. |
 | **Autònoma** | Es planteja un problema semblant sense el procediment. El seu objectiu és aplicar la tècnica. | Individual. Es lliura i s'avalua. |
 | **Repte** | Un problema obert o amb una dificultat extra. Exigix analitzar i decidir. | Opcional o per a pujar nota. Es defén oralment. |
 | **Projecte** | La tasca d'EduGest de la unitat. | Individual o per parelles. Forma part del projecte final. |
@@ -90,13 +90,13 @@ SELECT constraint_name, constraint_type FROM user_constraints WHERE table_name =
 - Identificadors en minúscules i amb guió baix (`fecha_nacimiento`), sense accents ni espais.
 - Les evidències d'execució es guarden amb `SPOOL` o amb captures a la carpeta `evidencias/`.
 
-## 5. Avaluació de les pràctiques
+## 5. Autoavaluació de les pràctiques
 
-Les pràctiques autònomes i les de projecte s'avaluen amb esta rúbrica comuna. Cada pràctica indica quins criteris d'avaluació (CE) qualifica.
+Les pràctiques autònomes i les de projecte s'autoavaluen amb esta rúbrica comuna. Cada pràctica indica quins criteris d'avaluació (CE) treballa.
 
 | Aspecte | Excel·lent (4) | Adequat (3) | Millorable (2) | Insuficient (1) |
 |---|---|---|---|---|
-| **Correcció** | Funciona i supera totes les comprovacions | Errors menors que no afecten el resultat | Funciona parcialment | No funciona o no s'executa |
+| **Resultat** | Funciona i supera totes les comprovacions | Errors menors que no afecten el resultat | Funciona parcialment | No funciona o no s'executa |
 | **Disseny i decisions** | Justifica cada decisió i valora alternatives | Decisions correctes amb poca justificació | Decisions discutibles sense justificar | Decisions incorrectes |
 | **Qualitat del codi o del diagrama** | Llegible, comentat, amb noms coherents | Llegible amb pocs comentaris | Difícil de seguir | Desordenat |
 | **Comprovació i evidències** | Proves pròpies a més de les demanades | Inclou les comprovacions demanades | Comprovacions incompletes | Sense evidències |

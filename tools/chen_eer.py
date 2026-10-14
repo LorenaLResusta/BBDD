@@ -6,18 +6,17 @@ agregaciones) y el script calcula la posición de los elementos y escribe un SVG
 en blanco y negro, con la misma notación que se usa en clase (draw.io):
 
     Entidad            rectángulo              Entidad débil      rectángulo doble
-    Relación           rombo partido en dos mitades. La mitad que mira a una
-                       entidad es NEGRA si el máximo junto a esa entidad es N
-                       (o mayor que 1) y BLANCA si es 1:
-                         1:1 rombo blanco · 1:N mitad blanca/mitad negra · N:M rombo negro
-    Ternaria           triángulo dividido en tres sectores con el mismo criterio
-    Dependencia        etiqueta ID (identificación) o E (existencia) junto a la entidad débil
+    Relación           rombo blanco            Relación identificadora  rombo doble
+    Ternaria           rombo con tres (o más) líneas; las N se rotulan N, M, P
+    Dependencia en existencia   etiqueta E junto a la entidad dependiente (extensión didáctica)
+    Participación      línea doble si es total (mínimo 1) y sencilla si es parcial
     Atributo           óvalo                   Identificador      subrayado continuo
     Clave alternativa  subrayado de puntos     Discriminador      subrayado discontinuo
     Multivaluado       óvalo doble             Derivado           óvalo discontinuo
     Compuesto          óvalo con sub-óvalos
-    Jerarquía (ISA)    flecha de las subclases a la superclase con T/P (total/parcial)
-                       y D/S (disjunta/solapada)
+    Especialización    círculo con d (disjunta) u o (solapada); cada subclase se une con
+                       el símbolo de subconjunto ⊂ y la línea hasta la superclase es
+                       doble si la especialización es total
     Agregación         recuadro doble alrededor de la relación agregada
 
 Convenio de cardinalidades (el de la teoría de la UD02):
@@ -89,8 +88,8 @@ class R:
     name: str
     ends: list
     attrs: list = field(default_factory=list)
-    ident: object = False  # dependencia en identificación: True o nombre de la entidad débil (etiqueta ID)
-    exist: object = False  # dependencia en existencia: True o nombre de la entidad (etiqueta E)
+    ident: object = False  # relación identificadora de una entidad débil (rombo doble)
+    exist: object = False  # dependencia en existencia: True o nombre de la entidad dependiente (etiqueta E)
     rid: str = ""          # clave para la disposición manual (por defecto, el nombre)
 
 
@@ -208,6 +207,8 @@ def layout_radius(n):
     obj = n.obj
     if n.kind == "isa":
         return 34
+    if n.kind == "agg":
+        return 20
     cnt = sum(natt(a) for a in obj.attrs) if hasattr(obj, "attrs") else 0
     if n.kind == "ent":
         return max(n.w / 2 + 12, 24 + 8 * cnt + n.w * 0.1)
@@ -656,6 +657,13 @@ def _label_node(n, text, cands, nodes):
     return best[1]
 
 
+def _snap(dx, dy):
+    """Vector unitario alineado con el eje dominante (horizontal o vertical)."""
+    if abs(dx) >= abs(dy):
+        return (1.0 if dx >= 0 else -1.0, 0.0)
+    return (0.0, 1.0 if dy >= 0 else -1.0)
+
+
 def orient(nodes, edges):
     """Calcula forma, puertos y etiqueta de cada relación según dónde están sus entidades."""
     ends_of = {}
@@ -671,11 +679,12 @@ def orient(nodes, edges):
         if len(ends) == 2:
             (i0, A_, inf0), (i1, B_, inf1) = ends
             if A_ is B_:  # reflexiva
-                dx, dy = _unit(n.x - A_.x, n.y - A_.y)
+                dx, dy = _snap(n.x - A_.x, n.y - A_.y)
                 ux, uy = -dy, dx
                 geo["reflex"] = (dx, dy)
             else:
-                ux, uy = _unit(B_.x - A_.x, B_.y - A_.y)
+                # rombo siempre alineado con los ejes (legible); la punta apunta hacia cada entidad
+                ux, uy = _snap(B_.x - A_.x, B_.y - A_.y)
             vx, vy = -uy, ux
             tA = (c[0] - ux * HW, c[1] - uy * HW)
             tB = (c[0] + ux * HW, c[1] + uy * HW)
@@ -691,53 +700,17 @@ def orient(nodes, edges):
                 cands = [(geo["reflex"][0], geo["reflex"][1], HH)]
             else:
                 cands = [(vx, vy, HH), (-vx, -vy, HH)]
-        elif len(ends) == 3:
-            angs = [math.atan2(e[1].y - n.y, e[1].x - n.x) for e in ends]
-            if ends[0][1] is ends[1][1] or ends[1][1] is ends[2][1] or ends[0][1] is ends[2][1]:
-                # ternaria con una entidad repetida: separar los dos extremos repetidos
-                pass
-            best = None
-            import itertools
-            for rot in range(0, 120, 3):
-                th = math.radians(rot)
-                normals = [th + k * 2 * math.pi / 3 for k in range(3)]
-                for perm in itertools.permutations(range(3)):
-                    if len({id(e[1]) for e in ends}) < 3:
-                        # entidad repetida: no se permite que compartan cara (no ocurre en permutaciones)
-                        pass
-                    cost = sum(ang_dist(normals[perm[j]], angs[j]) for j in range(3))
-                    if best is None or cost < best[0]:
-                        best = (cost, th, perm)
-            _, th, perm = best
-            # vértices del triángulo: entre normales
-            verts = [(c[0] + TR * 1.25 * math.cos(th + math.pi / 3 + k * 2 * math.pi / 3),
-                      c[1] + TR * 1.25 * math.sin(th + math.pi / 3 + k * 2 * math.pi / 3)) for k in range(3)]
-            # la cara k (normal th + k·120º) está entre los vértices k-1 y k
-            outline = verts
-            geo["outline"] = outline
-            for j, (idx, E_, inf) in enumerate(ends):
-                k = perm[j]
-                va, vb = verts[(k - 1) % 3], verts[k]
-                mid = ((va[0] + vb[0]) / 2, (va[1] + vb[1]) / 2)
-                geo["polys"].append(([c, va, vb], _many(inf["card"])))
-                geo["ports"][idx] = mid
-                geo["dirs"][idx] = (math.cos(th + k * 2 * math.pi / 3), math.sin(th + k * 2 * math.pi / 3))
-                geo["tips"][idx] = _max(inf["card"])
-            # etiqueta: por el vértice más despejado
-            cands = []
-            for v in verts:
-                dx, dy = _unit(v[0] - c[0], v[1] - c[1])
-                cands.append((dx, dy, TR * 1.25))
         else:
-            # n-aria (>3): cuadrado dividido
-            k = len(ends)
-            geo["outline"] = [(c[0] + 30 * math.cos(t * 2 * math.pi / k), c[1] + 30 * math.sin(t * 2 * math.pi / k)) for t in range(k)]
+            # ternaria o n-aria: rombo de Chen más grande, con un puerto por entidad
+            hw, hh = 46, 32
+            geo["outline"] = [(c[0] - hw, c[1]), (c[0], c[1] - hh), (c[0] + hw, c[1]), (c[0], c[1] + hh)]
             for j, (idx, E_, inf) in enumerate(ends):
-                a = math.atan2(E_.y - n.y, E_.x - n.x)
-                geo["ports"][idx] = (c[0] + 30 * math.cos(a), c[1] + 30 * math.sin(a))
-                geo["dirs"][idx] = (math.cos(a), math.sin(a))
+                dx, dy = _unit(E_.x - n.x, E_.y - n.y)
+                port = _ray_poly(c, (n.x + dx * 400, n.y + dy * 400), geo["outline"])
+                geo["ports"][idx] = port
+                geo["dirs"][idx] = (dx, dy)
                 geo["tips"][idx] = _max(inf["card"])
-            cands = [(0, -1, 30)]
+            cands = [(1, 0, hw), (-1, 0, hw), (0, -1, hh), (0, 1, hh)]
         geo["lab"] = _label_node(n, n.label, cands, nodes)
         n.geo = geo
 
@@ -829,6 +802,10 @@ def render(m: Model, best):
         q = boundary_point(an, (an.parent.x, an.parent.y))
         lines.append(f'<line x1="{p[0]:.1f}" y1="{p[1]:.1f}" x2="{q[0]:.1f}" y2="{q[1]:.1f}"/>')
 
+    nmp = {}
+    for a, b, info in edges:
+        if "card" in info and nodes[b].geo["tips"][info["idx"]] == "N":
+            nmp.setdefault(b, []).append(info["idx"])
     for a, b, info in edges:
         na, nb = nodes[a], nodes[b]
         if "card" in info:
@@ -849,7 +826,12 @@ def render(m: Model, best):
                 L = 90
             else:
                 q = boundary_point(na, port)
-                lines.append(f'<line x1="{port[0]:.1f}" y1="{port[1]:.1f}" x2="{q[0]:.1f}" y2="{q[1]:.1f}"/>')
+                if info["card"].replace(" ", "").startswith("(1"):
+                    for off in (-2.3, 2.3):
+                        pp, qq = parallel(port, q, off)
+                        lines.append(f'<line x1="{pp[0]:.1f}" y1="{pp[1]:.1f}" x2="{qq[0]:.1f}" y2="{qq[1]:.1f}"/>')
+                else:
+                    lines.append(f'<line x1="{port[0]:.1f}" y1="{port[1]:.1f}" x2="{q[0]:.1f}" y2="{q[1]:.1f}"/>')
                 L = math.hypot(port[0] - q[0], port[1] - q[1]) or 1
                 def pt_at(t, port=port, q=q):
                     return (q[0] + (port[0] - q[0]) * t, q[1] + (port[1] - q[1]) * t)
@@ -859,23 +841,21 @@ def render(m: Model, best):
                 texts.append(label(x, y, info["card"]))
             # máximo junto a la punta
             tip = g["tips"][idx]
+            if tip == "N":
+                tip = "NMP"[min(nmp[b].index(idx), 2)]
             px, py = -d[1], d[0]
             tx, ty = port[0] + d[0] * 9 + px * 10, port[1] + d[1] * 9 + py * 10
             texts.append(f'<text x="{tx:.1f}" y="{ty + 4:.1f}" font-size="11" fill="{INK}" text-anchor="middle">{esc(tip)}</text>')
-            # dependencia ID / E junto a la entidad débil
-            for flag, tag in ((r.ident, "ID"), (r.exist, "E")):
-                if not flag:
-                    continue
-                target = flag if isinstance(flag, str) else None
-                ename = na.obj.name if na.kind == "ent" else na.obj.name
-                is_dep = (ename == target) if target else (na.kind == "ent" and na.obj.weak)
+            # dependencia en existencia (extensión didáctica del módulo): etiqueta E junto a la entidad dependiente
+            if r.exist:
+                target = r.exist if isinstance(r.exist, str) else None
+                is_dep = (na.obj.name == target) if target else (na.kind == "ent" and na.obj.weak)
                 if is_dep:
                     x2, y2 = pt_at(min(0.3, 10 / L))
-                    ox, oy = -(q[1] - port[1]), (q[0] - port[0])
-                    ox, oy = _unit(ox, oy)
+                    ox, oy = _unit(-(q[1] - port[1]), q[0] - port[0])
                     if oy > 0:
                         ox, oy = -ox, -oy
-                    texts.append(f'<text x="{x2 + ox * 24:.1f}" y="{y2 + oy * 24 + 4:.1f}" font-size="11" font-weight="700" fill="{INK}" text-anchor="middle">{tag}</text>')
+                    texts.append(f'<text x="{x2 + ox * 24:.1f}" y="{y2 + oy * 24 + 4:.1f}" font-size="11" font-weight="700" fill="{INK}" text-anchor="middle">E</text>')
             if info.get("role"):
                 xa, ya = pt_at(min(0.42, 28 / L) - 0.03)
                 xb, yb = pt_at(min(0.42, 28 / L) + 0.03)
@@ -886,21 +866,26 @@ def render(m: Model, best):
                 rw = tw(info["role"]) / 2 + 6
                 texts.append(label(cx_ + ox * (14 + abs(ox) * rw), cy_ + oy * 16, info["role"], color=ROLE, italic=True, bold=False, size=11, bg=False))
         elif info.get("isa") == "sub":
-            # subclase → nodo de unión
+            # subclase → círculo, con el símbolo de subconjunto ⊂ abierto hacia la superclase
             p = boundary_point(nb, (na.x, na.y))
             lines.append(f'<line x1="{p[0]:.1f}" y1="{p[1]:.1f}" x2="{na.x:.1f}" y2="{na.y:.1f}"/>')
-        elif info.get("isa") == "sup":
-            # nodo de unión → superclase, con punta de flecha
-            q = boundary_point(na, (nb.x, nb.y))
-            lines.append(f'<line x1="{nb.x:.1f}" y1="{nb.y:.1f}" x2="{q[0]:.1f}" y2="{q[1]:.1f}"/>')
-            ux, uy = _unit(q[0] - nb.x, q[1] - nb.y)
+            ux, uy = _unit(na.x - p[0], na.y - p[1])
+            L = math.hypot(na.x - p[0], na.y - p[1])
+            mx, my = p[0] + ux * min(L * 0.5, L - 22), p[1] + uy * min(L * 0.5, L - 22)
             px, py = -uy, ux
-            tip = q
-            b1 = (q[0] - ux * 13 + px * 6, q[1] - uy * 13 + py * 6)
-            b2 = (q[0] - ux * 13 - px * 6, q[1] - uy * 13 - py * 6)
-            shapes.append(f'<polygon points="{_pts([tip, b1, b2])}" fill="{INK}" stroke="none"/>')
-            shapes.append(f'<circle cx="{nb.x:.1f}" cy="{nb.y:.1f}" r="3.2" fill="{INK}"/>')
-            texts.append(label(nb.x + px * 22 if abs(px) > 0.3 else nb.x + 24, nb.y + py * 22 if abs(px) > 0.3 else nb.y, nb.label, color=INK, size=12))
+            s0 = (mx + px * 6, my + py * 6); e0 = (mx - px * 6, my - py * 6)
+            shapes.append(f'<path d="M{s0[0]:.1f} {s0[1]:.1f} A6 6 0 0 1 {e0[0]:.1f} {e0[1]:.1f}" fill="{BG}" stroke="{INK}" stroke-width="1.5"/>')
+        elif info.get("isa") == "sup":
+            # círculo → superclase: línea doble si la especialización es total
+            q = boundary_point(na, (nb.x, nb.y))
+            if info.get("total"):
+                for off in (-2.3, 2.3):
+                    pp, qq = parallel((nb.x, nb.y), q, off)
+                    lines.append(f'<line x1="{pp[0]:.1f}" y1="{pp[1]:.1f}" x2="{qq[0]:.1f}" y2="{qq[1]:.1f}"/>')
+            else:
+                lines.append(f'<line x1="{nb.x:.1f}" y1="{nb.y:.1f}" x2="{q[0]:.1f}" y2="{q[1]:.1f}"/>')
+            shapes.append(f'<circle cx="{nb.x:.1f}" cy="{nb.y:.1f}" r="11.5" fill="{BG}" stroke="{INK}" stroke-width="1.6"/>')
+            shapes.append(f'<text x="{nb.x:.1f}" y="{nb.y + 4.5:.1f}" font-size="13" font-weight="700" text-anchor="middle" fill="{INK}">{nb.obj.kind}</text>')
 
     # formas
     for key, n in nodes.items():
@@ -913,16 +898,11 @@ def render(m: Model, best):
             texts.append(f'<text x="{n.x:.1f}" y="{n.y + 5:.1f}" font-size="13" font-weight="700" text-anchor="middle" fill="{TXT}">{esc(n.label)}</text>')
         elif n.kind == "rel":
             g = n.geo
-            for poly, black in g["polys"]:
-                shapes.append(f'<polygon points="{_pts(poly)}" fill="{REL_F if black else BG}" stroke="none"/>')
-            shapes.append(f'<polygon points="{_pts(g["outline"])}" fill="none" stroke="{REL_S}" stroke-width="1.8" stroke-linejoin="round"/>')
-            if len(g["polys"]) == 2:
-                (_, top, bot) = g["polys"][0][0]
-                shapes.append(f'<line x1="{top[0]:.1f}" y1="{top[1]:.1f}" x2="{bot[0]:.1f}" y2="{bot[1]:.1f}" stroke="{REL_S}" stroke-width="1"/>')
-            elif len(g["polys"]) == 3:
-                c = (n.x, n.y)
-                for v in g["outline"]:
-                    shapes.append(f'<line x1="{c[0]:.1f}" y1="{c[1]:.1f}" x2="{v[0]:.1f}" y2="{v[1]:.1f}" stroke="{REL_S}" stroke-width="1"/>')
+            shapes.append(f'<polygon points="{_pts(g["outline"])}" fill="{BG}" stroke="{REL_S}" stroke-width="1.8" stroke-linejoin="round"/>')
+            if n.obj.ident:
+                c0 = (n.x, n.y)
+                inner = [(c0[0] + (v[0] - c0[0]) * 0.8, c0[1] + (v[1] - c0[1]) * 0.8) for v in g["outline"]]
+                shapes.append(f'<polygon points="{_pts(inner)}" fill="none" stroke="{REL_S}" stroke-width="1.3" stroke-linejoin="round"/>')
             lb = g["lab"]
             texts.append(f'<text x="{lb.x:.1f}" y="{lb.y + 4.5:.1f}" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="{TXT}">{esc(n.label)}</text>')
     for an in attr_nodes:

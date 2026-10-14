@@ -35,20 +35,19 @@ En acabar esta unitat seràs capaç de:
 
 ### Temporalització
 
-La unitat ocupa **7 hores d'aula** (4 de teoria i 3 de pràctica) i tanca el mòdul.
+La unitat ocupa **4 hores d'aula** (2 de teoria i 2 de pràctica) i tanca el mòdul.
 És una unitat de criteri professional: importa més saber **quan** triar cada model
 que memoritzar la sintaxi de `mongosh`.
 
-{{< sesiones unidad="UD10" horas="7" >}}
+{{< sesiones unidad="UD10" horas="4" >}}
 items:
-  - {h: 2, tipo: T, t: "Característiques de NoSQL, BASE i CAP, tipus de bases de dades i elements de MongoDB", ref: "§1 a §4 · traductor SQL ↔ MongoDB"}
+  - {h: 1, tipo: T, t: "Característiques de NoSQL, BASE i CAP, tipus de bases de dades i elements de MongoDB", ref: "§1 a §4 · traductor SQL ↔ MongoDB"}
   - {h: 1, tipo: P, t: "Posada en marxa de MongoDB i CRUD sobre els expedients", ref: "Pràctiques 10.1 i 10.2"}
-  - {h: 1, tipo: T, t: "Operacions CRUD, subdocuments i arrays", ref: "§5 i §6"}
-  - {h: 1, tipo: T, t: "Agregacions", ref: "§7"}
-  - {h: 1, tipo: P, t: "El mateix informe en SQL i en MongoDB", ref: "Pràctica 10.4"}
+  - {h: 1, tipo: T, t: "Operacions CRUD, subdocuments, arrays i agregacions", ref: "§5 a §7"}
   - {h: 1, tipo: P, t: "Modelatge documental i decisió raonada", ref: "Pràctiques 10.5 i 10.7 · §8 a §11"}
 autonomo:
   - "Pràctica 10.3 (operadors, subdocuments i arrays)"
+  - "Pràctica 10.4 (el mateix informe en SQL i en MongoDB)"
   - "Pràctica 10.6 (altres models: clau-valor i grafs)"
   - "Projecte EduGest · UD10 (l'expedient documental)"
 {{< /sesiones >}}
@@ -58,7 +57,7 @@ autonomo:
 
 ---
 
-{{< sesion n="1" h="2" tipo="t" >}}NoSQL, BASE i CAP, tipus i elements de MongoDB{{< /sesion >}}
+{{< sesion n="1" h="1" tipo="t" >}}NoSQL, BASE i CAP, tipus i elements de MongoDB{{< /sesion >}}
 
 ## 1. Què són les bases de dades NoSQL
 
@@ -592,7 +591,7 @@ Fixa't especialment en dues operacions: *«La trampa de l'array»* i *«Reempla�
 
 ---
 
-{{< sesion n="3" h="1" tipo="t" >}}Operacions CRUD, subdocuments i arrays{{< /sesion >}}
+{{< sesion n="3" h="1" tipo="t" >}}Operacions CRUD, subdocuments, arrays i agregacions{{< /sesion >}}
 
 ## 5. Operacions CRUD
 
@@ -1203,7 +1202,6 @@ db.expedientes.updateOne(
 
 ---
 
-{{< sesion n="4" h="1" tipo="t" >}}Agregacions{{< /sesion >}}
 
 ## 7. Agregacions
 
@@ -1385,7 +1383,7 @@ Torna un únic document amb tres arrays, un per cada subpipeline. En SQL equival
 
 ---
 
-{{< sesion n="6" h="1" tipo="p" practica="10.5" >}}Modelatge documental i decisió raonada{{< /sesion >}}
+{{< sesion n="4" h="1" tipo="p" practica="10.5" >}}Modelatge documental i decisió raonada{{< /sesion >}}
 
 {{% paso-a-paso titulo="De tablas a documento: ¿embeber o referenciar?" %}}
 {{% etapa titulo="1. El model relacional" %}}
