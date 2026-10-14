@@ -34,21 +34,20 @@ Al terminar esta unidad serás capaz de:
 
 ### Temporalización
 
-La unidad ocupa **11 horas de aula** (7 de teoría y 4 de práctica). Es la unidad con más código del curso: conviene escribirlo a mano y recompilarlo, no copiarlo y pegarlo. Las prácticas largas (la tabla mutante, las tareas programadas, el paquete de secretaría y el proyecto) se completan fuera del horario de aula.
+La unidad ocupa **7 horas de aula** (4 de teoría y 3 de práctica). Es la unidad con más código del curso: conviene escribirlo a mano y recompilarlo, no copiarlo y pegarlo. Las prácticas largas (la tabla mutante, las tareas programadas, el paquete de secretaría y el proyecto) se completan fuera del horario de aula.
 
-{{< sesiones unidad="UD09" horas="11" >}}
+{{< sesiones unidad="UD09" horas="7" >}}
 items:
-  - {h: 2, tipo: T, t: "Formas de automatizar, herramientas, estructura del bloque, variables, tipos y `DBMS_OUTPUT`", ref: "§1 a §4"}
+  - {h: 1, tipo: T, t: "Formas de automatizar, herramientas, estructura del bloque, variables, tipos y `DBMS_OUTPUT`", ref: "§1 a §4"}
   - {h: 1, tipo: P, t: "Primeros bloques: el expediente de un alumno", ref: "Práctica 9.1"}
-  - {h: 2, tipo: T, t: "Control de flujo, funciones del gestor, cursores y funciones de usuario", ref: "§5 a §8 · laboratorio de bloques"}
+  - {h: 1, tipo: T, t: "Control de flujo, funciones del gestor, cursores y funciones de usuario", ref: "§5 a §8 · laboratorio de bloques"}
   - {h: 1, tipo: P, t: "Biblioteca de funciones de EduGest", ref: "Práctica 9.2"}
   - {h: 1, tipo: T, t: "Excepciones y procedimientos almacenados", ref: "§9 y §10"}
-  - {h: 1, tipo: P, t: "Matrícula con excepciones y boletines con cursores (la 9.4 se termina en casa)", ref: "Prácticas 9.3 y 9.4"}
-  - {h: 1, tipo: T, t: "Disparadores: auditoría, integridad, tabla mutante y disparador compuesto", ref: "§11 · simulador de disparadores"}
-  - {h: 1, tipo: P, t: "Disparadores de integridad y auditoría", ref: "Práctica 9.5"}
-  - {h: 1, tipo: T, t: "Tareas programadas con `DBMS_SCHEDULER`, paquetes y comparación con otros SGBD", ref: "§12 a §14"}
+  - {h: 1, tipo: P, t: "Matrícula con excepciones (la 9.4, boletines con cursores, se termina en casa)", ref: "Prácticas 9.3 y 9.4"}
+  - {h: 1, tipo: T, t: "Disparadores, tareas programadas con `DBMS_SCHEDULER` y paquetes", ref: "§11 a §14 · simulador de disparadores"}
 autonomo:
   - "Práctica 9.4 (cursores: boletines e informes), si no se ha terminado en el aula"
+  - "Práctica 9.5 (disparadores de integridad y auditoría)"
   - "Práctica 9.6 (reto: la tabla mutante)"
   - "Práctica 9.7 (tareas programadas)"
   - "Práctica 9.8 (reto: el paquete de secretaría)"
@@ -65,7 +64,7 @@ autonomo:
 
 ---
 
-{{< sesion n="1" h="2" tipo="t" >}}Formas de automatizar, herramientas, bloques y variables{{< /sesion >}}
+{{< sesion n="1" h="1" tipo="t" >}}Formas de automatizar, herramientas, bloques y variables{{< /sesion >}}
 
 ## 1. Programar dentro del servidor
 
@@ -636,7 +635,7 @@ Estas funciones son las que permiten registrar **quién** hizo un cambio y **des
 
 ---
 
-{{< sesion n="3" h="2" tipo="t" >}}Control de flujo, funciones del gestor, cursores y funciones de usuario{{< /sesion >}}
+{{< sesion n="3" h="1" tipo="t" >}}Control de flujo, funciones del gestor, cursores y funciones de usuario{{< /sesion >}}
 
 ## 5. Estructuras de control de flujo
 
@@ -2058,7 +2057,7 @@ Un subprograma pasa a `INVALID` cuando cambia algo de lo que depende (una tabla,
 
 ---
 
-{{< sesion n="7" h="1" tipo="t" >}}Disparadores: auditoría, integridad, tabla mutante y disparador compuesto{{< /sesion >}}
+{{< sesion n="7" h="1" tipo="t" >}}Disparadores, tareas programadas y paquetes{{< /sesion >}}
 
 {{% paso-a-paso titulo="Qué dispara un trigger y en qué orden" %}}
 {{% etapa titulo="1. Llega la sentencia" %}}
@@ -2546,7 +2545,6 @@ Un disparador es lógica **invisible**: no aparece en el código de la aplicaci�
 
 ---
 
-{{< sesion n="9" h="1" tipo="t" >}}Tareas programadas, paquetes y comparación con otros SGBD{{< /sesion >}}
 
 ## 12. Eventos y tareas programadas {#12-eventos-tareas-programadas}
 

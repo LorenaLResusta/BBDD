@@ -21,6 +21,10 @@ math: true
 | [2.8 Lloguer de cotxes: el model que recorda](#pràctica-28--lloguer-de-cotxes-el-model-que-recorda) | Repte | ●●● | RA6.d, RA6.e, RA6.h |
 | [2.9 Enginyeria inversa: de l'albarà a les entitats](#pràctica-29--enginyeria-inversa-de-lalbarà-a-les-entitats) | Repte | ●●● | RA6.a, RA6.d, RA6.h |
 | [2.10 Dos dissenys, un guanyador](#pràctica-210--dos-dissenys-un-guanyador) | Repte | ●●● | RA6.d, RA6.h |
+| [2.11 Festival de música: edicions, escenaris i actuacions](#pràctica-211--festival-de-música-edicions-escenaris-i-actuacions) | Repte | ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
+| [2.12 Editorial: obres, traduccions i drets d'autor](#pràctica-212--editorial-obres-traduccions-i-drets-dautor) | Repte | ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
+| [2.13 Taller aeronàutic: aeronaus, ordres de treball i habilitacions](#pràctica-213--taller-aeronàutic-aeronaus-ordres-de-treball-i-habilitacions) | Repte | ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
+| [2.14 Comunitat de propietaris: immobles, juntes i votacions](#pràctica-214--comunitat-de-propietaris-immobles-juntes-i-votacions) | Repte | ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
 | [Projecte EduGest · UD02](#projecte-edugest--ud02-model-conceptual) | Projecte | ●●○ | RA6.a, RA6.d, RA6.e, RA6.h |
 | [Banc · Fonaments (exercicis 1-5)](#bloc-1--fonaments) | Autònoma | ●○○ | RA6.a, RA6.d, RA6.e, RA6.h |
 | [Banc · Intermedi (exercicis 6-15)](#bloc-2--intermedi) | Autònoma | ●●○ | RA6.a, RA6.d, RA6.e, RA6.h |
@@ -29,6 +33,9 @@ math: true
 
 > [!NOTE]
 > **Com estan organitzades estes pàgines.** L'enunciat es presenta com el contaria una persona del negoci, no com una llista d'entitats: **decidir què és una entitat, un atribut o una relació forma part del treball**. Les tasques, la comprovació i els errors habituals estan plegats: desplega'ls quan els necessites, no abans de pensar.
+
+> [!IMPORTANT]
+> **Reptes de requisits (2.11 a 2.14).** Els enunciats d'estes quatre pràctiques estan escrits com un **document de requisits**: diversos paràgrafs, regles disperses, dades que no pertanyen al sistema i frases que admeten més d'una lectura. Ningú et diu quines són les entitats ni què és una relació ternària. Dedica la primera sessió a llegir, subratllar i **escriure les teues preguntes i supòsits** abans de dibuixar res.
 
 > [!TIP]
 > **Mètode per a tots els exercicis.** (1) Subratlla substantius i verbs; (2) decidix entitats i identificadors; (3) relacions i cardinalitats en **els dos sentits**; (4) atributs, inclosos els de les relacions; (5) revisa redundàncies i escriu els **supòsits** que hages hagut de fer.
@@ -787,6 +794,692 @@ erDiagram
 3. La reserva guarda com a atribut qui la fa, sense obligar que siga soci si el club decidira permetre-ho.
 
 **Lliçó:** el grup repetit és la forma habitual de fer que un model no escale. El senyal d'alarma són atributs numerats (`jugador1`, `jugador2`...).
+
+{{% /details %}}
+
+
+---
+
+## Pràctica 2.11 · Festival de música: edicions, escenaris i actuacions
+
+{{< practica num="2.11" tipo="Reto" duracion="3 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io" entrega="Diagrama EER + diccionari de dades + restriccions + preguntes al client" >}}
+
+#### Context
+
+Una associació cultural organitza diversos festivals a l'any i du la programació en fulls de càlcul que ja ningú entén. T'han enviat l'apartat de **requisits** de la licitació. Com en un document real, **hi ha dades repetides, frases ambigües i parts que no pertanyen al sistema**. El teu treball és separar el que cal modelar del que no, i deixar per escrit cada decisió que prengues.
+
+#### Enunciat
+
+> **1. Festivals i edicions.** L'associació organitza actualment tres festivals (*Sonora Rock*, *Sonora Jazz* i *Sonora Folk*), però preveu obrir-ne més. Cada festival té un nom i una descripció curta. Cada any se celebra una **edició** de cada festival, amb les dates d'inici i de fi, la ciutat seu i el pressupost aprovat. Les edicions s'identifiquen sempre pel festival i per l'any: l'associació parla de «el Sonora Jazz de 2026», mai de «l'edició 17». No es guarden edicions futures que no tinguen pressupost aprovat.
+>
+> **2. Recintes i escenaris.** Cada edició se celebra en un recinte, que pot canviar d'un any a un altre. De cada escenari es guarda el nom, l'aforament màxim i el **punt d'accés**, que el personal de seguretat necessita descrit en tres parts: la zona del recinte (nord, sud, central…), la porta i les indicacions d'arribada. Els escenaris es numeren dins de cada edició (escenari 1, escenari 2…); l'«escenari 1» de 2025 no té res a veure amb el de 2026, encara que estiga al mateix lloc. Tota edició té almenys un escenari.
+>
+> **3. Artistes.** Un artista pot ser un **solista** o una **agrupació**; no s'admeten altres tipus i ningú és les dues coses alhora (si un solista munta una banda, es dona d'alta com a agrupació a part). De tots es guarda el nom artístic, el país d'origen, els **gèneres** que toca (pot ser més d'un) i les dades del **representant**: nom, telèfon i correu, que es gestionen sempre junts. Dels solistes interessa el seu nom real i la data de naixement; de les agrupacions, l'any de formació i el nombre de components. Els components d'una agrupació són músics dels quals es guarda el nom, l'instrument principal i, per a cada agrupació a què pertanyen, la data en què hi van entrar i l'instrument amb què hi toquen. Un mateix músic pot estar en diverses agrupacions.
+>
+> **4. Programació.** El dia es divideix en **franges** de trenta minuts que comencen en punt o i mitja. Cada actuació consisteix que un artista toca en un escenari durant una o diverses franges consecutives; s'anota la franja d'inici, la durada en minuts i el caixet pactat. Un artista pot actuar diverses vegades en una mateixa edició, fins i tot en escenaris diferents i dies diferents, però **no pot estar en dos escenaris alhora** i un escenari **no pot acollir dues actuacions simultànies**. L'associació vol consultar la programació d'un escenari o la d'un artista d'una ullada.
+>
+> **5. Personal.** Tot el personal d'una edició s'identifica pel seu DNI i té nom, telèfon i talla de camiseta. Es distingeixen tècnics (amb la seua especialitat: so, il·luminació o escenari), personal de seguretat (amb el seu número d'habilitació) i voluntaris (amb els dies de la setmana en què estan disponibles). Hi ha personal de producció que no encaixa en cap de les tres categories, i és habitual que un voluntari amb formació tècnica treballe també com a tècnic, de manera que la mateixa persona pot figurar en dues categories. Cada persona s'assigna a un escenari en un torn concret (matí, vesprada o nit) d'una edició; pot cobrir diversos torns i diversos escenaris, però només d'edicions en què estiga contractada.
+>
+> **6. Fora d'abast.** La venda d'entrades la gestiona una plataforma externa i no forma part d'aquest sistema; només es rebrà al final de cada dia el total d'assistents per escenari. Tampoc no es gestionen els pagaments a proveïdors ni la comptabilitat de l'associació.
+
+{{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
+
+1. Extrau del text les **entitats candidates** i descarta les que no pertanyen al sistema, justificant-ho amb una frase de l'apartat 6. Indica quines són febles i quin és l'**identificador complet** de cadascuna.
+2. Classifica les dues jerarquies (artistes i personal) com a totals o parcials i disjuntes o solapades, citant la frase del text que ho justifica. Decideix quins atributs van a la superclasse.
+3. Modela l'actuació com a relació **ternària** (artista, escenari, franja). Calcula la cardinalitat de cada entitat fixant les altres dues i explica com les dues prohibicions de l'apartat 4 en redueixen una.
+4. Marca tots els atributs **compostos**, **multivalor** i **derivats** i explica com els representaries. La `duración` és un atribut de la relació o es dedueix d'una altra cosa?
+5. Escriu **almenys sis restriccions** que el diagrama no pot expressar (solapaments, coherència entre edicions, aforament…).
+6. Redacta cinc **preguntes al client** sobre les parts ambigües del text i com canviaria el teu model segons la resposta.
+
+{{% /details %}}
+
+{{% details title="Comprovació (fes-la servir en acabar el teu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `EDICIÓN` és feble de `FESTIVAL` (festival + any) i `ESCENARIO` és feble de `EDICIÓN` (festival + any + número).
+- [ ] La franja pertany a l'edició o és una dada general; has justificat quina de les dues opcions tries.
+- [ ] La jerarquia d'artistes és **total i disjunta**; la del personal és **parcial i solapada**.
+- [ ] `punto de acceso` i `representante` són atributs compostos; `géneros` i `días disponibles` són multivalor.
+- [ ] La relació entre agrupació i músic és N:M i duu `fecha_entrada` i `instrumento`.
+- [ ] L'assignació de personal té el torn com a part de la seua identificació.
+- [ ] La venda d'entrades no apareix al diagrama.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errors habituals (llig-los després d'intentar-ho)" %}}
+
+> [!WARNING]
+> - Identificar l'edició amb un número correlatiu global: el text diu que s'identifica per festival i any.
+> - Posar `escenario` com a text dins de l'actuació: té aforament, punt d'accés i personal assignat, de manera que és una entitat.
+> - Convertir la ternària en tres binàries i perdre quin artista toca en quin escenari en quina franja.
+> - Posar `edad` en lloc de `fecha_nacimiento`, o `número_componentes` com a dada introduïda en lloc de derivada de la relació amb els músics.
+> - Oblidar que el personal pot estar en dues categories alhora i declarar la jerarquia disjunta.
+
+{{% /details %}}
+
+#### Ampliació
+
+L'associació vol una **llista d'espera de voluntaris** per edició i que un voluntari puga recomanar-ne un altre. És una relació reflexiva? Quina cardinalitat té i quina restricció necessites per a evitar que algú es recomane a si mateix?
+
+{{% details title="Solució de referència" %}}
+
+```mermaid
+erDiagram
+    FESTIVAL ||--o{ EDICION : "se celebra en"
+    EDICION ||--|{ ESCENARIO : "dispone de"
+    EDICION ||--|{ FRANJA : "se divide en"
+    ESCENARIO ||--o{ ACTUACION : "acoge"
+    FRANJA ||--o{ ACTUACION : "comienza en"
+    ARTISTA ||--o{ ACTUACION : "protagoniza"
+    ARTISTA ||--|| SOLISTA : "es"
+    ARTISTA ||--|| AGRUPACION : "es"
+    AGRUPACION }o--o{ MUSICO : "se compone de"
+    PERSONAL }o--o{ ESCENARIO : "se asigna (turno)"
+    FESTIVAL {
+        string cod_festival PK
+        string nombre
+        string descripcion
+    }
+    EDICION {
+        int anio PK
+        decimal presupuesto
+        date fecha_inicio
+        date fecha_fin
+        string ciudad
+    }
+    ESCENARIO {
+        int num_escenario PK
+        string nombre
+        int aforo
+        string zona
+        string puerta
+        string indicaciones
+    }
+    FRANJA {
+        datetime inicio PK
+    }
+    ACTUACION {
+        int duracion_min
+        decimal cache
+    }
+    ARTISTA {
+        int cod_artista PK
+        string nombre_artistico
+        string pais
+        string representante_nombre
+        string representante_telefono
+        string representante_correo
+    }
+    SOLISTA {
+        string nombre_real
+        date fecha_nacimiento
+    }
+    AGRUPACION {
+        int anio_formacion
+    }
+    MUSICO {
+        int cod_musico PK
+        string nombre
+        string instrumento_principal
+    }
+    PERSONAL {
+        string dni PK
+        string nombre
+        string telefono
+        string talla
+    }
+```
+
+- **Febles en cadena.** `EDICIÓN` s'identifica per (festival, any) i `ESCENARIO` per (festival, any, número). `FRANJA` s'identifica per (festival, any, instant d'inici): pertany a l'edició perquè les edicions no comparteixen calendari.
+- **Ternària `actuación`.** Si es fixen escenari i franja, hi ha **com a màxim un** artista (un escenari no acull dues actuacions alhora). Si es fixen artista i franja, hi ha **com a màxim un** escenari (ningú no està en dos llocs alhora). Fixats artista i escenari, hi ha moltes franges. Les cardinalitats màximes són per tant **artista 1, escenari 1, franja N**, i l'actuació pot identificar-se amb (escenari, franja) o amb (artista, franja). Mermaid no dibuixa ternàries: en l'esquema `ACTUACION` apareix com a entitat associativa, però en notació de Chen és un únic rombe amb tres potes.
+- **Durada.** Una actuació que ocupa diverses franges consecutives es guarda amb la franja d'inici i la durada; els solapaments intermedis són una restricció que el diagrama no veu.
+- **Jerarquia d'artistes.** `ARTISTA` (nom artístic, país, representant) amb subclasses `SOLISTA` i `AGRUPACION`: total («no s'admeten altres tipus») i disjunta («ningú és les dues coses»). `número_componentes` és derivat de la relació amb `MÚSICO`.
+- **Jerarquia de personal.** `PERSONAL` amb `TÉCNICO`, `SEGURIDAD` i `VOLUNTARIO`: parcial («personal de producció que no encaixa») i solapada («un voluntari pot ser també tècnic»).
+- **Atributs especials.** Compostos: `punto de acceso` (zona, porta, indicacions) i `representante` (nom, telèfon, correu). Multivalor: `géneros` i `días disponibles`. Derivats: `número de componentes`.
+- **Assignació.** Relació N:M entre personal i escenari amb l'atribut `turno` en l'identificador; l'escenari ja determina l'edició.
+
+**Restriccions que el diagrama no arreplega**
+
+1. Dues actuacions del mateix escenari no poden solapar-se en el temps, tenint en compte la seua durada.
+2. Un artista no pot tindre dues actuacions simultànies en escenaris diferents.
+3. L'actuació ha de caure dins de les dates de l'edició.
+4. El caixet és major que zero i la durada és múltiple de trenta.
+5. El personal assignat a un escenari ha d'estar contractat en l'edició d'aquest escenari.
+6. Un solista no pot ser alhora agrupació (disjunció) i tot artista té una subclasse (totalitat).
+
+**Supòsits semàntics**
+
+1. El recinte és una dada de l'edició i no una entitat pròpia.
+2. El total diari d'assistents arriba de la plataforma externa i es guarda com a atribut de l'escenari i la data, fora d'aquest exercici.
+3. Un músic no té data d'eixida de l'agrupació (es pregunta al client).
+
+{{% /details %}}
+
+
+---
+
+## Pràctica 2.12 · Editorial: obres, traduccions i drets d'autor
+
+{{< practica num="2.12" tipo="Reto" duracion="3 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io" entrega="Diagrama EER + justificació de jerarquies, reflexives i agregació + restriccions" >}}
+
+#### Context
+
+Una editorial independent publica novel·la, poesia i còmic, tradueix obres d'altres idiomes i compila antologies. Hui du el catàleg i els contractes en documents de text solts i ha tingut problemes perquè **ningú no sabia quin percentatge de drets corresponia a cada persona d'una obra**. Et lliuren este resum de requisits.
+
+#### Enunciat
+
+> **1. Obres.** Una **obra** és el text en si, independentment de com es publique. Cada obra té un codi intern, el títol, l'any de primera publicació i l'idioma original. Hi ha tres classes d'obres amb dades pròpies: les **novel·les** (nombre de capítols i si pertanyen a una saga, cas en què s'anota el nom de la saga i el volum), els **poemaris** (nombre de poemes i mètrica predominant) i els **còmics** (nombre de pàgines i si són en color o en blanc i negre). Hi ha obres de divulgació i d'assaig que no encaixen en cap de les tres classes i només guarden les dades comunes. Una obra no pot ser alhora novel·la i còmic, encara que tinga adaptació: l'adaptació és una altra obra distinta.
+>
+> **2. Relacions entre obres.** Una obra pot ser una **traducció** d'una altra obra de l'editorial (l'original). De la traducció interessa el seu idioma, que no coincideix amb el de l'original, i qui la va traduir. Una obra original pot tindre moltes traduccions, però una traducció ho és d'una sola original. A més, l'editorial publica **antologies**: obres que reuneixen fragments o peces completes d'altres obres. En una antologia importa l'ordre en què apareix cada peça i les pàgines que ocupa. Una obra pot aparéixer en diverses antologies, i una antologia no pot incloure's a si mateixa.
+>
+> **3. Persones i funcions.** Els qui participen en una obra són persones: autors, traductors, il·lustradors i prologuistes. De cada persona es guarda el nom civil, la nacionalitat, la data de naixement i, si ha mort, la data de defunció; també un o diversos **pseudònims** sota els quals ha publicat. L'**adreça fiscal** es conserva desglossada en carrer, número, codi postal, localitat i país, perquè s'utilitza per a emetre les retencions. Una persona pot tindre diferents funcions en diferents obres (autor d'una, traductor d'una altra) i fins i tot més d'una en la mateixa. Per a cada funció s'anota el **percentatge de drets** que li correspon sobre l'obra.
+>
+> **4. Contractes i representació.** Abans de publicar una obra se signa un **contracte** de cessió de drets per cada persona que hi participa amb una funció concreta: es guarda la data de signatura, l'avançament i la durada en anys. Algunes persones tenen un **agent literari** que negocia en nom seu; l'agent té nom, agència i telèfon, i pot representar moltes persones. El contracte reflecteix si l'ha negociat un agent i qui va ser; els contractes de persones sense agent se signen directament.
+>
+> **5. Edicions i impressions.** Una obra es publica en una o diverses **edicions**: cadascuna amb el seu ISBN (que la identifica a tot el món), format (tapa dura, rústica o llibre electrònic), nombre de pàgines i preu. Cada edició s'imprimeix en **tirades** numerades dins de l'edició (primera, segona…), amb data d'impressió, nombre d'exemplars i impremta. Una tirada no té sentit sense la seua edició i si es retira una edició es retiren les seues tirades. Els llibres electrònics no tenen tirades.
+>
+> **6. Llibreries.** L'editorial envia exemplars de cada tirada a llibreries (CIF, nom, adreça i telèfon), indicant la data d'enviament i la quantitat. Una llibreria pot rebre diverses vegades exemplars de la mateixa tirada. Les **vendes** al públic les gestiona el distribuïdor i queden fora de l'abast.
+
+{{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
+
+1. Dibuixa el diagrama EER en notació de Chen. Justifica per què l'**obra** i l'**edició** són entitats distintes.
+2. Classifica la jerarquia d'obres. Què canvia si el text digués que «tota obra és novel·la, poemari o còmic»?
+3. Representa les relacions *traduce* i *incluye* com a **reflexives** sobre obra: escriu-ne els rols, cardinalitats i atributs, i les restriccions d'integritat que necessiten.
+4. Modela la participació de les persones en les obres com a relació **ternària** (persona, obra, funció) o com a binària amb la funció com a entitat. Compara les dues opcions i tria'n una.
+5. Representa el contracte mitjançant una **agregació** de la participació i explica per què una simple relació entre persona i obra no basta.
+6. Identifica les entitats febles i els seus identificadors. Per què l'ISBN no converteix l'edició en entitat feble i la tirada sí que ho és?
+7. Escriu almenys cinc restriccions textuals i assenyala dues dades que siguen **derivades**.
+
+{{% /details %}}
+
+{{% details title="Comprovació (fes-la servir en acabar el teu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] La jerarquia d'obres és **parcial i disjunta**, amb atributs propis en cada subclasse.
+- [ ] *Traduce* és una reflexiva 1:N amb els rols *original* i *traducción*; *incluye* és una reflexiva N:M amb `orden` i `páginas`.
+- [ ] La participació de persones duu el percentatge de drets i admet diverses funcions de la mateixa persona en la mateixa obra.
+- [ ] El contracte es modela com a agregació de la participació, amb l'agent com a relació opcional.
+- [ ] `TIRADA` és una entitat feble d'`EDICIÓN`; `EDICIÓN` té identificador propi (ISBN).
+- [ ] `seudónimos` és multivalor, `dirección fiscal` és compost i «domini públic» o «en vida» és derivat de les dates.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errors habituals (llig-los després d'intentar-ho)" %}}
+
+> [!WARNING]
+> - Fondre obra i edició en una sola entitat: es repeteix el títol, l'autor i els drets en cada edició.
+> - Posar `traductor` com a atribut de text en l'obra: és una persona amb dades i amb un percentatge de drets.
+> - Modelar l'antologia com una entitat apart amb una relació a obra: és una obra més, i la seua relació amb altres obres és reflexiva.
+> - Posar el percentatge de drets en la persona o en l'obra: pertany a la **participació** (persona, obra, funció).
+> - Fer de l'agent un atribut del contracte: l'agent és una entitat amb dades pròpies i moltes representacions.
+
+{{% /details %}}
+
+#### Ampliació
+
+Algunes obres tenen **coautoria**. Canvia alguna cosa en el model? Afig ara que els drets d'una persona sobre una obra passen als seus hereus quan mor: quina relació necessites i quin problema apareix amb les dates?
+
+{{% details title="Solució de referència" %}}
+
+```mermaid
+erDiagram
+    OBRA ||--o{ OBRA : "traduce"
+    OBRA }o--o{ OBRA : "incluye (orden, paginas)"
+    OBRA ||--|{ EDICION : "se publica en"
+    EDICION ||--o{ TIRADA : "se imprime en"
+    TIRADA }o--o{ LIBRERIA : "se envia a (fecha, cantidad)"
+    PERSONA }o--o{ OBRA : "participa (funcion, porcentaje)"
+    PERSONA ||--o{ SEUDONIMO : "usa"
+    AGENTE ||--o{ PERSONA : "representa"
+    PERSONA ||--o{ CONTRATO : "firma"
+    OBRA {
+        int cod_obra PK
+        string titulo
+        int anio_primera_pub
+        string idioma_original
+    }
+    NOVELA {
+        int num_capitulos
+        string saga
+        int volumen
+    }
+    POEMARIO {
+        int num_poemas
+        string metrica
+    }
+    COMIC {
+        int num_paginas
+        boolean color
+    }
+    EDICION {
+        string isbn PK
+        string formato
+        int num_paginas
+        decimal precio
+    }
+    TIRADA {
+        int num_tirada PK
+        date fecha
+        int ejemplares
+        string imprenta
+    }
+    PERSONA {
+        int cod_persona PK
+        string nombre_civil
+        string nacionalidad
+        date fecha_nacimiento
+        date fecha_fallecimiento
+    }
+    CONTRATO {
+        date fecha_firma
+        decimal anticipo
+        int duracion_anios
+    }
+    AGENTE {
+        int cod_agente PK
+        string nombre
+        string agencia
+        string telefono
+    }
+    LIBRERIA {
+        string cif PK
+        string nombre
+    }
+```
+
+- **Obra enfront d'edició.** L'obra és el text; l'edició és un producte concret. Una obra té moltes edicions (format, preu, ISBN distints) i les dades de l'obra no es repeteixen.
+- **Jerarquia d'obres.** Parcial («hi ha obres de divulgació que no encaixen») i disjunta («una obra no pot ser novel·la i còmic»). Si fóra «tota obra és novel·la, poemari o còmic» seria total, i les obres d'assaig no tindrien lloc: caldria afegir una quarta subclasse o replantejar la jerarquia.
+- **Reflexives.** *Traduce*: 1:N amb rols `original` (0,N) i `traducción` (0,1) i la restricció que ambdues tinguen idiomes distints. *Incluye*: N:M amb rols `antología` i `pieza`, atributs `orden` i `páginas`, i la restricció que una obra no s'incloga a si mateixa ni aparega en una antologia que ella mateixa continga.
+- **Participació.** Ternària persona–obra–funció amb el percentatge com a atribut. Si la funció fóra una entitat, la relació continuaria sent ternària, però el model permetria afegir funcions sense tocar el diagrama. Si dues persones tenen la mateixa funció en una obra (dos autors), es distingeixen per la persona.
+- **Agregació.** El contracte se signa sobre una **participació** concreta: no és un contracte amb la persona ni amb l'obra per separat. L'agregació *participación* es relaciona amb `CONTRATO` (1:1 obligatori per participació) i amb `AGENTE` (opcional).
+- **Febles.** `TIRADA` depén d'`EDICIÓN` (isbn + número). `EDICIÓN` no és feble perquè l'ISBN la identifica per si sol. Els llibres electrònics no tenen tirades: la cardinalitat mínima des d'`EDICIÓN` és 0.
+- **Atributs especials.** Compost: `dirección fiscal`. Multivalor: `seudónimos`. Derivat: «en domini públic» (a partir de la data de defunció i el termini legal).
+
+**Restriccions que el diagrama no arreplega**
+
+1. La suma dels percentatges de drets d'una obra no supera el 100 %.
+2. L'idioma d'una traducció és distint del de la seua original.
+3. Una antologia no pot incloure's a si mateixa, directa o indirectament.
+4. La data d'impressió és posterior a la de primera publicació de l'obra.
+5. Una tirada només existeix si l'edició no és en format electrònic.
+6. L'agent d'un contracte ha de representar la persona que signa.
+
+{{% /details %}}
+
+
+---
+
+## Pràctica 2.13 · Taller aeronàutic: aeronaus, ordres de treball i habilitacions
+
+{{< practica num="2.13" tipo="Reto" duracion="3 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io" entrega="Diagrama EER + diccionari de dades + restriccions normatives" >}}
+
+#### Context
+
+Un taller de manteniment aeronàutic treballa sota una normativa estricta: **cada tasca ha de poder demostrar qui la va fer, amb quina habilitació i sobre quina peça concreta**. El responsable de qualitat et lliura la descripció del que el sistema ha de registrar. Part de les regles estan escrites com a «ha de» i unes altres apareixen de passada: **ambdues són requisits**.
+
+#### Enunciat
+
+> **1. Aeronaus i models.** El taller revisa aeronaus de moltes companyies. Cada aeronau s'identifica per la seua matrícula i és d'un **model** (per exemple, ATR 72-600), del qual es coneix el fabricant, la denominació, la categoria de manteniment i les hores de vol entre revisions majors. De l'aeronau es guarda la data de fabricació i les hores de vol acumulades, que s'actualitzen en cada entrada al taller. Hi ha tres tipus: **avions** (nombre de motors i envergadura), **helicòpters** (nombre de pales del rotor principal i si tenen rotor de cua) i altres aeronaus lleugeres que no necessiten dades específiques. Una aeronau és sempre d'un únic tipus.
+>
+> **2. Propietaris.** Cada aeronau pertany en cada moment a una persona física o jurídica, de la qual es guarda un nom o raó social, un NIF i una **adreça de contacte** desglossada en carrer, número, codi postal, localitat i país. Amb la compravenda i l'arrendament una aeronau canvia de propietari al llarg de la seua vida, i la normativa exigeix conservar **tot l'historial**: qui va ser el propietari i des de quina data fins a quina data. Un propietari pot tindre moltes aeronaus i una aeronau no pot tindre dos propietaris al mateix temps.
+>
+> **3. Ordres de treball.** Cada vegada que una aeronau entra al taller s'obri una **ordre de treball**, que es numera de forma correlativa dins de cada any (l'ordre 17 de 2026). Es guarden la data d'entrada, la data prevista i la real d'eixida, el tipus de revisió (A, B, C o D) i les observacions del client. Una ordre es descompon en **tasques** numerades dins de l'ordre: cada tasca té una descripció, les hores estimades i el seu estat (pendent, en curs o acabada). Algunes tasques no poden començar fins que s'han acabat unes altres de la mateixa ordre, i eixes dependències han de quedar registrades. Una tasca no es reutilitza en una altra ordre: si es repeteix el treball, es crea una tasca nova.
+>
+> **4. Personal tècnic i habilitacions.** Els tècnics tenen un codi d'empleat, un nom i una data de contractació. Per a treballar sobre un model concret necessiten una **habilitació**, que es concedeix per **categoria de llicència** (B1 mecànica, B2 aviònica o C certificació) i té una data de caducitat. Un tècnic pot tindre diverses habilitacions: pot ser B1 en l'ATR 72 i B2 en l'Airbus A320, o B1 i B2 alhora en el mateix model. Per al mateix model i la mateixa categoria hi ha una única habilitació per tècnic. Cada tasca la realitzen un o diversos tècnics; s'anoten les hores reals que dedica cadascú i la data en què signa la seua part. Només els tècnics amb categoria C poden **certificar** la conformitat d'una ordre completa.
+>
+> **5. Magatzem i peces.** El magatzem gestiona peces identificades pel seu número de part, amb la descripció, la unitat de mesura i l'estoc mínim. Hi ha dues classes de peces: els **consumibles** (cargols, juntes, olis) dels quals només es controla la quantitat en magatzem, i els **rotables** (motors, trens d'aterratge) que tenen número de sèrie propi, les hores acumulades i una vida útil màxima. Les peces són d'una de les dues classes, mai d'ambdues. Cada peça es compra a un o diversos proveïdors, amb un preu per proveïdor i un termini de lliurament; un proveïdor pot subministrar moltes peces.
+>
+> **6. Ús de peces.** Una tasca consumeix peces (quantitat per als consumibles) o instal·la i desmunta rotables concrets en una aeronau. De cada instal·lació es guarda la data de muntatge i, quan es retira, la de desmuntatge; un rotable no pot estar instal·lat en dues aeronaus al mateix temps, però al llarg de la seua vida passa per diverses. El taller necessita poder respondre a «quins rotables duia l'aeronau EC-XYZ el 3 de març» i «en quines aeronaus ha estat instal·lat este motor».
+>
+> **7. Fora d'abast.** La facturació al client i la nòmina dels tècnics es porten en altres programes.
+
+{{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
+
+1. Identifica les entitats, indica les **febles** amb el seu identificador complet i dibuixa la cadena ordre → tasca. Per què la matrícula identifica l'aeronau però el número d'ordre no identifica l'ordre?
+2. Classifica les dues jerarquies (aeronaus i peces) i justifica cada classificació amb una frase del text.
+3. Modela l'habilitació com a relació **ternària** tècnic–model–categoria i calcula les cardinalitats. Per què no basta una binària tècnic–model?
+4. Modela l'historial de propietaris, el d'instal·lació de rotables i la dependència entre tasques. Indica en cada cas quin atribut fa que la mateixa parella d'entitats puga repetir-se.
+5. Decideix com representar la **certificació** d'una ordre i quina restricció exigeix que el tècnic siga de categoria C.
+6. Escriu almenys set restriccions d'integritat que el diagrama no pot arreplegar.
+7. Enumera tres consultes del taller que el teu diagrama ha de poder contestar i recorre el camí de relacions que usaria cadascuna.
+
+{{% /details %}}
+
+{{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `ORDEN` s'identifica per (any, número) i `TAREA` per (any, número d'ordre, número de tasca).
+- [ ] La jerarquia d'aeronaus és **parcial i disjunta**; la de peces, **total i disjunta**.
+- [ ] L'habilitació és una ternària amb la data de caducitat com a atribut.
+- [ ] L'historial de propietat i el d'instal·lació duen la data d'inici com a part de la seua identificació.
+- [ ] La dependència entre tasques és una N:M reflexiva sense atributs.
+- [ ] La relació tasca–tècnic és N:M amb `horas_reales` i `fecha_firma`.
+- [ ] `dirección de contacto` apareix com a atribut compost.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errors habituals (llig-los després d'intentar-ho)" %}}
+
+> [!WARNING]
+> - Guardar el propietari com a atribut de l'aeronau: es perd l'historial que exigeix la normativa.
+> - Identificar la tasca només pel seu número dins de l'ordre, sense heretar la identificació de l'ordre.
+> - Confondre `rotable` (amb número de sèrie i historial) amb `consumible` (només quantitat) i posar les hores acumulades en totes les peces.
+> - Resoldre l'habilitació amb dues binàries (tècnic–model i tècnic–categoria): no se sap quina categoria té sobre quin model.
+> - Donar a les tasques dependents una relació 1:N: una tasca pot esperar-ne diverses i ser requisit de diverses.
+
+{{% /details %}}
+
+#### Ampliació
+
+L'autoritat aeronàutica exigeix que cada **certificació d'ordre** quede signada per un tècnic de categoria C, amb la data i un número de certificat únic. Modela la certificació i decideix si és una entitat, una relació amb atributs o una agregació. Després afig la possibilitat que una certificació siga **anul·lada** i substituïda per una altra.
+
+{{% details title="Solució de referència" %}}
+
+```mermaid
+erDiagram
+    MODELO ||--o{ AERONAVE : "es de"
+    AERONAVE ||--o{ PROPIEDAD : "tiene"
+    PROPIETARIO ||--o{ PROPIEDAD : "posee"
+    AERONAVE ||--o{ ORDEN : "entra en el taller con"
+    ORDEN ||--|{ TAREA : "se descompone en"
+    TAREA }o--o{ TAREA : "depende de"
+    TAREA }o--o{ TECNICO : "realiza (horas, firma)"
+    TECNICO }o--o{ MODELO : "habilitado (categoria, caducidad)"
+    PIEZA }o--o{ PROVEEDOR : "suministra (precio, plazo)"
+    TAREA }o--o{ CONSUMIBLE : "consume (cantidad)"
+    ROTABLE ||--o{ INSTALACION : "se instala"
+    AERONAVE ||--o{ INSTALACION : "lleva"
+    TAREA ||--o{ INSTALACION : "realiza"
+    MODELO {
+        string cod_modelo PK
+        string fabricante
+        string denominacion
+        string categoria
+    }
+    AERONAVE {
+        string matricula PK
+        date fecha_fabricacion
+        decimal horas_vuelo
+    }
+    AVION {
+        int num_motores
+        decimal envergadura
+    }
+    HELICOPTERO {
+        int num_palas
+        boolean rotor_cola
+    }
+    PROPIETARIO {
+        string nif PK
+        string razon_social
+        string calle
+        string codigo_postal
+        string localidad
+        string pais
+    }
+    PROPIEDAD {
+        date fecha_inicio PK
+        date fecha_fin
+    }
+    ORDEN {
+        int anio PK
+        int num_orden PK
+        date fecha_entrada
+        date salida_prevista
+        date salida_real
+        char tipo_revision
+    }
+    TAREA {
+        int num_tarea PK
+        string descripcion
+        decimal horas_estimadas
+        string estado
+    }
+    TECNICO {
+        int cod_empleado PK
+        string nombre
+        date fecha_contratacion
+    }
+    PIEZA {
+        string num_parte PK
+        string descripcion
+        string unidad
+        int stock_minimo
+    }
+    CONSUMIBLE {
+        int cantidad_almacen
+    }
+    ROTABLE {
+        string num_serie PK
+        decimal horas_acumuladas
+        decimal vida_util
+    }
+    INSTALACION {
+        date fecha_montaje PK
+        date fecha_desmontaje
+    }
+    PROVEEDOR {
+        string cif PK
+        string nombre
+    }
+```
+
+- **Febles.** `ORDEN` seria feble d'`AERONAVE` si es numerara per aeronau; ací l'enunciat la numera per any, de manera que s'identifica per (any, número) i es relaciona amb l'aeronau. `TAREA` és feble d'`ORDEN`: (any, número d'ordre, número de tasca). `PROPIEDAD` i `INSTALACIÓN` duen la data d'inici com a part del seu identificador, perquè la mateixa parella pot repetir-se en el temps.
+- **Jerarquies.** Aeronaus: `AVIÓN`, `HELICÓPTERO` i altres (sense dades pròpies) → parcial («altres aeronaus lleugeres que no necessiten dades») i disjunta («sempre d'un únic tipus»). Peces: `CONSUMIBLE` i `ROTABLE` → total («hi ha dues classes») i disjunta («mai d'ambdues»).
+- **Ternària `habilitación`.** Amb tècnic i model fixos hi ha diverses categories (B1 i B2 alhora). Amb tècnic i categoria fixos hi ha diversos models. Amb model i categoria fixos hi ha diversos tècnics. Cardinalitat **N:M:P**, amb `fecha_caducidad` com a atribut. Dues binàries no arreplegarien quina categoria té el tècnic sobre quin model.
+- **Reflexiva.** `TAREA` depén de `TAREA`: N:M sense atributs, amb la restricció que no hi haja cicles i que ambdues tasques siguen de la mateixa ordre.
+- **Certificació.** L'enunciat només exigeix que la signe un tècnic C: una relació 1:N entre `TÉCNICO` i `ORDEN` amb `fecha_certificación`. La restricció de categoria C no pot expressar-se en el diagrama i s'ha de comprovar sobre l'habilitació.
+- **Compost.** `dirección de contacto` (carrer, número, codi postal, localitat, país).
+
+**Restriccions que el diagrama no arreplega**
+
+1. Una aeronau no pot tindre dos propietaris amb períodes solapats.
+2. Un rotable no pot estar instal·lat en dues aeronaus alhora (períodes d'instal·lació sense solapaments).
+3. El tècnic que realitza una tasca ha d'estar habilitat per al model de l'aeronau de la seua ordre, amb una habilitació no caducada en la data de signatura.
+4. Només un tècnic amb categoria C pot certificar una ordre.
+5. No pot haver-hi cicles en les dependències entre tasques i ambdues tasques són de la mateixa ordre.
+6. La data d'eixida real no és anterior a la d'entrada i la tasca no se signa abans que s'òbriga l'ordre.
+7. `horas_acumuladas` no pot superar `vida_util` en un rotable instal·lat.
+8. Quan una ordre està certificada, totes les seues tasques estan acabades.
+
+{{% /details %}}
+
+
+---
+
+## Pràctica 2.14 · Comunitat de propietaris: immobles, juntes i votacions
+
+{{< practica num="2.14" tipo="Reto" duracion="3 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io" entrega="Diagrama EER + justificació de la cadena de febles i de la ternària + restriccions legals" >}}
+
+#### Context
+
+Un administrador de finques gestiona desenes de comunitats de propietaris amb fulls de càlcul i paper. Vol un sistema que li permeta saber **qui és amo de què en cada moment, què es va votar en cada junta i qui deu diners**. Esta és la descripció del client. Com sol ocórrer, barreja regles legals amb costums de la casa, i no totes tenen el mateix pes.
+
+#### Enunciat
+
+> **1. Comunitats i immobles.** L'administrador du diverses comunitats. Cada comunitat té un CIF, un nom, una adreça (carrer, número, codi postal i localitat) i un compte bancari en què s'ingressen les quotes. Una comunitat es compon d'un o diversos **portals**, numerats dins de la comunitat (portal 1, portal 2…), i cada portal conté **immobles** que s'identifiquen per la seua planta i la seua lletra dins del portal (3r B). El «3r B del portal 1» d'una comunitat no té res a veure amb el «3r B del portal 1» d'una altra.
+>
+> **2. Tipus d'immobles.** Tot immoble té la seua superfície en metres quadrats i un **coeficient de participació** (el tant per cent que li correspon en les despeses i en els vots); la suma de coeficients d'una comunitat és sempre el 100 %. Els immobles són habitatges (nombre de dormitoris i si tenen terrassa), locals comercials (activitat que s'hi desenvolupa i número de llicència) o places de garatge (número de plaça i planta del soterrani). Un immoble és sempre d'un únic tipus. Alguns garatges estan **vinculats** a un habitatge concret i es transmeten amb ell; un garatge només pot estar vinculat a un habitatge de la seua mateixa comunitat, i un habitatge pot tindre diversos garatges vinculats.
+>
+> **3. Propietaris.** Els propietaris poden ser persones físiques (DNI, nom i cognoms) o jurídiques (CIF, raó social i persona de contacte, amb el seu nom i telèfon). Els dos tipus comparteixen un telèfon i un correu de notificació. Un immoble pot pertànyer a diverses persones alhora, cadascuna amb el seu **percentatge de propietat** (el 50 % cadascun si el compren dos germans). La propietat canvia amb vendes i herències, i s'ha de conservar l'**historial**: qui va ser propietari de quin immoble, amb quin percentatge i entre quines dates. Si no es coneix la data de fi, el propietari continua sent-ho.
+>
+> **4. Juntes.** Cada comunitat celebra juntes, ordinàries o extraordinàries, numerades per any dins de la comunitat (la junta 2 de 2026). De cadascuna es guarden la data, el lloc, si es va celebrar en primera o en segona convocatòria i l'acta (un text llarg). Cada junta té un **ordre del dia** compost per punts numerats dins de la junta; cada punt té un títol, una descripció i el resultat de la votació (aprovat, rebutjat o sense votació). Els punts no existeixen fora de la seua junta.
+>
+> **5. Assistència, delegació i vot.** A cada junta assisteixen propietaris, bé en persona, bé **representats** per un altre propietari de la mateixa comunitat a qui han delegat el seu vot; de cada assistent s'anota si va estar present o representat. Un propietari pot delegar el seu vot en una junta concreta en un altre, que al seu torn pot acumular diverses delegacions, però ningú no pot delegar en si mateix ni delegar un vot que ja ha rebut per delegació. Quan un punt se sotmet a votació, cada propietari present o representat vota **a favor, en contra o s'absté**, i el vot compta amb el coeficient de l'immoble. Es vol saber com va votar cada propietari en cada punt.
+>
+> **6. Quotes, derrames i rebuts.** Cada immoble paga una quota mensual de despeses proporcional al seu coeficient. A més, la junta pot aprovar **derrames extraordinàries** (una obra, per exemple) en un punt de l'ordre del dia; la derrama es reparteix entre els immobles segons el coeficient i té un import total, un concepte i unes dates de pagament. Tots els cobraments s'emeten com a **rebuts** a nom del propietari actual de l'immoble, numerats dins de cada immoble; en un rebut s'anoten el concepte, l'import, la data d'emissió i, quan es paga, la data de pagament. Un rebut és morós si passen trenta dies des de l'emissió sense haver-se pagat.
+>
+> **7. Fora d'abast.** La comptabilitat general de la comunitat, les incidències de manteniment i els contractes amb proveïdors es tractaran en una fase posterior.
+
+{{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
+
+1. Dibuixa la **cadena d'entitats febles** comunitat → portal → immoble i escriu l'identificador complet de cadascuna. Explica per què no es pot usar un codi global d'immoble sense perdre informació.
+2. Classifica la jerarquia d'immobles i la de propietaris. Justifica cada classificació amb una frase del text i decideix quins atributs van en cada nivell.
+3. Modela el vincle entre garatges i habitatges. És una reflexiva? Quina cardinalitat té des de cada costat?
+4. Modela la **propietat amb historial** (immoble, propietari, percentatge, dates) i justifica quin atribut forma part de l'identificador.
+5. Modela la **delegació de vot** com a relació **ternària** (propietari que delega, propietari representant, junta). Calcula les seues cardinalitats i escriu les tres restriccions de l'apartat 5.
+6. Modela el vot en cada punt i explica per què el coeficient **no** és un atribut del vot.
+7. Identifica els atributs compostos, derivats i multivalor (si n'hi ha) i explica què caldria preguntar al client per a decidir.
+8. Escriu almenys huit restriccions, distingint les **legals** de les **de negoci**.
+
+{{% /details %}}
+
+{{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `PORTAL` és feble de `COMUNIDAD`; `INMUEBLE` és feble de `PORTAL`; `JUNTA` és feble de `COMUNIDAD`; `PUNTO` és feble de `JUNTA`; `RECIBO` és feble d'`INMUEBLE`.
+- [ ] La jerarquia d'immobles és **total i disjunta**; la de propietaris, **total i disjunta**, amb atributs diferents en cada subclasse.
+- [ ] El vincle garatge–habitatge és una relació 1:N des de l'habitatge i opcional del costat del garatge.
+- [ ] La propietat és una N:M entre immoble i propietari amb `porcentaje` i `fecha_inicio` com a part de l'identificador.
+- [ ] La delegació és una ternària amb dos papers distints per a la mateixa entitat `PROPIETARIO`.
+- [ ] El vot és una N:M entre propietari i punt, amb el sentit del vot com a atribut.
+- [ ] «Morós» s'ha declarat com a atribut derivat.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errors habituals (llig-los després d'intentar-ho)" %}}
+
+> [!WARNING]
+> - Usar un codi d'immoble global i perdre l'estructura portal–planta–lletra que usa l'administrador.
+> - Posar `propietario` com a atribut de l'immoble: es perden el repartiment de percentatges i l'historial.
+> - Modelar la delegació com una relació binària entre propietaris, sense la junta: el mateix propietari pot delegar en un o en un altre segons la junta.
+> - Guardar el coeficient en el vot: és una dada de l'immoble, i el propietari en pot tindre diversos.
+> - Guardar el resultat de la votació com a text lliure, o comptar-lo a mà, en lloc de derivar-lo dels vots (aprovat si els vots a favor superen els contraris).
+
+{{% /details %}}
+
+#### Ampliació
+
+Una comunitat pot tindre **subcomunitats** (per exemple, un garatge comú a diversos portals amb les seues pròpies quotes). Decideix si es modela com una reflexiva de `COMUNIDAD` o com una entitat nova, i explica què ocorre amb els coeficients.
+
+{{% details title="Solució de referència" %}}
+
+```mermaid
+erDiagram
+    COMUNIDAD ||--|{ PORTAL : "se compone de"
+    PORTAL ||--|{ INMUEBLE : "contiene"
+    INMUEBLE ||--o| VIVIENDA : "es"
+    INMUEBLE ||--o| LOCAL : "es"
+    INMUEBLE ||--o| GARAJE : "es"
+    VIVIENDA ||--o{ GARAJE : "tiene vinculados"
+    INMUEBLE ||--o{ PROPIEDAD : "es propiedad de"
+    PROPIETARIO ||--o{ PROPIEDAD : "posee"
+    PROPIETARIO ||--o| PERSONA_FISICA : "es"
+    PROPIETARIO ||--o| PERSONA_JURIDICA : "es"
+    COMUNIDAD ||--o{ JUNTA : "celebra"
+    JUNTA ||--|{ PUNTO : "incluye"
+    JUNTA ||--o{ ASISTENCIA : "cuenta con"
+    PROPIETARIO ||--o{ ASISTENCIA : "asiste"
+    PUNTO }o--o{ PROPIETARIO : "vota (sentido)"
+    PUNTO ||--o| DERRAMA : "aprueba"
+    DERRAMA ||--o{ RECIBO : "origina"
+    INMUEBLE ||--o{ RECIBO : "genera"
+    COMUNIDAD {
+        string cif PK
+        string nombre
+        string calle
+        string numero
+        string codigo_postal
+        string localidad
+        string cuenta_bancaria
+    }
+    PORTAL {
+        int num_portal PK
+    }
+    INMUEBLE {
+        string planta PK
+        string letra PK
+        decimal superficie
+        decimal coeficiente
+    }
+    VIVIENDA {
+        int dormitorios
+        boolean terraza
+    }
+    LOCAL {
+        string actividad
+        string num_licencia
+    }
+    GARAJE {
+        int num_plaza
+        int planta_sotano
+    }
+    PROPIEDAD {
+        date fecha_inicio PK
+        date fecha_fin
+        decimal porcentaje
+    }
+    PROPIETARIO {
+        int cod_propietario PK
+        string telefono
+        string correo
+    }
+    PERSONA_FISICA {
+        string dni
+        string nombre
+        string apellidos
+    }
+    PERSONA_JURIDICA {
+        string cif
+        string razon_social
+        string contacto_nombre
+        string contacto_telefono
+    }
+    JUNTA {
+        int anio PK
+        int num_junta PK
+        date fecha
+        string lugar
+        string convocatoria
+        string acta
+    }
+    PUNTO {
+        int num_punto PK
+        string titulo
+        string descripcion
+        string resultado
+    }
+    ASISTENCIA {
+        string modalidad
+    }
+    DERRAMA {
+        int cod_derrama PK
+        string concepto
+        decimal importe_total
+    }
+    RECIBO {
+        int num_recibo PK
+        string concepto
+        decimal importe
+        date fecha_emision
+        date fecha_pago
+    }
+```
+
+- **Cadena de febles.** `PORTAL` = (CIF, número); `INMUEBLE` = (CIF, portal, planta, lletra); `JUNTA` = (CIF, any, número); `PUNTO` = (CIF, any, junta, punt); `RECIBO` = (immoble complet, número). No hi ha codi global perquè l'administrador no l'usa i perquè la numeració de cada nivell és local al seu propietari.
+- **Jerarquies.** Immobles: `VIVIENDA`, `LOCAL`, `GARAJE` → total i disjunta («sempre d'un únic tipus»). Propietaris: persona física o jurídica → total i disjunta, amb atributs distints (DNI i cognoms enfront de raó social i contacte). `teléfono` i `correo` estan en la superclasse.
+- **Garatges vinculats.** Relació 1:N entre `VIVIENDA` i `GARAJE`: un habitatge té (0,N) garatges vinculats i un garatge està vinculat a (0,1) habitatge. No és reflexiva sobre immoble perquè només participen dues subclasses concretes.
+- **Propietat.** N:M entre immoble i propietari amb `porcentaje`, `fecha_inicio` i `fecha_fin`. La data d'inici forma part de l'identificador perquè la mateixa parella pot repetir-se (es ven i es torna a comprar).
+- **Delegació (ternària).** Propietari que delega, propietari representant i junta. Fixats qui delega i la junta, hi ha **com a màxim un** representant. Fixats representant i junta, hi ha molts delegants. Fixats delegant i representant, hi ha diverses juntes. Cardinalitats: delega N, representa 1, junta N.
+- **Vot.** N:M entre propietari i punt amb `sentido` (a favor, en contra o abstenció). El coeficient s'obté de l'immoble del qual és propietari en votar, per la qual cosa no es guarda en el vot.
+- **Derivats.** `moroso` (trenta dies des de l'emissió sense pagament) i `resultado` del punt (segons els vots ponderats). L'`acta` és un atribut de text llarg que es guarda en la junta.
+- **Compostos.** `dirección` de la comunitat i `persona de contacto` de la persona jurídica.
+
+**Restriccions que el diagrama no arreplega**
+
+1. *(Legal)* La suma dels coeficients dels immobles d'una comunitat és el 100 %.
+2. *(Legal)* La suma dels percentatges de propietat vigents d'un immoble és el 100 %.
+3. *(Legal)* Un propietari no pot delegar en si mateix ni delegar un vot que ha rebut per delegació.
+4. *(Legal)* Només vota qui està present o representat en la junta, i vota una vegada per punt.
+5. *(Legal)* El representant pertany a la mateixa comunitat que qui delega.
+6. *(Negoci)* Un garatge només es vincula a un habitatge de la seua mateixa comunitat.
+7. *(Negoci)* El rebut s'emet a nom d'un propietari vigent en la data d'emissió.
+8. *(Negoci)* Una derrama només pot associar-se a un punt amb resultat «aprovat».
+9. *(Negoci)* La data de fi d'una propietat és posterior a la d'inici i els períodes d'un mateix immoble no se solapen excepte per copropietat.
 
 {{% /details %}}
 

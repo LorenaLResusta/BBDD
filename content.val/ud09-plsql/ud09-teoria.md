@@ -34,21 +34,20 @@ En acabar esta unitat seràs capaç de:
 
 ### Temporalització
 
-La unitat ocupa **11 hores d'aula** (7 de teoria i 4 de pràctica). És la unitat amb més codi del curs: convé escriure'l a mà i recompilar-lo, no copiar-lo i apegar-lo. Les pràctiques llargues (la taula mutant, les tasques programades, el paquet de secretaria i el projecte) es completen fora de l'horari d'aula.
+La unitat ocupa **7 hores d'aula** (4 de teoria i 3 de pràctica). És la unitat amb més codi del curs: convé escriure'l a mà i recompilar-lo, no copiar-lo i apegar-lo. Les pràctiques llargues (la taula mutant, les tasques programades, el paquet de secretaria i el projecte) es completen fora de l'horari d'aula.
 
-{{< sesiones unidad="UD09" horas="11" >}}
+{{< sesiones unidad="UD09" horas="7" >}}
 items:
-  - {h: 2, tipo: T, t: "Formes d'automatitzar, eines, estructura del bloc, variables, tipus i `DBMS_OUTPUT`", ref: "§1 a §4"}
+  - {h: 1, tipo: T, t: "Formes d'automatitzar, eines, estructura del bloc, variables, tipus i `DBMS_OUTPUT`", ref: "§1 a §4"}
   - {h: 1, tipo: P, t: "Primers blocs: l'expedient d'un alumne", ref: "Pràctica 9.1"}
-  - {h: 2, tipo: T, t: "Control de flux, funcions del gestor, cursors i funcions d'usuari", ref: "§5 a §8 · laboratori de blocs"}
+  - {h: 1, tipo: T, t: "Control de flux, funcions del gestor, cursors i funcions d'usuari", ref: "§5 a §8 · laboratori de blocs"}
   - {h: 1, tipo: P, t: "Biblioteca de funcions d'EduGest", ref: "Pràctica 9.2"}
   - {h: 1, tipo: T, t: "Excepcions i procediments emmagatzemats", ref: "§9 i §10"}
-  - {h: 1, tipo: P, t: "Matrícula amb excepcions i butlletins amb cursors (la 9.4 s'acaba a casa)", ref: "Pràctiques 9.3 i 9.4"}
-  - {h: 1, tipo: T, t: "Disparadors: auditoria, integritat, taula mutant i disparador compost", ref: "§11 · simulador de disparadors"}
-  - {h: 1, tipo: P, t: "Disparadors d'integritat i auditoria", ref: "Pràctica 9.5"}
-  - {h: 1, tipo: T, t: "Tasques programades amb `DBMS_SCHEDULER`, paquets i comparació amb altres SGBD", ref: "§12 a §14"}
+  - {h: 1, tipo: P, t: "Matrícula amb excepcions (la 9.4, butlletins amb cursors, s'acaba a casa)", ref: "Pràctiques 9.3 i 9.4"}
+  - {h: 1, tipo: T, t: "Disparadors, tasques programades amb `DBMS_SCHEDULER` i paquets", ref: "§11 a §14 · simulador de disparadors"}
 autonomo:
   - "Pràctica 9.4 (cursors: butlletins i informes), si no s'ha acabat a l'aula"
+  - "Pràctica 9.5 (disparadors d'integritat i auditoria)"
   - "Pràctica 9.6 (repte: la taula mutant)"
   - "Pràctica 9.7 (tasques programades)"
   - "Pràctica 9.8 (repte: el paquet de secretaria)"
@@ -65,7 +64,7 @@ autonomo:
 
 ---
 
-{{< sesion n="1" h="2" tipo="t" >}}Formes d'automatitzar, eines, blocs i variables{{< /sesion >}}
+{{< sesion n="1" h="1" tipo="t" >}}Formes d'automatitzar, eines, blocs i variables{{< /sesion >}}
 
 ## 1. Programar dins del servidor
 
@@ -636,7 +635,7 @@ Estes funcions són les que permeten registrar **qui** ha fet un canvi i **des d
 
 ---
 
-{{< sesion n="3" h="2" tipo="t" >}}Control de flux, funcions del gestor, cursors i funcions d'usuari{{< /sesion >}}
+{{< sesion n="3" h="1" tipo="t" >}}Control de flux, funcions del gestor, cursors i funcions d'usuari{{< /sesion >}}
 
 ## 5. Estructures de control de flux
 
@@ -2058,7 +2057,7 @@ Un subprograma passa a `INVALID` quan canvia alguna cosa de la qual depén (una 
 
 ---
 
-{{< sesion n="7" h="1" tipo="t" >}}Disparadors: auditoria, integritat, taula mutant i disparador compost{{< /sesion >}}
+{{< sesion n="7" h="1" tipo="t" >}}Disparadors, tasques programades i paquets{{< /sesion >}}
 
 {{% paso-a-paso titulo="Qué dispara un trigger y en qué orden" %}}
 {{% etapa titulo="1. Arriba la sentència" %}}
@@ -2546,7 +2545,6 @@ Un disparador és lògica **invisible**: no apareix en el codi de l'aplicació i
 
 ---
 
-{{< sesion n="9" h="1" tipo="t" >}}Tasques programades, paquets i comparació amb altres SGBD{{< /sesion >}}
 
 ## 12. Esdeveniments i tasques programades {#12-eventos-tareas-programadas}
 

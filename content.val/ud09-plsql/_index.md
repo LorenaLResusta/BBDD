@@ -14,4 +14,4 @@ Quan una tasca necessita lògica (decisions, bucles, tractament d'errors) o una 
 | [Teoria](/ud09-plsql/ud09-teoria) | Formes d'automatitzar, eines, blocs, variables, control de flux, funcions del SGBD, procediments, funcions, cursors, excepcions, disparadors (inclòs el compost), `DBMS_SCHEDULER` i comparació amb altres SGBD |
 | [Pràctiques](/ud09-plsql/ud09-practicas) | Expedient d'un alumne, biblioteca de funcions, matrícula amb excepcions, butlletins amb cursors, disparadors d'integritat i auditoria, taula mutant, tasques programades i paquet de secretaria |
 
-**Durada:** 11 hores d'aula, del 14/05/2027 al 28/05/2027. Consulta la [guia didàctica](/) per a vore el seu lloc en el calendari del curs.
+**Durada:** 7 hores d'aula, del 13/04/2027 al 21/04/2027. Consulta la [guia didàctica](/) per a vore el seu lloc en el calendari del curs.

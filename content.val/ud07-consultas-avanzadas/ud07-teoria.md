@@ -35,16 +35,16 @@ En acabar esta unitat seràs capaç de:
 
 ### Temporalització
 
-La unitat ocupa **17 hores d'aula** (10 de teoria i 7 de pràctica). Les composicions
+La unitat ocupa **16 hores d'aula** (10 de teoria i 6 de pràctica). Les composicions
 i les subconsultes són el nucli del RA3: convé no avançar fins que cada consulta
 es puga escriure sense consultar els apunts.
 
-{{< sesiones unidad="UD07" horas="17" >}}
+{{< sesiones unidad="UD07" horas="16" >}}
 items:
   - {h: 2, tipo: T, t: "Funcions d'agregat, GROUP BY i HAVING", ref: "§1 i §2 · laboratori d'agrupament"}
   - {h: 1, tipo: P, t: "Consultes resum", ref: "Pràctica 7.1"}
   - {h: 2, tipo: T, t: "Composicions internes: INNER JOIN i diverses taules", ref: "§3 · laboratori de composicions"}
-  - {h: 2, tipo: P, t: "Composicions pas a pas", ref: "Pràctica 7.2"}
+  - {h: 1, tipo: P, t: "Composicions pas a pas", ref: "Pràctica 7.2"}
   - {h: 2, tipo: T, t: "Composicions externes i autocomposició", ref: "§4 i §5"}
   - {h: 1, tipo: P, t: "Informes per a cap d'estudis", ref: "Pràctica 7.3"}
   - {h: 2, tipo: T, t: "Subconsultes, EXISTS i WITH", ref: "§6"}
