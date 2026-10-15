@@ -321,224 +321,35 @@ Resolver de forma autónoma consultas de varias tablas, decidiendo el tipo de co
 
 **J1.** Listado de módulos con el nombre completo de su ciclo, solo de 2º curso.
 
-{{% details title="Solución J1" %}}
-```sql
-SELECT c.nombre AS ciclo, mo.codigo, mo.nombre AS modulo
-FROM   modulo mo JOIN ciclo c ON c.cod_ciclo = mo.cod_ciclo
-WHERE  mo.curso = 2
-ORDER  BY c.nombre, mo.codigo;
-```
-
-| CICLO | CODIGO | MODULO |
-|---|---|---|
-| Desarrollo de Aplicaciones Multiplataforma | 0486 | Acceso a datos |
-| Desarrollo de Aplicaciones Multiplataforma | 0488 | Desarrollo de interfaces |
-| Desarrollo de Aplicaciones Multiplataforma | 0489 | Programación multimedia y dispositivos móviles |
-| Desarrollo de Aplicaciones Multiplataforma | 0490 | Programación de servicios y procesos |
-| Desarrollo de Aplicaciones Multiplataforma | 0491 | Sistemas de gestión empresarial |
-| Desarrollo de Aplicaciones Web | 0612 | Desarrollo web en entorno cliente |
-| Desarrollo de Aplicaciones Web | 0613 | Desarrollo web en entorno servidor |
-| Desarrollo de Aplicaciones Web | 0614 | Despliegue de aplicaciones web |
-| Desarrollo de Aplicaciones Web | 0615 | Diseño de interfaces web |
-
-*9 filas*
-
-{{% /details %}}
+{{< solucion id="ud07-001" title="Solución J1" />}}
 
 **J2.** Profesorado con el nombre de su departamento y, si es jefe de algún departamento, el nombre de ese departamento (si no, vacío).
 
-{{% details title="Solución J2" %}}
-```sql
-SELECT p.nombre, p.apellidos, d.nombre AS departamento, dj.nombre AS jefe_de
-FROM   profesor p
-       JOIN departamento d       ON d.id_departamento = p.id_departamento
-       LEFT JOIN departamento dj ON dj.id_jefe        = p.id_profesor
-ORDER  BY p.id_profesor;
-```
-
-| NOMBRE | APELLIDOS | DEPARTAMENTO | JEFE_DE |
-|---|---|---|---|
-| Marta | Soler Ivars | Informática y Comunicaciones | Informática y Comunicaciones |
-| Javier | Pastor Gil | Informática y Comunicaciones | (null) |
-| Lucía | Ferrándiz Mora | Informática y Comunicaciones | (null) |
-| Andrés | Navarro Ruiz | Informática y Comunicaciones | (null) |
-| Elena | Brotons Sala | Informática y Comunicaciones | (null) |
-| Raúl | Cano Vidal | Informática y Comunicaciones | (null) |
-| Nuria | Gómez Pérez | Informática y Comunicaciones | (null) |
-| Pablo | Lillo Martí | Informática y Comunicaciones | (null) |
-| Carmen | Ortiz Llorca | Formación y Orientación Laboral | Formación y Orientación Laboral |
-| Sergio | Ramos Climent | Formación y Orientación Laboral | (null) |
-| Laura | Vicent Ribes | Inglés | Inglés |
-| David | Esteve Juan | Administración y Gestión | Administración y Gestión |
-
-*12 filas*
-
-La tabla `DEPARTAMENTO` aparece **dos veces** con alias distintos, porque se relaciona con `PROFESOR` por dos caminos diferentes.
-{{% /details %}}
+{{< solucion id="ud07-002" title="Solución J2" />}}
 
 **J3.** Carga docente: para cada profesor que imparte clase, número de módulos, número de grupos distintos y horas semanales totales, de más a menos horas.
 
-{{% details title="Solución J3" %}}
-```sql
-SELECT p.nombre, p.apellidos,
-       COUNT(*)                    AS modulos,
-       COUNT(DISTINCT i.cod_grupo) AS grupos,
-       SUM(i.horas_semanales)      AS horas
-FROM   imparte i JOIN profesor p ON p.id_profesor = i.id_profesor
-GROUP  BY p.id_profesor, p.nombre, p.apellidos
-ORDER  BY horas DESC, p.apellidos;
-```
-
-| NOMBRE | APELLIDOS | MODULOS | GRUPOS | HORAS |
-|---|---|---|---|---|
-| Javier | Pastor Gil | 4 | 4 | 16 |
-| Elena | Brotons Sala | 3 | 2 | 15 |
-| Raúl | Cano Vidal | 3 | 3 | 15 |
-| Nuria | Gómez Pérez | 4 | 4 | 15 |
-| Andrés | Navarro Ruiz | 4 | 4 | 15 |
-| Marta | Soler Ivars | 3 | 3 | 15 |
-| Lucía | Ferrándiz Mora | 3 | 2 | 14 |
-
-*7 filas*
-
-{{% /details %}}
+{{< solucion id="ud07-003" title="Solución J3" />}}
 
 **J4.** Todos los grupos con su número de alumnos y su tutor; deben aparecer los grupos sin alumnos y sin tutor.
 
-{{% details title="Solución J4" %}}
-```sql
-SELECT g.cod_grupo,
-       COUNT(a.id_alumno) AS alumnos,
-       NVL2(p.id_profesor, p.nombre || ' ' || p.apellidos, '(sin tutor)') AS tutor
-FROM   grupo g
-       LEFT JOIN alumno a   ON a.cod_grupo   = g.cod_grupo
-       LEFT JOIN profesor p ON p.id_profesor = g.id_tutor
-GROUP  BY g.cod_grupo, p.id_profesor, p.nombre, p.apellidos
-ORDER  BY g.cod_grupo;
-```
-
-| COD_GRUPO | ALUMNOS | TUTOR |
-|---|---|---|
-| 1ASIR | 5 | Elena Brotons Sala |
-| 1DAM | 7 | Lucía Ferrándiz Mora |
-| 1DAW | 6 | Raúl Cano Vidal |
-| 2ASIR | 0 | (sin tutor) |
-| 2DAM | 6 | Andrés Navarro Ruiz |
-| 2DAW | 5 | Nuria Gómez Pérez |
-
-*6 filas*
-
-{{% /details %}}
+{{< solucion id="ud07-004" title="Solución J4" />}}
 
 **J5.** Porcentaje de aprobados por módulo de DAM (código, nombre, matrículas calificadas y porcentaje con un decimal), del peor al mejor porcentaje.
 
-{{% details title="Solución J5" %}}
-```sql
-SELECT mo.codigo, mo.nombre,
-       COUNT(m.nota_final) AS calificadas,
-       ROUND(100 * SUM(CASE WHEN m.nota_final >= 5 THEN 1 ELSE 0 END) / COUNT(m.nota_final), 1) AS pct_aprobados
-FROM   modulo mo JOIN matricula m ON m.id_modulo = mo.id_modulo
-WHERE  mo.cod_ciclo = 'DAM'
-GROUP  BY mo.id_modulo, mo.codigo, mo.nombre
-ORDER  BY pct_aprobados, mo.codigo;
-```
-
-| CODIGO | NOMBRE | CALIFICADAS | PCT_APROBADOS |
-|---|---|---|---|
-| 0485 | Programación | 8 | 50 |
-| 0486 | Acceso a datos | 6 | 66.7 |
-| 0488 | Desarrollo de interfaces | 6 | 66.7 |
-| 0491 | Sistemas de gestión empresarial | 6 | 66.7 |
-| 0484 | Bases de datos | 7 | 71.4 |
-| 0489 | Programación multimedia y dispositivos móviles | 6 | 83.3 |
-| 0487 | Entornos de desarrollo | 7 | 85.7 |
-| 0483 | Sistemas informáticos | 8 | 87.5 |
-| 0373 | Lenguajes de marcas y sistemas de gestión de información | 7 | 100 |
-| 0490 | Programación de servicios y procesos | 4 | 100 |
-
-*10 filas*
-
-{{% /details %}}
+{{< solucion id="ud07-005" title="Solución J5" />}}
 
 **J6.** Alumnado con más de 3 horas de faltas **no justificadas** en total (nombre, grupo y horas).
 
-{{% details title="Solución J6" %}}
-```sql
-SELECT a.nombre, a.apellidos, a.cod_grupo, SUM(f.horas) AS horas_injustificadas
-FROM   falta_asistencia f
-       JOIN matricula m ON m.id_matricula = f.id_matricula
-       JOIN alumno a    ON a.id_alumno    = m.id_alumno
-WHERE  f.justificada = 'N'
-GROUP  BY a.id_alumno, a.nombre, a.apellidos, a.cod_grupo
-HAVING SUM(f.horas) > 3
-ORDER  BY horas_injustificadas DESC, a.apellidos;
-```
-
-| NOMBRE | APELLIDOS | COD_GRUPO | HORAS_INJUSTIFICADAS |
-|---|---|---|---|
-| Martina | Alemany Vidal | 2DAM | 6 |
-| Valeria | Quiles Marco | 1DAM | 5 |
-| Tomás | Cerdá Pérez | 1DAM | 4 |
-| Álex | Tomás Vidal | 1ASIR | 4 |
-| Carla | Valero Cerdá | 1DAW | 4 |
-
-*5 filas*
-
-{{% /details %}}
+{{< solucion id="ud07-006" title="Solución J6" />}}
 
 **J7.** Profesorado del departamento de Informática y Comunicaciones que **no** es tutor de ningún grupo.
 
-{{% details title="Solución J7" %}}
-```sql
-SELECT p.id_profesor, p.nombre, p.apellidos
-FROM   profesor p
-       JOIN departamento d ON d.id_departamento = p.id_departamento
-       LEFT JOIN grupo g   ON g.id_tutor = p.id_profesor
-WHERE  d.nombre = 'Informática y Comunicaciones'
-AND    g.cod_grupo IS NULL
-ORDER  BY p.id_profesor;
-```
-
-| ID_PROFESOR | NOMBRE | APELLIDOS |
-|---|---|---|
-| 101 | Marta | Soler Ivars |
-| 102 | Javier | Pastor Gil |
-| 108 | Pablo | Lillo Martí |
-
-*3 filas*
-
-Aquí la condición `g.cod_grupo IS NULL` **sí** va en el `WHERE`: es precisamente la que selecciona las filas sin pareja (anti-composición).
-{{% /details %}}
+{{< solucion id="ud07-007" title="Solución J7" />}}
 
 **J8.** Para cada alumno de 1DAM, su nota en *Bases de datos* (0484) y en *Programación* (0485) en la misma fila.
 
-{{% details title="Solución J8" %}}
-```sql
-SELECT a.apellidos, a.nombre,
-       MAX(CASE WHEN mo.codigo = '0484' THEN m.nota_final END) AS bases_datos,
-       MAX(CASE WHEN mo.codigo = '0485' THEN m.nota_final END) AS programacion
-FROM   alumno a
-       JOIN matricula m ON m.id_alumno = a.id_alumno
-       JOIN modulo mo   ON mo.id_modulo = m.id_modulo
-WHERE  a.cod_grupo = '1DAM'
-GROUP  BY a.id_alumno, a.apellidos, a.nombre
-ORDER  BY a.apellidos, a.nombre;
-```
-
-| APELLIDOS | NOMBRE | BASES_DATOS | PROGRAMACION |
-|---|---|---|---|
-| Brotons Soriano | Andrea | 5.75 | 4.75 |
-| Cerdá Pérez | Tomás | 5.25 | 7.25 |
-| Ferri Baeza | Adrián | 4.75 | 7.25 |
-| Ferri Baeza | Paula | 6.5 | 3.25 |
-| Iborra Ferri | Rubén | 4.75 | 4.5 |
-| Quiles Marco | Valeria | 6.5 | 8 |
-| Verdú Espí | Noelia | 8 | 6.75 |
-
-*7 filas*
-
-Esta técnica (pasar filas a columnas) se llama **pivotar**. Oracle también tiene la cláusula `PIVOT`.
-{{% /details %}}
+{{< solucion id="ud07-008" title="Solución J8" />}}
 
 #### Comprobación
 
@@ -558,160 +369,27 @@ Esta técnica (pasar filas a columnas) se llama **pivotar**. Oracle también tie
 
 **S1.** Alumnado de mayor edad (puede haber empates).
 
-{{% details title="Solución S1" %}}
-```sql
-SELECT nombre, apellidos, fecha_nacimiento
-FROM   alumno
-WHERE  fecha_nacimiento = (SELECT MIN(fecha_nacimiento) FROM alumno);
-```
-
-| NOMBRE | APELLIDOS | FECHA_NACIMIENTO |
-|---|---|---|
-| Sara | Amorós Guillem | 07/08/2000 |
-
-*1 fila*
-
-{{% /details %}}
+{{< solucion id="ud07-009" title="Solución S1" />}}
 
 **S2.** Módulos de DAW con más horas que **cualquier** módulo de 2º de DAM.
 
-{{% details title="Solución S2" %}}
-```sql
-SELECT codigo, nombre, horas
-FROM   modulo
-WHERE  cod_ciclo = 'DAW'
-AND    horas > ALL (SELECT horas FROM modulo WHERE cod_ciclo = 'DAM' AND curso = 2)
-ORDER  BY horas DESC, codigo;
-```
-
-| CODIGO | NOMBRE | HORAS |
-|---|---|---|
-| 0485 | Programación | 256 |
-| 0483 | Sistemas informáticos | 160 |
-| 0484 | Bases de datos | 160 |
-| 0613 | Desarrollo web en entorno servidor | 160 |
-| 0612 | Desarrollo web en entorno cliente | 140 |
-| 0373 | Lenguajes de marcas y sistemas de gestión de información | 128 |
-
-*6 filas*
-
-`> ALL` equivale a «mayor que el máximo», es decir, mayor que 120.
-{{% /details %}}
+{{< solucion id="ud07-010" title="Solución S2" />}}
 
 **S3.** Alumnos que tienen **alguna** falta de asistencia (usa `EXISTS`).
 
-{{% details title="Solución S3" %}}
-```sql
-SELECT a.id_alumno, a.nombre, a.apellidos
-FROM   alumno a
-WHERE  EXISTS (SELECT 1
-               FROM   falta_asistencia f JOIN matricula m ON m.id_matricula = f.id_matricula
-               WHERE  m.id_alumno = a.id_alumno)
-ORDER  BY a.id_alumno;
-```
-
-| ID_ALUMNO | NOMBRE | APELLIDOS |
-|---|---|---|
-| 1 | Adrián | Ferri Baeza |
-| 3 | Noelia | Verdú Espí |
-| 6 | Tomás | Cerdá Pérez |
-| 7 | Valeria | Quiles Marco |
-| 8 | Iván | Ripoll Agulló |
-| 9 | Martina | Alemany Vidal |
-| 10 | Nerea | Cerdá Tomás |
-| 11 | Hugo | Brotons Iborra |
-| 12 | Lucía | Belda Quiles |
-| 13 | María | Domènech Quiles |
-| 14 | Carla | Valero Cerdá |
-| 16 | Julia | Espí Marco |
-| 17 | Jorge | Iborra Alemany |
-| 18 | Daniel | Alemany Pérez |
-| 20 | Mateo | Sala Brotons |
-| 21 | Elena | Carbonell Soriano |
-| 22 | Sofía | Planelles Marco |
-| 23 | Sara | Amorós Guillem |
-| 25 | Diego | Iborra Torregrosa |
-| 26 | Víctor | Tomás Guillem |
-| 27 | Álex | Tomás Vidal |
-| 28 | Pablo | Amorós Carbonell |
-| 29 | Aitana | Pascual Brotons |
-
-*23 filas*
-
-{{% /details %}}
+{{< solucion id="ud07-011" title="Solución S3" />}}
 
 **S4.** Alumnos con grupo que **no** tienen ninguna falta.
 
-{{% details title="Solución S4" %}}
-```sql
-SELECT a.id_alumno, a.nombre, a.apellidos, a.cod_grupo
-FROM   alumno a
-WHERE  a.cod_grupo IS NOT NULL
-AND    NOT EXISTS (SELECT 1
-                   FROM   falta_asistencia f JOIN matricula m ON m.id_matricula = f.id_matricula
-                   WHERE  m.id_alumno = a.id_alumno)
-ORDER  BY a.id_alumno;
-```
-
-| ID_ALUMNO | NOMBRE | APELLIDOS | COD_GRUPO |
-|---|---|---|---|
-| 2 | Rubén | Iborra Ferri | 1DAM |
-| 4 | Paula | Ferri Baeza | 1DAM |
-| 5 | Andrea | Brotons Soriano | 1DAM |
-| 15 | Manuel | Soriano Domènech | 1DAW |
-| 19 | Alba | Torregrosa Planelles | 1DAW |
-| 24 | Nicolás | Verdú Castelló | 2DAW |
-
-*6 filas*
-
-{{% /details %}}
+{{< solucion id="ud07-012" title="Solución S4" />}}
 
 **S5.** Para cada alumno de 2DAW, su nota media y la diferencia con la media de **su grupo** (subconsulta correlacionada).
 
-{{% details title="Solución S5" %}}
-```sql
-SELECT a.nombre, a.apellidos,
-       ROUND(AVG(m.nota_final), 2) AS media_alumno,
-       ROUND(AVG(m.nota_final) - (SELECT AVG(m2.nota_final)
-                                  FROM   matricula m2 JOIN alumno a2 ON a2.id_alumno = m2.id_alumno
-                                  WHERE  a2.cod_grupo = a.cod_grupo), 2) AS diferencia
-FROM   alumno a JOIN matricula m ON m.id_alumno = a.id_alumno
-WHERE  a.cod_grupo = '2DAW'
-GROUP  BY a.id_alumno, a.nombre, a.apellidos, a.cod_grupo
-ORDER  BY media_alumno DESC;
-```
-
-| NOMBRE | APELLIDOS | MEDIA_ALUMNO | DIFERENCIA |
-|---|---|---|---|
-| Mateo | Sala Brotons | 7.13 | 1.19 |
-| Nicolás | Verdú Castelló | 6 | 0.07 |
-| Sofía | Planelles Marco | 5.56 | -0.37 |
-| Elena | Carbonell Soriano | 5.44 | -0.5 |
-| Sara | Amorós Guillem | 5.42 | -0.52 |
-
-*5 filas*
-
-{{% /details %}}
+{{< solucion id="ud07-013" title="Solución S5" />}}
 
 **S6.** El grupo (o grupos) con más alumnos. Resuélvelo con una subconsulta en el `HAVING`.
 
-{{% details title="Solución S6" %}}
-```sql
-SELECT cod_grupo, COUNT(*) AS alumnos
-FROM   alumno
-WHERE  cod_grupo IS NOT NULL
-GROUP  BY cod_grupo
-HAVING COUNT(*) = (SELECT MAX(COUNT(*)) FROM alumno WHERE cod_grupo IS NOT NULL GROUP BY cod_grupo);
-```
-
-| COD_GRUPO | ALUMNOS |
-|---|---|
-| 1DAM | 7 |
-
-*1 fila*
-
-`MAX(COUNT(*))` (agregados anidados) es una extensión de Oracle. La forma estándar usa una subconsulta en el `FROM` o `FETCH FIRST 1 ROWS WITH TIES`.
-{{% /details %}}
+{{< solucion id="ud07-014" title="Solución S6" />}}
 
 **S7.** Explica por qué esta consulta no devuelve filas y corrígela de dos formas:
 
@@ -719,16 +397,7 @@ HAVING COUNT(*) = (SELECT MAX(COUNT(*)) FROM alumno WHERE cod_grupo IS NOT NULL 
 SELECT nombre FROM profesor WHERE id_profesor NOT IN (SELECT id_tutor FROM grupo);
 ```
 
-{{% details title="Solución S7" %}}
-La subconsulta devuelve un `NULL` (el tutor de 2ASIR). Correcciones:
-
-```sql
-SELECT nombre FROM profesor WHERE id_profesor NOT IN (SELECT id_tutor FROM grupo WHERE id_tutor IS NOT NULL);
-
-SELECT p.nombre FROM profesor p WHERE NOT EXISTS (SELECT 1 FROM grupo g WHERE g.id_tutor = p.id_profesor);
-```
-Ambas devuelven 7 profesores: los 12 menos los 5 tutores.
-{{% /details %}}
+{{< solucion id="ud07-015" title="Solución S7" />}}
 
 ---
 
@@ -740,95 +409,19 @@ Ambas devuelven 7 profesores: los 12 menos los 5 tutores.
 
 **U1.** Lista única de todas las **localidades** en las que vive alumnado de DAM o de DAW (sin repetir).
 
-{{% details title="Solución U1" %}}
-```sql
-SELECT a.localidad FROM alumno a JOIN grupo g ON g.cod_grupo = a.cod_grupo WHERE g.cod_ciclo = 'DAM'
-UNION
-SELECT a.localidad FROM alumno a JOIN grupo g ON g.cod_grupo = a.cod_grupo WHERE g.cod_ciclo = 'DAW'
-ORDER  BY 1;
-```
-
-| LOCALIDAD |
-|---|
-| Alicante |
-| El Campello |
-| Elche |
-| Mutxamel |
-| San Vicente del Raspeig |
-| Sant Joan d'Alacant |
-
-*6 filas*
-
-¿Cómo resolverías lo mismo con una sola consulta y `IN`?
-{{% /details %}}
+{{< solucion id="ud07-016" title="Solución U1" />}}
 
 **U2.** Localidades con alumnado **tanto** de DAM **como** de DAW.
 
-{{% details title="Solución U2" %}}
-```sql
-SELECT a.localidad FROM alumno a JOIN grupo g ON g.cod_grupo = a.cod_grupo WHERE g.cod_ciclo = 'DAM'
-INTERSECT
-SELECT a.localidad FROM alumno a JOIN grupo g ON g.cod_grupo = a.cod_grupo WHERE g.cod_ciclo = 'DAW'
-ORDER  BY 1;
-```
-
-| LOCALIDAD |
-|---|
-| Alicante |
-| Elche |
-| Mutxamel |
-
-*3 filas*
-
-{{% /details %}}
+{{< solucion id="ud07-017" title="Solución U2" />}}
 
 **U3.** Códigos de módulo oficiales que están en DAM pero **no** en DAW.
 
-{{% details title="Solución U3" %}}
-```sql
-SELECT codigo FROM modulo WHERE cod_ciclo = 'DAM'
-MINUS
-SELECT codigo FROM modulo WHERE cod_ciclo = 'DAW'
-ORDER  BY 1;
-```
-
-| CODIGO |
-|---|
-| 0486 |
-| 0488 |
-| 0489 |
-| 0490 |
-| 0491 |
-
-*5 filas*
-
-{{% /details %}}
+{{< solucion id="ud07-018" title="Solución U3" />}}
 
 **U4.** Crea la vista `v_acta` de la [teoría](/ud07-consultas-avanzadas/ud07-teoria#7-vistas-con-composiciones) y úsala para obtener el número de APTOS, NO APTOS y NC de cada módulo de 1DAW.
 
-{{% details title="Solución U4" %}}
-```sql
-SELECT cod_modulo, modulo,
-       SUM(CASE WHEN calificacion = 'APTO'    THEN 1 ELSE 0 END) AS aptos,
-       SUM(CASE WHEN calificacion = 'NO APTO' THEN 1 ELSE 0 END) AS no_aptos,
-       SUM(CASE WHEN calificacion = 'NC'      THEN 1 ELSE 0 END) AS nc
-FROM   v_acta
-WHERE  cod_grupo = '1DAW'
-GROUP  BY cod_modulo, modulo
-ORDER  BY cod_modulo;
-```
-
-| COD_MODULO | MODULO | APTOS | NO_APTOS | NC |
-|---|---|---|---|---|
-| 0373 | Lenguajes de marcas y sistemas de gestión de información | 5 | 1 | 0 |
-| 0483 | Sistemas informáticos | 4 | 2 | 0 |
-| 0484 | Bases de datos | 6 | 0 | 0 |
-| 0485 | Programación | 4 | 2 | 0 |
-| 0487 | Entornos de desarrollo | 5 | 0 | 1 |
-
-*5 filas*
-
-{{% /details %}}
+{{< solucion id="ud07-019" title="Solución U4" />}}
 
 ---
 

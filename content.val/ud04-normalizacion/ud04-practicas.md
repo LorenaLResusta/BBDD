@@ -76,17 +76,7 @@ Regles del negoci (confirmades amb el taller):
 
 {{% /steps %}}
 
-{{% details title="Solució: esquema en 3FN" %}}
-- CLIENTE(<u>dni_cliente</u>, cliente)
-- TELEFONO_CLIENTE(<u>*dni_cliente*, telefono</u>)
-- VEHICULO(<u>matricula</u>, modelo, *dni_cliente*)
-- FACTURA(<u>num_factura</u>, fecha, *matricula*)
-- SERVICIO(<u>cod_servicio</u>, servicio, precio_actual)
-- MECANICO(<u>mecanico</u>, especialidad) — en un disseny real, amb un identificador `id_mecanico`
-- LINEA_FACTURA(<u>*num_factura*, *cod_servicio*</u>, precio_aplicado, cantidad, *mecanico*)
-
-`precio_aplicado` **es queda** en LINEA_FACTURA: no depén del servei sinó de la factura concreta. No és redundància, és una dada històrica.
-{{% /details %}}
+{{< solucion id="ud04-001" title="Solució: esquema en 3FN" />}}
 
 #### Comprovació
 
@@ -128,15 +118,7 @@ Per a cada relació, calcula les claus candidates indicant els tancaments que ha
 | c | R(A, B, C, D, E) | A → BC, CD → E, B → D, E → A |
 | d | CURSO(cod_curso, aula, hora, profesor) | cod_curso → profesor; aula, hora → cod_curso; profesor, hora → aula |
 
-{{% details title="Solucions" %}}
-**a)** A no apareix a la dreta. $A^+ = \{A, B, C, D\}$. Clau: **A**. Hi ha dependències transitives (A → B → C → D): està en **2FN**, no en 3FN.
-
-**b)** B no apareix a la dreta. $B^+ = \{B\}$. $\{A,B\}^+ = \{A,B,C,D\}$ ✔. $\{B,C\}^+$: C → D, D → A, AB → C: tots ✔. $\{B,D\}^+$: D → A, AB → C: tots ✔. Claus: **AB, BC, BD**. Tots els atributs són primers → **3FN**. No està en FNBC: en C → D, C no és superclau.
-
-**c)** Cap atribut queda fora dels costats drets, així que provem un a un. $A^+ = \{A, B, C, D, E\}$ ✔ (A → BC, B → D, CD → E). $E^+$: E → A, i des d'A tot ✔. $\{C,D\}^+$: CD → E, E → A ✔. $\{B,C\}^+$: B → D, CD → E, E → A ✔. Claus: **A, E, CD, BC**. Tots els atributs són primers → 3FN. FNBC: B → D té un determinant (B) que no és superclau → no està en FNBC.
-
-**d)** $\{aula, hora\}^+$ = {aula, hora, cod_curso, profesor} ✔. $\{profesor, hora\}^+$ = {profesor, hora, aula, cod_curso} ✔. $\{cod\_curso, hora\}^+$: cod_curso → profesor; profesor, hora → aula ✔. Claus: **(aula, hora)**, **(profesor, hora)** i **(cod_curso, hora)**. Tots els atributs són primers → 3FN. cod_curso → profesor viola FNBC.
-{{% /details %}}
+{{< solucion id="ud04-002" title="Solucions" />}}
 
 ---
 

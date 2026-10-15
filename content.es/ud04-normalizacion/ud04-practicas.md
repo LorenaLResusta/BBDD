@@ -76,17 +76,7 @@ Reglas del negocio (confirmadas con el taller):
 
 {{% /steps %}}
 
-{{% details title="Solución: esquema en 3FN" %}}
-- CLIENTE(<u>dni_cliente</u>, cliente)
-- TELEFONO_CLIENTE(<u>*dni_cliente*, telefono</u>)
-- VEHICULO(<u>matricula</u>, modelo, *dni_cliente*)
-- FACTURA(<u>num_factura</u>, fecha, *matricula*)
-- SERVICIO(<u>cod_servicio</u>, servicio, precio_actual)
-- MECANICO(<u>mecanico</u>, especialidad) — en un diseño real, con un identificador `id_mecanico`
-- LINEA_FACTURA(<u>*num_factura*, *cod_servicio*</u>, precio_aplicado, cantidad, *mecanico*)
-
-`precio_aplicado` **se queda** en LINEA_FACTURA: no depende del servicio sino de la factura concreta. No es redundancia, es un dato histórico.
-{{% /details %}}
+{{< solucion id="ud04-001" title="Solución: esquema en 3FN" />}}
 
 #### Comprobación
 
@@ -128,15 +118,7 @@ Para cada relación, calcula las claves candidatas indicando los cierres que has
 | c | R(A, B, C, D, E) | A → BC, CD → E, B → D, E → A |
 | d | CURSO(cod_curso, aula, hora, profesor) | cod_curso → profesor; aula, hora → cod_curso; profesor, hora → aula |
 
-{{% details title="Soluciones" %}}
-**a)** A no aparece a la derecha. $A^+ = \{A, B, C, D\}$. Clave: **A**. Hay dependencias transitivas (A → B → C → D): está en **2FN**, no en 3FN.
-
-**b)** B no aparece a la derecha. $B^+ = \{B\}$. $\{A,B\}^+ = \{A,B,C,D\}$ ✔. $\{B,C\}^+$: C → D, D → A, AB → C: todos ✔. $\{B,D\}^+$: D → A, AB → C: todos ✔. Claves: **AB, BC, BD**. Todos los atributos son primos → **3FN**. No está en FNBC: en C → D, C no es superclave.
-
-**c)** Ningún atributo queda fuera de los lados derechos, así que probamos uno a uno. $A^+ = \{A, B, C, D, E\}$ ✔ (A → BC, B → D, CD → E). $E^+$: E → A, y desde A todo ✔. $\{C,D\}^+$: CD → E, E → A ✔. $\{B,C\}^+$: B → D, CD → E, E → A ✔. Claves: **A, E, CD, BC**. Todos los atributos son primos → 3FN. FNBC: B → D tiene un determinante (B) que no es superclave → no está en FNBC.
-
-**d)** $\{aula, hora\}^+$ = {aula, hora, cod_curso, profesor} ✔. $\{profesor, hora\}^+$ = {profesor, hora, aula, cod_curso} ✔. $\{cod\_curso, hora\}^+$: cod_curso → profesor; profesor, hora → aula ✔. Claves: **(aula, hora)**, **(profesor, hora)** y **(cod_curso, hora)**. Todos los atributos son primos → 3FN. cod_curso → profesor viola FNBC.
-{{% /details %}}
+{{< solucion id="ud04-002" title="Soluciones" />}}
 
 ---
 

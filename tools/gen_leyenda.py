@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Leyenda de la notación EER usada en clase (rombos blancos/negros, ID/E, T/P-D/S)."""
+"""Leyenda de la notación de Chen extendida (EER) (rombos blancos/negros, ID/E, T/P-D/S)."""
 import math
 import os
 import sys
@@ -9,8 +9,8 @@ from chen_eer import BG, FRAME, INK, AGG_S, CARD, tw
 OUT = os.path.join(os.path.dirname(__file__), "..", "assets", "images", "ud02", "chen-eer-leyenda.svg")
 W, H = 980, 600
 o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">',
-     '<title id="t">Leyenda de la notación EER usada en clase</title>',
-     '<desc id="d">Entidad, entidad débil con ID o E, relaciones 1:1 (rombo blanco), 1:N (mitad blanco y mitad negro) y N:M (rombo negro), ternaria, atributos (clave, clave alternativa, discriminador, multivaluado, derivado, compuesto), generalización con T/P y D/S, y agregación.</desc>',
+     '<title id="t">Leyenda de la notación de Chen extendida (EER)</title>',
+     '<desc id="d">Entidad, entidad débil con relación identificadora (rombo doble), relaciones binarias y ternaria con participación parcial (línea sencilla) y total (línea doble), atributos (clave, clave alternativa, discriminador, multivaluado, derivado, compuesto), especialización con círculo d u o, y agregación.</desc>',
      f'<rect width="{W}" height="{H}" rx="10" fill="{BG}" stroke="{FRAME}"/>']
 
 
@@ -38,13 +38,21 @@ def ent(cx, cy, name="ENTIDAD", w=104, h=38, weak=False):
     text(cx, cy + 4.5, name, 12, bold=True)
 
 
-def rombo(cx, cy, left_black, right_black, hw=34, hh=21):
-    L, T, R, B = (cx - hw, cy), (cx, cy - hh), (cx + hw, cy), (cx, cy + hh)
+def rombo(cx, cy, double=False, hw=34, hh=21):
     pts = lambda ps: " ".join(f"{x},{y}" for x, y in ps)
-    o.append(f'<polygon points="{pts([L, T, B])}" fill="{INK if left_black else "#fff"}"/>')
-    o.append(f'<polygon points="{pts([R, T, B])}" fill="{INK if right_black else "#fff"}"/>')
-    o.append(f'<polygon points="{pts([L, T, R, B])}" fill="none" stroke="{INK}" stroke-width="1.8"/>')
-    line(cx, cy - hh, cx, cy + hh, 1)
+    P = [(cx - hw, cy), (cx, cy - hh), (cx + hw, cy), (cx, cy + hh)]
+    o.append(f'<polygon points="{pts(P)}" fill="#fff" stroke="{INK}" stroke-width="1.8"/>')
+    if double:
+        Q = [(cx + (x - cx) * 0.8, cy + (y - cy) * 0.8) for x, y in P]
+        o.append(f'<polygon points="{pts(Q)}" fill="none" stroke="{INK}" stroke-width="1.3"/>')
+
+
+def dline(x1, y1, x2, y2):
+    """Línea doble (participación total)."""
+    dx, dy = x2 - x1, y2 - y1
+    L = math.hypot(dx, dy) or 1
+    nx, ny = -dy / L * 2.3, dx / L * 2.3
+    line(x1 + nx, y1 + ny, x2 + nx, y2 + ny); line(x1 - nx, y1 - ny, x2 - nx, y2 - ny)
 
 
 def card(x, y, s):
@@ -53,10 +61,11 @@ def card(x, y, s):
     text(x, y + 4.5, s, 12, CARD, bold=True)
 
 
-def binaria(y, ca, cb, lb, rb, name, a="A", b="B", lt="1", rt="N"):
-    ent(80, y, a, 70); ent(400, y, b, 70)
-    line(115, y, 206, y); line(274, y, 365, y)
-    rombo(240, y, lb, rb)
+def binaria(y, ca, cb, name, a="A", b="B", lt="1", rt="N", double=False, ta=False, tb=False, weak=False):
+    ent(80, y, a, 70); ent(400, y, b, 70, weak=weak)
+    (dline if ta else line)(115, y, 206, y)
+    (dline if tb else line)(274, y, 365, y)
+    rombo(240, y, double)
     text(240, y - 28, name, 12, bold=True, italic=True)
     text(198, y - 8, lt, 11); text(282, y - 8, rt, 11)
     card(150, y, ca); card(330, y, cb)
@@ -77,38 +86,28 @@ def att(cx, cy, name, w=None, k=False, kp=False, ak=False, mv=False, d=False):
 
 # ---------------------------------------------------------------- columna izquierda: relaciones
 title(30, 34, "RELACIONES Y CARDINALIDADES")
-binaria(80, "(0,1)", "(0,1)", False, False, "1:1", lt="1", rt="1")
-cap(240, 118, "Rombo blanco: los dos máximos son 1")
-binaria(170, "(1,1)", "(0,N)", False, True, "1:N")
-cap(240, 208, "Mitad negra junto a la entidad con máximo N")
-binaria(260, "(0,N)", "(1,N)", True, True, "N:M", lt="N")
-cap(240, 298, "Rombo negro: los dos máximos son N")
+binaria(80, "(0,1)", "(0,1)", "1:1", lt="1", rt="1")
+cap(240, 118, "Rombo blanco; 1 o N junto al rombo, (mín,máx) junto a la entidad")
+binaria(170, "(1,1)", "(0,N)", "1:N", ta=False)
+cap(240, 208, "Línea sencilla: participación parcial (mínimo 0)")
+binaria(260, "(1,N)", "(1,N)", "N:M", lt="N", rt="M", ta=True, tb=True)
+cap(240, 298, "Línea doble: participación total (mínimo 1)")
 
 # ternaria
 ent(90, 380, "A", 60); ent(390, 380, "B", 60); ent(240, 470, "C", 60)
-cx, cy, R = 240, 388, 40
-top, bl, br = (cx, cy - R), (cx - 0.866 * R, cy + 0.5 * R), (cx + 0.866 * R, cy + 0.5 * R)
-c = (cx, cy)
-pts = lambda ps: " ".join(f"{x:.1f},{y:.1f}" for x, y in ps)
-o.append(f'<polygon points="{pts([c, top, bl])}" fill="{INK}"/>')   # cara izquierda → A (N)
-o.append(f'<polygon points="{pts([c, top, br])}" fill="{INK}"/>')   # cara derecha → B (N)
-o.append(f'<polygon points="{pts([c, bl, br])}" fill="#fff"/>')     # cara inferior → C (1)
-o.append(f'<polygon points="{pts([top, bl, br])}" fill="none" stroke="{INK}" stroke-width="1.8"/>')
-for v in (top, bl, br):
-    line(cx, cy, v[0], v[1], 1)
-mA = ((top[0] + bl[0]) / 2, (top[1] + bl[1]) / 2); mB = ((top[0] + br[0]) / 2, (top[1] + br[1]) / 2); mC = (cx, cy + 0.5 * R)
-line(120, 380, mA[0], mA[1]); line(360, 380, mB[0], mB[1]); line(240, 451, mC[0], mC[1])
-text(240, 336, "ternaria N:M:1", 12, bold=True, italic=True)
-card(155, 378, "(0,N)"); card(325, 378, "(0,N)"); card(266, 440, "(1,1)")
-cap(240, 510, "Un sector por entidad, con el mismo criterio de color")
+rombo(240, 388, False, 46, 32)
+line(120, 380, 194, 386); line(360, 380, 286, 386); line(240, 451, 240, 420)
+text(240, 336, "ternaria N:M:P", 12, bold=True, italic=True)
+card(150, 378, "(0,N)"); card(330, 378, "(0,N)"); card(262, 440, "(0,N)")
+text(176, 376, "N", 11); text(304, 376, "M", 11); text(252, 426, "P", 11)
+cap(240, 510, "Un rombo con tres líneas; las N se rotulan N, M, P")
 
 # dependencia
 ent(80, 560, "FUERTE", 80); ent(400, 560, "DÉBIL", 80, weak=True)
-line(120, 560, 206, 560); line(274, 560, 360, 560)
-rombo(240, 560, False, True)
-card(150, 560, "(1,1)"); card(328, 560, "(0,N)")
-text(342, 540, "ID", 11, bold=True)
-cap(240, 592, "Entidad débil: ID = identificación · E = existencia")
+line(120, 560, 206, 560); dline(274, 560, 360, 560)
+rombo(240, 560, True)
+card(150, 560, "(1,1)"); card(328, 560, "(1,N)")
+cap(240, 592, "Entidad débil: rectángulo doble · relación identificadora: rombo doble")
 
 # ---------------------------------------------------------------- columna derecha: atributos, jerarquía, agregación
 title(520, 34, "ATRIBUTOS")
@@ -123,23 +122,28 @@ att(860, 270, "calle", 58); att(950, 270, "cp", 46)
 line(890, 238, 868, 256); line(920, 238, 942, 256)
 cap(905, 300, "Compuesto")
 
-title(520, 230, "GENERALIZACIÓN")
+title(520, 230, "ESPECIALIZACIÓN (EER)")
 ent(640, 270, "SUPERCLASE", 116)
-o.append(f'<polygon points="640,289 634,302 646,302" fill="{INK}"/>')
-line(640, 302, 640, 330)
-o.append(f'<circle cx="640" cy="330" r="3.2" fill="{INK}"/>')
-line(640, 330, 575, 370); line(640, 330, 705, 370)
+dline(640, 289, 640, 322)
+o.append(f'<circle cx="640" cy="334" r="11.5" fill="#fff" stroke="{INK}" stroke-width="1.6"/>')
+text(640, 338.5, "d", 13, bold=True)
+line(634, 344, 575, 370); line(646, 344, 705, 370)
+for sx in (594, 686):
+    ux, uy = (640 - sx), (334 - 358)
+    L = math.hypot(ux, uy); ux, uy = ux / L, uy / L
+    mx, my = (sx + 640) / 2 + (-5 if sx < 640 else 5), 358
+    px, py = -uy, ux
+    o.append(f'<path d="M{mx + px * 6:.1f} {my + py * 6:.1f} A6 6 0 0 1 {mx - px * 6:.1f} {my - py * 6:.1f}" fill="#fff" stroke="{INK}" stroke-width="1.5"/>')
 ent(575, 388, "SUB_1", 80); ent(705, 388, "SUB_2", 80)
-text(668, 324, "T,D", 12, bold=True)
-cap(640, 428, "T total / P parcial · D disjunta / S solapada")
+cap(640, 428, "d disjunta · o solapada · línea doble = total · ⊂ subclase")
 
 title(520, 470, "AGREGACIÓN")
 o.append(f'<rect x="520" y="486" width="300" height="74" fill="none" stroke="{AGG_S}" stroke-width="2"/>'
          f'<rect x="525" y="491" width="290" height="64" fill="none" stroke="{AGG_S}" stroke-width="1.2"/>')
 ent(570, 523, "A", 50); ent(770, 523, "B", 50)
 line(595, 523, 636, 523); line(704, 523, 745, 523)
-rombo(670, 523, True, True)
-line(820, 523, 864, 523)
+rombo(670, 523)
+line(820, 523, 885, 523)
 ent(915, 523, "C", 60)
 cap(700, 584, "La relación A–B se trata como una entidad")
 

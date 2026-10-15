@@ -952,7 +952,7 @@ El sistema ha de permetre atendre els drets d'**accés**, **rectificació**, **s
 
 ## 15. Autoavaluació
 
-Respon les preguntes i prem el botó de correcció. Cada resposta inclou una explicació.
+Respon les preguntes i prem el botó de comprovar. Cada resposta inclou una explicació.
 
 {{< quiz >}}
 - q: "Una acadèmia guarda l'alumnat en un full de càlcul i les factures en un altre, i copia el nom i l'adreça de cada alumne en cada factura. Quin problema dels sistemes de fitxers es produïx **directament**?"

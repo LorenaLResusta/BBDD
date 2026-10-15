@@ -94,352 +94,71 @@ Secretaría necesita respuestas rápidas a preguntas del día a día. Escribe un
 
 **A1.** Código, nombre y horas de todos los módulos de ASIR, de más a menos horas.
 
-{{% details title="Solución A1" %}}
-```sql
-SELECT codigo, nombre, horas
-FROM   modulo
-WHERE  cod_ciclo = 'ASIR'
-ORDER  BY horas DESC;
-```
-
-| CODIGO | NOMBRE | HORAS |
-|---|---|---|
-| 0369 | Implantación de sistemas operativos | 224 |
-| 0370 | Planificación y administración de redes | 192 |
-| 0372 | Gestión de bases de datos | 160 |
-| 0371 | Fundamentos de hardware | 96 |
-| 0373 | Lenguajes de marcas y sistemas de gestión de información | 96 |
-
-*5 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-001" title="Solución A1" />}}
 
 **A2.** Nombre completo del profesorado en el formato «Apellidos, Nombre», ordenado alfabéticamente, con una columna llamada `profesor`.
 
-{{% details title="Solución A2" %}}
-```sql
-SELECT apellidos || ', ' || nombre AS profesor
-FROM   profesor
-ORDER  BY profesor;
-```
-
-| PROFESOR |
-|---|
-| Brotons Sala, Elena |
-| Cano Vidal, Raúl |
-| Esteve Juan, David |
-| Ferrándiz Mora, Lucía |
-| Gómez Pérez, Nuria |
-| Lillo Martí, Pablo |
-| Navarro Ruiz, Andrés |
-| Ortiz Llorca, Carmen |
-| Pastor Gil, Javier |
-| Ramos Climent, Sergio |
-| Soler Ivars, Marta |
-| Vicent Ribes, Laura |
-
-*12 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-002" title="Solución A2" />}}
 
 **A3.** Las distintas especialidades del profesorado, sin repetir.
 
-{{% details title="Solución A3" %}}
-```sql
-SELECT DISTINCT especialidad FROM profesor ORDER BY especialidad;
-```
-
-| ESPECIALIDAD |
-|---|
-| Administración de Empresas |
-| Formación y Orientación Laboral |
-| Informática |
-| Inglés |
-| Sistemas y Aplicaciones Informáticas |
-
-*5 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-003" title="Solución A3" />}}
 
 **A4.** Los distintos pares (ciclo, curso) que existen en la tabla de módulos.
 
-{{% details title="Solución A4" %}}
-```sql
-SELECT DISTINCT cod_ciclo, curso FROM modulo ORDER BY cod_ciclo, curso;
-```
-
-| COD_CICLO | CURSO |
-|---|---|
-| ASIR | 1 |
-| DAM | 1 |
-| DAM | 2 |
-| DAW | 1 |
-| DAW | 2 |
-
-*5 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-004" title="Solución A4" />}}
 
 **Bloque B · Selección**
 
 **B1.** Alumnado que vive en Elche o en El Campello (nombre, apellidos y localidad).
 
-{{% details title="Solución B1" %}}
-```sql
-SELECT nombre, apellidos, localidad
-FROM   alumno
-WHERE  localidad IN ('Elche', 'El Campello')
-ORDER  BY localidad, apellidos;
-```
-
-| NOMBRE | APELLIDOS | LOCALIDAD |
-|---|---|---|
-| Daniel | Alemany Pérez | El Campello |
-| Elena | Carbonell Soriano | El Campello |
-| Jorge | Iborra Alemany | El Campello |
-| Rubén | Iborra Ferri | Elche |
-| Sofía | Planelles Marco | Elche |
-| Víctor | Tomás Guillem | Elche |
-
-*6 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-005" title="Solución B1" />}}
 
 **B2.** Módulos que tienen entre 96 y 128 horas, ambas incluidas.
 
-{{% details title="Solución B2" %}}
-```sql
-SELECT codigo, nombre, cod_ciclo, horas
-FROM   modulo
-WHERE  horas BETWEEN 96 AND 128
-ORDER  BY horas, codigo, cod_ciclo;
-```
-
-| CODIGO | NOMBRE | COD_CICLO | HORAS |
-|---|---|---|---|
-| 0371 | Fundamentos de hardware | ASIR | 96 |
-| 0373 | Lenguajes de marcas y sistemas de gestión de información | ASIR | 96 |
-| 0487 | Entornos de desarrollo | DAM | 96 |
-| 0487 | Entornos de desarrollo | DAW | 96 |
-| 0489 | Programación multimedia y dispositivos móviles | DAM | 100 |
-| 0491 | Sistemas de gestión empresarial | DAM | 100 |
-| 0486 | Acceso a datos | DAM | 120 |
-| 0488 | Desarrollo de interfaces | DAM | 120 |
-| 0615 | Diseño de interfaces web | DAW | 120 |
-| 0373 | Lenguajes de marcas y sistemas de gestión de información | DAM | 128 |
-| 0373 | Lenguajes de marcas y sistemas de gestión de información | DAW | 128 |
-
-*11 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-006" title="Solución B2" />}}
 
 **B3.** Alumnado nacido antes de 2005, del mayor al menor.
 
-{{% details title="Solución B3" %}}
-```sql
-SELECT nombre, apellidos, fecha_nacimiento
-FROM   alumno
-WHERE  fecha_nacimiento < DATE '2005-01-01'
-ORDER  BY fecha_nacimiento;
-```
-
-| NOMBRE | APELLIDOS | FECHA_NACIMIENTO |
-|---|---|---|
-| Sara | Amorós Guillem | 07/08/2000 |
-| Jorge | Iborra Alemany | 01/06/2001 |
-| Daniel | Alemany Pérez | 22/08/2001 |
-| Mateo | Sala Brotons | 09/04/2003 |
-| Iván | Ripoll Agulló | 01/05/2003 |
-| Lucía | Belda Quiles | 07/11/2003 |
-| Valeria | Quiles Marco | 20/01/2004 |
-| Noelia | Verdú Espí | 25/06/2004 |
-| Carla | Valero Cerdá | 08/07/2004 |
-| Sofía | Planelles Marco | 13/07/2004 |
-
-*10 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-007" title="Solución B3" />}}
 
 **B4.** Profesorado del departamento 1 que **no** tiene la especialidad «Informática».
 
-{{% details title="Solución B4" %}}
-```sql
-SELECT nombre, apellidos, especialidad
-FROM   profesor
-WHERE  id_departamento = 1
-AND    especialidad <> 'Informática'
-ORDER  BY apellidos;
-```
-
-| NOMBRE | APELLIDOS | ESPECIALIDAD |
-|---|---|---|
-| Elena | Brotons Sala | Sistemas y Aplicaciones Informáticas |
-| Pablo | Lillo Martí | Sistemas y Aplicaciones Informáticas |
-| Javier | Pastor Gil | Sistemas y Aplicaciones Informáticas |
-
-*3 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-008" title="Solución B4" />}}
 
 **B5.** Módulos cuyo nombre contiene la palabra «web» (en cualquier combinación de mayúsculas).
 
-{{% details title="Solución B5" %}}
-```sql
-SELECT codigo, nombre
-FROM   modulo
-WHERE  UPPER(nombre) LIKE '%WEB%'
-ORDER  BY codigo;
-```
-
-| CODIGO | NOMBRE |
-|---|---|
-| 0612 | Desarrollo web en entorno cliente |
-| 0613 | Desarrollo web en entorno servidor |
-| 0614 | Despliegue de aplicaciones web |
-| 0615 | Diseño de interfaces web |
-
-*4 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-009" title="Solución B5" />}}
 
 **B6.** Matrículas en segunda convocatoria o posterior (id de matrícula, alumno, módulo, convocatoria y nota).
 
-{{% details title="Solución B6" %}}
-```sql
-SELECT id_matricula, id_alumno, id_modulo, convocatoria, nota_final
-FROM   matricula
-WHERE  convocatoria >= 2
-ORDER  BY id_alumno;
-```
-
-| ID_MATRICULA | ID_ALUMNO | ID_MODULO | CONVOCATORIA | NOTA_FINAL |
-|---|---|---|---|---|
-| 10051 | 10 | 1 | 2 | 7.25 |
-| 10057 | 11 | 5 | 2 | 5.75 |
-| 10063 | 12 | 3 | 2 | 2.75 |
-
-*3 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-010" title="Solución B6" />}}
 
 **B7.** Faltas **justificadas** de 3 horas.
 
-{{% details title="Solución B7" %}}
-```sql
-SELECT id_falta, id_matricula, fecha, horas
-FROM   falta_asistencia
-WHERE  justificada = 'S' AND horas = 3
-ORDER  BY fecha;
-```
-
-| ID_FALTA | ID_MATRICULA | FECHA | HORAS |
-|---|---|---|---|
-| 43 | 10048 | 21/11/2025 | 3 |
-| 6 | 10003 | 04/02/2026 | 3 |
-| 14 | 10084 | 11/02/2026 | 3 |
-
-*3 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-011" title="Solución B7" />}}
 
 **B8.** Faltas registradas en diciembre de 2025.
 
-{{% details title="Solución B8" %}}
-```sql
-SELECT id_falta, id_matricula, fecha, horas, justificada
-FROM   falta_asistencia
-WHERE  fecha >= DATE '2025-12-01' AND fecha < DATE '2026-01-01'
-ORDER  BY fecha;
-```
-
-| ID_FALTA | ID_MATRICULA | FECHA | HORAS | JUSTIFICADA |
-|---|---|---|---|---|
-| 26 | 10029 | 03/12/2025 | 1 | N |
-| 35 | 10065 | 08/12/2025 | 1 | N |
-
-*2 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-012" title="Solución B8" />}}
 
 **Bloque C · Valores nulos y límites**
 
 **C1.** Matrículas **sin calificar**.
 
-{{% details title="Solución C1" %}}
-```sql
-SELECT id_matricula, id_alumno, id_modulo
-FROM   matricula
-WHERE  nota_final IS NULL
-ORDER  BY id_matricula;
-```
-
-| ID_MATRICULA | ID_ALUMNO | ID_MODULO |
-|---|---|---|
-| 10015 | 3 | 5 |
-| 10039 | 8 | 9 |
-| 10055 | 11 | 9 |
-| 10087 | 17 | 14 |
-| 10111 | 23 | 16 |
-| 10135 | 28 | 21 |
-
-*6 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-013" title="Solución C1" />}}
 
 **C2.** Grupos sin tutor asignado.
 
-{{% details title="Solución C2" %}}
-```sql
-SELECT cod_grupo FROM grupo WHERE id_tutor IS NULL;
-```
-
-| COD_GRUPO |
-|---|
-| 2ASIR |
-
-*1 fila*
-
-{{% /details %}}
+{{< solucion id="ud06-014" title="Solución C2" />}}
 
 **C3.** Las tres matrículas con peor nota (entre las calificadas), con desempate por `id_matricula`.
 
-{{% details title="Solución C3" %}}
-```sql
-SELECT id_matricula, id_alumno, id_modulo, nota_final
-FROM   matricula
-WHERE  nota_final IS NOT NULL
-ORDER  BY nota_final, id_matricula
-FETCH FIRST 3 ROWS ONLY;
-```
-
-| ID_MATRICULA | ID_ALUMNO | ID_MODULO | NOTA_FINAL |
-|---|---|---|---|
-| 10105 | 21 | 18 | 1.5 |
-| 10137 | 28 | 23 | 1.75 |
-| 10047 | 10 | 7 | 2.25 |
-
-*3 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-015" title="Solución C3" />}}
 
 **C4.** Los dos profesores con más antigüedad en el centro.
 
-{{% details title="Solución C4" %}}
-```sql
-SELECT nombre, apellidos, fecha_alta
-FROM   profesor
-ORDER  BY fecha_alta
-FETCH FIRST 2 ROWS ONLY;
-```
-
-| NOMBRE | APELLIDOS | FECHA_ALTA |
-|---|---|---|
-| Marta | Soler Ivars | 01/09/2009 |
-| Carmen | Ortiz Llorca | 01/09/2010 |
-
-*2 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-016" title="Solución C4" />}}
 
 #### Comprobación
 
@@ -489,20 +208,7 @@ Datos de partida: `ALUMNO` tiene 32 filas; 3 sin grupo, 4 sin DNI, 3 sin email y
 | 9 | `SELECT COUNT(*) FROM alumno WHERE cod_grupo NOT IN ('1DAM', '2DAM');` | | |
 | 10 | `SELECT COUNT(*) FROM alumno WHERE cod_grupo NOT IN ('1DAM', NULL);` | | |
 
-{{% details title="Resultados reales y explicación" %}}
-| # | Real | Explicación |
-|---|---|---|
-| 1 | 0 | `= NULL` nunca es verdadero |
-| 2 | 4 | Forma correcta |
-| 3 | 22 | 32 − 7 de 1DAM − 3 sin grupo (desconocido) |
-| 4 | 25 | Ahora sí se incluyen los 3 sin grupo |
-| 5 | 8 | 3 sin email + 5 sin teléfono; ningún alumno carece de los dos |
-| 6 | 110 | Solo las calificadas con 5 o más |
-| 7 | 27 | Los suspensos calificados. ¡`NOT` de desconocido sigue siendo desconocido! 6 + 110 + 27 = 143 |
-| 8 | 33 | `NVL` convierte los 6 sin calificar en 0: 27 + 6 |
-| 9 | 16 | 32 − 7 − 6 − 3 sin grupo |
-| 10 | 0 | `NOT IN` con un `NULL` en la lista **nunca** devuelve filas: `x <> NULL` siempre es desconocido |
-{{% /details %}}
+{{< solucion id="ud06-017" title="Resultados reales y explicación" />}}
 
 > [!CAUTION]
 > El caso 10 es una trampa clásica que aparecerá de nuevo en la UD07 con las subconsultas: `WHERE id NOT IN (SELECT ...)` no devuelve nada si la subconsulta devuelve algún `NULL`.
@@ -521,165 +227,27 @@ Usar las funciones de fila de Oracle para transformar y presentar los datos.
 
 **F1.** Genera la **etiqueta del casillero** de cada alumno de 1DAM: inicial del nombre, punto, primer apellido en mayúsculas y el NIA entre corchetes. Ejemplo: `A. FERRI [10450037]`.
 
-{{% details title="Solución F1" %}}
-```sql
-SELECT SUBSTR(nombre, 1, 1) || '. ' ||
-       UPPER(SUBSTR(apellidos, 1, INSTR(apellidos, ' ') - 1)) ||
-       ' [' || nia || ']' AS etiqueta
-FROM   alumno
-WHERE  cod_grupo = '1DAM'
-ORDER  BY apellidos, nombre;
-```
-
-| ETIQUETA |
-|---|
-| A. BROTONS [10450185] |
-| T. CERDÁ [10450222] |
-| A. FERRI [10450037] |
-| P. FERRI [10450148] |
-| R. IBORRA [10450074] |
-| V. QUILES [10450259] |
-| N. VERDÚ [10450111] |
-
-*7 filas*
-{{% /details %}}
+{{< solucion id="ud06-018" title="Solución F1" />}}
 
 **F2.** Para cada módulo de DAW, muestra el código, el nombre y una columna `duracion` con el texto «Corto» (menos de 100 horas), «Medio» (de 100 a 159) o «Largo» (160 o más).
 
-{{% details title="Solución F2" %}}
-```sql
-SELECT codigo, nombre,
-       CASE
-           WHEN horas < 100 THEN 'Corto'
-           WHEN horas < 160 THEN 'Medio'
-           ELSE 'Largo'
-       END AS duracion
-FROM   modulo
-WHERE  cod_ciclo = 'DAW'
-ORDER  BY codigo;
-```
-
-| CODIGO | NOMBRE | DURACION |
-|---|---|---|
-| 0373 | Lenguajes de marcas y sistemas de gestión de información | Medio |
-| 0483 | Sistemas informáticos | Largo |
-| 0484 | Bases de datos | Largo |
-| 0485 | Programación | Largo |
-| 0487 | Entornos de desarrollo | Corto |
-| 0612 | Desarrollo web en entorno cliente | Medio |
-| 0613 | Desarrollo web en entorno servidor | Largo |
-| 0614 | Despliegue de aplicaciones web | Corto |
-| 0615 | Diseño de interfaces web | Medio |
-
-*9 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-019" title="Solución F2" />}}
 
 **F3.** Para el profesorado, muestra el nombre, la fecha de alta con el formato «01/09/2009» y el número de **años completos** de antigüedad a fecha 1 de septiembre de 2026.
 
-{{% details title="Solución F3" %}}
-```sql
-SELECT nombre, apellidos,
-       TO_CHAR(fecha_alta, 'DD/MM/YYYY') AS alta,
-       TRUNC(MONTHS_BETWEEN(DATE '2026-09-01', fecha_alta) / 12) AS anios
-FROM   profesor
-ORDER  BY fecha_alta;
-```
-
-| NOMBRE | APELLIDOS | ALTA | ANIOS |
-|---|---|---|---|
-| Marta | Soler Ivars | 01/09/2009 | 17 |
-| Carmen | Ortiz Llorca | 01/09/2010 | 16 |
-| Javier | Pastor Gil | 01/09/2012 | 14 |
-| Lucía | Ferrándiz Mora | 01/09/2015 | 11 |
-| Laura | Vicent Ribes | 01/09/2016 | 10 |
-| Andrés | Navarro Ruiz | 03/09/2018 | 7 |
-| Sergio | Ramos Climent | 02/09/2019 | 6 |
-| Elena | Brotons Sala | 01/09/2020 | 6 |
-| Raúl | Cano Vidal | 01/09/2021 | 5 |
-| Nuria | Gómez Pérez | 01/09/2023 | 3 |
-| David | Esteve Juan | 02/09/2024 | 1 |
-| Pablo | Lillo Martí | 01/09/2025 | 1 |
-
-*12 filas*
-
-Observa a Andrés (alta el 03/09/2018): a 1 de septiembre de 2026 le faltan dos días para cumplir 8 años, así que tiene **7** años completos.
-{{% /details %}}
+{{< solucion id="ud06-020" title="Solución F3" />}}
 
 **F4.** Muestra el teléfono del alumnado de 2DAM de forma que, si no tiene, aparezca «Sin teléfono», y una columna `contacto` que muestre el email si existe y, si no, el teléfono.
 
-{{% details title="Solución F4" %}}
-```sql
-SELECT nombre, apellidos,
-       NVL(telefono, 'Sin teléfono')  AS telefono,
-       COALESCE(email, telefono)      AS contacto
-FROM   alumno
-WHERE  cod_grupo = '2DAM'
-ORDER  BY apellidos;
-```
-
-| NOMBRE | APELLIDOS | TELEFONO | CONTACTO |
-|---|---|---|---|
-| Martina | Alemany Vidal | 686052214 | martinaalemany9@alu.edugest.es |
-| Lucía | Belda Quiles | 630313272 | luciabelda12@alu.edugest.es |
-| Hugo | Brotons Iborra | 678897218 | hugobrotons11@alu.edugest.es |
-| Nerea | Cerdá Tomás | Sin teléfono | nereacerda10@alu.edugest.es |
-| María | Domènech Quiles | 675664399 | mariadomenech13@alu.edugest.es |
-| Iván | Ripoll Agulló | 645665668 | 645665668 |
-
-*6 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-021" title="Solución F4" />}}
 
 **F5.** Nombre del día de la semana (en castellano) de cada falta de asistencia de la matrícula 10044.
 
-{{% details title="Solución F5" %}}
-```sql
-SELECT fecha,
-       TO_CHAR(fecha, 'fmDay', 'NLS_DATE_LANGUAGE=SPANISH') AS dia_semana,
-       horas, justificada
-FROM   falta_asistencia
-WHERE  id_matricula = 10044
-ORDER  BY fecha;
-```
-
-| FECHA | DIA_SEMANA | HORAS | JUSTIFICADA |
-|---|---|---|---|
-| 11/03/2026 | Miércoles | 1 | S |
-| 29/04/2026 | Miércoles | 3 | N |
-
-*2 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-022" title="Solución F5" />}}
 
 **F6.** Para las matrículas del alumno 9, muestra la nota con **dos decimales** como texto (`TO_CHAR`), la nota redondeada y una columna `estado` con «Aprobado», «Suspenso» o «Pendiente».
 
-{{% details title="Solución F6" %}}
-```sql
-SELECT id_matricula, id_modulo,
-       TO_CHAR(nota_final, 'FM90.00') AS nota_texto,
-       ROUND(nota_final)              AS redondeada,
-       CASE
-           WHEN nota_final IS NULL THEN 'Pendiente'
-           WHEN nota_final >= 5    THEN 'Aprobado'
-           ELSE 'Suspenso'
-       END AS estado
-FROM   matricula
-WHERE  id_alumno = 9
-ORDER  BY id_modulo;
-```
-
-| ID_MATRICULA | ID_MODULO | NOTA_TEXTO | REDONDEADA | ESTADO |
-|---|---|---|---|---|
-| 10041 | 6 | 9.00 | 9 | Aprobado |
-| 10042 | 7 | 8.75 | 9 | Aprobado |
-| 10043 | 8 | 8.00 | 8 | Aprobado |
-| 10044 | 9 | 6.50 | 7 | Aprobado |
-| 10045 | 10 | 9.75 | 10 | Aprobado |
-
-*5 filas*
-
-{{% /details %}}
+{{< solucion id="ud06-023" title="Solución F6" />}}
 
 #### Comprobación
 

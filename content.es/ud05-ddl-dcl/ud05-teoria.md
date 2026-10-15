@@ -443,6 +443,27 @@ Define columnas, tipos y restricciones y observa el script que genera. Las restr
   explain: "La clave primaria es única por tabla, aunque puede constar de varias columnas. Las claves alternativas se definen con `UNIQUE` y pueden ser varias."
 {{< /quiz >}}
 
+#### De las reglas de transformación de la UD03 al DDL
+
+En la UD03 diseñaste el esquema relacional sin escribir SQL. Esta tabla traduce cada decisión de diseño a su sentencia en Oracle:
+
+| Decisión de diseño (UD03) | Se implanta en Oracle como |
+|---|---|
+| Clave primaria (PK) | `PRIMARY KEY`; si es compuesta, restricción de tabla `PRIMARY KEY (col1, col2)` |
+| Clave alternativa (UK) | `UNIQUE`, y `NOT NULL` si el atributo es obligatorio |
+| Atributo obligatorio | `NOT NULL` |
+| Regla de fila | `CHECK (condición sobre la propia fila)` |
+| Clave ajena obligatoria (participación mínima 1) | `FOREIGN KEY` + columna `NOT NULL` |
+| Relación 1:1 con clave ajena | `FOREIGN KEY` + `UNIQUE` sobre la clave ajena |
+| Borrado en cascada | `ON DELETE CASCADE` |
+| Puesta a nulos | `ON DELETE SET NULL` (la columna debe admitir `NULL`) |
+| Borrado restringido | no se escribe nada: es el comportamiento por defecto de Oracle |
+| Cambio de clave en cascada | **No existe** `ON UPDATE` en Oracle: por eso se usan claves primarias estables |
+
+> [!TIP]
+> Cuando traduzcas un esquema de la UD03, sigue este orden: primero las tablas sin claves ajenas, después las tablas hijas y, por último, las claves ajenas circulares con `ALTER TABLE`.
+
+
 ---
 
 {{< sesion n="6" h="1" tipo="t" >}}Modificar y eliminar la estructura{{< /sesion >}}

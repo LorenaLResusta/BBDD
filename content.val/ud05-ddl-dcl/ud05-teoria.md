@@ -443,6 +443,27 @@ Defineix columnes, tipus i restriccions i observa l'script que genera. Les restr
   explain: "La clau primària és única per taula, encara que pot constar de diverses columnes. Les claus alternatives es defineixen amb `UNIQUE` i poden ser diverses."
 {{< /quiz >}}
 
+#### De les regles de transformació de la UD03 al DDL
+
+A la UD03 vas dissenyar l'esquema relacional sense escriure SQL. Esta taula tradueix cada decisió de disseny a la seua sentència en Oracle:
+
+| Decisió de disseny (UD03) | S'implanta en Oracle com a |
+|---|---|
+| Clau primària (PK) | `PRIMARY KEY`; si és composta, restricció de taula `PRIMARY KEY (col1, col2)` |
+| Clau alternativa (UK) | `UNIQUE`, i `NOT NULL` si l'atribut és obligatori |
+| Atribut obligatori | `NOT NULL` |
+| Regla de fila | `CHECK (condició sobre la mateixa fila)` |
+| Clau aliena obligatòria (participació mínima 1) | `FOREIGN KEY` + columna `NOT NULL` |
+| Relació 1:1 amb clau aliena | `FOREIGN KEY` + `UNIQUE` sobre la clau aliena |
+| Esborrat en cascada | `ON DELETE CASCADE` |
+| Posada a nuls | `ON DELETE SET NULL` (la columna ha d'admetre `NULL`) |
+| Esborrat restringit | no s'escriu res: és el comportament per defecte d'Oracle |
+| Canvi de clau en cascada | **No existix** `ON UPDATE` en Oracle: per això s'usen claus primàries estables |
+
+> [!TIP]
+> Quan traduïsques un esquema de la UD03, seguix este ordre: primer les taules sense claus alienes, després les taules filles i, finalment, les claus alienes circulars amb `ALTER TABLE`.
+
+
 ---
 
 {{< sesion n="6" h="1" tipo="t" >}}Modificar i eliminar l'estructura{{< /sesion >}}

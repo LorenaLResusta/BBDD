@@ -1,91 +1,59 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" width="100%" height="100%">
-  <defs>
-    <linearGradient id="bgER" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#1e293b"/>
-    </linearGradient>
-  </defs>
-  <rect width="850" height="420" rx="12" fill="url(#bgER)"/>
-  <text x="425" y="35" text-anchor="middle" fill="#f8fafc" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">Componentes Principales del Modelo Entidad-Relación (E/R)</text>
-
-  <!-- Entity Strong vs Weak -->
-  <g transform="translate(40, 65)">
-    <rect width="360" height="150" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
-    <text x="180" y="25" text-anchor="middle" fill="#38bdf8" font-size="15" font-weight="bold">1. Entidades (Fuerte y Débil)</text>
-
-    <!-- Strong Entity -->
-    <rect x="25" y="45" width="130" height="45" rx="4" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
-    <text x="90" y="72" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">ALUMNO</text>
-    <text x="90" y="110" text-anchor="middle" fill="#94a3b8" font-size="11">Entidad Fuerte (Rectángulo)</text>
-
-    <!-- Weak Entity -->
-    <rect x="200" y="45" width="130" height="45" rx="4" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
-    <rect x="205" y="50" width="120" height="35" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/>
-    <text x="265" y="72" text-anchor="middle" fill="#fff" font-size="13" font-weight="bold">EJEMPLAR</text>
-    <text x="265" y="110" text-anchor="middle" fill="#94a3b8" font-size="11">Entidad Débil (Doble recuadro)</text>
-  </g>
-
-  <!-- Relationship -->
-  <g transform="translate(430, 65)">
-    <rect width="380" height="150" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
-    <text x="190" y="25" text-anchor="middle" fill="#34d399" font-size="15" font-weight="bold">2. Relaciones y Cardinalidades</text>
-
-    <rect x="20" y="55" width="90" height="35" rx="4" fill="#047857"/>
-    <text x="65" y="77" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">CLIENTE</text>
-
-    <path d="M 110 72 L 150 72" stroke="#34d399" stroke-width="2"/>
-    <text x="130" y="65" fill="#34d399" font-size="11" font-weight="bold">(1,1)</text>
-
-    <polygon points="190,45 230,72 190,99 150,72" fill="#059669" stroke="#34d399" stroke-width="1.5"/>
-    <text x="190" y="76" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">REALIZA</text>
-
-    <path d="M 230 72 L 270 72" stroke="#34d399" stroke-width="2"/>
-    <text x="250" y="65" fill="#34d399" font-size="11" font-weight="bold">(0,n)</text>
-
-    <rect x="270" y="55" width="90" height="35" rx="4" fill="#047857"/>
-    <text x="315" y="77" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">PEDIDO</text>
-
-    <text x="190" y="125" text-anchor="middle" fill="#cbd5e1" font-size="11">Asociación entre entidades con rango min/máx</text>
-  </g>
-
-  <!-- Attributes -->
-  <g transform="translate(40, 230)">
-    <rect width="770" height="165" rx="8" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.5"/>
-    <text x="385" y="25" text-anchor="middle" fill="#a78bfa" font-size="15" font-weight="bold">3. Tipos de Atributos</text>
-
-    <!-- PK -->
-    <g transform="translate(30, 45)">
-      <ellipse cx="65" cy="25" rx="55" ry="20" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="65" y="29" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold" text-decoration="underline">dni (PK)</text>
-      <text x="65" y="65" text-anchor="middle" fill="#94a3b8" font-size="11">Identificador Principal</text>
-    </g>
-
-    <!-- Descriptor -->
-    <g transform="translate(190, 45)">
-      <ellipse cx="65" cy="25" rx="55" ry="20" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="65" y="29" text-anchor="middle" fill="#fff" font-size="12">nombre</text>
-      <text x="65" y="65" text-anchor="middle" fill="#94a3b8" font-size="11">Descriptor Simple</text>
-    </g>
-
-    <!-- Compuesto -->
-    <g transform="translate(350, 45)">
-      <ellipse cx="75" cy="20" rx="55" ry="18" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="75" y="24" text-anchor="middle" fill="#fff" font-size="11">dirección</text>
-      <line x1="40" y1="36" x2="20" y2="60" stroke="#a78bfa" stroke-width="1.5"/>
-      <line x1="110" y1="36" x2="130" y2="60" stroke="#a78bfa" stroke-width="1.5"/>
-      <ellipse cx="15" cy="72" rx="35" ry="14" fill="#4c1d95"/>
-      <text x="15" y="75" text-anchor="middle" fill="#fff" font-size="9">calle</text>
-      <ellipse cx="135" cy="72" rx="35" ry="14" fill="#4c1d95"/>
-      <text x="135" y="75" text-anchor="middle" fill="#fff" font-size="9">ciudad</text>
-      <text x="75" y="105" text-anchor="middle" fill="#94a3b8" font-size="11">Atributo Compuesto</text>
-    </g>
-
-    <!-- Multivaluado -->
-    <g transform="translate(560, 45)">
-      <ellipse cx="75" cy="25" rx="55" ry="20" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.5"/>
-      <text x="75" y="29" text-anchor="middle" fill="#fff" font-size="12">teléfono</text>
-      <text x="135" y="18" fill="#38bdf8" font-size="12" font-weight="bold">N</text>
-      <text x="75" y="65" text-anchor="middle" fill="#94a3b8" font-size="11">Multivaluado (N valores)</text>
-    </g>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 505" width="880" height="505" role="img" aria-labelledby="t d" font-family='system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' xmlns:c2pa="http://c2pa.org/manifest"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpmOGI1N2RjMy04OTIxLTRmMGItODg1Mi1mZmY2OTAyZThjNDkAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaIga+JvGo4xJMB398Gr4St8AAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDoxNWIwNzcxNC03MTQwLTQ5YmItYmE0MC0wZjExYTcxM2JkOTJscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoBHUlLQGs3zwmiYPN75qeFQAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggm9I0OaojDmg2/IULl5I/PB3BsnpswPQViWXEK00sD2+kZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaHaZx4Q3HCZ64PkwLbSM6lwAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIFMdmPk/c6JK5ammJSU/ATCbJEjKIZE+Dog0eHUe+n7hZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GQEQZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmY4YjU3ZGMzLTg5MjEtNGYwYi04ODUyLWZmZjY5MDJlOGM0OS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmRkODI0ODE0LTkxNGEtNDhkYi05YmQ3LThjYWVhNjFmYWMyZnJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCCb0jQ5qiMOaDb8hQuXkj88HcGyemzA9BWJZcQrTSwPb6JjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggZHGsJl5/y9i2IYKvYi02Bv3SxCfh9DoKa6Rc0Z/MQUKiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggHSoBuXlraB912Wv3LMSK/hp0mG4T7ZiNgRnsoYInurl0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQMOF6iQDxH5qqkPdosYArUMpa4HVgKundKzhsA7FmgYZjnlczMnG+QzOMK1oM5UuOQDRV7rZPxXy3CGWO0Lf6qE=</c2pa:manifest></metadata>
+<title id="t">Componentes del modelo entidad-relación</title><desc id="d">Entidad fuerte y débil, relación con cardinalidades y tipos de atributos.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#1e293b"/></linearGradient></defs>
+<style>.hot{cursor:pointer;transition:filter .15s}.hot:hover,.hot:focus,.hot.on{filter:brightness(1.35) drop-shadow(0 0 6px rgba(255,255,255,.35));outline:none}</style>
+<rect width="880" height="505" rx="12" fill="url(#bg)"/>
+<text x="440.0" y="40.0" font-size="21" fill="#f1f5f9" text-anchor="middle" font-weight="700">Componentes del modelo E/R</text>
+<rect x="24.0" y="66.0" width="410.0" height="160.0" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+<text x="229.0" y="94.0" font-size="16" fill="#38bdf8" text-anchor="middle" font-weight="700">1. Entidades</text>
+<g class="hot" tabindex="0" data-tip="Entidad fuerte: existe por sí misma y tiene clave propia.">
+<rect x="54.0" y="110.0" width="150.0" height="52.0" rx="3" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+<text x="129.0" y="141.2" font-size="15" fill="#fff" text-anchor="middle" font-weight="700">ALUMNO</text>
+</g>
+<g class="hot" tabindex="0" data-tip="Entidad débil: depende de otra (p. ej. un EJEMPLAR depende de su LIBRO) y su clave es parcial."><rect x="244" y="110" width="150" height="52" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/><rect x="249" y="115" width="140" height="42" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+<text x="319.0" y="141.0" font-size="15" fill="#fff" text-anchor="middle" font-weight="700">EJEMPLAR</text>
+</g>
+<text x="129.0" y="192.0" font-size="12.5" fill="#94a3b8" text-anchor="middle">Entidad fuerte (rectángulo)</text>
+<text x="319.0" y="192.0" font-size="12.5" fill="#94a3b8" text-anchor="middle">Entidad débil (doble rectángulo)</text>
+<rect x="446.0" y="66.0" width="410.0" height="160.0" rx="10" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+<text x="651.0" y="94.0" font-size="16" fill="#34d399" text-anchor="middle" font-weight="700">2. Relaciones y cardinalidades</text>
+<rect x="466.0" y="118.0" width="100.0" height="44.0" rx="3" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<text x="516.0" y="144.6" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">CLIENTE</text>
+<rect x="746.0" y="118.0" width="90.0" height="44.0" rx="3" fill="#047857" stroke="#34d399" stroke-width="2"/>
+<text x="791.0" y="144.6" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">PEDIDO</text>
+<line x1="566.0" y1="140.0" x2="631.0" y2="140.0" stroke="#34d399" stroke-width="2"/>
+<line x1="691.0" y1="140.0" x2="746.0" y2="140.0" stroke="#34d399" stroke-width="2"/>
+<g class="hot" tabindex="0" data-tip="Una relación asocia entidades. REALIZA une CLIENTE y PEDIDO.">
+<polygon points="661,114.0 701.0,140 661,166.0 621.0,140" fill="#065f46" stroke="#34d399" stroke-width="2"/>
+<text x="661.0" y="143.8" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">REALIZA</text>
+</g>
+<text x="598.0" y="130.0" font-size="12" fill="#fbbf24" text-anchor="middle" font-weight="700">(0,n)</text>
+<text x="718.0" y="130.0" font-size="12" fill="#fbbf24" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="651.0" y="204.0" font-size="11.5" fill="#94a3b8" text-anchor="middle">(mín, máx): un cliente hace 0..n pedidos; un pedido es de 1 cliente</text>
+<rect x="24.0" y="242.0" width="832.0" height="250.0" rx="10" fill="#1e293b" stroke="#a78bfa" stroke-width="2"/>
+<text x="440.0" y="270.0" font-size="16" fill="#a78bfa" text-anchor="middle" font-weight="700">3. Tipos de atributos</text>
+<ellipse cx="110.0" cy="322.0" rx="46.0" ry="20" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.8"/>
+<text x="110.0" y="326.2" font-size="12" fill="#fff" text-anchor="middle" text-decoration="underline">dni</text>
+<text x="110.0" y="366.0" font-size="12.5" fill="#94a3b8" text-anchor="middle">Identificador (PK)</text>
+<ellipse cx="260.0" cy="322.0" rx="56.0" ry="20" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.8"/>
+<text x="260.0" y="326.2" font-size="12" fill="#fff" text-anchor="middle">nombre</text>
+<text x="260.0" y="366.0" font-size="12.5" fill="#94a3b8" text-anchor="middle">Simple</text>
+<ellipse cx="440.0" cy="300.0" rx="54.0" ry="18" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.8"/>
+<text x="440.0" y="304.2" font-size="12" fill="#fff" text-anchor="middle">dirección</text>
+<ellipse cx="385.0" cy="366.0" rx="36.0" ry="16" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.8"/>
+<text x="385.0" y="370.2" font-size="12" fill="#fff" text-anchor="middle">calle</text>
+<ellipse cx="495.0" cy="366.0" rx="42.0" ry="16" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.8"/>
+<text x="495.0" y="370.2" font-size="12" fill="#fff" text-anchor="middle">ciudad</text>
+<line x1="420.0" y1="316.0" x2="395.0" y2="351.0" stroke="#94a3b8" stroke-width="1.5"/>
+<line x1="460.0" y1="316.0" x2="485.0" y2="351.0" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="440.0" y="408.0" font-size="12.5" fill="#94a3b8" text-anchor="middle">Compuesto</text>
+<ellipse cx="640.0" cy="322.0" rx="54.0" ry="20" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.8"/>
+<ellipse cx="640.0" cy="322.0" rx="50.0" ry="16" fill="none" stroke="#a78bfa" stroke-width="1.2"/>
+<text x="640.0" y="326.2" font-size="12" fill="#fff" text-anchor="middle">teléfono</text>
+<text x="640.0" y="366.0" font-size="12.5" fill="#94a3b8" text-anchor="middle">Multivaluado</text>
+<ellipse cx="780.0" cy="322.0" rx="40.0" ry="20" fill="#6d28d9" stroke="#a78bfa" stroke-width="1.8" stroke-dasharray="4 3"/>
+<text x="780.0" y="326.2" font-size="12" fill="#fff" text-anchor="middle">edad</text>
+<text x="780.0" y="366.0" font-size="12.5" fill="#94a3b8" text-anchor="middle">Derivado</text>
+<rect x="44.0" y="430.0" width="792.0" height="46.0" rx="8" fill="#0f172a"/>
+<text x="440.0" y="458.0" font-size="12.5" fill="#f1f5f9" text-anchor="middle">Subrayado = clave · doble elipse = varios valores · línea discontinua = se calcula de otro dato</text>
 </svg>

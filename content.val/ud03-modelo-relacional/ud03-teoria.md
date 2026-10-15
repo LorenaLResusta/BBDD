@@ -13,7 +13,7 @@ math: true
 **Visió General:**
 El **Model Relacional**, ideat per Edgar F. Codd a IBM el 1970, és el model de dades lògic més estés i utilitzat comercialment al món de les bases de dades. A diferència del Model Entitat-Relació (EER), que és una eina d'abstracció conceptual per a representar la informació del món real de manera independent del programari, el Model Relacional representa l'estructura lògica de les dades mitjançant **relacions (taules)** compostes per **tuples (files)** i **atributs (columnes)**.
 
-En aquesta unitat s'estudien minuciosament els conceptes matemàtics i pragmàtics que sustenten el model relacional: l'estructura formal d'una taula, el domini i el tipat d'atributs, el grau i la cardinalitat, les claus (candidates, primàries, alternatives i foranes), la semàntica dels valors nuls (`NULL`) i les regles d'integritat (inherents i semàntiques). A més, es detalla un catàleg complet de **regles de transformació per a convertir esquemes conceptuals EER en esquemes relacionals lògics**, il·lustrat amb abundants exemples reals, esquemes formals, sentències SQL DDL i taules amb dades reals.
+En aquesta unitat s'estudien minuciosament els conceptes matemàtics i pragmàtics que sustenten el model relacional: l'estructura formal d'una taula, el domini i el tipat d'atributs, el grau i la cardinalitat, les claus (candidates, primàries, alternatives i foranes), la semàntica dels valors nuls (`NULL`) i les regles d'integritat (inherents i semàntiques). A més, es detalla un catàleg complet de **regles de transformació per a convertir esquemes conceptuals EER en esquemes relacionals lògics**, il·lustrat amb abundants exemples reals, esquemes formals i taules amb dades reals.
 
 {{< ra "RA6:a,b,c,d,e,f,h" "RA2:a,d,e" >}}
 
@@ -40,7 +40,7 @@ autonomo:
 {{< /sesiones >}}
 
 > [!IMPORTANT]
-> Aquesta unitat és el **pont** entre el disseny i la implementació: allò que decidisques ací (claus, nuls, polítiques d'esborrat) determina les sentències `CREATE TABLE` de la UD05. Un error de disseny que no detectes ara es paga després amb dades incorrectes.
+> Aquesta unitat és el **pont** entre el disseny i la implementació: allò que decidisques ací (claus, nuls, polítiques d'esborrat) determina la creació de les taules a la UD05. Un error de disseny que no detectes ara es paga després amb dades incorrectes.
 
 ### Objectius d'aprenentatge
 
@@ -83,7 +83,7 @@ Per a caracteritzar matemàticament una taula s'utilitzen els conceptes següent
 ---
 
 {{% curiosidad titulo="Codd i els dos tipus de «dada absent»" %}}
-El mateix Codd va proposar més tard distingir entre un valor **absent però aplicable** i un altre **no aplicable**. SQL es va quedar amb un únic `NULL`, i d'ací vénen moltes de les seues sorpreses: `NULL = NULL` no és vertader.
+El mateix Codd va proposar més tard distingir entre un valor **absent però aplicable** i un altre **no aplicable**. Els gestors reals es van quedar amb un únic valor nul (`NULL`), i d'ací vénen moltes sorpreses: dos nuls no poden considerar-se iguals entre si.
 {{% /curiosidad %}}
 
 ### 1.3 Tuples (files) i semàntica de valors nuls (NULL)
@@ -113,10 +113,10 @@ Les claus constituïxen el pilar fonamental per a garantir la unicitat de les fi
 
 ### 2.2 Claus alternatives
 
-Qualsevol clau candidata que no haja sigut triada com a clau primària passa a ser una **clau alternativa**. En l'esquema relacional i en la implementació SQL, les claus alternatives es protegixen mitjançant la restricció d'unicitat `UNIQUE`.
+Qualsevol clau candidata que no haja sigut triada com a clau primària passa a ser una **clau alternativa**. En l'esquema relacional, les claus alternatives se senyalen amb la restricció d'unicitat (UK, *unique key*): impedixen que dues files repetisquen el mateix valor.
 
 > [!NOTE]
-> **Exemple:** A la taula `CLIENTE`, si disposem del camp `id_cliente` (autoincremental intern) i del camp `dni`, tots dos són claus candidates. Triem `id_cliente` com a **Clau Primària (PK)** i indiquem que `dni` és una **Clau Alternativa (`UNIQUE`)**.
+> **Exemple:** A la taula `CLIENTE`, si disposem del camp `id_cliente` (autoincremental intern) i del camp `dni`, tots dos són claus candidates. Triem `id_cliente` com a **Clau Primària (PK)** i indiquem que `dni` és una **Clau Alternativa (UK)**.
 
 ---
 
@@ -147,13 +147,13 @@ Amb dades reals de la taula `ALUMNO` d'EduGest, prova quins conjunts de columnes
 
 {{< quiz >}}
 - q: "En la mostra de dalt, `(nombre, apellidos)` no es repetix. És una bona clau primària per a `ALUMNO`?"
-  options: ["Sí, identifica totes les files", "No: dos alumnes distints poden dir-se igual i els noms canvien", "Sí, sempre que s'afigga `NOT NULL`", "Només si s'afig també `localidad`"]
+  options: ["Sí, identifica totes les files", "No: dos alumnes distints poden dir-se igual i els noms canvien", "Sí, sempre que es declare obligatori", "Només si s'afig també `localidad`"]
   answer: 1
-  explain: "Que no es repetisca **hui** no la convertix en clau. Una clau primària ha de ser estable, no nul·la i única per significat. Per això s'usa `id_alumno` (artificial) i es protegix el NIA amb `UNIQUE`."
+  explain: "Que no es repetisca **hui** no la convertix en clau. Una clau primària ha de ser estable, no nul·la i única per significat. Per això s'usa `id_alumno` (artificial) i es protegix el NIA amb una restricció d'unicitat (UK)."
 - q: "`dni` conté algun `NULL` en la mostra. Quin paper pot tindre eixa columna?"
-  options: ["Clau primària", "Clau alternativa amb `UNIQUE`, però no clau primària", "Cap: no pot ser clau de cap tipus", "Clau aliena"]
+  options: ["Clau primària", "Clau alternativa (UK), però no clau primària", "Cap: no pot ser clau de cap tipus", "Clau aliena"]
   answer: 1
-  explain: "Una clau primària no admet nuls (integritat d'entitat). Una clau alternativa amb `UNIQUE` sí que admet `NULL`, encara que a la pràctica convé que el DNI siga obligatori si és una dada del negoci."
+  explain: "Una clau primària no admet nuls (integritat d'entitat). Una clau alternativa (UK) sí que admet nuls, encara que a la pràctica convé que el DNI siga obligatori si és una dada del negoci."
 {{< /quiz >}}
 
 ---
@@ -173,14 +173,14 @@ Són regles estructurals imposades automàticament per la pròpia definició mat
 
 ---
 
-### 3.2 Restriccions semàntiques o d'usuari (PK, UNIQUE, NOT NULL, CHECK)
+### 3.2 Restriccions semàntiques o d'usuari (PK, UK, obligatorietat, regles de fila)
 
-Són regles de negoci definides explícitament pel dissenyador de la base de dades utilitzant el llenguatge SQL DDL:
+Són regles de negoci definides explícitament pel dissenyador de la base de dades (més endavant, a la UD05, aprendràs a declarar-les en un gestor):
 
-- `PRIMARY KEY`: Defineix la clau primària (garanteix unicitat i no nul·litat).
-- `UNIQUE`: Defineix claus alternatives (garanteix que no hi haja valors duplicats, encara que admet nuls si la norma del SGBD ho permet).
-- `NOT NULL`: Obliga que un atribut siga sempre informat.
-- `CHECK`: Defineix una condició lògica que s'ha de complir per a cada fila (p. ex. `CHECK (precio > 0)` o `CHECK (edad >= 18)`).
+- **Clau primària (PK):** identifica cada fila (garanteix unicitat i no nul·litat).
+- **Clau alternativa (UK):** garanteix que no hi haja valors duplicats (admet nuls tret que s'indique el contrari).
+- **Atribut obligatori:** l'atribut ha de tindre sempre un valor.
+- **Regla de fila:** una condició lògica que ha de complir cada fila per si sola (per exemple, «el preu és major que 0» o «l'edat és com a mínim 18»).
 
 ---
 
@@ -190,51 +190,51 @@ La **Integritat Referencial** exigix que els valors emmagatzemats en una clau al
 
 Quan s'intenta eliminar o actualitzar una fila de la taula pare (la taula que conté la `PK`), el SGBD pot aplicar una de les 4 **polítiques d'integritat referencial** següents:
 
-1. **En cascada (`ON DELETE CASCADE / ON UPDATE CASCADE`):**
+1. **En cascada:**
    En esborrar o modificar una tupla de la taula pare, el SGBD esborra o actualitza automàticament totes les tuples de la taula filla que contenien eixa clau aliena.
 
-2. **Restringit (`ON DELETE RESTRICT / ON UPDATE RESTRICT`):**
+2. **Restringit:**
    El SGBD impedix i rebutja l'esborrat o modificació de la tupla pare mentre existisquen tuples filles que la referencien.
 
-3. **Posada a nuls (`ON DELETE SET NULL / ON UPDATE SET NULL`):**
+3. **Posada a nuls:**
    En esborrar o actualitzar la tupla pare, el SGBD establix automàticament a `NULL` el valor de la clau aliena en totes les tuples filles afectades.
 
-4. **Posada a valor per defecte (`ON DELETE SET DEFAULT / ON UPDATE SET DEFAULT`):**
+4. **Posada a valor per defecte:**
    En esborrar o actualitzar la tupla pare, el SGBD assigna un valor per defecte prèviament configurat a la clau aliena en les tuples filles.
 
 ---
 
 > [!WARNING]
-> **Diferències entre SGBD.** L'estàndard SQL defineix `CASCADE`, `SET NULL`, `SET DEFAULT`, `RESTRICT` i `NO ACTION` tant per a `ON DELETE` com per a `ON UPDATE`. **Oracle** només implementa `ON DELETE CASCADE` i `ON DELETE SET NULL`; si no s'indica res, rebutja l'esborrat (equival a `NO ACTION`). No admet `ON UPDATE`. Els exemples SQL d'aquesta unitat usen la sintaxi estàndard; a la UD05 els escriurem en Oracle.
+> **No tots els gestors oferixen totes les polítiques.** Quasi tots permeten l'esborrat en cascada i la posada a nuls, però molts no permeten propagar el canvi d'una clau primària. Per això convé dissenyar claus primàries **estables**. A la UD05 comprovaràs què oferix el gestor que usarem.
 
 > [!TIP]
 > **Quina política trie?** Fes-te aquesta pregunta sobre la fila filla: *té sentit que continue existint sense la fila pare?*
 > - **No** (una matrícula sense alumne) → `CASCADE`.
 > - **Sí, però cal revisar-la** (un alumne el grup del qual desapareix) → `SET NULL`, amb la columna opcional.
-> - **No ha de passar mai per accident** (un departament amb empleats) → rebutjar (l'opció per defecte d'Oracle).
+> - **No ha de passar mai per accident** (un departament amb empleats) → rebutjar (l'opció més prudent).
 
 #### Laboratori: simulador d'integritat referencial
 
-Canvia la política de la clau aliena, intenta esborrar, canviar i inserir files, i llig els missatges d'error **reals d'Oracle**. Després, repetix l'experiment amb la columna `NOT NULL`.
+Canvia la política de la clau aliena, intenta esborrar, canviar i inserir files, i llig els missatges que expliquen per què es rebutja cada operació. Després, repetix l'experiment fent l'atribut obligatori.
 
 {{< integridad >}}
 
 {{< quiz >}}
 - q: "La FK `matricula.id_alumno` ha d'eliminar la matrícula quan s'esborra l'alumne. Quina política declares?"
-  options: ["Sense clàusula", "`ON DELETE CASCADE`", "`ON DELETE SET NULL`", "`ON UPDATE CASCADE`"]
+  options: ["Restringit", "Esborrat en cascada", "Posada a nuls", "Posada a valor per defecte"]
   answer: 1
-  explain: "La matrícula no té sentit sense el seu alumne: s'esborra en cascada. `SET NULL` deixaria matrícules òrfenes i `ON UPDATE` no existix en Oracle."
-- q: "Al simulador, per què falla `ON DELETE SET NULL` si `cod_grupo` és `NOT NULL`?"
-  options: ["Perquè Oracle no suporta SET NULL", "Perquè la política exigix posar NULL en una columna que no l'admet", "Perquè el grup no existix", "Perquè falta el `COMMIT`"]
+  explain: "La matrícula no té sentit sense el seu alumne: s'esborra en cascada. La posada a nuls deixaria matrícules sense alumne i l'esborrat restringit impediria eliminar l'alumne."
+- q: "Al simulador, per què falla la posada a nuls si `cod_grupo` és obligatori?"
+  options: ["Perquè cap gestor admet la posada a nuls", "Perquè la política exigix posar NULL en una columna que no l'admet", "Perquè el grup no existix", "Perquè falta confirmar els canvis"]
   answer: 1
-  explain: "SET NULL i NOT NULL es contradiuen: el SGBD no pot complir les dues regles alhora (ORA-01407). Cal triar entre una política o l'altra."
+  explain: "Posada a nuls i obligatorietat es contradiuen: el SGBD no pot complir les dues regles alhora. Cal triar entre una política o l'altra."
 {{< /quiz >}}
 
 ---
 
 {{< sesion n="3" h="1" tipo="p" practica="3.2" >}}Simulador d'integritat referencial{{< /sesion >}}
 
-La pràctica 3.2 es fa a la [pàgina de pràctiques](/ud03-modelo-relacional/ud03-practicas), amb llapis i paper, i es comprova a la UD05 en Oracle.
+La pràctica 3.2 es fa a la [pàgina de pràctiques](/ud03-modelo-relacional/ud03-practicas), amb llapis i paper, i s'implementarà a la UD05.
 
 ---
 
@@ -251,7 +251,7 @@ Per a transformar de manera metòdica un diagrama EER conceptual en un esquema r
 - **Regla:** Cada entitat forta del diagrama EER es convertix en una **taula (relació)** independent.
   - Els atributs simples de l'entitat passen a ser **columnes** de la taula.
   - L'atribut identificador principal de l'entitat passa a ser la **Clau Primària (PK)** de la taula.
-  - Les claus alternatives passen a protegir-se amb la restricció `UNIQUE`.
+  - Les claus alternatives passen a protegir-se amb una restricció d'unicitat (UK).
 
 #### Esquema notacional formal
 
@@ -263,12 +263,12 @@ $$\text{ENTIDAD}(\underline{\text{id\_entidad}}, \text{atributo1}, \text{atribut
 
 - **Regla:** Una entitat feble es convertix en una **taula independent**.
   - **Feble per identificació:** La clau primària de la taula resultant és una **clau composta** formada per la clau primària de l'entitat forta propietària (que es propaga com a `FK`) combinada amb el discriminador parcial de l'entitat feble.
-  - **Feble per existència:** Si l'entitat feble posseïx el seu propi identificador únic, la clau primària de l'entitat forta es propaga com a `FK NOT NULL` amb política d'esborrat en cascada (`ON DELETE CASCADE`).
+  - **Feble per existència:** Si l'entitat feble posseïx el seu propi identificador únic, la clau primària de l'entitat forta es propaga com a FK obligatòria (no admet nuls) amb política d'esborrat en cascada.
 
 #### Esquema notacional formal (feble per identificació)
 
 $$\text{ENTIDAD\_DÉBIL}(\underline{\text{id\_padre}}, \underline{\text{id\_parcial\_débil}}, \text{atributo1})$$
-$$\text{FK: id\_padre } \rightarrow \text{ENTIDAD\_PADRE}(\text{id\_padre}) \text{ ON DELETE CASCADE}$$
+$$\text{FK: id\_padre } \rightarrow \text{ENTIDAD\_PADRE}(\text{id\_padre}) \text{ (esborrat en cascada)}$$
 
 ---
 
@@ -280,11 +280,11 @@ $$\text{FK: id\_padre } \rightarrow \text{ENTIDAD\_PADRE}(\text{id\_padre}) \tex
 #### Esquema notacional formal (atribut multivalorat)
 
 $$\text{ENTIDAD\_TELÉFONO}(\underline{\text{id\_persona}}, \underline{\text{numero\_telefono}}, \text{tipo\_linea})$$
-$$\text{FK: id\_persona } \rightarrow \text{PERSONA}(\text{id\_persona}) \text{ ON DELETE CASCADE}$$
+$$\text{FK: id\_persona } \rightarrow \text{PERSONA}(\text{id\_persona}) \text{ (esborrat en cascada)}$$
 
 #### Laboratori: de l'E/R a les taules
 
-Aquest transformador aplica les regles de l'apartat 4 i produïx l'esquema formal i el DDL d'Oracle. Comença pels casos d'aquesta sessió (feble, multivalorat) i torna a ell en la següent.
+Aquest transformador aplica les regles de l'apartat 4 i produïx l'esquema relacional formal. Comença pels casos d'aquesta sessió (feble, multivalorat) i torna a ell en la següent.
 
 {{< er-a-relacional >}}
 
@@ -296,7 +296,7 @@ Aquest transformador aplica les regles de l'apartat 4 i produïx l'esquema forma
 
 - **Regla (propagació de clau):** No es crea cap taula nova. Es pren la clau primària de l'entitat del costat "1" i es **propaga com a clau aliena (`FK`)** a la taula resultant de l'entitat del costat "N".
 - Si la relació contenia atributs descriptors propis, aquests es traslladen també com a columnes a la taula del costat "N".
-- Si la participació del costat "N" és obligatòria (cardinalitat mínima 1), la `FK` s'ha de configurar com a `NOT NULL`.
+- Si la participació del costat "N" és obligatòria (cardinalitat mínima 1), la FK ha de ser obligatòria (no admet nuls).
 
 ---
 
@@ -311,7 +311,7 @@ Un alumne es matricula en moltes assignatures i una assignatura té molts alumne
 No es pot posar una FK en cap de les dues taules sense repetir files, així que es crea una **taula intermèdia** `MATRICULA`.
 {{% /etapa %}}
 {{% etapa titulo="4. La seua clau" %}}
-Les dues claus alienes formen juntes la PK composta: `PRIMARY KEY (id_alumno, id_asig)`. Així un alumne no es matricula dues vegades en la mateixa assignatura.
+Les dues claus alienes formen juntes la PK composta: `(id_alumno, id_asig)`. Així un alumne no es matricula dues vegades en la mateixa assignatura.
 {{% /etapa %}}
 {{% etapa titulo="5. Els atributs de la relació" %}}
 `nota` i `fecha` van en `MATRICULA`: depenen de la parella alumne-assignatura, no d'un sol.
@@ -334,8 +334,8 @@ Les dues claus alienes formen juntes la PK composta: `PRIMARY KEY (id_alumno, id
 
 Hi ha 3 alternatives segons les cardinalitats mínimes de participació:
 
-1. **Participació opcional en ambdós costats:** hi ha dues solucions vàlides. La més simple propaga la clau d'una entitat a la taula de l'altra com a `FK` amb `UNIQUE` que **admet `NULL`** (és la que usa EduGest per a la tutoria). Si es volen evitar els nuls, es crea una taula intermèdia amb la clau d'una entitat com a `PK` i la de l'altra com a `UNIQUE NOT NULL`.
-2. **Participació obligatòria en un costat i opcional en l'altre:** la clau aliena es col·loca a la taula de l'entitat la participació de la qual és **obligatòria**, referenciant l'altra, com a `FK NOT NULL UNIQUE`. Així no necessita admetre nuls.
+1. **Participació opcional en ambdós costats:** hi ha dues solucions vàlides. La més simple propaga la clau d'una entitat a la taula de l'altra com a FK amb restricció d'unicitat (UK) que **admet nuls** (és la que usa EduGest per a la tutoria). Si es volen evitar els nuls, es crea una taula intermèdia amb la clau d'una entitat com a PK i la de l'altra com a UK obligatòria.
+2. **Participació obligatòria en un costat i opcional en l'altre:** la clau aliena es col·loca a la taula de l'entitat la participació de la qual és **obligatòria**, referenciant l'altra, com a FK obligatòria i única (UK). Així no necessita admetre nuls.
 3. **Participació obligatòria en ambdós costats:** les dues entitats poden unificar-se en una **única taula** que agrupa tots els atributs, sempre que descriguen de veres el mateix objecte.
 
 > [!NOTE]
@@ -367,9 +367,9 @@ Hi ha 3 estratègies relacionals per a transformar jerarquies EER:
 
 {{< quiz >}}
 - q: "Tot `PASAPORTE` pertany a una persona, però no tota `PERSONA` té passaport. On va la clau aliena?"
-  options: ["En `PERSONA`, `NOT NULL UNIQUE`", "En `PASAPORTE`, `NOT NULL UNIQUE`", "En totes dues taules", "En una taula nova obligatòriament"]
+  options: ["En `PERSONA`, obligatòria i única", "En `PASAPORTE`, obligatòria i única", "En totes dues taules", "En una taula nova obligatòriament"]
   answer: 1
-  explain: "La clau aliena va a la taula de l'entitat amb participació obligatòria (`PASAPORTE`): mai és nul·la i `UNIQUE` garanteix l'«1» de l'altre costat."
+  explain: "La clau aliena va a la taula de l'entitat amb participació obligatòria (`PASAPORTE`): mai és nul·la i la unicitat garanteix l'«1» de l'altre costat."
 - q: "`AULA` és feble per identificació respecte a `EDIFICIO`. Quina és la seua clau primària?"
   options: ["`num_aula`", "`id_edificio`", "`(id_edificio, num_aula)`", "No té clau primària"]
   answer: 2
@@ -394,29 +394,7 @@ Un `DEPARTAMENTO` (identificat per `id_dep`, amb `nombre_dep`) empra diversos `E
 
 - $\text{DEPARTAMENTO}(\underline{\text{id\_dep}}, \text{nombre\_dep})$
 - $\text{EMPLEADO}(\underline{\text{id\_emp}}, \text{nombre}, \text{salario}, \text{fecha\_alta}, \text{id\_dep*})$
-  - $\text{FK: id\_dep } \rightarrow \text{DEPARTAMENTO}(\text{id\_dep}) \text{ ON DELETE RESTRICT}$
-
-#### Sentències SQL DDL (5.1)
-
-{{< sgbd "SQL estàndard (MySQL / PostgreSQL)" >}}
-
-```sql
-CREATE TABLE departamento (
-    id_dep INT PRIMARY KEY,
-    nombre_dep VARCHAR(100) NOT NULL UNIQUE
-);
-
-CREATE TABLE empleado (
-    id_emp INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    salario DECIMAL(10,2) CHECK (salario >= 1080.00),
-    fecha_alta DATE NOT NULL,
-    id_dep INT NOT NULL,
-    CONSTRAINT fk_empleado_departamento FOREIGN KEY (id_dep)
-        REFERENCES departamento(id_dep)
-        ON DELETE RESTRICT ON UPDATE CASCADE
-);
-```
+  - $\text{FK: id\_dep } \rightarrow \text{DEPARTAMENTO}(\text{id\_dep}) \text{ (esborrat restringit)}$
 
 #### Contingut de dades reals en taules (5.1)
 
@@ -449,35 +427,8 @@ Un `ALUMNO` (`id_alumno`, `nombre`, `email`) es matricula en diverses `ASIGNATUR
 - $\text{ALUMNO}(\underline{\text{id\_alumno}}, \text{nombre}, \text{email})$
 - $\text{ASIGNATURA}(\underline{\text{id\_asig}}, \text{nombre\_asig}, \text{creditos})$
 - $\text{MATRICULA}(\underline{\text{id\_alumno*}}, \underline{\text{id\_asig*}}, \text{nota\_final})$
-  - $\text{FK1: id\_alumno } \rightarrow \text{ALUMNO}(\text{id\_alumno}) \text{ ON DELETE CASCADE}$
-  - $\text{FK2: id\_asig } \rightarrow \text{ASIGNATURA}(\text{id\_asig}) \text{ ON DELETE CASCADE}$
-
-#### Sentències SQL DDL (5.2)
-
-{{< sgbd "SQL estàndard (MySQL / PostgreSQL)" >}}
-
-```sql
-CREATE TABLE alumno (
-    id_alumno INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(150) NOT NULL UNIQUE
-);
-
-CREATE TABLE asignatura (
-    id_asig INT PRIMARY KEY,
-    nombre_asig VARCHAR(100) NOT NULL,
-    creditos INT CHECK (creditos > 0)
-);
-
-CREATE TABLE matricula (
-    id_alumno INT,
-    id_asig INT,
-    nota_final DECIMAL(4,2) CHECK (nota_final BETWEEN 0.00 AND 10.00),
-    PRIMARY KEY (id_alumno, id_asig),
-    CONSTRAINT fk_mat_alumno FOREIGN KEY (id_alumno) REFERENCES alumno(id_alumno) ON DELETE CASCADE,
-    CONSTRAINT fk_mat_asig FOREIGN KEY (id_asig) REFERENCES asignatura(id_asig) ON DELETE CASCADE
-);
-```
+  - $\text{FK1: id\_alumno } \rightarrow \text{ALUMNO}(\text{id\_alumno}) \text{ (esborrat en cascada)}$
+  - $\text{FK2: id\_asig } \rightarrow \text{ASIGNATURA}(\text{id\_asig}) \text{ (esborrat en cascada)}$
 
 #### Contingut de dades reals en taules (5.2)
 
@@ -515,28 +466,7 @@ Un `EDIFICIO` (`id_edificio`, `nombre_edificio`, `direccion`) conté diverses `A
 
 - $\text{EDIFICIO}(\underline{\text{id\_edificio}}, \text{nombre\_edificio}, \text{direccion})$
 - $\text{AULA}(\underline{\text{id\_edificio*}}, \underline{\text{num\_aula}}, \text{capacidad})$
-  - $\text{FK: id\_edificio } \rightarrow \text{EDIFICIO}(\text{id\_edificio}) \text{ ON DELETE CASCADE}$
-
-#### Sentències SQL DDL (5.3)
-
-{{< sgbd "SQL estàndard (MySQL / PostgreSQL)" >}}
-
-```sql
-CREATE TABLE edificio (
-    id_edificio INT PRIMARY KEY,
-    nombre_edificio VARCHAR(100) NOT NULL,
-    direccion VARCHAR(200) NOT NULL
-);
-
-CREATE TABLE aula (
-    id_edificio INT,
-    num_aula INT,
-    capacidad INT CHECK (capacidad > 0),
-    PRIMARY KEY (id_edificio, num_aula),
-    CONSTRAINT fk_aula_edificio FOREIGN KEY (id_edificio) 
-        REFERENCES edificio(id_edificio) ON DELETE CASCADE
-);
-```
+  - $\text{FK: id\_edificio } \rightarrow \text{EDIFICIO}(\text{id\_edificio}) \text{ (esborrat en cascada)}$
 
 #### Contingut de dades reals en taules (5.3)
 
@@ -566,22 +496,7 @@ En una empresa, de cada `EMPLEADO` (`id_emp`, `nombre`, `cargo`) es coneix el se
 #### Esquema relacional formal (5.4)
 
 - $\text{EMPLEADO}(\underline{\text{id\_emp}}, \text{nombre}, \text{cargo}, \text{id\_jefe*})$
-  - $\text{FK: id\_jefe } \rightarrow \text{EMPLEADO}(\text{id\_emp}) \text{ ON DELETE SET NULL}$
-
-#### Sentències SQL DDL (5.4)
-
-{{< sgbd "SQL estàndard (MySQL / PostgreSQL)" >}}
-
-```sql
-CREATE TABLE empleado (
-    id_emp INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    cargo VARCHAR(100) NOT NULL,
-    id_jefe INT,
-    CONSTRAINT fk_empleado_jefe FOREIGN KEY (id_jefe)
-        REFERENCES empleado(id_emp) ON DELETE SET NULL
-);
-```
+  - $\text{FK: id\_jefe } \rightarrow \text{EMPLEADO}(\text{id\_emp}) \text{ (posada a nuls)}$
 
 #### Contingut de dades reals en taules (5.4)
 
@@ -606,40 +521,9 @@ Un concessionari ven `COCHE` (`matricula`, `modelo`, `precio`) a `CLIENTE` (`id_
 
 - $\text{CLIENTE}(\underline{\text{id\_cliente}}, \text{nombre}, \text{telefono})$
 - $\text{COCHE}(\underline{\text{matricula}}, \text{modelo}, \text{precio}, \text{id\_cliente*})$
-  - $\text{FK: id\_cliente } \rightarrow \text{CLIENTE}(\text{id\_cliente}) \text{ ON DELETE RESTRICT}$
+  - $\text{FK: id\_cliente } \rightarrow \text{CLIENTE}(\text{id\_cliente}) \text{ (esborrat restringit)}$
 - $\text{REVISION}(\underline{\text{matricula*}}, \underline{\text{num\_revision}}, \text{fecha\_revision}, \text{coste})$
-  - $\text{FK: matricula } \rightarrow \text{COCHE}(\text{matricula}) \text{ ON DELETE CASCADE}$
-
-#### Sentències SQL DDL (5.5)
-
-{{< sgbd "SQL estàndard (MySQL / PostgreSQL)" >}}
-
-```sql
-CREATE TABLE cliente (
-    id_cliente INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    telefono VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE coche (
-    matricula VARCHAR(15) PRIMARY KEY,
-    modelo VARCHAR(100) NOT NULL,
-    precio DECIMAL(10,2) CHECK (precio > 0),
-    id_cliente INT NOT NULL,
-    CONSTRAINT fk_coche_cliente FOREIGN KEY (id_cliente)
-        REFERENCES cliente(id_cliente) ON DELETE RESTRICT
-);
-
-CREATE TABLE revision (
-    matricula VARCHAR(15),
-    num_revision INT,
-    fecha_revision DATE NOT NULL,
-    coste DECIMAL(8,2) CHECK (coste >= 0),
-    PRIMARY KEY (matricula, num_revision),
-    CONSTRAINT fk_revision_coche FOREIGN KEY (matricula)
-        REFERENCES coche(matricula) ON DELETE CASCADE
-);
-```
+  - $\text{FK: matricula } \rightarrow \text{COCHE}(\text{matricula}) \text{ (esborrat en cascada)}$
 
 #### Contingut de dades reals en taules (5.5)
 
@@ -670,7 +554,7 @@ CREATE TABLE revision (
 
 ## 6. Restriccions que el model lògic no pot expressar
 
-El model relacional expressa molt bé les restriccions **d'una fila** (`NOT NULL`, `CHECK`) i **de clau** (`PRIMARY KEY`, `UNIQUE`, `FOREIGN KEY`). Però moltes regles de negoci afecten **diverses files o diverses taules** i no es poden declarar així. El criteri RA6.h exigix **analitzar-les i documentar-les** perquè no es perden entre el disseny i la implementació.
+El model relacional expressa molt bé les restriccions **d'una fila** (atribut obligatori, regla de fila) i **de clau** (clau primària, clau alternativa, clau aliena). Però moltes regles de negoci afecten **diverses files o diverses taules** i no es poden declarar així. El criteri RA6.h exigix **analitzar-les i documentar-les** perquè no es perden entre el disseny i la implementació.
 
 | Regla de negoci (EduGest) | Per què no basta amb una restricció declarativa? | On s'implementarà |
 |---|---|---|
@@ -678,7 +562,7 @@ El model relacional expressa molt bé les restriccions **d'una fila** (`NOT NULL
 | Un alumne només es matricula en mòduls del cicle del seu grup | Implica `ALUMNO`, `GRUPO` i `MODULO` | Trigger o procediment de matrícula (UD09) |
 | Un professor no supera 20 hores lectives setmanals | És una **suma** sobre diverses files d'`IMPARTE` | Trigger compost o procediment (UD09) |
 | No hi ha faltes anteriors a la data de matrícula | Compara dues taules | Trigger (UD09) |
-| La nota final es posa en múltiples de 0,25 | És una regla d'**una fila** | `CHECK (MOD(nota_final * 4, 1) = 0)` (UD05) |
+| La nota final es posa en múltiples de 0,25 | És una regla d'**una fila** | Regla de fila: `nota_final` múltiple de 0,25 (es declara a la UD05) |
 | Un grup no supera 30 alumnes | És un **recompte** sobre diverses files | Procediment de matrícula o trigger (UD09) |
 
 Cada restricció es documenta amb un format fix:
@@ -703,17 +587,16 @@ El disseny lògic es representa amb un **diagrama relacional**: un rectangle per
 
 | Eina | Què aporta |
 |---|---|
-| **Oracle SQL Developer Data Modeler** | Dissenya el model lògic (Barker) i el relacional, i **genera el DDL d'Oracle**. També fa enginyeria inversa: dibuixa el diagrama d'un esquema existent |
-| **SQL Developer → Data Modeler** | Arrossegant les taules d'una connexió s'obté el seu diagrama |
+| **Oracle SQL Developer Data Modeler** | Dissenya el model lògic (Barker) i el relacional. Més endavant permetrà també l'enginyeria inversa d'un esquema existent |
 | **draw.io** | Plantilles de taules (*Entity Relation* → *Table*) |
 | **dbdiagram.io / DBML** | Diagrama a partir d'una descripció en text |
 | **Mermaid** | Diagrames `erDiagram` en Markdown, ideals per a documentar al repositori |
 
 > [!TIP]
-> Quan acabes el projecte a la UD05, usa l'**enginyeria inversa** de SQL Developer Data Modeler (*Arxiu → Importar → Diccionari de dades*) sobre l'esquema `EDUGEST`. Si el diagrama obtingut no coincidix amb el teu disseny lògic, hi ha un error en un dels dos.
+> Quan acabes el projecte a la UD05, dibuixa el diagrama de les taules que hages creat i compara'l amb el teu disseny lògic. Si no coincidixen, hi ha un error en un dels dos.
 
 {{% details title="Pista: on es comprova una regla de negoci?" %}}
-Fes-te tres preguntes, en este ordre: es decidix mirant **una sola fila**? → `CHECK`. Compara una columna amb la **clau d'una altra taula**? → clau aliena. Necessita **sumar, comptar o comparar diverses files** o taules? → trigger o procediment al servidor (UD09). Només si cap de les tres servix ha de viure en l'aplicació.
+Fes-te tres preguntes, en este ordre: es decidix mirant **una sola fila**? → regla de fila (es declara en el mateix esquema). Compara una columna amb la **clau d'una altra taula**? → clau aliena. Necessita **sumar, comptar o comparar diverses files** o taules? → trigger o procediment al servidor (UD09). Només si cap de les tres servix ha de viure en l'aplicació.
 {{% /details %}}
 
 ---
@@ -729,16 +612,16 @@ Apliquem les regles de l'apartat 4 al diagrama de la UD02. Cada pas cita la regl
 | Element del model E/R | Regla | Resultat en el model relacional |
 |---|---|---|
 | Entitat `CICLO` | 4.1 Entitat forta | CICLO(<u>cod_ciclo</u>, nombre, grado, horas_totales) |
-| Entitat `MODULO` amb (codigo, ciclo) únic | 4.1 + clau alternativa | MODULO(<u>id_modulo</u>, codigo, nombre, curso, horas, *cod_ciclo*) · UNIQUE(codigo, cod_ciclo) |
-| CICLO 1:N MODULO | 4.4 La FK va al costat N | `cod_ciclo` en MODULO, NOT NULL perquè la participació és (1, 1) |
+| Entitat `MODULO` amb (codigo, ciclo) únic | 4.1 + clau alternativa | MODULO(<u>id_modulo</u>, codigo, nombre, curso, horas, *cod_ciclo*) · UK(codigo, cod_ciclo) |
+| CICLO 1:N MODULO | 4.4 La FK va al costat N | `cod_ciclo` en MODULO, obligatòria perquè la participació és (1, 1) |
 | CICLO 1:N GRUPO | 4.4 | GRUPO(<u>cod_grupo</u>, *cod_ciclo*, curso, turno, ...) |
 | GRUPO 1:N ALUMNO, participació (0, 1) | 4.4 amb FK opcional | ALUMNO(..., *cod_grupo*) **admet NULL** |
-| PROFESOR 1:1 GRUPO (tutoria), opcional als dos costats | 4.6 | `id_tutor` en GRUPO, admet NULL i és **UNIQUE** |
-| ALUMNO N:M MODULO amb atributs i curs acadèmic | 4.5 | MATRICULA(<u>id_matricula</u>, *id_alumno*, *id_modulo*, curso_academico, ...) · UNIQUE(id_alumno, id_modulo, curso_academico) |
+| PROFESOR 1:1 GRUPO (tutoria), opcional als dos costats | 4.6 | `id_tutor` en GRUPO, admet nuls i és **UK** |
+| ALUMNO N:M MODULO amb atributs i curs acadèmic | 4.5 | MATRICULA(<u>id_matricula</u>, *id_alumno*, *id_modulo*, curso_academico, ...) · UK(id_alumno, id_modulo, curso_academico) |
 | PROFESOR–MODULO–GRUPO (imparte) | 4.8 Ternària | IMPARTE(<u>*id_modulo*, *cod_grupo*, curso_academico</u>, *id_profesor*, horas_semanales) |
 
 > [!NOTE]
-> En `MATRICULA` s'ha usat una **clau artificial** (`id_matricula`) en lloc de la clau composta (id_alumno, id_modulo, curso_academico). Les dues opcions són correctes. La clau artificial simplifica les claus alienes que apunten a la matrícula (com les faltes d'assistència), però **obliga** a declarar la clau natural com a `UNIQUE`; si no, es podrien duplicar matrícules.
+> En `MATRICULA` s'ha usat una **clau artificial** (`id_matricula`) en lloc de la clau composta (id_alumno, id_modulo, curso_academico). Les dues opcions són correctes. La clau artificial simplifica les claus alienes que apunten a la matrícula (com les faltes d'assistència), però **obliga** a declarar la clau natural com a clau alternativa (UK); si no, es podrien duplicar matrícules.
 
 {{% details title="Veure el diagrama relacional complet d'EduGest" %}}
 ```mermaid
@@ -780,7 +663,7 @@ erDiagram
 ## 9. Resum i conclusions
 
 - El **Model Relacional** estructura lògicament la informació mitjançant relacions (taules), tuples (files) i atributs (columnes), basant-se en la teoria matemàtica de conjunts.
-- Les **claus primàries (PK)** i **claus alternatives (`UNIQUE`)** garanteixen la unicitat de les tuples, mentre que les **claus alienes (FK)** representen els vincles i imposen integritat referencial.
+- Les **claus primàries (PK)** i **claus alternatives (UK)** garanteixen la unicitat de les tuples, mentre que les **claus alienes (FK)** representen els vincles i imposen integritat referencial.
 - Les polítiques d'integritat referencial (`CASCADE`, `RESTRICT`, `SET NULL`) determinen la resposta del SGBD davant d'esborrats o modificacions de claus primàries.
 - El pas d'EER a Relacional es regix per un catàleg estricte de regles de transformació que mapeja entitats a taules, relacions $1:N$ a propagacions de clau, relacions $N:M$ a taules intermèdies d'enllaç i entitats febles a claus compostes.
 
@@ -801,7 +684,7 @@ erDiagram
 
 ### 2. Anàlisi de polítiques d'integritat referencial
 
-**Pregunta:** Si eliminem la fila d'un `DEPARTAMENTO` amb `id_dep = 10` i la clau aliena de la taula `EMPLEADO` té configurada la política `ON DELETE CASCADE`, què passa amb els empleats pertanyents a eix departament?
+**Pregunta:** Si eliminem la fila d'un `DEPARTAMENTO` amb `id_dep = 10` i la clau aliena de la taula `EMPLEADO` té configurada la política d'esborrat en cascada, què passa amb els empleats pertanyents a eix departament?
 {{% details title="Solució Explicada" %}}
 El SGBD eliminarà automàticament de la taula `EMPLEADO` totes les tuples que tinguen `id_dep = 10`.
 {{% /details %}}
@@ -810,7 +693,7 @@ El SGBD eliminarà automàticament de la taula `EMPLEADO` totes les tuples que t
 
 ### 3. Exercici pràctic de transformació relacional
 
-**Enunciat:** Un `AUTOR` (`id_autor`, `nombre`) escriu diversos `LIBRO` (`isbn`, `titulo`, `precio`). Un llibre pot ser escrit per diversos autors. Expressa l'esquema relacional formal resultant i les sentències SQL DDL per a implementar esta relació $N:M$.
+**Enunciat:** Un `AUTOR` (`id_autor`, `nombre`) escriu diversos `LIBRO` (`isbn`, `titulo`, `precio`). Un llibre pot ser escrit per diversos autors. Expressa l'esquema relacional formal resultant i justifica on van les claus alienes i quina política d'esborrat convé en esta relació $N:M$.
 
 **Solució pas a pas:**
 
@@ -819,28 +702,7 @@ El SGBD eliminarà automàticament de la taula `EMPLEADO` totes les tuples que t
    - $\text{LIBRO}(\underline{\text{isbn}}, \text{titulo}, \text{precio})$
    - $\text{ESCRIBE}(\underline{\text{id\_autor*}}, \underline{\text{isbn*}})$
 
-2. **Sentències SQL DDL:**
-
-```sql
-CREATE TABLE autor (
-    id_autor INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE libro (
-    isbn VARCHAR(20) PRIMARY KEY,
-    titulo VARCHAR(150) NOT NULL,
-    precio DECIMAL(8,2) CHECK (precio > 0)
-);
-
-CREATE TABLE escribe (
-    id_autor INT,
-    isbn VARCHAR(20),
-    PRIMARY KEY (id_autor, isbn),
-    CONSTRAINT fk_esc_autor FOREIGN KEY (id_autor) REFERENCES autor(id_autor) ON DELETE CASCADE,
-    CONSTRAINT fk_esc_libro FOREIGN KEY (isbn) REFERENCES libro(isbn) ON DELETE CASCADE
-);
-```
+2. **Claus alienes i polítiques d'esborrat:** `id_autor` i `isbn` són claus alienes en `ESCRIBE` i formen la seua clau primària composta. Si s'esborra un autor o un llibre, té sentit esborrar també les seues files d'`ESCRIBE` (esborrat en cascada). A més, `precio` ha de complir una regla de fila: ser major que 0.
 
 ---
 
@@ -856,7 +718,7 @@ Respon a les preguntes i prem **Corregir**. Cada resposta inclou una explicació
 - q: "A la taula CLIENTE, tant `id_cliente` com `dni` identifiquen cada client. Es tria `id_cliente` com a clau primària. Què és `dni`?"
   options: ["Una clau aliena", "Una clau alternativa", "Una superclau no mínima", "Un atribut derivat"]
   answer: 1
-  explain: "És una clau **candidata** que no s'ha triat com a primària: una clau alternativa. Es declara amb `UNIQUE`."
+  explain: "És una clau **candidata** que no s'ha triat com a primària: una clau alternativa. Es marca com a UK."
 - q: "Quina regla d'integritat impedix que una clau primària prenga el valor NULL?"
   options: ["Integritat referencial", "Integritat d'entitat", "Integritat de domini", "Regla de negoci"]
   answer: 1
@@ -869,21 +731,20 @@ Respon a les preguntes i prem **Corregir**. Cada resposta inclou una explicació
   options: ["Una clau aliena en ALUMNO", "Una clau aliena en ASIGNATURA", "Una taula nova amb les dues claus alienes i la nota", "Un atribut multivalorat"]
   answer: 2
   explain: "Tota relació N:M genera una **taula pròpia** amb les claus de les dues entitats (normalment com a clau primària composta) i els atributs de la relació."
-- q: "S'esborra un departament que té empleats. La FK d'EMPLEADO té `ON DELETE SET NULL`. Què passa?"
+- q: "S'esborra un departament que té empleats. La FK d'EMPLEADO té política de posada a nuls. Què passa?"
   options: ["Es rebutja l'esborrat", "S'esborren també els empleats", "Els empleats queden amb id_dep a NULL", "Els empleats passen a un altre departament"]
   answer: 2
-  explain: "SET NULL conserva les files filles i posa la seua clau aliena a NULL. Només és possible si la columna admet nuls."
-- q: "Quina opció d'integritat referencial **no** està disponible en Oracle?"
-  options: ["ON DELETE CASCADE", "ON DELETE SET NULL", "ON UPDATE CASCADE", "L'opció per defecte (rebutjar l'esborrat)"]
+  explain: "La posada a nuls conserva les files filles i deixa la seua clau aliena buida. Només és possible si la columna admet nuls."
+- q: "Per què convé que les claus primàries siguen **estables** (que no canvien)?"
+  options: ["Perquè no es poden escriure dues vegades", "Perquè canviar una clau referenciada obliga a actualitzar totes les claus alienes que l'apunten, i molts gestors no ho propaguen", "Perquè les claus primàries no admeten text", "Perquè així s'eviten els nuls"]
   answer: 2
-  explain: "Oracle no implementa `ON UPDATE`: no permet modificar en cascada una clau primària referenciada. És una altra raó per a usar claus primàries **estables** que no canvien."
+  explain: "Canviar una clau primària referenciada trenca la integritat referencial si el gestor no propaga el canvi. Per això es prefereixen claus **estables**, que no canvien mai."
 - q: "La regla «un professor no pot impartir més de 20 hores setmanals» s'ha de..."
-  options: ["Expressar amb un CHECK a la taula IMPARTE", "Documentar com a restricció no representable i implementar amb PL/SQL", "Ignorar, ja que no forma part del model", "Resoldre amb una clau aliena"]
+  options: ["Expressar amb una regla de fila a la taula IMPARTE", "Documentar com a restricció no representable i implementar amb programació al servidor (UD09)", "Ignorar, ja que no forma part del model", "Resoldre amb una clau aliena"]
   answer: 1
-  explain: "Afecta la **suma** de diverses files. Un `CHECK` només veu la fila actual. Es documenta (RA6.h) i s'implementa amb un trigger o un procediment (UD09)."
+  explain: "Afecta la **suma** de diverses files. Una regla de fila només veu la fila actual. Es documenta (RA6.h) i s'implementa amb un trigger o un procediment (UD09)."
 {{< /quiz >}}
 
 ## Referències
 
 - Codd, E. F. (1970). «A Relational Model of Data for Large Shared Data Banks». *Communications of the ACM*, 13(6).
-- [Oracle AI Database 26ai: SQL Language Reference, *constraint*](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/constraint.html).

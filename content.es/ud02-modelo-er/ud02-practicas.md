@@ -28,8 +28,9 @@ math: true
 | [Proyecto EduGest · UD02](#proyecto-edugest--ud02-modelo-conceptual) | Proyecto | ●●○ | RA6.a, RA6.d, RA6.e, RA6.h |
 | [Banco · Fundamentos (ejercicios 1-5)](#bloque-1--fundamentos) | Autónoma | ●○○ | RA6.a, RA6.d, RA6.e, RA6.h |
 | [Banco · Intermedio (ejercicios 6-15)](#bloque-2--intermedio) | Autónoma | ●●○ | RA6.a, RA6.d, RA6.e, RA6.h |
-| [Banco · Integración (ejercicios 16-23)](#bloque-3--integración) | Autónoma | ●●○ → ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
-| [Banco · EER avanzado (ejercicios 24-30)](#bloque-4--eer-avanzado) | Autónoma | ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
+| [Banco · Intermedio: integración (ejercicios 16-23)](#bloque-3--intermedio-integración) | Autónoma | ●●○ | RA6.a, RA6.d, RA6.e, RA6.h |
+| [Banco · Intermedio: EER (ejercicios 24-30)](#bloque-4--intermedio-eer) | Autónoma | ●●○ |
+| [Banco · Consolidación (ejercicios 31-35)](#bloque-5--consolidación) | Autónoma | ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
 
 > [!NOTE]
 > **Cómo están organizadas estas páginas.** El enunciado se presenta como lo contaría una persona del negocio, no como una lista de entidades: **decidir qué es una entidad, un atributo o una relación forma parte del trabajo**. Las tareas, la comprobación y los errores habituales están plegados: despliégalos cuando los necesites, no antes de pensar.
@@ -80,69 +81,9 @@ Sigue los cinco pasos y responde a las preguntas antes de abrir las respuestas.
 
 {{% /steps %}}
 
-{{% details title="Respuestas guiadas a los cinco pasos" %}}
+{{< solucion id="ud02-001" title="Respuestas guiadas a los cinco pasos" />}}
 
-1. **Entidades:** `LIBRO`, `AUTOR`, `EJEMPLAR` y `SOCIO`. «Préstamo» no tiene propiedades propias más allá de fechas: es el hecho que relaciona un socio con un ejemplar, así que se modela como **relación**. La editorial se queda como atributo mientras no haya que guardar datos suyos.
-2. **Identificadores:** `LIBRO` → ISBN; `AUTOR` → código; `SOCIO` → número de carné (el DNI es **clave alternativa**). `EJEMPLAR`: su número solo es único dentro del libro, por lo que es una **entidad débil** identificada por (ISBN, número).
-3. **Cardinalidades:**
-
-    | Relación | Lectura | Tipo |
-    |---|---|---|
-    | AUTOR *escribe* LIBRO | un autor escribe (1, N) libros; un libro lo escriben (1, N) autores | N:M |
-    | LIBRO *tiene* EJEMPLAR | un libro tiene (0, N) ejemplares; un ejemplar es de (1, 1) libro | 1:N identificadora |
-    | SOCIO *toma prestado* EJEMPLAR | un socio tiene (0, N) préstamos; un ejemplar tiene (0, N) préstamos | N:M |
-
-    El mínimo 0 de socio y ejemplar refleja «libros que nunca han salido» y socios que aún no han llevado nada.
-4. **Atributos de relación:** las fechas no son ni del socio ni del ejemplar: son del préstamo. Como el mismo socio puede llevarse la misma copia varias veces, la **fecha de salida** forma parte de la identificación de cada préstamo (atributo discriminador de la relación).
-5. La frase «a algunos socios los tengo que llamar muchas veces» es **ruido**: no genera ningún requisito de datos (podría generar uno si se quisiera guardar un historial de avisos). Saber descartar información es parte del análisis.
-
-{{% /details %}}
-
-{{% details title="Solución en notación de pata de gallo" %}}
-
-```mermaid
-erDiagram
-    AUTOR }|--|{ LIBRO : "escribe"
-    LIBRO ||--o{ EJEMPLAR : "tiene"
-    SOCIO ||--o{ PRESTAMO : "realiza"
-    EJEMPLAR ||--o{ PRESTAMO : "es prestado en"
-    AUTOR {
-        string cod_autor PK
-        string nombre
-        string nacionalidad
-    }
-    LIBRO {
-        string isbn PK
-        string titulo
-        int anio
-        string editorial
-    }
-    EJEMPLAR {
-        string isbn PK, FK "débil"
-        int num_ejemplar PK
-        string estado
-    }
-    SOCIO {
-        int num_socio PK
-        string dni UK
-        string nombre
-        string telefono
-    }
-    PRESTAMO {
-        date fecha_salida PK
-        date fecha_prevista
-        date fecha_devolucion "opcional"
-    }
-```
-
-**Supuestos semánticos** (lo que el relato no dice y hemos decidido):
-
-1. Un libro registrado tiene al menos un autor conocido.
-2. Puede existir un libro sin ejemplares (pedido, pero todavía no recibido).
-3. La fecha real de devolución es opcional: está vacía mientras el préstamo sigue abierto.
-4. La editorial se guarda como atributo; si hiciera falta guardar más datos de ella, sería una entidad.
-
-{{% /details %}}
+{{< solucion id="ud02-002" title="Solución en notación de Chen" />}}
 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
@@ -190,17 +131,7 @@ Para cada frase, escribe la relación en notación (mín, máx) en los **dos sen
 | d | Un empleado puede supervisar a varios empleados; todo empleado salvo el director tiene un supervisor. |
 | e | Un vehículo de empresa puede estar asignado a un empleado como máximo; un empleado puede no tener vehículo y nunca tiene más de uno. |
 
-{{% details title="Soluciones" %}}
-| # | Lado A | Lado B | Tipo |
-|---|---|---|---|
-| a | Un empleado está en (1, 1) departamento | Un departamento tiene (0, N) empleados | 1:N |
-| b | Un país tiene (1, 1) capital | Una capital lo es de (1, 1) país | 1:1 |
-| c | Un pedido tiene (1, N) productos | Un producto está en (0, N) pedidos | N:M |
-| d | Un empleado supervisa a (0, N) empleados | Un empleado es supervisado por (0, 1) empleado | 1:N **reflexiva** |
-| e | Un vehículo está asignado a (0, 1) empleado | Un empleado tiene (0, 1) vehículo | 1:1 |
-
-En (d) el mínimo es 0 porque el director no tiene supervisor. Si el enunciado dijera «todo empleado tiene supervisor», el diagrama obligaría a que exista un ciclo infinito de jefes.
-{{% /details %}}
+{{< solucion id="ud02-003" title="Soluciones" />}}
 
 #### Segunda parte: del diagrama a la frase
 
@@ -213,11 +144,7 @@ erDiagram
     MEDICO }o--|| ESPECIALIDAD : "tiene"
 ```
 
-{{% details title="Solución" %}}
-- Un cliente recibe cero o muchas facturas; cada factura es de exactamente un cliente.
-- Una factura contiene una o muchas líneas; cada línea pertenece a exactamente una factura.
-- Cada médico tiene exactamente una especialidad; una especialidad puede tener cero o muchos médicos.
-{{% /details %}}
+{{< solucion id="ud02-004" title="Solución" />}}
 
 ---
 
@@ -311,16 +238,7 @@ Una clínica veterinaria de tamaño medio estrena sistema de gestión. La gerent
 
 {{% /details %}}
 
-{{% details title="Solución y criterios (para el profesorado o tras entregar)" %}}
-
-- **Empleados:** superclase `EMPLEADO` (DNI, nombre, teléfono, fecha de alta) con tres subclases. *Total* («los que pasan consulta son… los auxiliares… los administrativos… de todas») y *disyunta* («nadie hace dos cosas»).
-- **Mascotas:** `MASCOTA` con subclases `PERRO` y `GATO`. *Parcial* («con el resto no hace falta nada especial») y *disyunta* (un animal no es perro y gato a la vez).
-- **Cliente:** no se enumeran sus atributos en el texto. Es una entidad con identificador a decidir (supuesto: DNI) porque «cada mascota es de un cliente» (1:N).
-- **Consulta:** puede ser entidad (con identificador propio) o relación ternaria veterinario–mascota–fecha. Es entidad si se quiere colgar de ella a los auxiliares y los medicamentos con facilidad; la dosis siempre va en la relación *receta* entre consulta y medicamento.
-- **Auxiliar en consulta:** relación 0..N, opcional («a veces»).
-- **Información descartada:** «once personas» es un dato puntual, no un requisito.
-
-{{% /details %}}
+{{< solucion id="ud02-005" title="Solución y criterios" />}}
 
 #### Ampliación
 
@@ -336,32 +254,7 @@ Una clínica veterinaria de tamaño medio estrena sistema de gestión. La gerent
 
 Un compañero ha diseñado el modelo de un **gimnasio** y te pide que lo revises antes de pasar a tablas. El enunciado es: *«Los socios se apuntan a actividades (spinning, yoga...) que se imparten en salas. Cada sesión de una actividad tiene día, hora, sala y monitor. Un socio reserva plaza en sesiones concretas. Cada socio tiene una cuota mensual»*.
 
-```mermaid
-erDiagram
-    SOCIO {
-        string nombre PK
-        int edad
-        string actividades
-        date fecha_reserva
-    }
-    ACTIVIDAD {
-        string nombre PK
-        string sala
-        string monitor
-        string dia
-        string hora
-    }
-    CUOTA {
-        decimal importe
-    }
-    SALA {
-        string codigo PK
-    }
-    SOCIO }o--o{ ACTIVIDAD : "se apunta"
-    SOCIO ||--|| CUOTA : "paga"
-    ACTIVIDAD }o--o{ SALA : "usa"
-    SOCIO }o--o{ SALA : "entra en"
-```
+{{< figura src="ud02/p2_5.svg" alt="Diagrama EER en notación de Chen: Diseño defectuoso del gimnasio (para revisar)" caption="Diagrama EER en notación de Chen: Diseño defectuoso del gimnasio (para revisar)" >}}
 
 #### Enunciado
 
@@ -371,17 +264,7 @@ Haz la revisión como la haría un compañero senior: no sabes cuántos problema
 Identificadores inestables, atributos derivados, atributos multivaluados escondidos en un texto, atributos colocados en la entidad equivocada, entidades que no tienen identificador, conceptos que deberían ser entidades (monitor, sesión), relaciones redundantes.
 {{% /details %}}
 
-{{% details title="Solución (para el profesorado o tras entregar)" %}}
-1. `nombre` como clave de `SOCIO`: los nombres se repiten. → Añadir `num_socio`.
-2. `edad`: atributo derivado que se desactualiza. → `fecha_nacimiento`.
-3. `actividades` como texto en `SOCIO`: multivaluado escondido y redundante con la relación. → Eliminarlo.
-4. `fecha_reserva` en `SOCIO`: es un atributo de la reserva. → Moverlo a la relación.
-5. `dia`, `hora`, `sala` y `monitor` en `ACTIVIDAD`: una actividad tiene muchas sesiones. → Crear `SESION` (débil de `ACTIVIDAD` o con identificador propio) con día y hora, relacionada con `SALA` y `MONITOR`.
-6. `monitor` como texto: tiene datos propios y participa en relaciones. → Entidad `MONITOR`.
-7. `CUOTA` sin identificador y en relación 1:1 obligatoria: si solo guarda el importe, es un atributo de `SOCIO`; si se quiere el historial de pagos, es una entidad débil `PAGO` con mes y año.
-8. `SOCIO` *entra en* `SALA`: redundante; se deduce de las sesiones reservadas.
-9. El socio no se apunta a una actividad sino que **reserva sesiones**: la relación debe ser SOCIO–SESION.
-{{% /details %}}
+{{< solucion id="ud02-006" title="Solución" />}}
 
 ---
 
@@ -414,13 +297,7 @@ Identificadores inestables, atributos derivados, atributos multivaluados escondi
 
 {{% /details %}}
 
-{{% details title="Solución (para el profesorado o tras entregar)" %}}
-
-- **Ternaria `clase`:** un alumno recibe clase de muchos (profesor, vehículo); un profesor de muchos (alumno, vehículo); un vehículo de muchos (alumno, profesor). Cardinalidad N:M:P con atributos `fecha`, `hora` y `kilometros`; `fecha` y `hora` forman parte de la identificación porque la misma terna se repite.
-- **Agregación:** `MATRICULA` = relación alumno–profesor tratada como entidad. Se relaciona con `EXAMEN` (0,N), de modo que hay matrículas sin examen y matrículas con varios. Con una ternaria alumno–profesor–examen la pareja estaría obligada a participar.
-- **Tres binarias:** se pierde *qué alumno dio clase con qué profesor en qué coche*. Si Ana ha dado clase con Luis y con Marta, y Luis y Marta han usado el coche 1, no se sabe si Ana usó el coche 1 con Luis o con Marta.
-
-{{% /details %}}
+{{< solucion id="ud02-007" title="Solución" />}}
 
 
 ---
@@ -475,81 +352,9 @@ Una cooperativa de aceite quiere registrar la trazabilidad de su producción. Es
 
 {{% /details %}}
 
-{{% details title="Preguntas al cliente y decisiones asociadas (para el profesorado o tras entregar)" %}}
+{{< solucion id="ud02-008" title="Preguntas al cliente y decisiones asociadas" />}}
 
-| Pregunta | Qué decide |
-|---|---|
-| ¿Cuánto pesa cada finca en una entrega que mezcla dos fincas? | Si el peso se guarda **por finca** (la entrega se divide en líneas) o solo por entrega. Afecta a la trazabilidad. |
-| ¿Se registra el porcentaje de propiedad de cada hermano? ¿Puede cambiar con los años? | Atributo `porcentaje` en la relación socio–finca; si cambia, necesita historia (ver práctica 2.8). |
-| ¿Cuánto aceite de cada lote va a cada depósito? | Relación lote–depósito 1:N o N:M con cantidad. |
-| ¿Se mezcla aceite de lotes distintos en un depósito? ¿Y se envasa desde depósitos mezclados? | Trazabilidad hacia atrás: pasa de ser un árbol a un grafo. Hay que decidir hasta dónde se garantiza. |
-| ¿Quién entrega, el titular de la finca o cualquier socio? | Restricción de integridad: el entregador debe ser titular de la finca, no expresable en el diagrama. |
-| ¿La «campaña» tiene identidad propia (fechas, precio) o es solo un año? | Entidad `CAMPAÑA` o atributo. |
-
-{{% /details %}}
-
-{{% details title="Solución de referencia" %}}
-
-```mermaid
-erDiagram
-    SOCIO ||--o{ TITULARIDAD : "es titular"
-    FINCA ||--|{ TITULARIDAD : "tiene titulares"
-    SOCIO ||--o{ ENTREGA : "realiza"
-    ENTREGA ||--|{ LINEA_ENTREGA : "se compone de"
-    FINCA ||--o{ LINEA_ENTREGA : "origen de"
-    CAMPANIA ||--o{ ENTREGA : "agrupa"
-    ENTREGA }o--o{ LOTE : "se muele en (kg)"
-    DEPOSITO }o--o{ LOTE : "recibe aceite de (litros)"
-    DEPOSITO ||--o{ ENVASADO : "abastece"
-    FORMATO ||--o{ ENVASADO : "se envasa en"
-    SOCIO {
-        int cod_socio PK
-        string nombre
-    }
-    FINCA {
-        int poligono PK
-        int parcela PK
-        string termino_municipal
-    }
-    TITULARIDAD {
-        decimal porcentaje
-    }
-    ENTREGA {
-        int num_albaran PK
-        datetime fecha_hora
-        string variedad
-    }
-    LINEA_ENTREGA {
-        decimal kg
-    }
-    LOTE {
-        int cod_lote PK
-        date fecha
-        decimal litros_obtenidos
-    }
-    DEPOSITO {
-        int cod_deposito PK
-        decimal capacidad
-    }
-    ENVASADO {
-        date fecha PK
-        int botellas
-    }
-    FORMATO {
-        string cod_formato PK
-        decimal litros
-    }
-    CAMPANIA {
-        string cod_campania PK
-    }
-```
-
-- `LINEA_ENTREGA` es una entidad débil de `ENTREGA`: guarda los kilos de **cada finca** en un viaje y es lo que permite la trazabilidad por finca.
-- La trazabilidad es **botella → envasado → depósito → lote → entrega → línea → finca**. La parte *depósito → lote* es la que pierde precisión: si un depósito mezcla lotes, solo se puede afirmar que el aceite procede de **alguno** de ellos.
-- Restricciones: (1) el socio de la entrega es titular de todas las fincas de sus líneas; (2) la variedad de todas las líneas de una entrega es la misma; (3) la suma de litros de un lote repartidos en depósitos coincide con los litros obtenidos.
-- Fuera del alcance: pedidos, clientes y facturas.
-
-{{% /details %}}
+{{< solucion id="ud02-009" title="Solución de referencia" />}}
 
 
 ---
@@ -596,21 +401,7 @@ Un diseño que solo guarda «lo que es verdad ahora» olvida lo que ya pasó. Un
 
 {{% /details %}}
 
-{{% details title="Solución y criterios (para el profesorado o tras entregar)" %}}
-
-| Frase del enunciado | Tipo | Modelado |
-|---|---|---|
-| «Dónde estuvo cada coche en cada momento» | Relación que cambia | `COCHE`–`SUCURSAL` N:M con `fecha_inicio` y `fecha_fin` (la actual tiene fin nulo). Un coche está en **una** sucursal en cada instante, pero **a lo largo del tiempo** en muchas. |
-| «Tarifa que revisamos cada año» | Atributo que cambia | Entidad `TARIFA` (categoría, fecha de vigencia, precio día). Identificada por (categoría, fecha de inicio). |
-| «Se queda con el precio de ese día» | Valor que se congela | Atributo `precio_dia` **en el contrato**: copia deliberada de la tarifa vigente. No es redundancia dañina: es un dato firmado que no debe cambiar cuando cambie la tarifa. |
-| «Dirección que tenía el cliente cuando se emitió la factura» | Atributo que cambia | O bien `DIRECCION_CLIENTE` con periodo de vigencia, o bien copia de la dirección en la `FACTURA`. Se prefiere la copia en el documento si no se necesita el historial de domicilios. |
-| «Categoría profesional que cambia con los años» | Atributo que cambia | Relación `EMPLEADO`–`CATEGORIA` N:M con periodo. El sueldo depende de la categoría, no del empleado. |
-
-**Restricciones textuales:** (1) los periodos de un mismo coche en sucursales no se solapan y no hay huecos; (2) la tarifa de una categoría no se solapa con otra de la misma categoría; (3) el contrato debe ser gestionado por un empleado que, en la fecha de entrega, estaba en la sucursal desde la que se entrega el coche.
-
-**Lectura crítica:** tratar el tiempo multiplica el número de relaciones N:M. Antes de aplicarlo a todo, pregunta al negocio qué historia necesita realmente.
-
-{{% /details %}}
+{{< solucion id="ud02-010" title="Solución y criterios" />}}
 
 
 ---
@@ -674,23 +465,7 @@ Base imponible: 267,60 € · IVA 10 % sobre 23,40 €: 2,34 € · IVA 21 % sob
 
 {{% /details %}}
 
-{{% details title="Solución y criterios (para el profesorado o tras entregar)" %}}
-
-**Entidades y relaciones:** `CLIENTE` (código; CIF como alternativa, dirección de entrega), `PRODUCTO` (referencia, descripción, formato), `ALBARAN` (número, fecha, forma de pago, firma), `LINEA_ALBARAN` (débil de `ALBARAN`: nº de línea, unidades, precio, descuento), `REPARTIDOR`, `FURGONETA` (matrícula), `RUTA`, y la relación `VISITA` (documento B) entre cliente, repartidor y furgoneta con hora de llegada, hora de salida e incidencias.
-
-**Derivados:** `importe` = unidades × precio × (1 − descuento); `base imponible` = suma de importes; `IVA` = suma por tipo; `total` = base + IVA.
-
-**Copias:** `precio` y `descuento` de la línea son copias del catálogo vigente: si cambia el catálogo, el albarán no debe cambiar.
-
-**Preguntas abiertas que el documento deja:**
-1. El albarán mezcla **dos tipos de IVA** (10 % para el agua y 21 % para el resto): el tipo depende del producto. Falta saber si `tipo_iva` es atributo de `PRODUCTO` (y entonces cambia con la ley) o debe copiarse en la línea para que el albarán no cambie.
-2. La línea de promoción «3×2» tiene precio 0: ¿es una línea más del albarán o un descuento? Afecta al modelo (¿entidad `PROMOCION`?).
-3. ¿El cliente tiene una dirección de entrega distinta de la fiscal? Se imprime una sola.
-4. ¿Es lo mismo el albarán y la visita? No: un albarán se entrega en una visita, pero puede haber visitas sin albarán (cliente cerrado) y un día puede haber varios albaranes en una misma visita.
-
-**Hecho clave:** el documento A y el B parecen hablar de lo mismo, pero describen hechos distintos. El análisis consiste en separar lo que se entrega (albarán) de lo que se visita (visita).
-
-{{% /details %}}
+{{< solucion id="ud02-011" title="Solución y criterios" />}}
 
 
 ---
@@ -711,49 +486,11 @@ Un club de pádel ha recibido dos propuestas de modelo y no sabe cuál elegir. E
 
 **Propuesta A**
 
-```mermaid
-erDiagram
-    SOCIO ||--o{ RESERVA : "hace"
-    PISTA ||--o{ RESERVA : "se reserva en"
-    RESERVA {
-        datetime fecha_hora PK
-        string jugador1
-        string jugador2
-        string jugador3
-        string jugador4
-        decimal pago1
-        decimal pago2
-        decimal pago3
-        decimal pago4
-    }
-    SOCIO {
-        int num_socio PK
-        string nombre
-    }
-    PISTA {
-        int num_pista PK
-    }
-```
+{{< figura src="ud02/p2_10a.svg" alt="Diagrama EER en notación de Chen: Propuesta A" caption="Diagrama EER en notación de Chen: Propuesta A" >}}
 
 **Propuesta B**
 
-```mermaid
-erDiagram
-    PERSONA ||--o{ PARTICIPACION : "juega"
-    RESERVA ||--|{ PARTICIPACION : "tiene"
-    PISTA ||--o{ RESERVA : "se reserva en"
-    SOCIO ||--o{ RESERVA : "hace"
-    PERSONA {
-        int cod_persona PK
-        string nombre
-    }
-    SOCIO {
-        int num_socio PK
-    }
-    PARTICIPACION {
-        decimal importe_pagado
-    }
-```
+{{< figura src="ud02/p2_10b.svg" alt="Diagrama EER en notación de Chen: Propuesta B" caption="Diagrama EER en notación de Chen: Propuesta B" >}}
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -775,27 +512,282 @@ erDiagram
 
 {{% /details %}}
 
-{{% details title="Solución y criterios (para el profesorado o tras entregar)" %}}
+{{< solucion id="ud02-012" title="Solución y criterios" />}}
 
-| Caso de prueba | A | B |
-|---|---|---|
-| Partido de dos jugadores | Deja columnas vacías | Sí |
-| Cuatro jugadores | Sí | Sí |
-| Invitado sin ficha | No hay entidad: el nombre es solo un texto | Sí (`PERSONA`) |
-| Invitado que se hace socio | Pierde su historial al cambiar de texto a socio | Sí: se le añade la especialización de socio |
-| Un jugador paga por todos | Hay que sumar las columnas | Parcialmente: falta saber **quién** pagó |
-| ¿Cuántas veces ha jugado cada persona? | Hay que buscar en cuatro columnas | Sí |
-| ¿Quién juega con quién? | Muy difícil | Sí (autoconsulta sobre la participación) |
-| ¿Qué debe cada uno? | Mezclado con `pagoN` | Sí, si el importe se separa de «lo pagado por otro» |
 
-**Mejoras a B:**
-1. `PERSONA` es la superclase; `SOCIO` es una especialización parcial. Así el invitado se convierte en socio sin cambiar de identidad.
-2. `PARTICIPACION` guarda `importe_a_pagar`, y se añade una relación `PAGO` entre participación y persona pagadora para representar «paga por todos».
-3. La reserva guarda como atributo quién la hace, sin obligar a que sea socio si el club decidiera permitirlo.
+---
 
-**Lección:** el grupo repetido es la forma habitual de hacer que un modelo no escale. La señal de alarma son atributos numerados (`jugador1`, `jugador2`...).
+## Práctica 2.11 · Festival de música: ediciones, escenarios y actuaciones
+
+{{< practica num="2.11" tipo="Reto" duracion="3 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io" entrega="Diagrama EER + diccionario de datos + restricciones + preguntas al cliente" >}}
+
+#### Contexto
+
+Una asociación cultural organiza varios festivales al año y lleva su programación en hojas de cálculo que ya nadie entiende. Te han enviado el apartado de **requisitos** de la licitación. Como en un documento real, **hay datos repetidos, frases ambiguas y partes que no pertenecen al sistema**. Tu trabajo es separar lo que hay que modelar de lo que no, y dejar por escrito cada decisión que tomes.
+
+#### Enunciado
+
+> **1. Festivales y ediciones.** La asociación organiza actualmente tres festivales (*Sonora Rock*, *Sonora Jazz* y *Sonora Folk*), pero prevé abrir más. Cada festival tiene un nombre y una descripción corta. Cada año se celebra una **edición** de cada festival, con sus fechas de inicio y de fin, la ciudad sede y el presupuesto aprobado. Las ediciones se identifican siempre por el festival y por el año: la asociación habla de «el Sonora Jazz de 2026», nunca de «la edición 17». No se guardan ediciones futuras que no tengan presupuesto aprobado.
+>
+> **2. Recintos y escenarios.** Cada edición se celebra en un recinto, que puede cambiar de un año a otro. De cada escenario se guarda el nombre, el aforo máximo y el **punto de acceso**, que el personal de seguridad necesita descrito en tres partes: la zona del recinto (norte, sur, central…), la puerta y las indicaciones de llegada. Los escenarios se numeran dentro de cada edición (escenario 1, escenario 2…); el «escenario 1» de 2025 no tiene nada que ver con el de 2026, aunque esté en el mismo sitio. Toda edición tiene al menos un escenario.
+>
+> **3. Artistas.** Un artista puede ser un **solista** o una **agrupación**; no se admiten otros tipos y nadie es las dos cosas a la vez (si un solista monta una banda, se da de alta como agrupación aparte). De todos se guarda el nombre artístico, el país de origen, los **géneros** que toca (puede ser más de uno) y los datos del **representante**: nombre, teléfono y correo, que se manejan siempre juntos. De los solistas interesa su nombre real y su fecha de nacimiento; de las agrupaciones, el año de formación y el número de componentes. Los componentes de una agrupación son músicos de los que se guarda el nombre, el instrumento principal y, para cada agrupación a la que pertenecen, la fecha en que entraron y el instrumento con el que tocan en ella. Un mismo músico puede estar en varias agrupaciones.
+>
+> **4. Programación.** El día se divide en **franjas** de treinta minutos que empiezan a la hora en punto o y media. Cada actuación consiste en que un artista toca en un escenario durante una o varias franjas consecutivas; se anota la franja de inicio, la duración en minutos y el caché pactado. Un artista puede actuar varias veces en una misma edición, incluso en escenarios distintos y días distintos, pero **no puede estar en dos escenarios a la vez** y un escenario **no puede acoger dos actuaciones simultáneas**. La asociación quiere consultar la programación de un escenario o la de un artista de un golpe de vista.
+>
+> **5. Personal.** Todo el personal de una edición se identifica por su DNI y tiene nombre, teléfono y talla de camiseta. Se distinguen técnicos (con su especialidad: sonido, iluminación o escenario), personal de seguridad (con su número de habilitación) y voluntarios (con los días de la semana en que están disponibles). Hay personal de producción que no encaja en ninguna de las tres categorías, y es habitual que un voluntario con formación técnica trabaje también como técnico, por lo que la misma persona puede figurar en dos categorías. Cada persona se asigna a un escenario en un turno concreto (mañana, tarde o noche) de una edición; puede cubrir varios turnos y varios escenarios, pero solo de ediciones en las que esté contratada.
+>
+> **6. Fuera de alcance.** La venta de entradas la gestiona una plataforma externa y no forma parte de este sistema; solo se recibirá al final de cada día el total de asistentes por escenario. Tampoco se gestionan los pagos a proveedores ni la contabilidad de la asociación.
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+1. Extrae del texto las **entidades candidatas** y descarta las que no pertenecen al sistema, justificándolo con una frase del apartado 6. Indica cuáles son débiles y cuál es el **identificador completo** de cada una.
+2. Clasifica las dos jerarquías (artistas y personal) como totales o parciales y disyuntas o solapadas, citando la frase del texto que lo justifica. Decide qué atributos van en la superclase.
+3. Modela la actuación como relación **ternaria** (artista, escenario, franja). Calcula la cardinalidad de cada entidad fijando las otras dos y explica cómo las dos prohibiciones del apartado 4 reducen una de ellas.
+4. Marca todos los atributos **compuestos**, **multivaluados** y **derivados** y explica cómo los representarías. ¿`duración` es un atributo de la relación o se deduce de otra cosa?
+5. Escribe **al menos seis restricciones** que el diagrama no puede expresar (solapamientos, coherencia entre ediciones, aforo…).
+6. Redacta cinco **preguntas al cliente** sobre las partes ambiguas del texto y cómo cambiaría tu modelo según la respuesta.
 
 {{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `EDICIÓN` es débil de `FESTIVAL` (festival + año) y `ESCENARIO` es débil de `EDICIÓN` (festival + año + número).
+- [ ] La franja pertenece a la edición o es un dato general; has justificado cuál de las dos opciones eliges.
+- [ ] La jerarquía de artistas es **total y disyunta**; la del personal es **parcial y solapada**.
+- [ ] `punto de acceso` y `representante` son atributos compuestos; `géneros` y `días disponibles` son multivaluados.
+- [ ] La relación entre agrupación y músico es N:M y lleva `fecha_entrada` e `instrumento`.
+- [ ] La asignación de personal tiene el turno como parte de su identificación.
+- [ ] La venta de entradas no aparece en el diagrama.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
+> [!WARNING]
+> - Identificar la edición con un número correlativo global: el texto dice que se identifica por festival y año.
+> - Poner `escenario` como un texto dentro de la actuación: tiene aforo, punto de acceso y personal asignado, así que es una entidad.
+> - Convertir la ternaria en tres binarias y perder qué artista toca en qué escenario en qué franja.
+> - Poner `edad` en lugar de `fecha_nacimiento`, o `número_componentes` como dato introducido en vez de derivado de la relación con los músicos.
+> - Olvidar que el personal puede estar en dos categorías a la vez y declarar la jerarquía disyunta.
+
+{{% /details %}}
+
+#### Ampliación
+
+La asociación quiere una **lista de espera de voluntarios** por edición y que un voluntario pueda recomendar a otro. ¿Es una relación reflexiva? ¿Qué cardinalidad tiene y qué restricción necesitas para evitar que alguien se recomiende a sí mismo?
+
+{{< solucion id="ud02-013" title="Solución de referencia" />}}
+
+
+---
+
+## Práctica 2.12 · Editorial: obras, traducciones y derechos de autor
+
+{{< practica num="2.12" tipo="Reto" duracion="3 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io" entrega="Diagrama EER + justificación de jerarquías, reflexivas y agregación + restricciones" >}}
+
+#### Contexto
+
+Una editorial independiente publica novela, poesía y cómic, traduce obras de otros idiomas y compila antologías. Hoy lleva el catálogo y los contratos en documentos de texto sueltos y ha tenido problemas porque **nadie sabía qué porcentaje de derechos correspondía a cada persona de una obra**. Te entregan este resumen de requisitos.
+
+#### Enunciado
+
+> **1. Obras.** Una **obra** es el texto en sí, independientemente de cómo se publique. Cada obra tiene un código interno, el título, el año de primera publicación y el idioma original. Hay tres clases de obras con datos propios: las **novelas** (número de capítulos y si pertenecen a una saga, en cuyo caso se anota el nombre de la saga y el volumen), los **poemarios** (número de poemas y métrica predominante) y los **cómics** (número de páginas y si son en color o en blanco y negro). Hay obras de divulgación y de ensayo que no encajan en ninguna de las tres clases y solo guardan los datos comunes. Una obra no puede ser a la vez novela y cómic, aunque tenga adaptación: la adaptación es otra obra distinta.
+>
+> **2. Relaciones entre obras.** Una obra puede ser una **traducción** de otra obra de la editorial (la original). De la traducción interesa su idioma, que no coincide con el de la original, y quién la tradujo. Una obra original puede tener muchas traducciones, pero una traducción lo es de una sola original. Además, la editorial publica **antologías**: obras que reúnen fragmentos o piezas completas de otras obras. En una antología importa el orden en que aparece cada pieza y las páginas que ocupa. Una obra puede aparecer en varias antologías, y una antología no puede incluirse a sí misma.
+>
+> **3. Personas y funciones.** Quienes participan en una obra son personas: autores, traductores, ilustradores y prologuistas. De cada persona se guarda el nombre civil, la nacionalidad, la fecha de nacimiento y, si ha fallecido, la fecha de fallecimiento; también uno o varios **seudónimos** bajo los que ha publicado. La **dirección fiscal** se conserva desglosada en calle, número, código postal, localidad y país, porque se utiliza para emitir las retenciones. Una persona puede tener distintas funciones en distintas obras (autor de una, traductor de otra) e incluso más de una en la misma. Para cada función se anota el **porcentaje de derechos** que le corresponde sobre la obra.
+>
+> **4. Contratos y representación.** Antes de publicar una obra se firma un **contrato** de cesión de derechos por cada persona que participa en ella con una función concreta: se guarda la fecha de firma, el anticipo y la duración en años. Algunas personas tienen un **agente literario** que negocia en su nombre; el agente tiene nombre, agencia y teléfono, y puede representar a muchas personas. El contrato refleja si lo ha negociado un agente y quién fue; los contratos de personas sin agente se firman directamente.
+>
+> **5. Ediciones e impresiones.** Una obra se publica en una o varias **ediciones**: cada una con su ISBN (que la identifica en todo el mundo), formato (tapa dura, rústica o libro electrónico), número de páginas y precio. Cada edición se imprime en **tiradas** numeradas dentro de la edición (primera, segunda…), con fecha de impresión, número de ejemplares e imprenta. Una tirada no tiene sentido sin su edición y si se retira una edición se retiran sus tiradas. Los libros electrónicos no tienen tiradas.
+>
+> **6. Librerías.** La editorial envía ejemplares de cada tirada a librerías (CIF, nombre, dirección y teléfono), indicando la fecha de envío y la cantidad. Una librería puede recibir varias veces ejemplares de la misma tirada. Las **ventas** al público las gestiona el distribuidor y quedan fuera del alcance.
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+1. Dibuja el diagrama EER en notación de Chen. Justifica por qué la **obra** y la **edición** son entidades distintas.
+2. Clasifica la jerarquía de obras. ¿Qué cambia si el texto dijera que «toda obra es novela, poemario o cómic»?
+3. Representa las relaciones *traduce* e *incluye* como **reflexivas** sobre obra: escribe sus roles, cardinalidades y atributos, y las restricciones de integridad que necesitan.
+4. Modela la participación de las personas en las obras como relación **ternaria** (persona, obra, función) o como binaria con la función como entidad. Compara las dos opciones y elige una.
+5. Representa el contrato mediante una **agregación** de la participación y explica por qué una simple relación entre persona y obra no basta.
+6. Identifica las entidades débiles y sus identificadores. ¿Por qué el ISBN no convierte la edición en entidad débil y la tirada sí lo es?
+7. Escribe al menos cinco restricciones textuales y señala dos datos que sean **derivados**.
+
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] La jerarquía de obras es **parcial y disyunta**, con atributos propios en cada subclase.
+- [ ] *Traduce* es una reflexiva 1:N con los roles *original* y *traducción*; *incluye* es una reflexiva N:M con `orden` y `páginas`.
+- [ ] La participación de personas lleva el porcentaje de derechos y admite varias funciones de la misma persona en la misma obra.
+- [ ] El contrato se modela como agregación de la participación, con el agente como relación opcional.
+- [ ] `TIRADA` es una entidad débil de `EDICIÓN`; `EDICIÓN` tiene identificador propio (ISBN).
+- [ ] `seudónimos` es multivaluado, `dirección fiscal` es compuesto y «dominio público» o «en vida» es derivado de las fechas.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
+> [!WARNING]
+> - Fundir obra y edición en una sola entidad: se repite el título, el autor y los derechos en cada edición.
+> - Poner `traductor` como atributo de texto en la obra: es una persona con datos y con un porcentaje de derechos.
+> - Modelar la antología como una entidad aparte con una relación a obra: es una obra más, y su relación con otras obras es reflexiva.
+> - Poner el porcentaje de derechos en la persona o en la obra: pertenece a la **participación** (persona, obra, función).
+> - Hacer del agente un atributo del contrato: el agente es una entidad con datos propios y muchas representaciones.
+
+{{% /details %}}
+
+#### Ampliación
+
+Algunas obras tienen **coautoría**. ¿Cambia algo en el modelo? Añade ahora que los derechos de una persona sobre una obra pasan a sus herederos al fallecer: ¿qué relación necesitas y qué problema aparece con las fechas?
+
+{{< solucion id="ud02-014" title="Solución de referencia" />}}
+
+
+---
+
+## Práctica 2.13 · Taller aeronáutico: aeronaves, órdenes de trabajo y habilitaciones
+
+{{< practica num="2.13" tipo="Reto" duracion="3 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io" entrega="Diagrama EER + diccionario de datos + restricciones normativas" >}}
+
+#### Contexto
+
+Un taller de mantenimiento aeronáutico trabaja bajo una normativa estricta: **cada tarea debe poder demostrar quién la hizo, con qué habilitación y sobre qué pieza concreta**. El responsable de calidad te entrega la descripción de lo que el sistema debe registrar. Parte de las reglas están escritas como «debe» y otras aparecen de pasada: **ambas son requisitos**.
+
+#### Enunciado
+
+> **1. Aeronaves y modelos.** El taller revisa aeronaves de muchas compañías. Cada aeronave se identifica por su matrícula y es de un **modelo** (por ejemplo, ATR 72-600), del que se conoce el fabricante, la denominación, la categoría de mantenimiento y las horas de vuelo entre revisiones mayores. De la aeronave se guarda la fecha de fabricación y las horas de vuelo acumuladas, que se actualizan en cada entrada al taller. Hay tres tipos: **aviones** (número de motores y envergadura), **helicópteros** (número de palas del rotor principal y si tienen rotor de cola) y otras aeronaves ligeras que no necesitan datos específicos. Una aeronave es siempre de un único tipo.
+>
+> **2. Propietarios.** Cada aeronave pertenece en cada momento a una persona física o jurídica, de la que se guarda un nombre o razón social, un NIF y una **dirección de contacto** desglosada en calle, número, código postal, localidad y país. Con la compraventa y el arrendamiento una aeronave cambia de propietario a lo largo de su vida, y la normativa exige conservar **todo el historial**: quién fue el propietario y desde qué fecha hasta qué fecha. Un propietario puede tener muchas aeronaves y una aeronave no puede tener dos propietarios al mismo tiempo.
+>
+> **3. Órdenes de trabajo.** Cada vez que una aeronave entra en el taller se abre una **orden de trabajo**, que se numera de forma correlativa dentro de cada año (la orden 17 de 2026). Se guardan la fecha de entrada, la fecha prevista y la real de salida, el tipo de revisión (A, B, C o D) y las observaciones del cliente. Una orden se descompone en **tareas** numeradas dentro de la orden: cada tarea tiene una descripción, las horas estimadas y su estado (pendiente, en curso o terminada). Algunas tareas no pueden empezar hasta que se han terminado otras de la misma orden, y esas dependencias deben quedar registradas. Una tarea no se reutiliza en otra orden: si se repite el trabajo, se crea una tarea nueva.
+>
+> **4. Personal técnico y habilitaciones.** Los técnicos tienen un código de empleado, un nombre y una fecha de contratación. Para trabajar sobre un modelo concreto necesitan una **habilitación**, que se concede por **categoría de licencia** (B1 mecánica, B2 aviónica o C certificación) y tiene una fecha de caducidad. Un técnico puede tener varias habilitaciones: puede ser B1 en el ATR 72 y B2 en el Airbus A320, o B1 y B2 a la vez en el mismo modelo. Para el mismo modelo y la misma categoría hay una única habilitación por técnico. Cada tarea la realizan uno o varios técnicos; se anotan las horas reales que dedica cada uno y la fecha en que firma su parte. Solo los técnicos con categoría C pueden **certificar** la conformidad de una orden completa.
+>
+> **5. Almacén y piezas.** El almacén gestiona piezas identificadas por su número de parte, con la descripción, la unidad de medida y el stock mínimo. Hay dos clases de piezas: los **consumibles** (tornillos, juntas, aceites) de los que solo se controla la cantidad en almacén, y los **rotables** (motores, trenes de aterrizaje) que tienen número de serie propio, las horas acumuladas y una vida útil máxima. Las piezas son de una de las dos clases, nunca de ambas. Cada pieza se compra a uno o varios proveedores, con un precio por proveedor y un plazo de entrega; un proveedor puede suministrar muchas piezas.
+>
+> **6. Uso de piezas.** Una tarea consume piezas (cantidad para los consumibles) o instala y desmonta rotables concretos en una aeronave. De cada instalación se guarda la fecha de montaje y, cuando se retira, la de desmontaje; un rotable no puede estar instalado en dos aeronaves al mismo tiempo, pero a lo largo de su vida pasa por varias. El taller necesita poder responder a «qué rotables llevaba la aeronave EC-XYZ el 3 de marzo» y «en qué aeronaves ha estado instalado este motor».
+>
+> **7. Fuera de alcance.** La facturación al cliente y la nómina de los técnicos se llevan en otros programas.
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+1. Identifica las entidades, indica las **débiles** con su identificador completo y dibuja la cadena orden → tarea. ¿Por qué la matrícula identifica a la aeronave pero el número de orden no identifica a la orden?
+2. Clasifica las dos jerarquías (aeronaves y piezas) y justifica cada clasificación con una frase del texto.
+3. Modela la habilitación como relación **ternaria** técnico–modelo–categoría y calcula las cardinalidades. ¿Por qué no basta una binaria técnico–modelo?
+4. Modela el historial de propietarios, el de instalación de rotables y la dependencia entre tareas. Indica en cada caso qué atributo hace que la misma pareja de entidades pueda repetirse.
+5. Decide cómo representar la **certificación** de una orden y qué restricción exige que el técnico sea de categoría C.
+6. Escribe al menos siete restricciones de integridad que el diagrama no puede recoger.
+7. Enumera tres consultas del taller que tu diagrama debe poder contestar y recorre el camino de relaciones que usaría cada una.
+
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `ORDEN` se identifica por (año, número) y `TAREA` por (año, número de orden, número de tarea).
+- [ ] La jerarquía de aeronaves es **parcial y disyunta**; la de piezas, **total y disyunta**.
+- [ ] La habilitación es una ternaria con la fecha de caducidad como atributo.
+- [ ] El historial de propiedad y el de instalación llevan fecha de inicio como parte de su identificación.
+- [ ] La dependencia entre tareas es una N:M reflexiva sin atributos.
+- [ ] La relación tarea–técnico es N:M con `horas_reales` y `fecha_firma`.
+- [ ] `dirección de contacto` aparece como atributo compuesto.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
+> [!WARNING]
+> - Guardar el propietario como atributo de la aeronave: se pierde el historial que exige la normativa.
+> - Identificar la tarea solo por su número dentro de la orden, sin heredar la identificación de la orden.
+> - Confundir `rotable` (con número de serie e historial) con `consumible` (solo cantidad) y poner las horas acumuladas en todas las piezas.
+> - Resolver la habilitación con dos binarias (técnico–modelo y técnico–categoría): no se sabe qué categoría tiene sobre qué modelo.
+> - Dar a las tareas dependientes una relación 1:N: una tarea puede esperar a varias y ser requisito de varias.
+
+{{% /details %}}
+
+#### Ampliación
+
+La autoridad aeronáutica exige que cada **certificación de orden** quede firmada por un técnico de categoría C, con la fecha y un número de certificado único. Modela la certificación y decide si es una entidad, una relación con atributos o una agregación. Después añade la posibilidad de que una certificación sea **anulada** y sustituida por otra.
+
+{{< solucion id="ud02-015" title="Solución de referencia" />}}
+
+
+---
+
+## Práctica 2.14 · Comunidad de propietarios: inmuebles, juntas y votaciones
+
+{{< practica num="2.14" tipo="Reto" duracion="3 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io" entrega="Diagrama EER + justificación de la cadena de débiles y de la ternaria + restricciones legales" >}}
+
+#### Contexto
+
+Un administrador de fincas gestiona decenas de comunidades de propietarios con hojas de cálculo y papel. Quiere un sistema que le permita saber **quién es dueño de qué en cada momento, qué se votó en cada junta y quién debe dinero**. Esta es la descripción del cliente. Como suele ocurrir, mezcla reglas legales con costumbres de la casa, y no todas tienen el mismo peso.
+
+#### Enunciado
+
+> **1. Comunidades e inmuebles.** El administrador lleva varias comunidades. Cada comunidad tiene un CIF, un nombre, una dirección (calle, número, código postal y localidad) y una cuenta bancaria en la que se ingresan las cuotas. Una comunidad se compone de uno o varios **portales**, numerados dentro de la comunidad (portal 1, portal 2…), y cada portal contiene **inmuebles** que se identifican por su planta y su letra dentro del portal (3.º B). El «3.º B del portal 1» de una comunidad nada tiene que ver con el «3.º B del portal 1» de otra.
+>
+> **2. Tipos de inmuebles.** Todo inmueble tiene su superficie en metros cuadrados y un **coeficiente de participación** (el tanto por ciento que le corresponde en los gastos y en los votos); la suma de coeficientes de una comunidad es siempre el 100 %. Los inmuebles son viviendas (número de dormitorios y si tienen terraza), locales comerciales (actividad que se desarrolla y número de licencia) o plazas de garaje (número de plaza y planta del sótano). Un inmueble es siempre de un único tipo. Algunos garajes están **vinculados** a una vivienda concreta y se transmiten con ella; un garaje solo puede estar vinculado a una vivienda de su misma comunidad, y una vivienda puede tener varios garajes vinculados.
+>
+> **3. Propietarios.** Los propietarios pueden ser personas físicas (DNI, nombre y apellidos) o jurídicas (CIF, razón social y persona de contacto, con su nombre y teléfono). Los dos tipos comparten un teléfono y un correo de notificación. Un inmueble puede pertenecer a varias personas a la vez, cada una con su **porcentaje de propiedad** (el 50 % cada uno si lo compran dos hermanos). La propiedad cambia con ventas y herencias, y se debe conservar el **historial**: quién fue propietario de qué inmueble, con qué porcentaje y entre qué fechas. Si no se conoce la fecha de fin, el propietario sigue siéndolo.
+>
+> **4. Juntas.** Cada comunidad celebra juntas, ordinarias o extraordinarias, numeradas por año dentro de la comunidad (la junta 2 de 2026). De cada una se guardan la fecha, el lugar, si se celebró en primera o en segunda convocatoria y el acta (un texto largo). Cada junta tiene un **orden del día** compuesto por puntos numerados dentro de la junta; cada punto tiene un título, una descripción y el resultado de la votación (aprobado, rechazado o sin votación). Los puntos no existen fuera de su junta.
+>
+> **5. Asistencia, delegación y voto.** A cada junta asisten propietarios, bien en persona, bien **representados** por otro propietario de la misma comunidad a quien han delegado su voto; de cada asistente se anota si estuvo presente o representado. Un propietario puede delegar su voto en una junta concreta en otro, que a su vez puede acumular varias delegaciones, pero nadie puede delegar en sí mismo ni delegar un voto que ya ha recibido por delegación. Cuando un punto se somete a votación, cada propietario presente o representado vota **a favor, en contra o se abstiene**, y el voto cuenta con el coeficiente del inmueble. Se desea saber cómo votó cada propietario en cada punto.
+>
+> **6. Cuotas, derramas y recibos.** Cada inmueble paga una cuota mensual de gastos proporcional a su coeficiente. Además, la junta puede aprobar **derramas extraordinarias** (una obra, por ejemplo) en un punto del orden del día; la derrama se reparte entre los inmuebles según el coeficiente y tiene un importe total, un concepto y unas fechas de pago. Todos los cobros se emiten como **recibos** a nombre del propietario actual del inmueble, numerados dentro de cada inmueble; en un recibo se anotan el concepto, el importe, la fecha de emisión y, cuando se paga, la fecha de pago. Un recibo es moroso si pasan treinta días desde la emisión sin haberse pagado.
+>
+> **7. Fuera de alcance.** La contabilidad general de la comunidad, las incidencias de mantenimiento y los contratos con proveedores se tratarán en una fase posterior.
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+1. Dibuja la **cadena de entidades débiles** comunidad → portal → inmueble y escribe el identificador completo de cada una. Explica por qué no se puede usar un código global de inmueble sin perder información.
+2. Clasifica la jerarquía de inmuebles y la de propietarios. Justifica cada clasificación con una frase del texto y decide qué atributos van en cada nivel.
+3. Modela el vínculo entre garajes y viviendas. ¿Es una reflexiva? ¿Qué cardinalidad tiene desde cada lado?
+4. Modela la **propiedad con historial** (inmueble, propietario, porcentaje, fechas) y justifica qué atributo forma parte del identificador.
+5. Modela la **delegación de voto** como relación **ternaria** (propietario que delega, propietario representante, junta). Calcula sus cardinalidades y escribe las tres restricciones del apartado 5.
+6. Modela el voto en cada punto y explica por qué el coeficiente **no** es un atributo del voto.
+7. Identifica los atributos compuestos, derivados y multivaluados (si los hay) y explica qué haría falta preguntar al cliente para decidir.
+8. Escribe al menos ocho restricciones, distinguiendo las **legales** de las **de negocio**.
+
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `PORTAL` es débil de `COMUNIDAD`; `INMUEBLE` es débil de `PORTAL`; `JUNTA` es débil de `COMUNIDAD`; `PUNTO` es débil de `JUNTA`; `RECIBO` es débil de `INMUEBLE`.
+- [ ] La jerarquía de inmuebles es **total y disyunta**; la de propietarios, **total y disyunta**, con atributos distintos en cada subclase.
+- [ ] El vínculo garaje–vivienda es una relación 1:N desde la vivienda y opcional del lado del garaje.
+- [ ] La propiedad es una N:M entre inmueble y propietario con `porcentaje` y `fecha_inicio` como parte del identificador.
+- [ ] La delegación es una ternaria con dos papeles distintos para la misma entidad `PROPIETARIO`.
+- [ ] El voto es una N:M entre propietario y punto, con el sentido del voto como atributo.
+- [ ] «Moroso» se ha declarado como atributo derivado.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
+> [!WARNING]
+> - Usar un código de inmueble global y perder la estructura portal–planta–letra que usa el administrador.
+> - Poner `propietario` como atributo del inmueble: se pierden el reparto de porcentajes y el historial.
+> - Modelar la delegación como una relación binaria entre propietarios, sin la junta: el mismo propietario puede delegar en uno u otro según la junta.
+> - Guardar el coeficiente en el voto: es un dato del inmueble, y el propietario puede tener varios.
+> - Guardar el resultado de la votación como texto libre, o contarlo a mano, en lugar de derivarlo de los votos (aprobado si los votos a favor superan a los contrarios).
+
+{{% /details %}}
+
+#### Ampliación
+
+Una comunidad puede tener **subcomunidades** (por ejemplo, un garaje común a varios portales con sus propias cuotas). Decide si se modela como una reflexiva de `COMUNIDAD` o como una entidad nueva, y explica qué ocurre con los coeficientes.
+
+{{< solucion id="ud02-016" title="Solución de referencia" />}}
 
 
 ---
@@ -1528,19 +1520,20 @@ Lee la [entrevista con la jefatura de estudios](/guia/proyecto-edugest#1-enuncia
 
 ## Banco de ejercicios
 
-30 ejercicios para practicar el diseño conceptual, **ordenados de menor a mayor dificultad** en cuatro bloques. Cada ejercicio tiene el mismo formato que las prácticas: contexto y enunciado a la vista, y **objetivo, tareas, comprobación, errores habituales y solución plegados** (dibujada con la notación EER que usamos en clase). Los enunciados están escritos sin resaltar las entidades: reconocerlas es parte del ejercicio.
+35 ejercicios para practicar el diseño conceptual, **ordenados de menor a mayor dificultad** en cinco bloques. Cada ejercicio tiene el mismo formato que las prácticas: contexto y enunciado a la vista, y **objetivo, tareas, comprobación, errores habituales y solución plegados** (dibujada con la notación EER que usamos en clase). Los enunciados están escritos sin resaltar las entidades: reconocerlas es parte del ejercicio.
 
 | Bloque | Ejercicios | Qué introduce | Además del diagrama se pide |
 |---|---|---|---|
 | Fundamentos ●○○ | 1-5 | Entidades, atributos, identificadores, relaciones 1:N y N:M, atributos de relación y una primera relación reflexiva. | Diagrama y supuestos |
 | Intermedio ●●○ | 6-15 | Relaciones 1:1, N:M reflexivas, entidades débiles, atributos compuestos, multivaluados y derivados, y varias relaciones entre las mismas entidades. | Justificar decisiones y escribir restricciones textuales |
-| Integración ●●○ → ●●● | 16-23 | Relaciones ternarias, agregación, dos relaciones entre las mismas entidades, listas de materiales, cardinalidades máximas concretas y primera generalización. | Clasificar jerarquías, comparar ternaria y agregación, diccionario parcial |
-| EER avanzado ●●● | 24-30 | Varias especializaciones en un mismo modelo, cadenas de entidades débiles, ternarias con atributos y casos de integración completos. | Diccionario de datos, restricciones y tablas previstas |
+| Intermedio: integración ●●○ | 16-23 | Relaciones ternarias, agregación, dos relaciones entre las mismas entidades, listas de materiales, cardinalidades máximas concretas y primera generalización. | Clasificar jerarquías, comparar ternaria y agregación, diccionario parcial |
+| Intermedio: EER ●●○ | 24-30 | Varias especializaciones en un mismo modelo, cadenas de entidades débiles, ternarias con atributos y casos de integración completos. | Diccionario de datos, restricciones y tablas previstas |
+| Consolidación ●●● | 31-35 | Casos largos que mezclan cadenas de débiles, ternarias, agregación, reflexivas y especializaciones. | Diagrama, diccionario de datos, restricciones y tablas previstas |
 
-{{< figura src="ud02/chen-eer-leyenda.svg" alt="Leyenda de la notación EER: entidad, entidad débil, rombo blanco 1:1, rombo mitad blanco y mitad negro 1:N, rombo negro N:M, ternaria, dependencias ID y E, atributos, generalización y agregación" caption="Leyenda de la notación EER usada en las soluciones" >}}
+{{< figura src="ud02/chen-eer-leyenda.svg" alt="Leyenda de la notación de Chen extendida: entidad, entidad débil, relación, relación identificadora (rombo doble), participación parcial y total, ternaria, atributos, especialización con círculo d u o, y agregación" caption="Leyenda de la notación de Chen extendida (EER) usada en las soluciones" >}}
 
 > [!IMPORTANT]
-> **Cómo se lee el rombo.** Cada mitad del rombo mira a una entidad. La mitad es **negra** si el máximo escrito junto a esa entidad es N (o un número mayor que 1) y **blanca** si es 1. Así, un rombo blanco es 1:1, uno mitad blanco y mitad negro es 1:N y uno negro entero es N:M. En las ternarias se divide un triángulo en tres sectores con el mismo criterio. Junto a cada punta se repite el máximo (1 o N).
+> **Notación de Chen extendida.** Las entidades son rectángulos y las relaciones, rombos; la entidad débil lleva rectángulo doble y su relación identificadora, rombo doble. Una **línea doble** une una entidad con una relación cuando la participación es total (mínimo 1) y una línea sencilla cuando es parcial (mínimo 0). Junto al rombo se rotula la cardinalidad máxima (1, N, M, P) y junto a la entidad el par (mín, máx). Las especializaciones se dibujan con un círculo con **d** (disyunta) u **o** (solapada); cada subclase se une con el símbolo de subconjunto ⊂ y la línea hasta la superclase es doble si la especialización es total.
 
 > [!IMPORTANT]
 > **Convenio de cardinalidades.** El par (mín, máx) escrito **junto a una entidad** indica con cuántas instancias de **esa** entidad se relaciona una instancia de la otra. Es el mismo convenio de la [teoría](/ud02-modelo-er/ud02-teoria#71-equivalencia-entre-la-notación-de-chen-y-la-pata-de-gallo). En una relación ternaria, el par junto a una entidad cuenta cuántas instancias de ella corresponden a cada pareja de las otras dos.
@@ -1549,7 +1542,7 @@ Lee la [entrevista con la jefatura de estudios](/guia/proyecto-edugest#1-enuncia
 > **Cómo trabajar un ejercicio.** Aplica el método de arriba, dibuja en papel o en draw.io, rellena la lista de comprobación y solo entonces despliega la solución. Si tu diagrama difiere, no significa que esté mal: compara los **supuestos**. Dos diseños distintos son válidos si responden igual a las reglas del enunciado.
 
 > [!NOTE]
-> Los atributos se escriben en `snake_case` para que sirvan de nombres de columna en la [UD03](/ud03-modelo-relacional/ud03-teoria). Las entidades débiles llevan doble rectángulo y la etiqueta **ID** (dependencia en identificación) o **E** (dependencia en existencia) junto a la relación de la que dependen. El subrayado discontinuo marca el discriminador de una entidad débil y el atributo de una relación que permite repetir la misma combinación de entidades (por ejemplo, la fecha de una multa). El subrayado de puntos marca una clave alternativa. En las generalizaciones, **T/P** indica total o parcial y **D/S**, disjunta o solapada.
+> Los atributos se escriben en `snake_case` para que sirvan de nombres de columna en la [UD03](/ud03-modelo-relacional/ud03-teoria). El subrayado continuo marca el identificador, el discontinuo el discriminador de una entidad débil (o el atributo que permite repetir la misma combinación de entidades en una relación, como la fecha de una multa) y el de puntos una clave alternativa. Los óvalos dobles son multivaluados, los discontinuos derivados y los que cuelgan de otro óvalo, compuestos. Algunos ejercicios añaden una **E** junto a la entidad que depende en existencia (conserva su propio identificador).
 
 
 ---
@@ -1575,13 +1568,9 @@ Una pequeña empresa de distribución quiere informatizar sus ventas y sus compr
 
 #### Enunciado
 
-> Una empresa comercializa productos a clientes finales y se abastece mediante proveedores externos.
+> Somos una pequeña distribuidora y vendemos a particulares. Cuando alguien nos compra apuntamos quién es: su DNI, cómo se llama y se apellida, a qué dirección le enviamos el pedido y cuándo nació, porque en su cumpleaños le hacemos un descuento. Una misma persona nos compra cosas distintas a lo largo del año y, como es lógico, cada artículo acaba en casa de muchos clientes.
 >
-> De cada cliente se conocen el DNI, el nombre, los apellidos, la dirección y la fecha de nacimiento. Un cliente puede comprar varios productos y un mismo producto puede ser adquirido por diferentes clientes.
->
-> De cada producto se almacena un código identificativo, el nombre y el precio unitario.
->
-> Los productos los suministran proveedores. Cada producto lo suministra un único proveedor (exclusivo), mientras que un proveedor puede suministrar varios productos. De cada proveedor se desea conocer el NIF, el nombre y la dirección.
+> En el catálogo cada artículo tiene su código, su nombre y lo que cuesta la unidad. No fabricamos nada: a cada artículo se lo sirve siempre el mismo proveedor y no lo cambiamos de uno a otro, aunque un proveedor nos suministra muchos artículos. Del proveedor nos hace falta el NIF, el nombre con el que se anuncia y su dirección, para mandarle los pedidos de reposición. La furgoneta de reparto no entra en esto, la llevamos aparte.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -1616,24 +1605,7 @@ Una pequeña empresa de distribución quiere informatizar sus ventas y sus compr
 
 La empresa quiere guardar la **fecha** y la **cantidad** de cada compra. ¿Dónde colocas esos atributos? ¿Qué problema aparece si un cliente compra el mismo producto en dos días distintos?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej01.svg" alt="CLIENTE compra PRODUCTO (N:M). PROVEEDOR suministra PRODUCTO (1:N)." caption="Ejercicio 1: Ventas, clientes, productos y proveedores" >}}
-
-**Decisiones de diseño**
-
-- *Compra* es **N:M**: un cliente compra muchos productos y un producto lo compran muchos clientes.
-- *Suministra* es **1:N**: el máximo es 1 en el lado del proveedor. Por eso no hace falta una tabla intermedia cuando se pase al modelo relacional (UD03).
-- Los atributos de cada entidad son los del enunciado; el DNI, el código y el NIF identifican.
-
-**Supuestos semánticos**
-
-1. Un cliente puede estar registrado sin haber comprado todavía: (0,N).
-2. Todo producto tiene proveedor: (1,1).
-3. Un proveedor puede estar dado de alta sin productos: (0,N).
-4. El DNI, el código del producto y el NIF no se repiten.
-
-{{% /details %}}
+{{< solucion id="ud02-017" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -1655,13 +1627,11 @@ Una plataforma de cine bajo demanda quiere recomendar películas y avisar al cli
 
 #### Enunciado
 
-> Se desea crear una base de datos para una plataforma de películas en *streaming*.
+> Unos amigos montan una plataforma de películas por internet y quieren la base de datos antes de escribir la aplicación. Para darse de alta el cliente nos da su NIF, su nombre y apellidos, un correo y su dirección; además, cada cliente tiene en la cuenta un saldo con el que va pagando los alquileres.
 >
-> A los clientes se les piden sus datos personales (NIF, nombre, apellidos, correo electrónico y dirección) y el sistema mantiene el saldo disponible de su cuenta.
+> Lo importante es el catálogo. Cada película tiene su título, el año en que se estrenó y cuánto dura, y la identificamos internamente con un código. La gente la encuentra por el título, pero también por el género (cada película es de uno, comedia, drama, terror…) y por los actores que salen; de ellos guardamos un código, el nombre completo y de dónde son.
 >
-> Los clientes pueden buscar películas por género, por actores y por título. De cada película se guarda un código, el título, el año de estreno y la duración en minutos. De los actores se conoce un código, el nombre completo y la nacionalidad. Cada película pertenece a un género (comedia, drama, terror…).
->
-> La plataforma debe avisar al cliente si una película ya la ha visto. Para ello registra qué películas ha visto cada cliente, la fecha y la valoración (de 1 a 5) que le ha dado.
+> Queremos que, al abrir una película, la aplicación avise de que ya la viste. Para eso hay que recordar qué ha visto cada persona, qué día lo vio y qué nota le puso, del 1 al 5.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -1698,24 +1668,7 @@ Una plataforma de cine bajo demanda quiere recomendar películas y avisar al cli
 
 Una película puede pertenecer a **varios géneros** (comedia romántica, terror psicológico…). ¿Qué cambia en la relación *pertenece a*? ¿Y en el color del rombo?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej02.svg" alt="CLIENTE ve PELÍCULA (N:M con fecha y valoración). ACTOR actúa en PELÍCULA (N:M). PELÍCULA pertenece a GÉNERO (N:1)." caption="Ejercicio 2: Películas en streaming" >}}
-
-**Decisiones de diseño**
-
-- *Ve* es **N:M** con `fecha` y `valoración`: la existencia de la pareja (cliente, película) ya indica que la ha visto. Si se quiere guardar cada visionado, la fecha pasa a formar parte de la identificación (subrayado discontinuo).
-- *Actúa en* es N:M: un actor participa en muchas películas y una película tiene muchos actores.
-- *Pertenece a* es 1:N: cada película tiene un género y un género agrupa muchas películas. El rombo tiene la mitad blanca junto a `GÉNERO` (máximo 1) y la negra junto a `PELÍCULA` (máximo N).
-
-**Supuestos semánticos**
-
-1. Un cliente puede no haber visto ninguna película todavía: (0,N).
-2. Toda película tiene al menos un actor registrado: (1,N).
-3. Se guarda cada visionado, de modo que un cliente puede ver la misma película en fechas distintas.
-4. La valoración es un entero entre 1 y 5 (restricción de dominio).
-
-{{% /details %}}
+{{< solucion id="ud02-018" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -1737,11 +1690,9 @@ Un ayuntamiento quiere gestionar las infracciones de tráfico y las multas asoci
 
 #### Enunciado
 
-> De cada vehículo se registra la matrícula, el tipo, la marca y el modelo. Un vehículo pertenece a un propietario registrado. De los propietarios interesa guardar el DNI, el nombre, los apellidos y la dirección. Un propietario puede tener varios vehículos.
+> El ayuntamiento quiere controlar las multas de tráfico. Lo primero es saber de qué coches hablamos: de cada uno se anota la matrícula, si es turismo, moto o furgoneta, la marca y el modelo. Cada vehículo tiene un dueño censado en el municipio, al que hay que poder escribir a su casa y al que se identifica con el DNI y su nombre completo; un vecino puede tener varios coches.
 >
-> Existe un catálogo de infracciones con su código, una descripción y la cuantía a pagar.
->
-> Cuando un vehículo comete una infracción se genera la multa correspondiente, con la fecha de la sanción y la fecha de pago. Un mismo vehículo puede recibir varias multas a lo largo del tiempo y una infracción del catálogo puede cometerse muchas veces por distintos vehículos.
+> La policía local no inventa las infracciones: existe una lista oficial en la que cada una tiene su código, un texto que la describe y lo que hay que pagar por ella. Cada vez que un coche comete una de ellas se pone una multa en la que consta el día en que se puso y el día en que se pagó (si se llega a pagar). Un coche puede acumular multas durante años, incluso por lo mismo, y una infracción de la lista la comete mucha gente.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -1777,24 +1728,7 @@ Un ayuntamiento quiere gestionar las infracciones de tráfico y las multas asoci
 
 La multa puede **recurrirse** varias veces (fecha del recurso y resolución). ¿Sigue siendo adecuada una relación con atributos? Razona por qué la multa pasaría a ser entidad.
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej03.svg" alt="PROPIETARIO posee VEHÍCULO (1:N). VEHÍCULO se sanciona con INFRACCIÓN (N:M con fecha de sanción y fecha de pago)." caption="Ejercicio 3: Multas de tráfico municipales" >}}
-
-**Decisiones de diseño**
-
-- *Posee* es 1:N: el máximo es 1 en el lado del propietario.
-- *Se sanciona con* es una N:M entre `VEHÍCULO` e `INFRACCIÓN` con `fecha_sanción` (discriminador) y `fecha_pago`. Es la opción más compacta si la multa no tiene vida propia.
-- Alternativa válida: `MULTA` como entidad con un número de multa y dos relaciones 1:N. Es preferible si la multa se recurre, se notifica o se fracciona (ver ampliación).
-
-**Supuestos semánticos**
-
-1. Un propietario puede estar registrado sin vehículos.
-2. Un vehículo tiene siempre un propietario.
-3. Un vehículo no recibe dos multas por la misma infracción en la misma fecha.
-4. `fecha_pago` está vacía mientras la multa está pendiente.
-
-{{% /details %}}
+{{< solucion id="ud02-019" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -1816,11 +1750,11 @@ Una naviera internacional necesita gestionar su flota y las mercancías que tran
 
 #### Enunciado
 
-> De los capitanes se quiere guardar el DNI, el nombre, el teléfono, la dirección, el salario y la población de residencia. Un capitán transporta muchos contenedores y cada contenedor lo transporta un único capitán.
+> Una naviera pequeña nos pide ordenar su papeleo. Trabajan con capitanes, de quienes necesitan saber el DNI, cómo se llaman, un teléfono, dónde viven (dirección y población) y cuánto cobran. Cada capitán se encarga de llevar muchos contenedores, pero cada contenedor lo lleva siempre un único capitán.
 >
-> De los contenedores interesa conocer el código, una descripción, la dirección del remitente y la dirección del destinatario. Cada contenedor tiene como destino un único puerto, pero a un puerto pueden llegar muchos contenedores. De los puertos se guarda el código y el nombre.
+> Los contenedores llevan un código pintado en el costado y una descripción de lo que viajan dentro; además se apuntan las señas de quien los envía y de quien los recibe. Todo contenedor tiene un único puerto de destino y a un puerto (con su código y su nombre) pueden llegar contenedores de todo tipo.
 >
-> De los barcos se conoce la matrícula, el nombre, la potencia del motor y el astillero. Un capitán puede gobernar distintos barcos en fechas diferentes (se registra la fecha de inicio y la de fin) y un barco puede ser gobernado por varios capitanes a lo largo del tiempo.
+> Los barcos tienen una matrícula, un nombre, la potencia de su motor y el astillero donde se construyeron. No es raro que un mismo capitán gobierne barcos distintos en épocas distintas ni que un barco pase por las manos de varios capitanes: lo que quieren es poder saber desde qué día hasta qué día mandó cada uno cada barco.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -1860,24 +1794,7 @@ Si el mismo capitán puede volver a gobernar el mismo barco, la pareja (capitán
 
 La naviera quiere saber en qué **barco** viaja cada contenedor. ¿Cómo se modifica el modelo? ¿Sigue siendo necesaria la relación entre capitán y contenedor?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej04.svg" alt="CAPITÁN transporta CONTENEDOR (1:N). CONTENEDOR llega a PUERTO (N:1). CAPITÁN gobierna BARCO (N:M con fechas)." caption="Ejercicio 4: Naviera: capitanes, contenedores, puertos y barcos" >}}
-
-**Decisiones de diseño**
-
-- *Transporta* y *llega a* son 1:N en cadena: capitán → contenedor → puerto.
-- *Gobierna* es N:M y lleva `fecha_inicio` y `fecha_fin`. `fecha_inicio` se marca como discriminador (subrayado discontinuo) porque permite repetir la pareja capitán-barco en periodos distintos.
-- El puerto de destino es una entidad: tiene datos propios (código y nombre) y varios contenedores comparten el mismo puerto.
-
-**Supuestos semánticos**
-
-1. Todo contenedor tiene capitán y puerto de destino: (1,1).
-2. Un capitán puede no haber transportado aún ningún contenedor.
-3. `fecha_fin` está vacía mientras el capitán sigue al mando del barco.
-4. Un capitán no gobierna dos barcos a la vez (restricción que el diagrama no recoge).
-
-{{% /details %}}
+{{< solucion id="ud02-020" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -1899,9 +1816,7 @@ Un registro genealógico quiere guardar quién es progenitor de quién.
 
 #### Enunciado
 
-> Se desea diseñar una base de datos que registre las relaciones de parentesco entre personas. De cada persona se conocen el DNI, el nombre, la dirección y el teléfono.
->
-> Una persona puede ser progenitora (padre o madre) de varios hijos o hijas, o de ninguno. Toda persona registrada en el sistema debe tener registrada obligatoriamente su filiación directa con su progenitor o progenitora.
+> Queremos registrar el parentesco entre las personas de un municipio. De cada persona guardamos el DNI, el nombre, el domicilio y un teléfono de contacto. Lo que de verdad importa es de quién es hijo cada cual: hay personas que han tenido varios hijos y otras ninguno, pero en el registro no puede aparecer nadie de quien no sepamos quién es su padre o su madre.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -1909,7 +1824,7 @@ Un registro genealógico quiere guardar quién es progenitor de quién.
 1. Dibuja el diagrama EER con una **relación reflexiva** y los **roles** (progenitor, hijo).
 2. Escribe las cardinalidades (mín, máx) de cada rol. ¿Cuántos progenitores puede tener una persona como máximo?
 3. Razona si el mínimo que pide el enunciado («obligatoriamente») se puede mantener en una base de datos real y propón uno viable.
-4. Colorea el rombo según la notación del módulo y explica por qué queda entero en negro.
+4. Indica el máximo de cada lado de la relación en el vértice del rombo y explica qué significa que ambos sean mayores que 1.
 
 {{% /details %}}
 
@@ -1930,7 +1845,7 @@ Un registro genealógico quiere guardar quién es progenitor de quién.
 > [!WARNING]
 > - Crear dos entidades `PADRE` e `HIJO`. Ambos son `PERSONA` y una persona puede ser a la vez padre e hijo.
 > - Poner (1,1) en el rol de progenitor: solo permitiría registrar a uno de los dos progenitores y, además, obligaría a que todas las personas tuvieran uno registrado.
-> - Dibujar el rombo mitad blanco y mitad negro: los dos máximos (2 y N) son mayores que 1, así que las dos mitades van en negro.
+> - Escribir un 1 en un extremo del rombo: los dos máximos (2 y N) son mayores que 1, así que no hay lado «1» (es una relación N:M).
 
 {{% /details %}}
 
@@ -1942,24 +1857,7 @@ Si todas las personas deben tener progenitor registrado y la base de datos es fi
 
 Se quiere distinguir la filiación **biológica** de la **adoptiva** y registrar la fecha de adopción. ¿Dónde colocas esos atributos? ¿Sigue siendo 2 el máximo del rol *progenitor*?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej05.svg" alt="PERSONA tiene hijos PERSONA: relación reflexiva N:M con los roles progenitor (0,2) e hijo (0,N)." caption="Ejercicio 5: Parentesco y filiación" >}}
-
-**Decisiones de diseño**
-
-- *Tiene hijos* es una relación reflexiva **N:M**: una persona tiene hasta 2 progenitores registrados y puede tener muchos hijos. Por eso el rombo es negro entero.
-- El enunciado pide que la filiación sea obligatoria (mínimo 1), pero eso es insostenible: se corrige a **(0,2)** y se documenta como restricción de negocio (RA6.h).
-- El máximo 2 es una cardinalidad concreta: se escribe tal cual en el diagrama. Al pasar al modelo relacional (UD03) no se puede controlar solo con claves; necesitará un `CHECK` o un disparador.
-- Los roles distinguen los dos extremos de la misma entidad.
-
-**Supuestos semánticos**
-
-1. Las personas fundadoras del árbol no tienen progenitor registrado: mínimo 0.
-2. Una persona tiene como máximo dos progenitores registrados (padre y madre).
-3. Una persona no puede ser progenitora de sí misma ni de sus ascendientes (restricción que el diagrama no recoge).
-
-{{% /details %}}
+{{< solucion id="ud02-021" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -1988,15 +1886,11 @@ Un instituto de Educación Secundaria y Formación Profesional diseña su base d
 
 #### Enunciado
 
-> De los profesores se guarda el DNI, el nombre, la dirección y el teléfono. Los profesores imparten módulos, cada uno con un código y un nombre. Un profesor puede impartir varios módulos, pero cada módulo lo imparte un único profesor.
+> Un instituto necesita ordenar su estructura académica. El profesorado está dado de alta con su DNI, su nombre, su dirección y su teléfono. Cada uno puede dar varios módulos, pero cada módulo (que tiene un código y un nombre) lo da una sola persona.
 >
-> Algunos módulos tienen como prerrequisito haber cursado otros. Un módulo puede exigir varios módulos previos y, a su vez, ser requisito de otros.
+> Entre módulos hay dependencias: para cursar algunos hay que haber pasado antes por otros, y hay módulos que se piden para varios más. Del alumnado se anota su número de expediente, el nombre y apellidos, cuándo nació y el curso en el que está. Un alumno puede matricularse de un solo módulo o de varios y siempre queda constancia del día que se matriculó.
 >
-> De cada alumno se almacena el número de expediente, el nombre, los apellidos, la fecha de nacimiento y el curso. Un alumno se matricula en uno o varios módulos y se registra la fecha de matriculación.
->
-> Cada curso cuenta con un grupo de alumnos. Dentro de cada grupo se elige a uno de ellos como delegado, que representa a sus compañeros.
->
-> Los alumnos que lo soliciten pueden disponer de un casillero (número y tamaño en metros). Un casillero pertenece a un único alumno y un alumno tiene como máximo un casillero.
+> Los alumnos de un mismo curso forman un grupo y, dentro del grupo, los compañeros eligen a uno que habla en su nombre. Además, quien lo pide recibe un casillero (con su número y su tamaño en metros); un casillero solo es de una persona y nadie puede tener más de uno.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -2013,7 +1907,7 @@ Un instituto de Educación Secundaria y Formación Profesional diseña su base d
 {{% comprobacion %}}
 - [ ] *Es requisito de* es una N:M **reflexiva** sobre `MÓDULO` con dos roles.
 - [ ] *Es delegado de* es una 1:N **reflexiva** sobre `ALUMNO`.
-- [ ] La relación alumno–casillero es 1:1 con (0,1) en los dos lados: el rombo es blanco entero.
+- [ ] La relación alumno–casillero es 1:1 con (0,1) en los dos lados: los dos máximos son 1 (relación 1:1).
 - [ ] `fecha_matrícula` está en la relación *se matricula*, no en `ALUMNO`.
 {{% /comprobacion %}}
 
@@ -2037,25 +1931,7 @@ Cuando una entidad se relaciona consigo misma se usa una **relación reflexiva**
 
 El centro decide guardar los **grupos** como entidad (código, curso, aula). Rediseña la parte del delegado: ¿qué relaciones aparecen entre `ALUMNO` y `GRUPO`? ¿Por qué no pueden fusionarse en una sola?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej06.svg" alt="PROFESOR imparte MÓDULO (1:N); MÓDULO es requisito de MÓDULO (N:M reflexiva); ALUMNO se matricula en MÓDULO (N:M con fecha); ALUMNO es delegado de ALUMNO (1:N reflexiva); ALUMNO tiene CASILLERO (1:1)." caption="Ejercicio 6: Instituto: módulos, matrículas, delegados y casilleros" >}}
-
-**Decisiones de diseño**
-
-- *Imparte* es 1:N; *se matricula* es N:M con atributo; *es requisito de* es N:M reflexiva.
-- *Es delegado de* es una reflexiva 1:N: un alumno delegado representa a (0,N) compañeros y cada alumno tiene (0,1) delegado (0 mientras no se haya elegido).
-- *Tiene* (casillero) es 1:1 con mínimos 0: no todos los alumnos piden casillero y puede haber casilleros libres. Este caso, con (0,1) en los dos lados, se transforma en la UD03 con una tabla propia.
-- El curso es un atributo de `ALUMNO`. Si el grupo tuviera más datos, pasaría a ser una entidad (ver ampliación).
-
-**Supuestos semánticos**
-
-1. Todo módulo tiene profesor asignado: (1,1).
-2. Un alumno matriculado lo está al menos de un módulo: (1,N).
-3. El delegado y sus representados son del mismo curso (restricción textual).
-4. Un módulo no puede ser prerrequisito de sí mismo ni formar ciclos (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-022" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -2077,13 +1953,9 @@ Una clínica quiere controlar los ingresos de sus pacientes y los médicos que l
 
 #### Enunciado
 
-> De cada paciente se guarda el código, el nombre, los apellidos, la dirección (calle, población, provincia y código postal), el teléfono y la fecha de nacimiento.
+> Un hospital quiere informatizar la gestión de los ingresos. A los pacientes los identifica un código y se anotan su nombre, apellidos, teléfono, cuándo nacieron y dónde viven, con la calle, la población, la provincia y el código postal por separado porque luego se hacen cartas por distritos. De los médicos se recogen el código, el nombre, los apellidos, un teléfono y la especialidad.
 >
-> De cada médico se conserva el código, el nombre, los apellidos, el teléfono y la especialidad.
->
-> Se controlan los ingresos de cada paciente. Cada ingreso se identifica con un número que empieza en 1 para cada paciente, e incluye el número de habitación, la cama y la fecha de ingreso. Un paciente puede ingresar varias veces y un ingreso no puede existir sin el paciente al que corresponde.
->
-> Cada ingreso lo atiende un único médico responsable, aunque un médico puede atender muchos ingresos de pacientes distintos.
+> Cada vez que un paciente ingresa se le asigna habitación y cama, y se anota el día de entrada. Cada paciente tiene su propia historia, de modo que sus ingresos se numeran 1, 2, 3… y, naturalmente, un ingreso no tiene sentido si no se sabe de quién es. Todo ingreso está a cargo de un único médico, que puede llevar muchos a la vez.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -2098,7 +1970,7 @@ Una clínica quiere controlar los ingresos de sus pacientes y los médicos que l
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] `INGRESO` es una entidad débil (doble rectángulo) y depende de `PACIENTE` en identificación (etiqueta ID junto a la entidad débil).
+- [ ] `INGRESO` es una entidad débil (doble rectángulo) y depende de `PACIENTE` en identificación (doble rectángulo y relación identificadora con rombo doble).
 - [ ] El número de ingreso es un discriminador (subrayado discontinuo).
 - [ ] `dirección` es un atributo compuesto.
 - [ ] *Atiende* es 1:N entre `MÉDICO` e `INGRESO`.
@@ -2119,24 +1991,7 @@ Una clínica quiere controlar los ingresos de sus pacientes y los médicos que l
 
 Un ingreso puede ser atendido por **varios médicos** que se turnan. ¿Cómo cambia *atiende*? ¿Qué atributo habría que guardar en la relación?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej07.svg" alt="PACIENTE realiza INGRESO (relación identificadora, INGRESO es débil). MÉDICO atiende INGRESO (1:N)." caption="Ejercicio 7: Hospital: pacientes, ingresos y médicos" >}}
-
-**Decisiones de diseño**
-
-- `INGRESO` depende de `PACIENTE`: su identificador es (código de paciente, número de ingreso).
-- *Realiza* es identificadora, 1:N; el paciente tiene (1,1) en el lado del ingreso y el ingreso (0,N) en el del paciente.
-- *Atiende* conecta `MÉDICO` con `INGRESO` y es 1:N.
-
-**Supuestos semánticos**
-
-1. Un paciente puede estar registrado sin ingresos (pre-registro).
-2. Todo ingreso tiene médico responsable.
-3. La cama y la habitación se guardan como texto simple; no hay entidad `HABITACIÓN`.
-4. No pueden existir dos ingresos activos en la misma cama (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-023" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -2158,17 +2013,11 @@ Una clínica veterinaria quiere avisar a los dueños de las vacunas pendientes d
 
 #### Enunciado
 
-> Queremos crear una base de datos para una clínica veterinaria con el fin de controlar el calendario de vacunación de los animales y avisar al dueño cuándo debe acudir a la clínica.
+> Una clínica veterinaria está cansada de que a la gente se le pase la fecha de las vacunas y quiere avisar a los dueños por su cuenta. Los dueños son clientes de los que se guarda el DNI, el nombre completo, la dirección, el teléfono y el correo; un cliente suele traer más de un animal.
 >
-> De cada cliente (dueño) se guardan el DNI, el nombre, los apellidos, la dirección, el teléfono y el correo electrónico. Un cliente puede tener varios animales.
+> De cada animal hay una ficha con un código, su nombre, si es perro o gato u otra cosa, la raza y cuándo nació. En pantalla debe aparecer también la edad. Se vacunan con productos del catálogo de la clínica, que tienen un código, un nombre y cada cuántos días hay que repetirlos. Cuando se pone una, se apunta el día; a partir de ahí, y de la última vez, se sabe cuándo toca la siguiente.
 >
-> De cada animal se conoce un código, el nombre, el tipo (perro, gato…), la raza y la fecha de nacimiento; también se quiere mostrar su edad.
->
-> De cada vacuna se guarda un código, el nombre y cada cuántos días hay que repetirla. Cuando se administra una vacuna a un animal se registra la fecha; la próxima fecha de vacunación se calcula a partir de la última administración y del tipo de vacuna.
->
-> La clínica envía notificaciones: de cada una se guarda un número, la fecha de envío, la vacuna pendiente y la fecha prevista de administración.
->
-> Se registran también las visitas de cada animal: fecha, tipo de visita (vacunación, consulta…) y notas.
+> Los avisos que se mandan a los clientes se numeran e indican la fecha en que se enviaron, qué vacuna está pendiente y cuándo se esperaba al animal. Por último, el veterinario anota cada visita del animal con su fecha, de qué tipo fue (vacunación, consulta…) y alguna observación.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -2186,7 +2035,7 @@ Una clínica veterinaria quiere avisar a los dueños de las vacunas pendientes d
 - [ ] `edad` y `próxima_fecha` son derivados (óvalo discontinuo).
 - [ ] *Se vacuna* es N:M entre `ANIMAL` y `VACUNA` y la fecha permite repetir la misma vacuna.
 - [ ] `NOTIFICACIÓN` se relaciona con `ANIMAL` y con `VACUNA`, no con `CLIENTE`.
-- [ ] `VISITA` es débil de `ANIMAL` (etiqueta ID).
+- [ ] `VISITA` es débil de `ANIMAL` (doble rectángulo y rombo doble identificador).
 {{% /comprobacion %}}
 
 {{% /details %}}
@@ -2205,25 +2054,7 @@ Una clínica veterinaria quiere avisar a los dueños de las vacunas pendientes d
 
 Algunas vacunas se ponen **durante una visita**. ¿Cómo relacionarías la administración de la vacuna con la visita? ¿Qué problema aparece si una visita incluye dos vacunas?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej08.svg" alt="CLIENTE es dueño de ANIMAL (1:N). ANIMAL se vacuna con VACUNA (N:M con fecha). NOTIFICACIÓN avisa de VACUNA y se envía por ANIMAL. ANIMAL tiene VISITA (débil)." caption="Ejercicio 8: Clínica veterinaria: calendario de vacunación" >}}
-
-**Decisiones de diseño**
-
-- *Es dueño de* es 1:N: cada animal tiene un único dueño registrado.
-- *Se vacuna* es N:M con `fecha` como discriminador (una vacuna se repite cada cierto tiempo) y `próxima_fecha` como atributo derivado.
-- `NOTIFICACIÓN` es una entidad con identificador propio relacionada 1:N con `ANIMAL` y con `VACUNA`; el cliente se deduce del animal.
-- `VISITA` es débil: se identifica por (código del animal, fecha).
-
-**Supuestos semánticos**
-
-1. Todo animal tiene dueño: (1,1).
-2. Un animal no recibe dos veces la misma vacuna el mismo día.
-3. Un animal no tiene dos visitas en la misma fecha.
-4. La próxima fecha = última administración + periodicidad de la vacuna (regla de cálculo).
-
-{{% /details %}}
+{{< solucion id="ud02-024" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -2245,11 +2076,11 @@ Una tienda de ropa online quiere sustituir su hoja de cálculo por una base de d
 
 #### Enunciado
 
-> De cada cliente se guarda el correo electrónico (único), el nombre, los apellidos, una dirección de facturación (calle, código postal y ciudad) y uno o varios teléfonos.
+> Montamos una tienda en internet. Cuando alguien se registra nos da un correo (no se admiten dos cuentas con el mismo), su nombre y apellidos, la dirección de facturación (calle, código postal y ciudad) y todos los teléfonos que quiera dejarnos.
 >
-> Los productos tienen un código, un nombre, una descripción, un precio y las unidades en stock. Cada producto pertenece a una categoría. Las categorías se organizan en árbol: una categoría puede ser subcategoría de otra (*Ropa → Camisetas*).
+> El catálogo tiene un código por artículo, un nombre, una descripción, el precio y cuántas unidades quedan. Cada artículo se muestra en una categoría, y las categorías se anidan: dentro de «Ropa» hay «Camisetas», y dentro de «Camisetas» podría haber otras.
 >
-> Los clientes realizan pedidos. De cada pedido se guarda el número, la fecha, el estado y el importe total, que se calcula a partir de las líneas. Un pedido contiene una o varias líneas numeradas dentro del pedido (1, 2, 3…). Cada línea corresponde a un producto y guarda la cantidad y el precio unitario en el momento de la compra.
+> Un cliente hace pedidos, y cada pedido tiene su número, la fecha, un estado y un importe total que sale de sumar sus partes. Un pedido se compone de varias líneas que se numeran dentro de él (la 1, la 2…); en cada línea va un artículo, cuántos se piden y a qué precio se vendían ese día, aunque el precio del catálogo cambie mañana.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -2285,24 +2116,7 @@ Una tienda de ropa online quiere sustituir su hoja de cálculo por una base de d
 
 Un producto puede pertenecer a **varias categorías** a la vez. ¿Cambia la cardinalidad? ¿Qué tabla aparecerá al pasar al modelo relacional?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej09.svg" alt="CLIENTE realiza PEDIDO. PEDIDO incluye LÍNEA_PEDIDO (débil). LÍNEA_PEDIDO se refiere a PRODUCTO. PRODUCTO pertenece a CATEGORÍA, que puede ser subcategoría de otra." caption="Ejercicio 9: Tienda online: pedidos, líneas y categorías" >}}
-
-**Decisiones de diseño**
-
-- `LÍNEA_PEDIDO` depende de `PEDIDO`: su identificador es (número de pedido, número de línea).
-- `precio_unitario` guarda el precio **histórico** de la venta. Es un dato distinto del precio actual del producto.
-- *Subcategoría* es reflexiva 1:N: una categoría tiene como mucho una categoría padre y puede tener muchas hijas.
-
-**Supuestos semánticos**
-
-1. Un cliente puede registrarse sin haber hecho pedidos.
-2. Un pedido tiene al menos una línea: (1,N).
-3. Un producto pertenece a una sola categoría.
-4. La cantidad pedida no puede superar el stock (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-025" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -2324,11 +2138,9 @@ Un concesionario gestiona la venta de coches y las revisiones de su taller.
 
 #### Enunciado
 
-> De cada coche se conoce la matrícula, la marca, el modelo, el color y el precio de venta. De cada cliente se registra un código interno, el NIF, el nombre, la dirección, la ciudad y el teléfono. Un cliente puede comprar varios coches, pero cada coche lo compra un único cliente.
+> Un concesionario de coches quiere llevar sus ventas y su taller. De cada coche se anotan la matrícula, la marca, el modelo, el color y el precio al que se vende. Los compradores son personas a las que se identifica internamente con un código, a las que se pide el NIF y de las que se guarda el nombre, la dirección, la ciudad y el teléfono. Una persona puede comprar varios coches, pero cada coche se vende a una sola.
 >
-> En el taller se realizan revisiones. Cada revisión se identifica por un número secuencial dentro de cada coche (1, 2, 3…). De cada revisión se quiere saber si se ha cambiado el filtro, el aceite o los frenos, y si se ha hecho algún otro trabajo. Un coche puede pasar muchas revisiones.
->
-> Cada revisión la realiza un único mecánico, del que se conoce el código de empleado, el DNI, el nombre, el teléfono y la dirección. Un mecánico realiza muchas revisiones. Entre los mecánicos hay un supervisor que coordina el trabajo de otros mecánicos.
+> Después de la venta, los coches pasan por el taller. Las revisiones de un coche se numeran en el orden en que se hicieron (la primera, la segunda…) y en cada una se deja constancia de si se cambió el filtro, el aceite o los frenos, y de cualquier otro trabajo. La hace siempre un solo mecánico, del que tenemos el código de empleado, el DNI, el nombre, el teléfono y la dirección; un mecánico hace muchísimas revisiones. En el taller hay un supervisor entre los mecánicos que reparte el trabajo a los demás.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -2364,24 +2176,7 @@ Un concesionario gestiona la venta de coches y las revisiones de su taller.
 
 El taller quiere guardar **qué piezas** se cambiaron en cada revisión y cuántas. ¿Qué entidad y qué relación añades? ¿Qué atributo lleva la relación?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej10.svg" alt="CLIENTE compra COCHE (1:N). COCHE pasa REVISIÓN (identificadora, débil). MECÁNICO realiza REVISIÓN. MECÁNICO supervisa a MECÁNICO." caption="Ejercicio 10: Concesionario: ventas, revisiones y mecánicos" >}}
-
-**Decisiones de diseño**
-
-- `REVISIÓN` es débil porque su número solo es único dentro de cada coche.
-- Un mecánico tiene como mucho un supervisor, y un supervisor puede coordinar a muchos mecánicos: relación reflexiva 1:N con roles.
-- En `CLIENTE`, el código interno es el identificador elegido; el NIF es una **clave alternativa** (subrayado de puntos): único, pero no se usa para relacionar.
-
-**Supuestos semánticos**
-
-1. Un coche puede estar sin vender: (0,1) del lado del cliente.
-2. Una revisión siempre la hace un mecánico.
-3. Los trabajos de la revisión se guardan como cuatro atributos booleanos más un texto libre `otros`.
-4. Un mecánico no puede supervisarse a sí mismo (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-026" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -2403,13 +2198,11 @@ Una central de reservas de turismo rural quiere gestionar su oferta de alojamien
 
 #### Enunciado
 
-> De cada provincia se guarda el nombre, el área y la población. En cada provincia hay ciudades, de las que se conoce el nombre y el número de habitantes. El nombre de una ciudad solo es único dentro de su provincia (hay varias ciudades llamadas «Villanueva»).
+> Una asociación de turismo rural quiere publicar un portal. Para ordenar la información empiezan por el territorio: de cada provincia tienen el nombre, la superficie y la población total; dentro de ellas están las ciudades, con su nombre y sus habitantes. Ojo, que en España hay muchas ciudades llamadas «Villanueva», así que el nombre de una ciudad solo sirve para distinguirla dentro de su provincia.
 >
-> Las casas rurales tienen un nombre único, una localización y si ofrecen desayuno. Cada casa está en una ciudad y en una ciudad puede haber varias casas.
+> En cada ciudad hay casas rurales, y cada casa pertenece a una sola ciudad. Una casa se anuncia con un nombre que nunca se repite, dice dónde está y avisa de si sirve desayuno. Por dentro, cada casa tiene habitaciones que se numeran en la propia casa (la 1, la 2…), con una descripción y lo que cuesta pasar una noche.
 >
-> Cada casa tiene varias habitaciones, numeradas dentro de la casa (1, 2, 3…), con una descripción y un precio por noche.
->
-> Los clientes (DNI, nombre, dirección y teléfono) se alojan en habitaciones. De cada estancia se guarda la fecha de entrada y la de salida. Un cliente puede alojarse varias veces en la misma habitación.
+> Los huéspedes dejan su DNI, su nombre, su dirección y un teléfono. Cada estancia queda registrada con el día en que entra y el día en que se va, y un mismo huésped puede volver a dormir en la misma habitación otro año.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -2424,7 +2217,7 @@ Una central de reservas de turismo rural quiere gestionar su oferta de alojamien
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] `CIUDAD` es débil de `PROVINCIA` y `HABITACIÓN` es débil de `CASA_RURAL` (etiqueta ID).
+- [ ] `CIUDAD` es débil de `PROVINCIA` y `HABITACIÓN` es débil de `CASA_RURAL` (doble rectángulo y rombo doble identificador).
 - [ ] *Está en* (casa–ciudad) es 1:N y **no** es identificadora: el nombre de la casa ya es único.
 - [ ] *Se aloja* es N:M y `fecha_entrada` forma parte de la identificación.
 - [ ] `desayuno` es un atributo de `CASA_RURAL`.
@@ -2446,25 +2239,7 @@ Una central de reservas de turismo rural quiere gestionar su oferta de alojamien
 
 Variante: además de alquilar, se quiere saber qué **personas viven** en cada casa (cada persona vive en una sola) y qué personas **son propietarias** (una casa puede tener varios propietarios y se guarda la fecha de compra). Las casas tienen ahora un identificador propio y **no pueden existir sin su ciudad** (dependencia en existencia, etiqueta E). Dibuja el diagrama de esta variante.
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej11.svg" alt="PROVINCIA tiene CIUDAD (débil). CASA_RURAL está en CIUDAD (N:1). CASA_RURAL tiene HABITACIÓN (débil). CLIENTE se aloja en HABITACIÓN (N:M con fechas)." caption="Ejercicio 11: Casas rurales: provincias, ciudades y habitaciones" >}}
-
-**Decisiones de diseño**
-
-- `CIUDAD` depende de `PROVINCIA` en identificación: su identificador es (nombre de la provincia, nombre de la ciudad).
-- `HABITACIÓN` depende de `CASA_RURAL`: su identificador es (nombre de la casa, número).
-- *Se aloja* es N:M con `fecha_entrada` (discriminador) y `fecha_salida`.
-- El rombo de *está en* tiene la mitad blanca junto a `CIUDAD` (máximo 1) y la negra junto a `CASA_RURAL`.
-
-**Supuestos semánticos**
-
-1. Toda casa está en una ciudad: (1,1).
-2. Una ciudad puede no tener casas rurales: (0,N).
-3. Una casa tiene al menos una habitación: (1,N).
-4. La fecha de salida es posterior a la de entrada (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-027" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -2486,11 +2261,11 @@ Una consultora tecnológica quiere controlar sus proyectos y las horas de su equ
 
 #### Enunciado
 
-> De los clientes se registra el CIF, la razón social, el sitio web y el teléfono. Un cliente puede encargar varios proyectos, pero cada proyecto pertenece a un único cliente.
+> Una consultora de software gestiona sus proyectos desde una hoja de cálculo que ya no da más de sí. Sus clientes son empresas: se anotan el CIF, la razón social, la web y un teléfono. Un cliente encarga varios proyectos, pero cada proyecto es de un único cliente.
 >
-> De cada proyecto se conoce el código, el nombre, la fecha de inicio y el presupuesto. Un proyecto se descompone en varias tareas, numeradas dentro del proyecto (1, 2, 3…). De cada tarea se guarda la descripción, las horas estimadas y su estado (*pendiente*, *en proceso* o *completada*).
+> Cada proyecto tiene un código, un nombre, el día en que arranca y un presupuesto. Se trocea en tareas que se numeran dentro del proyecto (la 1, la 2…) y de cada una se anotan qué hay que hacer, cuántas horas se calcula que llevará y en qué punto está: pendiente, en proceso o terminada.
 >
-> De los desarrolladores se guarda el número de empleado, el DNI, el nombre, la especialidad y el nivel. Un desarrollador se asigna a varias tareas y en una tarea trabajan varios desarrolladores, con las horas reales dedicadas. Algunos desarrolladores senior ejercen de mentores de desarrolladores junior.
+> Quienes programan son los desarrolladores, de los que se guarda el número de empleado, el DNI, el nombre, la especialidad y el nivel. Una tarea nunca la saca una sola persona: se asignan varios desarrolladores y, cuando acaba, se contabilizan las horas reales que dedicó cada uno. Y es costumbre que alguno de los más veteranos haga de mentor de los que acaban de incorporarse.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -2526,24 +2301,7 @@ Una consultora tecnológica quiere controlar sus proyectos y las horas de su equ
 
 Se quiere que cada desarrollador tenga **un único rol** por proyecto (jefe de proyecto, analista, programador…). ¿Dónde se guarda este dato? ¿Es un atributo de la relación o hay que añadir una entidad?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej12.svg" alt="CLIENTE encarga PROYECTO (1:N). PROYECTO se descompone en TAREA (débil). DESARROLLADOR trabaja en TAREA (N:M con horas reales). DESARROLLADOR tutela a DESARROLLADOR." caption="Ejercicio 12: Consultora de software: proyectos, tareas y desarrolladores" >}}
-
-**Decisiones de diseño**
-
-- *Se descompone en* es identificadora: (código de proyecto, número de tarea).
-- *Trabaja en* es N:M con `horas_reales`: el dato depende de la pareja desarrollador-tarea.
-- *Tutela* es una reflexiva 1:N: un junior tiene como mucho un mentor; un mentor puede tutelar a varios.
-
-**Supuestos semánticos**
-
-1. Un proyecto tiene al menos una tarea: (1,N).
-2. Una tarea recién creada puede no tener desarrolladores asignados.
-3. Solo un desarrollador de nivel *senior* puede ser mentor (restricción textual).
-4. El estado de la tarea solo admite *pendiente*, *en proceso* o *completada* (restricción de dominio).
-
-{{% /details %}}
+{{< solucion id="ud02-028" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -2565,13 +2323,11 @@ Una cadena hotelera estructura el sistema central de reservas de sus establecimi
 
 #### Enunciado
 
-> De cada hotel se conoce el código, el nombre, la categoría (estrellas), la dirección y la ciudad.
+> Una cadena hotelera quiere unificar su sistema de reservas. Cada hotel tiene un código interno, un nombre, las estrellas que ostenta, su dirección y la ciudad donde está.
 >
-> Un hotel dispone de varias habitaciones. Cada habitación se identifica por su número dentro del hotel (101, 102, 201…); se guarda el tipo (*individual*, *doble* o *suite*) y el precio por noche.
+> Dentro del hotel, las habitaciones se numeran como en cualquier hotel (101, 102, 201…) y por eso el 101 de un hotel no es el 101 de otro; cada una es individual, doble o suite y tiene un precio por noche. Quien reserva es un cliente del que nos quedamos con el DNI, el nombre, el correo y un teléfono; reserva habitaciones concretas para unas fechas (se apunta cuándo entra y cuándo sale) y se anota lo que costó la estancia en total. Es habitual que vuelva y pida la misma habitación.
 >
-> De los clientes se registra el DNI, el nombre, el correo y el teléfono. Un cliente reserva habitaciones concretas para un periodo, con la fecha de entrada, la fecha de salida y el precio total de la estancia. Un cliente puede alojarse varias veces en la misma habitación.
->
-> De los empleados se conoce el código, el nombre y el puesto. Cada empleado está asignado a un hotel. Las gobernantas de planta supervisan al personal de limpieza de su hotel.
+> La plantilla es otra historia: de cada empleado se guardan el código, el nombre y su puesto, y todos trabajan en un hotel concreto. Las gobernantas de planta vigilan al personal de limpieza de su mismo hotel.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -2607,24 +2363,7 @@ Una cadena hotelera estructura el sistema central de reservas de sus establecimi
 
 Una reserva puede incluir **varias habitaciones** (una familia reserva dos). ¿Qué entidad intermedia se introduce y qué cambia en la relación con las habitaciones?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej13.svg" alt="HOTEL dispone de HABITACIÓN (débil). CLIENTE reserva HABITACIÓN (N:M con fechas y precio). EMPLEADO trabaja en HOTEL. EMPLEADO supervisa a EMPLEADO." caption="Ejercicio 13: Cadena hotelera: hoteles, habitaciones y reservas" >}}
-
-**Decisiones de diseño**
-
-- `HABITACIÓN` se identifica por (código de hotel, número de habitación).
-- *Reserva* lleva `fecha_entrada` como discriminador: permite repetir cliente y habitación en estancias distintas.
-- *Supervisa* es una reflexiva 1:N: una gobernanta supervisa a varios empleados de limpieza.
-
-**Supuestos semánticos**
-
-1. Un hotel tiene al menos una habitación: (1,N).
-2. Todo empleado está asignado a un único hotel.
-3. `precio_total` se guarda para conservar el precio pactado aunque cambie la tarifa.
-4. La fecha de salida es posterior a la de entrada y no hay dos reservas solapadas para la misma habitación (restricciones textuales).
-
-{{% /details %}}
+{{< solucion id="ud02-029" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -2646,11 +2385,9 @@ Una universidad pública organiza su estructura académica e investigadora.
 
 #### Enunciado
 
-> De las facultades se guarda el código y el nombre. Una facultad engloba varios departamentos, de los que se conoce el código y el área de conocimiento.
+> Una universidad quiere reflejar cómo se organiza. Hay facultades, con un código y un nombre, y cada una agrupa varios departamentos, que tienen un código y se dedican a un área de conocimiento.
 >
-> Dentro de cada departamento se crean cátedras de investigación. Cada cátedra se identifica por un número interno dentro de su departamento y tiene un nombre y un presupuesto.
->
-> De los profesores se guarda el número de registro, el DNI, el nombre, la categoría docente y la fecha de incorporación. Un profesor pertenece a un único departamento. Un profesor con categoría de *catedrático* puede ser nombrado director de una cátedra. Además, los profesores veteranos son tutores de los profesores noveles.
+> En los departamentos se ponen en marcha cátedras de investigación. Una cátedra se numera dentro de su departamento (la primera, la segunda…) y se conoce por su nombre y por el presupuesto que recibe. Las personas del profesorado tienen un número de registro, un DNI, un nombre, una categoría y el día en que se incorporaron; cada una está adscrita a un solo departamento. Al frente de una cátedra puede ponerse a un profesor, pero solo si es catedrático. Por otro lado, la universidad tiene la costumbre de que los profesores veteranos tutoricen a los noveles.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -2686,24 +2423,7 @@ Una universidad pública organiza su estructura académica e investigadora.
 
 Los **catedráticos** tienen datos propios (año de oposición, sexenios). Convierte esta situación en una **especialización** de `PROFESOR` y razona qué restricción desaparece del texto.
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej14.svg" alt="FACULTAD engloba DEPARTAMENTO. DEPARTAMENTO crea CÁTEDRA (débil). PROFESOR pertenece a DEPARTAMENTO, dirige CÁTEDRA y tutoriza a PROFESOR." caption="Ejercicio 14: Universidad: facultades, departamentos y cátedras" >}}
-
-**Decisiones de diseño**
-
-- Cadena 1:N: facultad → departamento → cátedra (la última, identificadora).
-- *Dirige* es 1:1 con mínimo 1 en la cátedra y 0 en el profesor.
-- *Tutoriza* es una reflexiva 1:N.
-
-**Supuestos semánticos**
-
-1. Todo profesor pertenece a un departamento: (1,1).
-2. Una cátedra siempre tiene director.
-3. Solo un catedrático puede dirigir una cátedra y debe ser del departamento de la cátedra (restricciones textuales).
-4. Un novel tiene como mucho un tutor.
-
-{{% /details %}}
+{{< solucion id="ud02-030" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -2725,11 +2445,11 @@ Un centro de acogida de menores necesita un registro informatizado de residentes
 
 #### Enunciado
 
-> De cada menor residente se conoce el número de expediente, el nombre, los apellidos, la fecha de nacimiento y los datos de contacto de sus tutores legales (nombre del padre, nombre de la madre y teléfono).
+> Un centro de acogida de menores quiere llevar el seguimiento de cada chico y chica. De cada menor residente tienen un número de expediente, nombre y apellidos, fecha de nacimiento y cómo localizar a sus tutores legales: el nombre del padre, el de la madre y un teléfono.
 >
-> De cada educador se registra el número de colegiado, el DNI, el nombre, los apellidos y la especialidad (*psicología*, *trabajo social* o *educación social*). Un educador tutela a varios menores, pero cada menor tiene un único educador tutor principal. Además, un educador coordinador supervisa al resto del equipo técnico.
+> El equipo técnico lo forman educadores, con su número de colegiado, DNI, nombre y apellidos y una especialidad (psicología, trabajo social o educación social). Cada educador tutela a varios menores, pero cada menor tiene un solo educador de referencia. Por encima hay una figura de coordinación, también educador, que supervisa al resto del equipo.
 >
-> Para cada menor se abren informes de seguimiento. Cada informe se identifica con un número correlativo para ese menor (1, 2, 3…) y recoge la fecha, la valoración evolutiva y las incidencias. Si el expediente de un menor se cancela por cumplimiento de la medida, todos sus informes se eliminan.
+> Cada menor genera informes de seguimiento a lo largo de su estancia: el primero, el segundo… (los números empiezan de nuevo con cada chico). En ellos se recoge la fecha, cómo evoluciona y las incidencias. Cuando se cierra un expediente porque el menor ha cumplido la medida, sus informes se destruyen con él.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -2765,24 +2485,7 @@ Un centro de acogida de menores necesita un registro informatizado de residentes
 
 Un menor puede ser **trasladado** a otro centro y volver años después. ¿Cómo cambiaría el identificador del menor y qué entidad nueva harías aparecer para conservar el historial?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej15.svg" alt="EDUCADOR tutela a MENOR (1:N). EDUCADOR coordina a EDUCADOR. MENOR tiene INFORME (débil)." caption="Ejercicio 15: Centro de menores: residentes, educadores e informes" >}}
-
-**Decisiones de diseño**
-
-- `INFORME` depende de `MENOR`: (nº expediente, nº informe).
-- El borrado en cascada se documenta como restricción: el diagrama solo muestra la dependencia.
-- `datos_tutores` es un atributo compuesto porque no se consulta de forma independiente.
-
-**Supuestos semánticos**
-
-1. Todo menor tiene un educador tutor: (1,1).
-2. El coordinador no tiene supervisor; el resto tiene uno como máximo.
-3. Los informes de menores se cancelan en cascada al cerrar el expediente (restricción de borrado).
-4. Los datos de menores requieren medidas reforzadas de acceso y confidencialidad.
-
-{{% /details %}}
+{{< solucion id="ud02-031" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -2790,7 +2493,7 @@ Un menor puede ser **trasladado** a otro centro y volver años después. ¿Cómo
 
 ---
 
-## Bloque 3 · Integración
+## Bloque 3 · Intermedio: integración
 
 Relaciones ternarias, agregación, dos relaciones entre las mismas entidades, listas de materiales, cardinalidades máximas concretas y primera generalización.
 
@@ -2811,13 +2514,11 @@ La empresa municipal de autobuses gestiona su red, su flota y los turnos de cond
 
 #### Enunciado
 
-> De las líneas se conoce el código (L1, L5…), el nombre del trayecto y la frecuencia de paso en minutos.
+> Una empresa de transporte urbano necesita organizar su red. Las líneas tienen un código (L1, L5…), el nombre del recorrido y cada cuántos minutos pasan.
 >
-> Cada línea hace sus paradas en un orden. Cada parada se identifica por su número de orden dentro de la línea (1, 2, 3…); se guarda el nombre de la calle o marquesina y si tiene pantalla de información.
+> Cada línea va parando en un orden fijo: la primera parada, la segunda, etc.; de la parada se anota el nombre de la calle o marquesina y si hay pantalla con la información de llegadas. Hay sitios donde se puede cambiar de una línea a otra, y entonces se guarda cuánto se tarda a pie entre ambas.
 >
-> Entre líneas se habilitan transbordos, con el tiempo estimado a pie entre las dos líneas conectadas.
->
-> De los autobuses se guarda la matrícula, el modelo y la capacidad de pasajeros de pie. De los conductores, el DNI, el nombre y el tipo de licencia. Un conductor conduce un autobús asignado a una línea en un turno de trabajo concreto.
+> La flota son autobuses con su matrícula, su modelo y cuántos viajeros caben de pie. Los conductores tienen DNI, nombre y tipo de carnet. En un turno concreto, un conductor lleva un autobús que está asignado a una línea; hay que saber quién llevó qué y para qué línea en cada turno.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -2857,24 +2558,7 @@ Si el hecho «el conductor C conduce el autobús A en la línea L en el turno T�
 
 El transbordo se produce realmente **entre paradas**, no entre líneas. Redibuja la relación entre `PARADA` y `PARADA` y razona cómo se identifica ahora.
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej16.svg" alt="LÍNEA tiene PARADA (débil). LÍNEA se conecta con LÍNEA mediante transbordo. CONDUCTOR, AUTOBÚS y LÍNEA se relacionan en conduce (ternaria) con el turno." caption="Ejercicio 16: Transporte urbano: líneas, paradas y turnos" >}}
-
-**Decisiones de diseño**
-
-- *Conduce* es ternaria porque el hecho involucra a las tres entidades a la vez y no se puede descomponer.
-- *Tiene* (línea–parada) es identificadora; una línea tiene al menos dos paradas.
-- *Transbordo* es una N:M reflexiva con `tiempo_a_pie`; los roles son los dos extremos de la conexión.
-
-**Supuestos semánticos**
-
-1. Cada línea tiene como mínimo dos paradas: (2,N).
-2. Un autobús puede cambiar de línea de un turno a otro.
-3. El tiempo de transbordo es simétrico entre líneas.
-4. Un conductor no puede conducir dos autobuses en el mismo turno (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-032" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -2896,11 +2580,9 @@ Una federación deportiva informatiza el control de sus competiciones oficiales.
 
 #### Enunciado
 
-> De los equipos se conoce el código, el nombre del club y la ciudad. De los jugadores, el número de ficha federativa, el DNI, el nombre y el dorsal. Un jugador pertenece a un único equipo y cada equipo designa a uno de sus jugadores como capitán.
+> La federación de fútbol sala de una provincia quiere llevar sus competiciones. Cada club se registra con un código, su nombre y la ciudad. Sus jugadores tienen una ficha federativa, un DNI, un nombre y llevan un dorsal; solo pueden jugar en un equipo y cada equipo escoge a uno de los suyos como capitán.
 >
-> De los partidos se guarda el código, la fecha y hora y la jornada. En cada partido se enfrentan dos equipos distintos: uno como local y otro como visitante.
->
-> En el acta de cada partido se registran las incidencias. Cada incidencia se identifica por el minuto de juego y un número de secuencia dentro del partido; se anota el tipo (*gol*, *tarjeta amarilla*, *expulsión* o *sustitución*) y el jugador que protagoniza la acción. Si se anula un partido, se eliminan las incidencias de su acta.
+> Un partido tiene su código, se juega en una fecha y hora y pertenece a una jornada de la liga; se enfrentan dos equipos distintos, uno actúa como local y el otro como visitante. El árbitro levanta un acta en la que se va anotando lo que sucede: goles, tarjetas amarillas, expulsiones y sustituciones. Cada anotación queda fijada por el minuto en que ocurre y un orden dentro del partido (puede haber dos cosas en el mismo minuto), y siempre se dice qué jugador la protagoniza. Si un partido se anula, su acta desaparece con todo lo que contiene.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -2936,24 +2618,7 @@ Una federación deportiva informatiza el control de sus competiciones oficiales.
 
 La federación quiere guardar los **jugadores convocados** en cada partido y los minutos que juega cada uno. ¿Qué relación añades y con qué atributos? ¿Cómo se relaciona con la incidencia?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej17.svg" alt="JUGADOR pertenece a EQUIPO y un jugador es capitán. EQUIPO es local o visitante en PARTIDO. PARTIDO registra INCIDENCIA (débil) protagonizada por JUGADOR." caption="Ejercicio 17: Federación deportiva: equipos, partidos e incidencias" >}}
-
-**Decisiones de diseño**
-
-- *Local* y *visitante* son dos relaciones 1:N entre `EQUIPO` y `PARTIDO`: dan información distinta.
-- *Capitán* (1:1) y *pertenece* (1:N) son relaciones distintas entre `JUGADOR` y `EQUIPO`.
-- `INCIDENCIA` es débil de `PARTIDO`: (código de partido, minuto, nº de secuencia).
-
-**Supuestos semánticos**
-
-1. Todo partido tiene equipo local y visitante: (1,1) en cada relación.
-2. Una incidencia la protagoniza un único jugador.
-3. El capitán pertenece al equipo que capitanea (restricción textual).
-4. El equipo local y el visitante de un partido son distintos (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-033" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -2975,13 +2640,11 @@ Una cadena de gimnasios gestiona sus centros, sus socios y los entrenamientos pe
 
 #### Enunciado
 
-> De cada gimnasio se conoce el código, el nombre comercial, la dirección, la ciudad y la superficie en m².
+> Una cadena de gimnasios quiere un sistema único. Cada gimnasio tiene un código, el nombre comercial con el que se anuncia, una dirección, la ciudad y los metros cuadrados que ocupa.
 >
-> Cada gimnasio dispone de salas. Cada sala se identifica por un número o letra propio del gimnasio (101, Sala A…); se guarda el tipo de actividad (*musculación*, *cardio*, *pilates*, *spinning*) y el aforo máximo.
+> En cada centro hay salas, que se reconocen por un número o una letra propios de ese centro (la 101 de uno no es la 101 de otro, o la «Sala A»), con una actividad (musculación, cardio, pilates o spinning) y un aforo máximo. Las personas que se apuntan son socios: se les asigna un número, y se guardan el DNI, el nombre y apellidos, un teléfono y el día que se dieron de alta. Cada socio pertenece a un gimnasio principal, pero puede usar cualquier centro de la cadena, y por eso reserva plaza en una sala indicando la fecha, la hora y la plaza.
 >
-> De los socios se almacena el número, el DNI, el nombre, los apellidos, el teléfono y la fecha de alta. Un socio está inscrito en un gimnasio principal, pero puede reservar plaza en las salas de cualquier centro de la cadena (se registra la fecha, la hora y la plaza).
->
-> De los entrenadores se conoce el código de empleado, el nombre, la especialidad y la titulación. Cada entrenador trabaja en un gimnasio y diseña rutinas para los socios, con la fecha de asignación y el objetivo. En cada gimnasio, un director técnico coordina al resto de entrenadores.
+> Los entrenadores tienen código de empleado, nombre, especialidad y titulación, y trabajan en un único gimnasio. Se encargan de preparar rutinas para los socios, con el día en que se asignan y el objetivo que se persigue. En cada gimnasio uno de los entrenadores actúa como director técnico del resto.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -3017,24 +2680,7 @@ Una cadena de gimnasios gestiona sus centros, sus socios y los entrenamientos pe
 
 Las reservas de clase **tienen un entrenador** responsable. ¿La reserva pasa a ser una ternaria o puede resolverse con una binaria adicional? Razona con el aforo y la sesión.
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej18.svg" alt="GIMNASIO dispone de SALA (débil). SOCIO se inscribe en GIMNASIO y reserva SALA. ENTRENADOR trabaja en GIMNASIO, diseña rutinas para SOCIO y es dirigido por otro ENTRENADOR." caption="Ejercicio 18: Red de gimnasios: salas, reservas y entrenadores" >}}
-
-**Decisiones de diseño**
-
-- La inscripción (socio → gimnasio) es 1:N; la reserva es N:M entre `SOCIO` y `SALA` con fecha, hora y plaza.
-- `SALA` se identifica por (código de gimnasio, número de sala).
-- El director técnico es un entrenador que coordina a otros: relación reflexiva 1:N con roles.
-
-**Supuestos semánticos**
-
-1. Un gimnasio tiene al menos una sala.
-2. Un entrenador trabaja en un único gimnasio.
-3. En cada gimnasio hay un solo director técnico (restricción textual).
-4. El número de reservas de una sala en una franja no supera su aforo (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-034" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -3056,17 +2702,13 @@ Una gran empresa de dulces necesita una base de datos centralizada para su produ
 
 #### Enunciado
 
-> La empresa elabora productos a partir de ingredientes. De cada ingrediente se conoce el nombre (único), la cantidad de vitaminas A, B y C por cada 100 g, las calorías y el coste por kilo.
+> PAVA S.A. es una empresa de repostería industrial. Compra ingredientes de los que conoce su nombre, que no se repite, cuántas vitaminas A, B y C llevan por cada 100 g, sus calorías y lo que cuesta el kilo.
 >
-> Con ellos fabrica productos («Filipondios», «Barridulces»…), conocidos por su nombre comercial. Interesa la composición de cada producto y el porcentaje de cada ingrediente en la receta.
+> Con ellos elabora productos como los «Filipondios» o los «Barridulces», que se conocen por su nombre comercial y de los que interesa saber qué ingredientes llevan y en qué proporción dentro de la receta. Cada producto sale al mercado en formatos de distinto peso (40 g, 150 g, 250 g…) y cada formato se vende a un precio.
 >
-> Cada producto se comercializa en formatos de peso (40 g, 150 g, 250 g…), y cada formato tiene un precio de venta.
+> Los clientes son comercios: se guarda su CIF, el nombre, la dirección, la población, la provincia y el teléfono. Hacen pedidos del tipo «200 unidades de Barridulces en formato de 250 g».
 >
-> De los clientes se guarda el CIF, el nombre, la dirección, la población, la provincia y el teléfono. Los clientes hacen pedidos de unidades de productos en formatos concretos (200 unidades de Barridulces en formato de 250 g).
->
-> La empresa prevé las promociones del año («2x1», «Vale descuento»). Cada tipo de promoción se pone en marcha una vez al año, con fecha de inicio, fecha de fin y la cantidad máxima de productos de cada formato que pueden beneficiarse.
->
-> Por último, se registran los productos competidores (nombre comercial único, marca y año de lanzamiento), vinculando cada uno al producto de la empresa al que más se parece.
+> Una vez al año la empresa lanza cada tipo de promoción («2x1», «Vale descuento»…), que dura entre dos fechas y limita cuántas unidades de cada formato pueden acogerse. Por último, el departamento comercial vigila la competencia: de cada producto rival interesa su nombre comercial (único), la marca y el año de lanzamiento, y con cuál de los productos de la empresa se le compara por su parecido.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -3102,24 +2744,7 @@ Una gran empresa de dulces necesita una base de datos centralizada para su produ
 
 El **precio** de cada formato cambia con el tiempo y se quiere conservar el histórico. ¿Qué entidad o atributo añadirías? ¿Dónde se guardaría el precio con el que se vendió cada pedido?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej19.svg" alt="INGREDIENTE forma parte de PRODUCTO con un porcentaje. PRODUCTO tiene FORMATO (débil). CLIENTE hace PEDIDO que solicita FORMATO. PROMOCIÓN se aplica a FORMATO. COMPETIDOR se parece a PRODUCTO." caption="Ejercicio 19: Repostería PAVA S.A." >}}
-
-**Decisiones de diseño**
-
-- `FORMATO` es débil de `PRODUCTO`: (nombre comercial, peso).
-- *Se compone de* es N:M con `porcentaje`; el porcentaje depende de la pareja producto-ingrediente.
-- *Solicita* relaciona `PEDIDO` con `FORMATO` y guarda las unidades; *se aplica a* lo hace con `PROMOCIÓN` y guarda la cantidad máxima.
-
-**Supuestos semánticos**
-
-1. Todo producto tiene al menos un ingrediente: (1,N).
-2. Un competidor se parece a un solo producto de la empresa.
-3. Los porcentajes de una receta suman 100 (restricción textual).
-4. La fecha de fin de la promoción no es anterior a la de inicio (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-035" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -3141,11 +2766,11 @@ Una planta de maquinaria pesada gestiona su proceso de producción y sus control
 
 #### Enunciado
 
-> De las fábricas se conoce el código, la ubicación y el teléfono. Cada fábrica alberga varias líneas de montaje. El código de línea es correlativo dentro de cada fábrica (la línea 1 de Valencia y la línea 1 de Sevilla son distintas) y se guarda la denominación.
+> Una planta de maquinaria pesada quiere organizar su producción. Tiene fábricas, de las que se conoce un código, dónde están y un teléfono. En cada fábrica hay líneas de montaje cuya numeración arranca en 1 dentro de cada una (la línea 1 de Valencia y la línea 1 de Sevilla no son la misma) y que tienen un nombre propio.
 >
-> De las piezas se registra el código, el nombre, el peso en gramos y el coste estándar. Una pieza se ensambla a partir de otras piezas componentes y una pieza puede formar parte de muchas piezas superiores. De cada componente interesa la cantidad de unidades necesarias. Cada pieza se fabrica en una línea de montaje.
+> Las piezas tienen un código, un nombre, lo que pesan en gramos y un coste estándar. Muchas se montan a partir de otras piezas, de las que hay que saber cuántas unidades entran, y a su vez una pieza puede servir para fabricar muchas otras de mayor nivel. Cada pieza sale siempre de una línea de montaje.
 >
-> Cada pieza pasa inspecciones de calidad. Cada inspección se identifica con un número dentro de la pieza y guarda la fecha, el resultado (*aprobado* o *rechazado*) y las observaciones. Si una pieza se descataloga, sus inspecciones se eliminan automáticamente.
+> Calidad inspecciona todas las piezas. Las inspecciones de una pieza se van numerando (la 1, la 2…) y de cada una se guarda cuándo se hizo, si resultó aprobada o rechazada y las observaciones. Cuando una pieza se retira del catálogo, desaparecen automáticamente también sus inspecciones.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -3181,24 +2806,7 @@ Una planta de maquinaria pesada gestiona su proceso de producción y sus control
 
 Algunas piezas se **compran a proveedores** en lugar de fabricarse. ¿Cómo modelarías esta distinción? Plantea una especialización de `PIEZA` y decide si es total o parcial, disyunta o solapada.
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej20.svg" alt="FÁBRICA alberga LÍNEA (débil). PIEZA se fabrica en una LÍNEA. PIEZA se compone de PIEZA con una cantidad. PIEZA se inspecciona en INSPECCIÓN (débil)." caption="Ejercicio 20: Planta industrial: lista de materiales e inspecciones" >}}
-
-**Decisiones de diseño**
-
-- `LÍNEA` se identifica por (código de fábrica, código de línea) e `INSPECCIÓN` por (código de pieza, número).
-- *Compone* es una reflexiva N:M: una pieza tiene muchos componentes y es componente de muchas piezas.
-- La pieza se fabrica en una línea: relación N:1 con la entidad débil.
-
-**Supuestos semánticos**
-
-1. Todas las piezas se fabrican en una línea: (1,1).
-2. Una pieza simple (sin componentes) es válida.
-3. No se admiten ciclos en la lista de materiales (restricción textual).
-4. Al eliminar una pieza se eliminan sus inspecciones (borrado en cascada).
-
-{{% /details %}}
+{{< solucion id="ud02-036" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -3220,15 +2828,13 @@ La comandancia de la fuerza de defensa quiere registrar su operativa interna.
 
 #### Enunciado
 
-> De los troopers se conoce el número de placa, el DNI, el nombre, la categoría y la función (piloto, agente…). Cada trooper tiene un único jefe directo y un trooper puede ser jefe de varios subordinados.
+> La comandancia de la fuerza de defensa quiere ordenar su día a día. Los soldados —troopers— tienen un número de placa, un DNI, un nombre, una categoría y una función (piloto, agente…). Todos reciben órdenes de un único jefe directo, y un jefe puede tener varios subordinados.
 >
-> El arsenal contiene armas con código único, clase y nombre. Un trooper puede usar varias armas; interesa la habilidad (de 1 a 10) de cada trooper con cada arma.
+> En el arsenal cada arma tiene un código irrepetible, una clase y un nombre. Un trooper puede manejar varias y de cada combinación se anota cuánto sabe usarla, en una escala de 1 a 10.
 >
-> De los bichos capturados se conoce el identificador, la raza, la localización de origen y el peso. Un bicho es detenido por uno o varios troopers y se guarda la fecha de detención. El mismo trooper puede detener al mismo bicho en fechas distintas.
+> Los bichos que se capturan tienen un identificador, una raza, el lugar de donde vienen y un peso. Uno o varios troopers participan en la detención de un mismo bicho y se apunta el día. Si el mismo soldado vuelve a atrapar al mismo bicho otro día, eso también queda registrado. Mientras estén en la comandancia, los bichos se encierran en mazmorras, que tienen un código y una ubicación y no admiten a más de cuatro a la vez.
 >
-> Cada bicho que permanece en la comandancia se encierra en una mazmorra (código y ubicación). En una mazmorra puede haber varios bichos, nunca más de cuatro.
->
-> Los bichos participan en delitos (número de asalto y juzgado instructor), y se anota el cargo principal de cada bicho en cada delito. Uno o varios troopers investigan cada delito.
+> Además, los bichos intervienen en delitos, que tienen un número de asalto y un juzgado instructor; de cada bicho en cada delito se anota el cargo principal. Uno o varios troopers investigan el mismo delito.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -3264,24 +2870,7 @@ La comandancia de la fuerza de defensa quiere registrar su operativa interna.
 
 Cada trooper tiene una **especialidad** (piloto, agente, médico…) con datos propios. Plantea una **especialización** de `TROOPER`, decide si es total o parcial, disyunta o solapada, y redibuja la parte afectada.
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej21.svg" alt="TROOPER tiene jefe TROOPER, usa ARMA, detiene BICHO e investiga DELITO. MAZMORRA encierra BICHO. BICHO está implicado en DELITO." caption="Ejercicio 21: Comandancia de Starship Troopers" >}}
-
-**Decisiones de diseño**
-
-- *Jefe* es una reflexiva 1:N; un trooper sin jefe es la cúspide de la cadena.
-- *Usa*, *detiene*, *implicado en* e *investiga* son N:M. Los tres primeros llevan atributos.
-- *Encierra* es 1:N con máximo 4 en el lado del bicho: (0,4).
-
-**Supuestos semánticos**
-
-1. Un bicho puede estar capturado y no encerrado: (0,1) mazmorra.
-2. Un delito tiene al menos un bicho implicado.
-3. La habilidad es un entero entre 1 y 10 (restricción de dominio).
-4. Una mazmorra no aloja a más de cuatro bichos a la vez (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-037" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -3303,13 +2892,17 @@ George R. R. Martin quiere documentar los castillos de las grandes casas de Poni
 
 #### Enunciado
 
-> De cada casa (Stark, Tully, Lannister…) se guarda un número de orden según el año de fundación, el nombre (que es único), el año de fundación, la localización, la dirección (valle, montaña y arroyo) y los metros cuadrados.
+> George RR Martin quiere guardar una base de datos con los castillos que pertenecen a cada casa. Las casas son la Casa Stark, Tully, etc.
 >
-> Cada casa tiene una serie de castillos. De cada castillo se guarda un código establecido por cada casa, el nombre, las medidas, la fecha y el estilo de construcción (gótico, románico…) y una descripción de la técnica utilizada.
+> Cada Casa tiene asignado un número de orden en base al año de su fundación; además, de cada una de ellas se desea saber el nombre (que es único), el año en que se fundó, la localización, la dirección (valle, montaña y arroyo) y los metros cuadrados que tiene.
 >
-> Cada castillo lo crea un arquitecto, del que se conoce el nombre, la nacionalidad, la fecha de nacimiento y la de fallecimiento. Un arquitecto puede tener como maestro a otro arquitecto de la base de datos; a su vez, un maestro puede serlo de varios o de ninguno. Los arquitectos pueden pertenecer o no a una escuela (nombre, país, fecha de aparición y estilo).
+> Cada Casa tiene una serie de Castillos de los que se quiere guardar su código (establecido por cada Casa), nombre, medidas, fecha y estilo (gótico, románico, etc.) en que fue construido y una descripción de la técnica utilizada para construirlo.
 >
-> Los arquitectos pueden tener uno o varios mecenas (nombre, que puede repetirse, país y ciudad de nacimiento, fecha de nacimiento y de fallecimiento), y un mecenas puede serlo de varios arquitectos. De cada mecenazgo se quiere saber la fecha de inicio, la de fin y la población donde tuvo lugar, y qué castillos resultaron de cada mecenazgo.
+> Cada castillo es creado por un determinado arquitecto (del cual queremos conocer su nombre, nacionalidad, fecha de nacimiento y fecha de fallecimiento). Además, un arquitecto puede tener a otro de los arquitectos que se encuentran en la BD como maestro; a su vez, un maestro puede serlo de varios o de ninguno.
+>
+> Los arquitectos pueden pertenecer o no a una escuela, de la que se desea saber su nombre, en qué país y fecha apareció, y a qué estilo pertenece.
+>
+> Los arquitectos pueden tener también uno o varios mecenas que los protegen, de los que queremos conocer su nombre (puede repetirse), país y ciudad de nacimiento, fecha de nacimiento y fecha de fallecimiento. A su vez, un mismo mecenas puede serlo de varios arquitectos. Se desea recoger la relación que existe entre un arquitecto y su mecenas. Además, se desea saber de cada mecenazgo la fecha en que comienza, la fecha en que termina, en qué población tuvo lugar y deseamos saber qué castillos resultaron de cada mecenazgo.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -3324,7 +2917,7 @@ George R. R. Martin quiere documentar los castillos de las grandes casas de Poni
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] `CASTILLO` es débil de `CASA` (etiqueta ID).
+- [ ] `CASTILLO` es débil de `CASA` (doble rectángulo y rombo doble identificador).
 - [ ] *Es maestro de* es una reflexiva 1:N sobre `ARQUITECTO`.
 - [ ] *Mecenazgo* es N:M y queda dentro de un recuadro de **agregación**.
 - [ ] La relación *resulta de* une `CASTILLO` con la agregación, no con `ARQUITECTO` ni con `MECENAS` por separado.
@@ -3351,26 +2944,7 @@ En el modelo E/R una relación solo une entidades. Cuando necesitas relacionar u
 
 Un castillo puede ser fruto de **varios mecenazgos** (por ejemplo, empezado con un mecenas y terminado con otro). ¿Cómo cambia la cardinalidad de *resulta de*? ¿Y el color del rombo?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej22.svg" alt="CASA tiene CASTILLO (débil). ARQUITECTO construye CASTILLO, es maestro de ARQUITECTO y pertenece a ESCUELA. ARQUITECTO y MECENAS forman el MECENAZGO (N:M), agregado y relacionado con CASTILLO." caption="Ejercicio 22: Casas de Juego de Tronos: castillos, arquitectos y mecenazgos" >}}
-
-**Decisiones de diseño**
-
-- `CASTILLO` depende de `CASA` en identificación: (nº de orden de la casa, código del castillo).
-- El nombre de la casa es **clave alternativa** (subrayado de puntos): es único, pero se identifica por el número de orden.
-- *Mecenazgo* es N:M con `fecha_inicio` como discriminador, `fecha_fin` y `población`. Se agrega para poder relacionarlo con `CASTILLO`.
-- *Resulta de* es 1:N entre la agregación y `CASTILLO`: cada castillo procede como mucho de un mecenazgo; un mecenazgo puede producir varios castillos o ninguno.
-- La solución con ternaria (la del primer borrador) es válida solo si todo mecenazgo produce castillos.
-
-**Supuestos semánticos**
-
-1. Todo castillo tiene un arquitecto creador: (1,1).
-2. Un arquitecto puede no pertenecer a ninguna escuela: (0,1).
-3. Un arquitecto no puede ser maestro de sí mismo (restricción textual).
-4. El arquitecto que construye el castillo es el del mecenazgo del que resulta (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-038" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -3392,26 +2966,34 @@ Se va a celebrar un campeonato de *quidditch* entre selecciones de distintos pa�
 
 #### Enunciado
 
-> En el campeonato participan jugadores y árbitros. De todos ellos se quiere conocer el número de mago, el nombre, la dirección y los campeonatos en los que han participado. De los jugadores se guarda además el nivel de juego (numérico) y de los árbitros, la categoría (nacional o internacional). Ningún árbitro puede participar como jugador.
+> Se va a celebrar un torneo de *quidditch*.
 >
-> Los países envían al campeonato equipos y árbitros, aunque no todos los países envían selección. Todo equipo y todo árbitro es enviado por un único país. Un país puede estar representado por otro país. Cada país se identifica por un número correlativo según su orden alfabético y se guarda su nombre y el número de clubes de quidditch que existen en él. Cada equipo tiene un nombre y está formado por varios jugadores.
+> En el campeonato participan jugadores y árbitros; de ambos se quiere conocer el número de mago, nombre, dirección, puesto y campeonatos en los que han participado (como jugador o como árbitro). De los jugadores se precisa además el nivel de juego en numérico y en los árbitros la categoría (nacional, internacional). Recuerda que la final de 1994 se jugó entre los equipos de Irlanda y Bulgaria.
 >
-> Cada juego (partida) se identifica por un número correlativo (Cod-Q). Lo juegan dos equipos y lo arbitra un árbitro. Todo equipo participa al menos en un juego. Un árbitro no puede arbitrar a equipos enviados por su mismo país.
+> Ningún árbitro puede participar como jugador.
 >
-> Los participantes se alojan en los castillos donde se desarrollan las partidas y se quiere saber en qué castillo y en qué fechas se ha alojado cada uno; pueden alojarse varias veces, en el mismo o en distinto castillo. De cada castillo se guarda el nombre, la dirección y el teléfono.
+> Los países envían al campeonato un conjunto de jugadores y árbitros, aunque no todos los países envían selecciones (equipo y árbitros). Todo equipo y árbitro es enviado por un único país. Un país puede ser representado por otro país.
 >
-> El campeonato se desarrolla a lo largo de una serie de jornadas (fecha). Cada juego tiene lugar en una jornada, aunque puede haber jornadas de descanso.
+> Cada país se identifica por un número correlativo según su orden alfabético e interesa conocer, además de su nombre, el número de clubes de quidditch existentes en él.
 >
-> Cada juego se celebra en un estadio de uno de los castillos (los estadios se numeran dentro de cada castillo) y se guarda el número de entradas vendidas. De cada estadio se conoce la capacidad y los medios de que dispone para la retransmisión (radio, televisión, vídeo…).
+> Cada juego se identifica por un número correlativo (Cod-Q), la juegan dos equipos y la arbitra un árbitro. Interesa registrar las partidas que juega cada equipo. Ha de tenerse en cuenta que un árbitro no puede arbitrar a equipos enviados por el mismo país que le ha enviado a él.
 >
-> De cada juego se registran todos los movimientos, identificados por un número de orden dentro del juego; de cada uno se guarda la jugada y un breve comentario de un experto.
+> Todo equipo participa en al menos un juego.
+>
+> Tanto equipos como árbitros se alojan en uno de los castillos en los que se desarrollan las partidas; se desea conocer en qué castillo y en qué fechas se ha alojado cada uno de los participantes. Los equipos pueden no permanecer en Hogwarts durante todo el campeonato, sino acudir cuando tienen que jugar alguna partida, alojándose en el mismo o en distinto castillo. De cada castillo se desea conocer el nombre, la dirección y el número de teléfono.
+>
+> El campeonato se desarrolla a lo largo de una serie de jornadas (año, mes, día) y cada partida tiene lugar en una de las jornadas, aunque no tengan lugar partidas en todas las jornadas (puede haber días de descanso).
+>
+> Cada partida se celebra en un estadio de los que pueden disponer los castillos; se desea conocer el número de entradas vendidas para cada partida. De cada estadio se desea conocer la capacidad y los medios de que dispone (radio, televisión, vídeo…) para facilitar la retransmisión de los encuentros. Un estadio puede disponer de varios medios distintos.
+>
+> De cada partida se pretende registrar todos los movimientos que la componen; la identificación de movimiento se establece en base a un número de orden dentro de cada partida: para cada movimiento se guardan la jugada y un breve comentario realizado por un experto.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Clasifica la generalización de `PARTICIPANTE` (total/parcial, disjunta/solapada) y justifícalo con frases del enunciado.
-3. ¿Qué cardinalidad tiene `EQUIPO` en la relación *juega*? ¿Qué color tiene esa mitad del rombo?
+3. ¿Qué cardinalidad tiene `EQUIPO` en la relación *juega*? ¿Qué máximo se escribe en ese vértice del rombo?
 4. Escribe las restricciones que el diagrama no puede expresar.
 
 {{% /details %}}
@@ -3419,9 +3001,9 @@ Se va a celebrar un campeonato de *quidditch* entre selecciones de distintos pa�
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] `PARTICIPANTE` se generaliza en `JUGADOR` y `ÁRBITRO` con **T,D**.
+- [ ] `PARTICIPANTE` se generaliza en `JUGADOR` y `ÁRBITRO` con **círculo «d» con línea doble: total y disjunta**.
 - [ ] *Juega* tiene (2,2) junto a `EQUIPO`.
-- [ ] `ESTADIO` es débil de `CASTILLO` y `MOVIMIENTO` es débil de `JUEGO` (etiqueta ID).
+- [ ] `ESTADIO` es débil de `CASTILLO` y `MOVIMIENTO` es débil de `JUEGO` (doble rectángulo y rombo doble identificador).
 - [ ] `campeonato` (de los participantes) y `medios` (de los estadios) son multivaluados.
 - [ ] *Se aloja* es N:M y la fecha de entrada forma parte de la identificación.
 {{% /comprobacion %}}
@@ -3440,34 +3022,14 @@ Se va a celebrar un campeonato de *quidditch* entre selecciones de distintos pa�
 {{% /details %}}
 
 {{% details title="Pista: dos equipos por juego" %}}
-Cuando el número de participantes es fijo se escribe el número en la cardinalidad: (2,2) junto a `EQUIPO`. La mitad del rombo que mira a `EQUIPO` es negra, porque el máximo (2) es mayor que 1.
+Cuando el número de participantes es fijo se escribe el número en la cardinalidad: (2,2) junto a `EQUIPO`. El vértice del rombo que mira a `EQUIPO` lleva el máximo 2, porque participan exactamente dos equipos.
 {{% /details %}}
 
 #### Ampliación
 
 Se quiere distinguir el equipo **local** del **visitante**. Propón dos alternativas (dos relaciones 1:N o una relación con un atributo `papel`) y explica qué restricción textual necesita cada una.
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej23.svg" alt="PARTICIPANTE se generaliza (T,D) en JUGADOR y ÁRBITRO. PAÍS envía EQUIPO y ÁRBITRO y representa a PAÍS. EQUIPO está formado por JUGADOR y juega JUEGO (2,2). ÁRBITRO arbitra JUEGO. JUEGO tiene lugar en JORNADA y se celebra en ESTADIO (débil de CASTILLO). JUEGO registra MOVIMIENTO (débil). PARTICIPANTE se aloja en CASTILLO." caption="Ejercicio 23: Campeonato de Quidditch" >}}
-
-**Decisiones de diseño**
-
-- Generalización **total y disjunta**: todo participante es jugador o árbitro y «ningún árbitro puede participar como jugador».
-- *Juega* es N:M con máximo 2 en el lado del equipo; *arbitra*, *tiene lugar* y *se celebra en* son 1:N.
-- *Se celebra en* lleva `entradas_vendidas`, que depende del juego y del estadio.
-- *Representa a* es una reflexiva 1:N sobre `PAÍS`.
-- `JORNADA` es entidad porque existen jornadas sin juegos.
-
-**Supuestos semánticos**
-
-1. Un equipo tiene al menos un jugador: (1,N).
-2. Un país puede no enviar equipo ni árbitros: (0,N).
-3. Un árbitro no arbitra juegos de equipos de su país (restricción textual).
-4. Los dos equipos de un juego son distintos (restricción textual).
-5. Un participante no está alojado en dos castillos a la vez (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-039" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
@@ -3475,13 +3037,13 @@ Se quiere distinguir el equipo **local** del **visitante**. Propón dos alternat
 
 ---
 
-## Bloque 4 · EER avanzado
+## Bloque 4 · Intermedio: EER
 
 Varias especializaciones en un mismo modelo, cadenas de entidades débiles, ternarias con atributos y casos de integración completos.
 
 ### Ejercicio 24 · Seguridad bancaria: vigilantes, bandas y atracos
 
-{{< practica num="24" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
+{{< practica num="24" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
 {{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
 
@@ -3496,13 +3058,11 @@ La Policía y la asociación de entidades bancarias quieren una base de datos so
 
 #### Enunciado
 
-> De las entidades bancarias se conoce el código y la dirección de la sede. Una entidad tiene varias sucursales, identificadas por un código dentro de la entidad, con dirección y número de empleados.
+> Una empresa de seguridad nos pide el modelo de datos de su trabajo con los bancos. Cada entidad bancaria tiene un código y una sede; de cada una de sus sucursales sabemos la dirección y cuánta gente trabaja en ella. Las sucursales no tienen un número propio en el mundo: el banco las numera, y dos bancos distintos pueden tener cada uno su sucursal 1.
 >
-> Las sucursales contratan vigilantes: código, DNI, nombre y fecha de nacimiento (la edad se calcula). Un vigilante es obligatoriamente armado (puntuación de tiro y calibre) o no armado (si tiene titulación en artes marciales). Un vigilante puede ser contratado por distintas sucursales en fechas diferentes y se registra si el contrato es con arma o no.
+> Los vigilantes los contratan las sucursales. De cada vigilante guardamos un código, su DNI, su nombre y cuándo nació (la edad nos interesa, pero no queremos tener que actualizarla). Un vigilante siempre es de uno de dos tipos: los que van armados, de los que anotamos la puntuación en la prueba de tiro y el calibre de su arma, y los que no, de quienes basta saber si tienen titulación en artes marciales. Con el tiempo, un mismo vigilante pasa por varias sucursales; cada contrato tiene su fecha y queda anotado si se hizo con arma o sin ella.
 >
-> Se controla a los detenidos por atracar sucursales (código y nombre completo). Algunos pertenecen a bandas (número y número de miembros). Una banda puede estar subordinada a otra banda matriz.
->
-> Cada atraco vincula al detenido, a la sucursal atracada y al juez instructor (clave del juzgado, nombre y años de servicio), con la fecha, la condena en años y la indemnización.
+> Por otro lado, la policía nos pasa datos de los detenidos por atracos: código, nombre y apellidos. Algunos actuaban en banda (número de banda y tamaño), y hay bandas que dependen de otra mayor. Cada atraco que se les imputa implica a un detenido, la sucursal que sufrió el golpe y el juez que lleva el caso (clave del juzgado, nombre y años de servicio); del atraco guardamos cuándo ocurrió, los años de condena y la indemnización.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -3538,31 +3098,14 @@ La Policía y la asociación de entidades bancarias quieren una base de datos so
 
 Un detenido puede pertenecer a **varias bandas** a lo largo del tiempo. ¿Qué atributo necesita ahora la relación y cómo cambia la reflexiva de subordinación?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej24.svg" alt="ENTIDAD tiene SUCURSAL (débil). SUCURSAL contrata VIGILANTE, que es armado o no armado. DETENIDO pertenece a BANDA, que puede ser subordinada de otra. DETENIDO, SUCURSAL y JUEZ se relacionan en atraco." caption="Ejercicio 24: Seguridad bancaria: vigilantes, bandas y atracos" >}}
-
-**Decisiones de diseño**
-
-- Especialización de `VIGILANTE`: total y disyunta, con atributos propios en cada subclase.
-- *Contrata* es N:M entre `SUCURSAL` y `VIGILANTE` con `fecha_inicio` y `con_arma`.
-- *Atraco* es ternaria (detenido, sucursal, juez) y la fecha forma parte de su identificación.
-
-**Supuestos semánticos**
-
-1. Todo vigilante es armado o no armado.
-2. Un detenido puede no pertenecer a ninguna banda.
-3. Un contrato con arma solo es válido para vigilantes armados (restricción textual).
-4. `num_miembros` equivale al número de detenidos de la banda (atributo derivado).
-
-{{% /details %}}
+{{< solucion id="ud02-040" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
 
 ### Ejercicio 25 · Club hípico: caballos, boxes y lecciones
 
-{{< practica num="25" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
+{{< practica num="25" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
 {{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
 
@@ -3577,13 +3120,11 @@ Un club hípico gestiona su cuadra, sus socios, sus instructores y las clases de
 
 #### Enunciado
 
-> De los caballos se conoce el microchip, el nombre, la raza y la fecha de nacimiento. Son propios del club (fecha de adquisición y coste mensual de mantenimiento) o de un socio (cuota de pupilaje y socio propietario). Se mantiene la genealogía: un caballo puede ser progenitor (padre o madre) de varios potros nacidos en el club.
+> Un club hípico quiere dejar el cuaderno y llevar sus datos en una base de datos. De cada caballo conocemos el microchip, el nombre, la raza y cuándo nació. Unos son del club, y de ellos apuntamos cuándo se compraron y lo que cuesta mantenerlos al mes; otros son de un socio que paga por tenerlos en el club, y entonces importa cuánto paga de pupilaje y quién es el dueño. También queremos saber de quién descienden: el padre y la madre de un potro, cuando nació aquí, deben poder consultarse, y un mismo caballo puede ser padre de muchos potros.
 >
-> Los establos se dividen en pabellones (código y nombre). Cada pabellón tiene varios boxes, numerados correlativamente dentro del pabellón (Box 1, Box 2…). Cada caballo ocupa un único box y un box aloja como máximo un caballo.
+> Las instalaciones están organizadas en pabellones con código y nombre. En cada pabellón hay boxes que se numeran desde el 1 dentro del suyo, así que hay un box 1 en cada pabellón. Cada caballo vive en un único box y nunca compartirá con otro.
 >
-> De los socios se guarda el DNI y el nombre. De los instructores, el número de colegiado, el DNI, el nombre y la titulación. Son titulares o en prácticas; cada instructor en prácticas es supervisado por un titular.
->
-> Las lecciones reúnen a un socio, un instructor y un caballo, con la fecha, la hora, la pista y el nivel (*iniciación*, *doma* o *salto*).
+> Los socios aportan su DNI y su nombre. Quienes dan clase son instructores, que tienen número de colegiado, DNI, nombre y titulación; unos ya son titulares y otros están en prácticas, y estos últimos siempre trabajan bajo la tutela de un titular. Por último, las clases: en cada una participan un socio, un instructor y un caballo, y se anota el día, la hora, la pista y el nivel, que sólo puede ser iniciación, doma o salto.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -3619,31 +3160,14 @@ Un club hípico gestiona su cuadra, sus socios, sus instructores y las clases de
 
 Un caballo cambia de box con el tiempo y se quiere conservar el **historial de ubicaciones**. ¿Qué relación pasa a ser N:M y con qué atributos?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej25.svg" alt="CABALLO se especializa en propio y de socio y tiene genealogía. PABELLÓN tiene BOX (débil), ocupado por un caballo. INSTRUCTOR se especializa en titular y en prácticas. SOCIO, INSTRUCTOR y CABALLO se relacionan en lección." caption="Ejercicio 25: Club hípico: caballos, boxes y lecciones" >}}
-
-**Decisiones de diseño**
-
-- `CABALLO` se especializa en propio y de socio; `INSTRUCTOR`, en titular y en prácticas.
-- *Genealogía*: reflexiva N:M con máximo 2 en el rol de progenitor.
-- *Lección*: ternaria con fecha y hora en su identificación.
-
-**Supuestos semánticos**
-
-1. Todo caballo es del club o de un socio.
-2. Un potro tiene como máximo dos progenitores registrados.
-3. Un instructor en prácticas tiene un único titular supervisor.
-4. Un caballo no recibe dos lecciones a la misma hora (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-041" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
 
 ### Ejercicio 26 · Hotel-balneario: alojados, habitaciones y tratamientos
 
-{{< practica num="26" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
+{{< practica num="26" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
 {{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
 
@@ -3658,13 +3182,11 @@ Un hotel-balneario termal automatiza la gestión de huéspedes, instalaciones y 
 
 #### Enunciado
 
-> De los clientes se almacena el DNI, el nombre, los apellidos y la fecha de nacimiento. Son alojados (tarjeta de crédito y fecha de salida prevista) o ambulantes (teléfono de emergencia), y no pueden ser ambas cosas.
+> Un hotel con balneario quiere controlar quién se aloja y qué tratamientos recibe. De cada cliente se guarda DNI, nombre, apellidos y fecha de nacimiento. Los que duermen en el hotel dejan una tarjeta de crédito y la fecha en que piensan irse; los que sólo vienen a pasar el día dejan un teléfono por si hay una urgencia. Nadie es las dos cosas a la vez.
 >
-> El hotel se divide en plantas (número, nombre y número de habitaciones). Las habitaciones se numeran correlativamente dentro de cada planta (existe la habitación 1 de la planta 3 y la habitación 1 de la 8) y tienen una capacidad. Son suites (jacuzzis y metros cuadrados) o estándar (si admiten cama supletoria y el tipo de baño). Un cliente alojado se asigna a una habitación en una fecha.
+> El hotel tiene plantas, cada una con su número, un nombre y la cantidad de habitaciones que alberga. Las habitaciones se numeran dentro de su planta, de modo que la habitación 1 de la tercera y la habitación 1 de la octava son habitaciones distintas, y de cada una conocemos cuántas personas caben. Las hay de lujo, con sus jacuzzis y sus metros cuadrados, y las normales, donde interesa si admiten una cama extra y qué tipo de baño tienen. Cada vez que un cliente se aloja se anota la habitación y la fecha.
 >
-> De los empleados se conoce el código, el nombre y el puesto. Algunos son terapeutas, y entre ellos existe una jerarquía: un terapeuta *senior* coordina a terapeutas *junior*.
->
-> Los tratamientos (código y nombre) se prestan de forma conjunta entre el cliente, el terapeuta y el tratamiento, con la fecha, la hora, la duración y las observaciones médicas.
+> El personal tiene código, nombre y puesto. Algunos son terapeutas, y entre ellos hay quien coordina a otros: un terapeuta de categoría senior se encarga de varios junior. Los tratamientos (código y nombre) se reciben siempre de un terapeuta, por parte de un cliente, y del servicio queda constancia de la fecha, la hora, lo que dura y cualquier observación médica.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -3700,31 +3222,14 @@ Un hotel-balneario termal automatiza la gestión de huéspedes, instalaciones y 
 
 Una suite puede **reformarse** y pasar a estándar. ¿Es compatible con una especialización disyunta? ¿Qué decisión de diseño habría que tomar?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej26.svg" alt="CLIENTE se especializa en alojado o ambulante. PLANTA tiene HABITACIÓN (débil), que es suite o estándar. EMPLEADO puede ser TERAPEUTA, que coordina a otros terapeutas. CLIENTE, TERAPEUTA y TRATAMIENTO se relacionan en presta." caption="Ejercicio 26: Hotel-balneario: alojados, habitaciones y tratamientos" >}}
-
-**Decisiones de diseño**
-
-- Tres jerarquías: clientes (total, disyunta), habitaciones (total, disyunta) y empleados (parcial).
-- `HABITACIÓN` depende de `PLANTA`; `nº_habitaciones` es derivado.
-- *Presta* es ternaria (cliente, terapeuta, tratamiento) con fecha y hora.
-
-**Supuestos semánticos**
-
-1. Todo cliente es alojado o ambulante.
-2. Un terapeuta senior coordina a varios juniors; un junior tiene como mucho un coordinador.
-3. Solo los alojados tienen habitación asignada (restricción textual).
-4. La fecha de salida prevista es posterior a la de asignación (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-042" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
 
 ### Ejercicio 27 · Red eléctrica: centrales, nodos y suministro
 
-{{< practica num="27" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
+{{< practica num="27" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
 {{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
 
@@ -3739,13 +3244,11 @@ El Ministerio quiere un sistema para controlar la producción, el transporte y e
 
 #### Enunciado
 
-> Las centrales se identifican por un código; se guarda también el nombre (único), la producción media y la fecha de entrada en funcionamiento. Son obligatoriamente hidroeléctricas (río, embalse y volumen útil), térmicas (combustible y emisiones) o renovables (número de generadores y superficie de captación).
+> Una empresa que gestiona energía quiere un modelo de su red. Las centrales llevan un código, un nombre que no se repite, su producción media y cuándo empezaron a funcionar. Cada una es de exactamente uno de estos tipos: hidroeléctrica (río, embalse y volumen útil), térmica (combustible que quema y emisiones) o renovable (cuántos generadores tiene y la superficie que capta).
 >
-> Cada central mantiene un registro de partes de mantenimiento, identificados por un número de incidencia dentro de la central (1, 2, 3…), con la fecha de la revisión, la empresa mantenedora y el coste.
+> De cada central se lleva un historial de revisiones. No hay un número de revisión global: cada central cuenta las suyas desde 1. De cada una importa cuándo se hizo, qué empresa la hizo y cuánto costó.
 >
-> La transmisión se realiza a través de nodos de la red (código y nombre) unidos entre sí por líneas de transmisión, con su capacidad en kV y la distancia en km.
->
-> El suministro mayorista es un acuerdo conjunto entre la central, la comercializadora (CIF y nombre) y la zona de distribución (código y nombre), con los MWh contratados, la tarifa y la fecha del contrato.
+> La electricidad circula por nodos de la red, con código y nombre, conectados entre ellos por líneas; hay que saber la capacidad en kV y la longitud en km de cada una. Por último, la venta al por mayor: cada contrato se firma entre una central, una comercializadora (CIF y nombre) y una zona de distribución (código y nombre), y recoge los MWh pactados, la tarifa y el día en que se firmó.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -3781,31 +3284,14 @@ El Ministerio quiere un sistema para controlar la producción, el transporte y e
 
 Las centrales renovables se dividen a su vez en **solares** y **eólicas** con atributos propios. Añade una segunda jerarquía bajo `RENOVABLE` y razona cómo se clasificaría.
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej27.svg" alt="CENTRAL se especializa en hidroeléctrica, térmica y renovable y tiene PARTE (débil). NODO se une a NODO mediante líneas. CENTRAL, COMERCIALIZADORA y ZONA se relacionan en suministro." caption="Ejercicio 27: Red eléctrica: centrales, nodos y suministro" >}}
-
-**Decisiones de diseño**
-
-- `CENTRAL` se especializa en tres subclases con atributos propios.
-- `PARTE` depende de `CENTRAL`: (código de central, nº de incidencia).
-- *Línea* es N:M reflexiva sobre `NODO` con `capacidad_kv` y `distancia_km`; *suministro* es ternaria.
-
-**Supuestos semánticos**
-
-1. Toda central pertenece a una de las tres clases.
-2. Un nodo puede no tener líneas aún.
-3. Una línea une dos nodos distintos (restricción textual).
-4. La capacidad y la distancia son positivas (restricción de dominio).
-
-{{% /details %}}
+{{< solucion id="ud02-043" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
 
 ### Ejercicio 28 · Festival de música: ediciones, escenarios y actuaciones
 
-{{< practica num="28" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
+{{< practica num="28" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
 {{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
 
@@ -3820,13 +3306,11 @@ Un promotor organiza un festival que se repite cada año y quiere guardar todo s
 
 #### Enunciado
 
-> Un festival (código, nombre y ciudad) se celebra cada año. Cada edición se identifica por el año dentro del festival y tiene fecha de inicio, fecha de fin y aforo.
+> Una promotora organiza festivales de música y quiere conservar su historia. Cada festival tiene código, nombre y ciudad, y se repite cada año; llamamos edición a cada celebración, que se reconoce por el año dentro de su festival (puede haber una edición 2024 de varios festivales distintos) y de la que guardamos cuándo empieza, cuándo acaba y el aforo.
 >
-> Cada edición monta varios escenarios, identificados por su nombre dentro de la edición (*Principal*, *Electrónica*…), con su capacidad.
+> Cada edición levanta sus propios escenarios, reconocibles por el nombre dentro de la edición (el Principal, el de Electrónica…), y de los que se conoce la capacidad. En ellos tocan artistas, con código, nombre artístico y país. Los hay que actúan solos, y entonces queremos el instrumento, y los hay que son grupo, y entonces interesa cuántos son. De cada actuación se anota el día, la hora a la que empieza, cuánto dura y el caché; un artista puede volver a pisar el mismo escenario más de una vez.
 >
-> Los artistas (código, nombre artístico y país) son solistas (instrumento) o grupos (número de componentes). Cada artista actúa en escenarios; de cada actuación se guarda la fecha, la hora de inicio, la duración y el caché. Un artista puede actuar varias veces en el mismo escenario.
->
-> Los asistentes (DNI, nombre y correo) compran entradas para una edición. Cada entrada se numera dentro de la edición y tiene un tipo (*general*, *vip* o *abono*) y un precio. Una entrada la compra un único asistente, aunque puede estar sin vender.
+> El público son asistentes (DNI, nombre y correo). Las entradas se numeran dentro de cada edición, son de un tipo (general, vip o abono) y tienen precio. Una entrada la compra un único asistente, pero puede que algunas se queden sin vender.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -3862,31 +3346,14 @@ Un promotor organiza un festival que se repite cada año y quiere guardar todo s
 
 Los festivales tienen **patrocinadores** que aportan un importe por edición. Añade esta relación y decide con qué entidad se establece. ¿Qué atributos lleva?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej28.svg" alt="FESTIVAL tiene EDICIÓN (débil). EDICIÓN monta ESCENARIO (débil) y emite ENTRADA (débil). ARTISTA, solista o grupo, actúa en ESCENARIO. ASISTENTE compra ENTRADA." caption="Ejercicio 28: Festival de música: ediciones, escenarios y actuaciones" >}}
-
-**Decisiones de diseño**
-
-- Cadena de dependencias: `FESTIVAL` → `EDICIÓN` → `ESCENARIO`. El identificador del escenario es (festival, año, nombre).
-- *Actúa* es N:M repetible: fecha y hora de inicio forman parte de su identificación.
-- `ENTRADA` depende de la edición y se asigna opcionalmente a un asistente.
-
-**Supuestos semánticos**
-
-1. Un festival tiene al menos una edición.
-2. Una entrada puede estar sin vender: (0,1) asistente.
-3. Las actuaciones de un escenario no se solapan (restricción textual).
-4. Las fechas de las actuaciones están dentro de las fechas de la edición (restricción textual).
-
-{{% /details %}}
+{{< solucion id="ud02-044" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
 
 ### Ejercicio 29 · Grupos de supervivientes del apocalipsis zombi
 
-{{< practica num="29" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + clasificación de la jerarquía + restricciones" >}}
+{{< practica num="29" etiqueta="Ejercicio" tipo="Autónoma" duracion="2 sesiones" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + clasificación de la jerarquía + restricciones" >}}
 
 {{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
 
@@ -3901,15 +3368,13 @@ Año 2050: tras una invasión zombi, los supervivientes se organizan en grupos y
 
 #### Enunciado
 
-> Se necesita almacenar información sobre cada grupo, los integrantes que lo componen, las tareas (proyectos) que realiza y sus trabajadores.
+> Tras el colapso, varios grupos de supervivientes quieren organizar sus datos para repartirse el trabajo. De cada grupo hay un identificador, un nombre, la dirección de su refugio, la provincia y el tipo de actividad a la que se dedica (recolección, fabricar munición, ataque…).
 >
-> De los grupos se guarda el identificador, la denominación, la dirección, la provincia y el tipo (recolectores, creadores de munición, atacantes…).
+> Los grupos se sostienen con las aportaciones de sus integrantes: DNI, nombre, dirección y provincia, el día en que se incorporaron y la cuota mensual que dan. Interesa también saber lo que aportan al año, pero esa cifra se deduce de la cuota y no debe guardarse.
 >
-> Cada grupo está formado por integrantes, de los que se conoce el DNI, el nombre, la dirección, la provincia, la fecha de alta en el grupo, la cuota mensual con que colaboran y la aportación anual (que se obtiene multiplicando la cuota mensual por los meses del año).
+> Además de los integrantes hay quien trabaja para el grupo. Cada trabajador tiene un número, un nombre y una fecha de ingreso, y es de uno de dos tipos: los mantenidos, que cobran en especie, ocupan un cargo y de los que se lleva la cuenta de todo lo que se les ha entregado; y los voluntarios, de los que se guarda la edad, la profesión y las horas que dedican. Quien contribuye con cuota no puede ser a la vez trabajador del mismo grupo.
 >
-> Los grupos tienen también trabajadores. Cada trabajador se identifica por un ID y tiene un nombre y una fecha de ingreso. Los trabajadores son de dos tipos: mantenidos, que cobran un sueldo en especie y ocupan un cargo (se guarda la cantidad total que se les ha dado), y voluntarios, de los que se guarda la edad, la profesión y las horas que dedican al grupo. Un integrante no puede ser trabajador del grupo.
->
-> Los grupos realizan tareas. Cada tarea se identifica por un número dentro del grupo y se guarda en qué zona libre de zombis se realiza y en qué parte de ella, el objetivo y el número de beneficiarios. Una tarea se compone a su vez de subtareas, que también son tareas.
+> El grupo emprende tareas. Se numeran dentro del grupo y de cada una se anota en qué zona libre de zombis se hace y en qué parte de ella, el objetivo y a cuánta gente beneficia. Una tarea grande puede descomponerse en otras más pequeñas, que son también tareas.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -3925,9 +3390,9 @@ Año 2050: tras una invasión zombi, los supervivientes se organizan en grupos y
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] `TRABAJADOR` se especializa en `MANTENIDO` y `VOLUNTARIO` con **T,D**.
+- [ ] `TRABAJADOR` se especializa en `MANTENIDO` y `VOLUNTARIO` con **círculo «d» con línea doble: total y disjunta**.
 - [ ] `aportación_anual` es derivado (óvalo discontinuo).
-- [ ] `TAREA` es débil de `GRUPO` (etiqueta ID).
+- [ ] `TAREA` es débil de `GRUPO` (doble rectángulo y rombo doble identificador).
 - [ ] *Se compone de* es una reflexiva 1:N sobre `TAREA`.
 {{% /comprobacion %}}
 
@@ -3947,32 +3412,14 @@ Año 2050: tras una invasión zombi, los supervivientes se organizan en grupos y
 
 Un integrante puede pertenecer a **varios grupos** con una cuota distinta en cada uno. ¿Qué cambia en la relación *forma parte de*? ¿Dónde van ahora `fecha_alta`, `cuota_mensual` y `aportación_anual`?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
-
-{{< figura src="ud02/ej29.svg" alt="INTEGRANTE forma parte de GRUPO. TRABAJADOR trabaja en GRUPO y se especializa (T,D) en MANTENIDO y VOLUNTARIO. GRUPO realiza TAREA (débil). TAREA se compone de TAREA." caption="Ejercicio 29: Grupos de supervivientes del apocalipsis zombi" >}}
-
-**Decisiones de diseño**
-
-- Especialización **total y disjunta**: todo trabajador es mantenido o voluntario, nunca ambos.
-- *Forma parte de* y *trabaja en* son 1:N con `GRUPO`.
-- `TAREA` se identifica por (id del grupo, nº de tarea). *Se compone de* es reflexiva 1:N con los roles *tarea* y *subtarea*.
-- «Un integrante no puede ser trabajador» no se representa en el diagrama: integrantes y trabajadores son entidades distintas con identificadores distintos. Se documenta como restricción textual.
-
-**Supuestos semánticos**
-
-1. Todo integrante pertenece a un grupo: (1,1).
-2. Una subtarea pertenece al mismo grupo que su tarea (restricción textual).
-3. Una persona no puede ser a la vez integrante y trabajador (restricción textual).
-4. Las horas de los voluntarios son un número positivo.
-
-{{% /details %}}
+{{< solucion id="ud02-045" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
 
 ---
 
 ### Ejercicio 30 · Muestra gastronómica: provincias, platos, restaurantes y vinos
 
-{{< practica num="30" etiqueta="Ejercicio" tipo="Autónoma" duracion="2-3 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
+{{< practica num="30" etiqueta="Ejercicio" tipo="Autónoma" duracion="2-3 sesiones" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones" >}}
 
 {{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
 
@@ -3987,15 +3434,15 @@ Se organiza una muestra de platos típicos de España con información de las lo
 
 #### Enunciado
 
-> De las provincias se conoce el nombre, la extensión y la capital. De las localidades (nombre, tamaño y habitantes), dos localidades de provincias distintas pueden llamarse igual.
+> Una consejería organiza una muestra gastronómica y necesita unificar los datos de los participantes. Las provincias tienen nombre, extensión y capital. Las localidades tienen nombre, tamaño y habitantes, y el nombre no basta para reconocerlas: hay localidades de igual nombre en provincias distintas.
 >
-> De los platos típicos se guarda el nombre, los ingredientes básicos (varios) y la forma de preparación. Un plato puede ser típico de varias localidades y una localidad puede conservar varios platos típicos. Para cada pareja plato-localidad se anotan las variaciones locales de la receta.
+> Cada plato típico lleva su nombre, varios ingredientes básicos y la forma de prepararlo. Un mismo plato se come en muchas localidades y en una localidad se conservan muchos platos; cada vez que coinciden se anotan las variaciones locales de la receta.
 >
-> En las localidades hay restaurantes (nombre, dirección, teléfono, precio del menú del día y capacidad). Los nombres pueden repetirse entre localidades, nunca dentro de una. Cada restaurante debe estar especializado en al menos uno de los platos típicos.
+> Los restaurantes son de una localidad y tienen nombre, dirección, teléfono, precio del menú del día y aforo. Dos localidades pueden tener restaurantes con el mismo nombre, pero no puede haber dos así en la misma. Ningún restaurante es genérico: todos deben especializarse en al menos uno de los platos típicos.
 >
-> En cada localidad se planifican visitas guiadas (nombre del lugar, único por localidad). Las visitas culturales tienen horario; las industriales (fábricas de embutidos, sidra…) tienen persona de contacto y teléfono.
+> Cada localidad ofrece visitas guiadas, y el nombre del lugar visitado no se repite dentro de la localidad. Unas son culturales y tienen un horario; otras son industriales (fábricas de embutido, bodegas de sidra) y se concretan con una persona de contacto y su teléfono.
 >
-> Las bodegas patrocinadoras (CIF, nombre del director, dirección de la sede y teléfono) ofrecen vinos (código, cosecha, grado, color y textura). Un grupo de expertos aconseja qué vinos servir con cada plato.
+> Los patrocinadores son bodegas: CIF, nombre del director, dirección de la sede y teléfono. Ofrecen vinos, con su código, cosecha, grado, color y textura. Un comité de expertos recomienda qué vinos acompañan a cada plato.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -4032,22 +3479,367 @@ Se organiza una muestra de platos típicos de España con información de las lo
 
 Los expertos aconsejan un vino **distinto según la temporada** (invierno o verano). ¿Cómo cambia la relación entre `PLATO` y `VINO`? ¿Se convierte en ternaria?
 
-{{% details title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" %}}
+{{< solucion id="ud02-046" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
-{{< figura src="ud02/ej30.svg" alt="PROVINCIA tiene LOCALIDAD (débil), que ubica RESTAURANTE (débil) y ofrece VISITA (débil), cultural o industrial. PLATO es típico de LOCALIDAD, RESTAURANTE se especializa en PLATO. BODEGA ofrece VINO y PLATO se aconseja con VINO." caption="Ejercicio 30: Muestra gastronómica: provincias, platos, restaurantes y vinos" >}}
+---
 
-**Decisiones de diseño**
+## Bloque 5 · Consolidación
 
-- `PROVINCIA` es propietaria de `LOCALIDAD` (identificador: provincia + nombre) y `LOCALIDAD`, de `RESTAURANTE` y `VISITA`.
-- *Es típico de* (N:M con `variación_local`), *especializado en* (N:M con mínimo 1 para el restaurante) y *aconseja* (N:M) son tres relaciones distintas.
-- Visitas: especialización total y disyunta en culturales (horario) e industriales (contacto y teléfono).
-- Variante del borrador de clase: si interesa saber **qué experto** aconsejó cada vino, se agrega la relación plato–vino y se relaciona la agregación con una entidad `EXPERTO`. Con el enunciado tal como está (un único grupo de expertos), basta la N:M *aconseja*.
+Cinco ejercicios muy difíciles que combinan **todo lo explicado en la unidad**: entidades débiles encadenadas, relaciones reflexivas, ternarias, agregación, especializaciones, atributos compuestos, multivaluados y derivados, y restricciones que el diagrama no recoge. Están pensados para cerrar la unidad: sin guías ni indicaciones, con el diccionario de datos, las restricciones y las tablas previstas.
 
-**Supuestos semánticos**
+### Ejercicio 31 · Aerolínea: rutas, vuelos y tripulación
 
-1. Toda localidad pertenece a una provincia.
-2. Un restaurante está especializado en al menos un plato: (1,N).
-3. El plato en que se especializa un restaurante debe ser típico de su localidad (restricción textual).
-4. Cada vino pertenece a una única bodega.
+{{< practica num="31" etiqueta="Ejercicio" tipo="Autónoma" duracion="3-4 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones + tablas previstas" >}}
+
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
+
+Modelar un caso con entidades débiles encadenadas con dos discriminadores, dos relaciones entre las mismas entidades, una reflexiva con roles, dos ternarias con cardinalidades distintas y una especialización parcial y solapada.
 
 {{% /details %}}
+
+#### Contexto
+
+Una aerolínea regional quiere sustituir sus hojas de cálculo de operaciones por una base de datos única.
+
+#### Enunciado
+
+> Una compañía aérea tiene un código interno, un nombre y un país. Dispone de una flota de aeronaves, cada una con su matrícula y la fecha en que entró en servicio, y cada aeronave es de un modelo concreto (fabricante, capacidad de pasajeros y autonomía en kilómetros) que puede estar representado por muchas aeronaves. Los aeropuertos se conocen por su código IATA y tienen nombre, ciudad, país y unas coordenadas (latitud y longitud) que siempre se manejan juntas. La compañía publica rutas entre pares de aeropuertos, de las que se guarda la distancia; una ruta no es lo mismo que un vuelo y solo interesa que exista.
+>
+> Los vuelos no tienen un código propio en el mundo: «IB6250» lo opera cada día la misma compañía, de modo que un vuelo se identifica por la compañía, el número de vuelo y la fecha. De cada vuelo se calcula la duración real una vez completado. Un vuelo se compone de uno o varios tramos numerados dentro del vuelo (con escalas, el tramo 1 puede ser Valencia-Madrid y el 2, Madrid-Lima); cada tramo sale de un aeropuerto y llega a otro, tiene hora de salida y de llegada y lo realiza una única aeronave, que a lo largo del día hace muchos tramos.
+>
+> El personal tiene DNI, nombre y fecha de alta, y se calcula su antigüedad. Hay pilotos (licencia y horas de vuelo), tripulantes de cabina (varios idiomas) e instructores (especialidad). Hay empleados que no son nada de lo anterior, como el personal de tierra, y un piloto veterano puede ser también instructor. En cada tramo trabajan varios empleados desempeñando un rol (comandante, copiloto, jefe de cabina…); de cada asignación se anota la hora de presentación. Un empleado puede tener roles distintos en tramos distintos, y en un mismo tramo solo un empleado puede ser comandante, pero el diagrama no puede garantizarlo.
+>
+> Los pasajeros se identifican por su pasaporte y tienen nombre y varios teléfonos. Un pasajero reserva plaza en un vuelo con una tarifa (código, nombre y kilos de equipaje incluidos); de la reserva se guardan el asiento y el precio pagado. En un mismo vuelo un pasajero solo viaja con una tarifa, pero puede volar muchas veces y con tarifas distintas en vuelos distintos.
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+
+1. Dibuja el diagrama EER en notación de Chen.
+2. Escribe el identificador completo de `VUELO` y de `TRAMO` y explica qué cambiaría si el número de vuelo bastara para identificar un vuelo.
+3. Calcula las cardinalidades de las dos ternarias fijando, por turnos, dos de sus entidades.
+4. Clasifica la especialización del personal y justifica cada una de las dos propiedades con una frase del texto.
+5. Escribe cinco restricciones que el diagrama no recoge (comandante único por tramo, coherencia de aeropuertos, solapamientos de la aeronave…) y propón cómo comprobar cada una.
+6. Elabora el diccionario de datos de `TRAMO` y de la relación `tripulación`.
+
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `VUELO` es débil de `COMPAÑÍA` con **dos** discriminadores (número y fecha) y `TRAMO` es débil de `VUELO`.
+- [ ] *Ruta* es una relación reflexiva N:M entre `AEROPUERTO` con roles origen y destino, y *sale de* y *llega a* son dos relaciones distintas.
+- [ ] *Reserva* tiene `TARIFA` con máximo 1 y *tripulación* tiene las tres entidades con máximo N.
+- [ ] La jerarquía del personal es **parcial y solapada**.
+- [ ] `coordenadas` es compuesto, `idiomas` y `teléfonos` multivaluados y `antigüedad` y `duración_real` derivados.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
+
+> [!WARNING]
+> - Dar a `VUELO` el código «IB6250» como identificador: el mismo número se repite todos los días.
+> - Convertir *ruta* en *vuelo*: la ruta es un dato permanente y el vuelo es un hecho de un día concreto.
+> - Poner la aeronave en `VUELO` en vez de en `TRAMO`: en un vuelo con escalas puede cambiar de avión.
+
+{{% /details %}}
+
+{{% details title="Pista (despliégala solo si te atascas)" %}}
+Piensa en la pregunta «¿cuántos X hay para cada pareja de Y y Z?» para cada pata de las ternarias, y recuerda que el enunciado dice que en un mismo vuelo un pasajero solo viaja con **una** tarifa.
+{{% /details %}}
+
+#### Ampliación
+
+La aerolínea ofrece vuelos en código compartido: el mismo vuelo se vende con el número de otra compañía. ¿Cómo cambia el identificador de `VUELO` y qué relación nueva necesitas?
+
+{{< solucion id="ud02-047" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
+
+
+---
+
+### Ejercicio 32 · Hospital: ingresos, camas y atenciones
+
+{{< practica num="32" etiqueta="Ejercicio" tipo="Autónoma" duracion="3-4 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones + tablas previstas" >}}
+
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
+
+Resolver un caso con tres niveles de entidades débiles, una reflexiva 1:N con roles, una especialización solapada y una agregación que se relaciona con otra entidad.
+
+{{% /details %}}
+
+#### Contexto
+
+Un hospital comarcal quiere informatizar los ingresos, la ocupación de camas y las prescripciones.
+
+#### Enunciado
+
+> De cada paciente se conserva el número de historia clínica, el nombre, la fecha de nacimiento (la edad se calcula), las alergias (puede tener varias o ninguna) y la dirección, que el servicio de admisión necesita por partes: calle, número, código postal y localidad. Un paciente puede ingresar muchas veces; cada ingreso se numera dentro de la historia del paciente (el ingreso 1, el 2…) y guarda la fecha de ingreso, la fecha de alta si ya se ha producido y el motivo. Un ingreso no tiene sentido sin su paciente.
+>
+> El hospital se organiza en plantas, que se identifican por su número y tienen un nombre. Dentro de una planta las habitaciones se numeran a partir de 1 y tienen un tipo (individual o doble); dentro de cada habitación las camas se distinguen por una letra (A, B…). Cada planta tiene al menos una habitación y cada habitación al menos una cama. Un ingreso ocupa camas a lo largo de la estancia, con la fecha de inicio y la de fin de cada ocupación; el paciente puede cambiar de cama o volver a una cama que ya ocupó, y una cama la ocupan muchos ingresos con el tiempo.
+>
+> El personal se identifica por un código y tiene nombre y DNI. Los hay médicos (especialidad y número de colegiado), enfermeros (titulación) y docentes (categoría), que son los que tutorizan a residentes. Hay personal administrativo que no encaja en ninguno de los tres grupos, y es habitual que un médico sea también docente. Cada persona del personal tiene como mucho un supervisor, que también es personal, y un supervisor puede tener muchas personas a su cargo.
+>
+> Un médico atiende un ingreso concreto (se anota la fecha de la primera visita), y un ingreso lo atienden uno o varios médicos. Sobre cada atención el médico prescribe medicamentos: de cada medicamento se guarda el código, el nombre y varios principios activos; de cada prescripción, la fecha, la dosis y la frecuencia. No se prescribe «a un médico» ni «a un ingreso» por separado, sino dentro de una atención concreta.
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+
+1. Dibuja el diagrama EER en notación de Chen.
+2. Escribe el identificador completo de `INGRESO`, `HABITACIÓN` y `CAMA` e indica cuáles de las tres relaciones débiles son identificadoras.
+3. Justifica por qué *prescribe* debe modelarse con una agregación y por qué una ternaria (médico, ingreso, medicamento) sería menos precisa.
+4. Clasifica la especialización del personal con una frase del texto para cada propiedad.
+5. Escribe cinco restricciones que el diagrama no recoge y una consulta en lenguaje natural que el modelo permita responder («¿qué camas ha ocupado el paciente X?»).
+6. Elabora el diccionario de datos de `INGRESO` y de la relación *ocupa*.
+
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `INGRESO`, `HABITACIÓN` y `CAMA` son débiles y las tres relaciones que las unen a su propietaria son identificadoras.
+- [ ] *Ocupa* es N:M entre `INGRESO` y `CAMA` con `fecha_inicio` como discriminador de la relación.
+- [ ] *Prescribe* relaciona la agregación *atención* con `MEDICAMENTO`.
+- [ ] *Supervisa* es reflexiva con roles y máximo 1 en el lado del supervisor.
+- [ ] La especialización es **parcial y solapada**; `alergias` y `principios_activos` son multivaluados, `dirección` compuesto y `edad` derivado.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
+
+> [!WARNING]
+> - Hacer del paciente el propietario de `CAMA`: la cama es de la habitación y el ingreso la ocupa con una relación propia.
+> - Sustituir la agregación por una ternaria: perderías que la prescripción pertenece a **una atención concreta** de un médico a un ingreso.
+> - Olvidar que *ocupa* admite repetir la misma cama en fechas distintas.
+
+{{% /details %}}
+
+{{% details title="Pista (despliégala solo si te atascas)" %}}
+La prescripción necesita dos cosas a la vez: *quién atendió a quién* y *qué medicamento*. Una relación entre una relación y una entidad se resuelve con una agregación.
+{{% /details %}}
+
+#### Ampliación
+
+Hay que registrar qué pruebas diagnósticas se solicitan en cada atención y su resultado. ¿Reutilizas la agregación? ¿Qué cardinalidad tiene `PRUEBA`?
+
+{{< solucion id="ud02-048" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
+
+
+---
+
+### Ejercicio 33 · Logística: artículos, lista de materiales y almacenes
+
+{{< practica num="33" etiqueta="Ejercicio" tipo="Autónoma" duracion="3-4 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones + tablas previstas" >}}
+
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
+
+Modelar una lista de materiales recursiva, dos entidades débiles con identificadores compuestos, una especialización total y disyunta y una ternaria sin entidades repetidas.
+
+{{% /details %}}
+
+#### Contexto
+
+Una fábrica de mobiliario quiere gestionar su catálogo, sus compras y sus almacenes en un único sistema.
+
+#### Enunciado
+
+> Todo lo que la fábrica compra, fabrica o vende es un artículo, con un código de referencia (SKU), un nombre, la unidad de medida y un coste estándar; el coste total se calcula a partir de sus componentes. Cada artículo es de uno y solo uno de estos tipos: materia prima (con sus días de caducidad), componente (con la referencia de su plano) o producto terminado (con el precio de venta). Un artículo puede componerse de otros artículos, de los que se anota cuántas unidades entran, y a su vez ser componente de muchos otros: una silla lleva cuatro patas, y la pata lleva una cantidad de madera.
+>
+> La fábrica tiene almacenes con un código, un nombre y una dirección (calle, código postal y localidad). Un almacén se divide en ubicaciones que se reconocen por el pasillo y la estantería dentro del almacén (el pasillo 3, estantería 2 existe en muchos almacenes) y tienen una capacidad máxima en kilos. De cada artículo se producen o reciben lotes, numerados dentro del artículo, con fecha de fabricación y de caducidad. Un lote puede estar repartido en varias ubicaciones y una ubicación contiene lotes de varios artículos; se anota cuántas unidades hay.
+>
+> Los proveedores se identifican por su CIF, tienen nombre y varios teléfonos. Un proveedor suministra muchos artículos y un artículo lo suministran varios proveedores, con un precio y un plazo de entrega que cambian en el tiempo: se guarda cada tarifa con su fecha de vigencia. Los pedidos de compra los emite la fábrica a un único proveedor; tienen un número, una fecha y un estado, y se componen de líneas numeradas dentro del pedido, con el artículo pedido, la cantidad y el precio unitario acordado. No todos los artículos pedidos tienen que ser de los que el proveedor suministra habitualmente.
+>
+> Los operarios del almacén (código y nombre) colocan lotes en ubicaciones; de cada colocación se anotan la fecha y la cantidad. Un mismo operario puede colocar el mismo lote en la misma ubicación en fechas distintas.
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+
+1. Dibuja el diagrama EER en notación de Chen.
+2. Escribe el identificador completo de `UBICACIÓN`, `LOTE` y `LÍNEA` y explica por qué ninguno puede tener un código propio global.
+3. Modela la lista de materiales y escribe las preguntas que permite contestar («¿de qué se compone el producto X?» y «¿en qué productos interviene la pieza Y?»).
+4. Compara *almacena* y *coloca*: ¿por qué una es binaria con atributo y la otra ternaria? ¿Qué distingue a cada una?
+5. Escribe cinco restricciones, entre ellas la que evita ciclos en la lista de materiales.
+6. Elabora el diccionario de datos de `LOTE` y de la relación *suministra*.
+
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] *Se compone de* es una reflexiva N:M con roles *conjunto* y *componente* y el atributo `cantidad`.
+- [ ] `UBICACIÓN` tiene **dos** discriminadores y `LOTE` y `LÍNEA` son débiles.
+- [ ] La especialización de `ARTÍCULO` es **total y disyunta**.
+- [ ] *Suministra* tiene `fecha_tarifa` como discriminador de la relación.
+- [ ] *Coloca* es una ternaria con `OPERARIO`, `LOTE` y `UBICACIÓN` con máximo N en las tres patas.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
+
+> [!WARNING]
+> - Dar a la ubicación un código propio: en el texto se identifica por pasillo y estantería **dentro del almacén**.
+> - Guardar el coste total como atributo normal en vez de derivado.
+> - Olvidar `fecha_tarifa`: sin ella no se puede guardar el histórico de precios.
+
+{{% /details %}}
+
+{{% details title="Pista (despliégala solo si te atascas)" %}}
+En una lista de materiales, la relación enlaza el artículo consigo mismo; los roles *conjunto* y *componente* te dicen qué lado es cuál.
+{{% /details %}}
+
+#### Ampliación
+
+Algunas piezas se fabrican en varias versiones (v1, v2) y la lista de materiales cambia según la versión. ¿Convierte la versión en entidad débil de `ARTÍCULO`? ¿Cómo queda *se compone de*?
+
+{{< solucion id="ud02-049" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
+
+
+---
+
+### Ejercicio 34 · Circuito de torneos de ajedrez
+
+{{< practica num="34" etiqueta="Ejercicio" tipo="Autónoma" duracion="3-4 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones + tablas previstas" >}}
+
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
+
+Modelar una cadena de cuatro niveles de entidades débiles, dos relaciones entre las mismas entidades, una ternaria con una pata de máximo 1 y una especialización total y disyunta.
+
+{{% /details %}}
+
+#### Contexto
+
+Una federación de ajedrez quiere llevar todos sus torneos, rondas y partidas en una sola base de datos.
+
+#### Enunciado
+
+> La federación organiza torneos con un código, un nombre y una sede formada por la ciudad y el país. Cada torneo es abierto (con una cuota de inscripción) o cerrado (con un Elo mínimo para participar); no hay torneos de otro tipo ni de los dos a la vez. Cada torneo se celebra varios años, y de cada edición se conoce el año, las fechas de inicio y fin y la bolsa de premios; la edición se reconoce siempre por el torneo y el año.
+>
+> Una edición se divide en rondas numeradas, y cada ronda tiene una fecha y varias partidas, que se numeran por tablero. De cada partida se guardan el resultado y la duración en minutos, que se calcula y no se almacena. Una partida enfrenta a un jugador con blancas y a otro con negras; las dos relaciones son distintas porque el color importa. La dirige un árbitro principal y la ayudan varios árbitros asistentes, que a su vez pueden ser principales de otras partidas.
+>
+> Los jugadores tienen una licencia, un nombre, un país, una fecha de nacimiento y varios títulos (maestro, gran maestro…). Un jugador se inscribe en las ediciones en las que quiere jugar, con el Elo que tenía al inscribirse. Cada temporada un jugador está fichado por un club como mucho; el club tiene un código, un nombre y una ciudad, y se anota el dorsal del jugador en esa temporada. Un jugador puede cambiar de club entre temporadas y un club ficha a muchos jugadores.
+>
+> Cada edición reparte premios numerados por puesto (el 1.º, el 2.º…) con un importe, que se llevan jugadores concretos; un premio solo puede ganarlo un jugador, y un jugador puede ganar varios premios en ediciones distintas. Todas las ediciones reparten al menos un premio.
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+
+1. Dibuja el diagrama EER en notación de Chen.
+2. Escribe el identificador completo de `EDICIÓN`, `RONDA`, `PARTIDA` y `PREMIO`.
+3. Explica por qué *blancas* y *negras* no pueden ser una sola relación con un atributo `color`.
+4. Calcula las cardinalidades de *ficha* y justifica el máximo 1 de `CLUB`.
+5. Escribe cinco restricciones (un jugador no juega contra sí mismo, un árbitro no dirige una partida que juega, el Elo mínimo en torneos cerrados…).
+6. Elabora el diccionario de datos de `PARTIDA`.
+
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] Hay cuatro niveles de debilidad: `EDICIÓN`, `RONDA`, `PARTIDA` y `PREMIO` (esta última también débil de `EDICIÓN`).
+- [ ] `JUGADOR` y `PARTIDA` se unen con dos relaciones, *blancas* y *negras*, ambas (1,1) para el jugador.
+- [ ] *Ficha* es ternaria con `CLUB` de máximo 1 y el atributo `dorsal`.
+- [ ] La especialización de `TORNEO` es **total y disyunta**.
+- [ ] `sede` es compuesto, `títulos` multivaluado y `duración_min` derivado.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
+
+> [!WARNING]
+> - Modelar una única relación jugador–partida con un atributo `color`: impediría exigir exactamente un jugador por color.
+> - Poner `club` como atributo de `JUGADOR`: un jugador cambia de club entre temporadas.
+> - Identificar la partida solo por su número de tablero: se repite en todas las rondas.
+
+{{% /details %}}
+
+{{% details title="Pista (despliégala solo si te atascas)" %}}
+Para cada nivel débil pregúntate qué hace falta para señalar **un solo** elemento: del torneo, el año; de la edición, la ronda; de la ronda, el tablero.
+{{% /details %}}
+
+#### Ampliación
+
+La federación quiere guardar los movimientos de cada partida en orden. ¿Qué entidad nueva necesitas y de quién es débil? ¿Qué identificador completo tiene?
+
+{{< solucion id="ud02-050" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
+
+
+---
+
+### Ejercicio 35 · Producción de una serie de televisión
+
+{{< practica num="35" etiqueta="Ejercicio" tipo="Autónoma" duracion="3-4 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o papel" entrega="Diagrama EER + diccionario + restricciones + tablas previstas" >}}
+
+{{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
+
+
+Modelar una cadena de tres niveles de entidades débiles, una especialización total y solapada, una ternaria con una pata de máximo 1 y una reflexiva 1:N.
+
+{{% /details %}}
+
+#### Contexto
+
+Una productora quiere llevar el seguimiento de sus series, desde el guion hasta la emisión.
+
+#### Enunciado
+
+> De cada serie se guardan un código, el título, el año de estreno y los géneros (puede ser más de uno). Una serie se divide en temporadas, numeradas dentro de la serie, con su año de emisión; cada temporada tiene al menos un episodio, que se numera dentro de la temporada y tiene título, duración en minutos y fecha de estreno. Algunas series nacen como derivadas de otra (spin-off): una serie puede tener muchas derivadas, pero cada derivada procede, como mucho, de una serie original.
+>
+> Las personas que trabajan en las series tienen un código, un nombre, una nacionalidad y una fecha de nacimiento, y se calcula su edad. Cada persona es actor (con su altura), director (con su estilo) o guionista (con su especialidad), o varias cosas a la vez: hay directores que también escriben y actores que dirigen. No se guardan personas que no encajen en ninguno de los tres grupos. Cada episodio lo dirige un único director, que dirige muchos episodios; lo escriben varios guionistas, a cada uno de los cuales se asigna un porcentaje de autoría, y cada guionista escribe en muchos episodios.
+>
+> Los personajes pertenecen a una serie y se reconocen por su nombre dentro de ella (hay un «Alex» en muchas series), con una descripción. En un episodio concreto un personaje lo interpreta un actor, de quien se guardan los minutos en pantalla; el mismo personaje puede ser interpretado por actores distintos en episodios distintos (de niño y de adulto), pero en un mismo episodio nunca por más de uno.
+>
+> Los episodios se emiten en cadenas (CIF y nombre), y de cada emisión se anota la fecha y la audiencia; un episodio se puede emitir en varias cadenas y varias veces en la misma. También se rueda en localizaciones, con un código, un tipo y una dirección compuesta de calle, ciudad y país; de cada episodio y localización se anota el número de jornadas de rodaje.
+
+{{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
+
+
+1. Dibuja el diagrama EER en notación de Chen.
+2. Escribe el identificador completo de `TEMPORADA`, `EPISODIO` y `PERSONAJE`.
+3. Justifica las dos propiedades de la especialización de personas con una frase del texto y explica el efecto de cada una al pasar al modelo relacional (UD03).
+4. Calcula las cardinalidades de *interpreta* fijando dos entidades cada vez.
+5. Escribe cinco restricciones y decide qué atributos de *se emite en* forman la identificación de cada emisión.
+6. Elabora el diccionario de datos de `EPISODIO` y de *interpreta*.
+
+{{% /details %}}
+
+{{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `TEMPORADA` y `EPISODIO` son débiles en cadena y `PERSONAJE` es débil de `SERIE`.
+- [ ] La especialización de `PERSONA` es **total y solapada**.
+- [ ] *Interpreta* es ternaria con `ACTOR` de máximo 1 y el atributo `minutos_pantalla`.
+- [ ] *Es spin-off de* es reflexiva con máximo 1 en el lado de la serie original.
+- [ ] *Se emite en* lleva `fecha` como discriminador, porque un episodio se repite en la misma cadena.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errores habituales (léelos tras intentarlo)" %}}
+
+
+> [!WARNING]
+> - Modelar al director de cada episodio con una relación N:M: el enunciado dice que es único.
+> - Hacer `PERSONAJE` fuerte con un código inventado: se identifica por su nombre dentro de la serie.
+> - Poner `ACTOR` como atributo de `PERSONAJE`: el actor depende del episodio.
+
+{{% /details %}}
+
+{{% details title="Pista (despliégala solo si te atascas)" %}}
+Fija el personaje y el episodio y pregúntate cuántos actores lo interpretan; la respuesta fija el máximo de la pata `ACTOR`.
+{{% /details %}}
+
+#### Ampliación
+
+Los actores pueden interpretar a varios personajes en el mismo episodio (doble papel). ¿Qué cambia en las cardinalidades de *interpreta*?
+
+{{< solucion id="ud02-051" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}

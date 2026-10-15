@@ -306,3 +306,126 @@
 .bd-cal-info { min-height: 3.2rem; }
 @media print { .bd-w button, .bd-cal-tabs { display: none; } }
 .bd-w-log div { white-space: pre-wrap; }
+
+/* =====================================================================
+   Elementos interactivos y didácticos añadidos
+   (curiosidades, paso a paso, diagramas interactivos, gráficos, tarjetas)
+   ===================================================================== */
+
+/* ---------- Imágenes resueltas desde assets/images ---------- */
+.bd-figura { margin: 1.25rem 0; text-align: center; }
+.bd-figura img { max-width: 100%; height: auto; border-radius: var(--border-radius); }
+.bd-figura figcaption { font-size: var(--font-size-smaller); opacity: .75; margin-top: .35rem; }
+
+/* ---------- Curiosidades ---------- */
+.bd-curio {
+  --c: #f59e0b;
+  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
+  border-left: 5px solid var(--c);
+  border-radius: var(--border-radius);
+  background: color-mix(in srgb, var(--c) 8%, transparent);
+  margin: 1.25rem 0;
+  padding: 0 1rem;
+}
+.bd-curio > summary { cursor: pointer; padding: .7rem 0; list-style: none; display: flex; gap: .5rem; align-items: baseline; flex-wrap: wrap; }
+.bd-curio > summary::-webkit-details-marker { display: none; }
+.bd-curio-label { font-size: var(--font-size-smallest); text-transform: uppercase; letter-spacing: .06em; font-weight: 700; color: var(--c); }
+.bd-curio-q { font-weight: 600; }
+.bd-curio > summary::after { content: "Mostrar ▾"; margin-left: auto; font-size: var(--font-size-smallest); opacity: .65; }
+.bd-curio[open] > summary::after { content: "Ocultar ▴"; }
+.bd-curio-body { padding: 0 0 .6rem; }
+.bd-curio-body > :first-child { margin-top: 0; }
+
+/* ---------- Explicación paso a paso ---------- */
+.bd-pasos { border: 1px solid var(--gray-200); border-radius: var(--border-radius); padding: 1rem; margin: 1.5rem 0; }
+.bd-pasos:focus-visible { outline: 2px solid var(--color-accent-important); }
+.bd-pasos-head { margin-bottom: .6rem; }
+.bd-pasos-badge { font-size: var(--font-size-smallest); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: .1rem .55rem; border-radius: 999px; color: #fff; background: var(--color-accent-important); margin-right: .4rem; }
+.bd-pasos-dots { display: flex; gap: .35rem; flex-wrap: wrap; margin-bottom: .5rem; }
+.bd-pasos-dot { width: 1.9rem; height: 1.9rem; border-radius: 50%; border: 2px solid var(--gray-300, #cbd5e1); background: transparent; color: inherit; font-weight: 700; cursor: pointer; }
+.bd-pasos-dot.done { border-color: var(--color-accent-tip); }
+.bd-pasos-dot.on { background: var(--color-accent-important); border-color: var(--color-accent-important); color: #fff; }
+.bd-pasos-bar { height: 4px; background: var(--gray-200); border-radius: 4px; overflow: hidden; margin-bottom: .75rem; }
+.bd-pasos-bar i { display: block; height: 100%; background: var(--color-accent-important); transition: width .25s; }
+.bd-etapa-t { margin: .2rem 0 .5rem; }
+.bd-pasos:not(.is-js) .bd-etapa { border-top: 1px dashed var(--gray-200); padding-top: .5rem; }
+.bd-pasos-foot { display: flex; align-items: center; gap: .75rem; justify-content: space-between; margin-top: .75rem; flex-wrap: wrap; }
+.bd-pasos-count { font-size: var(--font-size-smaller); opacity: .75; text-align: center; flex: 1; }
+.bd-pasos button:disabled { opacity: .4; cursor: default; }
+
+/* ---------- Diagramas interactivos ---------- */
+.bd-diagrama { margin: 1.25rem 0; }
+.bd-diagrama-svg svg { display: block; max-width: 100%; height: auto; margin: 0 auto; border-radius: 12px; }
+.bd-diagrama-tip {
+  display: block; margin-top: .5rem; padding: .55rem .8rem; min-height: 2.6rem;
+  border-radius: var(--border-radius); border: 1px dashed var(--gray-300, #cbd5e1);
+  font-size: var(--font-size-smaller); opacity: .8;
+}
+.bd-diagrama-tip.has { border-style: solid; border-color: var(--color-accent-important); opacity: 1; background: color-mix(in srgb, var(--color-accent-important) 7%, transparent); }
+.bd-diagrama figcaption { font-size: var(--font-size-smaller); opacity: .75; margin-top: .35rem; text-align: center; }
+
+/* ---------- Gráficos ---------- */
+.bd-grafico { border: 1px solid var(--gray-200); border-radius: var(--border-radius); padding: .75rem 1rem 1rem; margin: 1.5rem 0; }
+.bd-grafico-t { font-weight: 700; margin-bottom: .25rem; }
+.bd-gsvg { width: 100%; height: auto; display: block; }
+.bd-gsvg .g { stroke: currentColor; stroke-opacity: .15; }
+.bd-gsvg .ax { font-size: 12px; fill: currentColor; opacity: .75; }
+.bd-gsvg .val { font-size: 12px; font-weight: 700; fill: currentColor; }
+.bd-gsvg .bar { cursor: pointer; transition: opacity .15s, transform .15s; transform-box: fill-box; transform-origin: bottom; }
+.bd-gsvg .bar:hover, .bd-gsvg .bar:focus { opacity: .8; outline: none; }
+.bd-grafico-tip { display: block; font-size: var(--font-size-smaller); opacity: .75; min-height: 1.4rem; }
+.bd-grafico-tip.has { opacity: 1; font-weight: 600; }
+.bd-grafico-sw { float: right; font-size: var(--font-size-smaller); }
+.bd-grafico figcaption { font-size: var(--font-size-smallest); opacity: .7; margin-top: .25rem; }
+
+/* ---------- Laboratorio de coste de búsqueda ---------- */
+.bd-lab { border: 1px solid var(--gray-200); border-top: 5px solid var(--color-accent-note); border-radius: var(--border-radius); padding: .75rem 1rem 1rem; margin: 1.5rem 0; }
+.bd-lab-head { font-weight: 700; margin-bottom: .5rem; }
+.bd-lab-note { font-size: var(--font-size-smallest); opacity: .7; margin: .5rem 0 0; }
+.bd-coste-row { display: block; margin-bottom: .75rem; }
+.bd-coste-row input { width: 100%; display: block; margin-top: .35rem; }
+.bd-coste-line { display: grid; grid-template-columns: 14rem 1fr 9rem; gap: .6rem; align-items: center; margin: .35rem 0; font-size: var(--font-size-smaller); }
+.bd-coste-track { height: 1.1rem; background: var(--gray-200); border-radius: 999px; overflow: hidden; }
+.bd-coste-track i { display: block; height: 100%; border-radius: 999px; transition: width .2s; }
+.bd-coste-track .a { background: #f87171; }
+.bd-coste-track .b { background: #34d399; }
+.bd-coste-txt { font-weight: 600; margin: .6rem 0 0; }
+@media (max-width: 40rem) { .bd-coste-line { grid-template-columns: 1fr; } }
+
+/* ---------- Tarjetas que se giran ---------- */
+.bd-cartas { margin: 1.5rem 0; }
+.bd-cartas-head { font-weight: 700; margin-bottom: .5rem; }
+.bd-cartas-head span { font-weight: 400; font-size: var(--font-size-smaller); opacity: .7; margin-left: .5rem; }
+.bd-cartas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .75rem; }
+.bd-carta { perspective: 700px; background: none; border: 0; padding: 0; min-height: 8rem; cursor: pointer; color: inherit; font: inherit; }
+.bd-carta-in { display: block; position: relative; width: 100%; height: 100%; min-height: 8rem; transition: transform .45s; transform-style: preserve-3d; }
+.bd-carta.flip .bd-carta-in { transform: rotateY(180deg); }
+.bd-carta-f { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center; padding: .75rem; border-radius: var(--border-radius); backface-visibility: hidden; -webkit-backface-visibility: hidden; border: 1px solid var(--gray-200); }
+.bd-carta-front { font-weight: 700; font-size: 1.1rem; background: color-mix(in srgb, var(--color-accent-important) 9%, var(--body-background)); border-top: 4px solid var(--color-accent-important); }
+.bd-carta-back { transform: rotateY(180deg); font-size: var(--font-size-smaller); background: color-mix(in srgb, var(--color-accent-tip) 12%, var(--body-background)); border-top: 4px solid var(--color-accent-tip); }
+
+/* ---------- Lista de comprobación interactiva (prácticas) ---------- */
+.bd-check { border: 1px solid var(--gray-200); border-left: 5px solid var(--color-accent-tip); border-radius: var(--border-radius); padding: .6rem 1rem .8rem; margin: .75rem 0 1.25rem; }
+.bd-check-head { display: flex; gap: .6rem; align-items: baseline; flex-wrap: wrap; }
+.bd-check-badge { font-size: var(--font-size-smallest); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: .1rem .55rem; border-radius: 999px; color: #fff; background: var(--color-accent-tip); }
+.bd-check-n { font-size: var(--font-size-smaller); opacity: .8; }
+.bd-check-bar { height: 5px; background: var(--gray-200); border-radius: 4px; overflow: hidden; margin: .4rem 0 .4rem; }
+.bd-check-bar i { display: block; height: 100%; width: 0; background: var(--color-accent-tip); transition: width .25s; }
+.bd-check-li { position: relative; padding: .15rem 0 .15rem 1.7rem; }
+.bd-check-li > input { position: absolute; left: 0; top: .45rem; }
+.bd-check-li.done { opacity: .6; text-decoration: line-through; }
+.bd-check.all { border-left-color: #16a34a; background: color-mix(in srgb, #16a34a 6%, transparent); }
+.bd-check-reset { font-size: var(--font-size-smallest); margin-top: .25rem; }
+
+.bd-check li p { margin: .15rem 0; }
+.bd-check > ul, .bd-check > ol { margin: .25rem 0; }
+
+/* Soluciones protegidas */
+details.sol-lock > summary { cursor: pointer; font-weight: 600; }
+.sol-form { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .5rem 0; }
+.sol-form .sol-note { flex-basis: 100%; margin: 0; color: var(--gray-500, #666); }
+.sol-form input { padding: .35rem .5rem; border: 1px solid var(--gray-200, #ccc); border-radius: .3rem; min-width: 14rem; }
+.sol-form button { padding: .35rem .9rem; cursor: pointer; }
+.sol-msg { min-height: 1.2em; margin: .25rem 0; font-size: .9em; }
+.sol-msg.ko { color: #c0392b; }
+details.sol-lock.sol-open .sol-form { display: none; }

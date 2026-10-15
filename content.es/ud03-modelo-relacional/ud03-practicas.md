@@ -34,7 +34,7 @@ math: true
 
 ## Práctica 3.1 · Biblioteca: del E/R a las tablas
 
-{{< practica num="3.1" tipo="Guiada" duracion="2 sesiones" nivel="1" ra="RA6: b, c, d, e" sgbd="Papel u Oracle SQL Developer Data Modeler" entrega="Esquema relacional + diagrama relacional" >}}
+{{< practica num="3.1" tipo="Guiada" duracion="2 sesiones" nivel="1" ra="RA6: b, c, d, e" sgbd="Papel o herramienta de modelado" entrega="Esquema relacional + diagrama relacional" >}}
 
 #### Objetivo
 
@@ -54,7 +54,7 @@ Partimos del diagrama de la biblioteca municipal de la [práctica 2.1](/ud02-mod
 
     - AUTOR(<u>cod_autor</u>, nombre, nacionalidad)
     - LIBRO(<u>isbn</u>, titulo, anio, editorial)
-    - SOCIO(<u>num_socio</u>, dni, nombre, telefono) · `dni` UNIQUE
+    - SOCIO(<u>num_socio</u>, dni, nombre, telefono) · `dni` UK
 
 2. **Entidad débil → tabla con la clave del propietario.** La clave primaria de `EJEMPLAR` combina la clave de `LIBRO` y su discriminador. Esa parte de la clave también es clave ajena.
 
@@ -71,60 +71,17 @@ Partimos del diagrama de la biblioteca municipal de la [práctica 2.1](/ud02-mod
 
 5. **Revisa las claves ajenas compuestas.** Una clave ajena apunta a la clave primaria **completa** de la tabla referenciada: (isbn, num_ejemplar) → EJEMPLAR(isbn, num_ejemplar), no cada columna por separado.
 
-6. **Dibuja el diagrama relacional** en SQL Developer Data Modeler (*Modelo relacional → Nueva tabla*) o en draw.io.
+6. **Dibuja el diagrama relacional** en una herramienta de modelado (por ejemplo, draw.io) o en papel.
 
 {{% /steps %}}
 
-{{% details title="Diagrama relacional resultante" %}}
-```mermaid
-erDiagram
-    AUTOR ||--o{ ESCRIBE : "cod_autor"
-    LIBRO ||--|{ ESCRIBE : "isbn"
-    LIBRO ||--o{ EJEMPLAR : "isbn"
-    EJEMPLAR ||--o{ PRESTAMO : "isbn, num_ejemplar"
-    SOCIO ||--o{ PRESTAMO : "num_socio"
-    AUTOR {
-        string cod_autor PK
-        string nombre
-        string nacionalidad
-    }
-    LIBRO {
-        string isbn PK
-        string titulo
-        int anio
-        string editorial
-    }
-    ESCRIBE {
-        string cod_autor PK, FK
-        string isbn PK, FK
-    }
-    EJEMPLAR {
-        string isbn PK, FK
-        int num_ejemplar PK
-        string estado
-    }
-    SOCIO {
-        int num_socio PK
-        string dni UK
-        string nombre
-        string telefono
-    }
-    PRESTAMO {
-        int num_socio PK, FK
-        string isbn PK, FK
-        int num_ejemplar PK, FK
-        date fecha_salida PK
-        date fecha_prevista
-        date fecha_devolucion "NULL"
-    }
-```
-{{% /details %}}
+{{< solucion id="ud03-001" title="Diagrama relacional resultante" />}}
 
 #### Comprobación
 
 {{% comprobacion %}}
 - [ ] Hay **6** tablas: 4 por las entidades y 2 por las relaciones N:M.
-- [ ] La clave primaria de `PRESTAMO` tiene 4 columnas, o has justificado una clave artificial con `UNIQUE` sobre esas 4 columnas.
+- [ ] La clave primaria de `PRESTAMO` tiene 4 columnas, o has justificado una clave artificial con una clave alternativa (UK) sobre esas 4 columnas.
 - [ ] La clave ajena de `PRESTAMO` a `EJEMPLAR` es **compuesta**.
 - [ ] Has indicado qué columnas admiten nulos.
 {{% /comprobacion %}}
@@ -137,13 +94,13 @@ erDiagram
 
 #### Ampliación
 
-Sustituye la clave compuesta de `PRESTAMO` por un identificador artificial `id_prestamo`. ¿Qué restricción `UNIQUE` necesitas para no perder información? ¿Qué ventajas e inconvenientes tiene cada opción?
+Sustituye la clave compuesta de `PRESTAMO` por un identificador artificial `id_prestamo`. ¿Qué restricción de clave alternativa (UK) necesitas para no perder información? ¿Qué ventajas e inconvenientes tiene cada opción?
 
 ---
 
 ## Práctica 3.2 · Simulador de integridad referencial
 
-{{< practica num="3.2" tipo="Guiada" duracion="1 sesión" nivel="2" ra="RA6: f · RA2: e" sgbd="Papel (se comprobará en Oracle en la UD05)" entrega="Hoja de respuestas" >}}
+{{< practica num="3.2" tipo="Guiada" duracion="1 sesión" nivel="2" ra="RA6: f · RA2: e" sgbd="Papel" entrega="Hoja de respuestas" >}}
 
 #### Objetivo
 
@@ -184,30 +141,23 @@ Claves ajenas: `ALUMNO.cod_grupo → GRUPO` y `MATRICULA.id_alumno → ALUMNO`.
 
 Para cada escenario, indica si la operación **se ejecuta o se rechaza** y, si se ejecuta, cómo quedan las tres tablas.
 
-| # | Política de `fk_alumno_grupo` | Política de `fk_matricula_alumno` | Operación |
+| # | Política de la clave ajena alumno → grupo | Política de la clave ajena matrícula → alumno | Operación |
 |---|---|---|---|
-| A | Por defecto (sin acción) | `ON DELETE CASCADE` | `DELETE FROM grupo WHERE cod_grupo = '1DAM'` |
-| B | `ON DELETE SET NULL` | `ON DELETE CASCADE` | `DELETE FROM grupo WHERE cod_grupo = '1DAM'` |
-| C | `ON DELETE CASCADE` | Por defecto (sin acción) | `DELETE FROM grupo WHERE cod_grupo = '1DAM'` |
-| D | `ON DELETE CASCADE` | `ON DELETE CASCADE` | `DELETE FROM grupo WHERE cod_grupo = '1DAM'` |
-| E | cualquiera | cualquiera | `DELETE FROM grupo WHERE cod_grupo = '2ASIR'` |
-| F | cualquiera | cualquiera | `INSERT INTO alumno VALUES (40, 'Eva', '3DAM')` |
+| A | Restringido | En cascada | Borrar el grupo 1DAM |
+| B | Puesta a nulos | En cascada | Borrar el grupo 1DAM |
+| C | En cascada | Restringido | Borrar el grupo 1DAM |
+| D | En cascada | En cascada | Borrar el grupo 1DAM |
+| E | cualquiera | cualquiera | Borrar el grupo 2ASIR |
+| F | cualquiera | cualquiera | Añadir el alumno 40, Eva, al grupo 3DAM |
 
-{{% details title="Soluciones" %}}
-- **A. Se rechaza.** Hay alumnos en 1DAM y la clave ajena no permite el borrado (error `ORA-02292: integrity constraint violated - child record found`).
-- **B. Se ejecuta.** Se borra 1DAM; Adrián y Rubén quedan con `cod_grupo = NULL`. Sus matrículas **no** se borran: la cascada de la matrícula solo se activa si se borra el alumno, y el alumno no se ha borrado.
-- **C. Se rechaza.** La cascada intenta borrar a Adrián y a Rubén, pero Adrián tiene matrículas y `fk_matricula_alumno` no lo permite. Toda la sentencia se deshace: el borrado es **atómico**.
-- **D. Se ejecuta.** Se borra el grupo, los alumnos 1 y 2 y las matrículas 10001 y 10002. Un solo `DELETE` borra filas de tres tablas: por eso hay que usar `CASCADE` con mucho cuidado.
-- **E. Se ejecuta** siempre: 2ASIR no tiene alumnos.
-- **F. Se rechaza:** el grupo 3DAM no existe (`ORA-02291: integrity constraint violated - parent key not found`).
-{{% /details %}}
+{{< solucion id="ud03-002" title="Soluciones" />}}
 
 #### Ampliación
 
 ¿Qué política elegirías para cada clave ajena de EduGest? Justifica al menos tres decisiones. Recuerda que en un centro educativo las matrículas y las notas son **documentos oficiales**.
 
 > [!CAUTION]
-> `ON DELETE CASCADE` es cómodo, pero convierte un error humano (borrar el grupo equivocado) en una pérdida masiva de datos. Úsalo solo cuando las filas hijas no tengan sentido sin la fila padre **y** no tengan valor por sí mismas.
+> El borrado en cascada es cómodo, pero convierte un error humano (borrar el grupo equivocado) en una pérdida masiva de datos. Úsalo solo cuando las filas hijas no tengan sentido sin la fila padre **y** no tengan valor por sí mismas.
 
 ---
 
@@ -243,18 +193,12 @@ Termina recomendando una opción para la clínica.
 
 #### Comprobación
 
-- [ ] En la opción 1 propones un `CHECK` que obliga a rellenar `num_colegiado` cuando `tipo = 'VET'`.
+- [ ] En la opción 1 propones una restricción de fila que obliga a rellenar `num_colegiado` cuando `tipo = 'VET'`.
 - [ ] En la opción 2 identificas que la disyunción **no** se garantiza solo con claves ajenas.
 - [ ] En la opción 3 detectas que la relación con `CONSULTA` solo afecta a `VETERINARIO` y que el DNI podría repetirse entre subclases.
 
-{{% details title="Pista: el CHECK de la opción 1" %}}
-```sql
-CONSTRAINT ck_empleado_tipo CHECK (
-     (tipo = 'VET' AND num_colegiado IS NOT NULL)
-  OR (tipo = 'AUX' AND titulacion   IS NOT NULL)
-  OR (tipo = 'ADM')
-)
-```
+{{% details title="Pista: la regla de fila de la opción 1" %}}
+Hazte tres preguntas por cada opción: ¿qué atributos son obligatorios **solo** para un tipo de empleado? ¿Cómo sabe el SGBD qué tipo es cada fila? ¿Qué combinaciones de «tipo» y «atributos rellenos» son válidas? La regla de fila de la opción 1 debe aceptar solo esas combinaciones: veterinario con número de colegiado, auxiliar con titulación y administrativo sin ninguno de los dos.
 {{% /details %}}
 
 ---
@@ -290,10 +234,10 @@ INSCRIPCION(id_torneo*, id_jugador1*, id_jugador2*, categoria)
 2. Dibuja el diagrama E/R del que procede: entidades, relaciones (incluida la reflexiva), cardinalidades y entidades débiles.
 3. ¿Qué significa `RESERVA.id_jugador` y qué significa `PARTICIPA`? ¿Son redundantes?
 4. Detecta al menos **dos problemas**. Por ejemplo, ¿qué impide inscribir la misma pareja dos veces cambiando el orden de los jugadores?
-5. Propón las restricciones (`UNIQUE`, `CHECK` o textuales) que los resuelven.
+5. Propón las restricciones (clave alternativa, regla de fila o textuales) que los resuelven.
 
 {{% details title="Pista para el punto 4" %}}
-Con `INSCRIPCION(id_torneo, id_jugador1, id_jugador2)` como clave, las filas (T1, 5, 8) y (T1, 8, 5) son distintas para el SGBD pero representan la misma pareja. Un `CHECK (id_jugador1 < id_jugador2)` obliga a guardar siempre la pareja en el mismo orden. ¿Qué impide que un jugador se inscriba con él mismo?
+Con `INSCRIPCION(id_torneo, id_jugador1, id_jugador2)` como clave, las filas (T1, 5, 8) y (T1, 8, 5) son distintas para el SGBD pero representan la misma pareja. Una regla de fila («`id_jugador1` menor que `id_jugador2`») obliga a guardar siempre la pareja en el mismo orden. ¿Qué impide que un jugador se inscriba con él mismo?
 {{% /details %}}
 
 ---
@@ -318,7 +262,7 @@ RESERVA(id_reserva, id_cliente*, num_hab*, fecha_entrada, fecha_salida, num_pers
 
 #### Enunciado
 
-Clasifica cada regla en una de estas categorías: **PK/UNIQUE**, **FK**, **NOT NULL**, **CHECK de fila** o **no representable** (documentar e implementar en la UD09). En el último caso, usa el formato de documentación de la teoría.
+Clasifica cada regla en una de estas categorías: **PK / clave alternativa**, **FK**, **atributo obligatorio**, **regla de fila** o **no representable** (documentar e implementar en la UD09). En el último caso, usa el formato de documentación de la teoría.
 
 1. Dos clientes no pueden tener el mismo DNI.
 2. La fecha de salida es posterior a la de entrada.
@@ -333,7 +277,7 @@ Clasifica cada regla en una de estas categorías: **PK/UNIQUE**, **FK**, **NOT N
 
 {{% comprobacion %}}
 - [ ] Las reglas 3, 4, 6 y 7 están clasificadas como no representables o justificadas como tales.
-- [ ] La regla 2 es un `CHECK (fecha_salida > fecha_entrada)`.
+- [ ] La regla 2 es una regla de fila: `fecha_salida` posterior a `fecha_entrada`.
 - [ ] Para la regla 7 se discute si conviene **guardar** el importe o **calcularlo**.
 {{% /comprobacion %}}
 
@@ -341,7 +285,7 @@ Clasifica cada regla en una de estas categorías: **PK/UNIQUE**, **FK**, **NOT N
 
 ## Proyecto EduGest · UD03: modelo lógico
 
-{{< practica num="EduGest-3" tipo="Proyecto" duracion="Trabajo transversal (2 semanas)" nivel="2" ra="RA6: a, b, c, d, e, f, h" sgbd="Oracle SQL Developer Data Modeler o draw.io" entrega="edugest/docs/03-modelo-relacional.md + diagrama" >}}
+{{< practica num="EduGest-3" tipo="Proyecto" duracion="Trabajo transversal (2 semanas)" nivel="2" ra="RA6: a, b, c, d, e, f, h" sgbd="draw.io u otra herramienta de modelado" entrega="edugest/docs/03-modelo-relacional.md + diagrama" >}}
 
 #### Enunciado
 
@@ -358,7 +302,7 @@ Transforma **tu** modelo E/R de EduGest (práctica EduGest-2) en un modelo relac
 {{% comprobacion %}}
 - [ ] Todas las relaciones N:M del E/R se han convertido en tablas.
 - [ ] La relación «imparte» conserva la información de profesor, módulo, grupo y curso académico.
-- [ ] Ninguna clave ajena de matrículas o notas usa `ON DELETE CASCADE` sin justificarlo.
+- [ ] Ninguna clave ajena de matrículas o notas usa el borrado en cascada sin justificarlo.
 {{% /comprobacion %}}
 
 ---
@@ -384,14 +328,14 @@ CONTENEDOR (cod_contenedor, descripcion, dni_capitan, cod_puerto)
 | Marca | Nombre | ¿Admite duplicados? | ¿Admite nulos? |
 |---|---|---|---|
 | **PK** | Clave primaria | No | No |
-| **UK** | Clave alternativa (*unique*) | No | No, si es clave candidata (se añade VNN) |
+| **UK** | Clave alternativa (*unique key*) | No | No, si es clave candidata (se añade VNN) |
 | **FK** | Clave ajena | Sí\* | Sí\* |
-| **VNN** | Valor no nulo (*not null*) | — | No |
+| **VNN** | Valor no nulo (*valor obligatorio*) | — | No |
 
 \* Salvo que la columna forme parte también de una PK o UK, o tenga VNN.
 
 > [!TIP]
-> Es la misma información que la notación `TABLA(`<u>clave</u>`, columna, `*clave_ajena*`)` de las prácticas anteriores, pero en forma de lista. Con ella es más fácil revisar que no falta ninguna restricción y, en la UD05, cada línea se convierte casi directamente en una cláusula de `CREATE TABLE`.
+> Es la misma información que la notación `TABLA(`<u>clave</u>`, columna, `*clave_ajena*`)` de las prácticas anteriores, pero en forma de lista. Con ella es más fácil revisar que no falta ninguna restricción y, en la UD05, cada línea se convierte casi directamente en una tabla de la base de datos.
 
 ### Reglas de transformación (resumen)
 
@@ -414,7 +358,7 @@ CONTENEDOR (cod_contenedor, descripcion, dni_capitan, cod_puerto)
 | Atributo multivaluado | Tabla nueva con la PK de la entidad y el valor. |
 
 > [!IMPORTANT]
-> **Pérdidas semánticas habituales.** Las claves no pueden garantizar: el mínimo 1 del lado 1 de una relación 1:N («todo profesor imparte al menos un módulo»), la existencia de una entidad respecto a una relación cuando están en tablas distintas, las generalizaciones totales o disjuntas y las restricciones entre relaciones («C solo se relaciona con D si lo está con B»). Se anotan y se resuelven en la implementación con `CHECK`, disparadores (UD09) o procedimientos.
+> **Pérdidas semánticas habituales.** Las claves no pueden garantizar: el mínimo 1 del lado 1 de una relación 1:N («todo profesor imparte al menos un módulo»), la existencia de una entidad respecto a una relación cuando están en tablas distintas, las generalizaciones totales o disjuntas y las restricciones entre relaciones («C solo se relaciona con D si lo está con B»). Se anotan y se resuelven en la implementación con reglas de fila, disparadores (UD09) o procedimientos.
 
 ---
 
@@ -459,18 +403,7 @@ Ahora, la relación entre alumnos y asignaturas («los alumnos se matriculan de 
 | E | Igual que D, pero con **PK: dni** en `MATRICULA` |
 | F | `ASIGNATURA (codigo, nombre, curso, dni, nombre_alumno)` PK: codigo · UK: dni · VNN: dni (no hay tabla `ALUMNO`) |
 
-{{% details title="Solución (inténtalo antes de abrirla)" %}}
-| Caso | 1. Asignaturas por alumno | 2. ¿Obligado? | 3. Alumnos por asignatura | 4. ¿Necesario? | Relación |
-|---|---|---|---|---|---|
-| A | Una (`asig` guarda un valor) | No (`asig` admite nulos) | Muchos (FK admite duplicados) | No | 1:N · (0,1) y (0,N) |
-| B | Una | **Sí** (VNN) | Muchos | No | 1:N · (1,1) y (0,N) |
-| C | Una (UK: el dni no se repite) | No | Uno (la columna guarda un valor) | No (`dni` admite nulos) | 1:1 · (0,1) y (0,1) |
-| D | Varias | No | Muchos | No | N:M · (0,N) y (0,N) |
-| E | Una (el dni no se repite en `MATRICULA`) | No | Muchos | No | 1:N con tabla propia · (0,1) y (0,N) |
-| F | Una | Sí | Uno | Sí | 1:1 · (1,1) y (1,1), fusionada en una tabla |
-
-Fíjate en que **ninguna** combinación de PK, UK, FK y VNN obliga a que una asignatura tenga alumnos (pregunta 4) cuando están en tablas distintas: es una pérdida semántica típica.
-{{% /details %}}
+{{< solucion id="ud03-003" title="Solución (inténtalo antes de abrirla)" />}}
 
 #### Comprobación
 
@@ -530,37 +463,7 @@ Obtén el esquema relacional del diagrama, indicando para cada tabla su PK, sus 
 > - Crear una tabla para cada relación 1:N. Solo las N:M (y algunas 1:1) generan tabla nueva.
 > - Dejar la PK de `GOBIERNA` en (dni, matrícula): impediría que un capitán vuelva a gobernar el mismo barco.
 
-{{% details title="Solución" %}}
-```text
-CAPITAN (dni, nombre, telefono, direccion, salario, poblacion)
-   PK:  dni
-
-BARCO (matricula, nombre, potencia_motor, astillero)
-   PK:  matricula
-
-PUERTO (cod_puerto, nombre)
-   PK:  cod_puerto
-
-CONTENEDOR (cod_contenedor, descripcion, dir_remitente, dir_destinatario, dni_capitan, cod_puerto)
-   PK:  cod_contenedor
-   FK:  dni_capitan → CAPITAN
-   FK:  cod_puerto  → PUERTO
-   VNN: dni_capitan, cod_puerto
-
-GOBIERNA (dni_capitan, matricula, fecha_inicio, fecha_fin)
-   PK:  (dni_capitan, matricula, fecha_inicio)
-   FK:  dni_capitan → CAPITAN
-   FK:  matricula   → BARCO
-```
-
-**Pérdidas semánticas**
-
-- Un capitán no gobierna dos barcos a la vez (periodos solapados): se controlará con un disparador.
-- `fecha_fin` posterior a `fecha_inicio`: no es una pérdida, se resuelve con `CHECK` en la UD05.
-
-> [!NOTE]
-> En la solución del curso anterior la PK de `GOBIERNA` era (nombre_barco, dni_capitán) y el barco se identificaba por el nombre. Con la fecha en la clave se conserva el histórico; y la matrícula es mejor identificador que el nombre, que puede repetirse.
-{{% /details %}}
+{{< solucion id="ud03-004" title="Solución" />}}
 
 #### Ampliación
 
@@ -607,50 +510,7 @@ Obtén el esquema relacional completo con PK, FK, UK y VNN, y anota las pérdida
 > - Poner `fecha_matricula` en `ALUMNO` (en la solución antigua aparecía en las dos tablas). Solo va en `MATRICULA`.
 > - Usar el mismo nombre de columna para los dos módulos de `ES_REQUISITO`.
 
-{{% details title="Solución" %}}
-```text
-PROFESOR (dni, nombre, direccion, telefono)
-   PK:  dni
-
-MODULO (codigo, nombre, dni_profesor)
-   PK:  codigo
-   FK:  dni_profesor → PROFESOR
-   VNN: dni_profesor
-
-ES_REQUISITO (cod_previo, cod_posterior)
-   PK:  (cod_previo, cod_posterior)
-   FK:  cod_previo    → MODULO
-   FK:  cod_posterior → MODULO
-
-ALUMNO (n_expediente, nombre, apellidos, fecha_nacimiento, curso, exp_delegado)
-   PK:  n_expediente
-   FK:  exp_delegado → ALUMNO
-
-MATRICULA (n_expediente, cod_modulo, fecha_matricula)
-   PK:  (n_expediente, cod_modulo)
-   FK:  n_expediente → ALUMNO
-   FK:  cod_modulo   → MODULO
-
-CASILLERO (n_casillero, tamano_m)
-   PK:  n_casillero
-
-TIENE (n_expediente, n_casillero)
-   PK:  n_expediente
-   UK:  n_casillero
-   VNN: n_casillero
-   FK:  n_expediente → ALUMNO
-   FK:  n_casillero  → CASILLERO
-```
-
-**Pérdidas semánticas**
-
-- Todo profesor imparte al menos un módulo y todo alumno está matriculado de al menos uno: el mínimo 1 del lado 1 no se puede garantizar con claves.
-- El delegado y sus representados son del mismo curso.
-- Un módulo no puede ser requisito de sí mismo ni formar ciclos (el primer caso se resuelve con `CHECK (cod_previo <> cod_posterior)`).
-
-> [!TIP]
-> Alternativa también correcta: guardar `n_casillero` en `ALUMNO` con UK (admite nulos). Evita una tabla, pero deja nulos en los alumnos sin casillero. La regla de la 1:1 con (0,1) y (0,1) prefiere la tabla propia para no tener nulos.
-{{% /details %}}
+{{< solucion id="ud03-005" title="Solución" />}}
 
 #### Ampliación
 
@@ -670,7 +530,7 @@ Transformar una entidad débil por identificación, una reflexiva 1:N y claves a
 
 Es el diagrama del [ejercicio 10 de la UD02](/ud02-modelo-er/ud02-practicas#ejercicio-10--concesionario-ventas-revisiones-y-mecánicos).
 
-{{< figura src="ud02/ej10.svg" alt="CLIENTE compra COCHE (1:N), COCHE pasa REVISIÓN (débil, ID), MECÁNICO realiza REVISIÓN, MECÁNICO supervisa a MECÁNICO" caption="Diagrama de partida: concesionario" >}}
+{{< figura src="ud02/ej10.svg" alt="CLIENTE compra COCHE (1:N), COCHE pasa REVISIÓN (débil, identificadora), MECÁNICO realiza REVISIÓN, MECÁNICO supervisa a MECÁNICO" caption="Diagrama de partida: concesionario" >}}
 
 #### Enunciado
 
@@ -690,35 +550,7 @@ Obtén el esquema relacional con PK, FK, UK y VNN. Indica qué columnas de `REVI
 > - Escribir `PK (codigo, matricula)` sin marcar `matricula` como FK.
 > - Poner VNN en `cod_cliente` de `COCHE`: el diagrama dice (0,1), un coche puede estar sin vender.
 
-{{% details title="Solución" %}}
-```text
-CLIENTE (cod_cliente, nif, nombre, direccion, ciudad, telefono)
-   PK:  cod_cliente
-   UK:  nif
-   VNN: nif
-
-COCHE (matricula, marca, modelo, color, precio_venta, cod_cliente)
-   PK:  matricula
-   FK:  cod_cliente → CLIENTE
-
-MECANICO (cod_empleado, dni, nombre, telefono, direccion, cod_supervisor)
-   PK:  cod_empleado
-   UK:  dni
-   VNN: dni
-   FK:  cod_supervisor → MECANICO
-
-REVISION (matricula, n_revision, cambio_filtro, cambio_aceite, cambio_frenos, otros, cod_mecanico)
-   PK:  (matricula, n_revision)
-   FK:  matricula    → COCHE
-   FK:  cod_mecanico → MECANICO
-   VNN: cod_mecanico
-```
-
-**Pérdidas semánticas**
-
-- Un mecánico no puede supervisarse a sí mismo: `CHECK (cod_supervisor <> cod_empleado)`.
-- No puede haber ciclos de supervisión (A supervisa a B y B a A): disparador.
-{{% /details %}}
+{{< solucion id="ud03-006" title="Solución" />}}
 
 #### Ampliación
 
@@ -732,7 +564,7 @@ El taller guarda **qué piezas** se cambian en cada revisión y cuántas. Añade
 
 #### Objetivo
 
-Transformar una cadena de entidades débiles con **claves ajenas compuestas** y distinguir la dependencia en identificación (ID) de la dependencia en existencia (E).
+Transformar una cadena de entidades débiles con **claves ajenas compuestas** y distinguir la dependencia en identificación (identificadora) de la dependencia en existencia (E).
 
 #### Contexto
 
@@ -740,7 +572,7 @@ El primer diagrama es el del [ejercicio 11 de la UD02](/ud02-modelo-er/ud02-prac
 
 {{< figura src="ud02/ej11.svg" alt="PROVINCIA tiene CIUDAD (débil). CASA_RURAL está en CIUDAD. CASA_RURAL dispone de HABITACIÓN (débil). CLIENTE se aloja en HABITACIÓN." caption="Diagrama 4.1: casas rurales" >}}
 
-{{< figura src="ud03/tarea-rurales-b.svg" alt="PROVINCIA tiene CIUDAD (débil, ID). CASA depende en existencia de CIUDAD (E). PERSONA vive en CASA. PERSONA posee CASA con fecha de compra." caption="Diagrama 4.2: variante con residentes y propietarios" >}}
+{{< figura src="ud03/tarea-rurales-b.svg" alt="PROVINCIA tiene CIUDAD (débil, identificadora). CASA depende en existencia de CIUDAD (E). PERSONA vive en CASA. PERSONA posee CASA con fecha de compra." caption="Diagrama 4.2: variante con residentes y propietarios" >}}
 
 #### Enunciado
 
@@ -766,69 +598,7 @@ Obtén el esquema relacional de los dos diagramas.
 > - Escribir `FK: nombre_ciudad → CIUDAD` con una sola columna. La FK debe apuntar a la PK **completa** (era el error de la solución antigua).
 > - Incluir la ciudad en la PK de `CASA` en el diagrama 4.2: la dependencia es de existencia, no de identificación.
 
-{{% details title="Solución" %}}
-**Diagrama 4.1**
-
-```text
-PROVINCIA (nombre, area, poblacion)
-   PK:  nombre
-
-CIUDAD (nombre_provincia, nombre, habitantes)
-   PK:  (nombre_provincia, nombre)
-   FK:  nombre_provincia → PROVINCIA
-
-CASA_RURAL (nombre, localizacion, desayuno, nombre_provincia, nombre_ciudad)
-   PK:  nombre
-   FK:  (nombre_provincia, nombre_ciudad) → CIUDAD
-   VNN: nombre_provincia, nombre_ciudad
-
-HABITACION (nombre_casa, numero, descripcion, precio)
-   PK:  (nombre_casa, numero)
-   FK:  nombre_casa → CASA_RURAL
-
-CLIENTE (dni, nombre, direccion, telefono)
-   PK:  dni
-
-SE_ALOJA (dni, nombre_casa, numero, fecha_entrada, fecha_salida)
-   PK:  (dni, nombre_casa, numero, fecha_entrada)
-   FK:  dni → CLIENTE
-   FK:  (nombre_casa, numero) → HABITACION
-```
-
-**Diagrama 4.2**
-
-```text
-PROVINCIA (nombre)
-   PK:  nombre
-
-CIUDAD (nombre_provincia, nombre)
-   PK:  (nombre_provincia, nombre)
-   FK:  nombre_provincia → PROVINCIA
-
-CASA (id_casa, precio, valoracion, nombre_provincia, nombre_ciudad)
-   PK:  id_casa
-   FK:  (nombre_provincia, nombre_ciudad) → CIUDAD
-   VNN: nombre_provincia, nombre_ciudad
-
-PERSONA (id_persona, nombre, id_casa_vive)
-   PK:  id_persona
-   FK:  id_casa_vive → CASA
-
-POSEE (id_casa, id_persona, fecha_compra)
-   PK:  (id_casa, id_persona)
-   FK:  id_casa    → CASA
-   FK:  id_persona → PERSONA
-```
-
-**Pérdidas semánticas**
-
-- Toda provincia tiene al menos una ciudad y toda casa rural al menos una habitación (mínimo 1 del lado 1).
-- Toda casa tiene al menos un propietario: no se puede obligar a que exista una fila en `POSEE`.
-- En 4.1, la fecha de salida posterior a la de entrada y que no haya estancias solapadas en la misma habitación (disparador).
-
-> [!NOTE]
-> **ID frente a E.** Las dos dependencias producen una FK con VNN; la diferencia es que con **ID** la FK forma parte de la PK y con **E** no.
-{{% /details %}}
+{{< solucion id="ud03-007" title="Solución" />}}
 
 #### Ampliación
 
@@ -848,7 +618,7 @@ Aplicar las reglas a un esquema sin significado (letras), donde solo cuentan la 
 
 Los esquemas abstractos obligan a aplicar las reglas sin apoyarse en el sentido común del enunciado. Los atributos subrayados son identificadores; `a0` es el discriminador de la entidad débil `A`.
 
-{{< figura src="ud03/tarea-abstracto-1.svg" alt="A débil de C por R1 (ID), reflexiva R3 sobre A, F y G especializan A (P,D), ternaria R2 entre A, D y E (1:1:N), agregación de C-R4-B relacionada con D por R5" caption="Esquema abstracto 1" >}}
+{{< figura src="ud03/tarea-abstracto-1.svg" alt="A débil de C por R1 (identificadora), reflexiva R3 sobre A, F y G especializan A (parcial, disjunta), ternaria R2 entre A, D y E (1:1:N), agregación de C-R4-B relacionada con D por R5" caption="Esquema abstracto 1" >}}
 
 #### Enunciado
 
@@ -867,51 +637,7 @@ Obtén el esquema lógico relacional y enuncia las **pérdidas semánticas**.
 - [ ] `R2` tiene PK y UK distintas.
 - [ ] Has anotado que no se capta que la generalización sea disjunta.
 
-{{% details title="Solución" %}}
-```text
-B (b0, b1)
-   PK:  b0
-
-D (d0, d1)
-   PK:  d0
-
-E (e0, e1)
-   PK:  e0
-
-C (c0, c1, cB, cD)
-   PK:  c0
-   FK:  cB → B          (R4: C es el lado N)
-   FK:  cD → D          (R5: la agregación se identifica por C, porque R4 es 1:N)
-
-A (aC, a0, a1, aA_C, aA_0)
-   PK:  (aC, a0)
-   FK:  aC → C
-   FK:  (aA_C, aA_0) → A          (R3)
-
-F (fC, f0A, f0)
-   PK:  (fC, f0A)
-   FK:  (fC, f0A) → A
-
-G (gC, g0)
-   PK:  (gC, g0)
-   FK:  (gC, g0) → A
-
-R2 (rD, rE, rA_C, rA_0)
-   PK:  (rD, rE)
-   UK:  (rA_C, rA_0, rE)
-   FK:  rD → D
-   FK:  rE → E
-   FK:  (rA_C, rA_0) → A
-```
-
-**Pérdidas semánticas**
-
-- No se capta que la generalización sea **disjunta**: un mismo `A` podría estar en `F` y en `G`.
-- No se capta que `C` solo pueda relacionarse con `D` (R5) si lo está con `B` (R4). En SQL se resuelve con `CHECK (cD IS NULL OR cB IS NOT NULL)`.
-
-> [!NOTE]
-> La ternaria 1:1:N da dos claves candidatas: por cada pareja (D, E) hay un único `A`, y por cada pareja (A, E) hay un único `D`. Una se elige como PK y la otra queda como UK.
-{{% /details %}}
+{{< solucion id="ud03-008" title="Solución" />}}
 
 ---
 
@@ -923,7 +649,7 @@ R2 (rD, rE, rA_C, rA_0)
 
 Transformar una agregación de una N:M, una 1:1 con atributo y dependencia en existencia, una ternaria 1:N:N y una reflexiva sobre una subclase.
 
-{{< figura src="ud03/tarea-abstracto-2.svg" alt="A débil de C (R1, ID); F y E especializan A (P,D); R2 reflexiva 1:N sobre F; R3 N:M entre F y E; agregación de C-R4-D (N:M, D depende en existencia de R4) relacionada 1:1 con A por R5 (atributo m, E); ternaria R6 entre C, D y B (1:N:N)" caption="Esquema abstracto 2" >}}
+{{< figura src="ud03/tarea-abstracto-2.svg" alt="A débil de C (R1, identificadora); F y E especializan A (parcial, disjunta); R2 reflexiva 1:N sobre F; R3 N:M entre F y E; agregación de C-R4-D (N:M, D depende en existencia de R4) relacionada 1:1 con A por R5 (atributo m, E); ternaria R6 entre C, D y B (1:N:N)" caption="Esquema abstracto 2" >}}
 
 #### Enunciado
 
@@ -940,56 +666,7 @@ Obtén el esquema lógico relacional y enuncia las pérdidas semánticas.
 - [ ] La tabla `R4` lleva la clave de `A`, el atributo `m`, una UK y VNN.
 - [ ] `R6` tiene PK de dos columnas y la tercera con VNN.
 
-{{% details title="Solución" %}}
-```text
-B (b0, b1)
-   PK:  b0
-
-C (c0, c1)
-   PK:  c0
-
-D (d0, d1)
-   PK:  d0
-
-A (aC, a0, a1)
-   PK:  (aC, a0)
-   FK:  aC → C
-
-F (fC, f0A, f0, fP_C, fP_0)
-   PK:  (fC, f0A)
-   FK:  (fC, f0A) → A
-   FK:  (fP_C, fP_0) → F           (R2)
-
-E (eC, e0A, e0, e1)
-   PK:  (eC, e0A)
-   FK:  (eC, e0A) → A
-
-R3 (rF_C, rF_0, rE_C, rE_0)
-   PK:  (rF_C, rF_0, rE_C, rE_0)
-   FK:  (rF_C, rF_0) → F
-   FK:  (rE_C, rE_0) → E
-
-R4 (rC, rD, rA_C, rA_0, m)
-   PK:  (rC, rD)
-   UK:  (rA_C, rA_0)
-   VNN: rA_C, rA_0                  (la agregación depende en existencia de R5)
-   FK:  rC → C
-   FK:  rD → D
-   FK:  (rA_C, rA_0) → A
-
-R6 (rB, rD, rC)
-   PK:  (rB, rD)
-   VNN: rC
-   FK:  rB → B
-   FK:  rC → C
-   FK:  rD → D
-```
-
-**Pérdidas semánticas**
-
-- No se capta que la generalización sea **disjunta**.
-- No se capta la dependencia en existencia de `D` respecto a *R4*: no se puede obligar a que cada fila de `D` aparezca en `R4`.
-{{% /details %}}
+{{< solucion id="ud03-009" title="Solución" />}}
 
 ---
 
@@ -1001,7 +678,7 @@ R6 (rB, rD, rC)
 
 Transformar una ternaria en la que una entidad participa dos veces, una 1:1 con (0,1) en los dos lados y una generalización total y solapada.
 
-{{< figura src="ud03/tarea-abstracto-3.svg" alt="G débil de B (R5, ID); R6 1:1 G-H; agregación C-R4-D (C N, D 1) relacionada con G por R3 (atributo m, E) y N:M con F por R2; F y E especializan A (T,S); R1 ternaria F-F-E" caption="Esquema abstracto 3" >}}
+{{< figura src="ud03/tarea-abstracto-3.svg" alt="G débil de B (R5, identificadora); R6 1:1 G-H; agregación C-R4-D (C N, D 1) relacionada con G por R3 (atributo m, E) y N:M con F por R2; F y E especializan A (T,S); R1 ternaria F-F-E" caption="Esquema abstracto 3" >}}
 
 #### Enunciado
 
@@ -1020,67 +697,7 @@ Obtén el esquema lógico relacional y enuncia las pérdidas semánticas. En *R1
 - [ ] `R6` tiene PK de una columna y UK de dos.
 - [ ] `R1` tiene PK (F1, F2) y UK (F1, E).
 
-{{% details title="Solución" %}}
-```text
-B (b0, b1)
-   PK:  b0
-
-G (gB, g0, g1)
-   PK:  (gB, g0)
-   FK:  gB → B
-
-H (h0, h1)
-   PK:  h0
-
-R6 (rH, rG_B, rG_0)
-   PK:  rH
-   UK:  (rG_B, rG_0)
-   VNN: rG_B, rG_0
-   FK:  rH → H
-   FK:  (rG_B, rG_0) → G
-
-D (d0, d1)
-   PK:  d0
-
-C (c0, c1, cD, cG_B, cG_0, m)
-   PK:  c0
-   FK:  cD → D                      (R4)
-   FK:  (cG_B, cG_0) → G            (R3, con el atributo m)
-
-A (a0, a1)
-   PK:  a0
-
-F (fA, f0)
-   PK:  fA
-   FK:  fA → A
-
-E (eA, e0, e1)
-   PK:  eA
-   FK:  eA → A
-
-R2 (rC, rF)
-   PK:  (rC, rF)
-   FK:  rC → C
-   FK:  rF → F
-
-R1 (rF1, rF2, rE)
-   PK:  (rF1, rF2)
-   UK:  (rF1, rE)
-   VNN: rE
-   FK:  rF1 → F
-   FK:  rF2 → F
-   FK:  rE  → E
-```
-
-**Pérdidas semánticas**
-
-- No se capta que la generalización sea **total**: puede haber un `A` que no esté ni en `F` ni en `E`.
-- No se capta que `C` solo pueda relacionarse con `G` (R3) o con `F` (R2) si está en la agregación, es decir, si tiene `D` (R4). Para *R3* basta `CHECK (cG_B IS NULL OR cD IS NOT NULL)`; para *R2* hace falta un disparador.
-- No se capta la dependencia en existencia de la agregación respecto a *R3*: toda pareja (C, D) debería tener `G` (`CHECK (cD IS NULL OR cG_B IS NOT NULL)`).
-
-> [!TIP]
-> Comprueba la ternaria con datos: si (f1, f2) determina e, y (f1, e) determina f2, las dos combinaciones son claves candidatas. Elige una como PK y deja la otra como UK.
-{{% /details %}}
+{{< solucion id="ud03-010" title="Solución" />}}
 
 ---
 
@@ -1088,7 +705,7 @@ R1 (rF1, rF2, rE)
 ## Banco de ejercicios
 
 > [!NOTE]
-> Los ejercicios del banco piden el esquema relacional y, en algunos casos, el script SQL DDL. Resuelve primero el esquema; el SQL podrás escribirlo y **probarlo en Oracle** cuando termines la [UD05](/ud05-ddl-dcl). Recuerda que en Oracle la opción `RESTRICT` no se escribe: es el comportamiento por defecto.
+> Los ejercicios del banco piden el esquema relacional y, en algunos casos, las restricciones y políticas de borrado que lo acompañan. Todo se resuelve sobre el papel: la implementación en un gestor la harás cuando llegues a la [UD05](/ud05-ddl-dcl).
 
 ### Bloque 1: Ejercicios de Transformación de Relaciones Binarias y Claves
 
@@ -1098,7 +715,7 @@ R1 (rF1, rF2, rE)
 Un cliente realiza varios pedidos en una tienda online, pero cada pedido es realizado por un único cliente. De los clientes se conoce su `id_cliente`, `nombre`, `email` y `telefono`. De los pedidos se conoce `num_pedido`, `fecha_pedido` e `importe_total`.
 
 - a) Exprese el **Esquema Relacional Formal** derivado de esta relación $1:N$.
-- b) Escriba el script **SQL DDL** para crear ambas tablas aplicando las restricciones de clave primaria, unicidad, validación de importe positivo e integridad referencial impidiendo el borrado de clientes con pedidos activos (`RESTRICT`).
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1108,7 +725,7 @@ Un cliente realiza varios pedidos en una tienda online, pero cada pedido es real
 Un médico atiende a múltiples pacientes en un centro hospitalario y un paciente puede ser atendido por diferentes médicos especialistas. De los médicos se conoce `num_colegiado`, `nombre` y `especialidad`. De los pacientes se registra `id_paciente`, `dni`, `nombre` y `fecha_nacimiento`. De cada atención médica realizada se guarda la `fecha_atencion` y el `diagnostico`.
 
 - a) Exprese el **Esquema Relacional Formal** resultante para la relación $N:M$.
-- b) Escriba las sentencias **SQL DDL** creando la tabla intermedia necesaria con su clave primaria compuesta y sus claves foráneas en cascada.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1118,7 +735,7 @@ Un médico atiende a múltiples pacientes en un centro hospitalario y un pacient
 Una empresa asigna un coche de empresa a ciertos empleados clave. Un empleado solo puede tener asignado como máximo un coche, y un coche pertenece como máximo a un único empleado. Algunos empleados no tienen coche asignado. De los empleados se conoce `id_empleado` y `nombre`. De los vehículos se conoce `matricula`, `modelo` y `color`.
 
 - a) Indique qué estrategia de propagación de clave es la más adecuada para evitar la presencia innecesaria de valores nulos.
-- b) Escriba las sentencias **SQL DDL** definiendo las tablas y la clave foránea protegida con la restricción `UNIQUE`.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1128,7 +745,7 @@ Una empresa asigna un coche de empresa a ciertos empleados clave. Un empleado so
 Un campus universitario organiza sus aulas dentro de edificios. De cada edificio se conoce `cod_edificio` y `nombre_edificio`. De las aulas se conoce `num_aula` (101, 102, 201...) y `capacidad_puestos`. El número de aula no es único en todo el campus, sino únicamente dentro de cada edificio determinado.
 
 - a) Exprese el **Esquema Relacional Formal** especificando la clave primaria compuesta de la tabla `AULA`.
-- b) Escriba la sentencia SQL `CREATE TABLE` para la entidad débil `AULA` asegurando el borrado en cascada si se elimina el edificio.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1138,7 +755,7 @@ Un campus universitario organiza sus aulas dentro de edificios. De cada edificio
 En un hospital, un paciente puede realizar múltiples ingresos a lo largo del tiempo. De cada paciente se almacena `id_paciente`, `dni` y `nombre`. De cada ingreso se registra `num_ingreso` (1, 2, 3... secuencial para cada paciente), `fecha_ingreso` y `habitacion`. El ingreso no puede existir ni identificarse sin el paciente al que pertenece.
 
 - a) Exprese el esquema relacional formal para `PACIENTE` e `INGRESO`.
-- b) Escriba el código SQL DDL correspondiente.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1150,7 +767,7 @@ En un hospital, un paciente puede realizar múltiples ingresos a lo largo del ti
 En una empresa, cada empleado tiene un único jefe directo, que es a su vez otro empleado de la plantilla. De cada empleado se conoce `id_empleado`, `nombre`, `puesto` y `salario`.
 
 - a) Exprese el **Esquema Relacional Formal** indicando cómo se implementa la autorreferencia.
-- b) Escriba el código SQL DDL configurando la clave foránea autorreferenciada con política `ON DELETE SET NULL`.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1160,7 +777,7 @@ En una empresa, cada empleado tiene un único jefe directo, que es a su vez otro
 Una fábrica de maquinaria registra piezas industriales. De cada pieza se almacena `cod_pieza`, `nombre_pieza` y `precio`. Una pieza puede estar compuesta por varias subpiezas componentes, y a su vez una subpieza forma parte de la fabricación de múltiples piezas superiores. En cada ensamblaje se indica la `cantidad_unidades`.
 
 - a) Exprese el **Esquema Relacional Formal** definiendo la tabla intermedia de ensamblaje.
-- b) Escriba las sentencias SQL DDL correspondientes.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1171,7 +788,7 @@ De cada cliente de un banco se conoce `id_cliente`, `nombre` y `email`. Un clien
 
 - a) Indique por qué no se pueden guardar los teléfonos como una lista separada por comas dentro de la misma celda de la tabla `CLIENTE`.
 - b) Exprese el esquema relacional formal transformando el atributo multivaluado en una tabla independiente.
-- c) Escriba el código SQL DDL para ambas tablas.
+- c) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1181,7 +798,7 @@ De cada cliente de un banco se conoce `id_cliente`, `nombre` y `email`. Un clien
 De cada proveedor se conoce su `nif`, `nombre_empresa` y el atributo compuesto `direccion` (formado por `calle`, `numero`, `piso`, `codigo_postal` y `ciudad`).
 
 - a) Muestre cómo se transforma el atributo compuesto al modelo relacional lógico.
-- b) Escriba la sentencia SQL `CREATE TABLE` correspondiente.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1191,7 +808,7 @@ De cada proveedor se conoce su `nif`, `nombre_empresa` y el atributo compuesto `
 Una empresa clasifica a sus empleados en dos tipos exclusivos: `PROGRAMADOR` (con el atributo `lenguaje_principal`) y `ADMINISTRATIVO` (con el atributo `nivel_ofimatica`). Los atributos comunes a todos los empleados son `id_empleado`, `nombre` y `salario`.
 
 - a) Muestre el esquema relacional aplicando la estrategia de **Tabla Única** con una columna discriminadora `tipo_empleado`.
-- b) Escriba la sentencia SQL DDL utilizando restricciones `CHECK` para garantizar que los campos específicos solo sean informados según el tipo de empleado.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1201,7 +818,7 @@ Una empresa clasifica a sus empleados en dos tipos exclusivos: `PROGRAMADOR` (co
 Considere la misma jerarquía de empleados del Ejercicio 10, pero aplique la estrategia de **Tabla para el Supertipo y Tablas para cada Subtipo**.
 
 - a) Exprese el **Esquema Relacional Formal** para las 3 tablas resultantes (`EMPLEADO`, `PROGRAMADOR`, `ADMINISTRATIVO`).
-- b) Escriba el código SQL DDL vinculando las tablas especializadas a la tabla principal mediante claves foráneas en cascada.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1218,7 +835,7 @@ Diseñe el esquema relacional para un concesionario a partir de los siguientes r
 - **Mecánicos:** Cada revisión es realizada por un único mecánico (`id_mecanico` [PK], `nombre`, `especialidad`). Un mecánico supervisa a otros mecánicos (relación reflexiva $1:N$).
 
 - a) Redacte el **Esquema Relacional Formal Completo** de todas las tablas con sus PKs y FKs.
-- b) Escriba el script SQL DDL completo.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1233,7 +850,7 @@ Una cadena hotelera administra establecimientos:
 - **Reservas:** Un cliente reserva una habitación específica de un hotel para un rango de fechas (`fecha_inicio`, `fecha_fin`, `precio_total`). Un cliente realiza muchas reservas y una habitación recibe distintas reservas en fechas diferentes.
 
 - a) Redacte el **Esquema Relacional Formal Completo**.
-- b) Escriba las sentencias SQL DDL definiendo todas las tablas e integridades referenciales.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1248,7 +865,7 @@ Se requiere estructurar la base de datos de un videoclub digital:
 - **Alquileres:** Un socio alquila películas registrando `fecha_alquiler` y `precio_alquiler`.
 
 - a) Redacte el **Esquema Relacional Formal Completo**.
-- b) Escriba el código SQL DDL correspondiente.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1262,7 +879,7 @@ Una fábrica de maquinaria de alta precisión organiza su catálogo:
 - **Inspecciones de Calidad:** Cada pieza fabricada en una línea pasa inspecciones. La inspección se identifica de forma débil por `num_inspeccion` relativo a la pieza (`cod_pieza`), registrando `fecha_inspeccion`, `resultado` (Aprobado/Rechazado) y la línea de montaje donde se realizó.
 
 - a) Redacte el **Esquema Relacional Formal Completo**.
-- b) Escriba el código SQL DDL correspondiente.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1277,7 +894,7 @@ Una empresa municipal de transportes gestiona autobuses:
 - **Autobuses:** `matricula` (PK), `modelo`, adscritos a una línea.
 
 - a) Redacte el **Esquema Relacional Formal Completo**.
-- b) Escriba el código SQL DDL correspondiente.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1292,7 +909,7 @@ Una federación de baloncesto gestiona su liga:
 - **Incidencias Débiles:** Cada partido genera incidencias en el acta identificadas por `num_incidencia` secuencial relativo al partido (`id_partido`), registrando el `minuto` y el `tipo_incidencia`.
 
 - a) Redacte el **Esquema Relacional Formal Completo**.
-- b) Escriba el código SQL DDL correspondiente.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.
 
 ---
 
@@ -1317,10 +934,10 @@ Dada la siguiente tabla `PEDIDO_DESNORMALIZADO`:
 **Enunciado:**
 Considere las tablas `CURSO(id_curso [PK], nombre)` y `ALUMNO(id_alumno [PK], nombre, id_curso [FK])`.
 
-- Explique qué ocurre en la tabla `ALUMNO` ante la sentencia `DELETE FROM curso WHERE id_curso = 5;` en cada uno de los siguientes escenarios de configuración de la clave foránea:
-  1. `ON DELETE CASCADE`
-  2. `ON DELETE RESTRICT`
-  3. `ON DELETE SET NULL`
+- Explique qué ocurre en la tabla `ALUMNO` al borrar el curso 5 en cada uno de los siguientes escenarios de configuración de la clave foránea:
+  1. Borrado en cascada
+  2. Borrado restringido
+  3. Puesta a nulos
 
 ---
 
@@ -1336,4 +953,4 @@ Un centro sanitario gestiona sus pacientes e ingresos:
 - **Tarjetas de Visita Débiles:** Por cada paciente ingresado se emiten hasta 4 tarjetas de visita autorizadas, identificadas por un `num_tarjeta` (1, 2, 3, 4) relativo al paciente (`id_paciente`), con `horario_autorizado`.
 
 - a) Redacte el **Esquema Relacional Formal Completo** identificando todas las entidades débiles y claves compuestas.
-- b) Escriba el código SQL DDL ejecutable completo.
+- b) Indique las **restricciones** que acompañan al esquema (claves alternativas, atributos obligatorios, reglas de dominio) y la **política de borrado** de cada clave foránea, justificándola.

@@ -28,8 +28,9 @@ math: true
 | [Projecte EduGest · UD02](#projecte-edugest--ud02-model-conceptual) | Projecte | ●●○ | RA6.a, RA6.d, RA6.e, RA6.h |
 | [Banc · Fonaments (exercicis 1-5)](#bloc-1--fonaments) | Autònoma | ●○○ | RA6.a, RA6.d, RA6.e, RA6.h |
 | [Banc · Intermedi (exercicis 6-15)](#bloc-2--intermedi) | Autònoma | ●●○ | RA6.a, RA6.d, RA6.e, RA6.h |
-| [Banc · Integració (exercicis 16-23)](#bloc-3--integració) | Autònoma | ●●○ → ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
-| [Banc · EER avançat (exercicis 24-30)](#bloc-4--eer-avançat) | Autònoma | ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
+| [Banc · Intermedi: integració (exercicis 16-23)](#bloc-3--intermedi-integració) | Autònoma | ●●○ | RA6.a, RA6.d, RA6.e, RA6.h |
+| [Banc · Intermedi: EER (exercicis 24-30)](#bloc-4--intermedi-eer) | Autònoma | ●●○ |
+| [Banc · Consolidació (exercicis 31-35)](#bloc-5--consolidació) | Autònoma | ●●● | RA6.a, RA6.d, RA6.e, RA6.h |
 
 > [!NOTE]
 > **Com estan organitzades estes pàgines.** L'enunciat es presenta com el contaria una persona del negoci, no com una llista d'entitats: **decidir què és una entitat, un atribut o una relació forma part del treball**. Les tasques, la comprovació i els errors habituals estan plegats: desplega'ls quan els necessites, no abans de pensar.
@@ -80,69 +81,9 @@ Seguix els cinc passos i respon a les preguntes abans d'obrir les respostes.
 
 {{% /steps %}}
 
-{{% details title="Respostes guiades als cinc passos" %}}
+{{< solucion id="ud02-001" title="Respostes guiades als cinc passos" />}}
 
-1. **Entitats:** `LIBRO`, `AUTOR`, `EJEMPLAR` i `SOCIO`. «Préstec» no té propietats pròpies més enllà de dates: és el fet que relaciona un soci amb un exemplar, així que es modela com a **relació**. L'editorial es queda com a atribut mentre no calga guardar dades seues.
-2. **Identificadors:** `LIBRO` → ISBN; `AUTOR` → codi; `SOCIO` → número de carnet (el DNI és **clau alternativa**). `EJEMPLAR`: el seu número només és únic dins del llibre, per la qual cosa és una **entitat feble** identificada per (ISBN, número).
-3. **Cardinalitats:**
-
-    | Relació | Lectura | Tipus |
-    |---|---|---|
-    | AUTOR *escriu* LIBRO | un autor escriu (1, N) llibres; un llibre l'escriuen (1, N) autors | N:M |
-    | LIBRO *té* EJEMPLAR | un llibre té (0, N) exemplars; un exemplar és de (1, 1) llibre | 1:N identificadora |
-    | SOCIO *pren en préstec* EJEMPLAR | un soci té (0, N) préstecs; un exemplar té (0, N) préstecs | N:M |
-
-    El mínim 0 de soci i exemplar reflectix «llibres que mai no han eixit» i socis que encara no s'han emportat res.
-4. **Atributs de relació:** les dates no són ni del soci ni de l'exemplar: són del préstec. Com que el mateix soci pot emportar-se la mateixa còpia diverses vegades, la **data d'eixida** forma part de la identificació de cada préstec (atribut discriminador de la relació).
-5. La frase «a alguns socis els he de cridar moltes vegades» és **soroll**: no genera cap requisit de dades (podria generar-ne un si es volguera guardar un historial d'avisos). Saber descartar informació és part de l'anàlisi.
-
-{{% /details %}}
-
-{{% details title="Solució en notació de pota de gall" %}}
-
-```mermaid
-erDiagram
-    AUTOR }|--|{ LIBRO : "escriu"
-    LIBRO ||--o{ EJEMPLAR : "té"
-    SOCIO ||--o{ PRESTAMO : "realitza"
-    EJEMPLAR ||--o{ PRESTAMO : "és prestat en"
-    AUTOR {
-        string cod_autor PK
-        string nombre
-        string nacionalidad
-    }
-    LIBRO {
-        string isbn PK
-        string titulo
-        int anio
-        string editorial
-    }
-    EJEMPLAR {
-        string isbn PK, FK "feble"
-        int num_ejemplar PK
-        string estado
-    }
-    SOCIO {
-        int num_socio PK
-        string dni UK
-        string nombre
-        string telefono
-    }
-    PRESTAMO {
-        date fecha_salida PK
-        date fecha_prevista
-        date fecha_devolucion "opcional"
-    }
-```
-
-**Supòsits semàntics** (el que el relat no diu i hem decidit):
-
-1. Un llibre registrat té almenys un autor conegut.
-2. Pot existir un llibre sense exemplars (demanat, però encara no rebut).
-3. La data real de devolució és opcional: està buida mentre el préstec continua obert.
-4. L'editorial es guarda com a atribut; si calguera guardar més dades seues, seria una entitat.
-
-{{% /details %}}
+{{< solucion id="ud02-002" title="Solució en notació de Chen" />}}
 
 {{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
 
@@ -190,17 +131,7 @@ Per a cada frase, escriu la relació en notació (mín, màx) en els **dos senti
 | d | Un empleat pot supervisar diversos empleats; tot empleat llevat del director té un supervisor. |
 | e | Un vehicle d'empresa pot estar assignat a un empleat com a màxim; un empleat pot no tindre vehicle i mai no en té més d'un. |
 
-{{% details title="Solucions" %}}
-| # | Costat A | Costat B | Tipus |
-|---|---|---|---|
-| a | Un empleat està en (1, 1) departament | Un departament té (0, N) empleats | 1:N |
-| b | Un país té (1, 1) capital | Una capital ho és de (1, 1) país | 1:1 |
-| c | Una comanda té (1, N) productes | Un producte està en (0, N) comandes | N:M |
-| d | Un empleat supervisa (0, N) empleats | Un empleat és supervisat per (0, 1) empleat | 1:N **reflexiva** |
-| e | Un vehicle està assignat a (0, 1) empleat | Un empleat té (0, 1) vehicle | 1:1 |
-
-En (d) el mínim és 0 perquè el director no té supervisor. Si l'enunciat diguera «tot empleat té supervisor», el diagrama obligaria que existisca un cicle infinit de caps.
-{{% /details %}}
+{{< solucion id="ud02-003" title="Solucions" />}}
 
 #### Segona part: del diagrama a la frase
 
@@ -213,11 +144,7 @@ erDiagram
     MEDICO }o--|| ESPECIALIDAD : "té"
 ```
 
-{{% details title="Solució" %}}
-- Un client rep zero o moltes factures; cada factura és d'exactament un client.
-- Una factura conté una o moltes línies; cada línia pertany a exactament una factura.
-- Cada metge té exactament una especialitat; una especialitat pot tindre zero o molts metges.
-{{% /details %}}
+{{< solucion id="ud02-004" title="Solució" />}}
 
 ---
 
@@ -311,16 +238,7 @@ Una clínica veterinària de grandària mitjana estrena sistema de gestió. La g
 
 {{% /details %}}
 
-{{% details title="Solució i criteris (per al professorat o després de lliurar)" %}}
-
-- **Empleats:** superclasse `EMPLEADO` (DNI, nom, telèfon, data d'alta) amb tres subclasses. *Total* («els que passen consulta són… els auxiliars… els administratius… de totes») i *disjunta* («ningú no fa dos coses»).
-- **Mascotes:** `MASCOTA` amb subclasses `PERRO` i `GATO`. *Parcial* («amb la resta no cal res especial») i *disjunta* (un animal no és gos i gat alhora).
-- **Client:** no s'enumeren els seus atributs en el text. És una entitat amb identificador a decidir (supòsit: DNI) perquè «cada mascota és d'un client» (1:N).
-- **Consulta:** pot ser entitat (amb identificador propi) o relació ternària veterinari–mascota–data. És entitat si es vol penjar d'ella els auxiliars i els medicaments amb facilitat; la dosi sempre va en la relació *recepta* entre consulta i medicament.
-- **Auxiliar en consulta:** relació 0..N, opcional («de vegades»).
-- **Informació descartada:** «onze persones» és una dada puntual, no un requisit.
-
-{{% /details %}}
+{{< solucion id="ud02-005" title="Solució i criteris" />}}
 
 #### Ampliació
 
@@ -336,32 +254,7 @@ Com canviaria el model si un empleat poguera ser alhora auxiliar i administratiu
 
 Un company ha dissenyat el model d'un **gimnàs** i et demana que el revises abans de passar a taules. L'enunciat és: *«Els socis s'apunten a activitats (spinning, ioga...) que s'imparteixen en sales. Cada sessió d'una activitat té dia, hora, sala i monitor. Un soci reserva plaça en sessions concretes. Cada soci té una quota mensual»*.
 
-```mermaid
-erDiagram
-    SOCIO {
-        string nombre PK
-        int edad
-        string actividades
-        date fecha_reserva
-    }
-    ACTIVIDAD {
-        string nombre PK
-        string sala
-        string monitor
-        string dia
-        string hora
-    }
-    CUOTA {
-        decimal importe
-    }
-    SALA {
-        string codigo PK
-    }
-    SOCIO }o--o{ ACTIVIDAD : "s'apunta"
-    SOCIO ||--|| CUOTA : "paga"
-    ACTIVIDAD }o--o{ SALA : "usa"
-    SOCIO }o--o{ SALA : "entra en"
-```
+{{< figura src="ud02/p2_5.svg" alt="Diagrama EER en notació de Chen: Disseny defectuós del gimnàs (per a revisar)" caption="Diagrama EER en notació de Chen: Disseny defectuós del gimnàs (per a revisar)" >}}
 
 #### Enunciat
 
@@ -371,17 +264,7 @@ Fes la revisió com la faria un company sènior: no saps quants problemes hi ha.
 Identificadors inestables, atributs derivats, atributs multivaluats amagats en un text, atributs col·locats en l'entitat equivocada, entitats que no tenen identificador, conceptes que haurien de ser entitats (monitor, sessió), relacions redundants.
 {{% /details %}}
 
-{{% details title="Solució (per al professorat o després de lliurar)" %}}
-1. `nombre` com a clau de `SOCIO`: els noms es repetixen. → Afegir `num_socio`.
-2. `edad`: atribut derivat que es desactualitza. → `fecha_nacimiento`.
-3. `actividades` com a text en `SOCIO`: multivaluat amagat i redundant amb la relació. → Eliminar-lo.
-4. `fecha_reserva` en `SOCIO`: és un atribut de la reserva. → Moure'l a la relació.
-5. `dia`, `hora`, `sala` i `monitor` en `ACTIVIDAD`: una activitat té moltes sessions. → Crear `SESION` (feble d'`ACTIVIDAD` o amb identificador propi) amb dia i hora, relacionada amb `SALA` i `MONITOR`.
-6. `monitor` com a text: té dades pròpies i participa en relacions. → Entitat `MONITOR`.
-7. `CUOTA` sense identificador i en relació 1:1 obligatòria: si només guarda l'import, és un atribut de `SOCIO`; si es vol l'historial de pagaments, és una entitat feble `PAGO` amb mes i any.
-8. `SOCIO` *entra en* `SALA`: redundant; es deduïx de les sessions reservades.
-9. El soci no s'apunta a una activitat sinó que **reserva sessions**: la relació ha de ser SOCIO–SESION.
-{{% /details %}}
+{{< solucion id="ud02-006" title="Solució" />}}
 
 ---
 
@@ -414,13 +297,7 @@ Identificadors inestables, atributs derivats, atributs multivaluats amagats en u
 
 {{% /details %}}
 
-{{% details title="Solució (per al professorat o després de lliurar)" %}}
-
-- **Ternària `clase`:** un alumne rep classe de molts (professor, vehicle); un professor de molts (alumne, vehicle); un vehicle de molts (alumne, professor). Cardinalitat N:M:P amb atributs `fecha`, `hora` i `kilometros`; `fecha` i `hora` formen part de la identificació perquè la mateixa terna es repetix.
-- **Agregació:** `MATRICULA` = relació alumne–professor tractada com a entitat. Es relaciona amb `EXAMEN` (0,N), de manera que hi ha matrícules sense examen i matrícules amb diversos. Amb una ternària alumne–professor–examen la parella estaria obligada a participar.
-- **Tres binàries:** es perd *quin alumne va fer classe amb quin professor en quin cotxe*. Si Ana ha fet classe amb Luis i amb Marta, i Luis i Marta han usat el cotxe 1, no se sap si Ana va usar el cotxe 1 amb Luis o amb Marta.
-
-{{% /details %}}
+{{< solucion id="ud02-007" title="Solució" />}}
 
 
 ---
@@ -475,81 +352,9 @@ Una cooperativa d'oli vol registrar la traçabilitat de la seua producció. Esta
 
 {{% /details %}}
 
-{{% details title="Preguntes al client i decisions associades (per al professorat o després de lliurar)" %}}
+{{< solucion id="ud02-008" title="Preguntes al client i decisions associades" />}}
 
-| Pregunta | Què decidix |
-|---|---|
-| Quant pesa cada finca en un lliurament que barreja dos finques? | Si el pes es guarda **per finca** (el lliurament es divideix en línies) o només per lliurament. Afecta la traçabilitat. |
-| Es registra el percentatge de propietat de cada germà? Pot canviar amb els anys? | Atribut `porcentaje` en la relació soci–finca; si canvia, necessita història (vore pràctica 2.8). |
-| Quant oli de cada lot va a cada dipòsit? | Relació lot–dipòsit 1:N o N:M amb quantitat. |
-| Es barreja oli de lots distints en un dipòsit? I s'envasa des de dipòsits barrejats? | Traçabilitat cap arrere: passa de ser un arbre a un graf. Cal decidir fins a on es garantix. |
-| Qui lliura, el titular de la finca o qualsevol soci? | Restricció d'integritat: el que lliura ha de ser titular de la finca, no expressable en el diagrama. |
-| La «campanya» té identitat pròpia (dates, preu) o és només un any? | Entitat `CAMPAÑA` o atribut. |
-
-{{% /details %}}
-
-{{% details title="Solució de referència" %}}
-
-```mermaid
-erDiagram
-    SOCIO ||--o{ TITULARIDAD : "és titular"
-    FINCA ||--|{ TITULARIDAD : "té titulars"
-    SOCIO ||--o{ ENTREGA : "realitza"
-    ENTREGA ||--|{ LINEA_ENTREGA : "es compon de"
-    FINCA ||--o{ LINEA_ENTREGA : "origen de"
-    CAMPANIA ||--o{ ENTREGA : "agrupa"
-    ENTREGA }o--o{ LOTE : "es mol en (kg)"
-    DEPOSITO }o--o{ LOTE : "rep oli de (litres)"
-    DEPOSITO ||--o{ ENVASADO : "abasteix"
-    FORMATO ||--o{ ENVASADO : "s'envasa en"
-    SOCIO {
-        int cod_socio PK
-        string nombre
-    }
-    FINCA {
-        int poligono PK
-        int parcela PK
-        string termino_municipal
-    }
-    TITULARIDAD {
-        decimal porcentaje
-    }
-    ENTREGA {
-        int num_albaran PK
-        datetime fecha_hora
-        string variedad
-    }
-    LINEA_ENTREGA {
-        decimal kg
-    }
-    LOTE {
-        int cod_lote PK
-        date fecha
-        decimal litros_obtenidos
-    }
-    DEPOSITO {
-        int cod_deposito PK
-        decimal capacidad
-    }
-    ENVASADO {
-        date fecha PK
-        int botellas
-    }
-    FORMATO {
-        string cod_formato PK
-        decimal litros
-    }
-    CAMPANIA {
-        string cod_campania PK
-    }
-```
-
-- `LINEA_ENTREGA` és una entitat feble d'`ENTREGA`: guarda els quilos de **cada finca** en un viatge i és el que permet la traçabilitat per finca.
-- La traçabilitat és **ampolla → envasament → dipòsit → lot → lliurament → línia → finca**. La part *dipòsit → lot* és la que perd precisió: si un dipòsit barreja lots, només es pot afirmar que l'oli procedix d'**algun** d'ells.
-- Restriccions: (1) el soci del lliurament és titular de totes les finques de les seues línies; (2) la varietat de totes les línies d'un lliurament és la mateixa; (3) la suma de litres d'un lot repartits en dipòsits coincidix amb els litres obtinguts.
-- Fora de l'abast: comandes, clients i factures.
-
-{{% /details %}}
+{{< solucion id="ud02-009" title="Solució de referència" />}}
 
 
 ---
@@ -596,21 +401,7 @@ Un disseny que només guarda «el que és veritat ara» oblida el que ja ha pass
 
 {{% /details %}}
 
-{{% details title="Solució i criteris (per al professorat o després de lliurar)" %}}
-
-| Frase de l'enunciat | Tipus | Modelatge |
-|---|---|---|
-| «On va estar cada cotxe en cada moment» | Relació que canvia | `COCHE`–`SUCURSAL` N:M amb `fecha_inicio` i `fecha_fin` (l'actual té fi nul). Un cotxe està en **una** sucursal en cada instant, però **al llarg del temps** en moltes. |
-| «Tarifa que revisem cada any» | Atribut que canvia | Entitat `TARIFA` (categoria, data de vigència, preu dia). Identificada per (categoria, data d'inici). |
-| «Es queda amb el preu d'eixe dia» | Valor que es congela | Atribut `precio_dia` **en el contracte**: còpia deliberada de la tarifa vigent. No és redundància nociva: és una dada signada que no ha de canviar quan canvie la tarifa. |
-| «Adreça que tenia el client quan es va emetre la factura» | Atribut que canvia | O bé `DIRECCION_CLIENTE` amb període de vigència, o bé còpia de l'adreça en la `FACTURA`. Es preferix la còpia en el document si no es necessita l'historial de domicilis. |
-| «Categoria professional que canvia amb els anys» | Atribut que canvia | Relació `EMPLEADO`–`CATEGORIA` N:M amb període. El sou depén de la categoria, no de l'empleat. |
-
-**Restriccions textuals:** (1) els períodes d'un mateix cotxe en sucursals no se solapen i no hi ha buits; (2) la tarifa d'una categoria no se solapa amb una altra de la mateixa categoria; (3) el contracte ha de ser gestionat per un empleat que, en la data de lliurament, estava en la sucursal des de la qual es lliura el cotxe.
-
-**Lectura crítica:** tractar el temps multiplica el nombre de relacions N:M. Abans d'aplicar-lo a tot, pregunta al negoci quina història necessita realment.
-
-{{% /details %}}
+{{< solucion id="ud02-010" title="Solució i criteris" />}}
 
 
 ---
@@ -674,23 +465,7 @@ Base imposable: 267,60 € · IVA 10 % sobre 23,40 €: 2,34 € · IVA 21 % sob
 
 {{% /details %}}
 
-{{% details title="Solució i criteris (per al professorat o després de lliurar)" %}}
-
-**Entitats i relacions:** `CLIENTE` (codi; CIF com a alternativa, adreça de lliurament), `PRODUCTO` (referència, descripció, format), `ALBARAN` (número, data, forma de pagament, signatura), `LINEA_ALBARAN` (feble d'`ALBARAN`: núm. de línia, unitats, preu, descompte), `REPARTIDOR`, `FURGONETA` (matrícula), `RUTA`, i la relació `VISITA` (document B) entre client, repartidor i furgoneta amb hora d'arribada, hora d'eixida i incidències.
-
-**Derivats:** `importe` = unitats × preu × (1 − descompte); `base imponible` = suma d'imports; `IVA` = suma per tipus; `total` = base + IVA.
-
-**Còpies:** `precio` i `descuento` de la línia són còpies del catàleg vigent: si canvia el catàleg, l'albarà no ha de canviar.
-
-**Preguntes obertes que el document deixa:**
-1. L'albarà barreja **dos tipus d'IVA** (10 % per a l'aigua i 21 % per a la resta): el tipus depén del producte. Falta saber si `tipo_iva` és atribut de `PRODUCTO` (i llavors canvia amb la llei) o ha de copiar-se en la línia perquè l'albarà no canvie.
-2. La línia de promoció «3×2» té preu 0: és una línia més de l'albarà o un descompte? Afecta el model (entitat `PROMOCION`?).
-3. El client té una adreça de lliurament distinta de la fiscal? S'imprimix una sola.
-4. És el mateix l'albarà i la visita? No: un albarà es lliura en una visita, però pot haver-hi visites sense albarà (client tancat) i un dia pot haver-hi diversos albarans en una mateixa visita.
-
-**Fet clau:** el document A i el B semblen parlar del mateix, però descriuen fets distints. L'anàlisi consistix a separar el que es lliura (albarà) del que es visita (visita).
-
-{{% /details %}}
+{{< solucion id="ud02-011" title="Solució i criteris" />}}
 
 
 ---
@@ -711,49 +486,11 @@ Un club de pàdel ha rebut dos propostes de model i no sap quina triar. El club 
 
 **Proposta A**
 
-```mermaid
-erDiagram
-    SOCIO ||--o{ RESERVA : "fa"
-    PISTA ||--o{ RESERVA : "es reserva en"
-    RESERVA {
-        datetime fecha_hora PK
-        string jugador1
-        string jugador2
-        string jugador3
-        string jugador4
-        decimal pago1
-        decimal pago2
-        decimal pago3
-        decimal pago4
-    }
-    SOCIO {
-        int num_socio PK
-        string nombre
-    }
-    PISTA {
-        int num_pista PK
-    }
-```
+{{< figura src="ud02/p2_10a.svg" alt="Diagrama EER en notació de Chen: Proposta A" caption="Diagrama EER en notació de Chen: Proposta A" >}}
 
 **Proposta B**
 
-```mermaid
-erDiagram
-    PERSONA ||--o{ PARTICIPACION : "juga"
-    RESERVA ||--|{ PARTICIPACION : "té"
-    PISTA ||--o{ RESERVA : "es reserva en"
-    SOCIO ||--o{ RESERVA : "fa"
-    PERSONA {
-        int cod_persona PK
-        string nombre
-    }
-    SOCIO {
-        int num_socio PK
-    }
-    PARTICIPACION {
-        decimal importe_pagado
-    }
-```
+{{< figura src="ud02/p2_10b.svg" alt="Diagrama EER en notació de Chen: Proposta B" caption="Diagrama EER en notació de Chen: Proposta B" >}}
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -775,27 +512,282 @@ erDiagram
 
 {{% /details %}}
 
-{{% details title="Solució i criteris (per al professorat o després de lliurar)" %}}
+{{< solucion id="ud02-012" title="Solució i criteris" />}}
 
-| Cas de prova | A | B |
-|---|---|---|
-| Partit de dos jugadors | Deixa columnes buides | Sí |
-| Quatre jugadors | Sí | Sí |
-| Convidat sense fitxa | No hi ha entitat: el nom és només un text | Sí (`PERSONA`) |
-| Convidat que es fa soci | Perd el seu historial en canviar de text a soci | Sí: se li afig l'especialització de soci |
-| Un jugador paga per tots | Cal sumar les columnes | Parcialment: falta saber **qui** va pagar |
-| Quantes vegades ha jugat cada persona? | Cal buscar en quatre columnes | Sí |
-| Qui juga amb qui? | Molt difícil | Sí (autoconsulta sobre la participació) |
-| Què deu cadascú? | Barrejat amb `pagoN` | Sí, si l'import se separa de «el que ha pagat un altre» |
 
-**Millores a B:**
-1. `PERSONA` és la superclasse; `SOCIO` és una especialització parcial. Així el convidat es converteix en soci sense canviar d'identitat.
-2. `PARTICIPACION` guarda `importe_a_pagar`, i s'afig una relació `PAGO` entre participació i persona pagadora per a representar «paga per tots».
-3. La reserva guarda com a atribut qui la fa, sense obligar que siga soci si el club decidira permetre-ho.
+---
 
-**Lliçó:** el grup repetit és la forma habitual de fer que un model no escale. El senyal d'alarma són atributs numerats (`jugador1`, `jugador2`...).
+## Pràctica 2.11 · Festival de música: edicions, escenaris i actuacions
+
+{{< practica num="2.11" tipo="Reto" duracion="3 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io" entrega="Diagrama EER + diccionari de dades + restriccions + preguntes al client" >}}
+
+#### Context
+
+Una associació cultural organitza diversos festivals a l'any i du la programació en fulls de càlcul que ja ningú entén. T'han enviat l'apartat de **requisits** de la licitació. Com en un document real, **hi ha dades repetides, frases ambigües i parts que no pertanyen al sistema**. El teu treball és separar el que cal modelar del que no, i deixar per escrit cada decisió que prengues.
+
+#### Enunciat
+
+> **1. Festivals i edicions.** L'associació organitza actualment tres festivals (*Sonora Rock*, *Sonora Jazz* i *Sonora Folk*), però preveu obrir-ne més. Cada festival té un nom i una descripció curta. Cada any se celebra una **edició** de cada festival, amb les dates d'inici i de fi, la ciutat seu i el pressupost aprovat. Les edicions s'identifiquen sempre pel festival i per l'any: l'associació parla de «el Sonora Jazz de 2026», mai de «l'edició 17». No es guarden edicions futures que no tinguen pressupost aprovat.
+>
+> **2. Recintes i escenaris.** Cada edició se celebra en un recinte, que pot canviar d'un any a un altre. De cada escenari es guarda el nom, l'aforament màxim i el **punt d'accés**, que el personal de seguretat necessita descrit en tres parts: la zona del recinte (nord, sud, central…), la porta i les indicacions d'arribada. Els escenaris es numeren dins de cada edició (escenari 1, escenari 2…); l'«escenari 1» de 2025 no té res a veure amb el de 2026, encara que estiga al mateix lloc. Tota edició té almenys un escenari.
+>
+> **3. Artistes.** Un artista pot ser un **solista** o una **agrupació**; no s'admeten altres tipus i ningú és les dues coses alhora (si un solista munta una banda, es dona d'alta com a agrupació a part). De tots es guarda el nom artístic, el país d'origen, els **gèneres** que toca (pot ser més d'un) i les dades del **representant**: nom, telèfon i correu, que es gestionen sempre junts. Dels solistes interessa el seu nom real i la data de naixement; de les agrupacions, l'any de formació i el nombre de components. Els components d'una agrupació són músics dels quals es guarda el nom, l'instrument principal i, per a cada agrupació a què pertanyen, la data en què hi van entrar i l'instrument amb què hi toquen. Un mateix músic pot estar en diverses agrupacions.
+>
+> **4. Programació.** El dia es divideix en **franges** de trenta minuts que comencen en punt o i mitja. Cada actuació consisteix que un artista toca en un escenari durant una o diverses franges consecutives; s'anota la franja d'inici, la durada en minuts i el caixet pactat. Un artista pot actuar diverses vegades en una mateixa edició, fins i tot en escenaris diferents i dies diferents, però **no pot estar en dos escenaris alhora** i un escenari **no pot acollir dues actuacions simultànies**. L'associació vol consultar la programació d'un escenari o la d'un artista d'una ullada.
+>
+> **5. Personal.** Tot el personal d'una edició s'identifica pel seu DNI i té nom, telèfon i talla de camiseta. Es distingeixen tècnics (amb la seua especialitat: so, il·luminació o escenari), personal de seguretat (amb el seu número d'habilitació) i voluntaris (amb els dies de la setmana en què estan disponibles). Hi ha personal de producció que no encaixa en cap de les tres categories, i és habitual que un voluntari amb formació tècnica treballe també com a tècnic, de manera que la mateixa persona pot figurar en dues categories. Cada persona s'assigna a un escenari en un torn concret (matí, vesprada o nit) d'una edició; pot cobrir diversos torns i diversos escenaris, però només d'edicions en què estiga contractada.
+>
+> **6. Fora d'abast.** La venda d'entrades la gestiona una plataforma externa i no forma part d'aquest sistema; només es rebrà al final de cada dia el total d'assistents per escenari. Tampoc no es gestionen els pagaments a proveïdors ni la comptabilitat de l'associació.
+
+{{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
+
+1. Extrau del text les **entitats candidates** i descarta les que no pertanyen al sistema, justificant-ho amb una frase de l'apartat 6. Indica quines són febles i quin és l'**identificador complet** de cadascuna.
+2. Classifica les dues jerarquies (artistes i personal) com a totals o parcials i disjuntes o solapades, citant la frase del text que ho justifica. Decideix quins atributs van a la superclasse.
+3. Modela l'actuació com a relació **ternària** (artista, escenari, franja). Calcula la cardinalitat de cada entitat fixant les altres dues i explica com les dues prohibicions de l'apartat 4 en redueixen una.
+4. Marca tots els atributs **compostos**, **multivalor** i **derivats** i explica com els representaries. La `duración` és un atribut de la relació o es dedueix d'una altra cosa?
+5. Escriu **almenys sis restriccions** que el diagrama no pot expressar (solapaments, coherència entre edicions, aforament…).
+6. Redacta cinc **preguntes al client** sobre les parts ambigües del text i com canviaria el teu model segons la resposta.
 
 {{% /details %}}
+
+{{% details title="Comprovació (fes-la servir en acabar el teu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `EDICIÓN` és feble de `FESTIVAL` (festival + any) i `ESCENARIO` és feble de `EDICIÓN` (festival + any + número).
+- [ ] La franja pertany a l'edició o és una dada general; has justificat quina de les dues opcions tries.
+- [ ] La jerarquia d'artistes és **total i disjunta**; la del personal és **parcial i solapada**.
+- [ ] `punto de acceso` i `representante` són atributs compostos; `géneros` i `días disponibles` són multivalor.
+- [ ] La relació entre agrupació i músic és N:M i duu `fecha_entrada` i `instrumento`.
+- [ ] L'assignació de personal té el torn com a part de la seua identificació.
+- [ ] La venda d'entrades no apareix al diagrama.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errors habituals (llig-los després d'intentar-ho)" %}}
+
+> [!WARNING]
+> - Identificar l'edició amb un número correlatiu global: el text diu que s'identifica per festival i any.
+> - Posar `escenario` com a text dins de l'actuació: té aforament, punt d'accés i personal assignat, de manera que és una entitat.
+> - Convertir la ternària en tres binàries i perdre quin artista toca en quin escenari en quina franja.
+> - Posar `edad` en lloc de `fecha_nacimiento`, o `número_componentes` com a dada introduïda en lloc de derivada de la relació amb els músics.
+> - Oblidar que el personal pot estar en dues categories alhora i declarar la jerarquia disjunta.
+
+{{% /details %}}
+
+#### Ampliació
+
+L'associació vol una **llista d'espera de voluntaris** per edició i que un voluntari puga recomanar-ne un altre. És una relació reflexiva? Quina cardinalitat té i quina restricció necessites per a evitar que algú es recomane a si mateix?
+
+{{< solucion id="ud02-013" title="Solució de referència" />}}
+
+
+---
+
+## Pràctica 2.12 · Editorial: obres, traduccions i drets d'autor
+
+{{< practica num="2.12" tipo="Reto" duracion="3 sesiones" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io" entrega="Diagrama EER + justificació de jerarquies, reflexives i agregació + restriccions" >}}
+
+#### Context
+
+Una editorial independent publica novel·la, poesia i còmic, tradueix obres d'altres idiomes i compila antologies. Hui du el catàleg i els contractes en documents de text solts i ha tingut problemes perquè **ningú no sabia quin percentatge de drets corresponia a cada persona d'una obra**. Et lliuren este resum de requisits.
+
+#### Enunciat
+
+> **1. Obres.** Una **obra** és el text en si, independentment de com es publique. Cada obra té un codi intern, el títol, l'any de primera publicació i l'idioma original. Hi ha tres classes d'obres amb dades pròpies: les **novel·les** (nombre de capítols i si pertanyen a una saga, cas en què s'anota el nom de la saga i el volum), els **poemaris** (nombre de poemes i mètrica predominant) i els **còmics** (nombre de pàgines i si són en color o en blanc i negre). Hi ha obres de divulgació i d'assaig que no encaixen en cap de les tres classes i només guarden les dades comunes. Una obra no pot ser alhora novel·la i còmic, encara que tinga adaptació: l'adaptació és una altra obra distinta.
+>
+> **2. Relacions entre obres.** Una obra pot ser una **traducció** d'una altra obra de l'editorial (l'original). De la traducció interessa el seu idioma, que no coincideix amb el de l'original, i qui la va traduir. Una obra original pot tindre moltes traduccions, però una traducció ho és d'una sola original. A més, l'editorial publica **antologies**: obres que reuneixen fragments o peces completes d'altres obres. En una antologia importa l'ordre en què apareix cada peça i les pàgines que ocupa. Una obra pot aparéixer en diverses antologies, i una antologia no pot incloure's a si mateixa.
+>
+> **3. Persones i funcions.** Els qui participen en una obra són persones: autors, traductors, il·lustradors i prologuistes. De cada persona es guarda el nom civil, la nacionalitat, la data de naixement i, si ha mort, la data de defunció; també un o diversos **pseudònims** sota els quals ha publicat. L'**adreça fiscal** es conserva desglossada en carrer, número, codi postal, localitat i país, perquè s'utilitza per a emetre les retencions. Una persona pot tindre diferents funcions en diferents obres (autor d'una, traductor d'una altra) i fins i tot més d'una en la mateixa. Per a cada funció s'anota el **percentatge de drets** que li correspon sobre l'obra.
+>
+> **4. Contractes i representació.** Abans de publicar una obra se signa un **contracte** de cessió de drets per cada persona que hi participa amb una funció concreta: es guarda la data de signatura, l'avançament i la durada en anys. Algunes persones tenen un **agent literari** que negocia en nom seu; l'agent té nom, agència i telèfon, i pot representar moltes persones. El contracte reflecteix si l'ha negociat un agent i qui va ser; els contractes de persones sense agent se signen directament.
+>
+> **5. Edicions i impressions.** Una obra es publica en una o diverses **edicions**: cadascuna amb el seu ISBN (que la identifica a tot el món), format (tapa dura, rústica o llibre electrònic), nombre de pàgines i preu. Cada edició s'imprimeix en **tirades** numerades dins de l'edició (primera, segona…), amb data d'impressió, nombre d'exemplars i impremta. Una tirada no té sentit sense la seua edició i si es retira una edició es retiren les seues tirades. Els llibres electrònics no tenen tirades.
+>
+> **6. Llibreries.** L'editorial envia exemplars de cada tirada a llibreries (CIF, nom, adreça i telèfon), indicant la data d'enviament i la quantitat. Una llibreria pot rebre diverses vegades exemplars de la mateixa tirada. Les **vendes** al públic les gestiona el distribuïdor i queden fora de l'abast.
+
+{{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
+
+1. Dibuixa el diagrama EER en notació de Chen. Justifica per què l'**obra** i l'**edició** són entitats distintes.
+2. Classifica la jerarquia d'obres. Què canvia si el text digués que «tota obra és novel·la, poemari o còmic»?
+3. Representa les relacions *traduce* i *incluye* com a **reflexives** sobre obra: escriu-ne els rols, cardinalitats i atributs, i les restriccions d'integritat que necessiten.
+4. Modela la participació de les persones en les obres com a relació **ternària** (persona, obra, funció) o com a binària amb la funció com a entitat. Compara les dues opcions i tria'n una.
+5. Representa el contracte mitjançant una **agregació** de la participació i explica per què una simple relació entre persona i obra no basta.
+6. Identifica les entitats febles i els seus identificadors. Per què l'ISBN no converteix l'edició en entitat feble i la tirada sí que ho és?
+7. Escriu almenys cinc restriccions textuals i assenyala dues dades que siguen **derivades**.
+
+{{% /details %}}
+
+{{% details title="Comprovació (fes-la servir en acabar el teu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] La jerarquia d'obres és **parcial i disjunta**, amb atributs propis en cada subclasse.
+- [ ] *Traduce* és una reflexiva 1:N amb els rols *original* i *traducción*; *incluye* és una reflexiva N:M amb `orden` i `páginas`.
+- [ ] La participació de persones duu el percentatge de drets i admet diverses funcions de la mateixa persona en la mateixa obra.
+- [ ] El contracte es modela com a agregació de la participació, amb l'agent com a relació opcional.
+- [ ] `TIRADA` és una entitat feble d'`EDICIÓN`; `EDICIÓN` té identificador propi (ISBN).
+- [ ] `seudónimos` és multivalor, `dirección fiscal` és compost i «domini públic» o «en vida» és derivat de les dates.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errors habituals (llig-los després d'intentar-ho)" %}}
+
+> [!WARNING]
+> - Fondre obra i edició en una sola entitat: es repeteix el títol, l'autor i els drets en cada edició.
+> - Posar `traductor` com a atribut de text en l'obra: és una persona amb dades i amb un percentatge de drets.
+> - Modelar l'antologia com una entitat apart amb una relació a obra: és una obra més, i la seua relació amb altres obres és reflexiva.
+> - Posar el percentatge de drets en la persona o en l'obra: pertany a la **participació** (persona, obra, funció).
+> - Fer de l'agent un atribut del contracte: l'agent és una entitat amb dades pròpies i moltes representacions.
+
+{{% /details %}}
+
+#### Ampliació
+
+Algunes obres tenen **coautoria**. Canvia alguna cosa en el model? Afig ara que els drets d'una persona sobre una obra passen als seus hereus quan mor: quina relació necessites i quin problema apareix amb les dates?
+
+{{< solucion id="ud02-014" title="Solució de referència" />}}
+
+
+---
+
+## Pràctica 2.13 · Taller aeronàutic: aeronaus, ordres de treball i habilitacions
+
+{{< practica num="2.13" tipo="Reto" duracion="3 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io" entrega="Diagrama EER + diccionari de dades + restriccions normatives" >}}
+
+#### Context
+
+Un taller de manteniment aeronàutic treballa sota una normativa estricta: **cada tasca ha de poder demostrar qui la va fer, amb quina habilitació i sobre quina peça concreta**. El responsable de qualitat et lliura la descripció del que el sistema ha de registrar. Part de les regles estan escrites com a «ha de» i unes altres apareixen de passada: **ambdues són requisits**.
+
+#### Enunciat
+
+> **1. Aeronaus i models.** El taller revisa aeronaus de moltes companyies. Cada aeronau s'identifica per la seua matrícula i és d'un **model** (per exemple, ATR 72-600), del qual es coneix el fabricant, la denominació, la categoria de manteniment i les hores de vol entre revisions majors. De l'aeronau es guarda la data de fabricació i les hores de vol acumulades, que s'actualitzen en cada entrada al taller. Hi ha tres tipus: **avions** (nombre de motors i envergadura), **helicòpters** (nombre de pales del rotor principal i si tenen rotor de cua) i altres aeronaus lleugeres que no necessiten dades específiques. Una aeronau és sempre d'un únic tipus.
+>
+> **2. Propietaris.** Cada aeronau pertany en cada moment a una persona física o jurídica, de la qual es guarda un nom o raó social, un NIF i una **adreça de contacte** desglossada en carrer, número, codi postal, localitat i país. Amb la compravenda i l'arrendament una aeronau canvia de propietari al llarg de la seua vida, i la normativa exigeix conservar **tot l'historial**: qui va ser el propietari i des de quina data fins a quina data. Un propietari pot tindre moltes aeronaus i una aeronau no pot tindre dos propietaris al mateix temps.
+>
+> **3. Ordres de treball.** Cada vegada que una aeronau entra al taller s'obri una **ordre de treball**, que es numera de forma correlativa dins de cada any (l'ordre 17 de 2026). Es guarden la data d'entrada, la data prevista i la real d'eixida, el tipus de revisió (A, B, C o D) i les observacions del client. Una ordre es descompon en **tasques** numerades dins de l'ordre: cada tasca té una descripció, les hores estimades i el seu estat (pendent, en curs o acabada). Algunes tasques no poden començar fins que s'han acabat unes altres de la mateixa ordre, i eixes dependències han de quedar registrades. Una tasca no es reutilitza en una altra ordre: si es repeteix el treball, es crea una tasca nova.
+>
+> **4. Personal tècnic i habilitacions.** Els tècnics tenen un codi d'empleat, un nom i una data de contractació. Per a treballar sobre un model concret necessiten una **habilitació**, que es concedeix per **categoria de llicència** (B1 mecànica, B2 aviònica o C certificació) i té una data de caducitat. Un tècnic pot tindre diverses habilitacions: pot ser B1 en l'ATR 72 i B2 en l'Airbus A320, o B1 i B2 alhora en el mateix model. Per al mateix model i la mateixa categoria hi ha una única habilitació per tècnic. Cada tasca la realitzen un o diversos tècnics; s'anoten les hores reals que dedica cadascú i la data en què signa la seua part. Només els tècnics amb categoria C poden **certificar** la conformitat d'una ordre completa.
+>
+> **5. Magatzem i peces.** El magatzem gestiona peces identificades pel seu número de part, amb la descripció, la unitat de mesura i l'estoc mínim. Hi ha dues classes de peces: els **consumibles** (cargols, juntes, olis) dels quals només es controla la quantitat en magatzem, i els **rotables** (motors, trens d'aterratge) que tenen número de sèrie propi, les hores acumulades i una vida útil màxima. Les peces són d'una de les dues classes, mai d'ambdues. Cada peça es compra a un o diversos proveïdors, amb un preu per proveïdor i un termini de lliurament; un proveïdor pot subministrar moltes peces.
+>
+> **6. Ús de peces.** Una tasca consumeix peces (quantitat per als consumibles) o instal·la i desmunta rotables concrets en una aeronau. De cada instal·lació es guarda la data de muntatge i, quan es retira, la de desmuntatge; un rotable no pot estar instal·lat en dues aeronaus al mateix temps, però al llarg de la seua vida passa per diverses. El taller necessita poder respondre a «quins rotables duia l'aeronau EC-XYZ el 3 de març» i «en quines aeronaus ha estat instal·lat este motor».
+>
+> **7. Fora d'abast.** La facturació al client i la nòmina dels tècnics es porten en altres programes.
+
+{{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
+
+1. Identifica les entitats, indica les **febles** amb el seu identificador complet i dibuixa la cadena ordre → tasca. Per què la matrícula identifica l'aeronau però el número d'ordre no identifica l'ordre?
+2. Classifica les dues jerarquies (aeronaus i peces) i justifica cada classificació amb una frase del text.
+3. Modela l'habilitació com a relació **ternària** tècnic–model–categoria i calcula les cardinalitats. Per què no basta una binària tècnic–model?
+4. Modela l'historial de propietaris, el d'instal·lació de rotables i la dependència entre tasques. Indica en cada cas quin atribut fa que la mateixa parella d'entitats puga repetir-se.
+5. Decideix com representar la **certificació** d'una ordre i quina restricció exigeix que el tècnic siga de categoria C.
+6. Escriu almenys set restriccions d'integritat que el diagrama no pot arreplegar.
+7. Enumera tres consultes del taller que el teu diagrama ha de poder contestar i recorre el camí de relacions que usaria cadascuna.
+
+{{% /details %}}
+
+{{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `ORDEN` s'identifica per (any, número) i `TAREA` per (any, número d'ordre, número de tasca).
+- [ ] La jerarquia d'aeronaus és **parcial i disjunta**; la de peces, **total i disjunta**.
+- [ ] L'habilitació és una ternària amb la data de caducitat com a atribut.
+- [ ] L'historial de propietat i el d'instal·lació duen la data d'inici com a part de la seua identificació.
+- [ ] La dependència entre tasques és una N:M reflexiva sense atributs.
+- [ ] La relació tasca–tècnic és N:M amb `horas_reales` i `fecha_firma`.
+- [ ] `dirección de contacto` apareix com a atribut compost.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errors habituals (llig-los després d'intentar-ho)" %}}
+
+> [!WARNING]
+> - Guardar el propietari com a atribut de l'aeronau: es perd l'historial que exigeix la normativa.
+> - Identificar la tasca només pel seu número dins de l'ordre, sense heretar la identificació de l'ordre.
+> - Confondre `rotable` (amb número de sèrie i historial) amb `consumible` (només quantitat) i posar les hores acumulades en totes les peces.
+> - Resoldre l'habilitació amb dues binàries (tècnic–model i tècnic–categoria): no se sap quina categoria té sobre quin model.
+> - Donar a les tasques dependents una relació 1:N: una tasca pot esperar-ne diverses i ser requisit de diverses.
+
+{{% /details %}}
+
+#### Ampliació
+
+L'autoritat aeronàutica exigeix que cada **certificació d'ordre** quede signada per un tècnic de categoria C, amb la data i un número de certificat únic. Modela la certificació i decideix si és una entitat, una relació amb atributs o una agregació. Després afig la possibilitat que una certificació siga **anul·lada** i substituïda per una altra.
+
+{{< solucion id="ud02-015" title="Solució de referència" />}}
+
+
+---
+
+## Pràctica 2.14 · Comunitat de propietaris: immobles, juntes i votacions
+
+{{< practica num="2.14" tipo="Reto" duracion="3 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io" entrega="Diagrama EER + justificació de la cadena de febles i de la ternària + restriccions legals" >}}
+
+#### Context
+
+Un administrador de finques gestiona desenes de comunitats de propietaris amb fulls de càlcul i paper. Vol un sistema que li permeta saber **qui és amo de què en cada moment, què es va votar en cada junta i qui deu diners**. Esta és la descripció del client. Com sol ocórrer, barreja regles legals amb costums de la casa, i no totes tenen el mateix pes.
+
+#### Enunciat
+
+> **1. Comunitats i immobles.** L'administrador du diverses comunitats. Cada comunitat té un CIF, un nom, una adreça (carrer, número, codi postal i localitat) i un compte bancari en què s'ingressen les quotes. Una comunitat es compon d'un o diversos **portals**, numerats dins de la comunitat (portal 1, portal 2…), i cada portal conté **immobles** que s'identifiquen per la seua planta i la seua lletra dins del portal (3r B). El «3r B del portal 1» d'una comunitat no té res a veure amb el «3r B del portal 1» d'una altra.
+>
+> **2. Tipus d'immobles.** Tot immoble té la seua superfície en metres quadrats i un **coeficient de participació** (el tant per cent que li correspon en les despeses i en els vots); la suma de coeficients d'una comunitat és sempre el 100 %. Els immobles són habitatges (nombre de dormitoris i si tenen terrassa), locals comercials (activitat que s'hi desenvolupa i número de llicència) o places de garatge (número de plaça i planta del soterrani). Un immoble és sempre d'un únic tipus. Alguns garatges estan **vinculats** a un habitatge concret i es transmeten amb ell; un garatge només pot estar vinculat a un habitatge de la seua mateixa comunitat, i un habitatge pot tindre diversos garatges vinculats.
+>
+> **3. Propietaris.** Els propietaris poden ser persones físiques (DNI, nom i cognoms) o jurídiques (CIF, raó social i persona de contacte, amb el seu nom i telèfon). Els dos tipus comparteixen un telèfon i un correu de notificació. Un immoble pot pertànyer a diverses persones alhora, cadascuna amb el seu **percentatge de propietat** (el 50 % cadascun si el compren dos germans). La propietat canvia amb vendes i herències, i s'ha de conservar l'**historial**: qui va ser propietari de quin immoble, amb quin percentatge i entre quines dates. Si no es coneix la data de fi, el propietari continua sent-ho.
+>
+> **4. Juntes.** Cada comunitat celebra juntes, ordinàries o extraordinàries, numerades per any dins de la comunitat (la junta 2 de 2026). De cadascuna es guarden la data, el lloc, si es va celebrar en primera o en segona convocatòria i l'acta (un text llarg). Cada junta té un **ordre del dia** compost per punts numerats dins de la junta; cada punt té un títol, una descripció i el resultat de la votació (aprovat, rebutjat o sense votació). Els punts no existeixen fora de la seua junta.
+>
+> **5. Assistència, delegació i vot.** A cada junta assisteixen propietaris, bé en persona, bé **representats** per un altre propietari de la mateixa comunitat a qui han delegat el seu vot; de cada assistent s'anota si va estar present o representat. Un propietari pot delegar el seu vot en una junta concreta en un altre, que al seu torn pot acumular diverses delegacions, però ningú no pot delegar en si mateix ni delegar un vot que ja ha rebut per delegació. Quan un punt se sotmet a votació, cada propietari present o representat vota **a favor, en contra o s'absté**, i el vot compta amb el coeficient de l'immoble. Es vol saber com va votar cada propietari en cada punt.
+>
+> **6. Quotes, derrames i rebuts.** Cada immoble paga una quota mensual de despeses proporcional al seu coeficient. A més, la junta pot aprovar **derrames extraordinàries** (una obra, per exemple) en un punt de l'ordre del dia; la derrama es reparteix entre els immobles segons el coeficient i té un import total, un concepte i unes dates de pagament. Tots els cobraments s'emeten com a **rebuts** a nom del propietari actual de l'immoble, numerats dins de cada immoble; en un rebut s'anoten el concepte, l'import, la data d'emissió i, quan es paga, la data de pagament. Un rebut és morós si passen trenta dies des de l'emissió sense haver-se pagat.
+>
+> **7. Fora d'abast.** La comptabilitat general de la comunitat, les incidències de manteniment i els contractes amb proveïdors es tractaran en una fase posterior.
+
+{{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
+
+1. Dibuixa la **cadena d'entitats febles** comunitat → portal → immoble i escriu l'identificador complet de cadascuna. Explica per què no es pot usar un codi global d'immoble sense perdre informació.
+2. Classifica la jerarquia d'immobles i la de propietaris. Justifica cada classificació amb una frase del text i decideix quins atributs van en cada nivell.
+3. Modela el vincle entre garatges i habitatges. És una reflexiva? Quina cardinalitat té des de cada costat?
+4. Modela la **propietat amb historial** (immoble, propietari, percentatge, dates) i justifica quin atribut forma part de l'identificador.
+5. Modela la **delegació de vot** com a relació **ternària** (propietari que delega, propietari representant, junta). Calcula les seues cardinalitats i escriu les tres restriccions de l'apartat 5.
+6. Modela el vot en cada punt i explica per què el coeficient **no** és un atribut del vot.
+7. Identifica els atributs compostos, derivats i multivalor (si n'hi ha) i explica què caldria preguntar al client per a decidir.
+8. Escriu almenys huit restriccions, distingint les **legals** de les **de negoci**.
+
+{{% /details %}}
+
+{{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `PORTAL` és feble de `COMUNIDAD`; `INMUEBLE` és feble de `PORTAL`; `JUNTA` és feble de `COMUNIDAD`; `PUNTO` és feble de `JUNTA`; `RECIBO` és feble d'`INMUEBLE`.
+- [ ] La jerarquia d'immobles és **total i disjunta**; la de propietaris, **total i disjunta**, amb atributs diferents en cada subclasse.
+- [ ] El vincle garatge–habitatge és una relació 1:N des de l'habitatge i opcional del costat del garatge.
+- [ ] La propietat és una N:M entre immoble i propietari amb `porcentaje` i `fecha_inicio` com a part de l'identificador.
+- [ ] La delegació és una ternària amb dos papers distints per a la mateixa entitat `PROPIETARIO`.
+- [ ] El vot és una N:M entre propietari i punt, amb el sentit del vot com a atribut.
+- [ ] «Morós» s'ha declarat com a atribut derivat.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errors habituals (llig-los després d'intentar-ho)" %}}
+
+> [!WARNING]
+> - Usar un codi d'immoble global i perdre l'estructura portal–planta–lletra que usa l'administrador.
+> - Posar `propietario` com a atribut de l'immoble: es perden el repartiment de percentatges i l'historial.
+> - Modelar la delegació com una relació binària entre propietaris, sense la junta: el mateix propietari pot delegar en un o en un altre segons la junta.
+> - Guardar el coeficient en el vot: és una dada de l'immoble, i el propietari en pot tindre diversos.
+> - Guardar el resultat de la votació com a text lliure, o comptar-lo a mà, en lloc de derivar-lo dels vots (aprovat si els vots a favor superen els contraris).
+
+{{% /details %}}
+
+#### Ampliació
+
+Una comunitat pot tindre **subcomunitats** (per exemple, un garatge comú a diversos portals amb les seues pròpies quotes). Decideix si es modela com una reflexiva de `COMUNIDAD` o com una entitat nova, i explica què ocorre amb els coeficients.
+
+{{< solucion id="ud02-016" title="Solució de referència" />}}
 
 
 ---
@@ -1528,19 +1520,20 @@ Llig l'[entrevista amb la direcció d'estudis](/guia/proyecto-edugest#1-enunciat
 
 ## Banc d'exercicis
 
-30 exercicis per a practicar el disseny conceptual, **ordenats de menor a major dificultat** en quatre blocs. Cada exercici té el mateix format que les pràctiques: context i enunciat a la vista, i **objectiu, tasques, comprovació, errors habituals i solució plegats** (dibuixada amb la notació EER que usem a classe). Els enunciats estan escrits sense ressaltar les entitats: reconéixer-les és part de l'exercici.
+35 exercicis per a practicar el disseny conceptual, **ordenats de menor a major dificultat** en cinc blocs. Cada exercici té el mateix format que les pràctiques: context i enunciat a la vista, i **objectiu, tasques, comprovació, errors habituals i solució plegats** (dibuixada amb la notació EER que usem a classe). Els enunciats estan escrits sense ressaltar les entitats: reconéixer-les és part de l'exercici.
 
 | Bloc | Exercicis | Què introduïx | A més del diagrama es demana |
 |---|---|---|---|
 | Fonaments ●○○ | 1-5 | Entitats, atributs, identificadors, relacions 1:N i N:M, atributs de relació i una primera relació reflexiva. | Diagrama i supòsits |
 | Intermedi ●●○ | 6-15 | Relacions 1:1, N:M reflexives, entitats febles, atributs compostos, multivaluats i derivats, i diverses relacions entre les mateixes entitats. | Justificar decisions i escriure restriccions textuals |
-| Integració ●●○ → ●●● | 16-23 | Relacions ternàries, agregació, dues relacions entre les mateixes entitats, llistes de materials, cardinalitats màximes concretes i primera generalització. | Classificar jerarquies, comparar ternària i agregació, diccionari parcial |
-| EER avançat ●●● | 24-30 | Diverses especialitzacions en un mateix model, cadenes d'entitats febles, ternàries amb atributs i casos d'integració complets. | Diccionari de dades, restriccions i taules previstes |
+| Intermedi: integració ●●○ | 16-23 | Relacions ternàries, agregació, dues relacions entre les mateixes entitats, llistes de materials, cardinalitats màximes concretes i primera generalització. | Classificar jerarquies, comparar ternària i agregació, diccionari parcial |
+| Intermedi: EER ●●○ | 24-30 | Diverses especialitzacions en un mateix model, cadenes d'entitats febles, ternàries amb atributs i casos d'integració complets. | Diccionari de dades, restriccions i taules previstes |
+| Consolidació ●●● | 31-35 | Casos llargs que barregen cadenes de febles, ternàries, agregació, reflexives i especialitzacions. | Diagrama, diccionari de dades, restriccions i taules previstes |
 
-{{< figura src="ud02/chen-eer-leyenda.svg" alt="Llegenda de la notació EER: entitat, entitat feble, rombe blanc 1:1, rombe mig blanc i mig negre 1:N, rombe negre N:M, ternària, dependències ID i E, atributs, generalització i agregació" caption="Llegenda de la notació EER usada en les solucions" >}}
+{{< figura src="ud02/chen-eer-leyenda.svg" alt="Llegenda de la notació de Chen estesa: entitat, entitat feble, relació, relació identificadora (rombe doble), participació parcial i total, ternària, atributs, especialització amb cercle d o o, i agregació" caption="Llegenda de la notació de Chen estesa (EER) usada en les solucions" >}}
 
 > [!IMPORTANT]
-> **Com es llig el rombe.** Cada meitat del rombe mira a una entitat. La meitat és **negra** si el màxim escrit junt a eixa entitat és N (o un nombre major que 1) i **blanca** si és 1. Així, un rombe blanc és 1:1, un mig blanc i mig negre és 1:N i un negre sencer és N:M. En les ternàries es divideix un triangle en tres sectors amb el mateix criteri. Junt a cada punta es repetix el màxim (1 o N).
+> **Notació de Chen estesa.** Les entitats són rectangles i les relacions, rombes; l'entitat feble porta rectangle doble i la seua relació identificadora, rombe doble. Una **línia doble** uneix una entitat amb una relació quan la participació és total (mínim 1) i una línia senzilla quan és parcial (mínim 0). Junt al rombe es rotula la cardinalitat màxima (1, N, M, P) i junt a l'entitat el parell (mín, màx). Les especialitzacions es dibuixen amb un cercle amb **d** (disjunta) o **o** (solapada); cada subclasse s'uneix amb el símbol de subconjunt ⊂ i la línia fins a la superclasse és doble si l'especialització és total.
 
 > [!IMPORTANT]
 > **Conveni de cardinalitats.** El parell (mín, màx) escrit **junt a una entitat** indica amb quantes instàncies d'**eixa** entitat es relaciona una instància de l'altra. És el mateix conveni de la [teoria](/ud02-modelo-er/ud02-teoria#71-equivalència-entre-la-notació-de-chen-i-la-pota-de-gall). En una relació ternària, el parell junt a una entitat compta quantes instàncies d'ella corresponen a cada parella de les altres dos.
@@ -1549,7 +1542,7 @@ Llig l'[entrevista amb la direcció d'estudis](/guia/proyecto-edugest#1-enunciat
 > **Com treballar un exercici.** Aplica el mètode d'ací dalt, dibuixa en paper o en draw.io, omple la llista de comprovació i només llavors desplega la solució. Si el teu diagrama difereix, no vol dir que estiga malament: compara els **supòsits**. Dos dissenys distints són vàlids si responen igual a les regles de l'enunciat.
 
 > [!NOTE]
-> Els atributs s'escriuen en `snake_case` perquè servisquen de noms de columna en la [UD03](/ud03-modelo-relacional/ud03-teoria). Les entitats febles porten doble rectangle i l'etiqueta **ID** (dependència en identificació) o **E** (dependència en existència) junt a la relació de la qual depenen. El subratllat discontinu marca el discriminador d'una entitat feble i l'atribut d'una relació que permet repetir la mateixa combinació d'entitats (per exemple, la data d'una multa). El subratllat de punts marca una clau alternativa. En les generalitzacions, **T/P** indica total o parcial i **D/S**, disjunta o solapada.
+> Els atributs s'escriuen en `snake_case` perquè servisquen de noms de columna en la [UD03](/ud03-modelo-relacional/ud03-teoria). El subratllat continu marca l'identificador, el discontinu el discriminador d'una entitat feble (o l'atribut que permet repetir la mateixa combinació d'entitats en una relació, com la data d'una multa) i el de punts una clau alternativa. Els ovals dobles són multivaluats, els discontinus derivats i els que penjen d'un altre oval, compostos. Alguns exercicis afigen una **E** junt a l'entitat que depén en existència (conserva el seu propi identificador).
 
 
 ---
@@ -1575,13 +1568,9 @@ Una xicoteta empresa de distribució vol informatitzar les seues vendes i les se
 
 #### Enunciat
 
-> Una empresa comercialitza productes a clients finals i s'abastix mitjançant proveïdors externs.
+> Som una xicoteta distribuïdora i venem a particulars. Quan algú ens compra apuntem qui és: el seu DNI, com es diu i quins cognoms té, a quina adreça li enviem la comanda i quan va nàixer, perquè el dia del seu aniversari li fem un descompte. Una mateixa persona ens compra coses distintes al llarg de l'any i, com és lògic, cada article acaba a casa de molts clients.
 >
-> De cada client es coneixen el DNI, el nom, els cognoms, l'adreça i la data de naixement. Un client pot comprar diversos productes i un mateix producte pot ser adquirit per diferents clients.
->
-> De cada producte s'emmagatzema un codi identificatiu, el nom i el preu unitari.
->
-> Els productes els subministren proveïdors. Cada producte el subministra un únic proveïdor (exclusiu), mentre que un proveïdor pot subministrar diversos productes. De cada proveïdor es desitja conéixer el NIF, el nom i l'adreça.
+> Al catàleg cada article té el seu codi, el seu nom i el que costa la unitat. No fabriquem res: cada article se'l serveix sempre el mateix proveïdor i no el canviem de l'un a l'altre, encara que un proveïdor ens subministra molts articles. Del proveïdor ens fa falta el NIF, el nom amb què s'anuncia i la seua adreça, per a enviar-li les comandes de reposició. La furgoneta de repartiment no entra ací, la portem a banda.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -1616,24 +1605,7 @@ Una xicoteta empresa de distribució vol informatitzar les seues vendes i les se
 
 L'empresa vol guardar la **data** i la **quantitat** de cada compra. On col·loques eixos atributs? Quin problema apareix si un client compra el mateix producte en dos dies distints?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej01.svg" alt="CLIENTE compra PRODUCTO (N:M). PROVEEDOR suministra PRODUCTO (1:N)." caption="Exercici 1: Vendes, clients, productes i proveïdors" >}}
-
-**Decisions de disseny**
-
-- *Compra* és **N:M**: un client compra molts productes i un producte el compren molts clients.
-- *Subministra* és **1:N**: el màxim és 1 en el costat del proveïdor. Per això no cal una taula intermèdia quan es passe al model relacional (UD03).
-- Els atributs de cada entitat són els de l'enunciat; el DNI, el codi i el NIF identifiquen.
-
-**Supòsits semàntics**
-
-1. Un client pot estar registrat sense haver comprat encara: (0,N).
-2. Tot producte té proveïdor: (1,1).
-3. Un proveïdor pot estar donat d'alta sense productes: (0,N).
-4. El DNI, el codi del producte i el NIF no es repetixen.
-
-{{% /details %}}
+{{< solucion id="ud02-017" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -1655,13 +1627,11 @@ Una plataforma de cinema sota demanda vol recomanar pel·lícules i avisar el cl
 
 #### Enunciat
 
-> Es desitja crear una base de dades per a una plataforma de pel·lícules en *streaming*.
+> Uns amics munten una plataforma de pel·lícules per internet i volen la base de dades abans d'escriure l'aplicació. Per a donar-se d'alta el client ens dona el seu NIF, el seu nom i cognoms, un correu i la seua adreça; a més, cada client té al compte un saldo amb el qual va pagant els lloguers.
 >
-> Als clients se'ls demanen les seues dades personals (NIF, nom, cognoms, correu electrònic i adreça) i el sistema manté el saldo disponible del seu compte.
+> Allò important és el catàleg. Cada pel·lícula té el seu títol, l'any en què es va estrenar i quant dura, i la identifiquem internament amb un codi. La gent la troba pel títol, però també pel gènere (cada pel·lícula és d'un, comèdia, drama, terror…) i pels actors que hi apareixen; d'ells guardem un codi, el nom complet i d'on són.
 >
-> Els clients poden buscar pel·lícules per gènere, per actors i per títol. De cada pel·lícula es guarda un codi, el títol, l'any d'estrena i la durada en minuts. Dels actors es coneix un codi, el nom complet i la nacionalitat. Cada pel·lícula pertany a un gènere (comèdia, drama, terror…).
->
-> La plataforma ha d'avisar el client si una pel·lícula ja l'ha vista. Per a això registra quines pel·lícules ha vist cada client, la data i la valoració (d'1 a 5) que li ha donat.
+> Volem que, en obrir una pel·lícula, l'aplicació avise que ja l'has vista. Per a això cal recordar què ha vist cada persona, quin dia ho va veure i quina nota li va posar, de l'1 al 5.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -1698,24 +1668,7 @@ Una plataforma de cinema sota demanda vol recomanar pel·lícules i avisar el cl
 
 Una pel·lícula pot pertànyer a **diversos gèneres** (comèdia romàntica, terror psicològic…). Què canvia en la relació *pertany a*? I en el color del rombe?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej02.svg" alt="CLIENTE ve PELÍCULA (N:M con fecha y valoración). ACTOR actúa en PELÍCULA (N:M). PELÍCULA pertenece a GÉNERO (N:1)." caption="Exercici 2: Pel·lícules en streaming" >}}
-
-**Decisions de disseny**
-
-- *Veu* és **N:M** amb `fecha` i `valoración`: l'existència de la parella (client, pel·lícula) ja indica que l'ha vista. Si es vol guardar cada visionat, la data passa a formar part de la identificació (subratllat discontinu).
-- *Actua en* és N:M: un actor participa en moltes pel·lícules i una pel·lícula té molts actors.
-- *Pertany a* és 1:N: cada pel·lícula té un gènere i un gènere agrupa moltes pel·lícules. El rombe té la meitat blanca junt a `GÉNERO` (màxim 1) i la negra junt a `PELÍCULA` (màxim N).
-
-**Supòsits semàntics**
-
-1. Un client pot no haver vist cap pel·lícula encara: (0,N).
-2. Tota pel·lícula té almenys un actor registrat: (1,N).
-3. Es guarda cada visionat, de manera que un client pot veure la mateixa pel·lícula en dates distintes.
-4. La valoració és un enter entre 1 i 5 (restricció de domini).
-
-{{% /details %}}
+{{< solucion id="ud02-018" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -1737,11 +1690,9 @@ Un ajuntament vol gestionar les infraccions de trànsit i les multes associades.
 
 #### Enunciat
 
-> De cada vehicle es registra la matrícula, el tipus, la marca i el model. Un vehicle pertany a un propietari registrat. Dels propietaris interessa guardar el DNI, el nom, els cognoms i l'adreça. Un propietari pot tindre diversos vehicles.
+> L'ajuntament vol controlar les multes de trànsit. El primer és saber de quins cotxes parlem: de cadascun s'anota la matrícula, si és turisme, moto o furgoneta, la marca i el model. Cada vehicle té un amo censat al municipi, al qual cal poder escriure a casa i que s'identifica amb el DNI i el seu nom complet; un veí pot tindre diversos cotxes.
 >
-> Existix un catàleg d'infraccions amb el seu codi, una descripció i la quantia a pagar.
->
-> Quan un vehicle comet una infracció es genera la multa corresponent, amb la data de la sanció i la data de pagament. Un mateix vehicle pot rebre diverses multes al llarg del temps i una infracció del catàleg pot cometre's moltes vegades per distints vehicles.
+> La policia local no s'inventa les infraccions: hi ha una llista oficial en què cadascuna té el seu codi, un text que la descriu i el que cal pagar per ella. Cada vegada que un cotxe en comet una es posa una multa en què consta el dia en què es va posar i el dia en què es va pagar (si és que es paga). Un cotxe pot acumular multes durant anys, fins i tot per la mateixa cosa, i una infracció de la llista la comet molta gent.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -1777,24 +1728,7 @@ Un ajuntament vol gestionar les infraccions de trànsit i les multes associades.
 
 La multa pot **recórrer-se** diverses vegades (data del recurs i resolució). Continua sent adequada una relació amb atributs? Raona per què la multa passaria a ser entitat.
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej03.svg" alt="PROPIETARIO posee VEHÍCULO (1:N). VEHÍCULO se sanciona con INFRACCIÓN (N:M con fecha de sanción y fecha de pago)." caption="Exercici 3: Multes de trànsit municipals" >}}
-
-**Decisions de disseny**
-
-- *Posseïx* és 1:N: el màxim és 1 en el costat del propietari.
-- *Se sanciona amb* és una N:M entre `VEHÍCULO` i `INFRACCIÓN` amb `fecha_sanción` (discriminador) i `fecha_pago`. És l'opció més compacta si la multa no té vida pròpia.
-- Alternativa vàlida: `MULTA` com a entitat amb un número de multa i dues relacions 1:N. És preferible si la multa es recorre, es notifica o es fracciona (vore ampliació).
-
-**Supòsits semàntics**
-
-1. Un propietari pot estar registrat sense vehicles.
-2. Un vehicle té sempre un propietari.
-3. Un vehicle no rep dos multes per la mateixa infracció en la mateixa data.
-4. `fecha_pago` està buida mentre la multa està pendent.
-
-{{% /details %}}
+{{< solucion id="ud02-019" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -1816,11 +1750,11 @@ Una naviliera internacional necessita gestionar la seua flota i les mercaderies 
 
 #### Enunciat
 
-> Dels capitans es vol guardar el DNI, el nom, el telèfon, l'adreça, el salari i la població de residència. Un capità transporta molts contenidors i cada contenidor el transporta un únic capità.
+> Una naviliera xicoteta ens demana ordenar el seu paperam. Treballen amb capitans, dels quals necessiten saber el DNI, com es diuen, un telèfon, on viuen (adreça i població) i quant cobren. Cada capità s'encarrega de portar molts contenidors, però cada contenidor el porta sempre un únic capità.
 >
-> Dels contenidors interessa conéixer el codi, una descripció, l'adreça del remitent i l'adreça del destinatari. Cada contenidor té com a destinació un únic port, però a un port poden arribar molts contenidors. Dels ports es guarda el codi i el nom.
+> Els contenidors porten un codi pintat al costat i una descripció del que viatja dins; a més s'apunten les senyes de qui els envia i de qui els rep. Tot contenidor té un únic port de destinació i a un port (amb el seu codi i el seu nom) poden arribar contenidors de tota mena.
 >
-> Dels vaixells es coneix la matrícula, el nom, la potència del motor i la drassana. Un capità pot governar distints vaixells en dates diferents (es registra la data d'inici i la de fi) i un vaixell pot ser governat per diversos capitans al llarg del temps.
+> Els vaixells tenen una matrícula, un nom, la potència del seu motor i la drassana on es van construir. No és estrany que un mateix capità governe vaixells distints en èpoques distintes ni que un vaixell passe per les mans de diversos capitans: allò que volen és poder saber des de quin dia fins a quin dia va manar cadascun cada vaixell.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -1860,24 +1794,7 @@ Si el mateix capità pot tornar a governar el mateix vaixell, la parella (capit�
 
 La naviliera vol saber en quin **vaixell** viatja cada contenidor. Com es modifica el model? Continua sent necessària la relació entre capità i contenidor?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej04.svg" alt="CAPITÁN transporta CONTENEDOR (1:N). CONTENEDOR llega a PUERTO (N:1). CAPITÁN gobierna BARCO (N:M con fechas)." caption="Exercici 4: Naviliera: capitans, contenidors, ports i vaixells" >}}
-
-**Decisions de disseny**
-
-- *Transporta* i *arriba a* són 1:N en cadena: capità → contenidor → port.
-- *Governa* és N:M i porta `fecha_inicio` i `fecha_fin`. `fecha_inicio` es marca com a discriminador (subratllat discontinu) perquè permet repetir la parella capità-vaixell en períodes distints.
-- El port de destinació és una entitat: té dades pròpies (codi i nom) i diversos contenidors compartixen el mateix port.
-
-**Supòsits semàntics**
-
-1. Tot contenidor té capità i port de destinació: (1,1).
-2. Un capità pot no haver transportat encara cap contenidor.
-3. `fecha_fin` està buida mentre el capità continua al comandament del vaixell.
-4. Un capità no governa dos vaixells alhora (restricció que el diagrama no arreplega).
-
-{{% /details %}}
+{{< solucion id="ud02-020" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -1899,9 +1816,7 @@ Un registre genealògic vol guardar qui és progenitor de qui.
 
 #### Enunciat
 
-> Es desitja dissenyar una base de dades que registre les relacions de parentiu entre persones. De cada persona es coneixen el DNI, el nom, l'adreça i el telèfon.
->
-> Una persona pot ser progenitora (pare o mare) de diversos fills o filles, o de cap. Tota persona registrada en el sistema ha de tindre registrada obligatòriament la seua filiació directa amb el seu progenitor o progenitora.
+> Volem registrar el parentiu entre les persones d'un municipi. De cada persona guardem el DNI, el nom, el domicili i un telèfon de contacte. Allò que de debò importa és de qui és fill cadascú: hi ha persones que han tingut diversos fills i altres cap, però al registre no pot aparéixer ningú de qui no sapiguem qui és el seu pare o la seua mare.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -1909,7 +1824,7 @@ Un registre genealògic vol guardar qui és progenitor de qui.
 1. Dibuixa el diagrama EER amb una **relació reflexiva** i els **rols** (progenitor, fill).
 2. Escriu les cardinalitats (mín, màx) de cada rol. Quants progenitors pot tindre una persona com a màxim?
 3. Raona si el mínim que demana l'enunciat («obligatòriament») es pot mantindre en una base de dades real i proposa'n un de viable.
-4. Acoloreix el rombe segons la notació del mòdul i explica per què queda sencer en negre.
+4. Indica el màxim de cada costat de la relació en el vèrtex del rombe i explica què significa que ambdós siguen majors que 1.
 
 {{% /details %}}
 
@@ -1930,7 +1845,7 @@ Un registre genealògic vol guardar qui és progenitor de qui.
 > [!WARNING]
 > - Crear dues entitats `PADRE` i `HIJO`. Ambdós són `PERSONA` i una persona pot ser alhora pare i fill.
 > - Posar (1,1) en el rol de progenitor: només permetria registrar un dels dos progenitors i, a més, obligaria que totes les persones en tingueren un de registrat.
-> - Dibuixar el rombe mig blanc i mig negre: els dos màxims (2 i N) són majors que 1, així que les dos meitats van en negre.
+> - Escriure un 1 en un extrem del rombe: els dos màxims (2 i N) són majors que 1, així que no hi ha costat «1» (és una relació N:M).
 
 {{% /details %}}
 
@@ -1942,24 +1857,7 @@ Si totes les persones han de tindre progenitor registrat i la base de dades és 
 
 Es vol distingir la filiació **biològica** de l'**adoptiva** i registrar la data d'adopció. On col·loques eixos atributs? Continua sent 2 el màxim del rol *progenitor*?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej05.svg" alt="PERSONA tiene hijos PERSONA: relación reflexiva N:M con los roles progenitor (0,2) e hijo (0,N)." caption="Exercici 5: Parentiu i filiació" >}}
-
-**Decisions de disseny**
-
-- *Té fills* és una relació reflexiva **N:M**: una persona té fins a 2 progenitors registrats i pot tindre molts fills. Per això el rombe és negre sencer.
-- L'enunciat demana que la filiació siga obligatòria (mínim 1), però això és insostenible: es corregix a **(0,2)** i es documenta com a restricció de negoci (RA6.h).
-- El màxim 2 és una cardinalitat concreta: s'escriu tal qual en el diagrama. En passar al model relacional (UD03) no es pot controlar només amb claus; necessitarà un `CHECK` o un disparador.
-- Els rols distingixen els dos extrems de la mateixa entitat.
-
-**Supòsits semàntics**
-
-1. Les persones fundadores de l'arbre no tenen progenitor registrat: mínim 0.
-2. Una persona té com a màxim dos progenitors registrats (pare i mare).
-3. Una persona no pot ser progenitora de si mateixa ni dels seus ascendents (restricció que el diagrama no arreplega).
-
-{{% /details %}}
+{{< solucion id="ud02-021" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -1988,15 +1886,11 @@ Un institut d'Educació Secundària i Formació Professional dissenya la seua ba
 
 #### Enunciat
 
-> Dels professors es guarda el DNI, el nom, l'adreça i el telèfon. Els professors impartixen mòduls, cadascun amb un codi i un nom. Un professor pot impartir diversos mòduls, però cada mòdul l'imparteix un únic professor.
+> Un institut necessita ordenar la seua estructura acadèmica. El professorat està donat d'alta amb el seu DNI, el seu nom, la seua adreça i el seu telèfon. Cadascú pot donar diversos mòduls, però cada mòdul (que té un codi i un nom) el dona una sola persona.
 >
-> Alguns mòduls tenen com a prerequisit haver cursat altres. Un mòdul pot exigir diversos mòduls previs i, al seu torn, ser requisit d'altres.
+> Entre mòduls hi ha dependències: per a cursar-ne alguns cal haver passat abans per altres, i hi ha mòduls que es demanen per a diversos més. De l'alumnat s'anota el número d'expedient, el nom i cognoms, quan va nàixer i el curs en què està. Un alumne es pot matricular d'un sol mòdul o de diversos i sempre en queda constància del dia que es va matricular.
 >
-> De cada alumne s'emmagatzema el número d'expedient, el nom, els cognoms, la data de naixement i el curs. Un alumne es matricula en un o diversos mòduls i es registra la data de matriculació.
->
-> Cada curs compta amb un grup d'alumnes. Dins de cada grup s'elegix un d'ells com a delegat, que representa els seus companys.
->
-> Els alumnes que ho sol·liciten poden disposar d'un armariet (número i grandària en metres). Un armariet pertany a un únic alumne i un alumne té com a màxim un armariet.
+> Els alumnes d'un mateix curs formen un grup i, dins del grup, els companys trien un que parla en nom seu. A més, qui ho demana rep un armariet (amb el seu número i la seua grandària en metres); un armariet és només d'una persona i ningú no en pot tindre més d'un.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -2013,7 +1907,7 @@ Un institut d'Educació Secundària i Formació Professional dissenya la seua ba
 {{% comprobacion %}}
 - [ ] *És requisit de* és una N:M **reflexiva** sobre `MÓDULO` amb dos rols.
 - [ ] *És delegat de* és una 1:N **reflexiva** sobre `ALUMNO`.
-- [ ] La relació alumne–armariet és 1:1 amb (0,1) en els dos costats: el rombe és blanc sencer.
+- [ ] La relació alumne–armariet és 1:1 amb (0,1) en els dos costats: els dos màxims són 1 (relació 1:1).
 - [ ] `fecha_matrícula` està en la relació *es matricula*, no en `ALUMNO`.
 {{% /comprobacion %}}
 
@@ -2037,25 +1931,7 @@ Quan una entitat es relaciona amb si mateixa s'usa una **relació reflexiva**. U
 
 El centre decidix guardar els **grups** com a entitat (codi, curs, aula). Redissenya la part del delegat: quines relacions apareixen entre `ALUMNO` i `GRUPO`? Per què no poden fusionar-se en una sola?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej06.svg" alt="PROFESOR imparte MÓDULO (1:N); MÓDULO es requisito de MÓDULO (N:M reflexiva); ALUMNO se matricula en MÓDULO (N:M con fecha); ALUMNO es delegado de ALUMNO (1:N reflexiva); ALUMNO tiene CASILLERO (1:1)." caption="Exercici 6: Institut: mòduls, matrícules, delegats i armariets" >}}
-
-**Decisions de disseny**
-
-- *Imparteix* és 1:N; *es matricula* és N:M amb atribut; *és requisit de* és N:M reflexiva.
-- *És delegat de* és una reflexiva 1:N: un alumne delegat representa (0,N) companys i cada alumne té (0,1) delegat (0 mentre no s'haja elegit).
-- *Té* (armariet) és 1:1 amb mínims 0: no tots els alumnes demanen armariet i pot haver-hi armariets lliures. Aquest cas, amb (0,1) en els dos costats, es transforma en la UD03 amb una taula pròpia.
-- El curs és un atribut d'`ALUMNO`. Si el grup tinguera més dades, passaria a ser una entitat (vore ampliació).
-
-**Supòsits semàntics**
-
-1. Tot mòdul té professor assignat: (1,1).
-2. Un alumne matriculat ho està almenys d'un mòdul: (1,N).
-3. El delegat i els seus representats són del mateix curs (restricció textual).
-4. Un mòdul no pot ser prerequisit de si mateix ni formar cicles (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-022" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -2077,13 +1953,9 @@ Una clínica vol controlar els ingressos dels seus pacients i els metges que els
 
 #### Enunciat
 
-> De cada pacient es guarda el codi, el nom, els cognoms, l'adreça (carrer, població, província i codi postal), el telèfon i la data de naixement.
+> Un hospital vol informatitzar la gestió dels ingressos. Als pacients els identifica un codi i s'anoten el seu nom, cognoms, telèfon, quan van nàixer i on viuen, amb el carrer, la població, la província i el codi postal per separat perquè després es fan cartes per districtes. Dels metges s'arrepleguen el codi, el nom, els cognoms, un telèfon i l'especialitat.
 >
-> De cada metge es conserva el codi, el nom, els cognoms, el telèfon i l'especialitat.
->
-> Es controlen els ingressos de cada pacient. Cada ingrés s'identifica amb un número que comença en 1 per a cada pacient, i inclou el número d'habitació, el llit i la data d'ingrés. Un pacient pot ingressar diverses vegades i un ingrés no pot existir sense el pacient al qual correspon.
->
-> Cada ingrés l'atén un únic metge responsable, encara que un metge pot atendre molts ingressos de pacients distints.
+> Cada vegada que un pacient ingressa se li assigna habitació i llit, i s'anota el dia d'entrada. Cada pacient té la seua pròpia història, de manera que els seus ingressos es numeren 1, 2, 3… i, naturalment, un ingrés no té sentit si no se sap de qui és. Tot ingrés està a càrrec d'un únic metge, que en pot portar molts a la vegada.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -2098,7 +1970,7 @@ Una clínica vol controlar els ingressos dels seus pacients i els metges que els
 {{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] `INGRESO` és una entitat feble (doble rectangle) i depén de `PACIENTE` en identificació (etiqueta ID junt a l'entitat feble).
+- [ ] `INGRESO` és una entitat feble (doble rectangle) i depén de `PACIENTE` en identificació (doble rectangle i relació identificadora amb rombe doble).
 - [ ] El número d'ingrés és un discriminador (subratllat discontinu).
 - [ ] `dirección` és un atribut compost.
 - [ ] *Atén* és 1:N entre `MÉDICO` i `INGRESO`.
@@ -2119,24 +1991,7 @@ Una clínica vol controlar els ingressos dels seus pacients i els metges que els
 
 Un ingrés pot ser atés per **diversos metges** que fan torns. Com canvia *atén*? Quin atribut caldria guardar en la relació?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej07.svg" alt="PACIENTE realiza INGRESO (relación identificadora, INGRESO es débil). MÉDICO atiende INGRESO (1:N)." caption="Exercici 7: Hospital: pacients, ingressos i metges" >}}
-
-**Decisions de disseny**
-
-- `INGRESO` depén de `PACIENTE`: el seu identificador és (codi de pacient, número d'ingrés).
-- *Realitza* és identificadora, 1:N; el pacient té (1,1) en el costat de l'ingrés i l'ingrés (0,N) en el del pacient.
-- *Atén* connecta `MÉDICO` amb `INGRESO` i és 1:N.
-
-**Supòsits semàntics**
-
-1. Un pacient pot estar registrat sense ingressos (pre-registre).
-2. Tot ingrés té metge responsable.
-3. El llit i l'habitació es guarden com a text simple; no hi ha entitat `HABITACIÓN`.
-4. No poden existir dos ingressos actius en el mateix llit (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-023" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -2158,17 +2013,11 @@ Una clínica veterinària vol avisar els amos de les vacunes pendents dels seus 
 
 #### Enunciat
 
-> Volem crear una base de dades per a una clínica veterinària amb la finalitat de controlar el calendari de vacunació dels animals i avisar l'amo quan ha d'acudir a la clínica.
+> Una clínica veterinària està farta que a la gent se li passe la data de les vacunes i vol avisar els amos pel seu compte. Els amos són clients dels quals es guarda el DNI, el nom complet, l'adreça, el telèfon i el correu; un client sol portar més d'un animal.
 >
-> De cada client (amo) es guarden el DNI, el nom, els cognoms, l'adreça, el telèfon i el correu electrònic. Un client pot tindre diversos animals.
+> De cada animal hi ha una fitxa amb un codi, el seu nom, si és gos o gat o una altra cosa, la raça i quan va nàixer. En pantalla ha d'aparéixer també l'edat. Es vacunen amb productes del catàleg de la clínica, que tenen un codi, un nom i cada quants dies cal repetir-los. Quan se'n posa una, s'apunta el dia; a partir d'ací, i de l'última vegada, se sap quan toca la següent.
 >
-> De cada animal es coneix un codi, el nom, el tipus (gos, gat…), la raça i la data de naixement; també es vol mostrar la seua edat.
->
-> De cada vacuna es guarda un codi, el nom i cada quants dies cal repetir-la. Quan s'administra una vacuna a un animal es registra la data; la pròxima data de vacunació es calcula a partir de l'última administració i del tipus de vacuna.
->
-> La clínica envia notificacions: de cadascuna es guarda un número, la data d'enviament, la vacuna pendent i la data prevista d'administració.
->
-> Es registren també les visites de cada animal: data, tipus de visita (vacunació, consulta…) i notes.
+> Els avisos que s'envien als clients es numeren i indiquen la data en què es van enviar, quina vacuna està pendent i quan s'esperava l'animal. Finalment, el veterinari anota cada visita de l'animal amb la seua data, de quin tipus va ser (vacunació, consulta…) i alguna observació.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -2186,7 +2035,7 @@ Una clínica veterinària vol avisar els amos de les vacunes pendents dels seus 
 - [ ] `edad` i `próxima_fecha` són derivats (oval discontinu).
 - [ ] *Es vacuna* és N:M entre `ANIMAL` i `VACUNA` i la data permet repetir la mateixa vacuna.
 - [ ] `NOTIFICACIÓN` es relaciona amb `ANIMAL` i amb `VACUNA`, no amb `CLIENTE`.
-- [ ] `VISITA` és feble d'`ANIMAL` (etiqueta ID).
+- [ ] `VISITA` és feble d'`ANIMAL` (doble rectangle i rombe doble identificador).
 {{% /comprobacion %}}
 
 {{% /details %}}
@@ -2205,25 +2054,7 @@ Una clínica veterinària vol avisar els amos de les vacunes pendents dels seus 
 
 Algunes vacunes es posen **durant una visita**. Com relacionaries l'administració de la vacuna amb la visita? Quin problema apareix si una visita inclou dos vacunes?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej08.svg" alt="CLIENTE es dueño de ANIMAL (1:N). ANIMAL se vacuna con VACUNA (N:M con fecha). NOTIFICACIÓN avisa de VACUNA y se envía por ANIMAL. ANIMAL tiene VISITA (débil)." caption="Exercici 8: Clínica veterinària: calendari de vacunació" >}}
-
-**Decisions de disseny**
-
-- *És amo de* és 1:N: cada animal té un únic amo registrat.
-- *Es vacuna* és N:M amb `fecha` com a discriminador (una vacuna es repetix cada cert temps) i `próxima_fecha` com a atribut derivat.
-- `NOTIFICACIÓN` és una entitat amb identificador propi relacionada 1:N amb `ANIMAL` i amb `VACUNA`; el client es deduïx de l'animal.
-- `VISITA` és feble: s'identifica per (codi de l'animal, data).
-
-**Supòsits semàntics**
-
-1. Tot animal té amo: (1,1).
-2. Un animal no rep dues vegades la mateixa vacuna el mateix dia.
-3. Un animal no té dos visites en la mateixa data.
-4. La pròxima data = última administració + periodicitat de la vacuna (regla de càlcul).
-
-{{% /details %}}
+{{< solucion id="ud02-024" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -2245,11 +2076,11 @@ Una botiga de roba en línia vol substituir el seu full de càlcul per una base 
 
 #### Enunciat
 
-> De cada client es guarda el correu electrònic (únic), el nom, els cognoms, una adreça de facturació (carrer, codi postal i ciutat) i un o diversos telèfons.
+> Muntem una botiga a internet. Quan algú es registra ens dona un correu (no s'admeten dos comptes amb el mateix), el seu nom i cognoms, l'adreça de facturació (carrer, codi postal i ciutat) i tots els telèfons que vulga deixar-nos.
 >
-> Els productes tenen un codi, un nom, una descripció, un preu i les unitats en estoc. Cada producte pertany a una categoria. Les categories s'organitzen en arbre: una categoria pot ser subcategoria d'una altra (*Roba → Samarretes*).
+> El catàleg té un codi per article, un nom, una descripció, el preu i quantes unitats queden. Cada article es mostra en una categoria, i les categories s'aniuen: dins de «Roba» hi ha «Samarretes», i dins de «Samarretes» podria haver-hi unes altres.
 >
-> Els clients realitzen comandes. De cada comanda es guarda el número, la data, l'estat i l'import total, que es calcula a partir de les línies. Una comanda conté una o diverses línies numerades dins de la comanda (1, 2, 3…). Cada línia correspon a un producte i guarda la quantitat i el preu unitari en el moment de la compra.
+> Un client fa comandes, i cada comanda té el seu número, la data, un estat i un import total que ix de sumar les seues parts. Una comanda es compon de diverses línies que es numeren dins d'ella (la 1, la 2…); en cada línia va un article, quants se'n demanen i a quin preu es venien aquell dia, encara que el preu del catàleg canvie demà.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -2285,24 +2116,7 @@ Una botiga de roba en línia vol substituir el seu full de càlcul per una base 
 
 Un producte pot pertànyer a **diverses categories** alhora. Canvia la cardinalitat? Quina taula apareixerà en passar al model relacional?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej09.svg" alt="CLIENTE realiza PEDIDO. PEDIDO incluye LÍNEA_PEDIDO (débil). LÍNEA_PEDIDO se refiere a PRODUCTO. PRODUCTO pertenece a CATEGORÍA, que puede ser subcategoría de otra." caption="Exercici 9: Botiga en línia: comandes, línies i categories" >}}
-
-**Decisions de disseny**
-
-- `LÍNEA_PEDIDO` depén de `PEDIDO`: el seu identificador és (número de comanda, número de línia).
-- `precio_unitario` guarda el preu **històric** de la venda. És una dada distinta del preu actual del producte.
-- *Subcategoria* és reflexiva 1:N: una categoria té com a molt una categoria pare i pot tindre moltes filles.
-
-**Supòsits semàntics**
-
-1. Un client pot registrar-se sense haver fet comandes.
-2. Una comanda té almenys una línia: (1,N).
-3. Un producte pertany a una sola categoria.
-4. La quantitat demanada no pot superar l'estoc (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-025" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -2324,11 +2138,9 @@ Un concessionari gestiona la venda de cotxes i les revisions del seu taller.
 
 #### Enunciat
 
-> De cada cotxe es coneix la matrícula, la marca, el model, el color i el preu de venda. De cada client es registra un codi intern, el NIF, el nom, l'adreça, la ciutat i el telèfon. Un client pot comprar diversos cotxes, però cada cotxe el compra un únic client.
+> Un concessionari de cotxes vol portar les seues vendes i el seu taller. De cada cotxe s'anoten la matrícula, la marca, el model, el color i el preu al qual es ven. Els compradors són persones que s'identifiquen internament amb un codi, a les quals es demana el NIF i de les quals es guarda el nom, l'adreça, la ciutat i el telèfon. Una persona pot comprar diversos cotxes, però cada cotxe es ven a una sola.
 >
-> En el taller es realitzen revisions. Cada revisió s'identifica per un número seqüencial dins de cada cotxe (1, 2, 3…). De cada revisió es vol saber si s'ha canviat el filtre, l'oli o els frens, i si s'ha fet algun altre treball. Un cotxe pot passar moltes revisions.
->
-> Cada revisió la realitza un únic mecànic, del qual es coneix el codi d'empleat, el DNI, el nom, el telèfon i l'adreça. Un mecànic realitza moltes revisions. Entre els mecànics hi ha un supervisor que coordina el treball d'altres mecànics.
+> Després de la venda, els cotxes passen pel taller. Les revisions d'un cotxe es numeren en l'ordre en què es van fer (la primera, la segona…) i en cadascuna es deixa constància de si es va canviar el filtre, l'oli o els frens, i de qualsevol altre treball. La fa sempre un sol mecànic, del qual tenim el codi d'empleat, el DNI, el nom, el telèfon i l'adreça; un mecànic fa moltíssimes revisions. Al taller hi ha un supervisor entre els mecànics que reparteix el treball als altres.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -2364,24 +2176,7 @@ Un concessionari gestiona la venda de cotxes i les revisions del seu taller.
 
 El taller vol guardar **quines peces** es van canviar en cada revisió i quantes. Quina entitat i quina relació afigs? Quin atribut porta la relació?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej10.svg" alt="CLIENTE compra COCHE (1:N). COCHE pasa REVISIÓN (identificadora, débil). MECÁNICO realiza REVISIÓN. MECÁNICO supervisa a MECÁNICO." caption="Exercici 10: Concessionari: vendes, revisions i mecànics" >}}
-
-**Decisions de disseny**
-
-- `REVISIÓN` és feble perquè el seu número només és únic dins de cada cotxe.
-- Un mecànic té com a molt un supervisor, i un supervisor pot coordinar molts mecànics: relació reflexiva 1:N amb rols.
-- En `CLIENTE`, el codi intern és l'identificador triat; el NIF és una **clau alternativa** (subratllat de punts): únic, però no s'usa per a relacionar.
-
-**Supòsits semàntics**
-
-1. Un cotxe pot estar sense vendre: (0,1) del costat del client.
-2. Una revisió sempre la fa un mecànic.
-3. Els treballs de la revisió es guarden com a quatre atributs booleans més un text lliure `otros`.
-4. Un mecànic no pot supervisar-se a si mateix (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-026" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -2403,13 +2198,11 @@ Una central de reserves de turisme rural vol gestionar la seua oferta d'allotjam
 
 #### Enunciat
 
-> De cada província es guarda el nom, l'àrea i la població. En cada província hi ha ciutats, de les quals es coneix el nom i el nombre d'habitants. El nom d'una ciutat només és únic dins de la seua província (hi ha diverses ciutats anomenades «Villanueva»).
+> Una associació de turisme rural vol publicar un portal. Per a ordenar la informació comencen pel territori: de cada província tenen el nom, la superfície i la població total; dins d'elles estan les ciutats, amb el seu nom i els seus habitants. Ull, que a Espanya hi ha moltes ciutats anomenades «Villanueva», així que el nom d'una ciutat només serveix per a distingir-la dins de la seua província.
 >
-> Les cases rurals tenen un nom únic, una localització i si oferixen esmorzar. Cada casa està en una ciutat i en una ciutat pot haver-hi diverses cases.
+> A cada ciutat hi ha cases rurals, i cada casa pertany a una sola ciutat. Una casa s'anuncia amb un nom que mai no es repeteix, diu on està i avisa de si serveix esmorzar. Per dins, cada casa té habitacions que es numeren a la pròpia casa (la 1, la 2…), amb una descripció i el que costa passar una nit.
 >
-> Cada casa té diverses habitacions, numerades dins de la casa (1, 2, 3…), amb una descripció i un preu per nit.
->
-> Els clients (DNI, nom, adreça i telèfon) s'allotgen en habitacions. De cada estada es guarda la data d'entrada i la d'eixida. Un client pot allotjar-se diverses vegades en la mateixa habitació.
+> Els hostes deixen el seu DNI, el seu nom, la seua adreça i un telèfon. Cada estada queda registrada amb el dia en què entra i el dia en què se'n va, i un mateix hoste pot tornar a dormir en la mateixa habitació un altre any.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -2424,7 +2217,7 @@ Una central de reserves de turisme rural vol gestionar la seua oferta d'allotjam
 {{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] `CIUDAD` és feble de `PROVINCIA` i `HABITACIÓN` és feble de `CASA_RURAL` (etiqueta ID).
+- [ ] `CIUDAD` és feble de `PROVINCIA` i `HABITACIÓN` és feble de `CASA_RURAL` (doble rectangle i rombe doble identificador).
 - [ ] *Està en* (casa–ciutat) és 1:N i **no** és identificadora: el nom de la casa ja és únic.
 - [ ] *S'allotja* és N:M i `fecha_entrada` forma part de la identificació.
 - [ ] `desayuno` és un atribut de `CASA_RURAL`.
@@ -2446,25 +2239,7 @@ Una central de reserves de turisme rural vol gestionar la seua oferta d'allotjam
 
 Variant: a més de llogar, es vol saber quines **persones viuen** en cada casa (cada persona viu en una sola) i quines persones **són propietàries** (una casa pot tindre diversos propietaris i es guarda la data de compra). Les cases tenen ara un identificador propi i **no poden existir sense la seua ciutat** (dependència en existència, etiqueta E). Dibuixa el diagrama d'esta variant.
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej11.svg" alt="PROVINCIA tiene CIUDAD (débil). CASA_RURAL está en CIUDAD (N:1). CASA_RURAL tiene HABITACIÓN (débil). CLIENTE se aloja en HABITACIÓN (N:M con fechas)." caption="Exercici 11: Cases rurals: províncies, ciutats i habitacions" >}}
-
-**Decisions de disseny**
-
-- `CIUDAD` depén de `PROVINCIA` en identificació: el seu identificador és (nom de la província, nom de la ciutat).
-- `HABITACIÓN` depén de `CASA_RURAL`: el seu identificador és (nom de la casa, número).
-- *S'allotja* és N:M amb `fecha_entrada` (discriminador) i `fecha_salida`.
-- El rombe d'*està en* té la meitat blanca junt a `CIUDAD` (màxim 1) i la negra junt a `CASA_RURAL`.
-
-**Supòsits semàntics**
-
-1. Tota casa està en una ciutat: (1,1).
-2. Una ciutat pot no tindre cases rurals: (0,N).
-3. Una casa té almenys una habitació: (1,N).
-4. La data d'eixida és posterior a la d'entrada (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-027" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -2486,11 +2261,11 @@ Una consultora tecnològica vol controlar els seus projectes i les hores del seu
 
 #### Enunciat
 
-> Dels clients es registra el CIF, la raó social, el lloc web i el telèfon. Un client pot encarregar diversos projectes, però cada projecte pertany a un únic client.
+> Una consultora de programari gestiona els seus projectes des d'un full de càlcul que ja no pot més. Els seus clients són empreses: s'anoten el CIF, la raó social, el web i un telèfon. Un client encarrega diversos projectes, però cada projecte és d'un únic client.
 >
-> De cada projecte es coneix el codi, el nom, la data d'inici i el pressupost. Un projecte es descompon en diverses tasques, numerades dins del projecte (1, 2, 3…). De cada tasca es guarda la descripció, les hores estimades i el seu estat (*pendent*, *en procés* o *completada*).
+> Cada projecte té un codi, un nom, el dia en què arranca i un pressupost. Es trosseja en tasques que es numeren dins del projecte (la 1, la 2…) i de cadascuna s'anoten què cal fer, quantes hores es calcula que durà i en quin punt està: pendent, en procés o acabada.
 >
-> Dels desenvolupadors es guarda el número d'empleat, el DNI, el nom, l'especialitat i el nivell. Un desenvolupador s'assigna a diverses tasques i en una tasca treballen diversos desenvolupadors, amb les hores reals dedicades. Alguns desenvolupadors sènior exercixen de mentors de desenvolupadors júnior.
+> Qui programa són els desenvolupadors, dels quals es guarda el número d'empleat, el DNI, el nom, l'especialitat i el nivell. Una tasca mai no la trau una sola persona: s'hi assignen diversos desenvolupadors i, quan acaba, es comptabilitzen les hores reals que va dedicar cadascun. I és costum que algun dels més veterans faça de mentor dels que acaben d'incorporar-se.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -2526,24 +2301,7 @@ Una consultora tecnològica vol controlar els seus projectes i les hores del seu
 
 Es vol que cada desenvolupador tinga **un únic rol** per projecte (cap de projecte, analista, programador…). On es guarda esta dada? És un atribut de la relació o cal afegir una entitat?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej12.svg" alt="CLIENTE encarga PROYECTO (1:N). PROYECTO se descompone en TAREA (débil). DESARROLLADOR trabaja en TAREA (N:M con horas reales). DESARROLLADOR tutela a DESARROLLADOR." caption="Exercici 12: Consultora de programari: projectes, tasques i desenvolupadors" >}}
-
-**Decisions de disseny**
-
-- *Es descompon en* és identificadora: (codi de projecte, número de tasca).
-- *Treballa en* és N:M amb `horas_reales`: la dada depén de la parella desenvolupador-tasca.
-- *Tutela* és una reflexiva 1:N: un júnior té com a molt un mentor; un mentor pot tutelar diversos.
-
-**Supòsits semàntics**
-
-1. Un projecte té almenys una tasca: (1,N).
-2. Una tasca acabada de crear pot no tindre desenvolupadors assignats.
-3. Només un desenvolupador de nivell *sènior* pot ser mentor (restricció textual).
-4. L'estat de la tasca només admet *pendent*, *en procés* o *completada* (restricció de domini).
-
-{{% /details %}}
+{{< solucion id="ud02-028" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -2565,13 +2323,11 @@ Una cadena hotelera estructura el sistema central de reserves dels seus establim
 
 #### Enunciat
 
-> De cada hotel es coneix el codi, el nom, la categoria (estreles), l'adreça i la ciutat.
+> Una cadena hotelera vol unificar el seu sistema de reserves. Cada hotel té un codi intern, un nom, les estrelles que ostenta, la seua adreça i la ciutat on està.
 >
-> Un hotel disposa de diverses habitacions. Cada habitació s'identifica pel seu número dins de l'hotel (101, 102, 201…); es guarda el tipus (*individual*, *doble* o *suite*) i el preu per nit.
+> Dins de l'hotel, les habitacions es numeren com a qualsevol hotel (101, 102, 201…) i per això el 101 d'un hotel no és el 101 d'un altre; cadascuna és individual, doble o suite i té un preu per nit. Qui reserva és un client del qual ens quedem amb el DNI, el nom, el correu i un telèfon; reserva habitacions concretes per a unes dates (s'apunta quan entra i quan ix) i s'anota el que va costar l'estada en total. És habitual que torne i demane la mateixa habitació.
 >
-> Dels clients es registra el DNI, el nom, el correu i el telèfon. Un client reserva habitacions concretes per a un període, amb la data d'entrada, la data d'eixida i el preu total de l'estada. Un client pot allotjar-se diverses vegades en la mateixa habitació.
->
-> Dels empleats es coneix el codi, el nom i el lloc. Cada empleat està assignat a un hotel. Les governantes de planta supervisen el personal de neteja del seu hotel.
+> La plantilla és una altra història: de cada empleat es guarden el codi, el nom i el seu lloc, i tots treballen en un hotel concret. Les governantes de planta vigilen el personal de neteja del seu mateix hotel.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -2607,24 +2363,7 @@ Una cadena hotelera estructura el sistema central de reserves dels seus establim
 
 Una reserva pot incloure **diverses habitacions** (una família en reserva dos). Quina entitat intermèdia s'introduïx i què canvia en la relació amb les habitacions?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej13.svg" alt="HOTEL dispone de HABITACIÓN (débil). CLIENTE reserva HABITACIÓN (N:M con fechas y precio). EMPLEADO trabaja en HOTEL. EMPLEADO supervisa a EMPLEADO." caption="Exercici 13: Cadena hotelera: hotels, habitacions i reserves" >}}
-
-**Decisions de disseny**
-
-- `HABITACIÓN` s'identifica per (codi d'hotel, número d'habitació).
-- *Reserva* porta `fecha_entrada` com a discriminador: permet repetir client i habitació en estades distintes.
-- *Supervisa* és una reflexiva 1:N: una governanta supervisa diversos empleats de neteja.
-
-**Supòsits semàntics**
-
-1. Un hotel té almenys una habitació: (1,N).
-2. Tot empleat està assignat a un únic hotel.
-3. `precio_total` es guarda per a conservar el preu pactat encara que canvie la tarifa.
-4. La data d'eixida és posterior a la d'entrada i no hi ha dos reserves solapades per a la mateixa habitació (restriccions textuals).
-
-{{% /details %}}
+{{< solucion id="ud02-029" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -2646,11 +2385,9 @@ Una universitat pública organitza la seua estructura acadèmica i investigadora
 
 #### Enunciat
 
-> De les facultats es guarda el codi i el nom. Una facultat engloba diversos departaments, dels quals es coneix el codi i l'àrea de coneixement.
+> Una universitat vol reflectir com s'organitza. Hi ha facultats, amb un codi i un nom, i cadascuna agrupa diversos departaments, que tenen un codi i es dediquen a una àrea de coneixement.
 >
-> Dins de cada departament es creen càtedres d'investigació. Cada càtedra s'identifica per un número intern dins del seu departament i té un nom i un pressupost.
->
-> Dels professors es guarda el número de registre, el DNI, el nom, la categoria docent i la data d'incorporació. Un professor pertany a un únic departament. Un professor amb categoria de *catedràtic* pot ser nomenat director d'una càtedra. A més, els professors veterans són tutors dels professors novells.
+> Als departaments es posen en marxa càtedres d'investigació. Una càtedra es numera dins del seu departament (la primera, la segona…) i es coneix pel seu nom i pel pressupost que rep. Les persones del professorat tenen un número de registre, un DNI, un nom, una categoria i el dia en què es van incorporar; cadascuna està adscrita a un sol departament. Al capdavant d'una càtedra es pot posar un professor, però només si és catedràtic. D'altra banda, la universitat té el costum que els professors veterans tutoritzen els novells.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -2686,24 +2423,7 @@ Una universitat pública organitza la seua estructura acadèmica i investigadora
 
 Els **catedràtics** tenen dades pròpies (any d'oposició, sexennis). Converteix esta situació en una **especialització** de `PROFESOR` i raona quina restricció desapareix del text.
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej14.svg" alt="FACULTAD engloba DEPARTAMENTO. DEPARTAMENTO crea CÁTEDRA (débil). PROFESOR pertenece a DEPARTAMENTO, dirige CÁTEDRA y tutoriza a PROFESOR." caption="Exercici 14: Universitat: facultats, departaments i càtedres" >}}
-
-**Decisions de disseny**
-
-- Cadena 1:N: facultat → departament → càtedra (l'última, identificadora).
-- *Dirigix* és 1:1 amb mínim 1 en la càtedra i 0 en el professor.
-- *Tutoritza* és una reflexiva 1:N.
-
-**Supòsits semàntics**
-
-1. Tot professor pertany a un departament: (1,1).
-2. Una càtedra sempre té director.
-3. Només un catedràtic pot dirigir una càtedra i ha de ser del departament de la càtedra (restriccions textuals).
-4. Un novell té com a molt un tutor.
-
-{{% /details %}}
+{{< solucion id="ud02-030" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -2725,11 +2445,11 @@ Un centre d'acolliment de menors necessita un registre informatitzat de resident
 
 #### Enunciat
 
-> De cada menor resident es coneix el número d'expedient, el nom, els cognoms, la data de naixement i les dades de contacte dels seus tutors legals (nom del pare, nom de la mare i telèfon).
+> Un centre d'acollida de menors vol portar el seguiment de cada xiquet i xiqueta. De cada menor resident tenen un número d'expedient, nom i cognoms, data de naixement i com localitzar els seus tutors legals: el nom del pare, el de la mare i un telèfon.
 >
-> De cada educador es registra el número de col·legiat, el DNI, el nom, els cognoms i l'especialitat (*psicologia*, *treball social* o *educació social*). Un educador tutela diversos menors, però cada menor té un únic educador tutor principal. A més, un educador coordinador supervisa la resta de l'equip tècnic.
+> L'equip tècnic el formen educadors, amb el seu número de col·legiat, DNI, nom i cognoms i una especialitat (psicologia, treball social o educació social). Cada educador tutela diversos menors, però cada menor té un sol educador de referència. Per damunt hi ha una figura de coordinació, també educador, que supervisa la resta de l'equip.
 >
-> Per a cada menor s'obrin informes de seguiment. Cada informe s'identifica amb un número correlatiu per a eixe menor (1, 2, 3…) i arreplega la data, la valoració evolutiva i les incidències. Si l'expedient d'un menor es cancel·la per compliment de la mesura, tots els seus informes s'eliminen.
+> Cada menor genera informes de seguiment al llarg de la seua estada: el primer, el segon… (els números comencen de nou amb cada xiquet). S'hi arrepleguen la data, com evoluciona i les incidències. Quan es tanca un expedient perquè el menor ha complit la mesura, els seus informes es destrueixen amb ell.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -2765,24 +2485,7 @@ Un centre d'acolliment de menors necessita un registre informatitzat de resident
 
 Un menor pot ser **traslladat** a un altre centre i tornar anys després. Com canviaria l'identificador del menor i quina entitat nova faries aparéixer per a conservar l'historial?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej15.svg" alt="EDUCADOR tutela a MENOR (1:N). EDUCADOR coordina a EDUCADOR. MENOR tiene INFORME (débil)." caption="Exercici 15: Centre de menors: residents, educadors i informes" >}}
-
-**Decisions de disseny**
-
-- `INFORME` depén de `MENOR`: (núm. d'expedient, núm. d'informe).
-- L'esborrat en cascada es documenta com a restricció: el diagrama només mostra la dependència.
-- `datos_tutores` és un atribut compost perquè no es consulta de forma independent.
-
-**Supòsits semàntics**
-
-1. Tot menor té un educador tutor: (1,1).
-2. El coordinador no té supervisor; la resta en té un com a màxim.
-3. Els informes de menors es cancel·len en cascada en tancar l'expedient (restricció d'esborrat).
-4. Les dades de menors requerixen mesures reforçades d'accés i confidencialitat.
-
-{{% /details %}}
+{{< solucion id="ud02-031" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -2790,7 +2493,7 @@ Un menor pot ser **traslladat** a un altre centre i tornar anys després. Com ca
 
 ---
 
-## Bloc 3 · Integració
+## Bloc 3 · Intermedi: integració
 
 Relacions ternàries, agregació, dues relacions entre les mateixes entitats, llistes de materials, cardinalitats màximes concretes i primera generalització.
 
@@ -2811,13 +2514,11 @@ L'empresa municipal d'autobusos gestiona la seua xarxa, la seua flota i els torn
 
 #### Enunciat
 
-> De les línies es coneix el codi (L1, L5…), el nom del trajecte i la freqüència de pas en minuts.
+> Una empresa de transport urbà necessita organitzar la seua xarxa. Les línies tenen un codi (L1, L5…), el nom del recorregut i cada quants minuts passen.
 >
-> Cada línia fa les seues parades en un ordre. Cada parada s'identifica pel seu número d'ordre dins de la línia (1, 2, 3…); es guarda el nom del carrer o marquesina i si té pantalla d'informació.
+> Cada línia va parant en un ordre fix: la primera parada, la segona, etc.; de la parada s'anota el nom del carrer o de la marquesina i si hi ha pantalla amb la informació d'arribades. Hi ha llocs on es pot canviar d'una línia a una altra, i llavors es guarda quant es tarda a peu entre totes dues.
 >
-> Entre línies s'habiliten transbordaments, amb el temps estimat a peu entre les dos línies connectades.
->
-> Dels autobusos es guarda la matrícula, el model i la capacitat de passatgers dempeus. Dels conductors, el DNI, el nom i el tipus de llicència. Un conductor condueix un autobús assignat a una línia en un torn de treball concret.
+> La flota són autobusos amb la seua matrícula, el seu model i quants viatgers hi caben de peu. Els conductors tenen DNI, nom i tipus de carnet. En un torn concret, un conductor porta un autobús que està assignat a una línia; cal saber qui va portar què i per a quina línia en cada torn.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -2857,24 +2558,7 @@ Si el fet «el conductor C condueix l'autobús A en la línia L en el torn T» n
 
 El transbordament es produïx realment **entre parades**, no entre línies. Redibuixa la relació entre `PARADA` i `PARADA` i raona com s'identifica ara.
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej16.svg" alt="LÍNEA tiene PARADA (débil). LÍNEA se conecta con LÍNEA mediante transbordo. CONDUCTOR, AUTOBÚS y LÍNEA se relacionan en conduce (ternaria) con el turno." caption="Exercici 16: Transport urbà: línies, parades i torns" >}}
-
-**Decisions de disseny**
-
-- *Condueix* és ternària perquè el fet involucra les tres entitats alhora i no es pot descompondre.
-- *Té* (línia–parada) és identificadora; una línia té almenys dos parades.
-- *Transbordament* és una N:M reflexiva amb `tiempo_a_pie`; els rols són els dos extrems de la connexió.
-
-**Supòsits semàntics**
-
-1. Cada línia té com a mínim dos parades: (2,N).
-2. Un autobús pot canviar de línia d'un torn a un altre.
-3. El temps de transbordament és simètric entre línies.
-4. Un conductor no pot conduir dos autobusos en el mateix torn (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-032" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -2896,11 +2580,9 @@ Una federació esportiva informatitza el control de les seues competicions ofici
 
 #### Enunciat
 
-> Dels equips es coneix el codi, el nom del club i la ciutat. Dels jugadors, el número de fitxa federativa, el DNI, el nom i el dorsal. Un jugador pertany a un únic equip i cada equip designa un dels seus jugadors com a capità.
+> La federació de futbol sala d'una província vol portar les seues competicions. Cada club es registra amb un codi, el seu nom i la ciutat. Els seus jugadors tenen una fitxa federativa, un DNI, un nom i porten un dorsal; només poden jugar en un equip i cada equip tria un dels seus com a capità.
 >
-> Dels partits es guarda el codi, la data i hora i la jornada. En cada partit s'enfronten dos equips distints: un com a local i un altre com a visitant.
->
-> En l'acta de cada partit es registren les incidències. Cada incidència s'identifica pel minut de joc i un número de seqüència dins del partit; s'anota el tipus (*gol*, *targeta groga*, *expulsió* o *substitució*) i el jugador que protagonitza l'acció. Si s'anul·la un partit, s'eliminen les incidències de la seua acta.
+> Un partit té el seu codi, es juga en una data i hora i pertany a una jornada de la lliga; s'enfronten dos equips distints, un actua com a local i l'altre com a visitant. L'àrbitre alça una acta en què es va anotant el que succeeix: gols, targetes grogues, expulsions i substitucions. Cada anotació queda fixada pel minut en què ocorre i un ordre dins del partit (pot haver-hi dues coses en el mateix minut), i sempre es diu quin jugador la protagonitza. Si un partit s'anul·la, la seua acta desapareix amb tot el que conté.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -2936,24 +2618,7 @@ Una federació esportiva informatitza el control de les seues competicions ofici
 
 La federació vol guardar els **jugadors convocats** en cada partit i els minuts que juga cadascun. Quina relació afigs i amb quins atributs? Com es relaciona amb la incidència?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej17.svg" alt="JUGADOR pertenece a EQUIPO y un jugador es capitán. EQUIPO es local o visitante en PARTIDO. PARTIDO registra INCIDENCIA (débil) protagonizada por JUGADOR." caption="Exercici 17: Federació esportiva: equips, partits i incidències" >}}
-
-**Decisions de disseny**
-
-- *Local* i *visitant* són dues relacions 1:N entre `EQUIPO` i `PARTIDO`: donen informació distinta.
-- *Capità* (1:1) i *pertany* (1:N) són relacions distintes entre `JUGADOR` i `EQUIPO`.
-- `INCIDENCIA` és feble de `PARTIDO`: (codi de partit, minut, núm. de seqüència).
-
-**Supòsits semàntics**
-
-1. Tot partit té equip local i visitant: (1,1) en cada relació.
-2. Una incidència la protagonitza un únic jugador.
-3. El capità pertany a l'equip que capitaneja (restricció textual).
-4. L'equip local i el visitant d'un partit són distints (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-033" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -2975,13 +2640,11 @@ Una cadena de gimnasos gestiona els seus centres, els seus socis i els entrename
 
 #### Enunciat
 
-> De cada gimnàs es coneix el codi, el nom comercial, l'adreça, la ciutat i la superfície en m².
+> Una cadena de gimnasos vol un sistema únic. Cada gimnàs té un codi, el nom comercial amb què s'anuncia, una adreça, la ciutat i els metres quadrats que ocupa.
 >
-> Cada gimnàs disposa de sales. Cada sala s'identifica per un número o lletra propi del gimnàs (101, Sala A…); es guarda el tipus d'activitat (*musculació*, *cardio*, *pilates*, *spinning*) i l'aforament màxim.
+> En cada centre hi ha sales, que es reconeixen per un número o una lletra propis d'aqueix centre (la 101 d'un no és la 101 d'un altre, o la «Sala A»), amb una activitat (musculació, cardio, pilates o spinning) i un aforament màxim. Les persones que s'apunten són socis: se'ls assigna un número, i es guarden el DNI, el nom i cognoms, un telèfon i el dia que es van donar d'alta. Cada soci pertany a un gimnàs principal, però pot usar qualsevol centre de la cadena, i per això reserva plaça en una sala indicant la data, l'hora i la plaça.
 >
-> Dels socis s'emmagatzema el número, el DNI, el nom, els cognoms, el telèfon i la data d'alta. Un soci està inscrit en un gimnàs principal, però pot reservar plaça a les sales de qualsevol centre de la cadena (es registra la data, l'hora i la plaça).
->
-> Dels entrenadors es coneix el codi d'empleat, el nom, l'especialitat i la titulació. Cada entrenador treballa en un gimnàs i dissenya rutines per als socis, amb la data d'assignació i l'objectiu. En cada gimnàs, un director tècnic coordina la resta d'entrenadors.
+> Els entrenadors tenen codi d'empleat, nom, especialitat i titulació, i treballen en un únic gimnàs. S'encarreguen de preparar rutines per als socis, amb el dia en què s'assignen i l'objectiu que es persegueix. En cada gimnàs un dels entrenadors actua com a director tècnic de la resta.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -3017,24 +2680,7 @@ Una cadena de gimnasos gestiona els seus centres, els seus socis i els entrename
 
 Les reserves de classe **tenen un entrenador** responsable. La reserva passa a ser una ternària o pot resoldre's amb una binària addicional? Raona amb l'aforament i la sessió.
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej18.svg" alt="GIMNASIO dispone de SALA (débil). SOCIO se inscribe en GIMNASIO y reserva SALA. ENTRENADOR trabaja en GIMNASIO, diseña rutinas para SOCIO y es dirigido por otro ENTRENADOR." caption="Exercici 18: Xarxa de gimnasos: sales, reserves i entrenadors" >}}
-
-**Decisions de disseny**
-
-- La inscripció (soci → gimnàs) és 1:N; la reserva és N:M entre `SOCIO` i `SALA` amb data, hora i plaça.
-- `SALA` s'identifica per (codi de gimnàs, número de sala).
-- El director tècnic és un entrenador que coordina altres: relació reflexiva 1:N amb rols.
-
-**Supòsits semàntics**
-
-1. Un gimnàs té almenys una sala.
-2. Un entrenador treballa en un únic gimnàs.
-3. En cada gimnàs hi ha un sol director tècnic (restricció textual).
-4. El nombre de reserves d'una sala en una franja no supera el seu aforament (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-034" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -3056,17 +2702,13 @@ Una gran empresa de dolços necessita una base de dades centralitzada per a la s
 
 #### Enunciat
 
-> L'empresa elabora productes a partir d'ingredients. De cada ingredient es coneix el nom (únic), la quantitat de vitamines A, B i C per cada 100 g, les calories i el cost per quilo.
+> PAVA S.A. és una empresa de rebosteria industrial. Compra ingredients dels quals coneix el nom, que no es repeteix, quantes vitamines A, B i C porten per cada 100 g, les seues calories i el que costa el quilo.
 >
-> Amb ells fabrica productes («Filipondios», «Barridulces»…), coneguts pel seu nom comercial. Interessa la composició de cada producte i el percentatge de cada ingredient en la recepta.
+> Amb ells elabora productes com els «Filipondios» o els «Barridulces», que es coneixen pel seu nom comercial i dels quals interessa saber quins ingredients porten i en quina proporció dins de la recepta. Cada producte ix al mercat en formats de pes distint (40 g, 150 g, 250 g…) i cada format es ven a un preu.
 >
-> Cada producte es comercialitza en formats de pes (40 g, 150 g, 250 g…), i cada format té un preu de venda.
+> Els clients són comerços: es guarda el seu CIF, el nom, l'adreça, la població, la província i el telèfon. Fan comandes del tipus «200 unitats de Barridulces en format de 250 g».
 >
-> Dels clients es guarda el CIF, el nom, l'adreça, la població, la província i el telèfon. Els clients fan comandes d'unitats de productes en formats concrets (200 unitats de Barridulces en format de 250 g).
->
-> L'empresa preveu les promocions de l'any («2x1», «Val descompte»). Cada tipus de promoció es posa en marxa una vegada a l'any, amb data d'inici, data de fi i la quantitat màxima de productes de cada format que se'n poden beneficiar.
->
-> Finalment, es registren els productes competidors (nom comercial únic, marca i any de llançament), vinculant cadascun al producte de l'empresa al qual més s'assembla.
+> Una vegada a l'any l'empresa llança cada tipus de promoció («2x1», «Val de descompte»…), que dura entre dues dates i limita quantes unitats de cada format s'hi poden acollir. Finalment, el departament comercial vigila la competència: de cada producte rival interessa el seu nom comercial (únic), la marca i l'any de llançament, i amb quin dels productes de l'empresa se'l compara pel seu paregut.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -3102,24 +2744,7 @@ Una gran empresa de dolços necessita una base de dades centralitzada per a la s
 
 El **preu** de cada format canvia amb el temps i es vol conservar l'històric. Quina entitat o atribut afegiries? On es guardaria el preu amb què es va vendre cada comanda?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej19.svg" alt="INGREDIENTE forma parte de PRODUCTO con un porcentaje. PRODUCTO tiene FORMATO (débil). CLIENTE hace PEDIDO que solicita FORMATO. PROMOCIÓN se aplica a FORMATO. COMPETIDOR se parece a PRODUCTO." caption="Exercici 19: Rebosteria PAVA S.A." >}}
-
-**Decisions de disseny**
-
-- `FORMATO` és feble de `PRODUCTO`: (nom comercial, pes).
-- *Es compon de* és N:M amb `porcentaje`; el percentatge depén de la parella producte-ingredient.
-- *Sol·licita* relaciona `PEDIDO` amb `FORMATO` i guarda les unitats; *s'aplica a* ho fa amb `PROMOCIÓN` i guarda la quantitat màxima.
-
-**Supòsits semàntics**
-
-1. Tot producte té almenys un ingredient: (1,N).
-2. Un competidor s'assembla a un sol producte de l'empresa.
-3. Els percentatges d'una recepta sumen 100 (restricció textual).
-4. La data de fi de la promoció no és anterior a la d'inici (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-035" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -3141,11 +2766,11 @@ Una planta de maquinària pesada gestiona el seu procés de producció i els seu
 
 #### Enunciat
 
-> De les fàbriques es coneix el codi, la ubicació i el telèfon. Cada fàbrica alberga diverses línies de muntatge. El codi de línia és correlatiu dins de cada fàbrica (la línia 1 de València i la línia 1 de Sevilla són distintes) i es guarda la denominació.
+> Una planta de maquinària pesant vol organitzar la seua producció. Té fàbriques, de les quals es coneix un codi, on estan i un telèfon. A cada fàbrica hi ha línies de muntatge la numeració de les quals arranca en 1 dins de cadascuna (la línia 1 de València i la línia 1 de Sevilla no són la mateixa) i que tenen un nom propi.
 >
-> De les peces es registra el codi, el nom, el pes en grams i el cost estàndard. Una peça s'assembla a partir d'altres peces components i una peça pot formar part de moltes peces superiors. De cada component interessa la quantitat d'unitats necessàries. Cada peça es fabrica en una línia de muntatge.
+> Les peces tenen un codi, un nom, el que pesen en grams i un cost estàndard. Moltes es munten a partir d'altres peces, de les quals cal saber quantes unitats hi entren, i al seu torn una peça pot servir per a fabricar moltes altres de nivell superior. Cada peça ix sempre d'una línia de muntatge.
 >
-> Cada peça passa inspeccions de qualitat. Cada inspecció s'identifica amb un número dins de la peça i guarda la data, el resultat (*aprovat* o *rebutjat*) i les observacions. Si una peça es descataloga, les seues inspeccions s'eliminen automàticament.
+> Qualitat inspecciona totes les peces. Les inspeccions d'una peça es van numerant (la 1, la 2…) i de cadascuna es guarda quan es va fer, si va resultar aprovada o rebutjada i les observacions. Quan una peça es retira del catàleg, desapareixen automàticament també les seues inspeccions.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -3181,24 +2806,7 @@ Una planta de maquinària pesada gestiona el seu procés de producció i els seu
 
 Algunes peces es **compren a proveïdors** en lloc de fabricar-se. Com modelaries esta distinció? Planteja una especialització de `PIEZA` i decidix si és total o parcial, disjunta o solapada.
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej20.svg" alt="FÁBRICA alberga LÍNEA (débil). PIEZA se fabrica en una LÍNEA. PIEZA se compone de PIEZA con una cantidad. PIEZA se inspecciona en INSPECCIÓN (débil)." caption="Exercici 20: Planta industrial: llista de materials i inspeccions" >}}
-
-**Decisions de disseny**
-
-- `LÍNEA` s'identifica per (codi de fàbrica, codi de línia) i `INSPECCIÓN` per (codi de peça, número).
-- *Compon* és una reflexiva N:M: una peça té molts components i és component de moltes peces.
-- La peça es fabrica en una línia: relació N:1 amb l'entitat feble.
-
-**Supòsits semàntics**
-
-1. Totes les peces es fabriquen en una línia: (1,1).
-2. Una peça simple (sense components) és vàlida.
-3. No s'admeten cicles en la llista de materials (restricció textual).
-4. En eliminar una peça s'eliminen les seues inspeccions (esborrat en cascada).
-
-{{% /details %}}
+{{< solucion id="ud02-036" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -3220,15 +2828,13 @@ La comandància de la força de defensa vol registrar la seua operativa interna.
 
 #### Enunciat
 
-> Dels troopers es coneix el número de placa, el DNI, el nom, la categoria i la funció (pilot, agent…). Cada trooper té un únic cap directe i un trooper pot ser cap de diversos subordinats.
+> La comandància de la força de defensa vol ordenar el seu dia a dia. Els soldats —troopers— tenen un número de placa, un DNI, un nom, una categoria i una funció (pilot, agent…). Tots reben ordes d'un únic cap directe, i un cap pot tindre diversos subordinats.
 >
-> L'arsenal conté armes amb codi únic, classe i nom. Un trooper pot usar diverses armes; interessa l'habilitat (d'1 a 10) de cada trooper amb cada arma.
+> A l'arsenal cada arma té un codi irrepetible, una classe i un nom. Un trooper en pot manejar diverses i de cada combinació s'anota quant sap usar-la, en una escala d'1 a 10.
 >
-> Dels bitxos capturats es coneix l'identificador, la raça, la localització d'origen i el pes. Un bitxo és detingut per un o diversos troopers i es guarda la data de detenció. El mateix trooper pot detindre el mateix bitxo en dates distintes.
+> Els bitxos que es capturen tenen un identificador, una raça, el lloc d'on vénen i un pes. Un o diversos troopers participen en la detenció d'un mateix bitxo i s'apunta el dia. Si el mateix soldat torna a atrapar el mateix bitxo un altre dia, això també queda registrat. Mentre estiguen a la comandància, els bitxos es tanquen en masmorres, que tenen un codi i una ubicació i no n'admeten més de quatre alhora.
 >
-> Cada bitxo que roman en la comandància es tanca en una masmorra (codi i ubicació). En una masmorra pot haver-hi diversos bitxos, mai més de quatre.
->
-> Els bitxos participen en delictes (número d'assalt i jutjat instructor), i s'anota el càrrec principal de cada bitxo en cada delicte. Un o diversos troopers investiguen cada delicte.
+> A més, els bitxos intervenen en delictes, que tenen un número d'assalt i un jutjat instructor; de cada bitxo en cada delicte s'anota el càrrec principal. Un o diversos troopers investiguen el mateix delicte.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -3264,24 +2870,7 @@ La comandància de la força de defensa vol registrar la seua operativa interna.
 
 Cada trooper té una **especialitat** (pilot, agent, metge…) amb dades pròpies. Planteja una **especialització** de `TROOPER`, decidix si és total o parcial, disjunta o solapada, i redibuixa la part afectada.
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej21.svg" alt="TROOPER tiene jefe TROOPER, usa ARMA, detiene BICHO e investiga DELITO. MAZMORRA encierra BICHO. BICHO está implicado en DELITO." caption="Exercici 21: Comandància de Starship Troopers" >}}
-
-**Decisions de disseny**
-
-- *Cap* és una reflexiva 1:N; un trooper sense cap és el cim de la cadena.
-- *Usa*, *detén*, *implicat en* i *investiga* són N:M. Els tres primers porten atributs.
-- *Tanca* és 1:N amb màxim 4 en el costat del bitxo: (0,4).
-
-**Supòsits semàntics**
-
-1. Un bitxo pot estar capturat i no tancat: (0,1) masmorra.
-2. Un delicte té almenys un bitxo implicat.
-3. L'habilitat és un enter entre 1 i 10 (restricció de domini).
-4. Una masmorra no allotja més de quatre bitxos alhora (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-037" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -3303,13 +2892,17 @@ George R. R. Martin vol documentar els castells de les grans cases de Poniente.
 
 #### Enunciat
 
-> De cada casa (Stark, Tully, Lannister…) es guarda un número d'ordre segons l'any de fundació, el nom (que és únic), l'any de fundació, la localització, l'adreça (vall, muntanya i rierol) i els metres quadrats.
+> George RR Martin vol guardar una base de dades amb els castells que pertanyen a cada casa. Les cases són la Casa Stark, Tully, etc.
 >
-> Cada casa té una sèrie de castells. De cada castell es guarda un codi establit per cada casa, el nom, les mesures, la data i l'estil de construcció (gòtic, romànic…) i una descripció de la tècnica utilitzada.
+> Cada Casa té assignat un número d'ordre sobre la base de l'any de la seua fundació; a més, de cadascuna d'elles es vol saber el nom (que és únic), l'any en què es va fundar, la localització, l'adreça (vall, muntanya i barranc) i els metres quadrats que té.
 >
-> Cada castell el crea un arquitecte, del qual es coneix el nom, la nacionalitat, la data de naixement i la de defunció. Un arquitecte pot tindre com a mestre un altre arquitecte de la base de dades; al seu torn, un mestre pot ser-ho de diversos o de cap. Els arquitectes poden pertànyer o no a una escola (nom, país, data d'aparició i estil).
+> Cada Casa té una sèrie de Castells dels quals es vol guardar el seu codi (establit per cada Casa), nom, mesures, data i estil (gòtic, romànic, etc.) en què va ser construït i una descripció de la tècnica utilitzada per a construir-lo.
 >
-> Els arquitectes poden tindre un o diversos mecenes (nom, que pot repetir-se, país i ciutat de naixement, data de naixement i de defunció), i un mecenes pot ser-ho de diversos arquitectes. De cada mecenatge es vol saber la data d'inici, la de fi i la població on va tindre lloc, i quins castells van resultar de cada mecenatge.
+> Cada castell és creat per un determinat arquitecte (del qual volem conéixer el seu nom, nacionalitat, data de naixement i data de defunció). A més, un arquitecte pot tindre un altre dels arquitectes que es troben en la BD com a mestre; al seu torn, un mestre pot ser-ho de diversos o de cap.
+>
+> Els arquitectes poden pertànyer o no a una escola, de la qual es vol saber el seu nom, en quin país i data va aparéixer, i a quin estil pertany.
+>
+> Els arquitectes poden tindre també un o diversos mecenes que els protegixen, dels quals volem conéixer el seu nom (pot repetir-se), país i ciutat de naixement, data de naixement i data de defunció. Al seu torn, un mateix mecenes pot ser-ho de diversos arquitectes. Es vol arreplegar la relació que hi ha entre un arquitecte i el seu mecenes. A més, es vol saber de cada mecenatge la data en què comença, la data en què acaba, en quina població va tindre lloc i volem saber quins castells van resultar de cada mecenatge.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -3324,7 +2917,7 @@ George R. R. Martin vol documentar els castells de les grans cases de Poniente.
 {{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] `CASTILLO` és feble de `CASA` (etiqueta ID).
+- [ ] `CASTILLO` és feble de `CASA` (doble rectangle i rombe doble identificador).
 - [ ] *És mestre de* és una reflexiva 1:N sobre `ARQUITECTO`.
 - [ ] *Mecenatge* és N:M i queda dins d'un requadre d'**agregació**.
 - [ ] La relació *resulta de* uneix `CASTILLO` amb l'agregació, no amb `ARQUITECTO` ni amb `MECENAS` per separat.
@@ -3351,26 +2944,7 @@ En el model E/R una relació només uneix entitats. Quan necessites relacionar u
 
 Un castell pot ser fruit de **diversos mecenatges** (per exemple, començat amb un mecenes i acabat amb un altre). Com canvia la cardinalitat de *resulta de*? I el color del rombe?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej22.svg" alt="CASA tiene CASTILLO (débil). ARQUITECTO construye CASTILLO, es maestro de ARQUITECTO y pertenece a ESCUELA. ARQUITECTO y MECENAS forman el MECENAZGO (N:M), agregado y relacionado con CASTILLO." caption="Exercici 22: Cases de Joc de Trons: castells, arquitectes i mecenatges" >}}
-
-**Decisions de disseny**
-
-- `CASTILLO` depén de `CASA` en identificació: (núm. d'ordre de la casa, codi del castell).
-- El nom de la casa és **clau alternativa** (subratllat de punts): és únic, però s'identifica pel número d'ordre.
-- *Mecenatge* és N:M amb `fecha_inicio` com a discriminador, `fecha_fin` i `población`. S'agrega per a poder relacionar-lo amb `CASTILLO`.
-- *Resulta de* és 1:N entre l'agregació i `CASTILLO`: cada castell procedix com a molt d'un mecenatge; un mecenatge pot produir diversos castells o cap.
-- La solució amb ternària (la del primer esborrany) és vàlida només si tot mecenatge produïx castells.
-
-**Supòsits semàntics**
-
-1. Tot castell té un arquitecte creador: (1,1).
-2. Un arquitecte pot no pertànyer a cap escola: (0,1).
-3. Un arquitecte no pot ser mestre de si mateix (restricció textual).
-4. L'arquitecte que construïx el castell és el del mecenatge del qual resulta (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-038" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -3392,26 +2966,34 @@ Se celebrarà un campionat de *quidditch* entre seleccions de distints països.
 
 #### Enunciat
 
-> En el campionat participen jugadors i àrbitres. De tots ells es vol conéixer el número de mag, el nom, l'adreça i els campionats en els quals han participat. Dels jugadors es guarda a més el nivell de joc (numèric) i dels àrbitres, la categoria (nacional o internacional). Cap àrbitre pot participar com a jugador.
+> Es va a celebrar un torneig de *quidditch*.
 >
-> Els països envien al campionat equips i àrbitres, encara que no tots els països envien selecció. Tot equip i tot àrbitre és enviat per un únic país. Un país pot estar representat per un altre país. Cada país s'identifica per un número correlatiu segons el seu ordre alfabètic i es guarda el seu nom i el nombre de clubs de quidditch que hi existixen. Cada equip té un nom i està format per diversos jugadors.
+> Al campionat participen jugadors i àrbitres; d'ambdós es vol conéixer el número de mag, nom, adreça, lloc i campionats en què han participat (com a jugador o com a àrbitre). Dels jugadors es precisa a més el nivell de joc en numèric i en els àrbitres la categoria (nacional, internacional). Recorda que la final de 1994 es va jugar entre els equips d'Irlanda i Bulgària.
 >
-> Cada joc (partida) s'identifica per un número correlatiu (Cod-Q). El juguen dos equips i l'arbitra un àrbitre. Tot equip participa almenys en un joc. Un àrbitre no pot arbitrar equips enviats pel seu mateix país.
+> Cap àrbitre no pot participar com a jugador.
 >
-> Els participants s'allotgen en els castells on es desenvolupen les partides i es vol saber en quin castell i en quines dates s'ha allotjat cadascun; poden allotjar-se diverses vegades, en el mateix o en distint castell. De cada castell es guarda el nom, l'adreça i el telèfon.
+> Els països envien al campionat un conjunt de jugadors i àrbitres, encara que no tots els països envien seleccions (equip i àrbitres). Tot equip i àrbitre és enviat per un únic país. Un país pot ser representat per un altre país.
 >
-> El campionat es desenvolupa al llarg d'una sèrie de jornades (data). Cada joc té lloc en una jornada, encara que pot haver-hi jornades de descans.
+> Cada país s'identifica per un número correlatiu segons el seu ordre alfabètic i interessa conéixer, a més del seu nom, el nombre de clubs de quidditch existents en ell.
 >
-> Cada joc se celebra en un estadi d'un dels castells (els estadis es numeren dins de cada castell) i es guarda el nombre d'entrades venudes. De cada estadi es coneix la capacitat i els mitjans de què disposa per a la retransmissió (ràdio, televisió, vídeo…).
+> Cada joc s'identifica per un número correlatiu (Cod-Q), el juguen dos equips i l'arbitra un àrbitre. Interessa registrar les partides que juga cada equip. Cal tindre en compte que un àrbitre no pot arbitrar equips enviats pel mateix país que l'ha enviat a ell.
 >
-> De cada joc es registren tots els moviments, identificats per un número d'ordre dins del joc; de cadascun es guarda la jugada i un breu comentari d'un expert.
+> Tot equip participa en almenys un joc.
+>
+> Tant equips com àrbitres s'allotgen en un dels castells on es desenvolupen les partides; es vol conéixer en quin castell i en quines dates s'ha allotjat cadascun dels participants. Els equips poden no romandre a Hogwarts durant tot el campionat, sinó acudir quan han de jugar alguna partida, allotjant-se en el mateix o en un altre castell. De cada castell es vol conéixer el nom, l'adreça i el número de telèfon.
+>
+> El campionat es desenvolupa al llarg d'una sèrie de jornades (any, mes, dia) i cada partida té lloc en una de les jornades, encara que no tinguen lloc partides en totes les jornades (pot haver-hi dies de descans).
+>
+> Cada partida se celebra en un estadi dels que poden disposar els castells; es vol conéixer el nombre d'entrades venudes per a cada partida. De cada estadi es vol conéixer la capacitat i els mitjans de què disposa (ràdio, televisió, vídeo…) per a facilitar la retransmissió de les trobades. Un estadi pot disposar de diversos mitjans distints.
+>
+> De cada partida es pretén registrar tots els moviments que la componen; la identificació de moviment s'establix sobre la base d'un número d'ordre dins de cada partida: per a cada moviment es guarden la jugada i un breu comentari realitzat per un expert.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
 
 1. Dibuixa el diagrama EER en notació de Chen.
 2. Classifica la generalització de `PARTICIPANTE` (total/parcial, disjunta/solapada) i justifica-ho amb frases de l'enunciat.
-3. Quina cardinalitat té `EQUIPO` en la relació *juga*? Quin color té eixa meitat del rombe?
+3. Quina cardinalitat té `EQUIPO` en la relació *juga*? Quin màxim s'escriu en eixe vèrtex del rombe?
 4. Escriu les restriccions que el diagrama no pot expressar.
 
 {{% /details %}}
@@ -3419,9 +3001,9 @@ Se celebrarà un campionat de *quidditch* entre seleccions de distints països.
 {{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] `PARTICIPANTE` es generalitza en `JUGADOR` i `ÁRBITRO` amb **T,D**.
+- [ ] `PARTICIPANTE` es generalitza en `JUGADOR` i `ÁRBITRO` amb **cercle «d» amb línia doble: total i disjunta**.
 - [ ] *Juga* té (2,2) junt a `EQUIPO`.
-- [ ] `ESTADIO` és feble de `CASTILLO` i `MOVIMIENTO` és feble de `JUEGO` (etiqueta ID).
+- [ ] `ESTADIO` és feble de `CASTILLO` i `MOVIMIENTO` és feble de `JUEGO` (doble rectangle i rombe doble identificador).
 - [ ] `campeonato` (dels participants) i `medios` (dels estadis) són multivaluats.
 - [ ] *S'allotja* és N:M i la data d'entrada forma part de la identificació.
 {{% /comprobacion %}}
@@ -3440,34 +3022,14 @@ Se celebrarà un campionat de *quidditch* entre seleccions de distints països.
 {{% /details %}}
 
 {{% details title="Pista: dos equips per joc" %}}
-Quan el nombre de participants és fix s'escriu el nombre en la cardinalitat: (2,2) junt a `EQUIPO`. La meitat del rombe que mira a `EQUIPO` és negra, perquè el màxim (2) és major que 1.
+Quan el nombre de participants és fix s'escriu el nombre en la cardinalitat: (2,2) junt a `EQUIPO`. El vèrtex del rombe que mira a `EQUIPO` porta el màxim 2, perquè participen exactament dos equips.
 {{% /details %}}
 
 #### Ampliació
 
 Es vol distingir l'equip **local** del **visitant**. Proposa dues alternatives (dues relacions 1:N o una relació amb un atribut `papel`) i explica quina restricció textual necessita cadascuna.
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej23.svg" alt="PARTICIPANTE se generaliza (T,D) en JUGADOR y ÁRBITRO. PAÍS envía EQUIPO y ÁRBITRO y representa a PAÍS. EQUIPO está formado por JUGADOR y juega JUEGO (2,2). ÁRBITRO arbitra JUEGO. JUEGO tiene lugar en JORNADA y se celebra en ESTADIO (débil de CASTILLO). JUEGO registra MOVIMIENTO (débil). PARTICIPANTE se aloja en CASTILLO." caption="Exercici 23: Campionat de Quidditch" >}}
-
-**Decisions de disseny**
-
-- Generalització **total i disjunta**: tot participant és jugador o àrbitre i «cap àrbitre pot participar com a jugador».
-- *Juga* és N:M amb màxim 2 en el costat de l'equip; *arbitra*, *té lloc* i *se celebra en* són 1:N.
-- *Se celebra en* porta `entradas_vendidas`, que depén del joc i de l'estadi.
-- *Representa a* és una reflexiva 1:N sobre `PAÍS`.
-- `JORNADA` és entitat perquè existixen jornades sense jocs.
-
-**Supòsits semàntics**
-
-1. Un equip té almenys un jugador: (1,N).
-2. Un país pot no enviar equip ni àrbitres: (0,N).
-3. Un àrbitre no arbitra jocs d'equips del seu país (restricció textual).
-4. Els dos equips d'un joc són distints (restricció textual).
-5. Un participant no està allotjat en dos castells alhora (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-039" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
@@ -3475,13 +3037,13 @@ Es vol distingir l'equip **local** del **visitant**. Proposa dues alternatives (
 
 ---
 
-## Bloc 4 · EER avançat
+## Bloc 4 · Intermedi: EER
 
 Diverses especialitzacions en un mateix model, cadenes d'entitats febles, ternàries amb atributs i casos d'integració complets.
 
 ### Exercici 24 · Seguretat bancària: vigilants, bandes i atracaments
 
-{{< practica num="24" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
+{{< practica num="24" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
 
 {{% details title="Objectiu d'aprenentatge (llig-lo en acabar)" %}}
 
@@ -3496,13 +3058,11 @@ La Policia i l'associació d'entitats bancàries volen una base de dades sobre s
 
 #### Enunciat
 
-> De les entitats bancàries es coneix el codi i l'adreça de la seu. Una entitat té diverses sucursals, identificades per un codi dins de l'entitat, amb adreça i nombre d'empleats.
+> Una empresa de seguretat ens demana el model de dades del seu treball amb els bancs. Cada entitat bancària té un codi i una seu; de cadascuna de les seues sucursals sabem l'adreça i quanta gent hi treballa. Les sucursals no tenen un número propi al món: el banc les numera, i dos bancs distints poden tindre cadascun la seua sucursal 1.
 >
-> Les sucursals contracten vigilants: codi, DNI, nom i data de naixement (l'edat es calcula). Un vigilant és obligatòriament armat (puntuació de tir i calibre) o no armat (si té titulació en arts marcials). Un vigilant pot ser contractat per diferents sucursals en dates diferents i es registra si el contracte és amb arma o no.
+> Els vigilants els contracten les sucursals. De cada vigilant guardem un codi, el seu DNI, el seu nom i quan va nàixer (l'edat ens interessa, però no volem haver d'actualitzar-la). Un vigilant sempre és d'un de dos tipus: els que van armats, dels quals anotem la puntuació a la prova de tir i el calibre de la seua arma, i els que no, dels quals basta saber si tenen titulació en arts marcials. Amb el temps, un mateix vigilant passa per diverses sucursals; cada contracte té la seua data i queda anotat si es va fer amb arma o sense.
 >
-> Es controla els detinguts per atracar sucursals (codi i nom complet). Alguns pertanyen a bandes (número i nombre de membres). Una banda pot estar subordinada a una altra banda matriu.
->
-> Cada atracament vincula el detingut, la sucursal atracada i el jutge instructor (clau del jutjat, nom i anys de servei), amb la data, la condemna en anys i la indemnització.
+> D'altra banda, la policia ens passa dades dels detinguts per atracaments: codi, nom i cognoms. Alguns actuaven en banda (número de banda i grandària), i hi ha bandes que depenen d'una altra de major. Cada atracament que se'ls imputa implica un detingut, la sucursal que va patir el cop i el jutge que du el cas (clau del jutjat, nom i anys de servei); de l'atracament guardem quan va ocórrer, els anys de condemna i la indemnització.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -3538,31 +3098,14 @@ La Policia i l'associació d'entitats bancàries volen una base de dades sobre s
 
 Un detingut pot pertànyer a **diverses bandes** al llarg del temps. Quin atribut necessita ara la relació i com canvia la reflexiva de subordinació?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej24.svg" alt="ENTITAT té SUCURSAL (feble). SUCURSAL contracta VIGILANT, que és armat o no armat. DETINGUT pertany a BANDA, que pot ser subordinada d'una altra. DETINGUT, SUCURSAL i JUTGE es relacionen en atracament." caption="Exercici 24: Seguretat bancària: vigilants, bandes i atracaments" >}}
-
-**Decisions de disseny**
-
-- Especialització de `VIGILANTE`: total i disjunta, amb atributs propis en cada subclasse.
-- *Contracta* és N:M entre `SUCURSAL` i `VIGILANTE` amb `fecha_inicio` i `con_arma`.
-- *Atracament* és ternària (detingut, sucursal, jutge) i la data forma part de la seua identificació.
-
-**Supòsits semàntics**
-
-1. Tot vigilant és armat o no armat.
-2. Un detingut pot no pertànyer a cap banda.
-3. Un contracte amb arma només és vàlid per a vigilants armats (restricció textual).
-4. `num_miembros` equival al nombre de detinguts de la banda (atribut derivat).
-
-{{% /details %}}
+{{< solucion id="ud02-040" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
 
 ### Exercici 25 · Club hípic: cavalls, boxes i lliçons
 
-{{< practica num="25" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
+{{< practica num="25" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
 
 {{% details title="Objectiu d'aprenentatge (llig-lo en acabar)" %}}
 
@@ -3577,13 +3120,11 @@ Un club hípic gestiona la seua quadra, els seus socis, els seus instructors i l
 
 #### Enunciat
 
-> Dels cavalls es coneix el microxip, el nom, la raça i la data de naixement. Són propis del club (data d'adquisició i cost mensual de manteniment) o d'un soci (quota de pupil·latge i soci propietari). Es manté la genealogia: un cavall pot ser progenitor (pare o mare) de diversos poltres nascuts al club.
+> Un club hípic vol deixar el quadern i portar les seues dades en una base de dades. De cada cavall coneixem el microxip, el nom, la raça i quan va nàixer. Uns són del club, i d'ells apuntem quan es van comprar i el que costa mantindre'ls al mes; uns altres són d'un soci que paga per tindre'ls al club, i llavors importa quant paga de pupil·latge i qui és l'amo. També volem saber de qui descendeixen: el pare i la mare d'un poltre, quan va nàixer ací, han de poder consultar-se, i un mateix cavall pot ser pare de molts poltres.
 >
-> Les cavallerisses es divideixen en pavellons (codi i nom). Cada pavelló té diversos boxes, numerats correlativament dins del pavelló (Box 1, Box 2…). Cada cavall ocupa un únic box i un box allotja com a màxim un cavall.
+> Les instal·lacions estan organitzades en pavellons amb codi i nom. En cada pavelló hi ha boxes que es numeren des de l'1 dins del seu, així que hi ha un box 1 en cada pavelló. Cada cavall viu en un únic box i mai no el compartirà amb un altre.
 >
-> Dels socis es guarda el DNI i el nom. Dels instructors, el número de col·legiat, el DNI, el nom i la titulació. Són titulars o en pràctiques; cada instructor en pràctiques és supervisat per un titular.
->
-> Les lliçons reuneixen un soci, un instructor i un cavall, amb la data, l'hora, la pista i el nivell (*iniciació*, *doma* o *salt*).
+> Els socis aporten el seu DNI i el seu nom. Qui dona classe són instructors, que tenen número de col·legiat, DNI, nom i titulació; uns ja són titulars i altres estan en pràctiques, i aquests últims sempre treballen sota la tutela d'un titular. Finalment, les classes: en cadascuna participen un soci, un instructor i un cavall, i s'anota el dia, l'hora, la pista i el nivell, que només pot ser iniciació, doma o salt.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -3619,31 +3160,14 @@ Un club hípic gestiona la seua quadra, els seus socis, els seus instructors i l
 
 Un cavall canvia de box amb el temps i es vol conservar l'**historial d'ubicacions**. Quina relació passa a ser N:M i amb quins atributs?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej25.svg" alt="CAVALL s'especialitza en propi i de soci i té genealogia. PAVELLÓ té BOX (feble), ocupat per un cavall. INSTRUCTOR s'especialitza en titular i en pràctiques. SOCI, INSTRUCTOR i CAVALL es relacionen en lliçó." caption="Exercici 25: Club hípic: cavalls, boxes i lliçons" >}}
-
-**Decisions de disseny**
-
-- `CABALLO` s'especialitza en propi i de soci; `INSTRUCTOR`, en titular i en pràctiques.
-- *Genealogia*: reflexiva N:M amb màxim 2 en el rol de progenitor.
-- *Lliçó*: ternària amb data i hora en la seua identificació.
-
-**Supòsits semàntics**
-
-1. Tot cavall és del club o d'un soci.
-2. Un poltre té com a màxim dos progenitors registrats.
-3. Un instructor en pràctiques té un únic titular supervisor.
-4. Un cavall no rep dues lliçons a la mateixa hora (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-041" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
 
 ### Exercici 26 · Hotel-balneari: allotjats, habitacions i tractaments
 
-{{< practica num="26" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
+{{< practica num="26" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
 
 {{% details title="Objectiu d'aprenentatge (llig-lo en acabar)" %}}
 
@@ -3658,13 +3182,11 @@ Un hotel-balneari termal automatitza la gestió de hostes, instal·lacions i tra
 
 #### Enunciat
 
-> Dels clients s'emmagatzema el DNI, el nom, els cognoms i la data de naixement. Són allotjats (targeta de crèdit i data d'eixida prevista) o ambulants (telèfon d'emergència), i no poden ser les dues coses.
+> Un hotel amb balneari vol controlar qui s'allotja i quins tractaments rep. De cada client es guarda DNI, nom, cognoms i data de naixement. Els que dormen a l'hotel deixen una targeta de crèdit i la data en què pensen anar-se'n; els que només vénen a passar el dia deixen un telèfon per si hi ha una urgència. Ningú no és les dues coses a la vegada.
 >
-> L'hotel es divideix en plantes (número, nom i nombre d'habitacions). Les habitacions es numeren correlativament dins de cada planta (existeix l'habitació 1 de la planta 3 i l'habitació 1 de la 8) i tenen una capacitat. Són suites (jacuzzis i metres quadrats) o estàndard (si admeten llit supletori i el tipus de bany). Un client allotjat s'assigna a una habitació en una data.
+> L'hotel té plantes, cadascuna amb el seu número, un nom i la quantitat d'habitacions que alberga. Les habitacions es numeren dins de la seua planta, de manera que l'habitació 1 de la tercera i l'habitació 1 de la huitena són habitacions distintes, i de cadascuna coneixem quantes persones hi caben. N'hi ha de luxe, amb els seus jacuzzis i els seus metres quadrats, i les normals, on interessa si admeten un llit extra i quin tipus de bany tenen. Cada vegada que un client s'allotja s'anota l'habitació i la data.
 >
-> Dels empleats es coneix el codi, el nom i el lloc. Alguns són terapeutes, i entre ells existeix una jerarquia: un terapeuta *sènior* coordina terapeutes *júnior*.
->
-> Els tractaments (codi i nom) es presten de manera conjunta entre el client, el terapeuta i el tractament, amb la data, l'hora, la durada i les observacions mèdiques.
+> El personal té codi, nom i lloc. Alguns són terapeutes, i entre ells hi ha qui coordina altres: un terapeuta de categoria sènior s'encarrega de diversos júnior. Els tractaments (codi i nom) es reben sempre d'un terapeuta, per part d'un client, i del servei en queda constància de la data, l'hora, el que dura i qualsevol observació mèdica.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -3700,31 +3222,14 @@ Un hotel-balneari termal automatitza la gestió de hostes, instal·lacions i tra
 
 Una suite pot **reformar-se** i passar a estàndard. És compatible amb una especialització disjunta? Quina decisió de disseny caldria prendre?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej26.svg" alt="CLIENT s'especialitza en allotjat o ambulant. PLANTA té HABITACIÓ (feble), que és suite o estàndard. EMPLEAT pot ser TERAPEUTA, que coordina altres terapeutes. CLIENT, TERAPEUTA i TRACTAMENT es relacionen en presta." caption="Exercici 26: Hotel-balneari: allotjats, habitacions i tractaments" >}}
-
-**Decisions de disseny**
-
-- Tres jerarquies: clients (total, disjunta), habitacions (total, disjunta) i empleats (parcial).
-- `HABITACIÓN` depén de `PLANTA`; `nº_habitaciones` és derivat.
-- *Presta* és ternària (client, terapeuta, tractament) amb data i hora.
-
-**Supòsits semàntics**
-
-1. Tot client és allotjat o ambulant.
-2. Un terapeuta sènior coordina diversos júniors; un júnior té com a molt un coordinador.
-3. Només els allotjats tenen habitació assignada (restricció textual).
-4. La data d'eixida prevista és posterior a la d'assignació (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-042" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
 
 ### Exercici 27 · Xarxa elèctrica: centrals, nodes i subministrament
 
-{{< practica num="27" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
+{{< practica num="27" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
 
 {{% details title="Objectiu d'aprenentatge (llig-lo en acabar)" %}}
 
@@ -3739,13 +3244,11 @@ El Ministeri vol un sistema per a controlar la producció, el transport i el sub
 
 #### Enunciat
 
-> Les centrals s'identifiquen per un codi; es guarda també el nom (únic), la producció mitjana i la data d'entrada en funcionament. Són obligatòriament hidroelèctriques (riu, embassament i volum útil), tèrmiques (combustible i emissions) o renovables (nombre de generadors i superfície de captació).
+> Una empresa que gestiona energia vol un model de la seua xarxa. Les centrals porten un codi, un nom que no es repeteix, la seua producció mitjana i quan van començar a funcionar. Cadascuna és exactament d'un d'aquests tipus: hidroelèctrica (riu, embassament i volum útil), tèrmica (combustible que crema i emissions) o renovable (quants generadors té i la superfície que capta).
 >
-> Cada central manté un registre de parts de manteniment, identificats per un número d'incidència dins de la central (1, 2, 3…), amb la data de la revisió, l'empresa mantenidora i el cost.
+> De cada central es du un historial de revisions. No hi ha un número de revisió global: cada central compta les seues des d'1. De cadascuna importa quan es va fer, quina empresa la va fer i quant va costar.
 >
-> La transmissió es realitza a través de nodes de la xarxa (codi i nom) units entre si per línies de transmissió, amb la seua capacitat en kV i la distància en km.
->
-> El subministrament majorista és un acord conjunt entre la central, la comercialitzadora (CIF i nom) i la zona de distribució (codi i nom), amb els MWh contractats, la tarifa i la data del contracte.
+> L'electricitat circula per nodes de la xarxa, amb codi i nom, connectats entre ells per línies; cal saber la capacitat en kV i la longitud en km de cadascuna. Finalment, la venda a l'engròs: cada contracte se signa entre una central, una comercialitzadora (CIF i nom) i una zona de distribució (codi i nom), i arreplega els MWh pactats, la tarifa i el dia en què es va signar.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -3781,31 +3284,14 @@ El Ministeri vol un sistema per a controlar la producció, el transport i el sub
 
 Les centrals renovables es divideixen al seu torn en **solars** i **eòliques** amb atributs propis. Afegeix una segona jerarquia davall `RENOVABLE` i raona com es classificaria.
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej27.svg" alt="CENTRAL s'especialitza en hidroelèctrica, tèrmica i renovable i té PART (feble). NODE s'uneix a NODE mitjançant línies. CENTRAL, COMERCIALITZADORA i ZONA es relacionen en subministrament." caption="Exercici 27: Xarxa elèctrica: centrals, nodes i subministrament" >}}
-
-**Decisions de disseny**
-
-- `CENTRAL` s'especialitza en tres subclasses amb atributs propis.
-- `PARTE` depén de `CENTRAL`: (codi de central, nº d'incidència).
-- *Línia* és N:M reflexiva sobre `NODO` amb `capacidad_kv` i `distancia_km`; *subministrament* és ternària.
-
-**Supòsits semàntics**
-
-1. Tota central pertany a una de les tres classes.
-2. Un node pot no tindre línies encara.
-3. Una línia uneix dos nodes diferents (restricció textual).
-4. La capacitat i la distància són positives (restricció de domini).
-
-{{% /details %}}
+{{< solucion id="ud02-043" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
 
 ### Exercici 28 · Festival de música: edicions, escenaris i actuacions
 
-{{< practica num="28" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
+{{< practica num="28" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
 
 {{% details title="Objectiu d'aprenentatge (llig-lo en acabar)" %}}
 
@@ -3820,13 +3306,11 @@ Un promotor organitza un festival que es repeteix cada any i vol guardar tot el 
 
 #### Enunciat
 
-> Un festival (codi, nom i ciutat) se celebra cada any. Cada edició s'identifica per l'any dins del festival i té data d'inici, data de fi i aforament.
+> Una promotora organitza festivals de música i vol conservar la seua història. Cada festival té codi, nom i ciutat, i es repeteix cada any; anomenem edició cada celebració, que es reconeix per l'any dins del seu festival (pot haver-hi una edició 2024 de diversos festivals distints) i de la qual guardem quan comença, quan acaba i l'aforament.
 >
-> Cada edició munta diversos escenaris, identificats pel seu nom dins de l'edició (*Principal*, *Electrònica*…), amb la seua capacitat.
+> Cada edició alça els seus propis escenaris, reconeixibles pel nom dins de l'edició (el Principal, el d'Electrònica…), i dels quals es coneix la capacitat. En ells toquen artistes, amb codi, nom artístic i país. N'hi ha que actuen sols, i llavors volem l'instrument, i n'hi ha que són grup, i llavors interessa quants són. De cada actuació s'anota el dia, l'hora a la qual comença, quant dura i el caixet; un artista pot tornar a pisar el mateix escenari més d'una vegada.
 >
-> Els artistes (codi, nom artístic i país) són solistes (instrument) o grups (nombre de components). Cada artista actua en escenaris; de cada actuació es guarda la data, l'hora d'inici, la durada i el caixet. Un artista pot actuar diverses vegades al mateix escenari.
->
-> Els assistents (DNI, nom i correu) compren entrades per a una edició. Cada entrada es numera dins de l'edició i té un tipus (*general*, *vip* o *abonament*) i un preu. Una entrada la compra un únic assistent, encara que pot estar sense vendre.
+> El públic són assistents (DNI, nom i correu). Les entrades es numeren dins de cada edició, són d'un tipus (general, vip o abonament) i tenen preu. Una entrada la compra un únic assistent, però pot ser que algunes es queden sense vendre.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -3862,31 +3346,14 @@ Un promotor organitza un festival que es repeteix cada any i vol guardar tot el 
 
 Els festivals tenen **patrocinadors** que aporten un import per edició. Afig aquesta relació i decideix amb quina entitat s'estableix. Quins atributs porta?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej28.svg" alt="FESTIVAL té EDICIÓ (feble). EDICIÓ munta ESCENARI (feble) i emet ENTRADA (feble). ARTISTA, solista o grup, actua en ESCENARI. ASSISTENT compra ENTRADA." caption="Exercici 28: Festival de música: edicions, escenaris i actuacions" >}}
-
-**Decisions de disseny**
-
-- Cadena de dependències: `FESTIVAL` → `EDICIÓN` → `ESCENARIO`. L'identificador de l'escenari és (festival, any, nom).
-- *Actua* és N:M repetible: data i hora d'inici formen part de la seua identificació.
-- `ENTRADA` depén de l'edició i s'assigna opcionalment a un assistent.
-
-**Supòsits semàntics**
-
-1. Un festival té almenys una edició.
-2. Una entrada pot estar sense vendre: (0,1) assistent.
-3. Les actuacions d'un escenari no se solapen (restricció textual).
-4. Les dates de les actuacions estan dins de les dates de l'edició (restricció textual).
-
-{{% /details %}}
+{{< solucion id="ud02-044" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
 
 ### Exercici 29 · Grups de supervivents de l'apocalipsi zombi
 
-{{< practica num="29" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + classificació de la jerarquia + restriccions" >}}
+{{< practica num="29" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + classificació de la jerarquia + restriccions" >}}
 
 {{% details title="Objectiu d'aprenentatge (llig-lo en acabar)" %}}
 
@@ -3901,15 +3368,13 @@ Any 2050: després d'una invasió zombi, els supervivents s'organitzen en grups 
 
 #### Enunciat
 
-> Cal emmagatzemar informació sobre cada grup, els integrants que el componen, les tasques (projectes) que realitza i els seus treballadors.
+> Després del col·lapse, diversos grups de supervivents volen organitzar les seues dades per a repartir-se el treball. De cada grup hi ha un identificador, un nom, l'adreça del seu refugi, la província i el tipus d'activitat a la qual es dedica (recol·lecció, fabricar munició, atac…).
 >
-> Dels grups es guarda l'identificador, la denominació, l'adreça, la província i el tipus (recol·lectors, creadors de munició, atacants…).
+> Els grups se sostenen amb les aportacions dels seus integrants: DNI, nom, adreça i província, el dia en què es van incorporar i la quota mensual que donen. Interessa també saber el que aporten a l'any, però aqueixa xifra es dedueix de la quota i no s'ha de guardar.
 >
-> Cada grup està format per integrants, dels quals es coneix el DNI, el nom, l'adreça, la província, la data d'alta al grup, la quota mensual amb què col·laboren i l'aportació anual (que s'obté multiplicant la quota mensual pels mesos de l'any).
+> A més dels integrants hi ha qui treballa per al grup. Cada treballador té un número, un nom i una data d'ingrés, i és d'un de dos tipus: els mantinguts, que cobren en espècie, ocupen un càrrec i dels quals es du el compte de tot el que se'ls ha lliurat; i els voluntaris, dels quals es guarda l'edat, la professió i les hores que dediquen. Qui contribueix amb quota no pot ser alhora treballador del mateix grup.
 >
-> Els grups tenen també treballadors. Cada treballador s'identifica per un ID i té un nom i una data d'ingrés. Els treballadors són de dos tipus: mantinguts, que cobren un sou en espècie i ocupen un càrrec (es guarda la quantitat total que se'ls ha donat), i voluntaris, dels quals es guarda l'edat, la professió i les hores que dediquen al grup. Un integrant no pot ser treballador del grup.
->
-> Els grups realitzen tasques. Cada tasca s'identifica per un número dins del grup i es guarda en quina zona lliure de zombis es realitza i en quina part d'ella, l'objectiu i el nombre de beneficiaris. Una tasca es compon al seu torn de subtasques, que també són tasques.
+> El grup emprén tasques. Es numeren dins del grup i de cadascuna s'anota en quina zona lliure de zombis es fa i en quina part d'ella, l'objectiu i a quanta gent beneficia. Una tasca gran es pot descompondre en altres de més xicotetes, que són també tasques.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -3925,9 +3390,9 @@ Any 2050: després d'una invasió zombi, els supervivents s'organitzen en grups 
 {{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] `TRABAJADOR` s'especialitza en `MANTENIDO` i `VOLUNTARIO` amb **T,D**.
+- [ ] `TRABAJADOR` s'especialitza en `MANTENIDO` i `VOLUNTARIO` amb **cercle «d» amb línia doble: total i disjunta**.
 - [ ] `aportación_anual` és derivat (òval discontinu).
-- [ ] `TAREA` és feble de `GRUPO` (etiqueta ID).
+- [ ] `TAREA` és feble de `GRUPO` (doble rectangle i rombe doble identificador).
 - [ ] *Es compon de* és una reflexiva 1:N sobre `TAREA`.
 {{% /comprobacion %}}
 
@@ -3947,32 +3412,14 @@ Any 2050: després d'una invasió zombi, els supervivents s'organitzen en grups 
 
 Un integrant pot pertànyer a **diversos grups** amb una quota diferent en cadascun. Què canvia en la relació *forma part de*? On van ara `fecha_alta`, `cuota_mensual` i `aportación_anual`?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
-
-{{< figura src="ud02/ej29.svg" alt="INTEGRANT forma part de GRUP. TREBALLADOR treballa en GRUP i s'especialitza (T,D) en MANTINGUT i VOLUNTARI. GRUP realitza TASCA (feble). TASCA es compon de TASCA." caption="Exercici 29: Grups de supervivents de l'apocalipsi zombi" >}}
-
-**Decisions de disseny**
-
-- Especialització **total i disjunta**: tot treballador és mantingut o voluntari, mai tots dos.
-- *Forma part de* i *treballa en* són 1:N amb `GRUPO`.
-- `TAREA` s'identifica per (id del grup, nº de tasca). *Es compon de* és reflexiva 1:N amb els rols *tasca* i *subtasca*.
-- «Un integrant no pot ser treballador» no es representa en el diagrama: integrants i treballadors són entitats distintes amb identificadors distints. Es documenta com a restricció textual.
-
-**Supòsits semàntics**
-
-1. Tot integrant pertany a un grup: (1,1).
-2. Una subtasca pertany al mateix grup que la seua tasca (restricció textual).
-3. Una persona no pot ser alhora integrant i treballador (restricció textual).
-4. Les hores dels voluntaris són un nombre positiu.
-
-{{% /details %}}
+{{< solucion id="ud02-045" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
 
 ---
 
 ### Exercici 30 · Mostra gastronòmica: províncies, plats, restaurants i vins
 
-{{< practica num="30" etiqueta="Exercici" tipo="Autónoma" duracion="2-3 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
+{{< practica num="30" etiqueta="Exercici" tipo="Autónoma" duracion="2-3 sessions" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
 
 {{% details title="Objectiu d'aprenentatge (llig-lo en acabar)" %}}
 
@@ -3987,15 +3434,15 @@ S'organitza una mostra de plats típics d'Espanya amb informació de les localit
 
 #### Enunciat
 
-> De les províncies es coneix el nom, l'extensió i la capital. De les localitats (nom, grandària i habitants), dues localitats de províncies diferents poden dir-se igual.
+> Una conselleria organitza una mostra gastronòmica i necessita unificar les dades dels participants. Les províncies tenen nom, extensió i capital. Les localitats tenen nom, grandària i habitants, i el nom no basta per a reconéixer-les: hi ha localitats del mateix nom en províncies distintes.
 >
-> Dels plats típics es guarda el nom, els ingredients bàsics (diversos) i la forma de preparació. Un plat pot ser típic de diverses localitats i una localitat pot conservar diversos plats típics. Per a cada parella plat-localitat s'anoten les variacions locals de la recepta.
+> Cada plat típic porta el seu nom, diversos ingredients bàsics i la forma de preparar-lo. Un mateix plat es menja en moltes localitats i en una localitat es conserven molts plats; cada vegada que coincideixen s'anoten les variacions locals de la recepta.
 >
-> A les localitats hi ha restaurants (nom, adreça, telèfon, preu del menú del dia i capacitat). Els noms poden repetir-se entre localitats, mai dins d'una. Cada restaurant ha d'estar especialitzat en almenys un dels plats típics.
+> Els restaurants són d'una localitat i tenen nom, adreça, telèfon, preu del menú del dia i aforament. Dues localitats poden tindre restaurants amb el mateix nom, però no pot haver-hi dos així en la mateixa. Cap restaurant no és genèric: tots s'han d'especialitzar en almenys un dels plats típics.
 >
-> A cada localitat es planifiquen visites guiades (nom del lloc, únic per localitat). Les visites culturals tenen horari; les industrials (fàbriques d'embotits, sidra…) tenen persona de contacte i telèfon.
+> Cada localitat ofereix visites guiades, i el nom del lloc visitat no es repeteix dins de la localitat. Unes són culturals i tenen un horari; altres són industrials (fàbriques d'embotit, bodegues de sidra) i es concreten amb una persona de contacte i el seu telèfon.
 >
-> Els cellers patrocinadors (CIF, nom del director, adreça de la seu i telèfon) ofereixen vins (codi, collita, grau, color i textura). Un grup d'experts aconsella quins vins servir amb cada plat.
+> Els patrocinadors són bodegues: CIF, nom del director, adreça de la seu i telèfon. Ofereixen vins, amb el seu codi, anyada, grau, color i textura. Un comité d'experts recomana quins vins acompanyen cada plat.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -4032,22 +3479,367 @@ S'organitza una mostra de plats típics d'Espanya amb informació de les localit
 
 Els experts aconsellen un vi **distint segons la temporada** (hivern o estiu). Com canvia la relació entre `PLATO` i `VINO`? Es converteix en ternària?
 
-{{% details title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" %}}
+{{< solucion id="ud02-046" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
 
-{{< figura src="ud02/ej30.svg" alt="PROVÍNCIA té LOCALITAT (feble), que ubica RESTAURANT (feble) i ofereix VISITA (feble), cultural o industrial. PLAT és típic de LOCALITAT, RESTAURANT s'especialitza en PLAT. CELLER ofereix VI i PLAT s'aconsella amb VI." caption="Exercici 30: Mostra gastronòmica: províncies, plats, restaurants i vins" >}}
+---
 
-**Decisions de disseny**
+## Bloc 5 · Consolidació
 
-- `PROVINCIA` és propietària de `LOCALIDAD` (identificador: província + nom) i `LOCALIDAD`, de `RESTAURANTE` i `VISITA`.
-- *És típic de* (N:M amb `variación_local`), *especialitzat en* (N:M amb mínim 1 per al restaurant) i *aconsella* (N:M) són tres relacions distintes.
-- Visites: especialització total i disjunta en culturals (horari) i industrials (contacte i telèfon).
-- Variant de l'esborrany de classe: si interessa saber **quin expert** va aconsellar cada vi, s'agrega la relació plat–vi i es relaciona l'agregació amb una entitat `EXPERTO`. Amb l'enunciat tal com està (un únic grup d'experts), basta la N:M *aconsella*.
+Cinc exercicis molt difícils que combinen **tot l'explicat en la unitat**: entitats febles encadenades, relacions reflexives, ternàries, agregació, especialitzacions, atributs compostos, multivaluats i derivats, i restriccions que el diagrama no arreplega. Estan pensats per a tancar la unitat: sense guies ni indicacions, amb el diccionari de dades, les restriccions i les taules previstes.
 
-**Supòsits semàntics**
+### Exercici 31 · Aerolínia: rutes, vols i tripulació
 
-1. Tota localitat pertany a una província.
-2. Un restaurant està especialitzat en almenys un plat: (1,N).
-3. El plat en què s'especialitza un restaurant ha de ser típic de la seua localitat (restricció textual).
-4. Cada vi pertany a un únic celler.
+{{< practica num="31" etiqueta="Exercici" tipo="Autónoma" duracion="3-4 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions + taules previstes" >}}
+
+{{% details title="Objectiu d'aprenentatge (llig-lo en acabar)" %}}
+
+
+Modelar un cas amb entitats febles encadenades amb dos discriminadors, dues relacions entre les mateixes entitats, una reflexiva amb rols, dues ternàries amb cardinalitats distintes i una especialització parcial i solapada.
 
 {{% /details %}}
+
+#### Context
+
+Una aerolínia regional vol substituir els seus fulls de càlcul d'operacions per una base de dades única.
+
+#### Enunciat
+
+> Una companyia aèria té un codi intern, un nom i un país. Disposa d'una flota d'aeronaus, cadascuna amb la seua matrícula i la data en què va entrar en servei, i cada aeronau és d'un model concret (fabricant, capacitat de passatgers i autonomia en quilòmetres) que pot estar representat per moltes aeronaus. Els aeroports es coneixen pel seu codi IATA i tenen nom, ciutat, país i unes coordenades (latitud i longitud) que sempre es manegen juntes. La companyia publica rutes entre parells d'aeroports, de les quals es guarda la distància; una ruta no és el mateix que un vol i només interessa que existisca.
+>
+> Els vols no tenen un codi propi al món: «IB6250» l'opera cada dia la mateixa companyia, de manera que un vol s'identifica per la companyia, el número de vol i la data. De cada vol es calcula la durada real una vegada completat. Un vol es compon d'un o diversos trams numerats dins del vol (amb escales, el tram 1 pot ser València-Madrid i el 2, Madrid-Lima); cada tram ix d'un aeroport i arriba a un altre, té hora d'eixida i d'arribada i el fa una única aeronau, que al llarg del dia fa molts trams.
+>
+> El personal té DNI, nom i data d'alta, i se'n calcula l'antiguitat. Hi ha pilots (llicència i hores de vol), tripulants de cabina (diversos idiomes) i instructors (especialitat). Hi ha empleats que no són res de l'anterior, com el personal de terra, i un pilot veterà pot ser també instructor. En cada tram treballen diversos empleats exercint un rol (comandant, copilot, cap de cabina…); de cada assignació s'anota l'hora de presentació. Un empleat pot tindre rols distints en trams distints, i en un mateix tram només un empleat pot ser comandant, però el diagrama no pot garantir-ho.
+>
+> Els passatgers s'identifiquen pel seu passaport i tenen nom i diversos telèfons. Un passatger reserva plaça en un vol amb una tarifa (codi, nom i quilos d'equipatge inclosos); de la reserva es guarden el seient i el preu pagat. En un mateix vol un passatger només viatja amb una tarifa, però pot volar moltes vegades i amb tarifes distintes en vols distints.
+
+{{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
+
+
+1. Dibuixa el diagrama EER en notació de Chen.
+2. Escriu l'identificador complet de `VUELO` i de `TRAMO` i explica què canviaria si el número de vol bastara per a identificar un vol.
+3. Calcula les cardinalitats de les dues ternàries fixant, per torns, dues de les seues entitats.
+4. Classifica l'especialització del personal i justifica cadascuna de les dues propietats amb una frase del text.
+5. Escriu cinc restriccions que el diagrama no arreplega (comandant únic per tram, coherència d'aeroports, solapaments de l'aeronau…) i proposa com comprovar cadascuna.
+6. Elabora el diccionari de dades de `TRAMO` i de la relació `tripulación`.
+
+{{% /details %}}
+
+{{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `VUELO` és feble de `COMPAÑÍA` amb **dos** discriminadors (número i data) i `TRAMO` és feble de `VUELO`.
+- [ ] *Ruta* és una relació reflexiva N:M entre `AEROPUERTO` amb rols origen i destinació, i *ix de* i *arriba a* són dues relacions distintes.
+- [ ] *Reserva* té `TARIFA` amb màxim 1 i *tripulació* té les tres entitats amb màxim N.
+- [ ] La jerarquia del personal és **parcial i solapada**.
+- [ ] `coordenadas` és compost, `idiomas` i `teléfonos` multivaluats i `antigüedad` i `duración_real` derivats.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errors habituals (llig-los després d'intentar-ho)" %}}
+
+
+> [!WARNING]
+> - Donar a `VUELO` el codi «IB6250» com a identificador: el mateix número es repeteix tots els dies.
+> - Convertir *ruta* en *vol*: la ruta és una dada permanent i el vol és un fet d'un dia concret.
+> - Posar l'aeronau en `VUELO` en compte de en `TRAMO`: en un vol amb escales pot canviar d'avió.
+
+{{% /details %}}
+
+{{% details title="Pista (desplega-la només si t'encalles)" %}}
+Pensa en la pregunta «quants X hi ha per a cada parella de Y i Z?» per a cada pota de les ternàries, i recorda que l'enunciat diu que en un mateix vol un passatger només viatja amb **una** tarifa.
+{{% /details %}}
+
+#### Ampliació
+
+L'aerolínia ofereix vols en codi compartit: el mateix vol es ven amb el número d'una altra companyia. Com canvia l'identificador de `VUELO` i quina relació nova necessites?
+
+{{< solucion id="ud02-047" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
+
+
+---
+
+### Exercici 32 · Hospital: ingressos, llits i atencions
+
+{{< practica num="32" etiqueta="Exercici" tipo="Autónoma" duracion="3-4 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions + taules previstes" >}}
+
+{{% details title="Objectiu d'aprenentatge (llig-lo en acabar)" %}}
+
+
+Resoldre un cas amb tres nivells d'entitats febles, una reflexiva 1:N amb rols, una especialització solapada i una agregació que es relaciona amb una altra entitat.
+
+{{% /details %}}
+
+#### Context
+
+Un hospital comarcal vol informatitzar els ingressos, l'ocupació de llits i les prescripcions.
+
+#### Enunciat
+
+> De cada pacient es conserva el número d'història clínica, el nom, la data de naixement (l'edat es calcula), les al·lèrgies (en pot tindre diverses o cap) i l'adreça, que el servei d'admissió necessita per parts: carrer, número, codi postal i localitat. Un pacient pot ingressar moltes vegades; cada ingrés es numera dins de la història del pacient (l'ingrés 1, el 2…) i guarda la data d'ingrés, la data d'alta si ja s'ha produït i el motiu. Un ingrés no té sentit sense el seu pacient.
+>
+> L'hospital s'organitza en plantes, que s'identifiquen pel seu número i tenen un nom. Dins d'una planta les habitacions es numeren a partir d'1 i tenen un tipus (individual o doble); dins de cada habitació els llits es distingeixen per una lletra (A, B…). Cada planta té almenys una habitació i cada habitació almenys un llit. Un ingrés ocupa llits al llarg de l'estada, amb la data d'inici i la de fi de cada ocupació; el pacient pot canviar de llit o tornar a un llit que ja va ocupar, i un llit l'ocupen molts ingressos amb el temps.
+>
+> El personal s'identifica per un codi i té nom i DNI. N'hi ha metges (especialitat i número de col·legiat), infermers (titulació) i docents (categoria), que són els que tutoritzen residents. Hi ha personal administratiu que no encaixa en cap dels tres grups, i és habitual que un metge siga també docent. Cada persona del personal té com a màxim un supervisor, que també és personal, i un supervisor pot tindre moltes persones al seu càrrec.
+>
+> Un metge atén un ingrés concret (s'anota la data de la primera visita), i un ingrés l'atenen un o diversos metges. Sobre cada atenció el metge prescriu medicaments: de cada medicament es guarda el codi, el nom i diversos principis actius; de cada prescripció, la data, la dosi i la freqüència. No es prescriu «a un metge» ni «a un ingrés» per separat, sinó dins d'una atenció concreta.
+
+{{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
+
+
+1. Dibuixa el diagrama EER en notació de Chen.
+2. Escriu l'identificador complet de `INGRESO`, `HABITACIÓN` i `CAMA` i indica quines de les tres relacions febles són identificadores.
+3. Justifica per què *prescriu* s'ha de modelar amb una agregació i per què una ternària (metge, ingrés, medicament) seria menys precisa.
+4. Classifica l'especialització del personal amb una frase del text per a cada propietat.
+5. Escriu cinc restriccions que el diagrama no arreplega i una consulta en llenguatge natural que el model permeta respondre («quins llits ha ocupat el pacient X?»).
+6. Elabora el diccionari de dades de `INGRESO` i de la relació *ocupa*.
+
+{{% /details %}}
+
+{{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `INGRESO`, `HABITACIÓN` i `CAMA` són febles i les tres relacions que les uneixen a la seua propietària són identificadores.
+- [ ] *Ocupa* és N:M entre `INGRESO` i `CAMA` amb `fecha_inicio` com a discriminador de la relació.
+- [ ] *Prescriu* relaciona l'agregació *atenció* amb `MEDICAMENTO`.
+- [ ] *Supervisa* és reflexiva amb rols i màxim 1 al costat del supervisor.
+- [ ] L'especialització és **parcial i solapada**; `alergias` i `principios_activos` són multivaluats, `dirección` compost i `edad` derivat.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errors habituals (llig-los després d'intentar-ho)" %}}
+
+
+> [!WARNING]
+> - Fer del pacient el propietari de `CAMA`: el llit és de l'habitació i l'ingrés l'ocupa amb una relació pròpia.
+> - Substituir l'agregació per una ternària: perdries que la prescripció pertany a **una atenció concreta** d'un metge a un ingrés.
+> - Oblidar que *ocupa* admet repetir el mateix llit en dates distintes.
+
+{{% /details %}}
+
+{{% details title="Pista (desplega-la només si t'encalles)" %}}
+La prescripció necessita dues coses alhora: *qui va atendre qui* i *quin medicament*. Una relació entre una relació i una entitat es resol amb una agregació.
+{{% /details %}}
+
+#### Ampliació
+
+Cal registrar quines proves diagnòstiques se sol·liciten en cada atenció i el seu resultat. Reutilitzes l'agregació? Quina cardinalitat té `PRUEBA`?
+
+{{< solucion id="ud02-048" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
+
+
+---
+
+### Exercici 33 · Logística: articles, llista de materials i magatzems
+
+{{< practica num="33" etiqueta="Exercici" tipo="Autónoma" duracion="3-4 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions + taules previstes" >}}
+
+{{% details title="Objectiu d'aprenentatge (llig-lo en acabar)" %}}
+
+
+Modelar una llista de materials recursiva, dues entitats febles amb identificadors compostos, una especialització total i disjunta i una ternària sense entitats repetides.
+
+{{% /details %}}
+
+#### Context
+
+Una fàbrica de mobiliari vol gestionar el seu catàleg, les seues compres i els seus magatzems en un únic sistema.
+
+#### Enunciat
+
+> Tot el que la fàbrica compra, fabrica o ven és un article, amb un codi de referència (SKU), un nom, la unitat de mesura i un cost estàndard; el cost total es calcula a partir dels seus components. Cada article és d'un i només un d'aquests tipus: matèria primera (amb els seus dies de caducitat), component (amb la referència del seu plànol) o producte acabat (amb el preu de venda). Un article pot compondre's d'altres articles, dels quals s'anota quantes unitats hi entren, i al seu torn ser component de molts altres: una cadira porta quatre potes, i la pota porta una quantitat de fusta.
+>
+> La fàbrica té magatzems amb un codi, un nom i una adreça (carrer, codi postal i localitat). Un magatzem es divideix en ubicacions que es reconeixen pel passadís i el prestatge dins del magatzem (el passadís 3, prestatge 2 existeix en molts magatzems) i tenen una capacitat màxima en quilos. De cada article es produeixen o reben lots, numerats dins de l'article, amb data de fabricació i de caducitat. Un lot pot estar repartit en diverses ubicacions i una ubicació conté lots de diversos articles; s'anota quantes unitats hi ha.
+>
+> Els proveïdors s'identifiquen pel seu CIF, tenen nom i diversos telèfons. Un proveïdor subministra molts articles i un article el subministren diversos proveïdors, amb un preu i un termini de lliurament que canvien en el temps: es guarda cada tarifa amb la seua data de vigència. Les comandes de compra les emet la fàbrica a un únic proveïdor; tenen un número, una data i un estat, i es componen de línies numerades dins de la comanda, amb l'article demanat, la quantitat i el preu unitari acordat. No tots els articles demanats han de ser dels que el proveïdor subministra habitualment.
+>
+> Els operaris del magatzem (codi i nom) col·loquen lots en ubicacions; de cada col·locació s'anoten la data i la quantitat. Un mateix operari pot col·locar el mateix lot en la mateixa ubicació en dates distintes.
+
+{{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
+
+
+1. Dibuixa el diagrama EER en notació de Chen.
+2. Escriu l'identificador complet de `UBICACIÓN`, `LOTE` i `LÍNEA` i explica per què cap no pot tindre un codi propi global.
+3. Modela la llista de materials i escriu les preguntes que permet contestar («de què es compon el producte X?» i «en quins productes intervé la peça Y?»).
+4. Compara *emmagatzema* i *col·loca*: per què una és binària amb atribut i l'altra ternària? Què distingeix cadascuna?
+5. Escriu cinc restriccions, entre elles la que evita cicles en la llista de materials.
+6. Elabora el diccionari de dades de `LOTE` i de la relació *subministra*.
+
+{{% /details %}}
+
+{{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] *Es compon de* és una reflexiva N:M amb rols *conjunt* i *component* i l'atribut `cantidad`.
+- [ ] `UBICACIÓN` té **dos** discriminadors i `LOTE` i `LÍNEA` són febles.
+- [ ] L'especialització d'`ARTÍCULO` és **total i disjunta**.
+- [ ] *Subministra* té `fecha_tarifa` com a discriminador de la relació.
+- [ ] *Col·loca* és una ternària amb `OPERARIO`, `LOTE` i `UBICACIÓN` amb màxim N en les tres potes.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errors habituals (llig-los després d'intentar-ho)" %}}
+
+
+> [!WARNING]
+> - Donar a la ubicació un codi propi: en el text s'identifica per passadís i prestatge **dins del magatzem**.
+> - Guardar el cost total com a atribut normal en compte de derivat.
+> - Oblidar `fecha_tarifa`: sense ella no es pot guardar l'històric de preus.
+
+{{% /details %}}
+
+{{% details title="Pista (desplega-la només si t'encalles)" %}}
+En una llista de materials, la relació enllaça l'article amb ell mateix; els rols *conjunt* i *component* et diuen quin costat és quin.
+{{% /details %}}
+
+#### Ampliació
+
+Algunes peces es fabriquen en diverses versions (v1, v2) i la llista de materials canvia segons la versió. Converteix la versió en entitat feble d'`ARTÍCULO`? Com queda *es compon de*?
+
+{{< solucion id="ud02-049" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
+
+
+---
+
+### Exercici 34 · Circuit de torneigs d'escacs
+
+{{< practica num="34" etiqueta="Exercici" tipo="Autónoma" duracion="3-4 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions + taules previstes" >}}
+
+{{% details title="Objectiu d'aprenentatge (llig-lo en acabar)" %}}
+
+
+Modelar una cadena de quatre nivells d'entitats febles, dues relacions entre les mateixes entitats, una ternària amb una pota de màxim 1 i una especialització total i disjunta.
+
+{{% /details %}}
+
+#### Context
+
+Una federació d'escacs vol portar tots els seus torneigs, rondes i partides en una sola base de dades.
+
+#### Enunciat
+
+> La federació organitza torneigs amb un codi, un nom i una seu formada per la ciutat i el país. Cada torneig és obert (amb una quota d'inscripció) o tancat (amb un Elo mínim per a participar); no hi ha torneigs d'un altre tipus ni dels dos alhora. Cada torneig se celebra diversos anys, i de cada edició es coneix l'any, les dates d'inici i fi i la borsa de premis; l'edició es reconeix sempre pel torneig i l'any.
+>
+> Una edició es divideix en rondes numerades, i cada ronda té una data i diverses partides, que es numeren per tauler. De cada partida es guarden el resultat i la durada en minuts, que es calcula i no s'emmagatzema. Una partida enfronta un jugador amb blanques i un altre amb negres; les dues relacions són distintes perquè el color importa. La dirigeix un àrbitre principal i l'ajuden diversos àrbitres assistents, que al seu torn poden ser principals d'altres partides.
+>
+> Els jugadors tenen una llicència, un nom, un país, una data de naixement i diversos títols (mestre, gran mestre…). Un jugador s'inscriu en les edicions en què vol jugar, amb l'Elo que tenia en inscriure's. Cada temporada un jugador està fitxat per un club com a màxim; el club té un codi, un nom i una ciutat, i s'anota el dorsal del jugador en eixa temporada. Un jugador pot canviar de club entre temporades i un club fitxa molts jugadors.
+>
+> Cada edició reparteix premis numerats per lloc (el 1r, el 2n…) amb un import, que s'enduen jugadors concrets; un premi només pot guanyar-lo un jugador, i un jugador pot guanyar diversos premis en edicions distintes. Totes les edicions reparteixen almenys un premi.
+
+{{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
+
+
+1. Dibuixa el diagrama EER en notació de Chen.
+2. Escriu l'identificador complet de `EDICIÓN`, `RONDA`, `PARTIDA` i `PREMIO`.
+3. Explica per què *blanques* i *negres* no poden ser una sola relació amb un atribut `color`.
+4. Calcula les cardinalitats de *fitxa* i justifica el màxim 1 de `CLUB`.
+5. Escriu cinc restriccions (un jugador no juga contra si mateix, un àrbitre no dirigeix una partida que juga, l'Elo mínim en torneigs tancats…).
+6. Elabora el diccionari de dades de `PARTIDA`.
+
+{{% /details %}}
+
+{{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] Hi ha quatre nivells de debilitat: `EDICIÓN`, `RONDA`, `PARTIDA` i `PREMIO` (aquesta última també feble de `EDICIÓN`).
+- [ ] `JUGADOR` i `PARTIDA` s'uneixen amb dues relacions, *blanques* i *negres*, totes dues (1,1) per al jugador.
+- [ ] *Fitxa* és ternària amb `CLUB` de màxim 1 i l'atribut `dorsal`.
+- [ ] L'especialització de `TORNEO` és **total i disjunta**.
+- [ ] `sede` és compost, `títulos` multivaluat i `duración_min` derivat.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errors habituals (llig-los després d'intentar-ho)" %}}
+
+
+> [!WARNING]
+> - Modelar una única relació jugador–partida amb un atribut `color`: impediria exigir exactament un jugador per color.
+> - Posar `club` com a atribut de `JUGADOR`: un jugador canvia de club entre temporades.
+> - Identificar la partida només pel seu número de tauler: es repeteix en totes les rondes.
+
+{{% /details %}}
+
+{{% details title="Pista (desplega-la només si t'encalles)" %}}
+Per a cada nivell feble pregunta't què fa falta per a assenyalar **un sol** element: del torneig, l'any; de l'edició, la ronda; de la ronda, el tauler.
+{{% /details %}}
+
+#### Ampliació
+
+La federació vol guardar els moviments de cada partida en ordre. Quina entitat nova necessites i de qui és feble? Quin identificador complet té?
+
+{{< solucion id="ud02-050" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}
+
+
+---
+
+### Exercici 35 · Producció d'una sèrie de televisió
+
+{{< practica num="35" etiqueta="Exercici" tipo="Autónoma" duracion="3-4 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions + taules previstes" >}}
+
+{{% details title="Objectiu d'aprenentatge (llig-lo en acabar)" %}}
+
+
+Modelar una cadena de tres nivells d'entitats febles, una especialització total i solapada, una ternària amb una pota de màxim 1 i una reflexiva 1:N.
+
+{{% /details %}}
+
+#### Context
+
+Una productora vol portar el seguiment de les seues sèries, des del guió fins a l'emissió.
+
+#### Enunciat
+
+> De cada sèrie es guarden un codi, el títol, l'any d'estrena i els gèneres (pot ser més d'un). Una sèrie es divideix en temporades, numerades dins de la sèrie, amb el seu any d'emissió; cada temporada té almenys un episodi, que es numera dins de la temporada i té títol, durada en minuts i data d'estrena. Algunes sèries naixen com a derivades d'una altra (spin-off): una sèrie pot tindre moltes derivades, però cada derivada procedeix, com a màxim, d'una sèrie original.
+>
+> Les persones que treballen a les sèries tenen un codi, un nom, una nacionalitat i una data de naixement, i se'n calcula l'edat. Cada persona és actor (amb la seua alçada), director (amb el seu estil) o guionista (amb la seua especialitat), o diverses coses alhora: hi ha directors que també escriuen i actors que dirigeixen. No es guarden persones que no encaixen en cap dels tres grups. Cada episodi el dirigeix un únic director, que dirigeix molts episodis; l'escriuen diversos guionistes, a cadascun dels quals s'assigna un percentatge d'autoria, i cada guionista escriu en molts episodis.
+>
+> Els personatges pertanyen a una sèrie i es reconeixen pel seu nom dins d'ella (hi ha un «Alex» en moltes sèries), amb una descripció. En un episodi concret un personatge l'interpreta un actor, del qual es guarden els minuts en pantalla; el mateix personatge pot ser interpretat per actors distints en episodis distints (de xiquet i d'adult), però en un mateix episodi mai per més d'un.
+>
+> Els episodis s'emeten en cadenes (CIF i nom), i de cada emissió s'anota la data i l'audiència; un episodi es pot emetre en diverses cadenes i diverses vegades en la mateixa. També es roda en localitzacions, amb un codi, un tipus i una adreça composta de carrer, ciutat i país; de cada episodi i localització s'anota el nombre de jornades de rodatge.
+
+{{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
+
+
+1. Dibuixa el diagrama EER en notació de Chen.
+2. Escriu l'identificador complet de `TEMPORADA`, `EPISODIO` i `PERSONAJE`.
+3. Justifica les dues propietats de l'especialització de persones amb una frase del text i explica l'efecte de cadascuna en passar al model relacional (UD03).
+4. Calcula les cardinalitats d'*interpreta* fixant dues entitats cada vegada.
+5. Escriu cinc restriccions i decideix quins atributs de *s'emet en* formen la identificació de cada emissió.
+6. Elabora el diccionari de dades de `EPISODIO` i de *interpreta*.
+
+{{% /details %}}
+
+{{% details title="Comprovació (usa-la en acabar el teu diagrama)" %}}
+
+{{% comprobacion %}}
+- [ ] `TEMPORADA` i `EPISODIO` són febles en cadena i `PERSONAJE` és feble de `SERIE`.
+- [ ] L'especialització de `PERSONA` és **total i solapada**.
+- [ ] *Interpreta* és ternària amb `ACTOR` de màxim 1 i l'atribut `minutos_pantalla`.
+- [ ] *És spin-off de* és reflexiva amb màxim 1 al costat de la sèrie original.
+- [ ] *S'emet en* porta `fecha` com a discriminador, perquè un episodi es repeteix en la mateixa cadena.
+{{% /comprobacion %}}
+
+{{% /details %}}
+
+{{% details title="Errors habituals (llig-los després d'intentar-ho)" %}}
+
+
+> [!WARNING]
+> - Modelar el director de cada episodi amb una relació N:M: l'enunciat diu que és únic.
+> - Fer `PERSONAJE` fort amb un codi inventat: s'identifica pel seu nom dins de la sèrie.
+> - Posar `ACTOR` com a atribut de `PERSONAJE`: l'actor depén de l'episodi.
+
+{{% /details %}}
+
+{{% details title="Pista (desplega-la només si t'encalles)" %}}
+Fixa el personatge i l'episodi i pregunta't quants actors l'interpreten; la resposta fixa el màxim de la pota `ACTOR`.
+{{% /details %}}
+
+#### Ampliació
+
+Els actors poden interpretar diversos personatges en el mateix episodi (doble paper). Què canvia en les cardinalitats d'*interpreta*?
+
+{{< solucion id="ud02-051" title="Solució: diagrama EER en notació de Chen (intenta-ho abans d'obrir-la)" />}}

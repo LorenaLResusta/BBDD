@@ -8,12 +8,13 @@
   <main class="container flex">
     {{ template "menu-container" . }} <!-- Left menu -->
 
-    <div class="book-page">
-      <header class="book-header hidden">
-        {{ template "header" . }} <!-- Mobile layout header -->
-      </header>
+    <header class="book-header hidden">
+      {{ template "header" . }} <!-- Mobile layout header -->
+    </header>
 
+    <div class="book-page">
       {{ partial "docs/inject/content-before" . }}
+      {{ template "breadcrumbs" . }}
       {{ template "main" . }} <!-- Page Content -->
       {{ partial "docs/inject/content-after" . }}
 
@@ -36,7 +37,7 @@
 </html>
 
 {{ define "menu-container" }}
-<aside class="book-menu">
+<aside class="book-menu" aria-label="{{ partial "docs/text/i18n" "Menu" }}">
   <div class="book-menu-content">
     {{ template "menu" . }}
   </div>
@@ -49,11 +50,11 @@
 
 {{ define "header" }}
   {{ partial "docs/header" . }}
+{{ end }}
 
-  {{ if .Param "BookToC" | default true}}
-  <aside class="hidden">
-    {{ template "toc" . }}
-  </aside>
+{{ define "breadcrumbs" }}
+  {{ if .Param "BookBreadcrumbs" | default false }}
+  {{ partial "docs/breadcrumbs" . }}
   {{ end }}
 {{ end }}
 
@@ -91,7 +92,7 @@
 
 {{ define "toc-container" }}
   {{ if .Param "BookToC" | default true }}
-  <aside class="book-toc">
+  <aside class="book-toc" aria-label="{{ partial "docs/text/i18n" "Table of Contents" }}">
     <div class="book-toc-content">
       {{ template "toc" . }}
     </div>
