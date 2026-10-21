@@ -42,7 +42,7 @@ Aplicar una a una las reglas de transformación al modelo conceptual de la prác
 
 #### Contexto
 
-Partimos del diagrama de la biblioteca municipal de la [práctica 2.1](/ud02-modelo-er/ud02-practicas#práctica-21--biblioteca-municipal-del-enunciado-al-diagrama):
+La biblioteca de Montepinar (*La que se avecina*) ya tiene su diagrama; ahora le toca convertirse en tablas. Partimos del diagrama de la biblioteca municipal de la [práctica 2.1](/ud02-modelo-er/ud02-practicas#práctica-21--biblioteca-municipal-del-enunciado-al-diagrama):
 
 {{< diagrama src="chen-biblioteca.svg" caption="Diagrama de Chen de la biblioteca: autores, libros y ejemplares" >}}
 
@@ -213,7 +213,7 @@ Interpretar un esquema relacional existente, reconstruir el modelo conceptual de
 
 #### Contexto
 
-Heredas la base de datos de un **club de pádel**. No hay documentación, solo este esquema:
+El club de pádel de *Machos Alfa* ha cambiado de informático y nadie dejó documentación. Heredas la base de datos de un **club de pádel**. No hay documentación, solo este esquema:
 
 ```text
 JUGADOR(id_jugador, nombre, telefono, nivel, id_pareja_habitual*)
@@ -252,7 +252,7 @@ Clasificar las reglas de negocio según dónde pueden implementarse y documentar
 
 #### Contexto
 
-Esquema simplificado de un hotel:
+Vuelve el *Gran Hotel* de los Alarcón: este es el esquema que heredas. Esquema simplificado de un hotel:
 
 ```text
 HABITACION(num_hab, tipo, capacidad, precio_noche)
@@ -434,7 +434,7 @@ Transformar relaciones 1:N con participación obligatoria y una N:M que guarda u
 
 #### Contexto
 
-Es el diagrama del [ejercicio 4 de la UD02](/ud02-modelo-er/ud02-practicas#ejercicio-4--naviera-capitanes-contenedores-puertos-y-barcos).
+Es el diagrama del [ejercicio 4 de la UD02](/ud02-modelo-er/ud02-practicas#ejercicio-4--alta-mar-capitanes-contenedores-puertos-y-barcos).
 
 {{< figura src="ud02/ej04.svg" alt="CAPITÁN transporta CONTENEDOR (1:N), CONTENEDOR llega a PUERTO (N:1), CAPITÁN gobierna BARCO (N:M con fecha_inicio y fecha_fin)" caption="Diagrama de partida: naviera" >}}
 
@@ -481,7 +481,7 @@ Transformar dos relaciones reflexivas (1:N y N:M) y una 1:1 con mínimos 0 en lo
 
 #### Contexto
 
-Es el diagrama del [ejercicio 6 de la UD02](/ud02-modelo-er/ud02-practicas#ejercicio-6--instituto-módulos-matrículas-delegados-y-casilleros).
+Es el diagrama del [ejercicio 6 de la UD02](/ud02-modelo-er/ud02-practicas#ejercicio-6--instituto-zurbarán-módulos-matrículas-delegados-y-casilleros).
 
 {{< figura src="ud02/ej06.svg" alt="PROFESOR imparte MÓDULO; MÓDULO es requisito de MÓDULO; ALUMNO se matricula en MÓDULO; ALUMNO es delegado de ALUMNO; ALUMNO tiene CASILLERO" caption="Diagrama de partida: instituto" >}}
 
@@ -528,7 +528,7 @@ Transformar una entidad débil por identificación, una reflexiva 1:N y claves a
 
 #### Contexto
 
-Es el diagrama del [ejercicio 10 de la UD02](/ud02-modelo-er/ud02-practicas#ejercicio-10--concesionario-ventas-revisiones-y-mecánicos).
+Es el diagrama del [ejercicio 10 de la UD02](/ud02-modelo-er/ud02-practicas#ejercicio-10--recio-motors-ventas-revisiones-y-mecánicos).
 
 {{< figura src="ud02/ej10.svg" alt="CLIENTE compra COCHE (1:N), COCHE pasa REVISIÓN (débil, identificadora), MECÁNICO realiza REVISIÓN, MECÁNICO supervisa a MECÁNICO" caption="Diagrama de partida: concesionario" >}}
 
@@ -568,7 +568,7 @@ Transformar una cadena de entidades débiles con **claves ajenas compuestas** y 
 
 #### Contexto
 
-El primer diagrama es el del [ejercicio 11 de la UD02](/ud02-modelo-er/ud02-practicas#ejercicio-11--casas-rurales-provincias-ciudades-y-habitaciones). El segundo es la variante de su ampliación.
+El primer diagrama es el del [ejercicio 11 de la UD02](/ud02-modelo-er/ud02-practicas#ejercicio-11--el-pueblo-provincias-ciudades-y-habitaciones). El segundo es la variante de su ampliación.
 
 {{< figura src="ud02/ej11.svg" alt="PROVINCIA tiene CIUDAD (débil). CASA_RURAL está en CIUDAD. CASA_RURAL dispone de HABITACIÓN (débil). CLIENTE se aloja en HABITACIÓN." caption="Diagrama 4.1: casas rurales" >}}
 
@@ -712,6 +712,8 @@ Obtén el esquema lógico relacional y enuncia las pérdidas semánticas. En *R1
 #### Ejercicio 1: Transformación de Relación Binaria 1:N (Clientes y Pedidos)
 
 **Enunciado:**
+**Ambientación:** la tienda online de merchandising de *Élite*.
+
 Un cliente realiza varios pedidos en una tienda online, pero cada pedido es realizado por un único cliente. De los clientes se conoce su `id_cliente`, `nombre`, `email` y `telefono`. De los pedidos se conoce `num_pedido`, `fecha_pedido` e `importe_total`.
 
 - a) Exprese el **Esquema Relacional Formal** derivado de esta relación $1:N$.
@@ -722,6 +724,8 @@ Un cliente realiza varios pedidos en una tienda online, pero cada pedido es real
 #### Ejercicio 2: Transformación de Relación Binaria N:M (Médicos y Pacientes)
 
 **Enunciado:**
+**Ambientación:** el hospital de *Hospital Central*.
+
 Un médico atiende a múltiples pacientes en un centro hospitalario y un paciente puede ser atendido por diferentes médicos especialistas. De los médicos se conoce `num_colegiado`, `nombre` y `especialidad`. De los pacientes se registra `id_paciente`, `dni`, `nombre` y `fecha_nacimiento`. De cada atención médica realizada se guarda la `fecha_atencion` y el `diagnostico`.
 
 - a) Exprese el **Esquema Relacional Formal** resultante para la relación $N:M$.
@@ -732,6 +736,8 @@ Un médico atiende a múltiples pacientes en un centro hospitalario y un pacient
 #### Ejercicio 3: Transformación de Relación 1:1 Opcional (Empleados y Vehículos de Empresa)
 
 **Enunciado:**
+**Ambientación:** los coches de empresa de *Recio Motors* (*La que se avecina*).
+
 Una empresa asigna un coche de empresa a ciertos empleados clave. Un empleado solo puede tener asignado como máximo un coche, y un coche pertenece como máximo a un único empleado. Algunos empleados no tienen coche asignado. De los empleados se conoce `id_empleado` y `nombre`. De los vehículos se conoce `matricula`, `modelo` y `color`.
 
 - a) Indique qué estrategia de propagación de clave es la más adecuada para evitar la presencia innecesaria de valores nulos.
@@ -742,6 +748,8 @@ Una empresa asigna un coche de empresa a ciertos empleados clave. Un empleado so
 #### Ejercicio 4: Entidad Débil por Identificación (Edificios y Aulas)
 
 **Enunciado:**
+**Ambientación:** el campus de *Merlí. Sapere Aude*.
+
 Un campus universitario organiza sus aulas dentro de edificios. De cada edificio se conoce `cod_edificio` y `nombre_edificio`. De las aulas se conoce `num_aula` (101, 102, 201...) y `capacidad_puestos`. El número de aula no es único en todo el campus, sino únicamente dentro de cada edificio determinado.
 
 - a) Exprese el **Esquema Relacional Formal** especificando la clave primaria compuesta de la tabla `AULA`.
@@ -752,6 +760,8 @@ Un campus universitario organiza sus aulas dentro de edificios. De cada edificio
 #### Ejercicio 5: Entidad Débil por Existencia e Identificación (Pacientes e Ingresos)
 
 **Enunciado:**
+**Ambientación:** las urgencias de *Los hombres de Paco*.
+
 En un hospital, un paciente puede realizar múltiples ingresos a lo largo del tiempo. De cada paciente se almacena `id_paciente`, `dni` y `nombre`. De cada ingreso se registra `num_ingreso` (1, 2, 3... secuencial para cada paciente), `fecha_ingreso` y `habitacion`. El ingreso no puede existir ni identificarse sin el paciente al que pertenece.
 
 - a) Exprese el esquema relacional formal para `PACIENTE` e `INGRESO`.
@@ -764,6 +774,8 @@ En un hospital, un paciente puede realizar múltiples ingresos a lo largo del ti
 #### Ejercicio 6: Relación Reflexiva 1:N (Organigrama de Empleados)
 
 **Enunciado:**
+**Ambientación:** el organigrama del *Ministerio del Tiempo*.
+
 En una empresa, cada empleado tiene un único jefe directo, que es a su vez otro empleado de la plantilla. De cada empleado se conoce `id_empleado`, `nombre`, `puesto` y `salario`.
 
 - a) Exprese el **Esquema Relacional Formal** indicando cómo se implementa la autorreferencia.
@@ -774,6 +786,8 @@ En una empresa, cada empleado tiene un único jefe directo, que es a su vez otro
 #### Ejercicio 7: Relación Reflexiva N:M (Estructura Compuesta de Piezas / BOM)
 
 **Enunciado:**
+**Ambientación:** la fábrica de Perfumerías de la Reina, en *Sueños de libertad*.
+
 Una fábrica de maquinaria registra piezas industriales. De cada pieza se almacena `cod_pieza`, `nombre_pieza` y `precio`. Una pieza puede estar compuesta por varias subpiezas componentes, y a su vez una subpieza forma parte de la fabricación de múltiples piezas superiores. En cada ensamblaje se indica la `cantidad_unidades`.
 
 - a) Exprese el **Esquema Relacional Formal** definiendo la tabla intermedia de ensamblaje.
@@ -784,6 +798,8 @@ Una fábrica de maquinaria registra piezas industriales. De cada pieza se almace
 #### Ejercicio 8: Atributo Multivaluado (Teléfonos de Contacto de Clientes)
 
 **Enunciado:**
+**Ambientación:** el banco que asalta la banda de *La casa de papel*.
+
 De cada cliente de un banco se conoce `id_cliente`, `nombre` y `email`. Un cliente puede disponer de varios números de teléfono de contacto (`telefono`).
 
 - a) Indique por qué no se pueden guardar los teléfonos como una lista separada por comas dentro de la misma celda de la tabla `CLIENTE`.
@@ -795,6 +811,8 @@ De cada cliente de un banco se conoce `id_cliente`, `nombre` y `email`. Un clien
 #### Ejercicio 9: Atributo Compuesto (Dirección Estructurada)
 
 **Enunciado:**
+**Ambientación:** los proveedores de las Galerías Velvet (*Velvet*).
+
 De cada proveedor se conoce su `nif`, `nombre_empresa` y el atributo compuesto `direccion` (formado por `calle`, `numero`, `piso`, `codigo_postal` y `ciudad`).
 
 - a) Muestre cómo se transforma el atributo compuesto al modelo relacional lógico.
@@ -805,6 +823,8 @@ De cada proveedor se conoce su `nif`, `nombre_empresa` y el atributo compuesto `
 #### Ejercicio 10: Transformación de Jerarquía EER (Opción de Tabla Única con Discriminador)
 
 **Enunciado:**
+**Ambientación:** la agencia de *Paquita Salas*.
+
 Una empresa clasifica a sus empleados en dos tipos exclusivos: `PROGRAMADOR` (con el atributo `lenguaje_principal`) y `ADMINISTRATIVO` (con el atributo `nivel_ofimatica`). Los atributos comunes a todos los empleados son `id_empleado`, `nombre` y `salario`.
 
 - a) Muestre el esquema relacional aplicando la estrategia de **Tabla Única** con una columna discriminadora `tipo_empleado`.
@@ -815,6 +835,8 @@ Una empresa clasifica a sus empleados en dos tipos exclusivos: `PROGRAMADOR` (co
 #### Ejercicio 11: Transformación de Jerarquía EER (Opción de Tabla por Categoría con Claves Foráneas)
 
 **Enunciado:**
+**Ambientación:** la agencia de *Paquita Salas* (la misma plantilla del ejercicio anterior).
+
 Considere la misma jerarquía de empleados del Ejercicio 10, pero aplique la estrategia de **Tabla para el Supertipo y Tablas para cada Subtipo**.
 
 - a) Exprese el **Esquema Relacional Formal** para las 3 tablas resultantes (`EMPLEADO`, `PROGRAMADOR`, `ADMINISTRATIVO`).
@@ -827,6 +849,8 @@ Considere la misma jerarquía de empleados del Ejercicio 10, pero aplique la est
 #### Ejercicio 12: Sistema de Gestión de Concesionario de Vehículos
 
 **Enunciado:**
+**Ambientación:** Recio Motors, el concesionario de *La que se avecina*.
+
 Diseñe el esquema relacional para un concesionario a partir de los siguientes requisitos:
 
 - **Clientes:** `id_cliente` (PK), `nif`, `nombre` y `telefono`.
@@ -842,6 +866,8 @@ Diseñe el esquema relacional para un concesionario a partir de los siguientes r
 #### Ejercicio 13: Gestión de Hoteles, Habitaciones Débiles y Reservas de Clientes
 
 **Enunciado:**
+**Ambientación:** el *Gran Hotel* de los Alarcón.
+
 Una cadena hotelera administra establecimientos:
 
 - **Hoteles:** `id_hotel` (PK), `nombre_hotel`, `ciudad`.
@@ -857,6 +883,8 @@ Una cadena hotelera administra establecimientos:
 #### Ejercicio 14: Sistema de Videoclub / Plataforma de Contenidos
 
 **Enunciado:**
+**Ambientación:** la plataforma de streaming de *Élite* y *La casa de papel*.
+
 Se requiere estructurar la base de datos de un videoclub digital:
 
 - **Películas:** `id_pelicula` (PK), `titulo`, `duracion`, `año`.
@@ -872,6 +900,8 @@ Se requiere estructurar la base de datos de un videoclub digital:
 #### Ejercicio 15: Fabricación Industrial y Control de Calidad
 
 **Enunciado:**
+**Ambientación:** la fábrica donde trabaja Antonio Alcántara en *Cuéntame cómo pasó*.
+
 Una fábrica de maquinaria de alta precisión organiza su catálogo:
 
 - **Líneas de Montaje:** `id_linea` (PK), `denominacion`.
@@ -886,6 +916,8 @@ Una fábrica de maquinaria de alta precisión organiza su catálogo:
 #### Ejercicio 16: Red de Transportes Urbanos (Líneas, Paradas Débiles y Transbordos)
 
 **Enunciado:**
+**Ambientación:** los autobuses de *Skam España*.
+
 Una empresa municipal de transportes gestiona autobuses:
 
 - **Líneas:** `cod_linea` (PK), `nombre_linea`, `frecuencia`.
@@ -901,6 +933,8 @@ Una empresa municipal de transportes gestiona autobuses:
 #### Ejercicio 17: Organización de Torneo Deportivo
 
 **Enunciado:**
+**Ambientación:** la liga de *Machos Alfa*.
+
 Una federación de baloncesto gestiona su liga:
 
 - **Equipos:** `id_equipo` (PK), `nombre_club`, `ciudad`.
@@ -916,6 +950,8 @@ Una federación de baloncesto gestiona su liga:
 #### Ejercicio 18: Análisis de Inconsistencias en Tablas Relacionales
 
 **Enunciado:**
+**Ambientación:** el almacén de las Galerías Velvet (*Velvet*).
+
 Dada la siguiente tabla `PEDIDO_DESNORMALIZADO`:
 
 | `num_pedido` | `fecha` | `id_cliente` | `nombre_cliente` | `id_producto` | `precio` | `cantidad` |
@@ -932,6 +968,8 @@ Dada la siguiente tabla `PEDIDO_DESNORMALIZADO`:
 #### Ejercicio 19: Definición de Acciones de Integridad Referencial
 
 **Enunciado:**
+**Ambientación:** el instituto Zurbarán de *Física o Química*.
+
 Considere las tablas `CURSO(id_curso [PK], nombre)` y `ALUMNO(id_alumno [PK], nombre, id_curso [FK])`.
 
 - Explique qué ocurre en la tabla `ALUMNO` al borrar el curso 5 en cada uno de los siguientes escenarios de configuración de la clave foránea:
@@ -944,6 +982,8 @@ Considere las tablas `CURSO(id_curso [PK], nombre)` y `ALUMNO(id_alumno [PK], no
 #### Ejercicio 20: Caso Integrador de Hospital y Tarjetas de Visita Débiles
 
 **Enunciado:**
+**Ambientación:** el hospital de *Hospital Central*.
+
 Un centro sanitario gestiona sus pacientes e ingresos:
 
 - **Pacientes:** `id_paciente` (PK), `dni`, `nombre`.

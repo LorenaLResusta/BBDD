@@ -53,7 +53,7 @@ Aplicar la metodologia de cinc passos per a construir un diagrama E/R complet a 
 
 #### Context
 
-La biblioteca d'un barri vol deixar el quadern i passar a una base de dades. El seu responsable et conta com treballa.
+Montepinar, el barri de *La que se avecina*, estrena biblioteca i el president de la comunitat vol que tot conste en una base de dades. La biblioteca d'un barri vol deixar el quadern i passar a una base de dades. El seu responsable et conta com treballa.
 
 #### Enunciat
 
@@ -154,7 +154,7 @@ erDiagram
 
 #### Context
 
-Tres amics preparen el llançament d'un servei de vídeo sota demanda i et demanen el model conceptual. Este és el correu que t'envien.
+Després de l'èxit d'*Élite* i *La casa de papel*, tothom vol la seua pròpia plataforma de streaming. Tres amics preparen el llançament d'un servei de vídeo sota demanda i et demanen el model conceptual. Este és el correu que t'envien.
 
 #### Enunciat
 
@@ -206,7 +206,7 @@ Afig **sèries**, compostes per temporades (1, 2, 3...) i episodis numerats dins
 
 #### Context
 
-Una clínica veterinària de grandària mitjana estrena sistema de gestió. La gerent descriu el seu dia a dia.
+Fins i tot el gos d'*Los Serrano* té fitxa en aquesta clínica. Una clínica veterinària de grandària mitjana estrena sistema de gestió. La gerent descriu el seu dia a dia.
 
 #### Enunciat
 
@@ -308,7 +308,7 @@ Identificadors inestables, atributs derivats, atributs multivaluats amagats en u
 
 #### Context
 
-Una cooperativa d'oli vol registrar la traçabilitat de la seua producció. Esta és la transcripció de la reunió amb el gerent. Com ocorre en la realitat, **el client no t'ho conta tot, es contradiu i barreja coses que no són del teu sistema**.
+A *El pueblo* també es fa oli, i la cooperativa del poble vol saber quina botella ix de quina olivera. Una cooperativa d'oli vol registrar la traçabilitat de la seua producció. Esta és la transcripció de la reunió amb el gerent. Com ocorre en la realitat, **el client no t'ho conta tot, es contradiu i barreja coses que no són del teu sistema**.
 
 #### Enunciat
 
@@ -365,7 +365,7 @@ Una cooperativa d'oli vol registrar la traçabilitat de la seua producció. Esta
 
 #### Context
 
-Un disseny que només guarda «el que és veritat ara» oblida el que ja ha passat. Una empresa de lloguer de cotxes necessita poder explicar una factura de fa tres anys.
+Quan els Alcántara de *Cuéntame cómo pasó* lloguen un cotxe per a anar al poble, mai no saben qui el tenia abans. Un disseny que només guarda «el que és veritat ara» oblida el que ja ha passat. Una empresa de lloguer de cotxes necessita poder explicar una factura de fa tres anys.
 
 #### Enunciat
 
@@ -412,7 +412,7 @@ Un disseny que només guarda «el que és veritat ara» oblida el que ja ha pass
 
 #### Context
 
-En moltes empreses no hi ha requisits escrits: hi ha **documents** (albarans, factures, fulls de càlcul) i la gent que els usa. Un bon analista sap llegir un document i deduir el model que hi ha darrere.
+Distribuciones Marina subministra gènere al bar d'*Los Serrano* i tot s'apunta en un albarà. En moltes empreses no hi ha requisits escrits: hi ha **documents** (albarans, factures, fulls de càlcul) i la gent que els usa. Un bon analista sap llegir un document i deduir el model que hi ha darrere.
 
 #### Enunciat
 
@@ -476,7 +476,7 @@ Base imposable: 267,60 € · IVA 10 % sobre 23,40 €: 2,34 € · IVA 21 % sob
 
 #### Context
 
-Un bon disseny no es valora per com es veu, sinó per si **suporta les situacions reals** del negoci. Una tècnica útil és escriure casos de prova i comprovar si el disseny pot representar-los.
+El club de pàdel on queden els dijous els de *Machos Alfa* té dues propostes de disseny. Un bon disseny no es valora per com es veu, sinó per si **suporta les situacions reals** del negoci. Una tècnica útil és escriure casos de prova i comprovar si el disseny pot representar-los.
 
 #### Enunciat
 
@@ -523,7 +523,7 @@ Un club de pàdel ha rebut dos propostes de model i no sap quina triar. El club 
 
 #### Context
 
-Una associació cultural organitza diversos festivals a l'any i du la programació en fulls de càlcul que ja ningú entén. T'han enviat l'apartat de **requisits** de la licitació. Com en un document real, **hi ha dades repetides, frases ambigües i parts que no pertanyen al sistema**. El teu treball és separar el que cal modelar del que no, i deixar per escrit cada decisió que prengues.
+Si a *Élite* una festa ja acaba en drama, imagina un festival sencer. Una associació cultural organitza diversos festivals a l'any i du la programació en fulls de càlcul que ja ningú entén. T'han enviat l'apartat de **requisits** de la licitació. Com en un document real, **hi ha dades repetides, frases ambigües i parts que no pertanyen al sistema**. El teu treball és separar el que cal modelar del que no, i deixar per escrit cada decisió que prengues.
 
 #### Enunciat
 
@@ -590,7 +590,7 @@ L'associació vol una **llista d'espera de voluntaris** per edició i que un vol
 
 #### Context
 
-Una editorial independent publica novel·la, poesia i còmic, tradueix obres d'altres idiomes i compila antologies. Hui du el catàleg i els contractes en documents de text solts i ha tingut problemes perquè **ningú no sabia quin percentatge de drets corresponia a cada persona d'una obra**. Et lliuren este resum de requisits.
+Valeria, l'escriptora de la sèrie *Valeria*, ha fundat la seua pròpia editorial independent. Una editorial independent publica novel·la, poesia i còmic, tradueix obres d'altres idiomes i compila antologies. Hui du el catàleg i els contractes en documents de text solts i ha tingut problemes perquè **ningú no sabia quin percentatge de drets corresponia a cada persona d'una obra**. Et lliuren este resum de requisits.
 
 #### Enunciat
 
@@ -657,7 +657,7 @@ Algunes obres tenen **coautoria**. Canvia alguna cosa en el model? Afig ara que 
 
 #### Context
 
-Un taller de manteniment aeronàutic treballa sota una normativa estricta: **cada tasca ha de poder demostrar qui la va fer, amb quina habilitació i sobre quina peça concreta**. El responsable de qualitat et lliura la descripció del que el sistema ha de registrar. Part de les regles estan escrites com a «ha de» i unes altres apareixen de passada: **ambdues són requisits**.
+El taller manté els avions de l'aerolínia de *Berlín* (vegeu l'exercici 31). Un taller de manteniment aeronàutic treballa sota una normativa estricta: **cada tasca ha de poder demostrar qui la va fer, amb quina habilitació i sobre quina peça concreta**. El responsable de qualitat et lliura la descripció del que el sistema ha de registrar. Part de les regles estan escrites com a «ha de» i unes altres apareixen de passada: **ambdues són requisits**.
 
 #### Enunciat
 
@@ -727,7 +727,7 @@ L'autoritat aeronàutica exigeix que cada **certificació d'ordre** quede signad
 
 #### Context
 
-Un administrador de finques gestiona desenes de comunitats de propietaris amb fulls de càlcul i paper. Vol un sistema que li permeta saber **qui és amo de què en cada moment, què es va votar en cada junta i qui deu diners**. Esta és la descripció del client. Com sol ocórrer, barreja regles legals amb costums de la casa, i no totes tenen el mateix pes.
+Juntes de veïns? Pregunta-li a *La que se avecina*: la comunitat de Montepinar viu de votacions. Un administrador de finques gestiona desenes de comunitats de propietaris amb fulls de càlcul i paper. Vol un sistema que li permeta saber **qui és amo de què en cada moment, què es va votar en cada junta i qui deu diners**. Esta és la descripció del client. Com sol ocórrer, barreja regles legals amb costums de la casa, i no totes tenen el mateix pes.
 
 #### Enunciat
 
@@ -1551,7 +1551,7 @@ Llig l'[entrevista amb la direcció d'estudis](/guia/proyecto-edugest#1-enunciat
 
 Entitats, atributs, identificadors, relacions 1:N i N:M, atributs de relació i una primera relació reflexiva.
 
-### Exercici 1 · Vendes: clients, productes i proveïdors
+### Exercici 1 · Merchandatge d'Élite: clients, productes i proveïdors
 
 {{< practica num="1" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="1" ra="RA6: a, d, e" sgbd="draw.io o paper" entrega="Diagrama EER + supòsits" >}}
 
@@ -1564,11 +1564,11 @@ Identificar entitats, atributs i identificadors i distingir una relació 1:N d'u
 
 #### Context
 
-Una xicoteta empresa de distribució vol informatitzar les seues vendes i les seues compres a proveïdors.
+La distribuïdora oficial del merchandatge d'*Élite* vol informatitzar les seues vendes i les seues compres a proveïdors.
 
 #### Enunciat
 
-> Som una xicoteta distribuïdora i venem a particulars. Quan algú ens compra apuntem qui és: el seu DNI, com es diu i quins cognoms té, a quina adreça li enviem la comanda i quan va nàixer, perquè el dia del seu aniversari li fem un descompte. Una mateixa persona ens compra coses distintes al llarg de l'any i, com és lògic, cada article acaba a casa de molts clients.
+> Som la distribuïdora oficial del merchandatge d'*Élite* (dessuadores de Las Encinas, polseres, tasses…) i venem a particulars. Quan algú ens compra apuntem qui és: el seu DNI, com es diu i quins cognoms té, a quina adreça li enviem la comanda i quan va nàixer, perquè el dia del seu aniversari li fem un descompte. Una mateixa persona ens compra coses distintes al llarg de l'any i, com és lògic, cada article acaba a casa de molts clients.
 >
 > Al catàleg cada article té el seu codi, el seu nom i el que costa la unitat. No fabriquem res: cada article se'l serveix sempre el mateix proveïdor i no el canviem de l'un a l'altre, encara que un proveïdor ens subministra molts articles. Del proveïdor ens fa falta el NIF, el nom amb què s'anuncia i la seua adreça, per a enviar-li les comandes de reposició. La furgoneta de repartiment no entra ací, la portem a banda.
 
@@ -1610,7 +1610,7 @@ L'empresa vol guardar la **data** i la **quantitat** de cada compra. On col·loq
 
 ---
 
-### Exercici 2 · Pel·lícules en streaming
+### Exercici 2 · Pel·lícules en streaming: del plató al cinema
 
 {{< practica num="2" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="1" ra="RA6: a, d, e" sgbd="draw.io o paper" entrega="Diagrama EER + supòsits" >}}
 
@@ -1627,6 +1627,8 @@ Una plataforma de cinema sota demanda vol recomanar pel·lícules i avisar el cl
 
 #### Enunciat
 
+> Els actors d'*Élite* i *La casa de papel* fan el salt al cinema i una plataforma de streaming vol ordenar les seues pel·lícules per a recomanar-les al seu públic.
+>
 > Uns amics munten una plataforma de pel·lícules per internet i volen la base de dades abans d'escriure l'aplicació. Per a donar-se d'alta el client ens dona el seu NIF, el seu nom i cognoms, un correu i la seua adreça; a més, cada client té al compte un saldo amb el qual va pagant els lloguers.
 >
 > Allò important és el catàleg. Cada pel·lícula té el seu títol, l'any en què es va estrenar i quant dura, i la identifiquem internament amb un codi. La gent la troba pel títol, però també pel gènere (cada pel·lícula és d'un, comèdia, drama, terror…) i pels actors que hi apareixen; d'ells guardem un codi, el nom complet i d'on són.
@@ -1673,7 +1675,7 @@ Una pel·lícula pot pertànyer a **diversos gèneres** (comèdia romàntica, te
 
 ---
 
-### Exercici 3 · Multes de trànsit municipals
+### Exercici 3 · Multes de trànsit a Montepinar
 
 {{< practica num="3" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="1" ra="RA6: a, d, e" sgbd="draw.io o paper" entrega="Diagrama EER + justificació" >}}
 
@@ -1686,11 +1688,11 @@ Decidir si un fet repetible (la multa) es modela com a relació amb atributs o c
 
 #### Context
 
-Un ajuntament vol gestionar les infraccions de trànsit i les multes associades.
+L'ajuntament de Montepinar (el de *La que se avecina*) vol gestionar les infraccions de trànsit i les multes associades.
 
 #### Enunciat
 
-> L'ajuntament vol controlar les multes de trànsit. El primer és saber de quins cotxes parlem: de cadascun s'anota la matrícula, si és turisme, moto o furgoneta, la marca i el model. Cada vehicle té un amo censat al municipi, al qual cal poder escriure a casa i que s'identifica amb el DNI i el seu nom complet; un veí pot tindre diversos cotxes.
+> L'ajuntament de Montepinar, el de *La que se avecina*, vol controlar les multes de trànsit del barri, començant per les del garatge de Coque. El primer és saber de quins cotxes parlem: de cadascun s'anota la matrícula, si és turisme, moto o furgoneta, la marca i el model. Cada vehicle té un amo censat al municipi, al qual cal poder escriure a casa i que s'identifica amb el DNI i el seu nom complet; un veí pot tindre diversos cotxes.
 >
 > La policia local no s'inventa les infraccions: hi ha una llista oficial en què cadascuna té el seu codi, un text que la descriu i el que cal pagar per ella. Cada vegada que un cotxe en comet una es posa una multa en què consta el dia en què es va posar i el dia en què es va pagar (si és que es paga). Un cotxe pot acumular multes durant anys, fins i tot per la mateixa cosa, i una infracció de la llista la comet molta gent.
 
@@ -1733,7 +1735,7 @@ La multa pot **recórrer-se** diverses vegades (data del recurs i resolució). C
 
 ---
 
-### Exercici 4 · Naviliera: capitans, contenidors, ports i vaixells
+### Exercici 4 · Alta mar: capitans, contenidors, ports i vaixells
 
 {{< practica num="4" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="1" ra="RA6: a, d, e" sgbd="draw.io o paper" entrega="Diagrama EER + supòsits" >}}
 
@@ -1746,11 +1748,11 @@ Encadenar diverses relacions 1:N i modelar un històric mitjançant una relació
 
 #### Context
 
-Una naviliera internacional necessita gestionar la seua flota i les mercaderies que transporta.
+La naviliera d'*Alta mar* necessita gestionar la seua flota i les mercaderies que transporta.
 
 #### Enunciat
 
-> Una naviliera xicoteta ens demana ordenar el seu paperam. Treballen amb capitans, dels quals necessiten saber el DNI, com es diuen, un telèfon, on viuen (adreça i població) i quant cobren. Cada capità s'encarrega de portar molts contenidors, però cada contenidor el porta sempre un únic capità.
+> La naviliera del transatlàntic Bonanza, el d'*Alta mar*, ens demana ordenar el seu paperam, perquè en l'últim viatge es van perdre dos contenidors i ningú sap de qui eren. Treballen amb capitans, dels quals necessiten saber el DNI, com es diuen, un telèfon, on viuen (adreça i població) i quant cobren. Cada capità s'encarrega de portar molts contenidors, però cada contenidor el porta sempre un únic capità.
 >
 > Els contenidors porten un codi pintat al costat i una descripció del que viatja dins; a més s'apunten les senyes de qui els envia i de qui els rep. Tot contenidor té un únic port de destinació i a un port (amb el seu codi i el seu nom) poden arribar contenidors de tota mena.
 >
@@ -1799,7 +1801,7 @@ La naviliera vol saber en quin **vaixell** viatja cada contenidor. Com es modifi
 
 ---
 
-### Exercici 5 · Parentiu i filiació
+### Exercici 5 · Parentesc i filiació: la família Alcántara
 
 {{< practica num="5" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="1" ra="RA6: d, h" sgbd="draw.io o paper" entrega="Diagrama EER + anàlisi de l'enunciat" >}}
 
@@ -1812,11 +1814,11 @@ Modelar una relació **reflexiva** amb rols, detectar una cardinalitat mínima i
 
 #### Context
 
-Un registre genealògic vol guardar qui és progenitor de qui.
+Els fans de *Cuéntame cómo pasó* volen guardar qui és progenitor de qui en la família Alcántara i el seu entorn.
 
 #### Enunciat
 
-> Volem registrar el parentiu entre les persones d'un municipi. De cada persona guardem el DNI, el nom, el domicili i un telèfon de contacte. Allò que de debò importa és de qui és fill cadascú: hi ha persones que han tingut diversos fills i altres cap, però al registre no pot aparéixer ningú de qui no sapiguem qui és el seu pare o la seua mare.
+> Volem registrar el parentesc entre els personatges de *Cuéntame cómo pasó*, des de l'avi Herminio fins als nets Alcántara. De cada persona guardem el DNI, el nom, el domicili i un telèfon de contacte. Allò que de debò importa és de qui és fill cadascú: hi ha persones que han tingut diversos fills i altres cap, però al registre no pot aparéixer ningú de qui no sapiguem qui és el seu pare o la seua mare.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -1869,7 +1871,7 @@ Es vol distingir la filiació **biològica** de l'**adoptiva** i registrar la da
 
 Relacions 1:1, N:M reflexives, entitats febles, atributs compostos, multivaluats i derivats, i diverses relacions entre les mateixes entitats.
 
-### Exercici 6 · Institut: mòduls, matrícules, delegats i armariets
+### Exercici 6 · Institut Zurbarán: mòduls, matrícules, delegats i casellers
 
 {{< practica num="6" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + restriccions textuals" >}}
 
@@ -1882,11 +1884,11 @@ Distingir una relació 1:1 opcional, una N:M reflexiva i una 1:N reflexiva en un
 
 #### Context
 
-Un institut d'Educació Secundària i Formació Professional dissenya la seua base de dades de docència.
+L'institut Zurbarán (el de *Física o Química*) dissenya la seua base de dades de docència.
 
 #### Enunciat
 
-> Un institut necessita ordenar la seua estructura acadèmica. El professorat està donat d'alta amb el seu DNI, el seu nom, la seua adreça i el seu telèfon. Cadascú pot donar diversos mòduls, però cada mòdul (que té un codi i un nom) el dona una sola persona.
+> L'institut Zurbarán, el de *Física o Química*, necessita ordenar la seua estructura acadèmica abans que arribe la inspecció. El professorat està donat d'alta amb el seu DNI, el seu nom, la seua adreça i el seu telèfon. Cadascú pot donar diversos mòduls, però cada mòdul (que té un codi i un nom) el dona una sola persona.
 >
 > Entre mòduls hi ha dependències: per a cursar-ne alguns cal haver passat abans per altres, i hi ha mòduls que es demanen per a diversos més. De l'alumnat s'anota el número d'expedient, el nom i cognoms, quan va nàixer i el curs en què està. Un alumne es pot matricular d'un sol mòdul o de diversos i sempre en queda constància del dia que es va matricular.
 >
@@ -1936,7 +1938,7 @@ El centre decidix guardar els **grups** com a entitat (codi, curs, aula). Rediss
 
 ---
 
-### Exercici 7 · Hospital: pacients, ingressos i metges
+### Exercici 7 · Urgències per a Los hombres de Paco: pacients, ingressos i metges
 
 {{< practica num="7" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="2" ra="RA6: a, d, e" sgbd="draw.io o paper" entrega="Diagrama EER + supòsits" >}}
 
@@ -1949,11 +1951,11 @@ Reconéixer una **entitat feble** i la seua identificació per dependència amb 
 
 #### Context
 
-Una clínica vol controlar els ingressos dels seus pacients i els metges que els atenen.
+L'hospital que atén els guàrdies de *Los hombres de Paco* vol controlar els ingressos dels seus pacients i els metges que els atenen.
 
 #### Enunciat
 
-> Un hospital vol informatitzar la gestió dels ingressos. Als pacients els identifica un codi i s'anoten el seu nom, cognoms, telèfon, quan van nàixer i on viuen, amb el carrer, la població, la província i el codi postal per separat perquè després es fan cartes per districtes. Dels metges s'arrepleguen el codi, el nom, els cognoms, un telèfon i l'especialitat.
+> Els guàrdies de *Los hombres de Paco* acaben tantes voltes a urgències que l'hospital vol informatitzar la gestió dels ingressos. Als pacients els identifica un codi i s'anoten el seu nom, cognoms, telèfon, quan van nàixer i on viuen, amb el carrer, la població, la província i el codi postal per separat perquè després es fan cartes per districtes. Dels metges s'arrepleguen el codi, el nom, els cognoms, un telèfon i l'especialitat.
 >
 > Cada vegada que un pacient ingressa se li assigna habitació i llit, i s'anota el dia d'entrada. Cada pacient té la seua pròpia història, de manera que els seus ingressos es numeren 1, 2, 3… i, naturalment, un ingrés no té sentit si no se sap de qui és. Tot ingrés està a càrrec d'un únic metge, que en pot portar molts a la vegada.
 
@@ -1996,7 +1998,7 @@ Un ingrés pot ser atés per **diversos metges** que fan torns. Com canvia *até
 
 ---
 
-### Exercici 8 · Clínica veterinària: calendari de vacunació
+### Exercici 8 · Veterinari de Desengaño 21: calendari de vacunació
 
 {{< practica num="8" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + supòsits" >}}
 
@@ -2009,11 +2011,11 @@ Separar les dades que es **calculen** (edat, pròxima vacuna) de les que es guar
 
 #### Context
 
-Una clínica veterinària vol avisar els amos de les vacunes pendents dels seus animals.
+La clínica veterinària d'*Aquí no hay quien viva* vol avisar els veïns de les vacunes pendents dels seus animals.
 
 #### Enunciat
 
-> Una clínica veterinària està farta que a la gent se li passe la data de les vacunes i vol avisar els amos pel seu compte. Els amos són clients dels quals es guarda el DNI, el nom complet, l'adreça, el telèfon i el correu; un client sol portar més d'un animal.
+> La clínica veterinària dels veïns d'*Aquí no hay quien viva* (la del número 21 del carrer Desengaño) està cansada que a la gent se li passe la data de les vacunes i vol avisar els amos per compte seu. Els amos són clients dels quals es guarda el DNI, el nom complet, l'adreça, el telèfon i el correu; un client sol portar més d'un animal.
 >
 > De cada animal hi ha una fitxa amb un codi, el seu nom, si és gos o gat o una altra cosa, la raça i quan va nàixer. En pantalla ha d'aparéixer també l'edat. Es vacunen amb productes del catàleg de la clínica, que tenen un codi, un nom i cada quants dies cal repetir-los. Quan se'n posa una, s'apunta el dia; a partir d'ací, i de l'última vegada, se sap quan toca la següent.
 >
@@ -2059,7 +2061,7 @@ Algunes vacunes es posen **durant una visita**. Com relacionaries l'administraci
 
 ---
 
-### Exercici 9 · Botiga en línia: comandes, línies i categories
+### Exercici 9 · Velvet en línia: comandes, línies i categories
 
 {{< practica num="9" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + atributs derivats" >}}
 
@@ -2072,11 +2074,11 @@ Combinar entitat feble, relació reflexiva, atributs multivaluats, compostos i d
 
 #### Context
 
-Una botiga de roba en línia vol substituir el seu full de càlcul per una base de dades.
+Les Galeries Velvet (les de *Velvet*) volen substituir el seu full de càlcul de roba en línia per una base de dades.
 
 #### Enunciat
 
-> Muntem una botiga a internet. Quan algú es registra ens dona un correu (no s'admeten dos comptes amb el mateix), el seu nom i cognoms, l'adreça de facturació (carrer, codi postal i ciutat) i tots els telèfons que vulga deixar-nos.
+> Les Galeries Velvet, les de la sèrie *Velvet*, obrin per fi la seua botiga a internet. Quan algú es registra ens dona un correu (no s'admeten dos comptes amb el mateix), el seu nom i cognoms, l'adreça de facturació (carrer, codi postal i ciutat) i tots els telèfons que vulga deixar-nos.
 >
 > El catàleg té un codi per article, un nom, una descripció, el preu i quantes unitats queden. Cada article es mostra en una categoria, i les categories s'aniuen: dins de «Roba» hi ha «Samarretes», i dins de «Samarretes» podria haver-hi unes altres.
 >
@@ -2121,7 +2123,7 @@ Un producte pot pertànyer a **diverses categories** alhora. Canvia la cardinali
 
 ---
 
-### Exercici 10 · Concessionari: vendes, revisions i mecànics
+### Exercici 10 · Recio Motors: vendes, revisions i mecànics
 
 {{< practica num="10" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + supòsits" >}}
 
@@ -2134,11 +2136,11 @@ Combinar una entitat feble amb una relació reflexiva de supervisió i decidir c
 
 #### Context
 
-Un concessionari gestiona la venda de cotxes i les revisions del seu taller.
+Recio Motors (el concessionari de *La que se avecina*) gestiona la venda de cotxes i les revisions del seu taller.
 
 #### Enunciat
 
-> Un concessionari de cotxes vol portar les seues vendes i el seu taller. De cada cotxe s'anoten la matrícula, la marca, el model, el color i el preu al qual es ven. Els compradors són persones que s'identifiquen internament amb un codi, a les quals es demana el NIF i de les quals es guarda el nom, l'adreça, la ciutat i el telèfon. Una persona pot comprar diversos cotxes, però cada cotxe es ven a una sola.
+> Antonio Recio, el de *La que se avecina*, ha obert un concessionari («Recio Motors, el cotxe de qualitat!») i vol portar les seues vendes i el seu taller. De cada cotxe s'anoten la matrícula, la marca, el model, el color i el preu al qual es ven. Els compradors són persones que s'identifiquen internament amb un codi, a les quals es demana el NIF i de les quals es guarda el nom, l'adreça, la ciutat i el telèfon. Una persona pot comprar diversos cotxes, però cada cotxe es ven a una sola.
 >
 > Després de la venda, els cotxes passen pel taller. Les revisions d'un cotxe es numeren en l'ordre en què es van fer (la primera, la segona…) i en cadascuna es deixa constància de si es va canviar el filtre, l'oli o els frens, i de qualsevol altre treball. La fa sempre un sol mecànic, del qual tenim el codi d'empleat, el DNI, el nom, el telèfon i l'adreça; un mecànic fa moltíssimes revisions. Al taller hi ha un supervisor entre els mecànics que reparteix el treball als altres.
 
@@ -2181,7 +2183,7 @@ El taller vol guardar **quines peces** es van canviar en cada revisió i quantes
 
 ---
 
-### Exercici 11 · Cases rurals: províncies, ciutats i habitacions
+### Exercici 11 · El pueblo: províncies, ciutats i habitacions
 
 {{< practica num="11" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + identificadors complets" >}}
 
@@ -2194,11 +2196,11 @@ Encadenar dues entitats febles per identificació i modelar una estada repetible
 
 #### Context
 
-Una central de reserves de turisme rural vol gestionar la seua oferta d'allotjaments.
+Una central de reserves de turisme rural, inspirada en la sèrie *El pueblo*, vol gestionar la seua oferta d'allotjaments.
 
 #### Enunciat
 
-> Una associació de turisme rural vol publicar un portal. Per a ordenar la informació comencen pel territori: de cada província tenen el nom, la superfície i la població total; dins d'elles estan les ciutats, amb el seu nom i els seus habitants. Ull, que a Espanya hi ha moltes ciutats anomenades «Villanueva», així que el nom d'una ciutat només serveix per a distingir-la dins de la seua província.
+> Després de l'èxit de la sèrie *El pueblo*, una associació de turisme rural vol publicar un portal per als fans que somien a passar el cap de setmana en un poble de sèrie. Per a ordenar la informació comencen pel territori: de cada província tenen el nom, la superfície i la població total; dins d'elles estan les ciutats, amb el seu nom i els seus habitants. Ull, que a Espanya hi ha moltes ciutats anomenades «Villanueva», així que el nom d'una ciutat només serveix per a distingir-la dins de la seua província.
 >
 > A cada ciutat hi ha cases rurals, i cada casa pertany a una sola ciutat. Una casa s'anuncia amb un nom que mai no es repeteix, diu on està i avisa de si serveix esmorzar. Per dins, cada casa té habitacions que es numeren a la pròpia casa (la 1, la 2…), amb una descripció i el que costa passar una nit.
 >
@@ -2244,7 +2246,7 @@ Variant: a més de llogar, es vol saber quines **persones viuen** en cada casa (
 
 ---
 
-### Exercici 12 · Consultora de programari: projectes, tasques i desenvolupadors
+### Exercici 12 · Ministerio del Tiempo: projectes, tasques i desenvolupadors
 
 {{< practica num="12" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + restriccions" >}}
 
@@ -2257,11 +2259,11 @@ Modelar una jerarquia de dependència (client → projecte → tasca) amb una N:
 
 #### Context
 
-Una consultora tecnològica vol controlar els seus projectes i les hores del seu equip.
+La consultora tecnològica del *Ministerio del Tiempo* vol controlar els seus projectes i les hores del seu equip.
 
 #### Enunciat
 
-> Una consultora de programari gestiona els seus projectes des d'un full de càlcul que ja no pot més. Els seus clients són empreses: s'anoten el CIF, la raó social, el web i un telèfon. Un client encarrega diversos projectes, però cada projecte és d'un únic client.
+> La consultora de programari que desenvolupa les aplicacions del *Ministerio del Tiempo* gestiona els seus projectes des d'un full de càlcul que ja no dona més de si (i que, per descomptat, mai no coincideix amb el seu propi calendari). Els seus clients són empreses: s'anoten el CIF, la raó social, el web i un telèfon. Un client encarrega diversos projectes, però cada projecte és d'un únic client.
 >
 > Cada projecte té un codi, un nom, el dia en què arranca i un pressupost. Es trosseja en tasques que es numeren dins del projecte (la 1, la 2…) i de cadascuna s'anoten què cal fer, quantes hores es calcula que durà i en quin punt està: pendent, en procés o acabada.
 >
@@ -2306,7 +2308,7 @@ Es vol que cada desenvolupador tinga **un únic rol** per projecte (cap de proje
 
 ---
 
-### Exercici 13 · Cadena hotelera: hotels, habitacions i reserves
+### Exercici 13 · Gran Hotel: hotels, habitacions i reserves
 
 {{< practica num="13" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + restriccions" >}}
 
@@ -2319,11 +2321,11 @@ Modelar un cas de reserves amb entitat feble, N:M repetible entre les mateixes e
 
 #### Context
 
-Una cadena hotelera estructura el sistema central de reserves dels seus establiments.
+La cadena hotelera de *Gran Hotel* estructura el sistema central de reserves dels seus establiments.
 
 #### Enunciat
 
-> Una cadena hotelera vol unificar el seu sistema de reserves. Cada hotel té un codi intern, un nom, les estrelles que ostenta, la seua adreça i la ciutat on està.
+> La família Alarcón, la de *Gran Hotel*, ha convertit el seu hotel en una cadena i vol unificar el seu sistema de reserves. Cada hotel té un codi intern, un nom, les estrelles que ostenta, la seua adreça i la ciutat on està.
 >
 > Dins de l'hotel, les habitacions es numeren com a qualsevol hotel (101, 102, 201…) i per això el 101 d'un hotel no és el 101 d'un altre; cadascuna és individual, doble o suite i té un preu per nit. Qui reserva és un client del qual ens quedem amb el DNI, el nom, el correu i un telèfon; reserva habitacions concretes per a unes dates (s'apunta quan entra i quan ix) i s'anota el que va costar l'estada en total. És habitual que torne i demane la mateixa habitació.
 >
@@ -2368,7 +2370,7 @@ Una reserva pot incloure **diverses habitacions** (una família en reserva dos).
 
 ---
 
-### Exercici 14 · Universitat: facultats, departaments i càtedres
+### Exercici 14 · Merlí. Sapere Aude: facultats, departaments i càtedres
 
 {{< practica num="14" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + restriccions" >}}
 
@@ -2381,11 +2383,11 @@ Combinar una cadena de dependències jeràrquiques, una relació 1:1 amb condici
 
 #### Context
 
-Una universitat pública organitza la seua estructura acadèmica i investigadora.
+La universitat de *Merlí. Sapere Aude* organitza la seua estructura acadèmica i investigadora.
 
 #### Enunciat
 
-> Una universitat vol reflectir com s'organitza. Hi ha facultats, amb un codi i un nom, i cadascuna agrupa diversos departaments, que tenen un codi i es dediquen a una àrea de coneixement.
+> La universitat de *Merlí. Sapere Aude* vol reflectir com s'organitza, perquè l'alumnat deixe de perdre's entre despatxos. Hi ha facultats, amb un codi i un nom, i cadascuna agrupa diversos departaments, que tenen un codi i es dediquen a una àrea de coneixement.
 >
 > Als departaments es posen en marxa càtedres d'investigació. Una càtedra es numera dins del seu departament (la primera, la segona…) i es coneix pel seu nom i pel pressupost que rep. Les persones del professorat tenen un número de registre, un DNI, un nom, una categoria i el dia en què es van incorporar; cadascuna està adscrita a un sol departament. Al capdavant d'una càtedra es pot posar un professor, però només si és catedràtic. D'altra banda, la universitat té el costum que els professors veterans tutoritzen els novells.
 
@@ -2428,7 +2430,7 @@ Els **catedràtics** tenen dades pròpies (any d'oposició, sexennis). Convertei
 
 ---
 
-### Exercici 15 · Centre de menors: residents, educadors i informes
+### Exercici 15 · El Internado: residents, educadors i informes
 
 {{< practica num="15" etiqueta="Exercici" tipo="Autónoma" duracion="1 sessió" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + nota de protecció de dades" >}}
 
@@ -2441,11 +2443,11 @@ Modelar una entitat feble amb esborrat en cascada i valorar la protecció de dad
 
 #### Context
 
-Un centre d'acolliment de menors necessita un registre informatitzat de residents i dels seus expedients.
+L'antic internat d'*El Internado: Las Cumbres*, reconvertit en centre d'acollida de menors, necessita un registre informatitzat de residents i dels seus expedients.
 
 #### Enunciat
 
-> Un centre d'acollida de menors vol portar el seguiment de cada xiquet i xiqueta. De cada menor resident tenen un número d'expedient, nom i cognoms, data de naixement i com localitzar els seus tutors legals: el nom del pare, el de la mare i un telèfon.
+> L'antic internat d'*El Internado: Las Cumbres*, ara reconvertit en centre d'acollida de menors, vol per fi portar un seguiment ordenat de cada xic i xica. De cada menor resident tenen un número d'expedient, nom i cognoms, data de naixement i com localitzar els seus tutors legals: el nom del pare, el de la mare i un telèfon.
 >
 > L'equip tècnic el formen educadors, amb el seu número de col·legiat, DNI, nom i cognoms i una especialitat (psicologia, treball social o educació social). Cada educador tutela diversos menors, però cada menor té un sol educador de referència. Per damunt hi ha una figura de coordinació, també educador, que supervisa la resta de l'equip.
 >
@@ -2497,7 +2499,7 @@ Un menor pot ser **traslladat** a un altre centre i tornar anys després. Com ca
 
 Relacions ternàries, agregació, dues relacions entre les mateixes entitats, llistes de materials, cardinalitats màximes concretes i primera generalització.
 
-### Exercici 16 · Transport urbà: línies, parades i torns
+### Exercici 16 · Autobusos de Skam España: línies, parades i torns
 
 {{< practica num="16" etiqueta="Exercici" tipo="Autónoma" duracion="1-2 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + anàlisi de la ternària" >}}
 
@@ -2510,11 +2512,11 @@ Introduir una relació **ternària** junt amb una entitat feble i una N:M reflex
 
 #### Context
 
-L'empresa municipal d'autobusos gestiona la seua xarxa, la seua flota i els torns de conducció.
+L'empresa d'autobusos de *Skam España* gestiona la seua xarxa, la seua flota i els torns de conducció.
 
 #### Enunciat
 
-> Una empresa de transport urbà necessita organitzar la seua xarxa. Les línies tenen un codi (L1, L5…), el nom del recorregut i cada quants minuts passen.
+> L'empresa d'autobusos amb què els xics de *Skam España* arriben tard a classe necessita organitzar la seua xarxa. Les línies tenen un codi (L1, L5…), el nom del recorregut i cada quants minuts passen.
 >
 > Cada línia va parant en un ordre fix: la primera parada, la segona, etc.; de la parada s'anota el nom del carrer o de la marquesina i si hi ha pantalla amb la informació d'arribades. Hi ha llocs on es pot canviar d'una línia a una altra, i llavors es guarda quant es tarda a peu entre totes dues.
 >
@@ -2563,7 +2565,7 @@ El transbordament es produïx realment **entre parades**, no entre línies. Redi
 
 ---
 
-### Exercici 17 · Federació esportiva: equips, partits i incidències
+### Exercici 17 · Lliga de Machos Alfa: equips, partits i incidències
 
 {{< practica num="17" etiqueta="Exercici" tipo="Autónoma" duracion="1-2 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + restriccions" >}}
 
@@ -2576,11 +2578,11 @@ Modelar **dues relacions entre les mateixes entitats** (local i visitant), una r
 
 #### Context
 
-Una federació esportiva informatitza el control de les seues competicions oficials.
+La lliga de futbol sala de *Machos Alfa* informatitza el control de les seues competicions oficials.
 
 #### Enunciat
 
-> La federació de futbol sala d'una província vol portar les seues competicions. Cada club es registra amb un codi, el seu nom i la ciutat. Els seus jugadors tenen una fitxa federativa, un DNI, un nom i porten un dorsal; només poden jugar en un equip i cada equip tria un dels seus com a capità.
+> Pedro, Santi, Luis i Raúl, els de *Machos Alfa*, han muntat la federació de futbol sala de la seua província i volen portar les competicions (i que ningú discutisca els resultats). Cada club es registra amb un codi, el seu nom i la ciutat. Els seus jugadors tenen una fitxa federativa, un DNI, un nom i porten un dorsal; només poden jugar en un equip i cada equip tria un dels seus com a capità.
 >
 > Un partit té el seu codi, es juga en una data i hora i pertany a una jornada de la lliga; s'enfronten dos equips distints, un actua com a local i l'altre com a visitant. L'àrbitre alça una acta en què es va anotant el que succeeix: gols, targetes grogues, expulsions i substitucions. Cada anotació queda fixada pel minut en què ocorre i un ordre dins del partit (pot haver-hi dues coses en el mateix minut), i sempre es diu quin jugador la protagonitza. Si un partit s'anul·la, la seua acta desapareix amb tot el que conté.
 
@@ -2623,7 +2625,7 @@ La federació vol guardar els **jugadors convocats** en cada partit i els minuts
 
 ---
 
-### Exercici 18 · Xarxa de gimnasos: sales, reserves i entrenadors
+### Exercici 18 · Cuerpo de Élite Gym: sales, reserves i entrenadors
 
 {{< practica num="18" etiqueta="Exercici" tipo="Autónoma" duracion="1-2 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + restriccions" >}}
 
@@ -2636,11 +2638,11 @@ Gestionar diverses relacions N:M amb atributs repetibles junt amb una entitat fe
 
 #### Context
 
-Una cadena de gimnasos gestiona els seus centres, els seus socis i els entrenaments personalitzats.
+La cadena de gimnasos dels agents de *Cuerpo de Élite* gestiona els seus centres, els seus socis i els entrenaments personalitzats.
 
 #### Enunciat
 
-> Una cadena de gimnasos vol un sistema únic. Cada gimnàs té un codi, el nom comercial amb què s'anuncia, una adreça, la ciutat i els metres quadrats que ocupa.
+> Després d'acabar l'acadèmia, els agents de *Cuerpo de Élite* obrin una cadena de gimnasos i volen un sistema únic. Cada gimnàs té un codi, el nom comercial amb què s'anuncia, una adreça, la ciutat i els metres quadrats que ocupa.
 >
 > En cada centre hi ha sales, que es reconeixen per un número o una lletra propis d'aqueix centre (la 101 d'un no és la 101 d'un altre, o la «Sala A»), amb una activitat (musculació, cardio, pilates o spinning) i un aforament màxim. Les persones que s'apunten són socis: se'ls assigna un número, i es guarden el DNI, el nom i cognoms, un telèfon i el dia que es van donar d'alta. Cada soci pertany a un gimnàs principal, però pot usar qualsevol centre de la cadena, i per això reserva plaça en una sala indicant la data, l'hora i la plaça.
 >
@@ -2685,7 +2687,7 @@ Les reserves de classe **tenen un entrenador** responsable. La reserva passa a s
 
 ---
 
-### Exercici 19 · Rebosteria PAVA S.A.: receptes, formats, comandes i competència
+### Exercici 19 · Paquita Sweet (PAVA S.A.): receptes, formats, comandes i competència
 
 {{< practica num="19" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari de dades" >}}
 
@@ -2702,6 +2704,8 @@ Una gran empresa de dolços necessita una base de dades centralitzada per a la s
 
 #### Enunciat
 
+> Paquita Salas, la mítica representant de la sèrie *Paquita Salas*, deixa els càstings i munta una fàbrica de dolços: PAVA S.A.
+>
 > PAVA S.A. és una empresa de rebosteria industrial. Compra ingredients dels quals coneix el nom, que no es repeteix, quantes vitamines A, B i C porten per cada 100 g, les seues calories i el que costa el quilo.
 >
 > Amb ells elabora productes com els «Filipondios» o els «Barridulces», que es coneixen pel seu nom comercial i dels quals interessa saber quins ingredients porten i en quina proporció dins de la recepta. Cada producte ix al mercat en formats de pes distint (40 g, 150 g, 250 g…) i cada format es ven a un preu.
@@ -2749,7 +2753,7 @@ El **preu** de cada format canvia amb el temps i es vol conservar l'històric. Q
 
 ---
 
-### Exercici 20 · Planta industrial: llista de materials i inspeccions
+### Exercici 20 · Perfumerías de la Reina: llista de materials i inspeccions
 
 {{< practica num="20" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + restriccions" >}}
 
@@ -2762,11 +2766,11 @@ Modelar una estructura de **llista de materials (BOM)** amb una N:M reflexiva i 
 
 #### Context
 
-Una planta de maquinària pesada gestiona el seu procés de producció i els seus controls de qualitat.
+L'empresa de *Sueños de libertad* gestiona el seu procés de producció i els seus controls de qualitat.
 
 #### Enunciat
 
-> Una planta de maquinària pesant vol organitzar la seua producció. Té fàbriques, de les quals es coneix un codi, on estan i un telèfon. A cada fàbrica hi ha línies de muntatge la numeració de les quals arranca en 1 dins de cadascuna (la línia 1 de València i la línia 1 de Sevilla no són la mateixa) i que tenen un nom propi.
+> Perfumerías de la Reina, l'empresa de *Sueños de libertad*, vol organitzar la seua producció. Té fàbriques, de les quals es coneix un codi, on estan i un telèfon. A cada fàbrica hi ha línies de muntatge la numeració de les quals arranca en 1 dins de cadascuna (la línia 1 de València i la línia 1 de Sevilla no són la mateixa) i que tenen un nom propi.
 >
 > Les peces tenen un codi, un nom, el que pesen en grams i un cost estàndard. Moltes es munten a partir d'altres peces, de les quals cal saber quantes unitats hi entren, i al seu torn una peça pot servir per a fabricar moltes altres de nivell superior. Cada peça ix sempre d'una línia de muntatge.
 >
@@ -3041,7 +3045,7 @@ Es vol distingir l'equip **local** del **visitant**. Proposa dues alternatives (
 
 Diverses especialitzacions en un mateix model, cadenes d'entitats febles, ternàries amb atributs i casos d'integració complets.
 
-### Exercici 24 · Seguretat bancària: vigilants, bandes i atracaments
+### Exercici 24 · La casa de papel: vigilants, bandes i atracaments
 
 {{< practica num="24" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
 
@@ -3054,11 +3058,11 @@ Integrar una especialització amb atributs propis, una ternària amb atributs, u
 
 #### Context
 
-La Policia i l'associació d'entitats bancàries volen una base de dades sobre seguretat i delictes.
+La Policia i l'associació d'entitats bancàries, escarmentades per *La casa de papel*, volen una base de dades sobre seguretat i delictes.
 
 #### Enunciat
 
-> Una empresa de seguretat ens demana el model de dades del seu treball amb els bancs. Cada entitat bancària té un codi i una seu; de cadascuna de les seues sucursals sabem l'adreça i quanta gent hi treballa. Les sucursals no tenen un número propi al món: el banc les numera, i dos bancs distints poden tindre cadascun la seua sucursal 1.
+> Després d'allò de la Fàbrica de Moneda i Timbre, els bancs han contractat una empresa de seguretat —la nostra—, que ens demana el model de dades del seu treball amb els bancs. Cada entitat bancària té un codi i una seu; de cadascuna de les seues sucursals sabem l'adreça i quanta gent hi treballa. Les sucursals no tenen un número propi al món: el banc les numera, i dos bancs distints poden tindre cadascun la seua sucursal 1.
 >
 > Els vigilants els contracten les sucursals. De cada vigilant guardem un codi, el seu DNI, el seu nom i quan va nàixer (l'edat ens interessa, però no volem haver d'actualitzar-la). Un vigilant sempre és d'un de dos tipus: els que van armats, dels quals anotem la puntuació a la prova de tir i el calibre de la seua arma, i els que no, dels quals basta saber si tenen titulació en arts marcials. Amb el temps, un mateix vigilant passa per diverses sucursals; cada contracte té la seua data i queda anotat si es va fer amb arma o sense.
 >
@@ -3103,7 +3107,7 @@ Un detingut pot pertànyer a **diverses bandes** al llarg del temps. Quin atribu
 
 ---
 
-### Exercici 25 · Club hípic: cavalls, boxes i lliçons
+### Exercici 25 · Club hípic de La Promesa: cavalls, boxes i lliçons
 
 {{< practica num="25" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
 
@@ -3116,11 +3120,11 @@ Modelar dues especialitzacions, una genealogia reflexiva, una cadena d'entitat f
 
 #### Context
 
-Un club hípic gestiona la seua quadra, els seus socis, els seus instructors i les classes d'equitació.
+El palau de *La Promesa* gestiona la seua quadra, els seus socis, els seus instructors i les classes d'equitació.
 
 #### Enunciat
 
-> Un club hípic vol deixar el quadern i portar les seues dades en una base de dades. De cada cavall coneixem el microxip, el nom, la raça i quan va nàixer. Uns són del club, i d'ells apuntem quan es van comprar i el que costa mantindre'ls al mes; uns altres són d'un soci que paga per tindre'ls al club, i llavors importa quant paga de pupil·latge i qui és l'amo. També volem saber de qui descendeixen: el pare i la mare d'un poltre, quan va nàixer ací, han de poder consultar-se, i un mateix cavall pot ser pare de molts poltres.
+> El palau de *La Promesa* ha obert un club hípic i vol deixar el quadern dels marquesos per a portar les seues dades en una base de dades. De cada cavall coneixem el microxip, el nom, la raça i quan va nàixer. Uns són del club, i d'ells apuntem quan es van comprar i el que costa mantindre'ls al mes; uns altres són d'un soci que paga per tindre'ls al club, i llavors importa quant paga de pupil·latge i qui és l'amo. També volem saber de qui descendeixen: el pare i la mare d'un poltre, quan va nàixer ací, han de poder consultar-se, i un mateix cavall pot ser pare de molts poltres.
 >
 > Les instal·lacions estan organitzades en pavellons amb codi i nom. En cada pavelló hi ha boxes que es numeren des de l'1 dins del seu, així que hi ha un box 1 en cada pavelló. Cada cavall viu en un únic box i mai no el compartirà amb un altre.
 >
@@ -3165,7 +3169,7 @@ Un cavall canvia de box amb el temps i es vol conservar l'**historial d'ubicacio
 
 ---
 
-### Exercici 26 · Hotel-balneari: allotjats, habitacions i tractaments
+### Exercici 26 · Balneari de Los Serrano: allotjats, habitacions i tractaments
 
 {{< practica num="26" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
 
@@ -3178,11 +3182,11 @@ Combinar dues especialitzacions, una especialització parcial amb reflexiva, una
 
 #### Context
 
-Un hotel-balneari termal automatitza la gestió de hostes, instal·lacions i tractaments.
+Un hotel-balneari termal, on se'n van de vacances *Los Serrano*, automatitza la gestió d'hostes, instal·lacions i tractaments.
 
 #### Enunciat
 
-> Un hotel amb balneari vol controlar qui s'allotja i quins tractaments rep. De cada client es guarda DNI, nom, cognoms i data de naixement. Els que dormen a l'hotel deixen una targeta de crèdit i la data en què pensen anar-se'n; els que només vénen a passar el dia deixen un telèfon per si hi ha una urgència. Ningú no és les dues coses a la vegada.
+> Els Serrano se'n van de vacances a un hotel amb balneari, que vol controlar qui s'allotja i quins tractaments rep, perquè l'última volta algú es va colar a l'spa sense reserva. De cada client es guarda DNI, nom, cognoms i data de naixement. Els que dormen a l'hotel deixen una targeta de crèdit i la data en què pensen anar-se'n; els que només vénen a passar el dia deixen un telèfon per si hi ha una urgència. Ningú no és les dues coses a la vegada.
 >
 > L'hotel té plantes, cadascuna amb el seu número, un nom i la quantitat d'habitacions que alberga. Les habitacions es numeren dins de la seua planta, de manera que l'habitació 1 de la tercera i l'habitació 1 de la huitena són habitacions distintes, i de cadascuna coneixem quantes persones hi caben. N'hi ha de luxe, amb els seus jacuzzis i els seus metres quadrats, i les normals, on interessa si admeten un llit extra i quin tipus de bany tenen. Cada vegada que un client s'allotja s'anota l'habitació i la data.
 >
@@ -3227,7 +3231,7 @@ Una suite pot **reformar-se** i passar a estàndard. És compatible amb una espe
 
 ---
 
-### Exercici 27 · Xarxa elèctrica: centrals, nodes i subministrament
+### Exercici 27 · Apagón: centrals, nodes i subministrament
 
 {{< practica num="27" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
 
@@ -3240,11 +3244,11 @@ Resoldre una especialització amb tres subclasses, una entitat feble, una reflex
 
 #### Context
 
-El Ministeri vol un sistema per a controlar la producció, el transport i el subministrament d'electricitat.
+Després de l'*Apagón*, el Ministeri vol un sistema per a controlar la producció, el transport i el subministrament d'electricitat.
 
 #### Enunciat
 
-> Una empresa que gestiona energia vol un model de la seua xarxa. Les centrals porten un codi, un nom que no es repeteix, la seua producció mitjana i quan van començar a funcionar. Cadascuna és exactament d'un d'aquests tipus: hidroelèctrica (riu, embassament i volum útil), tèrmica (combustible que crema i emissions) o renovable (quants generadors té i la superfície que capta).
+> Després de l'*Apagón* de la sèrie, l'empresa que gestiona la xarxa elèctrica vol un model de la seua xarxa perquè no es repetisca. Les centrals porten un codi, un nom que no es repeteix, la seua producció mitjana i quan van començar a funcionar. Cadascuna és exactament d'un d'aquests tipus: hidroelèctrica (riu, embassament i volum útil), tèrmica (combustible que crema i emissions) o renovable (quants generadors té i la superfície que capta).
 >
 > De cada central es du un historial de revisions. No hi ha un número de revisió global: cada central compta les seues des d'1. De cadascuna importa quan es va fer, quina empresa la va fer i quant va costar.
 >
@@ -3289,7 +3293,7 @@ Les centrals renovables es divideixen al seu torn en **solars** i **eòliques** 
 
 ---
 
-### Exercici 28 · Festival de música: edicions, escenaris i actuacions
+### Exercici 28 · Festival de Las Encinas: edicions, escenaris i actuacions
 
 {{< practica num="28" etiqueta="Exercici" tipo="Autónoma" duracion="2 sessions" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
 
@@ -3302,11 +3306,11 @@ Modelar una **cadena d'entitats febles** (festival → edició → escenari), un
 
 #### Context
 
-Un promotor organitza un festival que es repeteix cada any i vol guardar tot el seu històric.
+Las Encinas (la d'*Élite*) organitza un festival que es repeteix cada any i vol guardar tot el seu històric.
 
 #### Enunciat
 
-> Una promotora organitza festivals de música i vol conservar la seua història. Cada festival té codi, nom i ciutat, i es repeteix cada any; anomenem edició cada celebració, que es reconeix per l'any dins del seu festival (pot haver-hi una edició 2024 de diversos festivals distints) i de la qual guardem quan comença, quan acaba i l'aforament.
+> Las Encinas, l'institut d'*Élite*, organitza cada any un festival de música (amb la festa posterior que ja t'imagines) i vol conservar la seua història. Cada festival té codi, nom i ciutat, i es repeteix cada any; anomenem edició cada celebració, que es reconeix per l'any dins del seu festival (pot haver-hi una edició 2024 de diversos festivals distints) i de la qual guardem quan comença, quan acaba i l'aforament.
 >
 > Cada edició alça els seus propis escenaris, reconeixibles pel nom dins de l'edició (el Principal, el d'Electrònica…), i dels quals es coneix la capacitat. En ells toquen artistes, amb codi, nom artístic i país. N'hi ha que actuen sols, i llavors volem l'instrument, i n'hi ha que són grup, i llavors interessa quants són. De cada actuació s'anota el dia, l'hora a la qual comença, quant dura i el caixet; un artista pot tornar a pisar el mateix escenari més d'una vegada.
 >
@@ -3417,7 +3421,7 @@ Un integrant pot pertànyer a **diversos grups** amb una quota diferent en cadas
 
 ---
 
-### Exercici 30 · Mostra gastronòmica: províncies, plats, restaurants i vins
+### Exercici 30 · Mostra d'Acacias 38: províncies, plats, restaurants i vins
 
 {{< practica num="30" etiqueta="Exercici" tipo="Autónoma" duracion="2-3 sessions" nivel="2" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions" >}}
 
@@ -3430,11 +3434,11 @@ Resoldre un cas d'integració amb tres entitats febles dependents de la mateixa 
 
 #### Context
 
-S'organitza una mostra de plats típics d'Espanya amb informació de les localitats, els restaurants, les visites i els vins que els acompanyen.
+El barri d'*Acacias 38* organitza una mostra de plats típics d'Espanya amb informació de les localitats, els restaurants, les visites i els vins que els acompanyen.
 
 #### Enunciat
 
-> Una conselleria organitza una mostra gastronòmica i necessita unificar les dades dels participants. Les províncies tenen nom, extensió i capital. Les localitats tenen nom, grandària i habitants, i el nom no basta per a reconéixer-les: hi ha localitats del mateix nom en províncies distintes.
+> El barri d'*Acacias 38* organitza una mostra gastronòmica de plats típics de tota Espanya i necessita unificar les dades dels participants. Les províncies tenen nom, extensió i capital. Les localitats tenen nom, grandària i habitants, i el nom no basta per a reconéixer-les: hi ha localitats del mateix nom en províncies distintes.
 >
 > Cada plat típic porta el seu nom, diversos ingredients bàsics i la forma de preparar-lo. Un mateix plat es menja en moltes localitats i en una localitat es conserven molts plats; cada vegada que coincideixen s'anoten les variacions locals de la recepta.
 >
@@ -3487,7 +3491,7 @@ Els experts aconsellen un vi **distint segons la temporada** (hivern o estiu). C
 
 Cinc exercicis molt difícils que combinen **tot l'explicat en la unitat**: entitats febles encadenades, relacions reflexives, ternàries, agregació, especialitzacions, atributs compostos, multivaluats i derivats, i restriccions que el diagrama no arreplega. Estan pensats per a tancar la unitat: sense guies ni indicacions, amb el diccionari de dades, les restriccions i les taules previstes.
 
-### Exercici 31 · Aerolínia: rutes, vols i tripulació
+### Exercici 31 · Aerolínia de Berlín: rutes, vols i tripulació
 
 {{< practica num="31" etiqueta="Exercici" tipo="Autónoma" duracion="3-4 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions + taules previstes" >}}
 
@@ -3500,10 +3504,12 @@ Modelar un cas amb entitats febles encadenades amb dos discriminadors, dues rela
 
 #### Context
 
-Una aerolínia regional vol substituir els seus fulls de càlcul d'operacions per una base de dades única.
+L'aerolínia de *Berlín* vol substituir els seus fulls de càlcul d'operacions per una base de dades única.
 
 #### Enunciat
 
+> Berlín, el de la sèrie *Berlín*, ha muntat la seua pròpia aerolínia per als seus colps per Europa i necessita una base de dades que no siga un tovalló.
+>
 > Una companyia aèria té un codi intern, un nom i un país. Disposa d'una flota d'aeronaus, cadascuna amb la seua matrícula i la data en què va entrar en servei, i cada aeronau és d'un model concret (fabricant, capacitat de passatgers i autonomia en quilòmetres) que pot estar representat per moltes aeronaus. Els aeroports es coneixen pel seu codi IATA i tenen nom, ciutat, país i unes coordenades (latitud i longitud) que sempre es manegen juntes. La companyia publica rutes entre parells d'aeroports, de les quals es guarda la distància; una ruta no és el mateix que un vol i només interessa que existisca.
 >
 > Els vols no tenen un codi propi al món: «IB6250» l'opera cada dia la mateixa companyia, de manera que un vol s'identifica per la companyia, el número de vol i la data. De cada vol es calcula la durada real una vegada completat. Un vol es compon d'un o diversos trams numerats dins del vol (amb escales, el tram 1 pot ser València-Madrid i el 2, Madrid-Lima); cada tram ix d'un aeroport i arriba a un altre, té hora d'eixida i d'arribada i el fa una única aeronau, que al llarg del dia fa molts trams.
@@ -3559,7 +3565,7 @@ L'aerolínia ofereix vols en codi compartit: el mateix vol es ven amb el número
 
 ---
 
-### Exercici 32 · Hospital: ingressos, llits i atencions
+### Exercici 32 · Hospital Central: ingressos, llits i atencions
 
 {{< practica num="32" etiqueta="Exercici" tipo="Autónoma" duracion="3-4 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions + taules previstes" >}}
 
@@ -3572,10 +3578,12 @@ Resoldre un cas amb tres nivells d'entitats febles, una reflexiva 1:N amb rols, 
 
 #### Context
 
-Un hospital comarcal vol informatitzar els ingressos, l'ocupació de llits i les prescripcions.
+L'hospital d'*Hospital Central* vol informatitzar els ingressos, l'ocupació de llits i les prescripcions.
 
 #### Enunciat
 
+> L'hospital d'*Hospital Central* creix: ara té plantes, habitacions, llits i fins i tot prescripcions, i necessita una base de dades a l'altura.
+>
 > De cada pacient es conserva el número d'història clínica, el nom, la data de naixement (l'edat es calcula), les al·lèrgies (en pot tindre diverses o cap) i l'adreça, que el servei d'admissió necessita per parts: carrer, número, codi postal i localitat. Un pacient pot ingressar moltes vegades; cada ingrés es numera dins de la història del pacient (l'ingrés 1, el 2…) i guarda la data d'ingrés, la data d'alta si ja s'ha produït i el motiu. Un ingrés no té sentit sense el seu pacient.
 >
 > L'hospital s'organitza en plantes, que s'identifiquen pel seu número i tenen un nom. Dins d'una planta les habitacions es numeren a partir d'1 i tenen un tipus (individual o doble); dins de cada habitació els llits es distingeixen per una lletra (A, B…). Cada planta té almenys una habitació i cada habitació almenys un llit. Un ingrés ocupa llits al llarg de l'estada, amb la data d'inici i la de fi de cada ocupació; el pacient pot canviar de llit o tornar a un llit que ja va ocupar, i un llit l'ocupen molts ingressos amb el temps.
@@ -3631,7 +3639,7 @@ Cal registrar quines proves diagnòstiques se sol·liciten en cada atenció i el
 
 ---
 
-### Exercici 33 · Logística: articles, llista de materials i magatzems
+### Exercici 33 · Mobles Serrano: articles, llista de materials i magatzems
 
 {{< practica num="33" etiqueta="Exercici" tipo="Autónoma" duracion="3-4 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions + taules previstes" >}}
 
@@ -3644,10 +3652,12 @@ Modelar una llista de materials recursiva, dues entitats febles amb identificado
 
 #### Context
 
-Una fàbrica de mobiliari vol gestionar el seu catàleg, les seues compres i els seus magatzems en un únic sistema.
+La fàbrica de mobiliari d'*Los Serrano* vol gestionar el seu catàleg, les seues compres i els seus magatzems en un únic sistema.
 
 #### Enunciat
 
+> El negoci de mobles de *Los Serrano* ha crescut tant que ja no cap en una llibreta.
+>
 > Tot el que la fàbrica compra, fabrica o ven és un article, amb un codi de referència (SKU), un nom, la unitat de mesura i un cost estàndard; el cost total es calcula a partir dels seus components. Cada article és d'un i només un d'aquests tipus: matèria primera (amb els seus dies de caducitat), component (amb la referència del seu plànol) o producte acabat (amb el preu de venda). Un article pot compondre's d'altres articles, dels quals s'anota quantes unitats hi entren, i al seu torn ser component de molts altres: una cadira porta quatre potes, i la pota porta una quantitat de fusta.
 >
 > La fàbrica té magatzems amb un codi, un nom i una adreça (carrer, codi postal i localitat). Un magatzem es divideix en ubicacions que es reconeixen pel passadís i el prestatge dins del magatzem (el passadís 3, prestatge 2 existeix en molts magatzems) i tenen una capacitat màxima en quilos. De cada article es produeixen o reben lots, numerats dins de l'article, amb data de fabricació i de caducitat. Un lot pot estar repartit en diverses ubicacions i una ubicació conté lots de diversos articles; s'anota quantes unitats hi ha.
@@ -3703,7 +3713,7 @@ Algunes peces es fabriquen en diverses versions (v1, v2) i la llista de material
 
 ---
 
-### Exercici 34 · Circuit de torneigs d'escacs
+### Exercici 34 · Torneigs d'escacs de Merlí
 
 {{< practica num="34" etiqueta="Exercici" tipo="Autónoma" duracion="3-4 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions + taules previstes" >}}
 
@@ -3716,10 +3726,12 @@ Modelar una cadena de quatre nivells d'entitats febles, dues relacions entre les
 
 #### Context
 
-Una federació d'escacs vol portar tots els seus torneigs, rondes i partides en una sola base de dades.
+El club de peripatètics de *Merlí* vol portar tots els seus torneigs, rondes i partides d'escacs en una sola base de dades.
 
 #### Enunciat
 
+> Merlí ensenya a pensar i els seus peripatètics juguen als escacs: la federació vol ara ordenar els seus torneigs.
+>
 > La federació organitza torneigs amb un codi, un nom i una seu formada per la ciutat i el país. Cada torneig és obert (amb una quota d'inscripció) o tancat (amb un Elo mínim per a participar); no hi ha torneigs d'un altre tipus ni dels dos alhora. Cada torneig se celebra diversos anys, i de cada edició es coneix l'any, les dates d'inici i fi i la borsa de premis; l'edició es reconeix sempre pel torneig i l'any.
 >
 > Una edició es divideix en rondes numerades, i cada ronda té una data i diverses partides, que es numeren per tauler. De cada partida es guarden el resultat i la durada en minuts, que es calcula i no s'emmagatzema. Una partida enfronta un jugador amb blanques i un altre amb negres; les dues relacions són distintes perquè el color importa. La dirigeix un àrbitre principal i l'ajuden diversos àrbitres assistents, que al seu torn poden ser principals d'altres partides.
@@ -3775,7 +3787,7 @@ La federació vol guardar els moviments de cada partida en ordre. Quina entitat 
 
 ---
 
-### Exercici 35 · Producció d'una sèrie de televisió
+### Exercici 35 · Producció d'una sèrie: del guió a l'emissió
 
 {{< practica num="35" etiqueta="Exercici" tipo="Autónoma" duracion="3-4 sessions" nivel="3" ra="RA6: a, d, e, h" sgbd="draw.io o paper" entrega="Diagrama EER + diccionari + restriccions + taules previstes" >}}
 
@@ -3788,10 +3800,12 @@ Modelar una cadena de tres nivells d'entitats febles, una especialització total
 
 #### Context
 
-Una productora vol portar el seguiment de les seues sèries, des del guió fins a l'emissió.
+La productora de *La casa de papel*, *Élite* i companyia vol portar el seguiment de les seues sèries, des del guió fins a l'emissió.
 
 #### Enunciat
 
+> La productora que hi ha darrere de *La casa de papel*, *Élite* i *Vis a vis* vol portar el seguiment de les seues sèries.
+>
 > De cada sèrie es guarden un codi, el títol, l'any d'estrena i els gèneres (pot ser més d'un). Una sèrie es divideix en temporades, numerades dins de la sèrie, amb el seu any d'emissió; cada temporada té almenys un episodi, que es numera dins de la temporada i té títol, durada en minuts i data d'estrena. Algunes sèries naixen com a derivades d'una altra (spin-off): una sèrie pot tindre moltes derivades, però cada derivada procedeix, com a màxim, d'una sèrie original.
 >
 > Les persones que treballen a les sèries tenen un codi, un nom, una nacionalitat i una data de naixement, i se'n calcula l'edat. Cada persona és actor (amb la seua alçada), director (amb el seu estil) o guionista (amb la seua especialitat), o diverses coses alhora: hi ha directors que també escriuen i actors que dirigeixen. No es guarden persones que no encaixen en cap dels tres grups. Cada episodi el dirigeix un únic director, que dirigeix molts episodis; l'escriuen diversos guionistes, a cadascun dels quals s'assigna un percentatge d'autoria, i cada guionista escriu en molts episodis.

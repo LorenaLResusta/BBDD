@@ -42,7 +42,7 @@ Aplicar una a una les regles de transformació al model conceptual de la pràcti
 
 #### Context
 
-Partim del diagrama de la biblioteca municipal de la [pràctica 2.1](/ud02-modelo-er/ud02-practicas#pràctica-21--biblioteca-municipal-de-lenunciat-al-diagrama):
+La biblioteca de Montepinar (*La que se avecina*) ja té el seu diagrama; ara li toca convertir-se en taules. Partim del diagrama de la biblioteca municipal de la [pràctica 2.1](/ud02-modelo-er/ud02-practicas#pràctica-21--biblioteca-municipal-de-lenunciat-al-diagrama):
 
 {{< diagrama src="chen-biblioteca.svg" caption="Diagrama de Chen de la biblioteca: autors, llibres i exemplars" >}}
 
@@ -213,7 +213,7 @@ Interpretar un esquema relacional existent, reconstruir el model conceptual del 
 
 #### Context
 
-Herets la base de dades d'un **club de pàdel**. No hi ha documentació, només este esquema:
+El club de pàdel de *Machos Alfa* ha canviat d'informàtic i ningú va deixar documentació. Herets la base de dades d'un **club de pàdel**. No hi ha documentació, només este esquema:
 
 ```text
 JUGADOR(id_jugador, nombre, telefono, nivel, id_pareja_habitual*)
@@ -252,7 +252,7 @@ Classificar les regles de negoci segons on poden implementar-se i documentar les
 
 #### Context
 
-Esquema simplificat d'un hotel:
+Torna el *Gran Hotel* dels Alarcón: aquest és l'esquema que heretes. Esquema simplificat d'un hotel:
 
 ```text
 HABITACION(num_hab, tipo, capacidad, precio_noche)
@@ -434,7 +434,7 @@ Transformar relacions 1:N amb participació obligatòria i una N:M que guarda un
 
 #### Context
 
-És el diagrama de l'[exercici 4 de la UD02](/ud02-modelo-er/ud02-practicas#exercici-4--naviliera-capitans-contenidors-ports-i-vaixells).
+És el diagrama de l'[exercici 4 de la UD02](/ud02-modelo-er/ud02-practicas#exercici-4--alta-mar-capitans-contenidors-ports-i-vaixells).
 
 {{< figura src="ud02/ej04.svg" alt="CAPITÀ transporta CONTENIDOR (1:N), CONTENIDOR arriba a PORT (N:1), CAPITÀ governa VAIXELL (N:M amb fecha_inicio i fecha_fin)" caption="Diagrama de partida: naviera" >}}
 
@@ -481,7 +481,7 @@ Transformar dues relacions reflexives (1:N i N:M) i una 1:1 amb mínims 0 als do
 
 #### Context
 
-És el diagrama de l'[exercici 6 de la UD02](/ud02-modelo-er/ud02-practicas#exercici-6--institut-mòduls-matrícules-delegats-i-armariets).
+És el diagrama de l'[exercici 6 de la UD02](/ud02-modelo-er/ud02-practicas#exercici-6--institut-zurbarán-mòduls-matrícules-delegats-i-casellers).
 
 {{< figura src="ud02/ej06.svg" alt="PROFESSOR imparteix MÒDUL; MÒDUL és requisit de MÒDUL; ALUMNE es matricula en MÒDUL; ALUMNE és delegat d'ALUMNE; ALUMNE té CASELLER" caption="Diagrama de partida: institut" >}}
 
@@ -528,7 +528,7 @@ Transformar una entitat feble per identificació, una reflexiva 1:N i claus alte
 
 #### Context
 
-És el diagrama de l'[exercici 10 de la UD02](/ud02-modelo-er/ud02-practicas#exercici-10--concessionari-vendes-revisions-i-mecànics).
+És el diagrama de l'[exercici 10 de la UD02](/ud02-modelo-er/ud02-practicas#exercici-10--recio-motors-vendes-revisions-i-mecànics).
 
 {{< figura src="ud02/ej10.svg" alt="CLIENT compra COTXE (1:N), COTXE passa REVISIÓ (feble, identificadora), MECÀNIC realitza REVISIÓ, MECÀNIC supervisa MECÀNIC" caption="Diagrama de partida: concessionari" >}}
 
@@ -568,7 +568,7 @@ Transformar una cadena d'entitats febles amb **claus alienes compostes** i disti
 
 #### Context
 
-El primer diagrama és el de l'[exercici 11 de la UD02](/ud02-modelo-er/ud02-practicas#exercici-11--cases-rurals-províncies-ciutats-i-habitacions). El segon és la variant de la seua ampliació.
+El primer diagrama és el de l'[exercici 11 de la UD02](/ud02-modelo-er/ud02-practicas#exercici-11--el-pueblo-províncies-ciutats-i-habitacions). El segon és la variant de la seua ampliació.
 
 {{< figura src="ud02/ej11.svg" alt="PROVÍNCIA té CIUTAT (feble). CASA_RURAL està en CIUTAT. CASA_RURAL disposa d'HABITACIÓ (feble). CLIENT s'allotja en HABITACIÓ." caption="Diagrama 4.1: cases rurals" >}}
 
@@ -712,6 +712,8 @@ Obtín l'esquema lògic relacional i enuncia les pèrdues semàntiques. En *R1*,
 #### Exercici 1: Transformació de relació binària 1:N (clients i comandes)
 
 **Enunciat:**
+**Ambientació:** la botiga en línia de merchandatge d'*Élite*.
+
 Un client fa diverses comandes en una botiga en línia, però cada comanda és feta per un únic client. Dels clients es coneix el seu `id_cliente`, `nombre`, `email` i `telefono`. De les comandes es coneix `num_pedido`, `fecha_pedido` i `importe_total`.
 
 - a) Expressa l'**esquema relacional formal** derivat d'esta relació $1:N$.
@@ -722,6 +724,8 @@ Un client fa diverses comandes en una botiga en línia, però cada comanda és f
 #### Exercici 2: Transformació de relació binària N:M (metges i pacients)
 
 **Enunciat:**
+**Ambientació:** l'hospital d'*Hospital Central*.
+
 Un metge atén diversos pacients en un centre hospitalari i un pacient pot ser atés per diferents metges especialistes. Dels metges es coneix `num_colegiado`, `nombre` i `especialidad`. Dels pacients es registra `id_paciente`, `dni`, `nombre` i `fecha_nacimiento`. De cada atenció mèdica realitzada es guarda la `fecha_atencion` i el `diagnostico`.
 
 - a) Expressa l'**esquema relacional formal** resultant per a la relació $N:M$.
@@ -732,6 +736,8 @@ Un metge atén diversos pacients en un centre hospitalari i un pacient pot ser a
 #### Exercici 3: Transformació de relació 1:1 opcional (empleats i vehicles d'empresa)
 
 **Enunciat:**
+**Ambientació:** els cotxes d'empresa de *Recio Motors* (*La que se avecina*).
+
 Una empresa assigna un cotxe d'empresa a certs empleats clau. Un empleat només pot tindre assignat com a màxim un cotxe, i un cotxe pertany com a màxim a un únic empleat. Alguns empleats no tenen cotxe assignat. Dels empleats es coneix `id_empleado` i `nombre`. Dels vehicles es coneix `matricula`, `modelo` i `color`.
 
 - a) Indica quina estratègia de propagació de clau és la més adequada per a evitar la presència innecessària de valors nuls.
@@ -742,6 +748,8 @@ Una empresa assigna un cotxe d'empresa a certs empleats clau. Un empleat només 
 #### Exercici 4: Entitat feble per identificació (edificis i aules)
 
 **Enunciat:**
+**Ambientació:** el campus de *Merlí. Sapere Aude*.
+
 Un campus universitari organitza les seues aules dins d'edificis. De cada edifici es coneix `cod_edificio` i `nombre_edificio`. De les aules es coneix `num_aula` (101, 102, 201...) i `capacidad_puestos`. El número d'aula no és únic en tot el campus, sinó únicament dins de cada edifici determinat.
 
 - a) Expressa l'**esquema relacional formal** especificant la clau primària composta de la taula `AULA`.
@@ -752,6 +760,8 @@ Un campus universitari organitza les seues aules dins d'edificis. De cada edific
 #### Exercici 5: Entitat feble per existència i identificació (pacients i ingressos)
 
 **Enunciat:**
+**Ambientació:** les urgències de *Los hombres de Paco*.
+
 En un hospital, un pacient pot fer diversos ingressos al llarg del temps. De cada pacient s'emmagatzema `id_paciente`, `dni` i `nombre`. De cada ingrés es registra `num_ingreso` (1, 2, 3... seqüencial per a cada pacient), `fecha_ingreso` i `habitacion`. L'ingrés no pot existir ni identificar-se sense el pacient al qual pertany.
 
 - a) Expressa l'esquema relacional formal per a `PACIENTE` i `INGRESO`.
@@ -764,6 +774,8 @@ En un hospital, un pacient pot fer diversos ingressos al llarg del temps. De cad
 #### Exercici 6: Relació reflexiva 1:N (organigrama d'empleats)
 
 **Enunciat:**
+**Ambientació:** l'organigrama del *Ministerio del Tiempo*.
+
 En una empresa, cada empleat té un únic cap directe, que és al seu torn un altre empleat de la plantilla. De cada empleat es coneix `id_empleado`, `nombre`, `puesto` i `salario`.
 
 - a) Expressa l'**esquema relacional formal** indicant com s'implementa l'autoreferència.
@@ -774,6 +786,8 @@ En una empresa, cada empleat té un únic cap directe, que és al seu torn un al
 #### Exercici 7: Relació reflexiva N:M (estructura composta de peces / BOM)
 
 **Enunciat:**
+**Ambientació:** la fàbrica de Perfumerías de la Reina, a *Sueños de libertad*.
+
 Una fàbrica de maquinària registra peces industrials. De cada peça s'emmagatzema `cod_pieza`, `nombre_pieza` i `precio`. Una peça pot estar composta per diverses subpeces components, i al seu torn una subpeça forma part de la fabricació de múltiples peces superiors. En cada acoblament s'indica la `cantidad_unidades`.
 
 - a) Expressa l'**esquema relacional formal** definint la taula intermèdia d'acoblament.
@@ -784,6 +798,8 @@ Una fàbrica de maquinària registra peces industrials. De cada peça s'emmagatz
 #### Exercici 8: Atribut multivalorat (telèfons de contacte de clients)
 
 **Enunciat:**
+**Ambientació:** el banc que assalta la banda de *La casa de papel*.
+
 De cada client d'un banc es coneix `id_cliente`, `nombre` i `email`. Un client pot disposar de diversos números de telèfon de contacte (`telefono`).
 
 - a) Indica per què no es poden guardar els telèfons com una llista separada per comes dins de la mateixa cel·la de la taula `CLIENTE`.
@@ -795,6 +811,8 @@ De cada client d'un banc es coneix `id_cliente`, `nombre` i `email`. Un client p
 #### Exercici 9: Atribut compost (adreça estructurada)
 
 **Enunciat:**
+**Ambientació:** els proveïdors de les Galeries Velvet (*Velvet*).
+
 De cada proveïdor es coneix el seu `nif`, `nombre_empresa` i l'atribut compost `direccion` (format per `calle`, `numero`, `piso`, `codigo_postal` i `ciudad`).
 
 - a) Mostra com es transforma l'atribut compost al model relacional lògic.
@@ -805,6 +823,8 @@ De cada proveïdor es coneix el seu `nif`, `nombre_empresa` i l'atribut compost 
 #### Exercici 10: Transformació de jerarquia EER (opció de taula única amb discriminador)
 
 **Enunciat:**
+**Ambientació:** l'agència de *Paquita Salas*.
+
 Una empresa classifica els seus empleats en dos tipus exclusius: `PROGRAMADOR` (amb l'atribut `lenguaje_principal`) i `ADMINISTRATIVO` (amb l'atribut `nivel_ofimatica`). Els atributs comuns a tots els empleats són `id_empleado`, `nombre` i `salario`.
 
 - a) Mostra l'esquema relacional aplicant l'estratègia de **taula única** amb una columna discriminadora `tipo_empleado`.
@@ -815,6 +835,8 @@ Una empresa classifica els seus empleats en dos tipus exclusius: `PROGRAMADOR` (
 #### Exercici 11: Transformació de jerarquia EER (opció de taula per categoria amb claus alienes)
 
 **Enunciat:**
+**Ambientació:** l'agència de *Paquita Salas* (la mateixa plantilla de l'exercici anterior).
+
 Considera la mateixa jerarquia d'empleats de l'exercici 10, però aplica l'estratègia de **taula per al supertipus i taules per a cada subtipus**.
 
 - a) Expressa l'**esquema relacional formal** per a les 3 taules resultants (`EMPLEADO`, `PROGRAMADOR`, `ADMINISTRATIVO`).
@@ -827,6 +849,8 @@ Considera la mateixa jerarquia d'empleats de l'exercici 10, però aplica l'estra
 #### Exercici 12: Sistema de gestió de concessionari de vehicles
 
 **Enunciat:**
+**Ambientació:** Recio Motors, el concessionari de *La que se avecina*.
+
 Dissenya l'esquema relacional per a un concessionari a partir dels requisits següents:
 
 - **Clients:** `id_cliente` (PK), `nif`, `nombre` i `telefono`.
@@ -842,6 +866,8 @@ Dissenya l'esquema relacional per a un concessionari a partir dels requisits seg
 #### Exercici 13: Gestió d'hotels, habitacions febles i reserves de clients
 
 **Enunciat:**
+**Ambientació:** el *Gran Hotel* dels Alarcón.
+
 Una cadena hotelera administra establiments:
 
 - **Hotels:** `id_hotel` (PK), `nombre_hotel`, `ciudad`.
@@ -857,6 +883,8 @@ Una cadena hotelera administra establiments:
 #### Exercici 14: Sistema de videoclub / plataforma de continguts
 
 **Enunciat:**
+**Ambientació:** la plataforma de streaming d'*Élite* i *La casa de papel*.
+
 Es requerix estructurar la base de dades d'un videoclub digital:
 
 - **Pel·lícules:** `id_pelicula` (PK), `titulo`, `duracion`, `año`.
@@ -872,6 +900,8 @@ Es requerix estructurar la base de dades d'un videoclub digital:
 #### Exercici 15: Fabricació industrial i control de qualitat
 
 **Enunciat:**
+**Ambientació:** la fàbrica on treballa Antonio Alcántara a *Cuéntame cómo pasó*.
+
 Una fàbrica de maquinària d'alta precisió organitza el seu catàleg:
 
 - **Línies de muntatge:** `id_linea` (PK), `denominacion`.
@@ -886,6 +916,8 @@ Una fàbrica de maquinària d'alta precisió organitza el seu catàleg:
 #### Exercici 16: Xarxa de transports urbans (línies, parades febles i transbordaments)
 
 **Enunciat:**
+**Ambientació:** els autobusos de *Skam España*.
+
 Una empresa municipal de transports gestiona autobusos:
 
 - **Línies:** `cod_linea` (PK), `nombre_linea`, `frecuencia`.
@@ -901,6 +933,8 @@ Una empresa municipal de transports gestiona autobusos:
 #### Exercici 17: Organització de torneig esportiu
 
 **Enunciat:**
+**Ambientació:** la lliga de *Machos Alfa*.
+
 Una federació de bàsquet gestiona la seua lliga:
 
 - **Equips:** `id_equipo` (PK), `nombre_club`, `ciudad`.
@@ -916,6 +950,8 @@ Una federació de bàsquet gestiona la seua lliga:
 #### Exercici 18: Anàlisi d'inconsistències en taules relacionals
 
 **Enunciat:**
+**Ambientació:** el magatzem de les Galeries Velvet (*Velvet*).
+
 Donada la taula següent `PEDIDO_DESNORMALIZADO`:
 
 | `num_pedido` | `fecha` | `id_cliente` | `nombre_cliente` | `id_producto` | `precio` | `cantidad` |
@@ -932,6 +968,8 @@ Donada la taula següent `PEDIDO_DESNORMALIZADO`:
 #### Exercici 19: Definició d'accions d'integritat referencial
 
 **Enunciat:**
+**Ambientació:** l'institut Zurbarán de *Física o Química*.
+
 Considera les taules `CURSO(id_curso [PK], nombre)` i `ALUMNO(id_alumno [PK], nombre, id_curso [FK])`.
 
 - Explica què passa a la taula `ALUMNO` en esborrar el curs 5 en cadascun dels escenaris de configuració de la clau aliena següents:
@@ -944,6 +982,8 @@ Considera les taules `CURSO(id_curso [PK], nombre)` i `ALUMNO(id_alumno [PK], no
 #### Exercici 20: Cas integrador d'hospital i targetes de visita febles
 
 **Enunciat:**
+**Ambientació:** l'hospital d'*Hospital Central*.
+
 Un centre sanitari gestiona els seus pacients i ingressos:
 
 - **Pacients:** `id_paciente` (PK), `dni`, `nombre`.
