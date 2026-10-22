@@ -3163,6 +3163,68 @@ Idees que convé endur-se gravades:
   explain: "L'historial d'execucions registra l'estat de cada vegada i, si falla, el codi i el text de l'error. Com que ningú mira l'eixida d'una tasca desatesa, la revisió periòdica de l'historial és imprescindible."
 {{< /quiz >}}
 
+### Autoavaluació ampliada
+
+Dos tests més per a reforçar el tema. Corregeix en acabar: cada pregunta explica per què la resposta és la correcta, i pots reiniciar-los i repetir-los tantes voltes com vulgues.
+
+#### Test A · Blocs, variables i control de flux (PL/SQL)
+
+{{< quiz >}}
+- q: "Quines són les seccions d'un bloc PL/SQL i quines són obligatòries?"
+  options: ["`DECLARE`, `BEGIN`, `EXCEPTION`; només `BEGIN ... END` és obligatòria", "`START`, `RUN`, `STOP`; totes obligatòries", "`DECLARE`, `BEGIN`, `END`; totes obligatòries", "Només `BEGIN`"]
+  answer: 0
+  explain: "`DECLARE` (variables) i `EXCEPTION` (errors) són opcionals. El bloc acaba amb `END;`."
+- q: "Què fa `v_nom alumne.nom%TYPE;`?"
+  options: ["Declara una variable amb el mateix tipus que la columna `alumne.nom`", "Crea una columna nova", "Converteix el valor a text", "Declara una constant"]
+  answer: 0
+  explain: "`%TYPE` evita duplicar el tipus: si canvia la columna, la variable s'adapta."
+- q: "Com s'assigna un valor a una variable en PL/SQL?"
+  options: ["`v := 5;`", "`v = 5;`", "`SET v = 5;`", "`LET v 5;`"]
+  answer: 0
+  explain: "`:=` assigna; `=` compara."
+- q: "Per a guardar el resultat d'una consulta d'una sola fila en variables s'usa…"
+  options: ["`SELECT ... INTO ...`", "`SELECT ... TO ...`", "`FETCH ALL`", "`RETURN`"]
+  answer: 0
+  explain: "Si torna zero files es llança `NO_DATA_FOUND`; si en torna diverses, `TOO_MANY_ROWS`."
+- q: "Quina estructura repeteix mentre es complisca una condició?"
+  options: ["`WHILE cond LOOP ... END LOOP;`", "`IF cond THEN`", "`CASE`", "`RAISE`"]
+  answer: 0
+  explain: "També hi ha `LOOP ... EXIT WHEN` i `FOR i IN 1..10 LOOP`."
+- q: "Per a què s'usa `DBMS_OUTPUT.PUT_LINE`?"
+  options: ["Per a mostrar text en l'eixida del script (amb `SET SERVEROUTPUT ON`)", "Per a guardar en una taula", "Per a enviar un correu", "Per a esborrar dades"]
+  answer: 0
+  explain: "És útil per a depurar i per a guions senzills."
+{{< /quiz >}}
+
+#### Test B · Cursors, procediments, excepcions i triggers
+
+{{< quiz >}}
+- q: "Un **cursor** serveix per a…"
+  options: ["Recórrer fila a fila el resultat d'una consulta", "Moure el ratolí", "Crear índexs", "Definir usuaris"]
+  answer: 0
+  explain: "El `FOR r IN (SELECT ...) LOOP` és la manera més còmoda: obri, recorre i tanca el cursor."
+- q: "Diferència principal entre **funció** i **procediment** emmagatzemat:"
+  options: ["La funció torna un valor amb `RETURN` i es pot usar en un `SELECT`; el procediment executa accions", "No n'hi ha cap", "El procediment sempre torna un valor", "Les funcions no admeten paràmetres"]
+  answer: 0
+  explain: "Tots dos es guarden al servidor i admeten paràmetres `IN`, `OUT` i `IN OUT`."
+- q: "En un bloc amb `EXCEPTION WHEN NO_DATA_FOUND THEN ...`, quan s'executa eixa branca?"
+  options: ["Quan una consulta `SELECT INTO` no torna files", "Sempre", "Quan s'esborra una taula", "En compilar"]
+  answer: 0
+  explain: "`WHEN OTHERS` captura qualsevol altra excepció; convé registrar-la o rellançar-la."
+- q: "Un **trigger** `BEFORE INSERT FOR EACH ROW` s'executa…"
+  options: ["Abans d'inserir cada fila, i permet validar-la o modificar-la amb `:NEW`", "Una vegada al dia", "Només si es fa `COMMIT`", "Quan l'usuari el crida"]
+  answer: 0
+  explain: "Els triggers els dispara el sistema davant d'un esdeveniment; no es criden directament."
+- q: "Per què es desaconsella abusar dels triggers?"
+  options: ["Perquè fan lògica implícita, difícil de depurar i poden encadenar-se amb efectes inesperats", "Perquè són il·legals", "Perquè no funcionen amb `UPDATE`", "Perquè no es poden desactivar"]
+  answer: 0
+  explain: "Usa'ls per a regles que no poden expressar-se amb restriccions (auditoria, regles complexes)."
+- q: "Què cal per a usar `:NEW` i `:OLD`?"
+  options: ["Un trigger de fila (`FOR EACH ROW`)", "Un procediment", "Un cursor", "Un paquet"]
+  answer: 0
+  explain: "`:OLD` guarda els valors previs (UPDATE/DELETE) i `:NEW` els nous (INSERT/UPDATE)."
+{{< /quiz >}}
+
 ## Referències
 
 - [Oracle AI Database 26ai: Database PL/SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/26/lnpls/) — blocs, variables, control de flux, cursors, subprogrames, paquets, excepcions i disparadors (inclosos els compostos i la restricció de la taula mutant).

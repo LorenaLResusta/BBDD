@@ -934,6 +934,68 @@ El criterio RA2.h pide usar **asistentes, herramientas gráficas y los lenguajes
   explain: "Oracle indexa automáticamente PK y UNIQUE, pero no las FK. Sin índice, cada borrado en la tabla padre recorre la tabla hija completa y bloquea más de lo necesario."
 {{< /quiz >}}
 
+### Autoevaluación ampliada
+
+Dos tests más para afianzar el tema. Corrige al terminar: cada pregunta explica por qué la respuesta es la correcta, y puedes reiniciar y repetirlos las veces que quieras.
+
+#### Test A · Tipos, tablas y restricciones (Oracle)
+
+{{< quiz >}}
+- q: "En Oracle, ¿qué tipo de dato es el recomendado para cadenas de longitud variable?"
+  options: ["`CHAR`", "`VARCHAR2`", "`TEXT`", "`STRING`"]
+  answer: 1
+  explain: "`VARCHAR2(n)` es el tipo de texto variable de Oracle. `CHAR(n)` rellena con blancos hasta n; `TEXT` y `STRING` no existen en Oracle."
+- q: "¿Qué hace `NUMBER(7,2)`?"
+  options: ["Guarda hasta 7 dígitos en total, 2 de ellos decimales (máximo 99999,99)", "Guarda 7 enteros y 2 decimales (hasta 9999999,99)", "Guarda una cadena de 7 caracteres", "Guarda una fecha"]
+  answer: 0
+  explain: "El primer número es la precisión (dígitos totales); el segundo, la escala (decimales). Quedan 5 dígitos para la parte entera."
+- q: "¿Qué restricción impide que una columna tenga valores repetidos pero **permite** nulos?"
+  options: ["`PRIMARY KEY`", "`UNIQUE`", "`NOT NULL`", "`CHECK`"]
+  answer: 1
+  explain: "`PRIMARY KEY` equivale a `UNIQUE` + `NOT NULL`. En Oracle, `UNIQUE` admite varios nulos."
+- q: "¿Qué hace `ALTER TABLE alumno ADD CONSTRAINT ck_nota CHECK (nota BETWEEN 0 AND 10)`?"
+  options: ["Añade una columna", "Añade una regla que rechaza notas fuera del rango 0-10", "Borra las notas inválidas existentes", "Crea un índice"]
+  answer: 1
+  explain: "Si ya hubiera filas que no cumplen la regla, la sentencia fallaría (a menos que se cree con `NOVALIDATE`)."
+- q: "¿Cuál es la sentencia correcta para eliminar una tabla y sus restricciones de clave foránea que la referencian?"
+  options: ["`DELETE TABLE t`", "`DROP TABLE t CASCADE CONSTRAINTS`", "`REMOVE TABLE t`", "`TRUNCATE TABLE t CASCADE`"]
+  answer: 1
+  explain: "`DROP TABLE` es DDL y no se puede deshacer con ROLLBACK (salvo papelera de reciclaje con `FLASHBACK`)."
+- q: "¿Qué ocurre si defines una clave foránea con `ON DELETE CASCADE` y borras la fila padre?"
+  options: ["Se rechaza el borrado", "Se borran también las filas hijas", "Las hijas quedan con la clave a NULL", "Se borra la tabla hija"]
+  answer: 1
+  explain: "`ON DELETE SET NULL` pondría la clave foránea a nulo. Sin cláusula, Oracle rechaza el borrado (ORA-02292)."
+{{< /quiz >}}
+
+#### Test B · Objetos, privilegios y diccionario
+
+{{< quiz >}}
+- q: "¿Para qué sirve una **secuencia** (`CREATE SEQUENCE`)?"
+  options: ["Para ordenar filas", "Para generar valores numéricos únicos, típicamente para claves primarias", "Para copiar tablas", "Para cifrar datos"]
+  answer: 1
+  explain: "Desde Oracle 12c también existen las columnas identidad (`GENERATED ... AS IDENTITY`), que usan una secuencia interna."
+- q: "Un **índice** en una columna…"
+  options: ["Acelera ciertas búsquedas pero ocupa espacio y ralentiza las escrituras", "Siempre acelera todo", "Impide valores repetidos siempre", "Reemplaza la clave primaria"]
+  answer: 0
+  explain: "Oracle crea automáticamente un índice para cada PRIMARY KEY y UNIQUE; las claves foráneas conviene indexarlas explícitamente si se consultan por ellas."
+- q: "Una **vista** es…"
+  options: ["Una copia física de la tabla", "Una consulta guardada con nombre que se usa como si fuera una tabla", "Un tipo de índice", "Un usuario especial"]
+  answer: 1
+  explain: "Las vistas simplifican consultas y limitan qué columnas o filas ve cada usuario. No almacenan datos (salvo las vistas materializadas)."
+- q: "¿Qué sentencia da permiso de lectura sobre la tabla `alumno` al usuario `ana`?"
+  options: ["`GRANT SELECT ON alumno TO ana;`", "`ALLOW SELECT alumno ana;`", "`REVOKE SELECT ON alumno FROM ana;`", "`CREATE USER ana SELECT;`"]
+  answer: 0
+  explain: "`GRANT` concede y `REVOKE` retira. Es DCL (control de datos)."
+- q: "El principio del **mínimo privilegio** dice que…"
+  options: ["Cada usuario debe tener solo los permisos imprescindibles para su trabajo", "Todos los usuarios deben ser DBA", "Los permisos se conceden por defecto a todos", "Los privilegios se heredan del sistema operativo"]
+  answer: 0
+  explain: "Reduce el daño posible ante errores o accesos indebidos. Los **roles** ayudan a agrupar privilegios."
+- q: "¿Qué vista del diccionario de datos permite ver las tablas del usuario actual?"
+  options: ["`USER_TABLES`", "`ALL_USERS_ONLY`", "`TABLES_NOW`", "`DUAL`"]
+  answer: 0
+  explain: "`USER_*` muestra los objetos propios, `ALL_*` los accesibles y `DBA_*` todos (requiere privilegios)."
+{{< /quiz >}}
+
 ## Referencias
 
 - [Oracle AI Database 26ai: SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/).

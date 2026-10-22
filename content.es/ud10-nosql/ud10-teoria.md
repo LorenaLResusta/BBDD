@@ -1876,6 +1876,68 @@ Y a la vez hay partes de un centro educativo donde el modelo documental encaja m
   explain: "El criterio decisivo no es la comodidad de una lectura, sino las garantías necesarias y la variedad de consultas. La lectura del expediente en un acceso es una ventaja real del modelo documental, pero menor frente a la integridad declarativa y a las consultas ad hoc que exige la gestión académica."
 {{< /quiz >}}
 
+### Autoevaluación ampliada
+
+Dos tests más para afianzar el tema. Corrige al terminar: cada pregunta explica por qué la respuesta es la correcta, y puedes reiniciar y repetirlos las veces que quieras.
+
+#### Test A · Conceptos NoSQL
+
+{{< quiz >}}
+- q: "¿Qué enuncia el **teorema CAP**?"
+  options: ["Un sistema distribuido solo puede garantizar a la vez dos de tres: consistencia, disponibilidad y tolerancia a particiones", "Todo sistema puede garantizar las tres a la vez", "Solo aplica a bases relacionales", "Habla del coste de las licencias"]
+  answer: 0
+  explain: "Como las particiones de red ocurren, en la práctica se elige entre consistencia y disponibilidad cuando hay una partición."
+- q: "BASE (frente a ACID) significa…"
+  options: ["Básicamente disponible, estado flexible y consistencia eventual", "Basado en SQL y Extensiones", "Bloqueo, Atomicidad, Secuencia y Escritura", "Nada"]
+  answer: 0
+  explain: "Prioriza disponibilidad y escalabilidad aceptando que las réplicas converjan con el tiempo."
+- q: "Un almacén **clave-valor** como Redis es ideal para…"
+  options: ["Cachés y sesiones: acceso muy rápido por clave", "Consultas con muchos JOIN", "Análisis estadístico complejo", "Modelado de relaciones complejas"]
+  answer: 0
+  explain: "Su modelo es sencillo: una clave y un valor, sin consultas por contenido."
+- q: "Las bases de datos de **grafos** (p. ej. Neo4j) destacan cuando…"
+  options: ["Las relaciones entre los datos son lo más importante (redes sociales, recomendaciones)", "Se guardan solo números", "No hay relaciones", "Se necesitan transacciones bancarias"]
+  answer: 0
+  explain: "Recorrer relaciones es su operación natural y rápida."
+- q: "MongoDB almacena los datos como…"
+  options: ["Documentos BSON agrupados en colecciones", "Filas en tablas", "Pares clave-valor planos", "Nodos y aristas"]
+  answer: 0
+  explain: "BSON es una representación binaria de JSON con más tipos de datos."
+- q: "¿Qué equivale aproximadamente a una **tabla** en MongoDB?"
+  options: ["Una colección", "Un documento", "Un campo", "Una base de datos"]
+  answer: 0
+  explain: "Documento ≈ fila, campo ≈ columna, colección ≈ tabla."
+{{< /quiz >}}
+
+#### Test B · CRUD, modelado y decisión
+
+{{< quiz >}}
+- q: "¿Qué hace `db.alumnos.insertOne({ nombre: 'Ana', nota: 8 })`?"
+  options: ["Inserta un documento en la colección `alumnos` (que se crea si no existe)", "Crea una tabla", "Borra un documento", "Da error si no existe la colección"]
+  answer: 0
+  explain: "MongoDB crea la colección al insertar el primer documento y añade automáticamente un `_id`."
+- q: "¿Cómo se buscan los alumnos con nota mayor que 7?"
+  options: ["`db.alumnos.find({ nota: { $gt: 7 } })`", "`db.alumnos.find(nota > 7)`", "`SELECT * FROM alumnos WHERE nota > 7`", "`db.alumnos.get(7)`"]
+  answer: 0
+  explain: "Los operadores de consulta empiezan por `$`: `$gt`, `$lt`, `$in`, `$and`…"
+- q: "¿Qué hace `db.alumnos.updateOne({ nombre: 'Ana' }, { $set: { nota: 9 } })`?"
+  options: ["Modifica solo el campo `nota` del primer documento que coincide", "Reemplaza todo el documento por `{ nota: 9 }`", "Actualiza todos los documentos", "Inserta un documento nuevo"]
+  answer: 0
+  explain: "Sin `$set`, un documento de reemplazo sustituiría el documento entero. `updateMany` actualiza todos los que coincidan."
+- q: "En modelado documental, **incrustar** (embedding) los pedidos dentro del documento del cliente es adecuado cuando…"
+  options: ["Se consultan siempre juntos y su número es acotado", "Los pedidos son millones por cliente", "Los pedidos se consultan independientemente de los clientes sin relación", "Nunca es adecuado"]
+  answer: 0
+  explain: "Si el subdocumento crece sin límite o se usa por separado, mejor **referenciar** con el `_id`."
+- q: "¿Qué hace el operador `$group` en una agregación?"
+  options: ["Agrupa documentos y calcula acumulados (sumas, medias…)", "Ordena documentos", "Elimina documentos", "Crea usuarios"]
+  answer: 0
+  explain: "Equivale al `GROUP BY` de SQL dentro de un pipeline (`$match`, `$group`, `$sort`…)."
+- q: "Un sistema bancario de transferencias con reglas estrictas de integridad suele encajar mejor en…"
+  options: ["Una base relacional con transacciones ACID", "Siempre en MongoDB", "Un almacén clave-valor sin transacciones", "Un fichero de texto"]
+  answer: 0
+  explain: "No es una regla absoluta (MongoDB también soporta transacciones), pero el modelo relacional es la opción natural."
+{{< /quiz >}}
+
 ## Referencias
 
 - [MongoDB Manual (8.0)](https://www.mongodb.com/docs/manual/): documentación oficial del servidor.

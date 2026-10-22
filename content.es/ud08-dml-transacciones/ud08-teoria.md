@@ -1872,6 +1872,68 @@ END;
   explain: "La comprobación se aplaza al `COMMIT`. Si falla, Oracle no puede deshacer solo una sentencia: deshace la transacción completa (`ORA-02091: transaction rolled back`, acompañado del ORA-02291 concreto)."
 {{< /quiz >}}
 
+### Autoevaluación ampliada
+
+Dos tests más para afianzar el tema. Corrige al terminar: cada pregunta explica por qué la respuesta es la correcta, y puedes reiniciar y repetirlos las veces que quieras.
+
+#### Test A · INSERT, UPDATE y DELETE
+
+{{< quiz >}}
+- q: "¿Qué ocurre con `UPDATE alumno SET nota = 0;` (sin `WHERE`)?"
+  options: ["Da error", "Actualiza la nota de **todas** las filas", "No hace nada", "Solo actualiza la primera fila"]
+  answer: 1
+  explain: "Siempre conviene escribir primero el `SELECT` con el mismo `WHERE` para ver qué filas se verán afectadas."
+- q: "¿Diferencia entre `DELETE FROM t` y `TRUNCATE TABLE t` en Oracle?"
+  options: ["`DELETE` es DDL y `TRUNCATE` DML", "`DELETE` es DML y se puede deshacer con `ROLLBACK`; `TRUNCATE` es DDL, rápido y no se puede deshacer", "Son idénticos", "`TRUNCATE` solo borra una fila"]
+  answer: 1
+  explain: "`TRUNCATE` hace commit implícito y no activa triggers de fila."
+- q: "¿Qué forma de `INSERT` es más segura y mantenible?"
+  options: ["`INSERT INTO alumno VALUES (...)` confiando en el orden", "`INSERT INTO alumno (dni, nombre) VALUES (...)`, indicando las columnas", "Insertar con `SELECT *`", "No hay diferencia"]
+  answer: 1
+  explain: "Si la tabla cambia (se añade una columna), la forma sin lista de columnas se rompe."
+- q: "`INSERT INTO historico SELECT * FROM matricula WHERE anyo = 2024;` hace…"
+  options: ["Copia filas desde una consulta a otra tabla", "Mueve las filas (las borra del origen)", "Da error siempre", "Crea la tabla `historico`"]
+  answer: 0
+  explain: "Copia; para mover habría que borrar después del origen. La tabla destino debe existir."
+- q: "En Oracle, `MERGE` sirve para…"
+  options: ["Fusionar dos bases de datos", "Insertar o actualizar según exista o no la fila (upsert)", "Unir columnas", "Borrar duplicados"]
+  answer: 1
+  explain: "`MERGE INTO ... USING ... ON (...) WHEN MATCHED THEN UPDATE ... WHEN NOT MATCHED THEN INSERT ...`."
+- q: "Intentas borrar un grupo que tiene alumnos y la clave foránea no tiene `ON DELETE`. Oracle responde…"
+  options: ["Borra los alumnos también", "ORA-02292: se violó la restricción de integridad, se encontró un registro secundario", "Pone los alumnos a NULL", "Borra solo el grupo"]
+  answer: 1
+  explain: "Por defecto, la integridad referencial protege a las filas hijas."
+{{< /quiz >}}
+
+#### Test B · Transacciones, concurrencia y bloqueos
+
+{{< quiz >}}
+- q: "ACID significa…"
+  options: ["Atomicidad, Consistencia, Aislamiento y Durabilidad", "Acceso, Control, Integridad y Datos", "Almacenamiento, Cola, Índice y Disco", "Automático, Concurrente, Íntegro y Distribuido"]
+  answer: 0
+  explain: "Atomicidad: todo o nada. Consistencia: de un estado válido a otro. Aislamiento: las transacciones concurrentes no se interfieren. Durabilidad: lo confirmado persiste."
+- q: "Transferencia: restas 100 € de la cuenta A y falla el servidor antes de sumarlos a B. La propiedad que lo resuelve es…"
+  options: ["Durabilidad", "Atomicidad: se deshace toda la transacción", "Aislamiento", "Ninguna"]
+  answer: 1
+  explain: "Sin `COMMIT`, la transacción incompleta se revierte automáticamente."
+- q: "¿Qué hace `SAVEPOINT p1;`?"
+  options: ["Confirma la transacción", "Marca un punto al que se puede volver con `ROLLBACK TO p1`", "Guarda una copia de seguridad", "Cierra la sesión"]
+  answer: 1
+  explain: "Permite deshacer parte de la transacción sin perder todo el trabajo."
+- q: "En Oracle, una sentencia DDL como `CREATE TABLE` en medio de una transacción…"
+  options: ["No afecta a la transacción", "Provoca un `COMMIT` implícito", "La deshace", "Da error"]
+  answer: 1
+  explain: "Por eso es mejor separar DDL y DML."
+- q: "Dos usuarios hacen `UPDATE` de la misma fila. El segundo…"
+  options: ["Sobrescribe sin esperar", "Queda esperando hasta que el primero haga `COMMIT` o `ROLLBACK`", "Recibe siempre error", "Duplica la fila"]
+  answer: 1
+  explain: "Es un bloqueo de fila. Si dos sesiones se esperan mutuamente se produce un interbloqueo y Oracle aborta una (ORA-00060)."
+- q: "Por defecto, en Oracle un lector…"
+  options: ["Bloquea a los escritores", "No bloquea a los escritores y ve una imagen consistente de los datos (lectura consistente)", "Siempre ve datos sin confirmar", "Necesita `LOCK TABLE`"]
+  answer: 1
+  explain: "Oracle usa multiversión (MVCC) con los datos de deshacer (undo): no hay lecturas sucias."
+{{< /quiz >}}
+
 ## Referencias
 
 - [Oracle AI Database 26ai: SQL Language Reference, *INSERT*](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/INSERT.html).

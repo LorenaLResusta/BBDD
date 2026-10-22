@@ -2350,6 +2350,68 @@ Ideas que conviene llevarse grabadas:
   explain: "Una función sobre la columna impide usar el índice: habría que evaluarla en todas las filas. Se corrige con un rango de fechas (`>= … AND < …`) o creando un índice basado en la función `TRUNC(fecha_hora)`."
 {{< /quiz >}}
 
+### Autoevaluación ampliada
+
+Dos tests más para afianzar el tema. Corrige al terminar: cada pregunta explica por qué la respuesta es la correcta, y puedes reiniciar y repetirlos las veces que quieras.
+
+#### Test A · Agregados, GROUP BY y JOIN
+
+{{< quiz >}}
+- q: "¿Qué diferencia hay entre `COUNT(*)` y `COUNT(telefono)`?"
+  options: ["Ninguna", "`COUNT(*)` cuenta todas las filas; `COUNT(telefono)` solo las que tienen teléfono no nulo", "`COUNT(telefono)` cuenta los teléfonos distintos", "`COUNT(*)` ignora los nulos"]
+  answer: 1
+  explain: "Las funciones de agregado, salvo `COUNT(*)`, ignoran los nulos."
+- q: "¿Para qué sirve `HAVING`?"
+  options: ["Para filtrar filas antes de agrupar", "Para filtrar grupos después de agrupar", "Para ordenar", "Para unir tablas"]
+  answer: 1
+  explain: "`WHERE` filtra filas antes de agrupar; `HAVING` filtra los grupos resultantes, y puede usar agregados."
+- q: "¿Qué devuelve un `INNER JOIN` entre `ALUMNO` y `GRUPO`?"
+  options: ["Todos los alumnos, tengan o no grupo", "Solo las parejas alumno-grupo que cumplen la condición de unión", "Todas las combinaciones posibles", "Los grupos sin alumnos"]
+  answer: 1
+  explain: "Los alumnos sin grupo (clave foránea nula) y los grupos sin alumnos no aparecen."
+- q: "Para listar **todos los ciclos**, incluidos los que no tienen grupos, usarías…"
+  options: ["`ciclo c INNER JOIN grupo g ON ...`", "`ciclo c LEFT JOIN grupo g ON ...`", "`grupo g LEFT JOIN ciclo c ON ...`", "`CROSS JOIN`"]
+  answer: 1
+  explain: "El `LEFT JOIN` conserva todas las filas de la tabla de la izquierda (ciclo) y rellena con nulos si no hay pareja."
+- q: "¿Qué pasa con `SELECT cod_grupo, nombre, COUNT(*) FROM alumno GROUP BY cod_grupo;`?"
+  options: ["Funciona", "Error ORA-00979: `nombre` no está en el `GROUP BY` ni es un agregado", "Devuelve un solo grupo", "Ignora `nombre`"]
+  answer: 1
+  explain: "Toda columna no agregada del `SELECT` debe estar en el `GROUP BY`."
+- q: "Un `CROSS JOIN` de una tabla de 10 filas con otra de 20 devuelve…"
+  options: ["30 filas", "200 filas", "10 filas", "20 filas"]
+  answer: 1
+  explain: "Producto cartesiano: 10 × 20. Un olvido de la condición de unión produce exactamente esto."
+{{< /quiz >}}
+
+#### Test B · Subconsultas, conjuntos y rendimiento
+
+{{< quiz >}}
+- q: "¿Qué devuelve `SELECT nombre FROM alumno WHERE nota > (SELECT AVG(nota) FROM alumno);`?"
+  options: ["Los alumnos con nota superior a la media", "La media de las notas", "Todos los alumnos", "Error: no se pueden anidar consultas"]
+  answer: 0
+  explain: "Es una subconsulta escalar: devuelve un único valor que se compara con cada fila."
+- q: "`NOT IN (subconsulta)` falla de forma traicionera cuando…"
+  options: ["La subconsulta devuelve algún NULL: el resultado no devuelve ninguna fila", "La subconsulta devuelve muchas filas", "Hay índices", "Nunca falla"]
+  answer: 0
+  explain: "Por la lógica de tres valores, `x NOT IN (..., NULL)` nunca es verdadero. `NOT EXISTS` evita el problema."
+- q: "Una subconsulta **correlacionada** es la que…"
+  options: ["Se ejecuta una sola vez", "Referencia columnas de la consulta externa, y se evalúa conceptualmente para cada fila", "No usa `SELECT`", "Siempre es más rápida que un JOIN"]
+  answer: 1
+  explain: "El optimizador suele transformarla, pero conviene saber leerla y compararla con un JOIN."
+- q: "`UNION` se diferencia de `UNION ALL` en que…"
+  options: ["`UNION` elimina duplicados; `UNION ALL` los conserva", "`UNION ALL` elimina duplicados", "No hay diferencia", "`UNION` solo funciona con números"]
+  answer: 0
+  explain: "`UNION ALL` es más rápido porque no ordena para eliminar duplicados. En Oracle la resta de conjuntos es `MINUS`."
+- q: "¿Qué herramienta de Oracle permite ver cómo ejecutará una consulta el optimizador?"
+  options: ["`EXPLAIN PLAN FOR ...` y `DBMS_XPLAN.DISPLAY`", "`SHOW PLAN`", "`DESCRIBE`", "`TRACE ON`"]
+  answer: 0
+  explain: "El plan muestra si usa índices (`INDEX RANGE SCAN`) o recorre toda la tabla (`TABLE ACCESS FULL`)."
+- q: "Una consulta con `WHERE UPPER(apellidos) = 'PEREZ'` sobre una columna indexada…"
+  options: ["Usa el índice siempre", "Puede no usar el índice normal, porque la función se aplica a la columna", "Es más rápida", "Da error"]
+  answer: 1
+  explain: "Una solución es un índice basado en función o evitar aplicar la función a la columna."
+{{< /quiz >}}
+
 ## Referencias
 
 - [Oracle AI Database 26ai: SQL Language Reference, *SELECT*](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/SELECT.html) — sintaxis completa de `JOIN`, `GROUP BY`, `HAVING`, subconsultas y operadores de conjuntos.

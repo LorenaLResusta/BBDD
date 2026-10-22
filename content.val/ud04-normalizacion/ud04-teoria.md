@@ -465,6 +465,68 @@ Claus candidates: **AC, BC, CD i CE**. Tots els atributs són primers, així que
   explain: "El preu de PRODUCTO canvia amb el temps; el de la factura no ha de canviar. Són **fets distints**, així que no hi ha redundància."
 {{< /quiz >}}
 
+### Autoavaluació ampliada
+
+Dos tests més per a reforçar el tema. Corregeix en acabar: cada pregunta explica per què la resposta és la correcta, i pots reiniciar-los i repetir-los tantes voltes com vulgues.
+
+#### Test A · Anomalies i dependències
+
+{{< quiz >}}
+- q: "Una taula `COMANDA(num, client, adreca_client, producte)` repeteix l'adreça en cada comanda. Quina anomalia pot provocar?"
+  options: ["D'actualització: canviar l'adreça en unes files i en altres no", "Cap", "Només anomalies de consulta", "De connexió"]
+  answer: 0
+  explain: "La redundància genera anomalies d'actualització, d'inserció (no puc guardar un client sense comanda) i d'esborrat (en esborrar l'última comanda es perd el client)."
+- q: "Si `dni → nom` és una dependència funcional, significa que…"
+  options: ["Dues files amb el mateix `dni` tenen sempre el mateix `nom`", "Dues files amb el mateix nom tenen el mateix dni", "El nom és clau primària", "El dni es calcula a partir del nom"]
+  answer: 0
+  explain: "X → Y: el valor de X determina el d'Y. No implica el contrari."
+- q: "Una taula està en **1FN** quan…"
+  options: ["Tots els seus atributs són atòmics i no hi ha grups repetitius", "No té claus foranes", "Té almenys tres columnes", "No admet nuls"]
+  answer: 0
+  explain: "Una cel·la no pot contindre llistes («666111222, 965000000») ni haver-hi columnes tel1, tel2, tel3."
+- q: "Una **dependència parcial** apareix quan…"
+  options: ["Un atribut no clau depén només d'una part de la clau composta", "Un atribut depén d'un altre no clau", "Hi ha claus foranes", "La taula està buida"]
+  answer: 0
+  explain: "S'elimina en passar a 2FN, traient eixos atributs a una taula amb la part de la clau de la qual depenen."
+- q: "Una **dependència transitiva** (A → B → C, amb B no clau) s'elimina per a aconseguir la…"
+  options: ["1FN", "2FN", "3FN", "Cap"]
+  answer: 2
+  explain: "En 3FN, els atributs no clau depenen de la clau, de tota la clau i de res més que la clau."
+- q: "Quina dependència funcional hi ha en `MATRICULA(dni, cod_modul, nom_alumne, nota)` amb clau (dni, cod_modul)?"
+  options: ["`dni → nom_alumne` (parcial: viola la 2FN)", "`nota → dni`", "`nom_alumne → cod_modul`", "Cap"]
+  answer: 0
+  explain: "El nom depén només d'una part de la clau. Cal moure'l a la taula ALUMNE."
+{{< /quiz >}}
+
+#### Test B · Normalització en la pràctica
+
+{{< quiz >}}
+- q: "Una descomposició **sense pèrdua d'informació** garanteix que…"
+  options: ["En reunir les taules amb JOIN es recupera exactament la taula original", "S'estalvia espai en disc sempre", "No hi ha claus foranes", "Es poden esborrar les dades antigues"]
+  answer: 0
+  explain: "Si es descompon malament, el JOIN pot produir tuples espúries (files que no existien)."
+- q: "Quan pot ser raonable **desnormalitzar**?"
+  options: ["Mai", "Per a millorar el rendiment de consultes molt freqüents, assumint el cost de mantindre la coherència", "Per a estalviar temps de disseny", "Quan hi haja poques files"]
+  answer: 1
+  explain: "És una decisió conscient i documentada, posterior a normalitzar, i compensada amb controls (triggers, processos)."
+- q: "Una taula `ALUMNE(dni, nom, cicle, tutor_cicle)` on `cicle → tutor_cicle`. En quina forma normal falla?"
+  options: ["1FN", "2FN", "3FN", "Les compleix totes"]
+  answer: 2
+  explain: "`tutor_cicle` depén de `cicle` (no clau): dependència transitiva. Es crea una taula CICLE(cicle, tutor)."
+- q: "Si la clau primària és **simple** (una sola columna) i la taula està en 1FN, pot haver-hi dependències parcials?"
+  options: ["Sí, sempre", "No: una dependència parcial requereix clau composta, així que ja està en 2FN", "Només si hi ha nuls", "Depén del gestor"]
+  answer: 1
+  explain: "Amb clau simple és impossible dependre d'una «part» de la clau."
+- q: "La normalització **no** pot expressar per si sola una regla com «un professor no pot donar dos mòduls a la mateixa hora». Què convé fer?"
+  options: ["Ignorar-la", "Documentar-la i decidir com controlar-la (UNIQUE, CHECK, trigger o aplicació)", "Posar-la en una taula més", "Crear una vista"]
+  answer: 1
+  explain: "Les restriccions de negoci sobrants es registren en el catàleg de restriccions i s'implementen on siga més fiable."
+- q: "Una taula amb atribut `telefons = '666111222, 965000000'` incompleix…"
+  options: ["La 1FN, per no ser atòmic", "La 3FN", "La integritat referencial", "Res"]
+  answer: 0
+  explain: "Es soluciona amb una taula TELEFON(persona, numero), amb una fila per telèfon."
+{{< /quiz >}}
+
 ## Referències
 
 - Codd, E. F. (1972). «Further Normalization of the Data Base Relational Model». *Data Base Systems*, Prentice-Hall.

@@ -745,6 +745,68 @@ Respon a les preguntes i prem **Corregir**. Cada resposta inclou una explicació
   explain: "Afecta la **suma** de diverses files. Una regla de fila només veu la fila actual. Es documenta (RA6.h) i s'implementa amb un trigger o un procediment (UD09)."
 {{< /quiz >}}
 
+### Autoavaluació ampliada
+
+Dos tests més per a reforçar el tema. Corregeix en acabar: cada pregunta explica per què la resposta és la correcta, i pots reiniciar-los i repetir-los tantes voltes com vulgues.
+
+#### Test A · Conceptes del model relacional
+
+{{< quiz >}}
+- q: "En el model relacional, una **tupla** és…"
+  options: ["Una columna de la taula", "Una fila de la relació", "El nom de la taula", "Una clau forana"]
+  answer: 1
+  explain: "Relació = taula, tupla = fila, atribut = columna, domini = conjunt de valors permesos."
+- q: "Una **clau candidata** és…"
+  options: ["Qualsevol columna que no admet nuls", "Un conjunt mínim d'atributs que identifica de manera única cada tupla", "La clau que es tria per a la clau forana", "Una clau que encara no s'ha creat"]
+  answer: 1
+  explain: "D'entre les candidates se'n tria una com a clau primària; les altres són claus alternatives (UNIQUE)."
+- q: "Què garanteix la **integritat d'entitat**?"
+  options: ["Que la clau primària no siga nul·la ni es repetisca", "Que les claus foranes apunten a files existents", "Que les dades estiguen xifrades", "Que no hi haja duplicats en cap columna"]
+  answer: 0
+  explain: "La integritat referencial és la que exigeix que les claus foranes apunten a files existents."
+- q: "La **integritat referencial** impedeix…"
+  options: ["Que una clau forana continga un valor que no existeix com a clau en la taula referenciada", "Que una taula tinga més de 10 columnes", "Que hi haja valors nuls en qualsevol columna", "Que s'esborre la base de dades"]
+  answer: 0
+  explain: "Una clau forana pot ser nul·la (si la participació és opcional), però si té valor ha d'existir en la taula pare."
+- q: "Si s'esborra una fila de la taula pare que té files filles i la política és **CASCADE**…"
+  options: ["Es rebutja l'esborrat", "S'esborren també les files filles", "Les filles passen a NULL", "No passa res"]
+  answer: 1
+  explain: "RESTRICT rebutja; CASCADE propaga l'esborrat; SET NULL posa la clau forana a nul."
+- q: "Una clau primària **composta** és la que…"
+  options: ["Es forma amb diverses columnes", "Conté lletres i números", "És autonumèrica", "Es calcula amb una funció"]
+  answer: 0
+  explain: "És habitual en les taules intermèdies de relacions N:M: la clau és la parella de claus foranes."
+{{< /quiz >}}
+
+#### Test B · Transformació E/R → relacional
+
+{{< quiz >}}
+- q: "En una relació **1:N** entre `GRUP` (1) i `ALUMNE` (N), on va la clau forana?"
+  options: ["En `GRUP`", "En `ALUMNE`", "En una taula nova", "En cap lloc"]
+  answer: 1
+  explain: "La clau forana es col·loca al costat N, apuntant a la clau primària del costat 1."
+- q: "Una relació **N:M** amb atribut propi (`nota` en la matrícula) es transforma en…"
+  options: ["Un atribut d'ALUMNE", "Una taula amb les dues claus foranes com a clau primària i la columna `nota`", "Dues taules independents sense relació", "Una vista"]
+  answer: 1
+  explain: "La nota depén de la parella alumne-mòdul, de manera que només pot viure en la taula de la relació."
+- q: "En una **relació 1:1 amb participació opcional en un costat**, el més habitual és posar la clau forana…"
+  options: ["Al costat de participació obligatòria, evitant nuls", "Sempre al costat opcional", "En ambdues taules", "En una tercera taula sempre"]
+  answer: 0
+  explain: "Així la clau forana mai és nul·la. L'alternativa de fondre les dues taules és vàlida si totes dues participen sempre."
+- q: "Una **entitat feble** per identificació genera una taula la clau primària de la qual és…"
+  options: ["Només el seu atribut discriminador", "La clau de l'entitat forta més el seu discriminador", "Un número aleatori", "No té clau"]
+  answer: 1
+  explain: "Per exemple, la línia de comanda té clau (num_comanda, num_linia)."
+- q: "Per a una jerarquia amb pocs atributs específics i que quasi no es consulta per subtipus, quina estratègia és raonable?"
+  options: ["Taula única amb un atribut discriminador", "Una taula per cada subtipus sense supertipus, sempre", "No transformar-la", "Una taula per atribut"]
+  answer: 0
+  explain: "La taula única és simple i ràpida, a costa d'admetre nuls en els atributs específics; cal controlar amb CHECK que siguen coherents amb el tipus."
+- q: "Una restricció com «un empleat no pot ser cap de si mateix» en el model lògic…"
+  options: ["S'expressa de vegades amb CHECK; si no, queda com a regla documentada per a controlar a l'aplicació o amb un trigger", "No importa", "Sempre s'expressa amb una clau primària", "S'elimina del disseny"]
+  answer: 0
+  explain: "Les restriccions que el model no pot expressar s'han de documentar i decidir on es controlen."
+{{< /quiz >}}
+
 ## Referències
 
 - Codd, E. F. (1970). «A Relational Model of Data for Large Shared Data Banks». *Communications of the ACM*, 13(6).

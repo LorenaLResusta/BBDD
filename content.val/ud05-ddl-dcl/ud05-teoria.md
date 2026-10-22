@@ -934,6 +934,68 @@ El criteri RA2.h demana usar **assistents, eines gràfiques i els llenguatges DD
   explain: "Oracle indexa automàticament PK i UNIQUE, però no les FK. Sense índex, cada esborrat en la taula pare recorre la taula filla completa i bloqueja més del necessari."
 {{< /quiz >}}
 
+### Autoavaluació ampliada
+
+Dos tests més per a reforçar el tema. Corregeix en acabar: cada pregunta explica per què la resposta és la correcta, i pots reiniciar-los i repetir-los tantes voltes com vulgues.
+
+#### Test A · Tipus, taules i restriccions (Oracle)
+
+{{< quiz >}}
+- q: "A Oracle, quin tipus de dada és el recomanat per a cadenes de longitud variable?"
+  options: ["`CHAR`", "`VARCHAR2`", "`TEXT`", "`STRING`"]
+  answer: 1
+  explain: "`VARCHAR2(n)` és el tipus de text variable d'Oracle. `CHAR(n)` omple amb blancs fins a n; `TEXT` i `STRING` no existeixen a Oracle."
+- q: "Què fa `NUMBER(7,2)`?"
+  options: ["Guarda fins a 7 dígits en total, 2 d'ells decimals (màxim 99999,99)", "Guarda 7 enters i 2 decimals (fins a 9999999,99)", "Guarda una cadena de 7 caràcters", "Guarda una data"]
+  answer: 0
+  explain: "El primer número és la precisió (dígits totals); el segon, l'escala (decimals). Queden 5 dígits per a la part entera."
+- q: "Quina restricció impedeix que una columna tinga valors repetits però **permet** nuls?"
+  options: ["`PRIMARY KEY`", "`UNIQUE`", "`NOT NULL`", "`CHECK`"]
+  answer: 1
+  explain: "`PRIMARY KEY` equival a `UNIQUE` + `NOT NULL`. A Oracle, `UNIQUE` admet diversos nuls."
+- q: "Què fa `ALTER TABLE alumne ADD CONSTRAINT ck_nota CHECK (nota BETWEEN 0 AND 10)`?"
+  options: ["Afig una columna", "Afig una regla que rebutja notes fora del rang 0-10", "Esborra les notes invàlides existents", "Crea un índex"]
+  answer: 1
+  explain: "Si ja hagueren files que no complisquen la regla, la sentència fallaria (llevat que es cree amb `NOVALIDATE`)."
+- q: "Quina és la sentència correcta per a eliminar una taula i les restriccions de clau forana que la referencien?"
+  options: ["`DELETE TABLE t`", "`DROP TABLE t CASCADE CONSTRAINTS`", "`REMOVE TABLE t`", "`TRUNCATE TABLE t CASCADE`"]
+  answer: 1
+  explain: "`DROP TABLE` és DDL i no es pot desfer amb ROLLBACK (llevat de la paperera de reciclatge amb `FLASHBACK`)."
+- q: "Què passa si defineixes una clau forana amb `ON DELETE CASCADE` i esborres la fila pare?"
+  options: ["Es rebutja l'esborrat", "S'esborren també les files filles", "Les filles queden amb la clau a NULL", "S'esborra la taula filla"]
+  answer: 1
+  explain: "`ON DELETE SET NULL` posaria la clau forana a nul. Sense clàusula, Oracle rebutja l'esborrat (ORA-02292)."
+{{< /quiz >}}
+
+#### Test B · Objectes, privilegis i diccionari
+
+{{< quiz >}}
+- q: "Per a què serveix una **seqüència** (`CREATE SEQUENCE`)?"
+  options: ["Per a ordenar files", "Per a generar valors numèrics únics, típicament per a claus primàries", "Per a copiar taules", "Per a xifrar dades"]
+  answer: 1
+  explain: "Des d'Oracle 12c també hi ha columnes identitat (`GENERATED ... AS IDENTITY`), que usen una seqüència interna."
+- q: "Un **índex** en una columna…"
+  options: ["Accelera certes cerques però ocupa espai i alenteix les escriptures", "Sempre accelera tot", "Impedeix valors repetits sempre", "Reemplaça la clau primària"]
+  answer: 0
+  explain: "Oracle crea automàticament un índex per a cada PRIMARY KEY i UNIQUE; les claus foranes convé indexar-les explícitament si es consulten per elles."
+- q: "Una **vista** és…"
+  options: ["Una còpia física de la taula", "Una consulta guardada amb nom que s'usa com si fora una taula", "Un tipus d'índex", "Un usuari especial"]
+  answer: 1
+  explain: "Les vistes simplifiquen consultes i limiten quines columnes o files veu cada usuari. No emmagatzemen dades (llevat de les vistes materialitzades)."
+- q: "Quina sentència dona permís de lectura sobre la taula `alumne` a l'usuari `ana`?"
+  options: ["`GRANT SELECT ON alumne TO ana;`", "`ALLOW SELECT alumne ana;`", "`REVOKE SELECT ON alumne FROM ana;`", "`CREATE USER ana SELECT;`"]
+  answer: 0
+  explain: "`GRANT` concedeix i `REVOKE` retira. És DCL (control de dades)."
+- q: "El principi del **mínim privilegi** diu que…"
+  options: ["Cada usuari ha de tindre només els permisos imprescindibles per al seu treball", "Tots els usuaris han de ser DBA", "Els permisos es concedeixen per defecte a tots", "Els privilegis s'hereten del sistema operatiu"]
+  answer: 0
+  explain: "Redueix el dany possible davant d'errors o accessos indeguts. Els **rols** ajuden a agrupar privilegis."
+- q: "Quina vista del diccionari de dades permet veure les taules de l'usuari actual?"
+  options: ["`USER_TABLES`", "`ALL_USERS_ONLY`", "`TABLES_NOW`", "`DUAL`"]
+  answer: 0
+  explain: "`USER_*` mostra els objectes propis, `ALL_*` els accessibles i `DBA_*` tots (requereix privilegis)."
+{{< /quiz >}}
+
 ## Referències
 
 - [Oracle AI Database 26ai: SQL Language Reference](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/).

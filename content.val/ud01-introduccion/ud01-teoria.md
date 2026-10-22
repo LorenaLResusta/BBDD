@@ -997,6 +997,68 @@ Respon les preguntes i prem el botó de comprovar. Cada resposta inclou una expl
   explain: "L'article 33 del RGPD establix un màxim de **72 hores** des que el responsable té constància de la bretxa."
 {{< /quiz >}}
 
+### Autoavaluació ampliada
+
+Dos tests més per a reforçar el tema. Corregeix en acabar: cada pregunta explica per què la resposta és la correcta, i pots reiniciar-los i repetir-los tantes voltes com vulgues.
+
+#### Test A · Conceptes bàsics
+
+{{< quiz >}}
+- q: "Quin és el principal problema d'emmagatzemar la informació d'una organització en fitxers independents per aplicació?"
+  options: ["Que els fitxers ocupen sempre més espai que una base de dades", "La redundància i la inconsistència: la mateixa dada està repetida i pot diferir entre fitxers", "Que no es poden guardar números", "Que només permeten un usuari"]
+  answer: 1
+  explain: "Cada aplicació guarda la seua còpia de les dades, de manera que es repeteixen i, en actualitzar-ne una, les altres queden desfasades. És una de les raons per les quals naixen els SGBD."
+- q: "Quina diferència hi ha entre **dada** i **informació**?"
+  options: ["Cap, són sinònims", "La dada és un valor sense context; la informació és la dada interpretada en un context útil", "La informació sempre és numèrica", "La dada només existeix en suport digital"]
+  answer: 1
+  explain: "«38,5» és una dada; «la temperatura del pacient és 38,5 °C» és informació, perquè té significat per a qui la llig."
+- q: "Una **base de dades** és…"
+  options: ["El programa que gestiona les dades", "Un conjunt organitzat de dades relacionades entre si i emmagatzemades de manera estructurada", "Un full de càlcul amb diverses pestanyes", "Un servidor amb molt de disc"]
+  answer: 1
+  explain: "El programa que la gestiona és el SGBD. Base de dades i SGBD són coses diferents: les dades i el programari que les administra."
+- q: "Quina d'aquestes funcions **no** correspon a un SGBD?"
+  options: ["Controlar l'accés concurrent", "Garantir la integritat de les dades", "Dissenyar la interfície gràfica de l'aplicació de negoci", "Realitzar còpies de seguretat i recuperació"]
+  answer: 2
+  explain: "La interfície de l'aplicació la desenvolupa l'equip de desenvolupament. El SGBD ofereix emmagatzematge, consulta, seguretat, integritat, concurrència i recuperació."
+- q: "Què és la **independència de les dades**?"
+  options: ["Que les dades no depenen de cap usuari", "Poder canviar l'estructura d'emmagatzematge sense haver de modificar les aplicacions que les usen", "Que cada taula viu en un servidor diferent", "Que les dades no necessiten claus"]
+  answer: 1
+  explain: "Gràcies als nivells d'abstracció (extern, conceptual i intern) es pot reorganitzar l'emmagatzematge físic sense reescriure els programes."
+- q: "El nivell de l'arquitectura ANSI/SPARC que descriu **quines dades hi ha i com es relacionen**, sense detalls d'emmagatzematge, és el…"
+  options: ["Nivell intern", "Nivell conceptual", "Nivell extern", "Nivell físic"]
+  answer: 1
+  explain: "El conceptual descriu l'estructura lògica de tota la base; l'extern, les vistes de cada usuari; l'intern, l'emmagatzematge."
+{{< /quiz >}}
+
+#### Test B · Casos i decisions
+
+{{< quiz >}}
+- q: "Una botiga guarda les seues vendes en un full de càlcul que editen cinc empleats alhora i de vegades es trepitgen els canvis. Quina característica d'un SGBD resoldria millor el problema?"
+  options: ["El control de concurrència i les transaccions", "Un monitor de major resolució", "Més memòria RAM a cada equip", "Canviar el format a PDF"]
+  answer: 0
+  explain: "Els bloquejos i les transaccions permeten que diversos usuaris modifiquen dades alhora sense que es perden canvis."
+- q: "Quin rol s'ocupa de crear usuaris, assignar privilegis i fer còpies de seguretat?"
+  options: ["Usuari final", "Programador d'aplicacions", "Administrador de la base de dades (DBA)", "Analista funcional"]
+  answer: 2
+  explain: "El DBA s'encarrega de l'administració, la seguretat i la disponibilitat del sistema."
+- q: "Una aplicació de missatgeria necessita guardar milions de missatges amb esquema flexible i escalar horitzontalment. Quin tipus de gestor encaixa millor *a priori*?"
+  options: ["Sempre un de relacional", "Un NoSQL, valorant el cas concret", "Un fitxer de text", "Un full de càlcul"]
+  answer: 1
+  explain: "Els NoSQL destaquen amb esquemes flexibles i grans volums distribuïts, però la decisió depén dels requisits (consistència, consultes, relacions)."
+- q: "En una base de dades **distribuïda**, la fragmentació horitzontal consisteix a…"
+  options: ["Dividir una taula per columnes", "Dividir una taula per files i repartir cada tros en un node", "Copiar la taula sencera en tots els nodes", "Xifrar la taula"]
+  answer: 1
+  explain: "L'horitzontal reparteix files (per exemple, per província); la vertical reparteix columnes; la replicació copia."
+- q: "Una clínica guarda dades de salut dels seus pacients. Quina norma de protecció de dades ha de tindre present a la UE?"
+  options: ["Només el Codi Civil", "El Reglament General de Protecció de Dades (RGPD) i la LOPDGDD", "Cap, les dades són internes", "La llei de propietat intel·lectual"]
+  answer: 1
+  explain: "Les dades de salut són una categoria especial: exigeixen base legal, mesures de seguretat reforçades i respecte als drets de les persones afectades."
+- q: "Què descriu millor el **Big Data**?"
+  options: ["Una base de dades de més d'1 GB", "Dades de gran volum, velocitat i varietat que requereixen tècniques específiques per al seu tractament", "Qualsevol base de dades relacional", "Un tipus d'índex"]
+  answer: 1
+  explain: "Les «V» clàssiques (volum, velocitat, varietat…) caracteritzen el Big Data; la intel·ligència de negoci busca extraure'n valor."
+{{< /quiz >}}
+
 ## Referències
 
 - Silberschatz, A., Korth, H. F. i Sudarshan, S. *Fundamentos de bases de datos*. McGraw-Hill.

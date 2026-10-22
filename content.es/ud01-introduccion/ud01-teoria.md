@@ -997,6 +997,68 @@ Responde a las preguntas y pulsa el botón de comprobar. Cada respuesta incluye 
   explain: "El artículo 33 del RGPD establece un máximo de **72 horas** desde que el responsable tiene constancia de la brecha."
 {{< /quiz >}}
 
+### Autoevaluación ampliada
+
+Dos tests más para afianzar el tema. Corrige al terminar: cada pregunta explica por qué la respuesta es la correcta, y puedes reiniciar y repetirlos las veces que quieras.
+
+#### Test A · Conceptos básicos
+
+{{< quiz >}}
+- q: "¿Cuál es el principal problema de almacenar la información de una organización en ficheros independientes por aplicación?"
+  options: ["Que los ficheros ocupan siempre más espacio que una base de datos", "La redundancia y la inconsistencia: el mismo dato está repetido y puede diferir entre ficheros", "Que no se pueden guardar números", "Que solo permiten un usuario"]
+  answer: 1
+  explain: "Cada aplicación guarda su copia de los datos, de modo que se repiten y, al actualizar uno, los demás quedan desfasados. Es una de las razones por las que nacen los SGBD."
+- q: "¿Qué diferencia hay entre **dato** e **información**?"
+  options: ["Ninguna, son sinónimos", "El dato es un valor sin contexto; la información es el dato interpretado en un contexto útil", "La información siempre es numérica", "El dato solo existe en soporte digital"]
+  answer: 1
+  explain: "«38,5» es un dato; «la temperatura del paciente es 38,5 °C» es información, porque tiene significado para quien la lee."
+- q: "Una **base de datos** es…"
+  options: ["El programa que gestiona los datos", "Un conjunto organizado de datos relacionados entre sí y almacenados de forma estructurada", "Una hoja de cálculo con varias pestañas", "Un servidor con mucho disco"]
+  answer: 1
+  explain: "El programa que la gestiona es el SGBD. Base de datos y SGBD son cosas distintas: los datos y el software que los administra."
+- q: "¿Cuál de estas funciones **no** corresponde a un SGBD?"
+  options: ["Controlar el acceso concurrente", "Garantizar la integridad de los datos", "Diseñar la interfaz gráfica de la aplicación de negocio", "Realizar copias de seguridad y recuperación"]
+  answer: 2
+  explain: "La interfaz de la aplicación la desarrolla el equipo de desarrollo. El SGBD ofrece almacenamiento, consulta, seguridad, integridad, concurrencia y recuperación."
+- q: "¿Qué es la **independencia de los datos**?"
+  options: ["Que los datos no dependen de ningún usuario", "Poder cambiar la estructura de almacenamiento sin tener que modificar las aplicaciones que los usan", "Que cada tabla vive en un servidor distinto", "Que los datos no necesitan claves"]
+  answer: 1
+  explain: "Gracias a los niveles de abstracción (externo, conceptual e interno) se puede reorganizar el almacenamiento físico sin reescribir los programas."
+- q: "El nivel de la arquitectura ANSI/SPARC que describe **qué datos hay y cómo se relacionan**, sin detalles de almacenamiento, es el…"
+  options: ["Nivel interno", "Nivel conceptual", "Nivel externo", "Nivel físico"]
+  answer: 1
+  explain: "El conceptual describe la estructura lógica de toda la base; el externo, las vistas de cada usuario; el interno, el almacenamiento."
+{{< /quiz >}}
+
+#### Test B · Casos y decisiones
+
+{{< quiz >}}
+- q: "Una tienda guarda sus ventas en una hoja de cálculo que editan cinco empleados a la vez y a veces se pisan los cambios. ¿Qué característica de un SGBD resolvería mejor el problema?"
+  options: ["El control de concurrencia y las transacciones", "Un monitor de mayor resolución", "Más memoria RAM en cada equipo", "Cambiar el formato a PDF"]
+  answer: 0
+  explain: "Los bloqueos y las transacciones permiten que varios usuarios modifiquen datos a la vez sin que se pierdan cambios."
+- q: "¿Qué rol se ocupa de crear usuarios, asignar privilegios y hacer copias de seguridad?"
+  options: ["Usuario final", "Programador de aplicaciones", "Administrador de la base de datos (DBA)", "Analista funcional"]
+  answer: 2
+  explain: "El DBA se encarga de la administración, la seguridad y la disponibilidad del sistema."
+- q: "Una aplicación de mensajería necesita guardar millones de mensajes con esquema flexible y escalar horizontalmente. ¿Qué tipo de gestor encaja mejor *a priori*?"
+  options: ["Siempre uno relacional", "Uno NoSQL, valorando el caso concreto", "Un fichero de texto", "Una hoja de cálculo"]
+  answer: 1
+  explain: "Los NoSQL destacan con esquemas flexibles y grandes volúmenes distribuidos, pero la decisión depende de los requisitos (consistencia, consultas, relaciones)."
+- q: "En una base de datos **distribuida**, la fragmentación horizontal consiste en…"
+  options: ["Dividir una tabla por columnas", "Dividir una tabla por filas y repartir cada trozo en un nodo", "Copiar la tabla entera en todos los nodos", "Cifrar la tabla"]
+  answer: 1
+  explain: "La horizontal reparte filas (por ejemplo, por provincia); la vertical reparte columnas; la replicación copia."
+- q: "Una clínica guarda datos de salud de sus pacientes. ¿Qué norma de protección de datos debe tener presente en la UE?"
+  options: ["Solo el Código Civil", "El Reglamento General de Protección de Datos (RGPD) y la LOPDGDD", "Ninguna, los datos son internos", "La ley de propiedad intelectual"]
+  answer: 1
+  explain: "Los datos de salud son una categoría especial: exigen base legal, medidas de seguridad reforzadas y respeto a los derechos de las personas afectadas."
+- q: "¿Qué describe mejor al **Big Data**?"
+  options: ["Una base de datos de más de 1 GB", "Datos de gran volumen, velocidad y variedad que requieren técnicas específicas para su tratamiento", "Cualquier base de datos relacional", "Un tipo de índice"]
+  answer: 1
+  explain: "Las «V» clásicas (volumen, velocidad, variedad…) caracterizan el Big Data; la inteligencia de negocio busca extraer valor de esos datos."
+{{< /quiz >}}
+
 ## Referencias
 
 - Silberschatz, A., Korth, H. F. y Sudarshan, S. *Fundamentos de bases de datos*. McGraw-Hill.

@@ -832,6 +832,68 @@ SELECT nombre, dni FROM profesor WHERE REGEXP_LIKE(dni, '^2[0-9]{7}[CE]$') ORDER
   explain: "Les condicions s'avaluen en ordre i CASE torna el resultat de la **primera** branca vertadera."
 {{< /quiz >}}
 
+### Autoavaluació ampliada
+
+Dos tests més per a reforçar el tema. Corregeix en acabar: cada pregunta explica per què la resposta és la correcta, i pots reiniciar-los i repetir-los tantes voltes com vulgues.
+
+#### Test A · SELECT, WHERE i ORDER BY
+
+{{< quiz >}}
+- q: "Què torna `SELECT nom, cognoms FROM alumne;`?"
+  options: ["Totes les columnes d'`alumne`", "Només les columnes `nom` i `cognoms` de totes les files", "Només la primera fila", "Un error: falta `WHERE`"]
+  answer: 1
+  explain: "Triar columnes és la **projecció**; `WHERE` és opcional i s'usa per a **seleccionar** files."
+- q: "Quina consulta torna els alumnes nascuts des de 2005 inclòs?"
+  options: ["`WHERE data_naix >= DATE '2005-01-01'`", "`WHERE data_naix = 2005`", "`WHERE data_naix LIKE 2005`", "`HAVING data_naix > 2005`"]
+  answer: 0
+  explain: "A Oracle convé comparar dates amb `DATE 'AAAA-MM-DD'` o `TO_DATE`, no amb números o cadenes ambigües."
+- q: "Què fa `WHERE nom LIKE 'A%'`?"
+  options: ["Filtra noms que comencen per A", "Filtra noms que acaben en A", "Filtra noms d'una sola lletra", "Dona error"]
+  answer: 0
+  explain: "`%` substitueix qualsevol seqüència de caràcters i `_` exactament un. `LIKE` distingeix majúscules/minúscules a Oracle."
+- q: "Com s'ordena per nota de major a menor i, en empat, per cognoms?"
+  options: ["`ORDER BY nota DESC, cognoms`", "`ORDER BY nota, cognoms DESC`", "`SORT BY nota DESC`", "`GROUP BY nota, cognoms`"]
+  answer: 0
+  explain: "`ASC` és el valor per defecte. Es poden encadenar criteris separats per comes."
+- q: "`SELECT * FROM alumne WHERE telefon = NULL;` torna…"
+  options: ["Els alumnes sense telèfon", "Cap fila, perquè res no és igual a NULL", "Tots els alumnes", "Error de sintaxi"]
+  answer: 1
+  explain: "Per a comprovar nuls cal usar `IS NULL` o `IS NOT NULL`: la comparació amb `=` dona *desconegut*."
+- q: "Quina és la manera de limitar a 5 files a Oracle 12c o posterior?"
+  options: ["`LIMIT 5`", "`FETCH FIRST 5 ROWS ONLY`", "`TOP 5`", "`SHOW 5`"]
+  answer: 1
+  explain: "`LIMIT` és de MySQL/PostgreSQL i `TOP` de SQL Server. A Oracle també s'usava `ROWNUM`."
+{{< /quiz >}}
+
+#### Test B · Funcions, nuls i errors comuns
+
+{{< quiz >}}
+- q: "Què torna `SELECT UPPER('hola') FROM dual;`?"
+  options: ["hola", "HOLA", "Hola", "Un error"]
+  answer: 1
+  explain: "`DUAL` és una taula d'una fila que serveix per a avaluar expressions a Oracle."
+- q: "Quina funció substitueix un nul per un valor per defecte?"
+  options: ["`NVL(columna, 0)`", "`ISNULL(columna)`", "`IFNULL`", "`DEFAULT(columna)`"]
+  answer: 0
+  explain: "`NVL` és d'Oracle; `COALESCE(a, b, c)` és estàndard i admet més de dos arguments."
+- q: "Què torna `SELECT 10 + NULL FROM dual;`?"
+  options: ["10", "0", "NULL", "Error"]
+  answer: 2
+  explain: "Qualsevol operació aritmètica amb NULL dona NULL."
+- q: "Com es concatenen dues cadenes a Oracle?"
+  options: ["`nom + cognoms`", "`nom || ' ' || cognoms`", "`CONCAT(nom, ' ', cognoms)`", "`nom & cognoms`"]
+  answer: 1
+  explain: "`||` és l'operador estàndard. `CONCAT` d'Oracle només admet dos arguments."
+- q: "Per què sol ser mala pràctica usar `SELECT *` en una aplicació?"
+  options: ["Perquè no funciona", "Perquè porta columnes innecessàries i el resultat canvia si canvia la taula", "Perquè és més ràpid", "Perquè Oracle ho prohibeix"]
+  answer: 1
+  explain: "Llistar columnes fa el codi més clar, estable i eficient."
+- q: "`WHERE nota > 5 OR nota < 3 AND repetidor = 'S'` s'avalua com…"
+  options: ["`(nota > 5 OR nota < 3) AND repetidor = 'S'`", "`nota > 5 OR (nota < 3 AND repetidor = 'S')`", "D'esquerra a dreta sense prioritat", "Dona error"]
+  answer: 1
+  explain: "`AND` té més prioritat que `OR`. En cas de dubte, usa parèntesis."
+{{< /quiz >}}
+
 ## Referències
 
 - [Oracle AI Database 26ai: SQL Language Reference, *SELECT*](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/SELECT.html).

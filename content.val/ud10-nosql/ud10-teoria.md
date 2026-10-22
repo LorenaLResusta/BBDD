@@ -1876,6 +1876,68 @@ I alhora hi ha parts d'un centre educatiu on el model documental encaixa molt b�
   explain: "El criteri decisiu no és la comoditat d'una lectura, sinó les garanties necessàries i la varietat de consultes. La lectura de l'expedient en un accés és un avantatge real del model documental, però menor enfront de la integritat declarativa i de les consultes ad hoc que exigix la gestió acadèmica."
 {{< /quiz >}}
 
+### Autoavaluació ampliada
+
+Dos tests més per a reforçar el tema. Corregeix en acabar: cada pregunta explica per què la resposta és la correcta, i pots reiniciar-los i repetir-los tantes voltes com vulgues.
+
+#### Test A · Conceptes NoSQL
+
+{{< quiz >}}
+- q: "Què enuncia el **teorema CAP**?"
+  options: ["Un sistema distribuït només pot garantir alhora dues de tres: consistència, disponibilitat i tolerància a particions", "Tot sistema pot garantir les tres alhora", "Només s'aplica a bases relacionals", "Parla del cost de les llicències"]
+  answer: 0
+  explain: "Com que les particions de xarxa ocorren, a la pràctica es tria entre consistència i disponibilitat quan hi ha una partició."
+- q: "BASE (davant d'ACID) significa…"
+  options: ["Bàsicament disponible, estat flexible i consistència eventual", "Basat en SQL i Extensions", "Bloqueig, Atomicitat, Seqüència i Escriptura", "Res"]
+  answer: 0
+  explain: "Prioritza disponibilitat i escalabilitat acceptant que les rèpliques convergisquen amb el temps."
+- q: "Un magatzem **clau-valor** com Redis és ideal per a…"
+  options: ["Cachés i sessions: accés molt ràpid per clau", "Consultes amb molts JOIN", "Anàlisi estadística complexa", "Modelatge de relacions complexes"]
+  answer: 0
+  explain: "El seu model és senzill: una clau i un valor, sense consultes per contingut."
+- q: "Les bases de dades de **grafs** (p. ex. Neo4j) destaquen quan…"
+  options: ["Les relacions entre les dades són el més important (xarxes socials, recomanacions)", "Es guarden només números", "No hi ha relacions", "Calen transaccions bancàries"]
+  answer: 0
+  explain: "Recórrer relacions és la seua operació natural i ràpida."
+- q: "MongoDB emmagatzema les dades com…"
+  options: ["Documents BSON agrupats en col·leccions", "Files en taules", "Parells clau-valor plans", "Nodes i arestes"]
+  answer: 0
+  explain: "BSON és una representació binària de JSON amb més tipus de dades."
+- q: "Què equival aproximadament a una **taula** a MongoDB?"
+  options: ["Una col·lecció", "Un document", "Un camp", "Una base de dades"]
+  answer: 0
+  explain: "Document ≈ fila, camp ≈ columna, col·lecció ≈ taula."
+{{< /quiz >}}
+
+#### Test B · CRUD, modelatge i decisió
+
+{{< quiz >}}
+- q: "Què fa `db.alumnes.insertOne({ nom: 'Ana', nota: 8 })`?"
+  options: ["Insereix un document a la col·lecció `alumnes` (que es crea si no existeix)", "Crea una taula", "Esborra un document", "Dona error si no existeix la col·lecció"]
+  answer: 0
+  explain: "MongoDB crea la col·lecció en inserir el primer document i afig automàticament un `_id`."
+- q: "Com es busquen els alumnes amb nota major que 7?"
+  options: ["`db.alumnes.find({ nota: { $gt: 7 } })`", "`db.alumnes.find(nota > 7)`", "`SELECT * FROM alumnes WHERE nota > 7`", "`db.alumnes.get(7)`"]
+  answer: 0
+  explain: "Els operadors de consulta comencen per `$`: `$gt`, `$lt`, `$in`, `$and`…"
+- q: "Què fa `db.alumnes.updateOne({ nom: 'Ana' }, { $set: { nota: 9 } })`?"
+  options: ["Modifica només el camp `nota` del primer document que coincideix", "Reemplaça tot el document per `{ nota: 9 }`", "Actualitza tots els documents", "Insereix un document nou"]
+  answer: 0
+  explain: "Sense `$set`, un document de reemplaçament substituiria el document sencer. `updateMany` actualitza tots els que coincidisquen."
+- q: "En modelatge documental, **incrustar** (embedding) les comandes dins del document del client és adequat quan…"
+  options: ["Es consulten sempre juntes i el seu nombre és acotat", "Les comandes són milions per client", "Les comandes es consulten independentment dels clients sense relació", "Mai és adequat"]
+  answer: 0
+  explain: "Si el subdocument creix sense límit o s'usa per separat, millor **referenciar** amb l'`_id`."
+- q: "Què fa l'operador `$group` en una agregació?"
+  options: ["Agrupa documents i calcula acumulats (sumes, mitjanes…)", "Ordena documents", "Elimina documents", "Crea usuaris"]
+  answer: 0
+  explain: "Equival al `GROUP BY` de SQL dins d'un pipeline (`$match`, `$group`, `$sort`…)."
+- q: "Un sistema bancari de transferències amb regles estrictes d'integritat sol encaixar millor en…"
+  options: ["Una base relacional amb transaccions ACID", "Sempre en MongoDB", "Un magatzem clau-valor sense transaccions", "Un fitxer de text"]
+  answer: 0
+  explain: "No és una regla absoluta (MongoDB també suporta transaccions), però el model relacional és l'opció natural."
+{{< /quiz >}}
+
 ## Referències
 
 - [MongoDB Manual (8.0)](https://www.mongodb.com/docs/manual/): documentació oficial del servidor.

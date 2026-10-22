@@ -465,6 +465,68 @@ Claves candidatas: **AC, BC, CD y CE**. Todos los atributos son primos, así que
   explain: "El precio de PRODUCTO cambia con el tiempo; el de la factura no debe cambiar. Son **hechos distintos**, así que no hay redundancia."
 {{< /quiz >}}
 
+### Autoevaluación ampliada
+
+Dos tests más para afianzar el tema. Corrige al terminar: cada pregunta explica por qué la respuesta es la correcta, y puedes reiniciar y repetirlos las veces que quieras.
+
+#### Test A · Anomalías y dependencias
+
+{{< quiz >}}
+- q: "Una tabla `PEDIDO(num, cliente, direccion_cliente, producto)` repite la dirección en cada pedido. ¿Qué anomalía puede provocar?"
+  options: ["De actualización: cambiar la dirección en unas filas y no en otras", "Ninguna", "Solo anomalías de consulta", "De conexión"]
+  answer: 0
+  explain: "La redundancia genera anomalías de actualización, inserción (no puedo guardar un cliente sin pedido) y borrado (al borrar el último pedido se pierde el cliente)."
+- q: "Si `dni → nombre` es una dependencia funcional, significa que…"
+  options: ["Dos filas con el mismo `dni` tienen siempre el mismo `nombre`", "Dos filas con el mismo nombre tienen el mismo dni", "El nombre es clave primaria", "El dni se calcula a partir del nombre"]
+  answer: 0
+  explain: "X → Y: el valor de X determina el de Y. No implica lo contrario."
+- q: "Una tabla está en **1FN** cuando…"
+  options: ["Todos sus atributos son atómicos y no hay grupos repetitivos", "No tiene claves foráneas", "Tiene al menos tres columnas", "No admite nulos"]
+  answer: 0
+  explain: "Una celda no puede contener listas («666111222, 965000000») ni haber columnas tel1, tel2, tel3."
+- q: "Una **dependencia parcial** aparece cuando…"
+  options: ["Un atributo no clave depende solo de una parte de la clave compuesta", "Un atributo depende de otro no clave", "Hay claves foráneas", "La tabla está vacía"]
+  answer: 0
+  explain: "Se elimina al pasar a 2FN, sacando esos atributos a una tabla con la parte de la clave de la que dependen."
+- q: "Una **dependencia transitiva** (A → B → C, con B no clave) se elimina para alcanzar la…"
+  options: ["1FN", "2FN", "3FN", "Ninguna"]
+  answer: 2
+  explain: "En 3FN, los atributos no clave dependen de la clave, de toda la clave y de nada más que la clave."
+- q: "¿Qué dependencia funcional hay en `MATRICULA(dni, cod_modulo, nombre_alumno, nota)` con clave (dni, cod_modulo)?"
+  options: ["`dni → nombre_alumno` (parcial: viola la 2FN)", "`nota → dni`", "`nombre_alumno → cod_modulo`", "Ninguna"]
+  answer: 0
+  explain: "El nombre depende solo de una parte de la clave. Hay que moverlo a la tabla ALUMNO."
+{{< /quiz >}}
+
+#### Test B · Normalización en la práctica
+
+{{< quiz >}}
+- q: "Una descomposición **sin pérdida de información** garantiza que…"
+  options: ["Al reunir las tablas con JOIN se recupera exactamente la tabla original", "Se ahorra espacio en disco siempre", "No hay claves foráneas", "Se pueden borrar los datos antiguos"]
+  answer: 0
+  explain: "Si se descompone mal, el JOIN puede producir tuplas espurias (filas que no existían)."
+- q: "¿Cuándo puede ser razonable **desnormalizar**?"
+  options: ["Nunca", "Para mejorar el rendimiento de consultas muy frecuentes, asumiendo el coste de mantener la coherencia", "Para ahorrar tiempo de diseño", "Cuando haya pocas filas"]
+  answer: 1
+  explain: "Es una decisión consciente y documentada, posterior a normalizar, y compensada con controles (triggers, procesos)."
+- q: "Una tabla `ALUMNO(dni, nombre, ciclo, tutor_ciclo)` donde `ciclo → tutor_ciclo`. ¿En qué forma normal falla?"
+  options: ["1FN", "2FN", "3FN", "Cumple todas"]
+  answer: 2
+  explain: "`tutor_ciclo` depende de `ciclo` (no clave): dependencia transitiva. Se crea una tabla CICLO(ciclo, tutor)."
+- q: "Si la clave primaria es **simple** (una sola columna) y la tabla está en 1FN, ¿puede haber dependencias parciales?"
+  options: ["Sí, siempre", "No: una dependencia parcial requiere clave compuesta, así que ya está en 2FN", "Solo si hay nulos", "Depende del gestor"]
+  answer: 1
+  explain: "Con clave simple es imposible depender de «parte» de la clave."
+- q: "La normalización **no** puede expresar por sí sola una regla como «un profesor no puede dar dos módulos a la misma hora». ¿Qué conviene hacer?"
+  options: ["Ignorarla", "Documentarla y decidir cómo controlarla (UNIQUE, CHECK, trigger o aplicación)", "Meterla en una tabla más", "Crear una vista"]
+  answer: 1
+  explain: "Las restricciones de negocio sobrantes se registran en el catálogo de restricciones y se implementan donde sea más fiable."
+- q: "Una tabla con atributo `telefonos = '666111222, 965000000'` incumple…"
+  options: ["La 1FN, por no ser atómico", "La 3FN", "La integridad referencial", "Nada"]
+  answer: 0
+  explain: "Se soluciona con una tabla TELEFONO(persona, numero), con una fila por teléfono."
+{{< /quiz >}}
+
 ## Referencias
 
 - Codd, E. F. (1972). «Further Normalization of the Data Base Relational Model». *Data Base Systems*, Prentice-Hall.

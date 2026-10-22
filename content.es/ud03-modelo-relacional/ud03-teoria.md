@@ -745,6 +745,68 @@ Responde a las preguntas y pulsa **Corregir**. Cada respuesta incluye una explic
   explain: "Afecta a la **suma** de varias filas. Una regla de fila solo ve la fila actual. Se documenta (RA6.h) y se implementa con un trigger o un procedimiento (UD09)."
 {{< /quiz >}}
 
+### Autoevaluación ampliada
+
+Dos tests más para afianzar el tema. Corrige al terminar: cada pregunta explica por qué la respuesta es la correcta, y puedes reiniciar y repetirlos las veces que quieras.
+
+#### Test A · Conceptos del modelo relacional
+
+{{< quiz >}}
+- q: "En el modelo relacional, una **tupla** es…"
+  options: ["Una columna de la tabla", "Una fila de la relación", "El nombre de la tabla", "Una clave foránea"]
+  answer: 1
+  explain: "Relación = tabla, tupla = fila, atributo = columna, dominio = conjunto de valores permitidos."
+- q: "Una **clave candidata** es…"
+  options: ["Cualquier columna que no admite nulos", "Un conjunto mínimo de atributos que identifica de forma única cada tupla", "La clave que se elige para la clave foránea", "Una clave que todavía no se ha creado"]
+  answer: 1
+  explain: "De entre las candidatas se elige una como clave primaria; las demás son claves alternativas (UNIQUE)."
+- q: "¿Qué garantiza la **integridad de entidad**?"
+  options: ["Que la clave primaria no sea nula ni se repita", "Que las claves foráneas apunten a filas existentes", "Que los datos estén cifrados", "Que no haya duplicados en ninguna columna"]
+  answer: 0
+  explain: "La integridad referencial es la que exige que las claves foráneas apunten a filas existentes."
+- q: "La **integridad referencial** impide…"
+  options: ["Que una clave foránea contenga un valor que no existe como clave en la tabla referenciada", "Que una tabla tenga más de 10 columnas", "Que haya valores nulos en cualquier columna", "Que se borre la base de datos"]
+  answer: 0
+  explain: "Una clave foránea puede ser nula (si la participación es opcional), pero si tiene valor debe existir en la tabla padre."
+- q: "Si se borra una fila de la tabla padre que tiene filas hijas y la política es **CASCADE**…"
+  options: ["Se rechaza el borrado", "Se borran también las filas hijas", "Las hijas pasan a NULL", "No ocurre nada"]
+  answer: 1
+  explain: "RESTRICT rechaza; CASCADE propaga el borrado; SET NULL pone la clave foránea a nulo."
+- q: "Una clave primaria **compuesta** es la que…"
+  options: ["Se forma con varias columnas", "Contiene letras y números", "Es autonumérica", "Se calcula con una función"]
+  answer: 0
+  explain: "Es habitual en las tablas intermedias de relaciones N:M: la clave es la pareja de claves foráneas."
+{{< /quiz >}}
+
+#### Test B · Transformación E/R → relacional
+
+{{< quiz >}}
+- q: "En una relación **1:N** entre `GRUPO` (1) y `ALUMNO` (N), ¿dónde va la clave foránea?"
+  options: ["En `GRUPO`", "En `ALUMNO`", "En una tabla nueva", "En ninguna parte"]
+  answer: 1
+  explain: "La clave foránea se coloca en el lado N, apuntando a la clave primaria del lado 1."
+- q: "Una relación **N:M** con atributo propio (`nota` en la matrícula) se transforma en…"
+  options: ["Un atributo de ALUMNO", "Una tabla con las dos claves foráneas como clave primaria y la columna `nota`", "Dos tablas independientes sin relación", "Una vista"]
+  answer: 1
+  explain: "La nota depende de la pareja alumno-módulo, de modo que solo puede vivir en la tabla de la relación."
+- q: "En una **relación 1:1 con participación opcional en un lado**, lo más habitual es poner la clave foránea…"
+  options: ["En el lado de participación obligatoria, evitando nulos", "Siempre en el lado opcional", "En ambas tablas", "En una tercera tabla siempre"]
+  answer: 0
+  explain: "Así la clave foránea nunca es nula. La alternativa de fundir las dos tablas es válida si ambas participan siempre."
+- q: "Una **entidad débil** por identificación genera una tabla cuya clave primaria es…"
+  options: ["Solo su atributo discriminador", "La clave de la entidad fuerte más su discriminador", "Un número aleatorio", "No tiene clave"]
+  answer: 1
+  explain: "Por ejemplo, la línea de pedido tiene clave (num_pedido, num_linea)."
+- q: "Para una jerarquía con pocos atributos específicos y que apenas se consulta por subtipo, ¿qué estrategia es razonable?"
+  options: ["Tabla única con un atributo discriminador", "Una tabla por cada subtipo sin supertipo, siempre", "No transformarla", "Una tabla por atributo"]
+  answer: 0
+  explain: "La tabla única es simple y rápida, a costa de admitir nulos en los atributos específicos; hay que controlar con CHECK que sean coherentes con el tipo."
+- q: "Una restricción como «un empleado no puede ser jefe de sí mismo» en el modelo lógico…"
+  options: ["Se expresa a veces con CHECK; si no, queda como regla documentada para controlar en la aplicación o con un trigger", "No importa", "Siempre se expresa con una clave primaria", "Se elimina del diseño"]
+  answer: 0
+  explain: "Las restricciones que el modelo no puede expresar deben documentarse y decidir dónde se controlan."
+{{< /quiz >}}
+
 ## Referencias
 
 - Codd, E. F. (1970). «A Relational Model of Data for Large Shared Data Banks». *Communications of the ACM*, 13(6).

@@ -2350,6 +2350,68 @@ Idees que convé endur-se ben gravades:
   explain: "Una funció sobre la columna impedix usar l'índex: caldria avaluar-la en totes les files. Es corregix amb un rang de dates (`>= … AND < …`) o creant un índex basat en la funció `TRUNC(fecha_hora)`."
 {{< /quiz >}}
 
+### Autoavaluació ampliada
+
+Dos tests més per a reforçar el tema. Corregeix en acabar: cada pregunta explica per què la resposta és la correcta, i pots reiniciar-los i repetir-los tantes voltes com vulgues.
+
+#### Test A · Agregats, GROUP BY i JOIN
+
+{{< quiz >}}
+- q: "Quina diferència hi ha entre `COUNT(*)` i `COUNT(telefon)`?"
+  options: ["Cap", "`COUNT(*)` compta totes les files; `COUNT(telefon)` només les que tenen telèfon no nul", "`COUNT(telefon)` compta els telèfons distints", "`COUNT(*)` ignora els nuls"]
+  answer: 1
+  explain: "Les funcions d'agregat, llevat de `COUNT(*)`, ignoren els nuls."
+- q: "Per a què serveix `HAVING`?"
+  options: ["Per a filtrar files abans d'agrupar", "Per a filtrar grups després d'agrupar", "Per a ordenar", "Per a unir taules"]
+  answer: 1
+  explain: "`WHERE` filtra files abans d'agrupar; `HAVING` filtra els grups resultants, i pot usar agregats."
+- q: "Què torna un `INNER JOIN` entre `ALUMNE` i `GRUP`?"
+  options: ["Tots els alumnes, tinguen o no grup", "Només les parelles alumne-grup que compleixen la condició d'unió", "Totes les combinacions possibles", "Els grups sense alumnes"]
+  answer: 1
+  explain: "Els alumnes sense grup (clau forana nul·la) i els grups sense alumnes no apareixen."
+- q: "Per a llistar **tots els cicles**, inclosos els que no tenen grups, usaries…"
+  options: ["`cicle c INNER JOIN grup g ON ...`", "`cicle c LEFT JOIN grup g ON ...`", "`grup g LEFT JOIN cicle c ON ...`", "`CROSS JOIN`"]
+  answer: 1
+  explain: "El `LEFT JOIN` conserva totes les files de la taula de l'esquerra (cicle) i omple amb nuls si no hi ha parella."
+- q: "Què passa amb `SELECT cod_grup, nom, COUNT(*) FROM alumne GROUP BY cod_grup;`?"
+  options: ["Funciona", "Error ORA-00979: `nom` no està al `GROUP BY` ni és un agregat", "Torna un sol grup", "Ignora `nom`"]
+  answer: 1
+  explain: "Tota columna no agregada del `SELECT` ha d'estar al `GROUP BY`."
+- q: "Un `CROSS JOIN` d'una taula de 10 files amb una altra de 20 torna…"
+  options: ["30 files", "200 files", "10 files", "20 files"]
+  answer: 1
+  explain: "Producte cartesià: 10 × 20. Un oblit de la condició d'unió produeix exactament això."
+{{< /quiz >}}
+
+#### Test B · Subconsultes, conjunts i rendiment
+
+{{< quiz >}}
+- q: "Què torna `SELECT nom FROM alumne WHERE nota > (SELECT AVG(nota) FROM alumne);`?"
+  options: ["Els alumnes amb nota superior a la mitjana", "La mitjana de les notes", "Tots els alumnes", "Error: no es poden niar consultes"]
+  answer: 0
+  explain: "És una subconsulta escalar: torna un únic valor que es compara amb cada fila."
+- q: "`NOT IN (subconsulta)` falla de manera traïdora quan…"
+  options: ["La subconsulta torna algun NULL: el resultat no torna cap fila", "La subconsulta torna moltes files", "Hi ha índexs", "Mai falla"]
+  answer: 0
+  explain: "Per la lògica de tres valors, `x NOT IN (..., NULL)` mai és vertader. `NOT EXISTS` evita el problema."
+- q: "Una subconsulta **correlacionada** és la que…"
+  options: ["S'executa una sola vegada", "Referencia columnes de la consulta externa, i s'avalua conceptualment per a cada fila", "No usa `SELECT`", "Sempre és més ràpida que un JOIN"]
+  answer: 1
+  explain: "L'optimitzador sol transformar-la, però convé saber llegir-la i comparar-la amb un JOIN."
+- q: "`UNION` es diferencia d'`UNION ALL` en que…"
+  options: ["`UNION` elimina duplicats; `UNION ALL` els conserva", "`UNION ALL` elimina duplicats", "No hi ha diferència", "`UNION` només funciona amb números"]
+  answer: 0
+  explain: "`UNION ALL` és més ràpid perquè no ordena per a eliminar duplicats. A Oracle la resta de conjunts és `MINUS`."
+- q: "Quina eina d'Oracle permet veure com executarà una consulta l'optimitzador?"
+  options: ["`EXPLAIN PLAN FOR ...` i `DBMS_XPLAN.DISPLAY`", "`SHOW PLAN`", "`DESCRIBE`", "`TRACE ON`"]
+  answer: 0
+  explain: "El pla mostra si usa índexs (`INDEX RANGE SCAN`) o recorre tota la taula (`TABLE ACCESS FULL`)."
+- q: "Una consulta amb `WHERE UPPER(cognoms) = 'PEREZ'` sobre una columna indexada…"
+  options: ["Usa l'índex sempre", "Pot no usar l'índex normal, perquè la funció s'aplica a la columna", "És més ràpida", "Dona error"]
+  answer: 1
+  explain: "Una solució és un índex basat en funció o evitar aplicar la funció a la columna."
+{{< /quiz >}}
+
 ## Referències
 
 - [Oracle AI Database 26ai: SQL Language Reference, *SELECT*](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/SELECT.html) — sintaxi completa de `JOIN`, `GROUP BY`, `HAVING`, subconsultes i operadors de conjunts.

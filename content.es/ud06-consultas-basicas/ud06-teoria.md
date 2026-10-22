@@ -832,6 +832,68 @@ SELECT nombre, dni FROM profesor WHERE REGEXP_LIKE(dni, '^2[0-9]{7}[CE]$') ORDER
   explain: "Las condiciones se evalúan en orden y CASE devuelve el resultado de la **primera** rama verdadera."
 {{< /quiz >}}
 
+### Autoevaluación ampliada
+
+Dos tests más para afianzar el tema. Corrige al terminar: cada pregunta explica por qué la respuesta es la correcta, y puedes reiniciar y repetirlos las veces que quieras.
+
+#### Test A · SELECT, WHERE y ORDER BY
+
+{{< quiz >}}
+- q: "¿Qué devuelve `SELECT nombre, apellidos FROM alumno;`?"
+  options: ["Todas las columnas de `alumno`", "Solo las columnas `nombre` y `apellidos` de todas las filas", "Solo la primera fila", "Un error: falta `WHERE`"]
+  answer: 1
+  explain: "Elegir columnas es la **proyección**; `WHERE` es opcional y se usa para **seleccionar** filas."
+- q: "¿Qué consulta devuelve los alumnos nacidos desde 2005 inclusive?"
+  options: ["`WHERE fecha_nac >= DATE '2005-01-01'`", "`WHERE fecha_nac = 2005`", "`WHERE fecha_nac LIKE 2005`", "`HAVING fecha_nac > 2005`"]
+  answer: 0
+  explain: "En Oracle conviene comparar fechas con `DATE 'AAAA-MM-DD'` o `TO_DATE`, no con números o cadenas ambiguas."
+- q: "¿Qué hace `WHERE nombre LIKE 'A%'`?"
+  options: ["Filtra nombres que empiezan por A", "Filtra nombres que terminan en A", "Filtra nombres de una sola letra", "Da error"]
+  answer: 0
+  explain: "`%` sustituye a cualquier secuencia de caracteres y `_` a exactamente uno. `LIKE` distingue mayúsculas/minúsculas en Oracle."
+- q: "¿Cómo se ordena por nota de mayor a menor y, en empate, por apellidos?"
+  options: ["`ORDER BY nota DESC, apellidos`", "`ORDER BY nota, apellidos DESC`", "`SORT BY nota DESC`", "`GROUP BY nota, apellidos`"]
+  answer: 0
+  explain: "`ASC` es el valor por defecto. Se pueden encadenar criterios separados por comas."
+- q: "`SELECT * FROM alumno WHERE telefono = NULL;` devuelve…"
+  options: ["Los alumnos sin teléfono", "Ninguna fila, porque nada es igual a NULL", "Todos los alumnos", "Error de sintaxis"]
+  answer: 1
+  explain: "Para comprobar nulos hay que usar `IS NULL` o `IS NOT NULL`: la comparación con `=` da *desconocido*."
+- q: "¿Cuál es la forma de limitar a 5 filas en Oracle 12c o posterior?"
+  options: ["`LIMIT 5`", "`FETCH FIRST 5 ROWS ONLY`", "`TOP 5`", "`SHOW 5`"]
+  answer: 1
+  explain: "`LIMIT` es de MySQL/PostgreSQL y `TOP` de SQL Server. En Oracle también se usaba `ROWNUM`."
+{{< /quiz >}}
+
+#### Test B · Funciones, nulos y errores comunes
+
+{{< quiz >}}
+- q: "¿Qué devuelve `SELECT UPPER('hola') FROM dual;`?"
+  options: ["hola", "HOLA", "Hola", "Un error"]
+  answer: 1
+  explain: "`DUAL` es una tabla de una fila que sirve para evaluar expresiones en Oracle."
+- q: "¿Qué función sustituye un nulo por un valor por defecto?"
+  options: ["`NVL(columna, 0)`", "`ISNULL(columna)`", "`IFNULL`", "`DEFAULT(columna)`"]
+  answer: 0
+  explain: "`NVL` es de Oracle; `COALESCE(a, b, c)` es estándar y admite más de dos argumentos."
+- q: "¿Qué devuelve `SELECT 10 + NULL FROM dual;`?"
+  options: ["10", "0", "NULL", "Error"]
+  answer: 2
+  explain: "Cualquier operación aritmética con NULL da NULL."
+- q: "¿Cómo se concatenan dos cadenas en Oracle?"
+  options: ["`nombre + apellidos`", "`nombre || ' ' || apellidos`", "`CONCAT(nombre, ' ', apellidos)`", "`nombre & apellidos`"]
+  answer: 1
+  explain: "`||` es el operador estándar. `CONCAT` de Oracle solo admite dos argumentos."
+- q: "¿Por qué suele ser mala práctica usar `SELECT *` en una aplicación?"
+  options: ["Porque no funciona", "Porque trae columnas innecesarias y el resultado cambia si cambia la tabla", "Porque es más rápido", "Porque Oracle lo prohíbe"]
+  answer: 1
+  explain: "Listar columnas hace el código más claro, estable y eficiente."
+- q: "`WHERE nota > 5 OR nota < 3 AND repetidor = 'S'` se evalúa como…"
+  options: ["`(nota > 5 OR nota < 3) AND repetidor = 'S'`", "`nota > 5 OR (nota < 3 AND repetidor = 'S')`", "De izquierda a derecha sin prioridad", "Da error"]
+  answer: 1
+  explain: "`AND` tiene más prioridad que `OR`. Ante la duda, usa paréntesis."
+{{< /quiz >}}
+
 ## Referencias
 
 - [Oracle AI Database 26ai: SQL Language Reference, *SELECT*](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/SELECT.html).
