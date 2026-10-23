@@ -38,10 +38,10 @@ weight: 2
 | UD04 | Normalización del esquema y de la hoja heredada de matrículas. | Informe de normalización hasta 3FN |
 | UD05 | Implementación en Oracle: tablas, restricciones, índices, vistas, usuarios y roles. | Scripts `01_esquema.sql` y `03_seguridad.sql` |
 | UD06 | Consultas sobre una tabla para el día a día de secretaría. | Script de consultas comentado |
-| UD07 | Informes: actas, estadísticas por grupo, consultas con JOIN y subconsultas. Optimización. | Script de informes + planes de ejecución |
-| UD08 | Altas, bajas y cambios. Promoción de curso dentro de una transacción. | Guion transaccional probado |
-| UD09 | Lógica en el servidor: funciones, procedimientos, triggers de auditoría y tarea programada. | Paquete PL/SQL + pruebas |
-| UD10 | Versión documental del expediente del alumnado en MongoDB y comparación con el modelo relacional. | Colección + consultas + informe comparativo |
+| UD06 | Informes: actas, estadísticas por grupo, consultas con JOIN y subconsultas. Optimización. | Script de informes + planes de ejecución |
+| UD07 | Altas, bajas y cambios. Promoción de curso dentro de una transacción. | Guion transaccional probado |
+| UD08 | Lógica en el servidor: funciones, procedimientos, triggers de auditoría y tarea programada. | Paquete PL/SQL + pruebas |
+| UD09 | Versión documental del expediente del alumnado en MongoDB y comparación con el modelo relacional. | Colección + consultas + informe comparativo |
 
 ## 3. Modelo de referencia
 
@@ -134,7 +134,7 @@ erDiagram
 
 ### Restricciones que no recoge el diagrama
 
-Algunas reglas de negocio no se pueden expresar con claves ni con `CHECK` de una sola fila. Se documentan en la UD04 (RA6.h) y se implementan en la UD09 con PL/SQL:
+Algunas reglas de negocio no se pueden expresar con claves ni con `CHECK` de una sola fila. Se documentan en la UD04 (RA6.h) y se implementan en la UD08 con PL/SQL:
 
 1. El jefe de un departamento debe **pertenecer** a ese departamento.
 2. Un alumno solo puede matricularse en módulos del **ciclo de su grupo**, salvo autorización.

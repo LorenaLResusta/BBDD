@@ -308,7 +308,7 @@ Normalizar es **descomponer** una tabla en varias. Una descomposición correcta 
 | ALUMNO(nia, alumno, cod_grupo) + GRUPO(cod_grupo, tutor, cod_ciclo...) | cod_grupo | Sí, de GRUPO | ✅ |
 | A(nia, alumno, tutor) + B(alumno, cod_grupo) | alumno | No | ❌ Si dos alumnos se llaman igual, el `JOIN` mezcla sus grupos y genera filas falsas |
 
-Cuando lleguemos a la UD07 podrás comprobarlo en Oracle: la consulta que reconstruye la hoja original es un `JOIN` de todas las tablas normalizadas.
+Cuando lleguemos a la UD06 podrás comprobarlo en Oracle: la consulta que reconstruye la hoja original es un `JOIN` de todas las tablas normalizadas.
 
 ---
 
@@ -319,12 +319,12 @@ Cuando lleguemos a la UD07 podrás comprobarlo en Oracle: la consulta que recons
 | Situación | Ejemplo | Cómo se controla la redundancia |
 |---|---|---|
 | Sistemas analíticos (OLAP) | Tabla de hechos de matrículas con el nombre del ciclo repetido | Se carga por procesos ETL, no la modifica nadie |
-| Valores agregados muy consultados | Guardar `num_alumnos` en GRUPO | Trigger que lo actualiza (UD09) |
+| Valores agregados muy consultados | Guardar `num_alumnos` en GRUPO | Trigger que lo actualiza (UD08) |
 | Valores históricos que **deben** congelarse | Guardar el `precio` en cada línea de factura | No es redundancia: el precio del producto cambia, el de la factura no |
-| Bases de datos documentales | Incrustar los datos del ciclo en el documento del alumno (UD10) | El modelo se diseña según las consultas |
+| Bases de datos documentales | Incrustar los datos del ciclo en el documento del alumno (UD09) | El modelo se diseña según las consultas |
 
 > [!CAUTION]
-> Desnormalizar «porque los JOIN son lentos» sin haberlo medido es un error frecuente. Con índices adecuados (UD05 y UD07), un esquema normalizado responde rápido en la mayoría de los sistemas transaccionales.
+> Desnormalizar «porque los JOIN son lentos» sin haberlo medido es un error frecuente. Con índices adecuados (UD05 y UD06), un esquema normalizado responde rápido en la mayoría de los sistemas transaccionales.
 
 ---
 

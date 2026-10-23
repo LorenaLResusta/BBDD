@@ -535,7 +535,7 @@ COMMIT;
 ```
 
 > [!NOTE]
-> La forma de **iniciar** una transacción depende del SGBD: `BEGIN TRANSACTION` (SQL Server), `START TRANSACTION` (MySQL/MariaDB) o `BEGIN` (PostgreSQL). **Oracle** no tiene ninguna de estas órdenes: la transacción comienza automáticamente con la primera instrucción DML y termina con `COMMIT` o `ROLLBACK`. Lo veremos en la UD08.
+> La forma de **iniciar** una transacción depende del SGBD: `BEGIN TRANSACTION` (SQL Server), `START TRANSACTION` (MySQL/MariaDB) o `BEGIN` (PostgreSQL). **Oracle** no tiene ninguna de estas órdenes: la transacción comienza automáticamente con la primera instrucción DML y termina con `COMMIT` o `ROLLBACK`. Lo veremos en la UD07.
 
 > [!IMPORTANT]
 > Antes de ejecutar `COMMIT`, la aplicación debe comprobar que **las dos actualizaciones** han afectado a una fila. Si alguna falla, hay que ejecutar `ROLLBACK`: abrir una transacción no valida por sí mismo el resultado de las operaciones.
@@ -616,7 +616,7 @@ graph TD
   - *Orientados a grafos:* Representan de forma nativa los nodos y las relaciones (Neo4j).
   - *Columnares:* Agrupan los datos en familias de columnas para leerlos y escribirlos a gran escala (Cassandra).
 
-La UD10 estudia con detalle los modelos NoSQL y en qué casos conviene utilizarlos.
+La UD09 estudia con detalle los modelos NoSQL y en qué casos conviene utilizarlos.
 
 > [!WARNING]
 > **NoSQL no significa necesariamente «sin ACID»**: las garantías transaccionales varían según el producto y la configuración. Antes de elegir un sistema, comprueba qué propiedades ofrece.
@@ -745,7 +745,7 @@ Una base de datos distribuida es útil cuando (RA1.g):
 A cambio, el sistema es más complejo: hay que coordinar las transacciones entre nodos (por ejemplo, con el protocolo de **confirmación en dos fases**, *two-phase commit*), mantener la coherencia de las copias y tolerar los fallos de red.
 
 > [!IMPORTANT]
-> **Teorema CAP.** Cuando falla la red entre nodos (*Partition*), un sistema distribuido tiene que elegir entre seguir respondiendo con datos posiblemente desactualizados (*Availability*) o rechazar peticiones hasta que se garantice que todos los nodos coinciden (*Consistency*). No existe ningún sistema distribuido que garantice las tres propiedades a la vez. Esta decisión explica muchas diferencias entre los SGBD relacionales y los NoSQL (UD10).
+> **Teorema CAP.** Cuando falla la red entre nodos (*Partition*), un sistema distribuido tiene que elegir entre seguir respondiendo con datos posiblemente desactualizados (*Availability*) o rechazar peticiones hasta que se garantice que todos los nodos coinciden (*Consistency*). No existe ningún sistema distribuido que garantice las tres propiedades a la vez. Esta decisión explica muchas diferencias entre los SGBD relacionales y los NoSQL (UD09).
 
 ### 10.3 Políticas de fragmentación
 
@@ -827,7 +827,7 @@ flowchart LR
 | **Ejemplo en EduGest** | Registrar una falta de asistencia | Evolución de la tasa de abandono por ciclo durante los últimos 10 años |
 
 > [!TIP]
-> Las consultas de resumen con `GROUP BY` que harás en la UD07 son la base de cualquier informe de BI. Herramientas como Power BI, Tableau o Looker Studio generan internamente consultas SQL muy parecidas.
+> Las consultas de resumen con `GROUP BY` que harás en la UD06 son la base de cualquier informe de BI. Herramientas como Power BI, Tableau o Looker Studio generan internamente consultas SQL muy parecidas.
 
 ---
 
@@ -857,7 +857,7 @@ Las bases de datos almacenan muchos **datos personales**: nombre, DNI, correo el
 | Limitación de la finalidad | Utilizar los datos solo para la finalidad para la que se han recogido | Vistas y privilegios según el perfil de usuario (UD05) |
 | **Minimización de datos** | Recoger solo los datos necesarios | No crear columnas «por si acaso» en el diseño (UD02) |
 | Exactitud | Mantener los datos correctos y actualizados | Restricciones `CHECK`, validaciones y procesos de actualización |
-| Limitación del plazo de conservación | No guardar los datos más tiempo del necesario | Procedimientos de borrado o anonimización periódica (UD09) |
+| Limitación del plazo de conservación | No guardar los datos más tiempo del necesario | Procedimientos de borrado o anonimización periódica (UD08) |
 | Integridad y confidencialidad | Proteger los datos frente a accesos no autorizados y pérdidas | Usuarios, roles, cifrado, copias de seguridad, auditoría |
 | Responsabilidad proactiva | Poder demostrar que se cumple la normativa | Documentación del diseño, registro de accesos |
 
@@ -963,7 +963,7 @@ Responde a las preguntas y pulsa el botón de comprobar. Cada respuesta incluye 
 - q: "¿Qué módulo del SGBD decide **cómo** se ejecuta una consulta, por ejemplo, si utiliza un índice o recorre toda la tabla?"
   options: ["El gestor de transacciones", "El optimizador de consultas", "El diccionario de datos", "El gestor de copias de seguridad"]
   answer: 1
-  explain: "El **optimizador** genera varios planes de ejecución posibles y elige el de coste estimado más bajo. Lo estudiarás en la UD07."
+  explain: "El **optimizador** genera varios planes de ejecución posibles y elige el de coste estimado más bajo. Lo estudiarás en la UD06."
 - q: "Una cadena de clínicas guarda en el servidor de cada ciudad solo los pacientes de esa ciudad. ¿Qué política se aplica?"
   options: ["Fragmentación vertical", "Replicación total", "Fragmentación horizontal", "Normalización"]
   answer: 2

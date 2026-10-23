@@ -262,7 +262,7 @@ RESERVA(id_reserva, id_cliente*, num_hab*, fecha_entrada, fecha_salida, num_pers
 
 #### Enunciat
 
-Classifica cada regla en una d'estes categories: **PK / clau alternativa**, **FK**, **atribut obligatori**, **regla de fila** o **no representable** (documentar i implementar a la UD09). En l'últim cas, usa el format de documentació de la teoria.
+Classifica cada regla en una d'estes categories: **PK / clau alternativa**, **FK**, **atribut obligatori**, **regla de fila** o **no representable** (documentar i implementar a la UD08). En l'últim cas, usa el format de documentació de la teoria.
 
 1. Dos clients no poden tindre el mateix DNI.
 2. La data d'eixida és posterior a la d'entrada.
@@ -358,7 +358,7 @@ CONTENEDOR (cod_contenedor, descripcion, dni_capitan, cod_puerto)
 | Atribut multivalorat | Taula nova amb la PK de l'entitat i el valor. |
 
 > [!IMPORTANT]
-> **Pèrdues semàntiques habituals.** Les claus no poden garantir: el mínim 1 del costat 1 d'una relació 1:N («tot professor imparteix almenys un mòdul»), l'existència d'una entitat respecte a una relació quan estan en taules distintes, les generalitzacions totals o disjuntes i les restriccions entre relacions («C només es relaciona amb D si ho està amb B»). S'anoten i es resolen en la implementació amb regles de fila, disparadors (UD09) o procediments.
+> **Pèrdues semàntiques habituals.** Les claus no poden garantir: el mínim 1 del costat 1 d'una relació 1:N («tot professor imparteix almenys un mòdul»), l'existència d'una entitat respecte a una relació quan estan en taules distintes, les generalitzacions totals o disjuntes i les restriccions entre relacions («C només es relaciona amb D si ho està amb B»). S'anoten i es resolen en la implementació amb regles de fila, disparadors (UD08) o procediments.
 
 ---
 

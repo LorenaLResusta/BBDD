@@ -95,7 +95,7 @@ Regles del negoci (confirmades amb el taller):
 
 #### Ampliació
 
-Comprova en la teua solució que la descomposició és **sense pèrdua**: per a cada parell de taules que es combinen, indica l'atribut comú i de quina taula és clau. Quan acabes la UD07, escriu el `JOIN` que reconstruïx el full original.
+Comprova en la teua solució que la descomposició és **sense pèrdua**: per a cada parell de taules que es combinen, indica l'atribut comú i de quina taula és clau. Quan acabes la UD06, escriu el `JOIN` que reconstruïx el full original.
 
 ---
 
@@ -203,7 +203,7 @@ CLASE(alumno, sede, profesor) amb `alumno, sede → profesor` i `profesor → se
 2. Demostra que la relació està en 3FN però no en FNBC.
 3. Descompon-la en FNBC i comprova que la descomposició és sense pèrdua.
 4. Quina dependència es perd? Escriu un exemple de dades que la incomplisca i que les noves taules acceptarien.
-5. Recomana una solució per a l'autoescola i explica com garantiries la regla perduda (avança el que faries a la UD09).
+5. Recomana una solució per a l'autoescola i explica com garantiries la regla perduda (avança el que faries a la UD08).
 
 {{% details title="Pista" %}}
 Les claus són (alumno, sede) i (alumno, profesor). La descomposició en FNBC és PROFESOR_SEDE(<u>profesor</u>, sede) i ALUMNO_PROFESOR(<u>alumno, profesor</u>). Prova d'assignar al mateix alumne dos professors de la mateixa seu.

@@ -17,11 +17,11 @@ content.es/
 ├── ud03-modelo-relacional/        RA6, RA2 · Modelo relacional
 ├── ud04-normalizacion/            RA6 · Normalización
 ├── ud05-ddl-dcl/                  RA2 · DDL y DCL en Oracle
-├── ud06-consultas-basicas/        RA3 · Consultas sobre una tabla y funciones
-├── ud07-consultas-avanzadas/      RA3 · JOIN, agrupamiento, subconsultas, optimización
-├── ud08-dml-transacciones/        RA4 · DML, transacciones y concurrencia
-├── ud09-plsql/                    RA5 · PL/SQL: procedimientos, cursores, triggers, jobs
-└── ud10-nosql/                    RA7 · Bases de datos NoSQL con MongoDB
+├── ud06-consultas/        RA3 · Consultas sobre una tabla y funciones
+├── ud06-consultas/      RA3 · JOIN, agrupamiento, subconsultas, optimización
+├── ud07-dml-transacciones/        RA4 · DML, transacciones y concurrencia
+├── ud08-plsql/                    RA5 · PL/SQL: procedimientos, cursores, triggers, jobs
+└── ud09-nosql/                    RA7 · Bases de datos NoSQL con MongoDB
 ```
 
 Cada unidad tiene `_index.md` (presentación y RA/CE), `udXX-teoria.md` y `udXX-practicas.md`.

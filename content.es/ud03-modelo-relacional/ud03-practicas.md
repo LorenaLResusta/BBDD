@@ -262,7 +262,7 @@ RESERVA(id_reserva, id_cliente*, num_hab*, fecha_entrada, fecha_salida, num_pers
 
 #### Enunciado
 
-Clasifica cada regla en una de estas categorías: **PK / clave alternativa**, **FK**, **atributo obligatorio**, **regla de fila** o **no representable** (documentar e implementar en la UD09). En el último caso, usa el formato de documentación de la teoría.
+Clasifica cada regla en una de estas categorías: **PK / clave alternativa**, **FK**, **atributo obligatorio**, **regla de fila** o **no representable** (documentar e implementar en la UD08). En el último caso, usa el formato de documentación de la teoría.
 
 1. Dos clientes no pueden tener el mismo DNI.
 2. La fecha de salida es posterior a la de entrada.
@@ -358,7 +358,7 @@ CONTENEDOR (cod_contenedor, descripcion, dni_capitan, cod_puerto)
 | Atributo multivaluado | Tabla nueva con la PK de la entidad y el valor. |
 
 > [!IMPORTANT]
-> **Pérdidas semánticas habituales.** Las claves no pueden garantizar: el mínimo 1 del lado 1 de una relación 1:N («todo profesor imparte al menos un módulo»), la existencia de una entidad respecto a una relación cuando están en tablas distintas, las generalizaciones totales o disjuntas y las restricciones entre relaciones («C solo se relaciona con D si lo está con B»). Se anotan y se resuelven en la implementación con reglas de fila, disparadores (UD09) o procedimientos.
+> **Pérdidas semánticas habituales.** Las claves no pueden garantizar: el mínimo 1 del lado 1 de una relación 1:N («todo profesor imparte al menos un módulo»), la existencia de una entidad respecto a una relación cuando están en tablas distintas, las generalizaciones totales o disjuntas y las restricciones entre relaciones («C solo se relaciona con D si lo está con B»). Se anotan y se resuelven en la implementación con reglas de fila, disparadores (UD08) o procedimientos.
 
 ---
 

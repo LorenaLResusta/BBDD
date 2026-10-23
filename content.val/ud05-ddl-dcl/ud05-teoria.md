@@ -76,8 +76,8 @@ Abans de ser una empresa de bases de dades, Larry Ellison, Bob Miner i Ed Oates 
 |---|---|---|---|
 | **DDL** | `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `RENAME`, `COMMENT` | Definir l'estructura | UD05 |
 | **DCL** | `GRANT`, `REVOKE` | Controlar l'accés | UD05 |
-| **DML** | `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `MERGE` | Consultar i modificar dades | UD06 a UD08 |
-| **TCL** | `COMMIT`, `ROLLBACK`, `SAVEPOINT` | Controlar transaccions | UD08 |
+| **DML** | `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `MERGE` | Consultar i modificar dades | UD06 a UD07 |
+| **TCL** | `COMMIT`, `ROLLBACK`, `SAVEPOINT` | Controlar transaccions | UD07 |
 
 > [!WARNING]
 > En Oracle, **cada sentència DDL executa un `COMMIT` implícit** abans i després d'executar-se. Si tenies canvis de dades pendents i llances un `CREATE TABLE`, eixos canvis queden confirmats i ja no podràs desfer-los amb `ROLLBACK`.
@@ -124,7 +124,7 @@ CREATE TABLE producto (
 - Les paraules reservades i els identificadors **no distingeixen majúscules**: `CREATE TABLE Alumno` crea la taula `ALUMNO`. Oracle guarda els noms en majúscules en el diccionari.
 - Si escrius un identificador entre **cometes dobles** (`"Alumno"`), Oracle respecta majúscules i espais, i hauràs d'usar sempre les cometes. **Evita-ho.**
 - Els identificadors poden tindre fins a **128 bytes** (des d'Oracle 12.2), comencen per lletra i poden contindre lletres, números, `_`, `$` i `#`.
-- Cada sentència acaba en `;`. Els blocs PL/SQL (UD09) acaben a més amb `/` en una línia.
+- Cada sentència acaba en `;`. Els blocs PL/SQL (UD08) acaben a més amb `/` en una línia.
 - Comentaris: `-- hasta el final de la línea` i `/* de varias líneas */`.
 - Les cadenes van entre **cometes simples**: `'DAM'`. Per a incloure una cometa, es duplica: `'Sant Joan d''Alacant'`.
 
@@ -408,7 +408,7 @@ CONSTRAINT ck_reserva_fechas  CHECK (fecha_salida > fecha_entrada)
 > [!WARNING]
 > Si `nota_final` és `NULL`, la condició `nota_final BETWEEN 0 AND 10` és **desconeguda** i el `CHECK` **l'accepta**. Si la columna ha de tindre valor, afig `NOT NULL`.
 >
-> Un `CHECK` **no** pot usar subconsultes, ni consultar altres taules, ni cridar `SYSDATE`. Les regles que ho necessiten són restriccions no representables (UD03, apartat 6) i s'implementen amb triggers (UD09).
+> Un `CHECK` **no** pot usar subconsultes, ni consultar altres taules, ni cridar `SYSDATE`. Les regles que ho necessiten són restriccions no representables (UD03, apartat 6) i s'implementen amb triggers (UD08).
 
 ### 5.5 Consultar les restriccions en el diccionari
 
@@ -523,7 +523,7 @@ TRUNCATE TABLE falta_asistencia;            -- buida la taula; no es pot desfer
 
 | Sentència | Esborra | Estructura | Es pot desfer? |
 |---|---|---|---|
-| `DELETE FROM t` (DML, UD08) | Files (totes o algunes) | Es manté | Sí, amb `ROLLBACK` |
+| `DELETE FROM t` (DML, UD07) | Files (totes o algunes) | Es manté | Sí, amb `ROLLBACK` |
 | `TRUNCATE TABLE t` | Totes les files | Es manté | **No** (és DDL) |
 | `DROP TABLE t` | Taula i dades | Desapareix | Només des de la paperera |
 | `DROP TABLE t PURGE` | Taula i dades | Desapareix | **No** |
@@ -610,7 +610,7 @@ DROP INDEX ix_alumno_apellidos_nombre;
 | Columnes usades per a ordenar resultats grans | Columnes que es modifiquen constantment |
 
 > [!IMPORTANT]
-> Un índex **accelera les lectures** però **alenteix les escriptures**: cada `INSERT`, `UPDATE` o `DELETE` ha d'actualitzar també tots els índexs de la taula, i a més ocupa espai. Indexar és una decisió de **disseny físic**: la UD07 ensenya a comprovar amb el pla d'execució si un índex s'usa.
+> Un índex **accelera les lectures** però **alenteix les escriptures**: cada `INSERT`, `UPDATE` o `DELETE` ha d'actualitzar també tots els índexs de la taula, i a més ocupa espai. Indexar és una decisió de **disseny físic**: la UD06 ensenya a comprovar amb el pla d'execució si un índex s'usa.
 
 ---
 

@@ -76,8 +76,8 @@ Antes de ser una empresa de bases de datos, Larry Ellison, Bob Miner y Ed Oates 
 |---|---|---|---|
 | **DDL** | `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `RENAME`, `COMMENT` | Definir la estructura | UD05 |
 | **DCL** | `GRANT`, `REVOKE` | Controlar el acceso | UD05 |
-| **DML** | `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `MERGE` | Consultar y modificar datos | UD06 a UD08 |
-| **TCL** | `COMMIT`, `ROLLBACK`, `SAVEPOINT` | Controlar transacciones | UD08 |
+| **DML** | `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `MERGE` | Consultar y modificar datos | UD06 a UD07 |
+| **TCL** | `COMMIT`, `ROLLBACK`, `SAVEPOINT` | Controlar transacciones | UD07 |
 
 > [!WARNING]
 > En Oracle, **cada sentencia DDL ejecuta un `COMMIT` implícito** antes y después de ejecutarse. Si tenías cambios de datos pendientes y lanzas un `CREATE TABLE`, esos cambios quedan confirmados y ya no podrás deshacerlos con `ROLLBACK`.
@@ -124,7 +124,7 @@ CREATE TABLE producto (
 - Las palabras reservadas y los identificadores **no distinguen mayúsculas**: `CREATE TABLE Alumno` crea la tabla `ALUMNO`. Oracle guarda los nombres en mayúsculas en el diccionario.
 - Si escribes un identificador entre **comillas dobles** (`"Alumno"`), Oracle respeta mayúsculas y espacios, y tendrás que usar siempre las comillas. **Evítalo.**
 - Los identificadores pueden tener hasta **128 bytes** (desde Oracle 12.2), empiezan por letra y pueden contener letras, números, `_`, `$` y `#`.
-- Cada sentencia termina en `;`. Los bloques PL/SQL (UD09) terminan además con `/` en una línea.
+- Cada sentencia termina en `;`. Los bloques PL/SQL (UD08) terminan además con `/` en una línea.
 - Comentarios: `-- hasta el final de la línea` y `/* de varias líneas */`.
 - Las cadenas van entre **comillas simples**: `'DAM'`. Para incluir una comilla, se duplica: `'Sant Joan d''Alacant'`.
 
@@ -408,7 +408,7 @@ CONSTRAINT ck_reserva_fechas  CHECK (fecha_salida > fecha_entrada)
 > [!WARNING]
 > Si `nota_final` es `NULL`, la condición `nota_final BETWEEN 0 AND 10` es **desconocida** y el `CHECK` **la acepta**. Si la columna debe tener valor, añade `NOT NULL`.
 >
-> Un `CHECK` **no** puede usar subconsultas, ni consultar otras tablas, ni llamar a `SYSDATE`. Las reglas que lo necesitan son restricciones no representables (UD03, apartado 6) y se implementan con triggers (UD09).
+> Un `CHECK` **no** puede usar subconsultas, ni consultar otras tablas, ni llamar a `SYSDATE`. Las reglas que lo necesitan son restricciones no representables (UD03, apartado 6) y se implementan con triggers (UD08).
 
 ### 5.5 Consultar las restricciones en el diccionario
 
@@ -523,7 +523,7 @@ TRUNCATE TABLE falta_asistencia;            -- vacía la tabla; no se puede desh
 
 | Sentencia | Borra | Estructura | ¿Se puede deshacer? |
 |---|---|---|---|
-| `DELETE FROM t` (DML, UD08) | Filas (todas o algunas) | Se mantiene | Sí, con `ROLLBACK` |
+| `DELETE FROM t` (DML, UD07) | Filas (todas o algunas) | Se mantiene | Sí, con `ROLLBACK` |
 | `TRUNCATE TABLE t` | Todas las filas | Se mantiene | **No** (es DDL) |
 | `DROP TABLE t` | Tabla y datos | Desaparece | Solo desde la papelera |
 | `DROP TABLE t PURGE` | Tabla y datos | Desaparece | **No** |
@@ -610,7 +610,7 @@ DROP INDEX ix_alumno_apellidos_nombre;
 | Columnas usadas para ordenar resultados grandes | Columnas que se modifican constantemente |
 
 > [!IMPORTANT]
-> Un índice **acelera las lecturas** pero **ralentiza las escrituras**: cada `INSERT`, `UPDATE` o `DELETE` tiene que actualizar también todos los índices de la tabla, y además ocupa espacio. Indexar es una decisión de **diseño físico**: la UD07 enseña a comprobar con el plan de ejecución si un índice se usa.
+> Un índice **acelera las lecturas** pero **ralentiza las escrituras**: cada `INSERT`, `UPDATE` o `DELETE` tiene que actualizar también todos los índices de la tabla, y además ocupa espacio. Indexar es una decisión de **diseño físico**: la UD06 enseña a comprobar con el plan de ejecución si un índice se usa.
 
 ---
 

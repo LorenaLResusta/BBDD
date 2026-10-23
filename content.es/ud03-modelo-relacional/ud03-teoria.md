@@ -561,12 +561,12 @@ El modelo relacional expresa muy bien las restricciones **de una fila** (atribut
 
 | Regla de negocio (EduGest) | ¿Por qué no basta con una restricción declarativa? | Dónde se implementará |
 |---|---|---|
-| El jefe de un departamento debe pertenecer a ese departamento | Compara una fila de `DEPARTAMENTO` con una fila de `PROFESOR` | Trigger (UD09) |
-| Un alumno solo se matricula en módulos del ciclo de su grupo | Implica `ALUMNO`, `GRUPO` y `MODULO` | Trigger o procedimiento de matrícula (UD09) |
-| Un profesor no supera 20 horas lectivas semanales | Es una **suma** sobre varias filas de `IMPARTE` | Trigger compuesto o procedimiento (UD09) |
-| No hay faltas anteriores a la fecha de matrícula | Compara dos tablas | Trigger (UD09) |
+| El jefe de un departamento debe pertenecer a ese departamento | Compara una fila de `DEPARTAMENTO` con una fila de `PROFESOR` | Trigger (UD08) |
+| Un alumno solo se matricula en módulos del ciclo de su grupo | Implica `ALUMNO`, `GRUPO` y `MODULO` | Trigger o procedimiento de matrícula (UD08) |
+| Un profesor no supera 20 horas lectivas semanales | Es una **suma** sobre varias filas de `IMPARTE` | Trigger compuesto o procedimiento (UD08) |
+| No hay faltas anteriores a la fecha de matrícula | Compara dos tablas | Trigger (UD08) |
 | La nota final se pone en múltiplos de 0,25 | Es una regla de **una fila** | Regla de fila: `nota_final` múltiplo de 0,25 (se declara en la UD05) |
-| Un grupo no supera 30 alumnos | Es un **recuento** sobre varias filas | Procedimiento de matrícula o trigger (UD09) |
+| Un grupo no supera 30 alumnos | Es un **recuento** sobre varias filas | Procedimiento de matrícula o trigger (UD08) |
 
 Cada restricción se documenta con un formato fijo:
 
@@ -576,7 +576,7 @@ R1. Jefe de departamento
     Tablas: DEPARTAMENTO(id_jefe), PROFESOR(id_profesor, id_departamento)
     Momento de comprobación: al asignar o cambiar el jefe y al cambiar de
                              departamento a un profesor.
-    Implementación prevista: trigger (UD09).
+    Implementación prevista: trigger (UD08).
 ```
 
 > [!IMPORTANT]
@@ -599,7 +599,7 @@ El diseño lógico se representa con un **diagrama relacional**: un rectángulo 
 > Cuando termines el proyecto en la UD05, dibuja el diagrama de las tablas que hayas creado y compáralo con tu diseño lógico. Si no coinciden, hay un error en uno de los dos.
 
 {{% details title="Pista: ¿dónde se comprueba una regla de negocio?" %}}
-Hazte tres preguntas, en este orden: ¿se decide mirando **una sola fila**? → regla de fila (se declara en el propio esquema). ¿Compara una columna con la **clave de otra tabla**? → clave ajena. ¿Necesita **sumar, contar o comparar varias filas** o tablas? → trigger o procedimiento en el servidor (UD09). Solo si ninguna de las tres sirve debe vivir en la aplicación.
+Hazte tres preguntas, en este orden: ¿se decide mirando **una sola fila**? → regla de fila (se declara en el propio esquema). ¿Compara una columna con la **clave de otra tabla**? → clave ajena. ¿Necesita **sumar, contar o comparar varias filas** o tablas? → trigger o procedimiento en el servidor (UD08). Solo si ninguna de las tres sirve debe vivir en la aplicación.
 {{% /details %}}
 
 ---
@@ -743,9 +743,9 @@ Responde a las preguntas y pulsa **Corregir**. Cada respuesta incluye una explic
   answer: 2
   explain: "Cambiar una clave primaria referenciada rompe la integridad referencial si el gestor no propaga el cambio. Por eso se prefieren claves **estables**, que no cambien nunca."
 - q: "La regla «un profesor no puede impartir más de 20 horas semanales» se debe..."
-  options: ["Expresar con una regla de fila en la tabla IMPARTE", "Documentar como restricción no representable e implementar con programación en el servidor (UD09)", "Ignorar, ya que no forma parte del modelo", "Resolver con una clave ajena"]
+  options: ["Expresar con una regla de fila en la tabla IMPARTE", "Documentar como restricción no representable e implementar con programación en el servidor (UD08)", "Ignorar, ya que no forma parte del modelo", "Resolver con una clave ajena"]
   answer: 1
-  explain: "Afecta a la **suma** de varias filas. Una regla de fila solo ve la fila actual. Se documenta (RA6.h) y se implementa con un trigger o un procedimiento (UD09)."
+  explain: "Afecta a la **suma** de varias filas. Una regla de fila solo ve la fila actual. Se documenta (RA6.h) y se implementa con un trigger o un procedimiento (UD08)."
 {{< /quiz >}}
 
 ### Autoevaluación ampliada

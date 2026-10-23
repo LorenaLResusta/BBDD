@@ -95,7 +95,7 @@ Reglas del negocio (confirmadas con el taller):
 
 #### Ampliación
 
-Comprueba en tu solución que la descomposición es **sin pérdida**: para cada par de tablas que se combinan, indica el atributo común y de qué tabla es clave. Cuando termines la UD07, escribe el `JOIN` que reconstruye la hoja original.
+Comprueba en tu solución que la descomposición es **sin pérdida**: para cada par de tablas que se combinan, indica el atributo común y de qué tabla es clave. Cuando termines la UD06, escribe el `JOIN` que reconstruye la hoja original.
 
 ---
 
@@ -203,7 +203,7 @@ CLASE(alumno, sede, profesor) con `alumno, sede → profesor` y `profesor → se
 2. Demuestra que la relación está en 3FN pero no en FNBC.
 3. Descomponla en FNBC y comprueba que la descomposición es sin pérdida.
 4. ¿Qué dependencia se pierde? Escribe un ejemplo de datos que la incumpla y que las nuevas tablas aceptarían.
-5. Recomienda una solución para la autoescuela y explica cómo garantizarías la regla perdida (adelanta lo que harías en la UD09).
+5. Recomienda una solución para la autoescuela y explica cómo garantizarías la regla perdida (adelanta lo que harías en la UD08).
 
 {{% details title="Pista" %}}
 Las claves son (alumno, sede) y (alumno, profesor). La descomposición en FNBC es PROFESOR_SEDE(<u>profesor</u>, sede) y ALUMNO_PROFESOR(<u>alumno, profesor</u>). Prueba a asignar al mismo alumno dos profesores de la misma sede.

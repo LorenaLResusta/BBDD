@@ -308,7 +308,7 @@ Normalitzar és **descompondre** una taula en diverses. Una descomposició corre
 | ALUMNO(nia, alumno, cod_grupo) + GRUPO(cod_grupo, tutor, cod_ciclo...) | cod_grupo | Sí, de GRUPO | ✅ |
 | A(nia, alumno, tutor) + B(alumno, cod_grupo) | alumno | No | ❌ Si dos alumnes es diuen igual, el `JOIN` barreja els seus grups i genera files falses |
 
-Quan arribem a la UD07 podràs comprovar-ho en Oracle: la consulta que reconstruïx el full original és un `JOIN` de totes les taules normalitzades.
+Quan arribem a la UD06 podràs comprovar-ho en Oracle: la consulta que reconstruïx el full original és un `JOIN` de totes les taules normalitzades.
 
 ---
 
@@ -319,12 +319,12 @@ Quan arribem a la UD07 podràs comprovar-ho en Oracle: la consulta que reconstru
 | Situació | Exemple | Com es controla la redundància |
 |---|---|---|
 | Sistemes analítics (OLAP) | Taula de fets de matrícules amb el nom del cicle repetit | Es carrega per processos ETL, no la modifica ningú |
-| Valors agregats molt consultats | Guardar `num_alumnos` en GRUPO | Trigger que l'actualitza (UD09) |
+| Valors agregats molt consultats | Guardar `num_alumnos` en GRUPO | Trigger que l'actualitza (UD08) |
 | Valors històrics que **han de** congelar-se | Guardar el `precio` en cada línia de factura | No és redundància: el preu del producte canvia, el de la factura no |
-| Bases de dades documentals | Incrustar les dades del cicle en el document de l'alumne (UD10) | El model es dissenya segons les consultes |
+| Bases de dades documentals | Incrustar les dades del cicle en el document de l'alumne (UD09) | El model es dissenya segons les consultes |
 
 > [!CAUTION]
-> Desnormalitzar «perquè els JOIN són lents» sense haver-ho mesurat és un error freqüent. Amb índexs adequats (UD05 i UD07), un esquema normalitzat respon ràpid en la majoria dels sistemes transaccionals.
+> Desnormalitzar «perquè els JOIN són lents» sense haver-ho mesurat és un error freqüent. Amb índexs adequats (UD05 i UD06), un esquema normalitzat respon ràpid en la majoria dels sistemes transaccionals.
 
 ---
 
