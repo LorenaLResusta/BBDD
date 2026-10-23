@@ -389,3 +389,4 @@ jobs:
 - `content.es/` (castellano, idioma por defecto) y `content.val/` (valenciano, ruta `/val/`) tienen la misma estructura de archivos y el mismo número de líneas, de modo que un cambio en uno se localiza fácilmente en el otro.
 - Textos de interfaz de los componentes: `i18n/es.toml` y `i18n/val.toml`. Currículo oficial: `data/curriculo.yaml` (es) y `data/curriculo_val.yaml` (val).
 - Los laboratorios interactivos (`layouts/_shortcodes/*-lab.html`, calendario, etc.) y los SVG de `assets/images` siguen en castellano.
+# GBD
