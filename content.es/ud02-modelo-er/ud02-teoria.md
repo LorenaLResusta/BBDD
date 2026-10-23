@@ -729,9 +729,9 @@ Responde a las preguntas y pulsa **Corregir**. Cada respuesta incluye una explic
   answer: 2
   explain: "La nota depende de la **pareja** alumno-módulo (y del curso académico). Por eso es un atributo de la relación."
 - q: "Todo vehículo de una flota es un turismo o una furgoneta, nunca las dos cosas. ¿Cómo es la jerarquía?"
-  options: ["Parcial y solapada", "Total y disyunta", "Parcial y disyunta", "Total y solapada"]
+  options: ["Parcial y solapada", "Total y disjunta", "Parcial y disjunta", "Total y solapada"]
   answer: 1
-  explain: "**Total** porque todo vehículo pertenece a alguna subclase; **disyunta** porque no puede pertenecer a las dos a la vez."
+  explain: "**Total** porque todo vehículo pertenece a alguna subclase; **disjunta** porque no puede pertenecer a las dos a la vez."
 - q: "En notación de pata de gallo, ¿qué indica el símbolo `o{` junto a una entidad?"
   options: ["Exactamente uno", "Cero o uno", "Uno o muchos", "Cero o muchos"]
   answer: 3

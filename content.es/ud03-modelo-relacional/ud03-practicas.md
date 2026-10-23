@@ -171,7 +171,7 @@ Comparar las alternativas de transformación de una jerarquía y elegir la más 
 
 #### Enunciado
 
-Usa la jerarquía de empleados de la clínica veterinaria de la [práctica 2.4](/ud02-modelo-er/ud02-practicas#práctica-24--clínica-veterinaria-con-jerarquías): `EMPLEADO` (total y disyunta) con `VETERINARIO`, `AUXILIAR` y `ADMINISTRATIVO`.
+Usa la jerarquía de empleados de la clínica veterinaria de la [práctica 2.4](/ud02-modelo-er/ud02-practicas#práctica-24--clínica-veterinaria-con-jerarquías): `EMPLEADO` (total y disjunta) con `VETERINARIO`, `AUXILIAR` y `ADMINISTRATIVO`.
 
 {{< diagrama src="chen-jerarquia-empleados.svg" caption="Jerarquía de especialización en notación de Chen" >}}
 
@@ -185,7 +185,7 @@ Para cada opción, escribe el esquema relacional y responde:
 |---|---|---|---|
 | ¿Cuántos nulos aparecen? | | | |
 | ¿Cómo se obtiene un listado de **todos** los empleados? | | | |
-| ¿Cómo se garantiza que la jerarquía es **disyunta**? | | | |
+| ¿Cómo se garantiza que la jerarquía es **disjunta**? | | | |
 | ¿Cómo se garantiza que es **total**? | | | |
 | ¿Qué pasa con la relación «un veterinario realiza consultas»? | | | |
 

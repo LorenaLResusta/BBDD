@@ -2382,6 +2382,9 @@ La Policia i l'associació d'entitats bancàries, escarmentades per *La casa de 
 >
 > D'altra banda, la policia ens passa dades dels detinguts per atracaments: codi, nom i cognoms. Alguns actuaven en banda (número de banda i grandària), i hi ha bandes que depenen d'una altra de major. Cada atracament que se'ls imputa implica un detingut, la sucursal que va patir el cop i el jutge que du el cas (clau del jutjat, nom i anys de servei); de l'atracament guardem quan va ocórrer, els anys de condemna i la indemnització.
 
+> [!TIP]
+> **Què és un atribut derivat?** És un atribut el valor del qual es **calcula a partir d'altres dades** que ja guardes, així que no cal emmagatzemar-lo. Ací l'`edad` ix de la data de naixement (hui menys `fecha_nacimiento`) i canvia sola cada any: si la guardares, caldria actualitzar-la a mà i es quedaria desfasada. El mateix passa amb la grandària de la banda, que s'obté comptant quants detinguts hi pertanyen. En la notació de Chen es dibuixa amb una el·lipse de **línia discontínua**.
+
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
 

@@ -325,7 +325,7 @@ CREATE TABLE administrativo (
 ```
 
 > [!TIP]
-> **Truco profesional para garantizar una jerarquía disyunta solo con restricciones.** El discriminador `tipo` se repite en cada subclase con un `CHECK` de valor fijo, y la clave ajena es compuesta (id, tipo). Así, un empleado de tipo `'ADM'` no puede aparecer en `PROGRAMADOR`: la clave ajena (id, 'PRO') no encontraría su fila. Lo que **no** garantiza es que la jerarquía sea **total** (que todo empleado esté en alguna subclase).
+> **Truco profesional para garantizar una jerarquía disjunta solo con restricciones.** El discriminador `tipo` se repite en cada subclase con un `CHECK` de valor fijo, y la clave ajena es compuesta (id, tipo). Así, un empleado de tipo `'ADM'` no puede aparecer en `PROGRAMADOR`: la clave ajena (id, 'PRO') no encontraría su fila. Lo que **no** garantiza es que la jerarquía sea **total** (que todo empleado esté en alguna subclase).
 
 #### Comprobación
 

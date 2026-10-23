@@ -219,7 +219,7 @@ Hasta el perro de *Los Serrano* tiene ficha en esta clínica. Una clínica veter
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
 1. Diagrama EER con todas las jerarquías.
-2. Clasifica cada jerarquía como total/parcial y disyunta/solapada y **justifícalo con una frase del texto**.
+2. Clasifica cada jerarquía como total/parcial y disjunta/solapada y **justifícalo con una frase del texto**.
 3. Decide si `CONSULTA` es una entidad o una relación. Razona las dos opciones.
 4. Escribe las restricciones que no puede recoger el diagrama (por ejemplo, sobre la dosis o sobre quién puede recetar).
 5. Identifica qué información del texto **no** da lugar a ningún dato que haya que guardar.
@@ -229,8 +229,8 @@ Hasta el perro de *Los Serrano* tiene ficha en esta clínica. Una clínica veter
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] La jerarquía de empleados es **total y disyunta**.
-- [ ] La jerarquía de mascotas es **parcial y disyunta**.
+- [ ] La jerarquía de empleados es **total y disjunta**.
+- [ ] La jerarquía de mascotas es **parcial y disjunta**.
 - [ ] Los atributos comunes están en la superclase y solo los específicos en las subclases.
 - [ ] El cliente aparece como entidad aunque el texto «lo conoce por sus mascotas».
 - [ ] La dosis es un atributo de la relación consulta–medicamento.
@@ -542,7 +542,7 @@ Si en *Élite* una fiesta ya acaba en drama, imagina un festival entero. Una aso
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
 1. Extrae del texto las **entidades candidatas** y descarta las que no pertenecen al sistema, justificándolo con una frase del apartado 6. Indica cuáles son débiles y cuál es el **identificador completo** de cada una.
-2. Clasifica las dos jerarquías (artistas y personal) como totales o parciales y disyuntas o solapadas, citando la frase del texto que lo justifica. Decide qué atributos van en la superclase.
+2. Clasifica las dos jerarquías (artistas y personal) como totales o parciales y disjuntas o solapadas, citando la frase del texto que lo justifica. Decide qué atributos van en la superclase.
 3. Modela la actuación como relación **ternaria** (artista, escenario, franja). Calcula la cardinalidad de cada entidad fijando las otras dos y explica cómo las dos prohibiciones del apartado 4 reducen una de ellas.
 4. Marca todos los atributos **compuestos**, **multivaluados** y **derivados** y explica cómo los representarías. ¿`duración` es un atributo de la relación o se deduce de otra cosa?
 5. Escribe **al menos seis restricciones** que el diagrama no puede expresar (solapamientos, coherencia entre ediciones, aforo…).
@@ -555,7 +555,7 @@ Si en *Élite* una fiesta ya acaba en drama, imagina un festival entero. Una aso
 {{% comprobacion %}}
 - [ ] `EDICIÓN` es débil de `FESTIVAL` (festival + año) y `ESCENARIO` es débil de `EDICIÓN` (festival + año + número).
 - [ ] La franja pertenece a la edición o es un dato general; has justificado cuál de las dos opciones eliges.
-- [ ] La jerarquía de artistas es **total y disyunta**; la del personal es **parcial y solapada**.
+- [ ] La jerarquía de artistas es **total y disjunta**; la del personal es **parcial y solapada**.
 - [ ] `punto de acceso` y `representante` son atributos compuestos; `géneros` y `días disponibles` son multivaluados.
 - [ ] La relación entre agrupación y músico es N:M y lleva `fecha_entrada` e `instrumento`.
 - [ ] La asignación de personal tiene el turno como parte de su identificación.
@@ -571,7 +571,7 @@ Si en *Élite* una fiesta ya acaba en drama, imagina un festival entero. Una aso
 > - Poner `escenario` como un texto dentro de la actuación: tiene aforo, punto de acceso y personal asignado, así que es una entidad.
 > - Convertir la ternaria en tres binarias y perder qué artista toca en qué escenario en qué franja.
 > - Poner `edad` en lugar de `fecha_nacimiento`, o `número_componentes` como dato introducido en vez de derivado de la relación con los músicos.
-> - Olvidar que el personal puede estar en dos categorías a la vez y declarar la jerarquía disyunta.
+> - Olvidar que el personal puede estar en dos categorías a la vez y declarar la jerarquía disjunta.
 
 {{% /details %}}
 
@@ -621,7 +621,7 @@ Valeria, la escritora de la serie *Valeria*, ha fundado su propia editorial inde
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] La jerarquía de obras es **parcial y disyunta**, con atributos propios en cada subclase.
+- [ ] La jerarquía de obras es **parcial y disjunta**, con atributos propios en cada subclase.
 - [ ] *Traduce* es una reflexiva 1:N con los roles *original* y *traducción*; *incluye* es una reflexiva N:M con `orden` y `páginas`.
 - [ ] La participación de personas lleva el porcentaje de derechos y admite varias funciones de la misma persona en la misma obra.
 - [ ] El contrato se modela como agregación de la participación, con el agente como relación opcional.
@@ -691,7 +691,7 @@ El taller mantiene los aviones de la aerolínea de *Berlín* (ver el ejercicio 3
 
 {{% comprobacion %}}
 - [ ] `ORDEN` se identifica por (año, número) y `TAREA` por (año, número de orden, número de tarea).
-- [ ] La jerarquía de aeronaves es **parcial y disyunta**; la de piezas, **total y disyunta**.
+- [ ] La jerarquía de aeronaves es **parcial y disjunta**; la de piezas, **total y disjunta**.
 - [ ] La habilitación es una ternaria con la fecha de caducidad como atributo.
 - [ ] El historial de propiedad y el de instalación llevan fecha de inicio como parte de su identificación.
 - [ ] La dependencia entre tareas es una N:M reflexiva sin atributos.
@@ -762,7 +762,7 @@ La autoridad aeronáutica exige que cada **certificación de orden** quede firma
 
 {{% comprobacion %}}
 - [ ] `PORTAL` es débil de `COMUNIDAD`; `INMUEBLE` es débil de `PORTAL`; `JUNTA` es débil de `COMUNIDAD`; `PUNTO` es débil de `JUNTA`; `RECIBO` es débil de `INMUEBLE`.
-- [ ] La jerarquía de inmuebles es **total y disyunta**; la de propietarios, **total y disyunta**, con atributos distintos en cada subclase.
+- [ ] La jerarquía de inmuebles es **total y disjunta**; la de propietarios, **total y disjunta**, con atributos distintos en cada subclase.
 - [ ] El vínculo garaje–vivienda es una relación 1:N desde la vivienda y opcional del lado del garaje.
 - [ ] La propiedad es una N:M entre inmueble y propietario con `porcentaje` y `fecha_inicio` como parte del identificador.
 - [ ] La delegación es una ternaria con dos papeles distintos para la misma entidad `PROPIETARIO`.
@@ -847,7 +847,7 @@ Lee la [entrevista con la jefatura de estudios](/guia/proyecto-edugest#1-enuncia
 {{< figura src="ud02/chen-eer-leyenda.svg" alt="Leyenda de la notación de Chen extendida: entidad, entidad débil, relación, relación identificadora (rombo doble), participación parcial y total, ternaria, atributos, especialización con círculo d u o, y agregación" caption="Leyenda de la notación de Chen extendida (EER) usada en las soluciones" >}}
 
 > [!IMPORTANT]
-> **Notación de Chen extendida.** Las entidades son rectángulos y las relaciones, rombos; la entidad débil lleva rectángulo doble y su relación identificadora, rombo doble. Una **línea doble** une una entidad con una relación cuando la participación es total (mínimo 1) y una línea sencilla cuando es parcial (mínimo 0). Junto al rombo se rotula la cardinalidad máxima (1, N, M, P) y junto a la entidad el par (mín, máx). Las especializaciones se dibujan con un círculo con **d** (disyunta) u **o** (solapada); cada subclase se une con el símbolo de subconjunto ⊂ y la línea hasta la superclase es doble si la especialización es total.
+> **Notación de Chen extendida.** Las entidades son rectángulos y las relaciones, rombos; la entidad débil lleva rectángulo doble y su relación identificadora, rombo doble. Una **línea doble** une una entidad con una relación cuando la participación es total (mínimo 1) y una línea sencilla cuando es parcial (mínimo 0). Junto al rombo se rotula la cardinalidad máxima (1, N, M, P) y junto a la entidad el par (mín, máx). Las especializaciones se dibujan con un círculo con **d** (disjunta) u **o** (solapada); cada subclase se une con el símbolo de subconjunto ⊂ y la línea hasta la superclase es doble si la especialización es total.
 
 > [!IMPORTANT]
 > **Convenio de cardinalidades.** El par (mín, máx) escrito **junto a una entidad** indica con cuántas instancias de **esa** entidad se relaciona una instancia de la otra. Es el mismo convenio de la [teoría](/ud02-modelo-er/ud02-teoria#71-equivalencia-entre-la-notación-de-chen-y-la-pata-de-gallo). En una relación ternaria, el par junto a una entidad cuenta cuántas instancias de ella corresponden a cada pareja de las otras dos.
@@ -2122,7 +2122,7 @@ La empresa de *Sueños de libertad* gestiona su proceso de producción y sus con
 
 #### Ampliación
 
-Algunas piezas se **compran a proveedores** en lugar de fabricarse. ¿Cómo modelarías esta distinción? Plantea una especialización de `PIEZA` y decide si es total o parcial, disyunta o solapada.
+Algunas piezas se **compran a proveedores** en lugar de fabricarse. ¿Cómo modelarías esta distinción? Plantea una especialización de `PIEZA` y decide si es total o parcial, disjunta o solapada.
 
 {{< solucion id="ud02-036" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
@@ -2186,7 +2186,7 @@ La comandancia de la fuerza de defensa quiere registrar su operativa interna.
 
 #### Ampliación
 
-Cada trooper tiene una **especialidad** (piloto, agente, médico…) con datos propios. Plantea una **especialización** de `TROOPER`, decide si es total o parcial, disyunta o solapada, y redibuja la parte afectada.
+Cada trooper tiene una **especialidad** (piloto, agente, médico…) con datos propios. Plantea una **especialización** de `TROOPER`, decide si es total o parcial, disjunta o solapada, y redibuja la parte afectada.
 
 {{< solucion id="ud02-037" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
@@ -2382,6 +2382,9 @@ La Policía y la asociación de entidades bancarias, escarmentadas por *La casa 
 >
 > Por otro lado, la policía nos pasa datos de los detenidos por atracos: código, nombre y apellidos. Algunos actuaban en banda (número de banda y tamaño), y hay bandas que dependen de otra mayor. Cada atraco que se les imputa implica a un detenido, la sucursal que sufrió el golpe y el juez que lleva el caso (clave del juzgado, nombre y años de servicio); del atraco guardamos cuándo ocurrió, los años de condena y la indemnización.
 
+> [!TIP]
+> **¿Qué es un atributo derivado?** Es un atributo cuyo valor se **calcula a partir de otros datos** que ya guardas, así que no hace falta almacenarlo. Aquí la `edad` sale de la fecha de nacimiento (hoy menos `fecha_nacimiento`) y cambia sola cada año: si la guardaras, habría que actualizarla a mano y se quedaría desfasada. Lo mismo pasa con el tamaño de la banda, que se obtiene contando cuántos detenidos pertenecen a ella. En la notación de Chen se dibuja con una elipse de **línea discontinua**.
+
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
 
@@ -2395,7 +2398,7 @@ La Policía y la asociación de entidades bancarias, escarmentadas por *La casa 
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] La especialización es **total y disyunta**.
+- [ ] La especialización es **total y disjunta**.
 - [ ] `edad` y `num_miembros` son atributos derivados.
 - [ ] *Atraco* es una ternaria con `fecha`, `condena` e `indemnización`.
 - [ ] `SUCURSAL` es débil de `ENTIDAD_BANCARIA`.
@@ -2457,7 +2460,7 @@ El palacio de *La Promesa* gestiona su cuadra, sus socios, sus instructores y la
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] Hay dos jerarquías **totales y disyuntas**.
+- [ ] Hay dos jerarquías **totales y disjuntas**.
 - [ ] La genealogía es una reflexiva con máximo 2 progenitores por potro.
 - [ ] `BOX` es débil de `PABELLÓN`.
 - [ ] *Supervisa* sale de la subclase *en prácticas* hacia *titular*.
@@ -2519,7 +2522,7 @@ Un hotel-balneario termal, al que se van de vacaciones *Los Serrano*, automatiza
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] La jerarquía de empleados es **parcial** y las otras dos son **totales y disyuntas**.
+- [ ] La jerarquía de empleados es **parcial** y las otras dos son **totales y disjuntas**.
 - [ ] *Asignación* sale de la subclase `ALOJADO`.
 - [ ] `HABITACIÓN` es débil de `PLANTA`.
 - [ ] *Presta* es una ternaria con cuatro atributos.
@@ -2538,7 +2541,7 @@ Un hotel-balneario termal, al que se van de vacaciones *Los Serrano*, automatiza
 
 #### Ampliación
 
-Una suite puede **reformarse** y pasar a estándar. ¿Es compatible con una especialización disyunta? ¿Qué decisión de diseño habría que tomar?
+Una suite puede **reformarse** y pasar a estándar. ¿Es compatible con una especialización disjunta? ¿Qué decisión de diseño habría que tomar?
 
 {{< solucion id="ud02-042" title="Solución: diagrama EER en notación de Chen (inténtalo antes de abrirla)" />}}
 
@@ -2581,7 +2584,7 @@ Tras el *Apagón*, el Ministerio quiere un sistema para controlar la producción
 {{% details title="Comprobación (úsala al terminar tu diagrama)" %}}
 
 {{% comprobacion %}}
-- [ ] La jerarquía es **total y disyunta** con tres subclases.
+- [ ] La jerarquía es **total y disjunta** con tres subclases.
 - [ ] *Línea* es una reflexiva N:M con dos atributos.
 - [ ] `PARTE` es débil de `CENTRAL`.
 - [ ] *Suministro* es una ternaria.
@@ -2645,7 +2648,7 @@ Las Encinas (la de *Élite*) organiza un festival que se repite cada año y quie
 {{% comprobacion %}}
 - [ ] `EDICIÓN` es débil de `FESTIVAL` y `ESCENARIO` es débil de `EDICIÓN`.
 - [ ] `ENTRADA` es débil de `EDICIÓN`.
-- [ ] La especialización de artistas es **total y disyunta**.
+- [ ] La especialización de artistas es **total y disjunta**.
 - [ ] *Actúa* tiene la fecha y la hora de inicio como discriminador.
 {{% /comprobacion %}}
 
@@ -2778,7 +2781,7 @@ El barrio de *Acacias 38* organiza una muestra de platos típicos de España con
 {{% comprobacion %}}
 - [ ] `LOCALIDAD`, `RESTAURANTE` y `VISITA` son entidades débiles.
 - [ ] *Es típico de* es una N:M con el atributo `variación_local`.
-- [ ] La jerarquía de visitas es **total y disyunta**.
+- [ ] La jerarquía de visitas es **total y disjunta**.
 - [ ] `ingredientes_básicos` es multivaluado.
 {{% /comprobacion %}}
 
@@ -2960,7 +2963,7 @@ Hay que registrar qué pruebas diagnósticas se solicitan en cada atención y su
 {{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
 
 
-Modelar una lista de materiales recursiva, dos entidades débiles con identificadores compuestos, una especialización total y disyunta y una ternaria sin entidades repetidas.
+Modelar una lista de materiales recursiva, dos entidades débiles con identificadores compuestos, una especialización total y disjunta y una ternaria sin entidades repetidas.
 
 {{% /details %}}
 
@@ -2997,7 +3000,7 @@ La fábrica de mobiliario de *Los Serrano* quiere gestionar su catálogo, sus co
 {{% comprobacion %}}
 - [ ] *Se compone de* es una reflexiva N:M con roles *conjunto* y *componente* y el atributo `cantidad`.
 - [ ] `UBICACIÓN` tiene **dos** discriminadores y `LOTE` y `LÍNEA` son débiles.
-- [ ] La especialización de `ARTÍCULO` es **total y disyunta**.
+- [ ] La especialización de `ARTÍCULO` es **total y disjunta**.
 - [ ] *Suministra* tiene `fecha_tarifa` como discriminador de la relación.
 - [ ] *Coloca* es una ternaria con `OPERARIO`, `LOTE` y `UBICACIÓN` con máximo N en las tres patas.
 {{% /comprobacion %}}
@@ -3034,7 +3037,7 @@ Algunas piezas se fabrican en varias versiones (v1, v2) y la lista de materiales
 {{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
 
 
-Modelar una cadena de cuatro niveles de entidades débiles, dos relaciones entre las mismas entidades, una ternaria con una pata de máximo 1 y una especialización total y disyunta.
+Modelar una cadena de cuatro niveles de entidades débiles, dos relaciones entre las mismas entidades, una ternaria con una pata de máximo 1 y una especialización total y disjunta.
 
 {{% /details %}}
 
@@ -3072,7 +3075,7 @@ El club de peripatéticos de *Merlí* quiere llevar todos sus torneos, rondas y 
 - [ ] Hay cuatro niveles de debilidad: `EDICIÓN`, `RONDA`, `PARTIDA` y `PREMIO` (esta última también débil de `EDICIÓN`).
 - [ ] `JUGADOR` y `PARTIDA` se unen con dos relaciones, *blancas* y *negras*, ambas (1,1) para el jugador.
 - [ ] *Ficha* es ternaria con `CLUB` de máximo 1 y el atributo `dorsal`.
-- [ ] La especialización de `TORNEO` es **total y disyunta**.
+- [ ] La especialización de `TORNEO` es **total y disjunta**.
 - [ ] `sede` es compuesto, `títulos` multivaluado y `duración_min` derivado.
 {{% /comprobacion %}}
 
