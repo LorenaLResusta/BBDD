@@ -19,9 +19,9 @@ En esta unidad se estudian minuciosamente los conceptos matemáticos y pragmáti
 
 ### Temporalización
 
-La unidad ocupa **15 horas de aula** (9 de teoría y 6 de práctica).
+La unidad ocupa **20 horas de aula** (9 de teoría y 11 de práctica).
 
-{{< sesiones unidad="UD03" horas="15" >}}
+{{< sesiones unidad="UD03" horas="20" >}}
 items:
   - {h: 2, tipo: T, t: "Relación, atributo, dominio, tupla, grado y cardinalidad. Claves", ref: "§1 y §2 · laboratorio de claves"}
   - {h: 2, tipo: T, t: "Restricciones e integridad referencial", ref: "§3 · simulador de integridad"}
@@ -32,10 +32,14 @@ items:
   - {h: 1, tipo: T, t: "Restricciones no representables y herramientas", ref: "§6 y §7"}
   - {h: 1, tipo: P, t: "Tres formas de transformar una jerarquía", ref: "Práctica 3.3"}
   - {h: 2, tipo: P, t: "Modelo lógico de EduGest", ref: "§8 y proyecto EduGest-3"}
+  - {h: 2, tipo: P, t: "Tareas de transformación 1 y 2 (naviera e instituto)", ref: "Tareas 1 y 2"}
+  - {h: 1, tipo: P, t: "Ingeniería inversa de un esquema", ref: "Práctica 3.4"}
+  - {h: 1, tipo: P, t: "Catálogo de restricciones de un hotel", ref: "Práctica 3.5"}
+  - {h: 1, tipo: P, t: "Banco de ejercicios de transformación (bloque 1)", ref: "Ejercicios 1 a 5"}
 autonomo:
-  - "Tareas de transformación 1 a 7 (E/R → relacional)"
-  - "Prácticas 3.4 (ingeniería inversa), 3.5 y 3.6"
-  - "Banco de 20 ejercicios"
+  - "Tareas de transformación 3 a 7 (E/R → relacional)"
+  - "Práctica 3.6"
+  - "Banco de 20 ejercicios (bloques 2 y 3)"
 {{< /sesiones >}}
 
 > [!IMPORTANT]

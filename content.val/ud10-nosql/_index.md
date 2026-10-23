@@ -14,4 +14,4 @@ Ara que domines el model relacional, és el moment de conéixer les alternatives
 | [Teoria](/ud10-nosql/ud10-teoria) | Característiques, BASE i CAP, tipus (clau-valor, documental, columnar, grafs), elements de MongoDB, CRUD, arrays, agregacions, modelatge, validació, índexs, seguretat i comparació amb SQL |
 | [Pràctiques](/ud10-nosql/ud10-practicas) | Posada en marxa, CRUD, consultes, agregacions comparades amb SQL, modelatge d'un catàleg, Valkey i Neo4j, decisió raonada i expedient documental d'EduGest |
 
-**Durada:** 3 hores d'aula, del 23/04/2027 al 27/04/2027. Consulta la [guia didàctica](/) per a vore el seu lloc en el calendari del curs.
+**Durada:** 2 hores d'aula, del 29/06/2027 al 30/06/2027. Consulta la [guia didàctica](/) per a vore el seu lloc en el calendari del curs.

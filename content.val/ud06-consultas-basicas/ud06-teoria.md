@@ -16,23 +16,23 @@ Tots els exemples s'executen sobre l'esquema de referència **EDUGEST** carregat
 
 ### Temporalització
 
-La unitat ocupa **14 hores d'aula** (8 de teoria i 6 de pràctica). És, juntament amb la UD07, el bloc de **consultes**, una de les parts amb més pes del mòdul (29 hores d'aula abans de la FE i 22 hores de reforç a juny, 51 en total): ací s'adquirix la destresa amb `SELECT` que s'utilitzarà fins al final.
+La unitat ocupa **19 hores d'aula** (8 de teoria i 11 de pràctica). És, juntament amb la UD07, el bloc de **consultes (DML)**, el de més pes del mòdul: 40 hores d'aula entre les dues. Ací s'adquirix la destresa amb `SELECT` que s'utilitzarà fins al final.
 
-{{< sesiones unidad="UD06" horas="14" >}}
+{{< sesiones unidad="UD06" horas="19" >}}
 items:
   - {h: 2, tipo: T, t: "Eines i sentència SELECT. Projecció, àlies, concatenació i DISTINCT", ref: "§1 i §2"}
-  - {h: 1, tipo: P, t: "Primeres consultes i eines", ref: "Pràctica 6.1"}
+  - {h: 2, tipo: P, t: "Primeres consultes i eines", ref: "Pràctica 6.1"}
   - {h: 2, tipo: T, t: "Ordenació i selecció amb WHERE: comparació, LIKE i operadors lògics", ref: "§3 i §4 · laboratori de SELECT"}
-  - {h: 2, tipo: P, t: "Consultes per a secretaria", ref: "Pràctica 6.2"}
+  - {h: 3, tipo: P, t: "Consultes per a secretaria", ref: "Pràctica 6.2"}
   - {h: 1, tipo: T, t: "El valor NULL, la lògica de tres valors i limitar files", ref: "§5 i §6 · simulador de lògica trivalent"}
-  - {h: 1, tipo: P, t: "Laboratori de valors nuls", ref: "Pràctica 6.3"}
+  - {h: 2, tipo: P, t: "Laboratori de valors nuls", ref: "Pràctica 6.3"}
   - {h: 2, tipo: T, t: "Funcions de fila: text, numèriques, data, conversió i CASE", ref: "§7"}
   - {h: 1, tipo: T, t: "Expressions regulars i DECODE", ref: "§7.5 i §7.6"}
-  - {h: 2, tipo: P, t: "Funcions per a informes", ref: "Pràctica 6.4"}
+  - {h: 3, tipo: P, t: "Funcions per a informes", ref: "Pràctica 6.4"}
+  - {h: 1, tipo: P, t: "Validar dades amb SQL", ref: "Pràctica 6.5"}
 autonomo:
-  - "Pràctica 6.5 (validar dades amb SQL)"
   - "Projecte EduGest · UD06 (consultes del dia a dia)"
-  - "Ampliacions de les pràctiques 6.2, 6.3 i 6.4"
+  - "Ampliacions de les pràctiques 6.2 a 6.5"
 {{< /sesiones >}}
 
 > [!IMPORTANT]

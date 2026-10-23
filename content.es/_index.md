@@ -10,7 +10,7 @@ Apuntes del módulo profesional **0484. Bases de datos**, común a los ciclos fo
 | Característica | Valor |
 |---|---|
 | **Referencia curricular** | Real Decreto 405/2023, de 29 de mayo (actualiza los títulos de DAM y DAW) |
-| **Duración** | 105 horas (enseñanzas mínimas) · 12 créditos ECTS · 166 horas de aula en el centro (144 hasta la FE y 22 de refuerzo en junio) |
+| **Duración** | 105 horas (enseñanzas mínimas) · 12 créditos ECTS · 166 horas de aula en el centro (144 hasta la FE y 22 en junio) |
 | **Resultados de aprendizaje** | 7 (RA1 a RA7) con 57 criterios de evaluación |
 | **SGBD relacional** | Oracle AI Database 26ai Free (23.26) |
 | **SGBD no relacional** | MongoDB Community Server 8.0 |
@@ -48,38 +48,35 @@ El módulo se imparte con una carga de **166 horas de aula** (5 horas semanales,
 
 | Evaluación | Unidad | Horas | Del | Al | RA principal |
 |---|---|:-:|---|---|---|
-| **1ª** (65 h) | UD01 · Sistemas de almacenamiento y SGBD | 10 | 09/09/2026 | 22/09/2026 | RA1 |
-|  | UD02 · Modelo Entidad/Relación | 30 | 23/09/2026 | 05/11/2026 | RA6 |
-|  | UD03 · Modelo relacional | 15 | 06/11/2026 | 26/11/2026 | RA6 · RA2 |
-|  | UD04 · Normalización | 2 | 27/11/2026 | 30/11/2026 | RA6 |
-|  | UD05 · DDL: definición de datos (parte 1) | 5 | 01/12/2026 | 07/12/2026 | RA2 |
-| | Prueba y revisión de la 1ª evaluación | 3 | 09/12/2026 | 11/12/2026 | |
-| **2ª** (43 h) | UD05 · DDL: definición de datos (parte 2) | 17 | 14/12/2026 | 21/01/2027 | RA2 |
-|  | UD06 · Consultas (I): una tabla | 14 | 22/01/2027 | 10/02/2027 | RA3 · RA5 |
-|  | UD07 · Consultas (II): avanzadas (parte 1) | 9 | 11/02/2027 | 23/02/2027 | RA3 |
-| | Prueba y revisión de la 2ª evaluación | 3 | 24/02/2027 | 26/02/2027 | |
-| **3ª** (36 h) | UD07 · Consultas (II): avanzadas (parte 2) | 6 | 01/03/2027 | 08/03/2027 | RA3 |
-|  | UD08 · DML, transacciones y concurrencia | 3 | 09/03/2027 | 11/03/2027 | RA4 |
+| **1ª** (65 h) | UD01 · Almacenamiento de la información | 3 | 09/09/2026 | 11/09/2026 | RA1 |
+|  | UD02 · Diseño conceptual (Entidad/Relación) | 26 | 14/09/2026 | 21/10/2026 | RA6 |
+|  | UD03 · Modelo relacional | 20 | 22/10/2026 | 18/11/2026 | RA6 · RA2 |
+|  | UD04 · Normalización | 2 | 19/11/2026 | 20/11/2026 | RA6 |
+|  | UD05 · DDL: lenguaje de definición de datos (parte 1) | 14 | 23/11/2026 | 11/12/2026 | RA2 |
+| **2ª** (43 h) | UD05 · DDL: lenguaje de definición de datos (parte 2) | 21 | 14/12/2026 | 27/01/2027 | RA2 |
+|  | UD06 · Consultas (DML) (I): una tabla | 19 | 28/01/2027 | 23/02/2027 | RA3 · RA5 |
+|  | UD07 · Consultas (DML) (II): avanzadas (parte 1) | 3 | 24/02/2027 | 26/02/2027 | RA3 |
+| **3ª** (36 h) | UD07 · Consultas (DML) (II): avanzadas (parte 2) | 18 | 01/03/2027 | 06/04/2027 | RA3 |
 | | *Vacaciones de Pascua* | | 25/03/2027 | 05/04/2027 | |
-|  | UD09 · Programación con PL/SQL | 21 | 12/03/2027 | 22/04/2027 | RA5 |
-|  | UD10 · Bases de datos NoSQL | 3 | 23/04/2027 | 27/04/2027 | RA7 |
-| | Prueba y revisión de la 3ª evaluación y final | 3 | 28/04/2027 | 30/04/2027 | |
+|  | UD08 · DML, transacciones y concurrencia | 3 | 07/04/2027 | 09/04/2027 | RA4 |
+|  | UD09 · Programación en PL/SQL (parte 1) | 15 | 12/04/2027 | 30/04/2027 | RA5 |
 | | *Formación en Empresa (FE)* | | 03/05/2027 | 18/06/2027 | |
-| | Refuerzo de consultas y proyecto EduGest (junio, fechas por concretar) | 22 | 21/06/2027 | 30/06/2027 | RA3 |
+| **Junio** (22 h) | UD09 · Programación en PL/SQL (parte 2) | 20 | 21/06/2027 | 30/06/2027 (por concretar) | RA5 |
+| | UD10 · Bases de datos no relacionales | 2 | | | RA7 |
 | | **Total** | **166** | | | |
 
 La evaluación extraordinaria está prevista para el **21 de junio de 2027**. Como la FE ocupa de mayo a junio, la prueba de la 3ª evaluación se adelanta a la última semana de abril (del 28 al 30).
 
 ### Criterios de la planificación
 
-- **Las consultas son el bloque principal.** La UD06 y la UD07 forman un único bloque de *Consultas*: 29 horas de aula antes de la FE y 22 horas de refuerzo en junio, 51 en total. Es, junto con el modelo E/R (UD02), el DDL (UD05) y PL/SQL (UD09), donde se concentra el tiempo del módulo. Normalización (UD04), manipulación y transacciones (UD08) y NoSQL (UD10) se reducen a lo esencial; sus apuntes se mantienen completos como material de estudio y de ampliación.
+- **Prioridades.** El tiempo del módulo se concentra en el diseño conceptual (UD02), el modelo relacional (UD03), el DDL (UD05), las consultas y la manipulación de datos (UD06 y UD07, 40 horas entre las dos) y PL/SQL (UD09). Normalización (UD04), transacciones (UD08) y NoSQL (UD10) se reducen a lo esencial; sus apuntes se mantienen completos como material de estudio y de ampliación. Las pruebas de evaluación cuentan dentro de las horas de la unidad que se esté impartiendo.
 - **Teoría y práctica en la misma unidad.** Cada unidad indica en su página de teoría una *temporalización* con el reparto de sesiones entre teoría (T) y práctica (P). La suma de horas de cada unidad coincide con la de esta tabla.
 - **Práctica guiada en el aula, práctica autónoma fuera de ella.** Las prácticas guiadas y la tarea del proyecto EduGest se hacen en clase. Las prácticas autónomas, los retos y las ampliaciones son trabajo personal, y las dudas se trabajan en las sesiones de práctica.
 - **Pruebas de evaluación.** Cada evaluación reserva 3 horas a la prueba y a su revisión, en la semana indicada por el centro para los ciclos de grado superior.
 - **Un día lectivo equivale a una hora.** Los festivos y los días sin docencia no cuentan. No hay semana de refuerzo: los días que se pierdan por fiestas locales o actividades del centro se recuperan recortando las sesiones de práctica de la última unidad impartida.
 
 > [!WARNING]
-> **La Formación en Empresa empieza el 3 de mayo.** El alumnado de primer curso presencial se marcha a la FE el 3 de mayo, por lo que la 3ª evaluación **se comprime en abril** y las unidades finales (UD08 a UD10) quedan con 3, 21 y 3 horas de aula; las 22 horas de refuerzo de consultas se pasan a junio. Eso obliga a que una parte de las prácticas de esas unidades se haga como **trabajo autónomo**; cada página de teoría indica qué prácticas se hacen en el aula y cuáles fuera de ella. Si el calendario cambia, el archivo `data/planificacion.json` y las tablas de *temporalización* de cada unidad deben ajustarse a la vez.
+> **La Formación en Empresa empieza el 3 de mayo.** El alumnado de primer curso presencial se marcha a la FE el 3 de mayo, por lo que la 3ª evaluación **se comprime en abril** y las unidades finales se reparten así: UD08 con 3 horas, UD09 con 15 horas antes de la FE y 20 en junio, y UD10 (2 horas) en junio. Eso obliga a que una parte de las prácticas de esas unidades se haga como **trabajo autónomo**; cada página de teoría indica qué prácticas se hacen en el aula y cuáles fuera de ella. Si el calendario cambia, el archivo `data/planificacion.json` y las tablas de *temporalización* de cada unidad deben ajustarse a la vez.
 
 > [!CAUTION]
 > **Calendario provisional.** Las fechas proceden del calendario escolar provisional 2026/27 y de las fechas de evaluación comunicadas por el centro. Los festivos locales y los tres días no lectivos que fije el centro **no están descontados**: como no queda margen antes de la FE, habrá que recortar sesiones de práctica de UD09 y de las unidades finales. Cuando se publique el calendario definitivo debe revisarse el archivo `data/planificacion.json`; la tabla y el calendario se actualizan solos y la compilación falla si las horas de una unidad dejan de sumar.

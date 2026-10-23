@@ -35,17 +35,15 @@ En acabar esta unitat seràs capaç de:
 
 ### Temporalització
 
-La unitat ocupa **3 hores d'aula** (1 de teoria i 2 de pràctica). És una unitat **mínima**, de criteri professional: importa més saber **quan** triar cada model que memoritzar la sintaxi de `mongosh`. La resta de les pràctiques són treball autònom.
+La unitat ocupa **2 hores d'aula** (1 de teoria i 1 de pràctica). És una unitat **mínima**, de criteri professional: importa més saber **quan** triar cada model que memoritzar la sintaxi de `mongosh`. La resta del contingut és treball autònom.
 
-{{< sesiones unidad="UD10" horas="3" >}}
+{{< sesiones unidad="UD10" horas="2" >}}
 items:
-  - {h: 1, tipo: T, t: "NoSQL, BASE i CAP, tipus de bases de dades, MongoDB, CRUD i agregacions", ref: "§1 a §7 · traductor SQL ↔ MongoDB"}
+  - {h: 1, tipo: T, t: "NoSQL, BASE i CAP, tipus de bases de dades, MongoDB i CRUD", ref: "§1 a §5 · traductor SQL ↔ MongoDB"}
   - {h: 1, tipo: P, t: "Posada en marxa de MongoDB i CRUD sobre els expedients", ref: "Pràctiques 10.1 i 10.2"}
-  - {h: 1, tipo: P, t: "Modelatge documental i decisió raonada", ref: "Pràctiques 10.5 i 10.7 · §8 a §11"}
 autonomo:
-  - "Pràctica 10.3 (operadors, subdocuments i arrays)"
-  - "Pràctica 10.4 (el mateix informe en SQL i en MongoDB)"
-  - "Pràctica 10.6 (altres models: clau-valor i grafs)"
+  - "Teoria §6 a §14 (subdocuments, agregacions, modelatge, índexs, seguretat i SQL enfront de NoSQL)"
+  - "Pràctiques 10.3 a 10.7"
   - "Projecte EduGest · UD10 (l'expedient documental)"
 {{< /sesiones >}}
 

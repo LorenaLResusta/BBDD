@@ -35,17 +35,15 @@ Al terminar esta unidad serás capaz de:
 
 ### Temporalización
 
-La unidad ocupa **3 horas de aula** (1 de teoría y 2 de práctica). Es una unidad **mínima**, de criterio profesional: importa más saber **cuándo** elegir cada modelo que memorizar la sintaxis de `mongosh`. El resto de las prácticas son trabajo autónomo.
+La unidad ocupa **2 horas de aula** (1 de teoría y 1 de práctica). Es una unidad **mínima**, de criterio profesional: importa más saber **cuándo** elegir cada modelo que memorizar la sintaxis de `mongosh`. El resto del contenido es trabajo autónomo.
 
-{{< sesiones unidad="UD10" horas="3" >}}
+{{< sesiones unidad="UD10" horas="2" >}}
 items:
-  - {h: 1, tipo: T, t: "NoSQL, BASE y CAP, tipos de bases de datos, MongoDB, CRUD y agregaciones", ref: "§1 a §7 · traductor SQL ↔ MongoDB"}
+  - {h: 1, tipo: T, t: "NoSQL, BASE y CAP, tipos de bases de datos, MongoDB y CRUD", ref: "§1 a §5 · traductor SQL ↔ MongoDB"}
   - {h: 1, tipo: P, t: "Puesta en marcha de MongoDB y CRUD sobre los expedientes", ref: "Prácticas 10.1 y 10.2"}
-  - {h: 1, tipo: P, t: "Modelado documental y decisión razonada", ref: "Prácticas 10.5 y 10.7 · §8 a §11"}
 autonomo:
-  - "Práctica 10.3 (operadores, subdocumentos y arrays)"
-  - "Práctica 10.4 (el mismo informe en SQL y en MongoDB)"
-  - "Práctica 10.6 (otros modelos: clave-valor y grafos)"
+  - "Teoría §6 a §14 (subdocumentos, agregaciones, modelado, índices, seguridad y SQL frente a NoSQL)"
+  - "Prácticas 10.3 a 10.7"
   - "Proyecto EduGest · UD10 (el expediente documental)"
 {{< /sesiones >}}
 

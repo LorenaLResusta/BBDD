@@ -14,4 +14,4 @@ Com sabem que un esquema relacional està **ben** dissenyat? La normalització d
 | [Teoria](/ud04-normalizacion/ud04-teoria) | Anomalies, dependències funcionals, tancament i claus, 1FN, 2FN, 3FN, FNBC, descomposició sense pèrdua i desnormalització |
 | [Pràctiques](/ud04-normalizacion/ud04-practicas) | Sis pràctiques i la tasca EduGest (informe de normalització i comparació amb la solució de referència) |
 
-**Durada:** 2 hores d'aula, del 27/11/2026 al 30/11/2026. Consulta la [guia didàctica](/) per a vore el seu lloc en el calendari del curs.
+**Durada:** 2 hores d'aula, del 19/11/2026 al 20/11/2026. Consulta la [guia didàctica](/) per a vore el seu lloc en el calendari del curs.

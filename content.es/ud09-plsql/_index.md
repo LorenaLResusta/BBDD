@@ -14,4 +14,4 @@ Cuando una tarea necesita lógica (decisiones, bucles, tratamiento de errores) o
 | [Teoría](/ud09-plsql/ud09-teoria) | Formas de automatizar, herramientas, bloques, variables, control de flujo, funciones del SGBD, procedimientos, funciones, cursores, excepciones, disparadores (incluido el compuesto), `DBMS_SCHEDULER` y comparación con otros SGBD |
 | [Prácticas](/ud09-plsql/ud09-practicas) | Expediente de un alumno, biblioteca de funciones, matrícula con excepciones, boletines con cursores, disparadores de integridad y auditoría, tabla mutante, tareas programadas y paquete de secretaría |
 
-**Duración:** 21 horas de aula, del 12/03/2027 al 22/04/2027. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.
+**Duración:** 35 horas de aula, del 12/04/2027 al 30/04/2027. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.

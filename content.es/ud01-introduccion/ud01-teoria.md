@@ -18,19 +18,17 @@ Esta unidad trata en profundidad la transición histórica desde los soportes f�
 {{< ra "RA1:a,b,c,d,e,f,g,h,i,j" "RA2:a" "RA7:a" >}}
 ### Temporalización
 
-La unidad ocupa **10 horas de aula** (7 de teoría y 3 de práctica).
+La unidad ocupa **3 horas de aula** (2 de teoría y 1 de práctica).
 
-{{< sesiones unidad="UD01" horas="10" >}}
+{{< sesiones unidad="UD01" horas="3" >}}
 items:
-  - {h: 2, tipo: T, t: "Datos e información. Historia. Sistemas basados en ficheros", ref: "§1 a §3"}
-  - {h: 1, tipo: P, t: "De la hoja de cálculo al SGBD", ref: "Práctica 1.1"}
-  - {h: 2, tipo: T, t: "Bases de datos y SGBD. Arquitectura y componentes", ref: "§4 y §5"}
+  - {h: 2, tipo: T, t: "Datos, ficheros frente a bases de datos, SGBD y arquitectura", ref: "§1 a §5"}
   - {h: 1, tipo: P, t: "Primer contacto con Oracle", ref: "Práctica 1.2"}
-  - {h: 2, tipo: T, t: "Integridad, concurrencia, seguridad, modelos de datos y clasificación de los SGBD", ref: "§6 a §10"}
-  - {h: 1, tipo: T, t: "Big Data, inteligencia empresarial y protección de datos", ref: "§11 y §12"}
-  - {h: 1, tipo: P, t: "Informe de análisis de EduGest", ref: "Proyecto EduGest-1"}
 autonomo:
-  - "Prácticas 1.3 (elegir un SGBD), 1.4 (distribución de datos), 1.5 (auditoría de protección de datos) y 1.6"
+  - "Teoría §6 a §13 (integridad, seguridad, modelos, clasificación, distribución, Big Data y protección de datos)"
+  - "Práctica 1.1 (de la hoja de cálculo al SGBD)"
+  - "Prácticas 1.3 a 1.6"
+  - "Proyecto EduGest · UD01 (informe de análisis)"
   - "Ejercicios resueltos y autoevaluación"
 {{< /sesiones >}}
 

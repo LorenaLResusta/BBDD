@@ -19,9 +19,9 @@ En aquesta unitat s'estudien minuciosament els conceptes matemàtics i pragmàti
 
 ### Temporalització
 
-La unitat ocupa **15 hores d'aula** (9 de teoria i 6 de pràctica).
+La unitat ocupa **20 hores d'aula** (9 de teoria i 11 de pràctica).
 
-{{< sesiones unidad="UD03" horas="15" >}}
+{{< sesiones unidad="UD03" horas="20" >}}
 items:
   - {h: 2, tipo: T, t: "Relació, atribut, domini, tupla, grau i cardinalitat. Claus", ref: "§1 i §2 · laboratori de claus"}
   - {h: 2, tipo: T, t: "Restriccions i integritat referencial", ref: "§3 · simulador d'integritat"}
@@ -32,10 +32,14 @@ items:
   - {h: 1, tipo: T, t: "Restriccions no representables i eines", ref: "§6 i §7"}
   - {h: 1, tipo: P, t: "Tres maneres de transformar una jerarquia", ref: "Pràctica 3.3"}
   - {h: 2, tipo: P, t: "Model lògic d'EduGest", ref: "§8 i projecte EduGest-3"}
+  - {h: 2, tipo: P, t: "Tasques de transformació 1 i 2 (naviliera i institut)", ref: "Tasques 1 i 2"}
+  - {h: 1, tipo: P, t: "Enginyeria inversa d'un esquema", ref: "Pràctica 3.4"}
+  - {h: 1, tipo: P, t: "Catàleg de restriccions d'un hotel", ref: "Pràctica 3.5"}
+  - {h: 1, tipo: P, t: "Banc d'exercicis de transformació (bloc 1)", ref: "Exercicis 1 a 5"}
 autonomo:
-  - "Tasques de transformació 1 a 7 (E/R → relacional)"
-  - "Pràctiques 3.4 (enginyeria inversa), 3.5 i 3.6"
-  - "Banc de 20 exercicis"
+  - "Tasques de transformació 3 a 7 (E/R → relacional)"
+  - "Pràctica 3.6"
+  - "Banc de 20 exercicis (blocs 2 i 3)"
 {{< /sesiones >}}
 
 > [!IMPORTANT]

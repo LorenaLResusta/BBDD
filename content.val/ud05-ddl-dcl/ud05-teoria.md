@@ -19,26 +19,27 @@ Tots els exemples usen **Oracle AI Database 26ai Free**. Quan una característic
 
 ### Temporalització
 
-La unitat ocupa **22 hores d'aula** (7 de teoria i 15 de pràctica).
+La unitat ocupa **35 hores d'aula** (7 de teoria i 28 de pràctica).
 
-{{< sesiones unidad="UD05" horas="22" >}}
+{{< sesiones unidad="UD05" horas="35" >}}
 items:
   - {h: 1, tipo: T, t: "SQL i Oracle. Emmagatzematge de la informació", ref: "§1 i §2"}
   - {h: 1, tipo: T, t: "Tipus de dades d'Oracle", ref: "§3 · calculadora de NUMBER(p, s)"}
   - {h: 1, tipo: T, t: "CREATE TABLE i restriccions d'integritat", ref: "§4 i §5 · constructor de CREATE TABLE"}
-  - {h: 2, tipo: P, t: "Primeres taules i restriccions a Oracle", ref: "Pràctica 5.1"}
-  - {h: 2, tipo: P, t: "Del diagrama de Chen al DDL", ref: "Pràctica 5.2"}
+  - {h: 3, tipo: P, t: "Primeres taules i restriccions a Oracle", ref: "Pràctica 5.1"}
+  - {h: 3, tipo: P, t: "Del diagrama de Chen al DDL", ref: "Pràctica 5.2"}
   - {h: 1, tipo: T, t: "Modificar i eliminar l'estructura (ALTER, DROP)", ref: "§6"}
-  - {h: 1, tipo: P, t: "Evolució de l'esquema amb ALTER", ref: "Pràctica 5.5"}
+  - {h: 2, tipo: P, t: "Evolució de l'esquema amb ALTER", ref: "Pràctica 5.5"}
   - {h: 1, tipo: T, t: "Seqüències, identitat, índexs i vistes", ref: "§7, §8 i §9"}
-  - {h: 1, tipo: P, t: "Índexs, vistes i seqüències a EduGest", ref: "Pràctica 5.6"}
+  - {h: 2, tipo: P, t: "Índexs, vistes i seqüències a EduGest", ref: "Pràctica 5.6"}
   - {h: 1, tipo: T, t: "Usuaris, rols i privilegis. Diccionari de dades", ref: "§10 a §12 · taller de privilegis"}
-  - {h: 1, tipo: P, t: "Usuaris, rols i privilegis a EduGest", ref: "Pràctica 5.7"}
-  - {h: 1, tipo: P, t: "Implementació d'EduGest", ref: "Projecte EduGest-5"}
+  - {h: 2, tipo: P, t: "Usuaris, rols i privilegis a EduGest", ref: "Pràctica 5.7"}
+  - {h: 3, tipo: P, t: "Implementació d'EduGest", ref: "Projecte EduGest-5"}
   - {h: 1, tipo: T, t: "Repàs de restriccions i errors freqüents en DDL", ref: "§5 i §13"}
-  - {h: 2, tipo: P, t: "Biblioteca: script complet i bateria de proves", ref: "Pràctica 5.3"}
-  - {h: 3, tipo: P, t: "Sis casos per a implementar", ref: "Pràctica 5.4"}
-  - {h: 2, tipo: P, t: "Depurar un script defectuós", ref: "Pràctica 5.8"}
+  - {h: 3, tipo: P, t: "Biblioteca: script complet i bateria de proves", ref: "Pràctica 5.3"}
+  - {h: 4, tipo: P, t: "Sis casos per a implementar", ref: "Pràctica 5.4"}
+  - {h: 3, tipo: P, t: "Depurar un script defectuós", ref: "Pràctica 5.8"}
+  - {h: 3, tipo: E, t: "Prova i revisió de la 1a avaluació", ref: ""}
 autonomo:
   - "Ampliacions de les pràctiques 5.1 a 5.8 i autoavaluació"
 {{< /sesiones >}}

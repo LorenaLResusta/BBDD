@@ -14,4 +14,4 @@ Modificar dades és fàcil; modificar-les **bé** —sense deixar operacions a m
 | [Teoria](/ud08-dml-transacciones/ud08-teoria) | Eines, `INSERT` (també des de consultes), `UPDATE` i `DELETE` amb subconsultes, `MERGE`, transaccions i ACID, `SAVEPOINT`, concurrència, bloquejos, interbloquejos, restriccions diferides i guions |
 | [Pràctiques](/ud08-dml-transacciones/ud08-practicas) | Altes i baixes, històrics, modificacions amb subconsultes, laboratori de transaccions, experiments amb dues sessions, `MERGE` des de CSV i guió de promoció de curs |
 
-**Durada:** 3 hores d'aula, del 09/03/2027 al 11/03/2027. Consulta la [guia didàctica](/) per a vore el seu lloc en el calendari del curs.
+**Durada:** 3 hores d'aula, del 07/04/2027 al 09/04/2027. Consulta la [guia didàctica](/) per a vore el seu lloc en el calendari del curs.

@@ -16,23 +16,23 @@ Todos los ejemplos se ejecutan sobre el esquema de referencia **EDUGEST** cargad
 
 ### Temporalización
 
-La unidad ocupa **14 horas de aula** (8 de teoría y 6 de práctica). Es, junto con la UD07, el bloque de **consultas**, una de las partes con más peso del módulo (29 horas de aula antes de la FE y 22 horas de refuerzo en junio, 51 en total): aquí se adquiere la destreza con `SELECT` que se utilizará hasta el final.
+La unidad ocupa **19 horas de aula** (8 de teoría y 11 de práctica). Es, junto con la UD07, el bloque de **consultas (DML)**, el de mayor peso del módulo: 40 horas de aula entre las dos. Aquí se adquiere la destreza con `SELECT` que se utilizará hasta el final.
 
-{{< sesiones unidad="UD06" horas="14" >}}
+{{< sesiones unidad="UD06" horas="19" >}}
 items:
   - {h: 2, tipo: T, t: "Herramientas y sentencia SELECT. Proyección, alias, concatenación y DISTINCT", ref: "§1 y §2"}
-  - {h: 1, tipo: P, t: "Primeras consultas y herramientas", ref: "Práctica 6.1"}
+  - {h: 2, tipo: P, t: "Primeras consultas y herramientas", ref: "Práctica 6.1"}
   - {h: 2, tipo: T, t: "Ordenación y selección con WHERE: comparación, LIKE y operadores lógicos", ref: "§3 y §4 · laboratorio de SELECT"}
-  - {h: 2, tipo: P, t: "Consultas para secretaría", ref: "Práctica 6.2"}
+  - {h: 3, tipo: P, t: "Consultas para secretaría", ref: "Práctica 6.2"}
   - {h: 1, tipo: T, t: "El valor NULL, la lógica de tres valores y limitar filas", ref: "§5 y §6 · simulador de lógica trivalente"}
-  - {h: 1, tipo: P, t: "Laboratorio de valores nulos", ref: "Práctica 6.3"}
+  - {h: 2, tipo: P, t: "Laboratorio de valores nulos", ref: "Práctica 6.3"}
   - {h: 2, tipo: T, t: "Funciones de fila: texto, numéricas, fecha, conversión y CASE", ref: "§7"}
   - {h: 1, tipo: T, t: "Expresiones regulares y DECODE", ref: "§7.5 y §7.6"}
-  - {h: 2, tipo: P, t: "Funciones para informes", ref: "Práctica 6.4"}
+  - {h: 3, tipo: P, t: "Funciones para informes", ref: "Práctica 6.4"}
+  - {h: 1, tipo: P, t: "Validar datos con SQL", ref: "Práctica 6.5"}
 autonomo:
-  - "Práctica 6.5 (validar datos con SQL)"
   - "Proyecto EduGest · UD06 (consultas del día a día)"
-  - "Ampliaciones de las prácticas 6.2, 6.3 y 6.4"
+  - "Ampliaciones de las prácticas 6.2 a 6.5"
 {{< /sesiones >}}
 
 > [!IMPORTANT]

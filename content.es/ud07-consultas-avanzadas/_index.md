@@ -14,4 +14,4 @@ La información útil está repartida entre varias tablas y casi siempre hay que
 | [Teoría](/ud07-consultas-avanzadas/ud07-teoria) | Funciones de agregado, `GROUP BY`, `HAVING`, `INNER/LEFT/RIGHT/FULL JOIN`, autocomposición, subconsultas, `EXISTS`, `WITH`, `UNION`/`INTERSECT`/`MINUS`, funciones analíticas, vistas y optimización |
 | [Prácticas](/ud07-consultas-avanzadas/ud07-practicas) | Consultas resumen, composiciones paso a paso, informes de jefatura, subconsultas, conjuntos, optimización con medio millón de filas, cuadro de mando y tarea EduGest |
 
-**Duración:** 15 horas de aula, del 11/02/2027 al 08/03/2027. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.
+**Duración:** 21 horas de aula, del 24/02/2027 al 06/04/2027. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.

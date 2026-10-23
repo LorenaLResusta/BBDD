@@ -34,23 +34,27 @@ Al terminar esta unidad serás capaz de:
 
 ### Temporalización
 
-La unidad ocupa **21 horas de aula** (8 de teoría y 13 de práctica). Es la unidad con más código del curso y una de las **prioritarias**: conviene escribirlo a mano y recompilarlo, no copiarlo y pegarlo.
+La unidad ocupa **35 horas de aula** (11 de teoría y 24 de práctica). Es la unidad con más código del curso y una de las **prioritarias**: conviene escribirlo a mano y recompilarlo, no copiarlo y pegarlo. La parte final de la unidad (20 horas) se imparte en **junio**, tras la Formación en Empresa.
 
-{{< sesiones unidad="UD09" horas="21" >}}
+{{< sesiones unidad="UD09" horas="35" >}}
 items:
   - {h: 2, tipo: T, t: "Formas de automatizar, herramientas, estructura del bloque, variables, tipos y `DBMS_OUTPUT`", ref: "§1 a §4"}
-  - {h: 1, tipo: P, t: "Primeros bloques: el expediente de un alumno", ref: "Práctica 9.1"}
+  - {h: 2, tipo: P, t: "Primeros bloques: el expediente de un alumno", ref: "Práctica 9.1"}
   - {h: 2, tipo: T, t: "Control de flujo, funciones del gestor, cursores y funciones de usuario", ref: "§5 a §8 · laboratorio de bloques"}
-  - {h: 2, tipo: P, t: "Biblioteca de funciones de EduGest", ref: "Práctica 9.2"}
+  - {h: 3, tipo: P, t: "Biblioteca de funciones de EduGest", ref: "Práctica 9.2"}
   - {h: 1, tipo: T, t: "Excepciones y procedimientos almacenados", ref: "§9 y §10"}
-  - {h: 2, tipo: P, t: "Matrícula con excepciones y boletines con cursores", ref: "Prácticas 9.3 y 9.4"}
+  - {h: 3, tipo: P, t: "Matrícula con excepciones y boletines con cursores", ref: "Prácticas 9.3 y 9.4"}
   - {h: 2, tipo: T, t: "Disparadores, tareas programadas con `DBMS_SCHEDULER` y paquetes", ref: "§11 a §14 · simulador de disparadores"}
-  - {h: 2, tipo: P, t: "Disparadores de integridad y auditoría", ref: "Práctica 9.5"}
-  - {h: 1, tipo: P, t: "Tareas programadas", ref: "Práctica 9.7"}
-  - {h: 2, tipo: P, t: "Reto: la tabla mutante", ref: "Práctica 9.6"}
-  - {h: 2, tipo: P, t: "Reto: el paquete de secretaría", ref: "Práctica 9.8"}
+  - {h: 3, tipo: P, t: "Disparadores de integridad y auditoría", ref: "Práctica 9.5"}
+  - {h: 2, tipo: P, t: "Tareas programadas", ref: "Práctica 9.7"}
+  - {h: 3, tipo: P, t: "Reto: la tabla mutante", ref: "Práctica 9.6"}
+  - {h: 3, tipo: P, t: "Reto: el paquete de secretaría", ref: "Práctica 9.8"}
   - {h: 1, tipo: T, t: "Errores frecuentes y buenas prácticas en PL/SQL", ref: "§15 y §16"}
-  - {h: 1, tipo: P, t: "Lógica en el servidor para EduGest", ref: "Proyecto EduGest · UD09"}
+  - {h: 2, tipo: P, t: "Lógica en el servidor para EduGest", ref: "Proyecto EduGest · UD09"}
+  - {h: 1, tipo: T, t: "Disparadores avanzados y la tabla mutante", ref: "§11"}
+  - {h: 1, tipo: T, t: "Paquetes y tareas programadas", ref: "§12 y §13"}
+  - {h: 1, tipo: T, t: "Comparación con otros gestores", ref: "§14"}
+  - {h: 3, tipo: E, t: "Prueba y revisión de la 3ª evaluación", ref: ""}
 autonomo:
   - "Ampliaciones de las prácticas 9.1 a 9.8 y autoevaluación"
 {{< /sesiones >}}

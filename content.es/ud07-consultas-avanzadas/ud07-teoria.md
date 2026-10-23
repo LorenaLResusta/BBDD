@@ -35,23 +35,24 @@ Al terminar esta unidad serás capaz de:
 
 ### Temporalización
 
-La unidad ocupa **15 horas de aula** (10 de teoría y 5 de práctica). Las composiciones y las subconsultas son el núcleo del RA3: conviene no avanzar hasta que cada consulta se pueda escribir sin consultar los apuntes. Las 22 horas de refuerzo de junio se dedican a seguir practicando estas consultas y al proyecto EduGest.
+La unidad ocupa **21 horas de aula** (10 de teoría y 11 de práctica). Las composiciones y las subconsultas son el núcleo del RA3: conviene no avanzar hasta que cada consulta se pueda escribir sin consultar los apuntes.
 
-{{< sesiones unidad="UD07" horas="15" >}}
+{{< sesiones unidad="UD07" horas="21" >}}
 items:
   - {h: 2, tipo: T, t: "Funciones de agregado, GROUP BY y HAVING", ref: "§1 y §2 · laboratorio de agrupamiento"}
   - {h: 1, tipo: P, t: "Consultas resumen", ref: "Práctica 7.1"}
   - {h: 2, tipo: T, t: "Composiciones internas: INNER JOIN y varias tablas", ref: "§3 · laboratorio de composiciones"}
-  - {h: 1, tipo: P, t: "Composiciones paso a paso", ref: "Práctica 7.2"}
+  - {h: 2, tipo: P, t: "Composiciones paso a paso", ref: "Práctica 7.2"}
   - {h: 2, tipo: T, t: "Composiciones externas y autocomposición", ref: "§4 y §5"}
   - {h: 1, tipo: P, t: "Informes para jefatura", ref: "Práctica 7.3"}
   - {h: 2, tipo: T, t: "Subconsultas, EXISTS y WITH", ref: "§6"}
-  - {h: 1, tipo: P, t: "Subconsultas", ref: "Práctica 7.4"}
+  - {h: 2, tipo: P, t: "Subconsultas", ref: "Práctica 7.4"}
   - {h: 1, tipo: T, t: "Vistas con composiciones y operadores de conjuntos", ref: "§7 y §8"}
   - {h: 1, tipo: T, t: "Funciones analíticas y optimización de consultas", ref: "§9 y §10"}
   - {h: 1, tipo: P, t: "Optimización: medir antes y después", ref: "Práctica 7.6"}
+  - {h: 1, tipo: P, t: "Múltiples selecciones y vistas", ref: "Práctica 7.5"}
+  - {h: 3, tipo: E, t: "Prueba y revisión de la 2ª evaluación", ref: ""}
 autonomo:
-  - "Práctica 7.5 (múltiples selecciones y vistas)"
   - "Práctica 7.7 (reto: el cuadro de mando)"
   - "Proyecto EduGest · UD07 (informes de secretaría y jefatura)"
   - "Ampliación de funciones analíticas"

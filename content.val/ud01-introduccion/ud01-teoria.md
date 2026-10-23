@@ -18,19 +18,17 @@ Aquesta unitat tracta en profunditat la transició històrica des dels suports f
 {{< ra "RA1:a,b,c,d,e,f,g,h,i,j" "RA2:a" "RA7:a" >}}
 ### Temporalització
 
-La unitat ocupa **10 hores d'aula** (7 de teoria i 3 de pràctica).
+La unitat ocupa **3 hores d'aula** (2 de teoria i 1 de pràctica).
 
-{{< sesiones unidad="UD01" horas="10" >}}
+{{< sesiones unidad="UD01" horas="3" >}}
 items:
-  - {h: 2, tipo: T, t: "Dades i informació. Història. Sistemes basats en fitxers", ref: "§1 a §3"}
-  - {h: 1, tipo: P, t: "Del full de càlcul al SGBD", ref: "Pràctica 1.1"}
-  - {h: 2, tipo: T, t: "Bases de dades i SGBD. Arquitectura i components", ref: "§4 i §5"}
+  - {h: 2, tipo: T, t: "Dades, fitxers enfront de bases de dades, SGBD i arquitectura", ref: "§1 a §5"}
   - {h: 1, tipo: P, t: "Primer contacte amb Oracle", ref: "Pràctica 1.2"}
-  - {h: 2, tipo: T, t: "Integritat, concurrència, seguretat, models de dades i classificació dels SGBD", ref: "§6 a §10"}
-  - {h: 1, tipo: T, t: "Big Data, intel·ligència empresarial i protecció de dades", ref: "§11 i §12"}
-  - {h: 1, tipo: P, t: "Informe d'anàlisi d'EduGest", ref: "Projecte EduGest-1"}
 autonomo:
-  - "Pràctiques 1.3 (triar un SGBD), 1.4 (distribució de dades), 1.5 (auditoria de protecció de dades) i 1.6"
+  - "Teoria §6 a §13 (integritat, seguretat, models, classificació, distribució, Big Data i protecció de dades)"
+  - "Pràctica 1.1 (del full de càlcul al SGBD)"
+  - "Pràctiques 1.3 a 1.6"
+  - "Projecte EduGest · UD01 (informe d'anàlisi)"
   - "Exercicis resolts i autoavaluació"
 {{< /sesiones >}}
 
