@@ -19,9 +19,9 @@ Tots els exemples usen **Oracle AI Database 26ai Free**. Quan una característic
 
 ### Temporalització
 
-La unitat ocupa **14 hores d'aula** (6 de teoria i 8 de pràctica).
+La unitat ocupa **22 hores d'aula** (7 de teoria i 15 de pràctica).
 
-{{< sesiones unidad="UD05" horas="14" >}}
+{{< sesiones unidad="UD05" horas="22" >}}
 items:
   - {h: 1, tipo: T, t: "SQL i Oracle. Emmagatzematge de la informació", ref: "§1 i §2"}
   - {h: 1, tipo: T, t: "Tipus de dades d'Oracle", ref: "§3 · calculadora de NUMBER(p, s)"}
@@ -35,10 +35,12 @@ items:
   - {h: 1, tipo: T, t: "Usuaris, rols i privilegis. Diccionari de dades", ref: "§10 a §12 · taller de privilegis"}
   - {h: 1, tipo: P, t: "Usuaris, rols i privilegis a EduGest", ref: "Pràctica 5.7"}
   - {h: 1, tipo: P, t: "Implementació d'EduGest", ref: "Projecte EduGest-5"}
+  - {h: 1, tipo: T, t: "Repàs de restriccions i errors freqüents en DDL", ref: "§5 i §13"}
+  - {h: 2, tipo: P, t: "Biblioteca: script complet i bateria de proves", ref: "Pràctica 5.3"}
+  - {h: 3, tipo: P, t: "Sis casos per a implementar", ref: "Pràctica 5.4"}
+  - {h: 2, tipo: P, t: "Depurar un script defectuós", ref: "Pràctica 5.8"}
 autonomo:
-  - "Pràctica 5.3 (biblioteca: script complet i bateria de proves)"
-  - "Pràctica 5.4 (sis casos per a implementar)"
-  - "Pràctica 5.8 (depurar un script defectuós)"
+  - "Ampliacions de les pràctiques 5.1 a 5.8 i autoavaluació"
 {{< /sesiones >}}
 
 > [!IMPORTANT]

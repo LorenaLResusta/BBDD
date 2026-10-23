@@ -16,25 +16,23 @@ Tots els exemples s'executen sobre l'esquema de referència **EDUGEST** carregat
 
 ### Temporalització
 
-La unitat ocupa **20 hores d'aula** (9 de teoria i 11 de pràctica). És, juntament amb la UD07, el bloc de **consultes**, la part amb més pes del mòdul (63 hores entre les dues i el reforç de juny): ací s'adquirix la destresa amb `SELECT` que s'utilitzarà fins al final.
+La unitat ocupa **14 hores d'aula** (8 de teoria i 6 de pràctica). És, juntament amb la UD07, el bloc de **consultes**, una de les parts amb més pes del mòdul (29 hores d'aula abans de la FE i 22 hores de reforç a juny, 51 en total): ací s'adquirix la destresa amb `SELECT` que s'utilitzarà fins al final.
 
-{{< sesiones unidad="UD06" horas="20" >}}
+{{< sesiones unidad="UD06" horas="14" >}}
 items:
   - {h: 2, tipo: T, t: "Eines i sentència SELECT. Projecció, àlies, concatenació i DISTINCT", ref: "§1 i §2"}
   - {h: 1, tipo: P, t: "Primeres consultes i eines", ref: "Pràctica 6.1"}
   - {h: 2, tipo: T, t: "Ordenació i selecció amb WHERE: comparació, LIKE i operadors lògics", ref: "§3 i §4 · laboratori de SELECT"}
-  - {h: 3, tipo: P, t: "Consultes per a secretaria", ref: "Pràctica 6.2"}
-  - {h: 1, tipo: T, t: "El valor NULL i la lògica de tres valors", ref: "§5 · simulador de lògica trivalent"}
-  - {h: 2, tipo: P, t: "Laboratori de valors nuls", ref: "Pràctica 6.3"}
-  - {h: 1, tipo: T, t: "Limitar el nombre de files", ref: "§6"}
-  - {h: 2, tipo: T, t: "Funcions de fila (I): text, numèriques i de data", ref: "§7.1 a §7.3"}
-  - {h: 1, tipo: T, t: "Funcions de fila (II): conversió, CASE, DECODE i expressions regulars", ref: "§7.4 a §7.6"}
-  - {h: 3, tipo: P, t: "Funcions per a informes", ref: "Pràctica 6.4"}
-  - {h: 1, tipo: P, t: "Validar dades amb SQL", ref: "Pràctica 6.5"}
-  - {h: 1, tipo: P, t: "Consultes del dia a dia a EduGest", ref: "Projecte EduGest-6"}
+  - {h: 2, tipo: P, t: "Consultes per a secretaria", ref: "Pràctica 6.2"}
+  - {h: 1, tipo: T, t: "El valor NULL, la lògica de tres valors i limitar files", ref: "§5 i §6 · simulador de lògica trivalent"}
+  - {h: 1, tipo: P, t: "Laboratori de valors nuls", ref: "Pràctica 6.3"}
+  - {h: 2, tipo: T, t: "Funcions de fila: text, numèriques, data, conversió i CASE", ref: "§7"}
+  - {h: 1, tipo: T, t: "Expressions regulars i DECODE", ref: "§7.5 i §7.6"}
+  - {h: 2, tipo: P, t: "Funcions per a informes", ref: "Pràctica 6.4"}
 autonomo:
-  - "Acabar les consultes de la pràctica 6.2 que no hagen donat temps a l'aula"
-  - "Ampliacions de les pràctiques 6.3, 6.4 i 6.5"
+  - "Pràctica 6.5 (validar dades amb SQL)"
+  - "Projecte EduGest · UD06 (consultes del dia a dia)"
+  - "Ampliacions de les pràctiques 6.2, 6.3 i 6.4"
 {{< /sesiones >}}
 
 > [!IMPORTANT]

@@ -35,25 +35,25 @@ En acabar esta unitat seràs capaç de:
 
 ### Temporalització
 
-La unitat ocupa **21 hores d'aula** (10 de teoria i 11 de pràctica). Les composicions i les subconsultes són el nucli del RA3: convé no avançar fins que cada consulta es puga escriure sense consultar els apunts. Les 22 hores de reforç de juny es dediquen a continuar practicant estes consultes i al projecte EduGest.
+La unitat ocupa **15 hores d'aula** (10 de teoria i 5 de pràctica). Les composicions i les subconsultes són el nucli del RA3: convé no avançar fins que cada consulta es puga escriure sense consultar els apunts. Les 22 hores de reforç de juny es dediquen a continuar practicant estes consultes i al projecte EduGest.
 
-{{< sesiones unidad="UD07" horas="21" >}}
+{{< sesiones unidad="UD07" horas="15" >}}
 items:
   - {h: 2, tipo: T, t: "Funcions d'agregat, GROUP BY i HAVING", ref: "§1 i §2 · laboratori d'agrupament"}
   - {h: 1, tipo: P, t: "Consultes resum", ref: "Pràctica 7.1"}
   - {h: 2, tipo: T, t: "Composicions internes: INNER JOIN i diverses taules", ref: "§3 · laboratori de composicions"}
-  - {h: 2, tipo: P, t: "Composicions pas a pas", ref: "Pràctica 7.2"}
+  - {h: 1, tipo: P, t: "Composicions pas a pas", ref: "Pràctica 7.2"}
   - {h: 2, tipo: T, t: "Composicions externes i autocomposició", ref: "§4 i §5"}
-  - {h: 2, tipo: P, t: "Informes per a direcció", ref: "Pràctica 7.3"}
+  - {h: 1, tipo: P, t: "Informes per a direcció", ref: "Pràctica 7.3"}
   - {h: 2, tipo: T, t: "Subconsultes, EXISTS i WITH", ref: "§6"}
-  - {h: 2, tipo: P, t: "Subconsultes", ref: "Pràctica 7.4"}
+  - {h: 1, tipo: P, t: "Subconsultes", ref: "Pràctica 7.4"}
   - {h: 1, tipo: T, t: "Vistes amb composicions i operadors de conjunts", ref: "§7 i §8"}
-  - {h: 1, tipo: P, t: "Múltiples seleccions i vistes", ref: "Pràctica 7.5"}
   - {h: 1, tipo: T, t: "Funcions analítiques i optimització de consultes", ref: "§9 i §10"}
-  - {h: 2, tipo: P, t: "Optimització: mesurar abans i després", ref: "Pràctica 7.6"}
-  - {h: 1, tipo: P, t: "Informes de secretaria i direcció d'EduGest", ref: "Projecte EduGest · UD07"}
+  - {h: 1, tipo: P, t: "Optimització: mesurar abans i després", ref: "Pràctica 7.6"}
 autonomo:
+  - "Pràctica 7.5 (múltiples seleccions i vistes)"
   - "Pràctica 7.7 (repte: el quadre de comandament)"
+  - "Projecte EduGest · UD07 (informes de secretaria i direcció)"
   - "Ampliació de funcions analítiques"
 {{< /sesiones >}}
 

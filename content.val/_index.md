@@ -49,19 +49,19 @@ El mòdul s'imparteix amb una càrrega de **166 hores d'aula** (5 hores setmanal
 | Avaluació | Unitat | Hores | Del | Al | RA principal |
 |---|---|:-:|---|---|---|
 | **1a** (65 h) | UD01 · Sistemes d'emmagatzematge i SGBD | 10 | 09/09/2026 | 22/09/2026 | RA1 |
-|  | UD02 · Model Entitat/Relació | 32 | 23/09/2026 | 09/11/2026 | RA6 |
-|  | UD03 · Model relacional | 15 | 10/11/2026 | 30/11/2026 | RA6 · RA2 |
-|  | UD04 · Normalització | 2 | 01/12/2026 | 02/12/2026 | RA6 |
-|  | UD05 · DDL: definició de dades (part 1) | 3 | 03/12/2026 | 07/12/2026 | RA2 |
+|  | UD02 · Model Entitat/Relació | 30 | 23/09/2026 | 05/11/2026 | RA6 |
+|  | UD03 · Model relacional | 15 | 06/11/2026 | 26/11/2026 | RA6 · RA2 |
+|  | UD04 · Normalització | 2 | 27/11/2026 | 30/11/2026 | RA6 |
+|  | UD05 · DDL: definició de dades (part 1) | 5 | 01/12/2026 | 07/12/2026 | RA2 |
 | | Prova i revisió de la 1a avaluació | 3 | 09/12/2026 | 11/12/2026 | |
-| **2a** (43 h) | UD05 · DDL: definició de dades (part 2) | 11 | 14/12/2026 | 13/01/2027 | RA2 |
-|  | UD06 · Consultes (I): una taula | 20 | 14/01/2027 | 10/02/2027 | RA3 · RA5 |
+| **2a** (43 h) | UD05 · DDL: definició de dades (part 2) | 17 | 14/12/2026 | 21/01/2027 | RA2 |
+|  | UD06 · Consultes (I): una taula | 14 | 22/01/2027 | 10/02/2027 | RA3 · RA5 |
 |  | UD07 · Consultes (II): avançades (part 1) | 9 | 11/02/2027 | 23/02/2027 | RA3 |
 | | Prova i revisió de la 2a avaluació | 3 | 24/02/2027 | 26/02/2027 | |
-| **3a** (36 h) | UD07 · Consultes (II): avançades (part 2) | 12 | 01/03/2027 | 16/03/2027 | RA3 |
-|  | UD08 · DML, transaccions i concurrència | 3 | 17/03/2027 | 22/03/2027 | RA4 |
+| **3a** (36 h) | UD07 · Consultes (II): avançades (part 2) | 6 | 01/03/2027 | 08/03/2027 | RA3 |
+|  | UD08 · DML, transaccions i concurrència | 3 | 09/03/2027 | 11/03/2027 | RA4 |
 | | *Vacances de Pasqua* | | 25/03/2027 | 05/04/2027 | |
-|  | UD09 · Programació amb PL/SQL | 15 | 23/03/2027 | 22/04/2027 | RA5 |
+|  | UD09 · Programació amb PL/SQL | 21 | 12/03/2027 | 22/04/2027 | RA5 |
 |  | UD10 · Bases de dades NoSQL | 3 | 23/04/2027 | 27/04/2027 | RA7 |
 | | Prova i revisió de la 3a avaluació i final | 3 | 28/04/2027 | 30/04/2027 | |
 | | *Formació en Empresa (FE)* | | 03/05/2027 | 18/06/2027 | |
@@ -72,14 +72,14 @@ L'avaluació extraordinària està prevista per al **21 de juny de 2027**. Com q
 
 ### Criteris de la planificació
 
-- **Les consultes són el bloc principal.** La UD06 i la UD07 formen un únic bloc de *Consultes*: 41 hores d'aula abans de la FE i 22 hores de reforç a juny, 63 en total. És, juntament amb el model E/R (UD02) i PL/SQL (UD09), on es concentra el temps del mòdul. Normalització (UD04), manipulació i transaccions (UD08) i NoSQL (UD10) es redueixen a l'essencial; els seus apunts es mantenen complets com a material d'estudi i d'ampliació.
+- **Les consultes són el bloc principal.** La UD06 i la UD07 formen un únic bloc de *Consultes*: 29 hores d'aula abans de la FE i 22 hores de reforç a juny, 51 en total. És, juntament amb el model E/R (UD02), el DDL (UD05) i PL/SQL (UD09), on es concentra el temps del mòdul. Normalització (UD04), manipulació i transaccions (UD08) i NoSQL (UD10) es redueixen a l'essencial; els seus apunts es mantenen complets com a material d'estudi i d'ampliació.
 - **Teoria i pràctica en la mateixa unitat.** Cada unitat indica en la seua pàgina de teoria una *temporalització* amb el repartiment de sessions entre teoria (T) i pràctica (P). La suma d'hores de cada unitat coincidix amb la d'esta taula.
 - **Pràctica guiada a l'aula, pràctica autònoma fora d'ella.** Les pràctiques guiades i la tasca del projecte EduGest es fan a classe. Les pràctiques autònomes, els reptes i les ampliacions són treball personal, i els dubtes es treballen en les sessions de pràctica.
 - **Proves d'avaluació.** Cada avaluació reserva 3 hores a la prova i a la seua revisió, en la setmana indicada pel centre per als cicles de grau superior.
 - **Un dia lectiu equival a una hora.** Els festius i els dies sense docència no compten. No hi ha setmana de reforç: els dies que es perguen per festes locals o activitats del centre es recuperen retallant les sessions de pràctica de l'última unitat impartida.
 
 > [!WARNING]
-> **La Formació en Empresa comença el 3 de maig.** L'alumnat de primer curs presencial se'n va a la FE el 3 de maig, per la qual cosa la 3a avaluació **es comprimix a l'abril** i les unitats finals (UD08 a UD10) queden amb 3, 15 i 3 hores d'aula; les 22 hores de reforç de consultes es passen a juny. Això obliga que una part de les pràctiques d'eixes unitats es faça com a **treball autònom**; cada pàgina de teoria indica quines pràctiques es fan a l'aula i quines fora. Si el calendari canvia, l'arxiu `data/planificacion.json` i les taules de *temporalització* de cada unitat s'han d'ajustar alhora.
+> **La Formació en Empresa comença el 3 de maig.** L'alumnat de primer curs presencial se'n va a la FE el 3 de maig, per la qual cosa la 3a avaluació **es comprimix a l'abril** i les unitats finals (UD08 a UD10) queden amb 3, 21 i 3 hores d'aula; les 22 hores de reforç de consultes es passen a juny. Això obliga que una part de les pràctiques d'eixes unitats es faça com a **treball autònom**; cada pàgina de teoria indica quines pràctiques es fan a l'aula i quines fora. Si el calendari canvia, l'arxiu `data/planificacion.json` i les taules de *temporalització* de cada unitat s'han d'ajustar alhora.
 
 > [!CAUTION]
 > **Calendari provisional.** Les dates procedixen del calendari escolar provisional 2026/27 i de les dates d'avaluació comunicades pel centre. Els festius locals i els tres dies no lectius que fixe el centre **no estan descomptats**: com que no queda marge abans de la FE, caldrà retallar sessions de pràctica d'UD09 i de les unitats finals. Quan es publique el calendari definitiu cal revisar l'arxiu `data/planificacion.json`; la taula i el calendari s'actualitzen sols i la compilació falla si les hores d'una unitat deixen de sumar.

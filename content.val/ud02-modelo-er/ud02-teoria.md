@@ -19,9 +19,9 @@ El seu objectiu prioritari és modelar i estructurar la semàntica de la informa
 
 ### Temporalització
 
-La unitat ocupa **32 hores d'aula** (12 de teoria i 20 de pràctica). És una de les unitats **prioritàries** del mòdul: un bon disseny conceptual condiciona tot el que ve després. Cada sessió apareix assenyalada en la pàgina amb una franja de color.
+La unitat ocupa **30 hores d'aula** (12 de teoria i 18 de pràctica). És una de les unitats **prioritàries** del mòdul: un bon disseny conceptual condiciona tot el que ve després. Cada sessió apareix assenyalada en la pàgina amb una franja de color.
 
-{{< sesiones unidad="UD02" horas="32" >}}
+{{< sesiones unidad="UD02" horas="30" >}}
 items:
   - {h: 2, tipo: T, t: "Cicle de vida del disseny. Entitats fortes i febles", ref: "§1 i §2.1"}
   - {h: 2, tipo: T, t: "Atributs i relacions: grau i rols", ref: "§2.2 i §2.3"}
@@ -34,7 +34,6 @@ items:
   - {h: 1, tipo: T, t: "Notacions i eines de modelatge", ref: "§7"}
   - {h: 2, tipo: P, t: "Plataforma de streaming", ref: "Pràctica 2.3"}
   - {h: 2, tipo: P, t: "Clínica veterinària amb jerarquies", ref: "Pràctica 2.4"}
-  - {h: 2, tipo: P, t: "Revisió d'un disseny defectuós", ref: "Pràctica 2.5"}
   - {h: 2, tipo: P, t: "Autoescola: ternària o agregació", ref: "Pràctica 2.6"}
   - {h: 2, tipo: P, t: "Almàssera: l'entrevista que no ho diu tot", ref: "Pràctica 2.7"}
   - {h: 2, tipo: P, t: "Enginyeria inversa: de l'albarà a les entitats", ref: "Pràctica 2.9"}
@@ -43,6 +42,7 @@ items:
 autonomo:
   - "Reptes 2.8 i 2.10 a 2.14 (lloguer, comparació de dissenys, festival, editorial, taller aeronàutic i comunitat de propietaris)"
   - "Banc d'exercicis: blocs 3 a 5 (exercicis 16 a 35)"
+  - "Pràctica 2.5 (revisió d'un disseny defectuós)"
 {{< /sesiones >}}
 
 > [!NOTE]

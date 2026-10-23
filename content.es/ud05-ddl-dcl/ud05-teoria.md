@@ -19,9 +19,9 @@ Todos los ejemplos usan **Oracle AI Database 26ai Free**. Cuando una caracterís
 
 ### Temporalización
 
-La unidad ocupa **14 horas de aula** (6 de teoría y 8 de práctica).
+La unidad ocupa **22 horas de aula** (7 de teoría y 15 de práctica).
 
-{{< sesiones unidad="UD05" horas="14" >}}
+{{< sesiones unidad="UD05" horas="22" >}}
 items:
   - {h: 1, tipo: T, t: "SQL y Oracle. Almacenamiento de la información", ref: "§1 y §2"}
   - {h: 1, tipo: T, t: "Tipos de datos de Oracle", ref: "§3 · calculadora de NUMBER(p, s)"}
@@ -35,10 +35,12 @@ items:
   - {h: 1, tipo: T, t: "Usuarios, roles y privilegios. Diccionario de datos", ref: "§10 a §12 · taller de privilegios"}
   - {h: 1, tipo: P, t: "Usuarios, roles y privilegios en EduGest", ref: "Práctica 5.7"}
   - {h: 1, tipo: P, t: "Implementación de EduGest", ref: "Proyecto EduGest-5"}
+  - {h: 1, tipo: T, t: "Repaso de restricciones y errores frecuentes en DDL", ref: "§5 y §13"}
+  - {h: 2, tipo: P, t: "Biblioteca: script completo y batería de pruebas", ref: "Práctica 5.3"}
+  - {h: 3, tipo: P, t: "Seis casos para implementar", ref: "Práctica 5.4"}
+  - {h: 2, tipo: P, t: "Depurar un script defectuoso", ref: "Práctica 5.8"}
 autonomo:
-  - "Práctica 5.3 (biblioteca: script completo y batería de pruebas)"
-  - "Práctica 5.4 (seis casos para implementar)"
-  - "Práctica 5.8 (depurar un script defectuoso)"
+  - "Ampliaciones de las prácticas 5.1 a 5.8 y autoevaluación"
 {{< /sesiones >}}
 
 > [!IMPORTANT]

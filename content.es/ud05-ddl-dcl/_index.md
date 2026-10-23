@@ -14,4 +14,4 @@ Es el momento de pasar del papel al servidor. En esta unidad implementas en **Or
 | [Teoría](/ud05-ddl-dcl/ud05-teoria) | Almacenamiento, tipos de datos, `CREATE`/`ALTER`/`DROP`, restricciones, secuencias, índices, vistas, usuarios, privilegios, roles y diccionario de datos |
 | [Prácticas](/ud05-ddl-dcl/ud05-practicas) | Ocho prácticas (de MySQL a Oracle, batería de pruebas, `ALTER`, vistas, seguridad, depuración) y la implementación de EduGest |
 
-**Duración:** 14 horas de aula, del 03/12/2026 al 13/01/2027. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.
+**Duración:** 22 horas de aula, del 01/12/2026 al 21/01/2027. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.

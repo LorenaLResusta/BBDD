@@ -16,25 +16,23 @@ Todos los ejemplos se ejecutan sobre el esquema de referencia **EDUGEST** cargad
 
 ### Temporalización
 
-La unidad ocupa **20 horas de aula** (9 de teoría y 11 de práctica). Es, junto con la UD07, el bloque de **consultas**, la parte con más peso del módulo (63 horas entre las dos y el refuerzo de junio): aquí se adquiere la destreza con `SELECT` que se utilizará hasta el final.
+La unidad ocupa **14 horas de aula** (8 de teoría y 6 de práctica). Es, junto con la UD07, el bloque de **consultas**, una de las partes con más peso del módulo (29 horas de aula antes de la FE y 22 horas de refuerzo en junio, 51 en total): aquí se adquiere la destreza con `SELECT` que se utilizará hasta el final.
 
-{{< sesiones unidad="UD06" horas="20" >}}
+{{< sesiones unidad="UD06" horas="14" >}}
 items:
   - {h: 2, tipo: T, t: "Herramientas y sentencia SELECT. Proyección, alias, concatenación y DISTINCT", ref: "§1 y §2"}
   - {h: 1, tipo: P, t: "Primeras consultas y herramientas", ref: "Práctica 6.1"}
   - {h: 2, tipo: T, t: "Ordenación y selección con WHERE: comparación, LIKE y operadores lógicos", ref: "§3 y §4 · laboratorio de SELECT"}
-  - {h: 3, tipo: P, t: "Consultas para secretaría", ref: "Práctica 6.2"}
-  - {h: 1, tipo: T, t: "El valor NULL y la lógica de tres valores", ref: "§5 · simulador de lógica trivalente"}
-  - {h: 2, tipo: P, t: "Laboratorio de valores nulos", ref: "Práctica 6.3"}
-  - {h: 1, tipo: T, t: "Limitar el número de filas", ref: "§6"}
-  - {h: 2, tipo: T, t: "Funciones de fila (I): texto, numéricas y de fecha", ref: "§7.1 a §7.3"}
-  - {h: 1, tipo: T, t: "Funciones de fila (II): conversión, CASE, DECODE y expresiones regulares", ref: "§7.4 a §7.6"}
-  - {h: 3, tipo: P, t: "Funciones para informes", ref: "Práctica 6.4"}
-  - {h: 1, tipo: P, t: "Validar datos con SQL", ref: "Práctica 6.5"}
-  - {h: 1, tipo: P, t: "Consultas del día a día en EduGest", ref: "Proyecto EduGest-6"}
+  - {h: 2, tipo: P, t: "Consultas para secretaría", ref: "Práctica 6.2"}
+  - {h: 1, tipo: T, t: "El valor NULL, la lógica de tres valores y limitar filas", ref: "§5 y §6 · simulador de lógica trivalente"}
+  - {h: 1, tipo: P, t: "Laboratorio de valores nulos", ref: "Práctica 6.3"}
+  - {h: 2, tipo: T, t: "Funciones de fila: texto, numéricas, fecha, conversión y CASE", ref: "§7"}
+  - {h: 1, tipo: T, t: "Expresiones regulares y DECODE", ref: "§7.5 y §7.6"}
+  - {h: 2, tipo: P, t: "Funciones para informes", ref: "Práctica 6.4"}
 autonomo:
-  - "Terminar las consultas de la práctica 6.2 que no hayan dado tiempo en el aula"
-  - "Ampliaciones de las prácticas 6.3, 6.4 y 6.5"
+  - "Práctica 6.5 (validar datos con SQL)"
+  - "Proyecto EduGest · UD06 (consultas del día a día)"
+  - "Ampliaciones de las prácticas 6.2, 6.3 y 6.4"
 {{< /sesiones >}}
 
 > [!IMPORTANT]

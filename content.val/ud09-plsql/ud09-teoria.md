@@ -34,9 +34,9 @@ En acabar esta unitat seràs capaç de:
 
 ### Temporalització
 
-La unitat ocupa **15 hores d'aula** (7 de teoria i 8 de pràctica). És la unitat amb més codi del curs i una de les **prioritàries**: convé escriure'l a mà i recompilar-lo, no copiar-lo i apegar-lo.
+La unitat ocupa **21 hores d'aula** (8 de teoria i 13 de pràctica). És la unitat amb més codi del curs i una de les **prioritàries**: convé escriure'l a mà i recompilar-lo, no copiar-lo i apegar-lo.
 
-{{< sesiones unidad="UD09" horas="15" >}}
+{{< sesiones unidad="UD09" horas="21" >}}
 items:
   - {h: 2, tipo: T, t: "Maneres d'automatitzar, eines, estructura del bloc, variables, tipus i `DBMS_OUTPUT`", ref: "§1 a §4"}
   - {h: 1, tipo: P, t: "Primers blocs: l'expedient d'un alumne", ref: "Pràctica 9.1"}
@@ -47,10 +47,12 @@ items:
   - {h: 2, tipo: T, t: "Disparadors, tasques programades amb `DBMS_SCHEDULER` i paquets", ref: "§11 a §14 · simulador de disparadors"}
   - {h: 2, tipo: P, t: "Disparadors d'integritat i auditoria", ref: "Pràctica 9.5"}
   - {h: 1, tipo: P, t: "Tasques programades", ref: "Pràctica 9.7"}
+  - {h: 2, tipo: P, t: "Repte: la taula mutant", ref: "Pràctica 9.6"}
+  - {h: 2, tipo: P, t: "Repte: el paquet de secretaria", ref: "Pràctica 9.8"}
+  - {h: 1, tipo: T, t: "Errors freqüents i bones pràctiques en PL/SQL", ref: "§15 i §16"}
+  - {h: 1, tipo: P, t: "Lògica al servidor per a EduGest", ref: "Projecte EduGest · UD09"}
 autonomo:
-  - "Pràctica 9.6 (repte: la taula mutant)"
-  - "Pràctica 9.8 (repte: el paquet de secretaria)"
-  - "Projecte EduGest · UD09 (lògica al servidor)"
+  - "Ampliacions de les pràctiques 9.1 a 9.8 i autoavaluació"
 {{< /sesiones >}}
 
 > [!IMPORTANT]

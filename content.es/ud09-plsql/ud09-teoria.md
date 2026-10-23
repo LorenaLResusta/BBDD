@@ -34,9 +34,9 @@ Al terminar esta unidad serás capaz de:
 
 ### Temporalización
 
-La unidad ocupa **15 horas de aula** (7 de teoría y 8 de práctica). Es la unidad con más código del curso y una de las **prioritarias**: conviene escribirlo a mano y recompilarlo, no copiarlo y pegarlo.
+La unidad ocupa **21 horas de aula** (8 de teoría y 13 de práctica). Es la unidad con más código del curso y una de las **prioritarias**: conviene escribirlo a mano y recompilarlo, no copiarlo y pegarlo.
 
-{{< sesiones unidad="UD09" horas="15" >}}
+{{< sesiones unidad="UD09" horas="21" >}}
 items:
   - {h: 2, tipo: T, t: "Formas de automatizar, herramientas, estructura del bloque, variables, tipos y `DBMS_OUTPUT`", ref: "§1 a §4"}
   - {h: 1, tipo: P, t: "Primeros bloques: el expediente de un alumno", ref: "Práctica 9.1"}
@@ -47,10 +47,12 @@ items:
   - {h: 2, tipo: T, t: "Disparadores, tareas programadas con `DBMS_SCHEDULER` y paquetes", ref: "§11 a §14 · simulador de disparadores"}
   - {h: 2, tipo: P, t: "Disparadores de integridad y auditoría", ref: "Práctica 9.5"}
   - {h: 1, tipo: P, t: "Tareas programadas", ref: "Práctica 9.7"}
+  - {h: 2, tipo: P, t: "Reto: la tabla mutante", ref: "Práctica 9.6"}
+  - {h: 2, tipo: P, t: "Reto: el paquete de secretaría", ref: "Práctica 9.8"}
+  - {h: 1, tipo: T, t: "Errores frecuentes y buenas prácticas en PL/SQL", ref: "§15 y §16"}
+  - {h: 1, tipo: P, t: "Lógica en el servidor para EduGest", ref: "Proyecto EduGest · UD09"}
 autonomo:
-  - "Práctica 9.6 (reto: la tabla mutante)"
-  - "Práctica 9.8 (reto: el paquete de secretaría)"
-  - "Proyecto EduGest · UD09 (lógica en el servidor)"
+  - "Ampliaciones de las prácticas 9.1 a 9.8 y autoevaluación"
 {{< /sesiones >}}
 
 > [!IMPORTANT]
