@@ -10,14 +10,14 @@ bookToc: true
 
 | Práctica | Tipo | Nivel | CE principales |
 |---|---|---|---|
-| [9.1 Primeros bloques: el expediente de un alumno](#práctica-81--primeros-bloques-el-expediente-de-un-alumno) | Guiada | ●○○ | RA5.b, RA5.c, RA5.e, RA5.g |
-| [9.2 Biblioteca de funciones de EduGest](#práctica-82--biblioteca-de-funciones-de-edugest) | Guiada | ●●○ | RA5.e, RA5.f |
-| [9.3 Procedimiento de matrícula con excepciones](#práctica-83--procedimiento-de-matrícula-con-excepciones) | Guiada | ●●○ | RA5.f, RA5.g, RA5.j |
-| [9.4 Cursores: boletines e informes](#práctica-84--cursores-boletines-e-informes) | Autónoma | ●●○ | RA5.g, RA5.i |
-| [9.5 Disparadores de integridad y auditoría](#práctica-85--disparadores-de-integridad-y-auditoría) | Guiada | ●●● | RA5.h, RA6.h, RA4.h |
-| [9.6 Reto: la tabla mutante](#práctica-86--reto-la-tabla-mutante) | Reto | ●●● | RA5.h, RA5.i |
-| [9.7 Tareas programadas](#práctica-87--tareas-programadas) | Guiada | ●●○ | RA5.a, RA5.d, RA5.h |
-| [9.8 Reto: el paquete de secretaría](#práctica-88--reto-el-paquete-de-secretaría) | Reto | ●●● | RA5.d, RA5.f, RA5.j, RA4.d |
+| [8.1 Primeros bloques: el expediente de un alumno](#práctica-81--primeros-bloques-el-expediente-de-un-alumno) | Guiada | ●○○ | RA5.b, RA5.c, RA5.e, RA5.g |
+| [8.2 Biblioteca de funciones de EduGest](#práctica-82--biblioteca-de-funciones-de-edugest) | Guiada | ●●○ | RA5.e, RA5.f |
+| [8.3 Procedimiento de matrícula con excepciones](#práctica-83--procedimiento-de-matrícula-con-excepciones) | Guiada | ●●○ | RA5.f, RA5.g, RA5.j |
+| [8.4 Cursores: boletines e informes](#práctica-84--cursores-boletines-e-informes) | Autónoma | ●●○ | RA5.g, RA5.i |
+| [8.5 Disparadores de integridad y auditoría](#práctica-85--disparadores-de-integridad-y-auditoría) | Guiada | ●●● | RA5.h, RA6.h, RA4.h |
+| [8.6 Reto: la tabla mutante](#práctica-86--reto-la-tabla-mutante) | Reto | ●●● | RA5.h, RA5.i |
+| [8.7 Tareas programadas](#práctica-87--tareas-programadas) | Guiada | ●●○ | RA5.a, RA5.d, RA5.h |
+| [8.8 Reto: el paquete de secretaría](#práctica-88--reto-el-paquete-de-secretaría) | Reto | ●●● | RA5.d, RA5.f, RA5.j, RA4.d |
 | [Proyecto EduGest · UD08](#proyecto-edugest--ud08-lógica-en-el-servidor) | Proyecto | ●●● | RA5 completo, RA6.h |
 
 > [!IMPORTANT]

@@ -10,13 +10,13 @@ bookToc: true
 
 | Práctica | Tipo | Nivel | CE principales |
 |---|---|---|---|
-| [10.1 Puesta en marcha de MongoDB](#práctica-91--puesta-en-marcha-de-mongodb) | Guiada | ●○○ | RA7.c, RA7.e |
-| [10.2 CRUD sobre los expedientes](#práctica-92--crud-sobre-los-expedientes) | Guiada | ●○○ | RA7.d, RA7.e |
-| [10.3 Consultas con operadores, subdocumentos y arrays](#práctica-93--consultas-con-operadores-subdocumentos-y-arrays) | Autónoma | ●●○ | RA7.d, RA7.e |
-| [10.4 Agregaciones: el mismo informe en SQL y en MongoDB](#práctica-94--agregaciones-el-mismo-informe-en-sql-y-en-mongodb) | Guiada | ●●○ | RA7.d, RA7.e |
-| [10.5 Modelado documental de un catálogo](#práctica-95--modelado-documental-de-un-catálogo) | Autónoma | ●●● | RA7.c, RA7.d |
-| [10.6 Otros modelos: clave-valor y grafos](#práctica-96--otros-modelos-clave-valor-y-grafos) | Autónoma | ●●○ | RA7.a, RA7.b |
-| [10.7 Reto: ¿relacional o NoSQL?](#práctica-97--reto-relacional-o-nosql) | Reto | ●●● | RA7.a, RA7.b, RA1.b |
+| [9.1 Puesta en marcha de MongoDB](#práctica-91--puesta-en-marcha-de-mongodb) | Guiada | ●○○ | RA7.c, RA7.e |
+| [9.2 CRUD sobre los expedientes](#práctica-92--crud-sobre-los-expedientes) | Guiada | ●○○ | RA7.d, RA7.e |
+| [9.3 Consultas con operadores, subdocumentos y arrays](#práctica-93--consultas-con-operadores-subdocumentos-y-arrays) | Autónoma | ●●○ | RA7.d, RA7.e |
+| [9.4 Agregaciones: el mismo informe en SQL y en MongoDB](#práctica-94--agregaciones-el-mismo-informe-en-sql-y-en-mongodb) | Guiada | ●●○ | RA7.d, RA7.e |
+| [9.5 Modelado documental de un catálogo](#práctica-95--modelado-documental-de-un-catálogo) | Autónoma | ●●● | RA7.c, RA7.d |
+| [9.6 Otros modelos: clave-valor y grafos](#práctica-96--otros-modelos-clave-valor-y-grafos) | Autónoma | ●●○ | RA7.a, RA7.b |
+| [9.7 Reto: ¿relacional o NoSQL?](#práctica-97--reto-relacional-o-nosql) | Reto | ●●● | RA7.a, RA7.b, RA1.b |
 | [Proyecto EduGest · UD09](#proyecto-edugest--ud09-el-expediente-documental) | Proyecto | ●●● | RA7 completo |
 
 > [!IMPORTANT]

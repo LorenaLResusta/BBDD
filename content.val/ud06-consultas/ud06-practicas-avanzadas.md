@@ -10,13 +10,13 @@ bookToc: true
 
 | Pràctica | Tipus | Nivell | CE principals |
 |---|---|---|---|
-| [7.1 Consultes resum](#pràctica-66--consultes-resum) | Guiada | ●○○ | RA3.e |
-| [7.2 Composicions pas a pas](#pràctica-67--composicions-pas-a-pas) | Guiada | ●●○ | RA3.c, RA3.d |
-| [7.3 Informes per a cap d'estudis](#pràctica-68--informes-per-a-cap-destudis) | Autònoma | ●●○ | RA3.c, RA3.d, RA3.e |
-| [7.4 Subconsultes](#pràctica-69--subconsultes) | Autònoma | ●●○ | RA3.f |
-| [7.5 Múltiples seleccions i vistes](#pràctica-610--múltiples-seleccions-i-vistes) | Autònoma | ●●○ | RA3.g, RA2.f |
-| [7.6 Optimització: mesurar abans i després](#pràctica-611--optimització-mesurar-abans-i-després) | Guiada | ●●● | RA3.h |
-| [7.7 Repte: el quadre de comandament](#pràctica-612--repte-el-quadre-de-comandament) | Repte | ●●● | RA3.c-h |
+| [6.6 Consultes resum](#pràctica-66--consultes-resum) | Guiada | ●○○ | RA3.e |
+| [6.7 Composicions pas a pas](#pràctica-67--composicions-pas-a-pas) | Guiada | ●●○ | RA3.c, RA3.d |
+| [6.8 Informes per a cap d'estudis](#pràctica-68--informes-per-a-cap-destudis) | Autònoma | ●●○ | RA3.c, RA3.d, RA3.e |
+| [6.9 Subconsultes](#pràctica-69--subconsultes) | Autònoma | ●●○ | RA3.f |
+| [6.10 Múltiples seleccions i vistes](#pràctica-610--múltiples-seleccions-i-vistes) | Autònoma | ●●○ | RA3.g, RA2.f |
+| [6.11 Optimització: mesurar abans i després](#pràctica-611--optimització-mesurar-abans-i-després) | Guiada | ●●● | RA3.h |
+| [6.12 Repte: el quadre de comandament](#pràctica-612--repte-el-quadre-de-comandament) | Repte | ●●● | RA3.c-h |
 | [Projecte EduGest · UD06](#projecte-edugest--ud06-informes) | Projecte | ●●● | RA3 complet |
 
 > [!IMPORTANT]

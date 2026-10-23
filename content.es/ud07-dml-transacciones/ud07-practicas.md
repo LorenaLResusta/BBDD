@@ -10,13 +10,13 @@ bookToc: true
 
 | Práctica | Tipo | Nivel | CE principales |
 |---|---|---|---|
-| [8.1 Altas, cambios y bajas en EduGest](#práctica-71--altas-cambios-y-bajas-en-edugest) | Guiada | ●○○ | RA4.a, RA4.b |
-| [8.2 Copias, históricos e INSERT … SELECT](#práctica-72--copias-históricos-e-insert--select) | Guiada | ●●○ | RA4.c |
-| [8.3 Modificaciones con subconsultas](#práctica-73--modificaciones-con-subconsultas) | Autónoma | ●●○ | RA4.b, RA4.c, RA4.h |
-| [8.4 Laboratorio de transacciones](#práctica-74--laboratorio-de-transacciones) | Guiada | ●●○ | RA4.e, RA4.f |
-| [8.5 Dos sesiones, un dato: concurrencia y bloqueos](#práctica-75--dos-sesiones-un-dato-concurrencia-y-bloqueos) | Guiada | ●●● | RA4.g, RA4.h |
-| [8.6 Carga de notas con MERGE](#práctica-76--carga-de-notas-con-merge) | Autónoma | ●●○ | RA4.b, RA4.c |
-| [8.7 Reto: guion de promoción de curso](#práctica-77--reto-guion-de-promoción-de-curso) | Reto | ●●● | RA4.d, RA4.e, RA4.f, RA4.h |
+| [7.1 Altas, cambios y bajas en EduGest](#práctica-71--altas-cambios-y-bajas-en-edugest) | Guiada | ●○○ | RA4.a, RA4.b |
+| [7.2 Copias, históricos e INSERT … SELECT](#práctica-72--copias-históricos-e-insert--select) | Guiada | ●●○ | RA4.c |
+| [7.3 Modificaciones con subconsultas](#práctica-73--modificaciones-con-subconsultas) | Autónoma | ●●○ | RA4.b, RA4.c, RA4.h |
+| [7.4 Laboratorio de transacciones](#práctica-74--laboratorio-de-transacciones) | Guiada | ●●○ | RA4.e, RA4.f |
+| [7.5 Dos sesiones, un dato: concurrencia y bloqueos](#práctica-75--dos-sesiones-un-dato-concurrencia-y-bloqueos) | Guiada | ●●● | RA4.g, RA4.h |
+| [7.6 Carga de notas con MERGE](#práctica-76--carga-de-notas-con-merge) | Autónoma | ●●○ | RA4.b, RA4.c |
+| [7.7 Reto: guion de promoción de curso](#práctica-77--reto-guion-de-promoción-de-curso) | Reto | ●●● | RA4.d, RA4.e, RA4.f, RA4.h |
 | [Proyecto EduGest · UD07](#proyecto-edugest--ud07-guiones-de-mantenimiento) | Proyecto | ●●● | RA4 completo |
 
 > [!IMPORTANT]

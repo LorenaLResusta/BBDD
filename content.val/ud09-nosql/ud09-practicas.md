@@ -10,13 +10,13 @@ bookToc: true
 
 | Pràctica | Tipus | Nivell | CE principals |
 |---|---|---|---|
-| [10.1 Posada en marxa de MongoDB](#pràctica-91--posada-en-marxa-de-mongodb) | Guiada | ●○○ | RA7.c, RA7.e |
-| [10.2 CRUD sobre els expedients](#pràctica-92--crud-sobre-els-expedients) | Guiada | ●○○ | RA7.d, RA7.e |
-| [10.3 Consultes amb operadors, subdocuments i arrays](#pràctica-93--consultes-amb-operadors-subdocuments-i-arrays) | Autònoma | ●●○ | RA7.d, RA7.e |
-| [10.4 Agregacions: el mateix informe en SQL i en MongoDB](#pràctica-94--agregacions-el-mateix-informe-en-sql-i-en-mongodb) | Guiada | ●●○ | RA7.d, RA7.e |
-| [10.5 Modelatge documental d'un catàleg](#pràctica-95--modelatge-documental-dun-catàleg) | Autònoma | ●●● | RA7.c, RA7.d |
-| [10.6 Altres models: clau-valor i grafs](#pràctica-96--altres-models-clau-valor-i-grafs) | Autònoma | ●●○ | RA7.a, RA7.b |
-| [10.7 Repte: relacional o NoSQL?](#pràctica-97--repte-relacional-o-nosql) | Repte | ●●● | RA7.a, RA7.b, RA1.b |
+| [9.1 Posada en marxa de MongoDB](#pràctica-91--posada-en-marxa-de-mongodb) | Guiada | ●○○ | RA7.c, RA7.e |
+| [9.2 CRUD sobre els expedients](#pràctica-92--crud-sobre-els-expedients) | Guiada | ●○○ | RA7.d, RA7.e |
+| [9.3 Consultes amb operadors, subdocuments i arrays](#pràctica-93--consultes-amb-operadors-subdocuments-i-arrays) | Autònoma | ●●○ | RA7.d, RA7.e |
+| [9.4 Agregacions: el mateix informe en SQL i en MongoDB](#pràctica-94--agregacions-el-mateix-informe-en-sql-i-en-mongodb) | Guiada | ●●○ | RA7.d, RA7.e |
+| [9.5 Modelatge documental d'un catàleg](#pràctica-95--modelatge-documental-dun-catàleg) | Autònoma | ●●● | RA7.c, RA7.d |
+| [9.6 Altres models: clau-valor i grafs](#pràctica-96--altres-models-clau-valor-i-grafs) | Autònoma | ●●○ | RA7.a, RA7.b |
+| [9.7 Repte: relacional o NoSQL?](#pràctica-97--repte-relacional-o-nosql) | Repte | ●●● | RA7.a, RA7.b, RA1.b |
 | [Projecte EduGest · UD09](#projecte-edugest--ud09-lexpedient-documental) | Projecte | ●●● | RA7 complet |
 
 > [!IMPORTANT]

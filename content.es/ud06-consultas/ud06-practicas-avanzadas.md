@@ -10,13 +10,13 @@ bookToc: true
 
 | Práctica | Tipo | Nivel | CE principales |
 |---|---|---|---|
-| [7.1 Consultas resumen](#práctica-66--consultas-resumen) | Guiada | ●○○ | RA3.e |
-| [7.2 Composiciones paso a paso](#práctica-67--composiciones-paso-a-paso) | Guiada | ●●○ | RA3.c, RA3.d |
-| [7.3 Informes para jefatura](#práctica-68--informes-para-jefatura) | Autónoma | ●●○ | RA3.c, RA3.d, RA3.e |
-| [7.4 Subconsultas](#práctica-69--subconsultas) | Autónoma | ●●○ | RA3.f |
-| [7.5 Múltiples selecciones y vistas](#práctica-610--múltiples-selecciones-y-vistas) | Autónoma | ●●○ | RA3.g, RA2.f |
-| [7.6 Optimización: medir antes y después](#práctica-611--optimización-medir-antes-y-después) | Guiada | ●●● | RA3.h |
-| [7.7 Reto: el cuadro de mando](#práctica-612--reto-el-cuadro-de-mando) | Reto | ●●● | RA3.c-h |
+| [6.6 Consultas resumen](#práctica-66--consultas-resumen) | Guiada | ●○○ | RA3.e |
+| [6.7 Composiciones paso a paso](#práctica-67--composiciones-paso-a-paso) | Guiada | ●●○ | RA3.c, RA3.d |
+| [6.8 Informes para jefatura](#práctica-68--informes-para-jefatura) | Autónoma | ●●○ | RA3.c, RA3.d, RA3.e |
+| [6.9 Subconsultas](#práctica-69--subconsultas) | Autónoma | ●●○ | RA3.f |
+| [6.10 Múltiples selecciones y vistas](#práctica-610--múltiples-selecciones-y-vistas) | Autónoma | ●●○ | RA3.g, RA2.f |
+| [6.11 Optimización: medir antes y después](#práctica-611--optimización-medir-antes-y-después) | Guiada | ●●● | RA3.h |
+| [6.12 Reto: el cuadro de mando](#práctica-612--reto-el-cuadro-de-mando) | Reto | ●●● | RA3.c-h |
 | [Proyecto EduGest · UD06](#proyecto-edugest--ud06-informes) | Proyecto | ●●● | RA3 completo |
 
 > [!IMPORTANT]

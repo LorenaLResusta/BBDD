@@ -10,14 +10,14 @@ bookToc: true
 
 | Pràctica | Tipus | Nivell | CE principals |
 |---|---|---|---|
-| [9.1 Primers blocs: l'expedient d'un alumne](#pràctica-81--primers-blocs-lexpedient-dun-alumne) | Guiada | ●○○ | RA5.b, RA5.c, RA5.e, RA5.g |
-| [9.2 Biblioteca de funcions d'EduGest](#pràctica-82--biblioteca-de-funcions-dedugest) | Guiada | ●●○ | RA5.e, RA5.f |
-| [9.3 Procediment de matrícula amb excepcions](#pràctica-83--procediment-de-matrícula-amb-excepcions) | Guiada | ●●○ | RA5.f, RA5.g, RA5.j |
-| [9.4 Cursors: butlletins i informes](#pràctica-84--cursors-butlletins-i-informes) | Autònoma | ●●○ | RA5.g, RA5.i |
-| [9.5 Disparadors d'integritat i auditoria](#pràctica-85--disparadors-dintegritat-i-auditoria) | Guiada | ●●● | RA5.h, RA6.h, RA4.h |
-| [9.6 Repte: la taula mutant](#pràctica-86--repte-la-taula-mutant) | Repte | ●●● | RA5.h, RA5.i |
-| [9.7 Tasques programades](#pràctica-87--tasques-programades) | Guiada | ●●○ | RA5.a, RA5.d, RA5.h |
-| [9.8 Repte: el paquet de secretaria](#pràctica-88--repte-el-paquet-de-secretaria) | Repte | ●●● | RA5.d, RA5.f, RA5.j, RA4.d |
+| [8.1 Primers blocs: l'expedient d'un alumne](#pràctica-81--primers-blocs-lexpedient-dun-alumne) | Guiada | ●○○ | RA5.b, RA5.c, RA5.e, RA5.g |
+| [8.2 Biblioteca de funcions d'EduGest](#pràctica-82--biblioteca-de-funcions-dedugest) | Guiada | ●●○ | RA5.e, RA5.f |
+| [8.3 Procediment de matrícula amb excepcions](#pràctica-83--procediment-de-matrícula-amb-excepcions) | Guiada | ●●○ | RA5.f, RA5.g, RA5.j |
+| [8.4 Cursors: butlletins i informes](#pràctica-84--cursors-butlletins-i-informes) | Autònoma | ●●○ | RA5.g, RA5.i |
+| [8.5 Disparadors d'integritat i auditoria](#pràctica-85--disparadors-dintegritat-i-auditoria) | Guiada | ●●● | RA5.h, RA6.h, RA4.h |
+| [8.6 Repte: la taula mutant](#pràctica-86--repte-la-taula-mutant) | Repte | ●●● | RA5.h, RA5.i |
+| [8.7 Tasques programades](#pràctica-87--tasques-programades) | Guiada | ●●○ | RA5.a, RA5.d, RA5.h |
+| [8.8 Repte: el paquet de secretaria](#pràctica-88--repte-el-paquet-de-secretaria) | Repte | ●●● | RA5.d, RA5.f, RA5.j, RA4.d |
 | [Projecte EduGest · UD08](#projecte-edugest--ud08-lògica-en-el-servidor) | Projecte | ●●● | RA5 complet, RA6.h |
 
 > [!IMPORTANT]

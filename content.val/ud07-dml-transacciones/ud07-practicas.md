@@ -10,13 +10,13 @@ bookToc: true
 
 | Pràctica | Tipus | Nivell | CE principals |
 |---|---|---|---|
-| [8.1 Altes, canvis i baixes a EduGest](#pràctica-71--altes-canvis-i-baixes-a-edugest) | Guiada | ●○○ | RA4.a, RA4.b |
-| [8.2 Còpies, històrics i INSERT … SELECT](#pràctica-72--còpies-històrics-i-insert--select) | Guiada | ●●○ | RA4.c |
-| [8.3 Modificacions amb subconsultes](#pràctica-73--modificacions-amb-subconsultes) | Autònoma | ●●○ | RA4.b, RA4.c, RA4.h |
-| [8.4 Laboratori de transaccions](#pràctica-74--laboratori-de-transaccions) | Guiada | ●●○ | RA4.e, RA4.f |
-| [8.5 Dues sessions, una dada: concurrència i bloquejos](#pràctica-75--dues-sessions-una-dada-concurrència-i-bloquejos) | Guiada | ●●● | RA4.g, RA4.h |
-| [8.6 Càrrega de notes amb MERGE](#pràctica-76--càrrega-de-notes-amb-merge) | Autònoma | ●●○ | RA4.b, RA4.c |
-| [8.7 Repte: guió de promoció de curs](#pràctica-77--repte-guió-de-promoció-de-curs) | Repte | ●●● | RA4.d, RA4.e, RA4.f, RA4.h |
+| [7.1 Altes, canvis i baixes a EduGest](#pràctica-71--altes-canvis-i-baixes-a-edugest) | Guiada | ●○○ | RA4.a, RA4.b |
+| [7.2 Còpies, històrics i INSERT … SELECT](#pràctica-72--còpies-històrics-i-insert--select) | Guiada | ●●○ | RA4.c |
+| [7.3 Modificacions amb subconsultes](#pràctica-73--modificacions-amb-subconsultes) | Autònoma | ●●○ | RA4.b, RA4.c, RA4.h |
+| [7.4 Laboratori de transaccions](#pràctica-74--laboratori-de-transaccions) | Guiada | ●●○ | RA4.e, RA4.f |
+| [7.5 Dues sessions, una dada: concurrència i bloquejos](#pràctica-75--dues-sessions-una-dada-concurrència-i-bloquejos) | Guiada | ●●● | RA4.g, RA4.h |
+| [7.6 Càrrega de notes amb MERGE](#pràctica-76--càrrega-de-notes-amb-merge) | Autònoma | ●●○ | RA4.b, RA4.c |
+| [7.7 Repte: guió de promoció de curs](#pràctica-77--repte-guió-de-promoció-de-curs) | Repte | ●●● | RA4.d, RA4.e, RA4.f, RA4.h |
 | [Projecte EduGest · UD07](#projecte-edugest--ud07-guions-de-manteniment) | Projecte | ●●● | RA4 complet |
 
 > [!IMPORTANT]
