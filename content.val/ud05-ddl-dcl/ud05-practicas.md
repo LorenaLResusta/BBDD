@@ -1,5 +1,5 @@
 ---
-title: "Definició i control de dades - Pràctiques"
+title: "DDL: definició de dades - Pràctiques"
 weight: 2
 bookToc: true
 ---

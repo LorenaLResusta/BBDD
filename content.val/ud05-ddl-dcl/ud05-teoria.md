@@ -1,10 +1,10 @@
 ---
-title: "Definició i control de dades"
+title: "DDL: definició de dades"
 weight: 1
 bookToc: true
 ---
 
-# UD05 · Definició i control de dades (DDL i DCL)
+# UD05 · DDL: definició de dades (i control amb DCL)
 
 ## Resum del tema
 
@@ -19,21 +19,21 @@ Tots els exemples usen **Oracle AI Database 26ai Free**. Quan una característic
 
 ### Temporalització
 
-La unitat ocupa **17 hores d'aula** (9 de teoria i 8 de pràctica).
+La unitat ocupa **14 hores d'aula** (6 de teoria i 8 de pràctica).
 
-{{< sesiones unidad="UD05" horas="17" >}}
+{{< sesiones unidad="UD05" horas="14" >}}
 items:
   - {h: 1, tipo: T, t: "SQL i Oracle. Emmagatzematge de la informació", ref: "§1 i §2"}
-  - {h: 2, tipo: T, t: "Tipus de dades d'Oracle", ref: "§3 · calculadora de NUMBER(p, s)"}
-  - {h: 2, tipo: T, t: "CREATE TABLE i restriccions d'integritat", ref: "§4 i §5 · constructor de CREATE TABLE"}
-  - {h: 2, tipo: P, t: "Primeres taules i restriccions en Oracle", ref: "Pràctica 5.1"}
+  - {h: 1, tipo: T, t: "Tipus de dades d'Oracle", ref: "§3 · calculadora de NUMBER(p, s)"}
+  - {h: 1, tipo: T, t: "CREATE TABLE i restriccions d'integritat", ref: "§4 i §5 · constructor de CREATE TABLE"}
+  - {h: 2, tipo: P, t: "Primeres taules i restriccions a Oracle", ref: "Pràctica 5.1"}
   - {h: 2, tipo: P, t: "Del diagrama de Chen al DDL", ref: "Pràctica 5.2"}
   - {h: 1, tipo: T, t: "Modificar i eliminar l'estructura (ALTER, DROP)", ref: "§6"}
   - {h: 1, tipo: P, t: "Evolució de l'esquema amb ALTER", ref: "Pràctica 5.5"}
   - {h: 1, tipo: T, t: "Seqüències, identitat, índexs i vistes", ref: "§7, §8 i §9"}
-  - {h: 1, tipo: P, t: "Índexs, vistes i seqüències en EduGest", ref: "Pràctica 5.6"}
-  - {h: 2, tipo: T, t: "Usuaris, rols i privilegis. Diccionari de dades i eines", ref: "§10 a §12 · taller de privilegis"}
-  - {h: 1, tipo: P, t: "Usuaris, rols i privilegis en EduGest", ref: "Pràctica 5.7"}
+  - {h: 1, tipo: P, t: "Índexs, vistes i seqüències a EduGest", ref: "Pràctica 5.6"}
+  - {h: 1, tipo: T, t: "Usuaris, rols i privilegis. Diccionari de dades", ref: "§10 a §12 · taller de privilegis"}
+  - {h: 1, tipo: P, t: "Usuaris, rols i privilegis a EduGest", ref: "Pràctica 5.7"}
   - {h: 1, tipo: P, t: "Implementació d'EduGest", ref: "Projecte EduGest-5"}
 autonomo:
   - "Pràctica 5.3 (biblioteca: script complet i bateria de proves)"

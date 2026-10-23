@@ -35,15 +35,12 @@ Al terminar esta unidad serás capaz de:
 
 ### Temporalización
 
-La unidad ocupa **4 horas de aula** (2 de teoría y 2 de práctica) y cierra el módulo.
-Es una unidad de criterio profesional: importa más saber **cuándo** elegir cada modelo
-que memorizar la sintaxis de `mongosh`.
+La unidad ocupa **3 horas de aula** (1 de teoría y 2 de práctica). Es una unidad **mínima**, de criterio profesional: importa más saber **cuándo** elegir cada modelo que memorizar la sintaxis de `mongosh`. El resto de las prácticas son trabajo autónomo.
 
-{{< sesiones unidad="UD10" horas="4" >}}
+{{< sesiones unidad="UD10" horas="3" >}}
 items:
-  - {h: 1, tipo: T, t: "Características de NoSQL, BASE y CAP, tipos de bases de datos y elementos de MongoDB", ref: "§1 a §4 · traductor SQL ↔ MongoDB"}
+  - {h: 1, tipo: T, t: "NoSQL, BASE y CAP, tipos de bases de datos, MongoDB, CRUD y agregaciones", ref: "§1 a §7 · traductor SQL ↔ MongoDB"}
   - {h: 1, tipo: P, t: "Puesta en marcha de MongoDB y CRUD sobre los expedientes", ref: "Prácticas 10.1 y 10.2"}
-  - {h: 1, tipo: T, t: "Operaciones CRUD, subdocumentos, arrays y agregaciones", ref: "§5 a §7"}
   - {h: 1, tipo: P, t: "Modelado documental y decisión razonada", ref: "Prácticas 10.5 y 10.7 · §8 a §11"}
 autonomo:
   - "Práctica 10.3 (operadores, subdocumentos y arrays)"

@@ -1,5 +1,5 @@
 ---
-title: "Definición y control de datos - Prácticas"
+title: "DDL: definición de datos - Prácticas"
 weight: 2
 bookToc: true
 ---

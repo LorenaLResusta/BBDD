@@ -35,15 +35,12 @@ En acabar esta unitat seràs capaç de:
 
 ### Temporalització
 
-La unitat ocupa **4 hores d'aula** (2 de teoria i 2 de pràctica) i tanca el mòdul.
-És una unitat de criteri professional: importa més saber **quan** triar cada model
-que memoritzar la sintaxi de `mongosh`.
+La unitat ocupa **3 hores d'aula** (1 de teoria i 2 de pràctica). És una unitat **mínima**, de criteri professional: importa més saber **quan** triar cada model que memoritzar la sintaxi de `mongosh`. La resta de les pràctiques són treball autònom.
 
-{{< sesiones unidad="UD10" horas="4" >}}
+{{< sesiones unidad="UD10" horas="3" >}}
 items:
-  - {h: 1, tipo: T, t: "Característiques de NoSQL, BASE i CAP, tipus de bases de dades i elements de MongoDB", ref: "§1 a §4 · traductor SQL ↔ MongoDB"}
+  - {h: 1, tipo: T, t: "NoSQL, BASE i CAP, tipus de bases de dades, MongoDB, CRUD i agregacions", ref: "§1 a §7 · traductor SQL ↔ MongoDB"}
   - {h: 1, tipo: P, t: "Posada en marxa de MongoDB i CRUD sobre els expedients", ref: "Pràctiques 10.1 i 10.2"}
-  - {h: 1, tipo: T, t: "Operacions CRUD, subdocuments, arrays i agregacions", ref: "§5 a §7"}
   - {h: 1, tipo: P, t: "Modelatge documental i decisió raonada", ref: "Pràctiques 10.5 i 10.7 · §8 a §11"}
 autonomo:
   - "Pràctica 10.3 (operadors, subdocuments i arrays)"

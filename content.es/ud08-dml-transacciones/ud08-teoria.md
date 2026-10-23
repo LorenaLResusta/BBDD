@@ -34,23 +34,19 @@ Al terminar esta unidad serás capaz de:
 
 ### Temporalización
 
-La unidad ocupa **6 horas de aula** (3 de teoría y 3 de práctica). Es una unidad corta
-en relación con su importancia profesional: aprovecha las sesiones
-prácticas, que requieren **dos sesiones de Oracle abiertas a la vez**.
+La unidad ocupa **3 horas de aula** (2 de teoría y 1 de práctica). Es una unidad **mínima**: se ve lo esencial de `INSERT`, `UPDATE`, `DELETE` y de las transacciones. Las prácticas, que requieren **dos sesiones de Oracle abiertas a la vez**, se hacen principalmente como trabajo autónomo.
 
-{{< sesiones unidad="UD08" horas="6" >}}
+{{< sesiones unidad="UD08" horas="3" >}}
 items:
-  - {h: 1, tipo: T, t: "DML: INSERT, UPDATE, DELETE y TRUNCATE", ref: "§1 a §4"}
-  - {h: 1, tipo: P, t: "Altas, cambios y bajas en EduGest", ref: "Práctica 8.1"}
-  - {h: 1, tipo: T, t: "INSERT … SELECT, MERGE, transacciones, ACID y SAVEPOINT", ref: "§5 a §7 · laboratorio de transacciones"}
+  - {h: 1, tipo: T, t: "DML: INSERT, UPDATE, DELETE y TRUNCATE. INSERT … SELECT y MERGE", ref: "§1 a §5"}
+  - {h: 1, tipo: T, t: "Transacciones, ACID, COMMIT, ROLLBACK, concurrencia y bloqueos", ref: "§6 a §10"}
   - {h: 1, tipo: P, t: "Laboratorio de transacciones", ref: "Práctica 8.4"}
-  - {h: 1, tipo: T, t: "Concurrencia, bloqueos, interbloqueos y restricciones diferidas", ref: "§8 a §10"}
-  - {h: 1, tipo: P, t: "Dos sesiones, un dato: concurrencia y bloqueos", ref: "Práctica 8.5"}
 autonomo:
+  - "Práctica 8.1 (altas, cambios y bajas en EduGest)"
   - "Prácticas 8.2 y 8.6 (copias, históricos y carga de notas con MERGE)"
   - "Práctica 8.3 (modificaciones con subconsultas)"
+  - "Práctica 8.5 (dos sesiones, un dato: concurrencia y bloqueos)"
   - "Práctica 8.7 (reto: guion de promoción de curso)"
-  - "Proyecto EduGest · UD08 (guiones de mantenimiento)"
 {{< /sesiones >}}
 
 > [!IMPORTANT]

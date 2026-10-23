@@ -34,23 +34,19 @@ En acabar esta unitat seràs capaç de:
 
 ### Temporalització
 
-La unitat ocupa **6 hores d'aula** (3 de teoria i 3 de pràctica). És una unitat curta
-en relació amb la seua importància professional: aprofita les sessions
-pràctiques, que requerixen **dues sessions d'Oracle obertes alhora**.
+La unitat ocupa **3 hores d'aula** (2 de teoria i 1 de pràctica). És una unitat **mínima**: es veu l'essencial d'`INSERT`, `UPDATE`, `DELETE` i de les transaccions. Les pràctiques, que requereixen **dues sessions d'Oracle obertes alhora**, es fan principalment com a treball autònom.
 
-{{< sesiones unidad="UD08" horas="6" >}}
+{{< sesiones unidad="UD08" horas="3" >}}
 items:
-  - {h: 1, tipo: T, t: "DML: INSERT, UPDATE, DELETE i TRUNCATE", ref: "§1 a §4"}
-  - {h: 1, tipo: P, t: "Altes, canvis i baixes en EduGest", ref: "Pràctica 8.1"}
-  - {h: 1, tipo: T, t: "INSERT … SELECT, MERGE, transaccions, ACID i SAVEPOINT", ref: "§5 a §7 · laboratori de transaccions"}
+  - {h: 1, tipo: T, t: "DML: INSERT, UPDATE, DELETE i TRUNCATE. INSERT … SELECT i MERGE", ref: "§1 a §5"}
+  - {h: 1, tipo: T, t: "Transaccions, ACID, COMMIT, ROLLBACK, concurrència i bloquejos", ref: "§6 a §10"}
   - {h: 1, tipo: P, t: "Laboratori de transaccions", ref: "Pràctica 8.4"}
-  - {h: 1, tipo: T, t: "Concurrència, bloquejos, interbloquejos i restriccions diferides", ref: "§8 a §10"}
-  - {h: 1, tipo: P, t: "Dues sessions, una dada: concurrència i bloquejos", ref: "Pràctica 8.5"}
 autonomo:
+  - "Pràctica 8.1 (altes, canvis i baixes a EduGest)"
   - "Pràctiques 8.2 i 8.6 (còpies, històrics i càrrega de notes amb MERGE)"
   - "Pràctica 8.3 (modificacions amb subconsultes)"
+  - "Pràctica 8.5 (dues sessions, una dada: concurrència i bloquejos)"
   - "Pràctica 8.7 (repte: guió de promoció de curs)"
-  - "Projecte EduGest · UD08 (guions de manteniment)"
 {{< /sesiones >}}
 
 > [!IMPORTANT]

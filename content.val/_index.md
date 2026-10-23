@@ -10,7 +10,7 @@ Apunts del mòdul professional **0484. Bases de dades**, comú als cicles format
 | Característica | Valor |
 |---|---|
 | **Referència curricular** | Reial decret 405/2023, de 29 de maig (actualitza els títols de DAM i DAW) |
-| **Durada** | 105 hores (ensenyaments mínims) · 12 crèdits ECTS · 144 hores d'aula al centre (fins a la FE) |
+| **Durada** | 105 hores (ensenyaments mínims) · 12 crèdits ECTS · 166 hores d'aula al centre (144 fins a la FE i 22 de reforç a juny) |
 | **Resultats d'aprenentatge** | 7 (RA1 a RA7) amb 57 criteris d'avaluació |
 | **SGBD relacional** | Oracle AI Database 26ai Free (23.26) |
 | **SGBD no relacional** | MongoDB Community Server 8.0 |
@@ -37,10 +37,10 @@ flowchart LR
 
 ## Guia didàctica del curs 2026/27
 
-El mòdul s'imparteix amb una càrrega de **144 hores d'aula** (5 hores setmanals, una per dia lectiu) entre el **9 de setembre de 2026** i el **30 d'abril de 2027**. El **3 de maig** l'alumnat s'incorpora a la Formació en Empresa (FE) per ser de primer curs presencial, de manera que la docència del mòdul acaba a l'abril. Les hores es repartixen en tres avaluacions i s'han ajustat al calendari escolar i a les dates de proves comunicades pel centre.
+El mòdul s'imparteix amb una càrrega de **166 hores d'aula** (5 hores setmanals, una per dia lectiu). **144 hores** s'impartixen entre el **9 de setembre de 2026** i el **30 d'abril de 2027**: el **3 de maig** l'alumnat s'incorpora a la Formació en Empresa (FE) per ser de primer curs presencial. Les **22 hores restants** s'impartixen a **juny**, com a reforç de consultes i projecte EduGest, amb dates per concretar amb el centre. Les hores es repartixen en tres avaluacions i s'han ajustat al calendari escolar i a les dates de proves comunicades pel centre.
 
 > [!NOTE]
-> Els ensenyaments mínims del RD 405/2023 fixen 105 hores per al mòdul. Les 144 hores són les d'**horari del centre** fins a l'inici de la FE; l'excés sobre el mínim es dedica a la pràctica guiada, al projecte EduGest i al reforç. Tots els criteris d'avaluació es cobrixen en les unitats; el repartiment d'hores és orientatiu i es pot ajustar a cada grup.
+> Els ensenyaments mínims del RD 405/2023 fixen 105 hores per al mòdul. Les 166 hores són les d'**horari del centre** (144 fins a l'inici de la FE i 22 a juny); l'excés sobre el mínim es dedica a la pràctica guiada, al projecte EduGest i al reforç. Tots els criteris d'avaluació es cobrixen en les unitats; el repartiment d'hores és orientatiu i es pot ajustar a cada grup.
 
 {{< calendario >}}
 
@@ -48,37 +48,41 @@ El mòdul s'imparteix amb una càrrega de **144 hores d'aula** (5 hores setmanal
 
 | Avaluació | Unitat | Hores | Del | Al | RA principal |
 |---|---|:-:|---|---|---|
-| **1a** (65 h) | UD01 · Sistemes d'emmagatzematge i SGBD | 12 | 09/09/2026 | 24/09/2026 | RA1 |
-| | UD02 · Model Entitat/Relació | 19 | 25/09/2026 | 23/10/2026 | RA6 |
-| | UD03 · Model relacional | 17 | 26/10/2026 | 17/11/2026 | RA6 · RA2 |
-| | UD04 · Normalització | 14 | 18/11/2026 | 07/12/2026 | RA6 |
+| **1a** (65 h) | UD01 · Sistemes d'emmagatzematge i SGBD | 10 | 09/09/2026 | 22/09/2026 | RA1 |
+|  | UD02 · Model Entitat/Relació | 32 | 23/09/2026 | 09/11/2026 | RA6 |
+|  | UD03 · Model relacional | 15 | 10/11/2026 | 30/11/2026 | RA6 · RA2 |
+|  | UD04 · Normalització | 2 | 01/12/2026 | 02/12/2026 | RA6 |
+|  | UD05 · DDL: definició de dades (part 1) | 3 | 03/12/2026 | 07/12/2026 | RA2 |
 | | Prova i revisió de la 1a avaluació | 3 | 09/12/2026 | 11/12/2026 | |
-| **2a** (43 h) | UD05 · Definició i control de dades | 17 | 14/12/2026 | 21/01/2027 | RA2 |
-| | UD06 · Consultes sobre una taula | 23 | 22/01/2027 | 23/02/2027 | RA3 · RA5 |
+| **2a** (43 h) | UD05 · DDL: definició de dades (part 2) | 11 | 14/12/2026 | 13/01/2027 | RA2 |
+|  | UD06 · Consultes (I): una taula | 20 | 14/01/2027 | 10/02/2027 | RA3 · RA5 |
+|  | UD07 · Consultes (II): avançades (part 1) | 9 | 11/02/2027 | 23/02/2027 | RA3 |
 | | Prova i revisió de la 2a avaluació | 3 | 24/02/2027 | 26/02/2027 | |
-| **3a** (36 h) | UD07 · Consultes avançades | 16 | 01/03/2027 | 23/03/2027 | RA3 |
+| **3a** (36 h) | UD07 · Consultes (II): avançades (part 2) | 12 | 01/03/2027 | 16/03/2027 | RA3 |
+|  | UD08 · DML, transaccions i concurrència | 3 | 17/03/2027 | 22/03/2027 | RA4 |
 | | *Vacances de Pasqua* | | 25/03/2027 | 05/04/2027 | |
-| | UD08 · DML, transaccions i concurrència | 6 | 24/03/2027 | 12/04/2027 | RA4 |
-| | UD09 · Programació amb PL/SQL | 7 | 13/04/2027 | 21/04/2027 | RA5 |
-| | UD10 · Bases de dades NoSQL | 4 | 22/04/2027 | 27/04/2027 | RA7 |
+|  | UD09 · Programació amb PL/SQL | 15 | 23/03/2027 | 22/04/2027 | RA5 |
+|  | UD10 · Bases de dades NoSQL | 3 | 23/04/2027 | 27/04/2027 | RA7 |
 | | Prova i revisió de la 3a avaluació i final | 3 | 28/04/2027 | 30/04/2027 | |
 | | *Formació en Empresa (FE)* | | 03/05/2027 | 18/06/2027 | |
-| | **Total** | **144** | | | |
+| | Reforç de consultes i projecte EduGest (juny, dates per concretar) | 22 | 21/06/2027 | 30/06/2027 | RA3 |
+| | **Total** | **166** | | | |
 
 L'avaluació extraordinària està prevista per al **21 de juny de 2027**. Com que la FE ocupa de maig a juny, la prova de la 3a avaluació s'avança a l'última setmana d'abril (del 28 al 30).
 
 ### Criteris de la planificació
 
+- **Les consultes són el bloc principal.** La UD06 i la UD07 formen un únic bloc de *Consultes*: 41 hores d'aula abans de la FE i 22 hores de reforç a juny, 63 en total. És, juntament amb el model E/R (UD02) i PL/SQL (UD09), on es concentra el temps del mòdul. Normalització (UD04), manipulació i transaccions (UD08) i NoSQL (UD10) es redueixen a l'essencial; els seus apunts es mantenen complets com a material d'estudi i d'ampliació.
 - **Teoria i pràctica en la mateixa unitat.** Cada unitat indica en la seua pàgina de teoria una *temporalització* amb el repartiment de sessions entre teoria (T) i pràctica (P). La suma d'hores de cada unitat coincidix amb la d'esta taula.
 - **Pràctica guiada a l'aula, pràctica autònoma fora d'ella.** Les pràctiques guiades i la tasca del projecte EduGest es fan a classe. Les pràctiques autònomes, els reptes i les ampliacions són treball personal, i els dubtes es treballen en les sessions de pràctica.
 - **Proves d'avaluació.** Cada avaluació reserva 3 hores a la prova i a la seua revisió, en la setmana indicada pel centre per als cicles de grau superior.
 - **Un dia lectiu equival a una hora.** Els festius i els dies sense docència no compten. No hi ha setmana de reforç: els dies que es perguen per festes locals o activitats del centre es recuperen retallant les sessions de pràctica de l'última unitat impartida.
 
 > [!WARNING]
-> **La Formació en Empresa comença el 3 de maig.** L'alumnat de primer curs presencial se'n va a la FE el 3 de maig, per la qual cosa la 3a avaluació **es comprimix a l'abril** i les unitats finals (UD08 a UD10) queden amb 6, 7 i 4 hores d'aula. Això obliga que una part de les pràctiques d'eixes unitats es faça com a **treball autònom**; cada pàgina de teoria indica quines pràctiques es fan a l'aula i quines fora. Si el calendari canvia, l'arxiu `data/planificacion.json` i les taules de *temporalització* de cada unitat s'han d'ajustar alhora.
+> **La Formació en Empresa comença el 3 de maig.** L'alumnat de primer curs presencial se'n va a la FE el 3 de maig, per la qual cosa la 3a avaluació **es comprimix a l'abril** i les unitats finals (UD08 a UD10) queden amb 3, 15 i 3 hores d'aula; les 22 hores de reforç de consultes es passen a juny. Això obliga que una part de les pràctiques d'eixes unitats es faça com a **treball autònom**; cada pàgina de teoria indica quines pràctiques es fan a l'aula i quines fora. Si el calendari canvia, l'arxiu `data/planificacion.json` i les taules de *temporalització* de cada unitat s'han d'ajustar alhora.
 
 > [!CAUTION]
-> **Calendari provisional.** Les dates procedixen del calendari escolar provisional 2026/27 i de les dates d'avaluació comunicades pel centre. Els festius locals i els tres dies no lectius que fixe el centre **no estan descomptats**: com que no queda marge abans de la FE, caldrà retallar sessions de pràctica d'UD08 a UD10. Quan es publique el calendari definitiu cal revisar l'arxiu `data/planificacion.json`; la taula i el calendari s'actualitzen sols i la compilació falla si les hores d'una unitat deixen de sumar.
+> **Calendari provisional.** Les dates procedixen del calendari escolar provisional 2026/27 i de les dates d'avaluació comunicades pel centre. Els festius locals i els tres dies no lectius que fixe el centre **no estan descomptats**: com que no queda marge abans de la FE, caldrà retallar sessions de pràctica d'UD09 i de les unitats finals. Quan es publique el calendari definitiu cal revisar l'arxiu `data/planificacion.json`; la taula i el calendari s'actualitzen sols i la compilació falla si les hores d'una unitat deixen de sumar.
 
 ## Unitats didàctiques
 
@@ -89,9 +93,9 @@ Cada unitat té dos pàgines: **teoria** (conceptes, exemples i autoavaluació) 
   <div class="bd-card"><span class="bd-card-ra">RA6</span><h3>UD02 · Model Entitat/Relació</h3><p>Anàlisi de requisits, entitats, atributs, relacions, cardinalitats, entitats febles i extensions EER.</p><div class="bd-card-links"><a href="ud02-modelo-er/ud02-teoria/">Teoria</a> · <a href="ud02-modelo-er/ud02-practicas/">Pràctiques</a></div></div>
   <div class="bd-card"><span class="bd-card-ra">RA6 · RA2</span><h3>UD03 · Model relacional</h3><p>Relacions, claus, restriccions, integritat i transformació del model E/R al model relacional.</p><div class="bd-card-links"><a href="ud03-modelo-relacional/ud03-teoria/">Teoria</a> · <a href="ud03-modelo-relacional/ud03-practicas/">Pràctiques</a></div></div>
   <div class="bd-card"><span class="bd-card-ra">RA6</span><h3>UD04 · Normalització</h3><p>Anomalies, dependències funcionals, 1FN, 2FN, 3FN i FNBC. Restriccions que el disseny lògic no pot expressar.</p><div class="bd-card-links"><a href="ud04-normalizacion/ud04-teoria/">Teoria</a> · <a href="ud04-normalizacion/ud04-practicas/">Pràctiques</a></div></div>
-  <div class="bd-card"><span class="bd-card-ra">RA2</span><h3>UD05 · Definició i control de dades</h3><p>DDL en Oracle: taules, tipus, restriccions, índexs, vistes i seqüències. DCL: usuaris, rols i privilegis.</p><div class="bd-card-links"><a href="ud05-ddl-dcl/ud05-teoria/">Teoria</a> · <a href="ud05-ddl-dcl/ud05-practicas/">Pràctiques</a></div></div>
-  <div class="bd-card"><span class="bd-card-ra">RA3</span><h3>UD06 · Consultes sobre una taula</h3><p>SELECT, projecció, selecció, ordenació, operadors, valors nuls i funcions de fila.</p><div class="bd-card-links"><a href="ud06-consultas-basicas/ud06-teoria/">Teoria</a> · <a href="ud06-consultas-basicas/ud06-practicas/">Pràctiques</a></div></div>
-  <div class="bd-card"><span class="bd-card-ra">RA3</span><h3>UD07 · Consultes avançades</h3><p>Agrupament, composicions internes i externes, subconsultes, operadors de conjunts i optimització.</p><div class="bd-card-links"><a href="ud07-consultas-avanzadas/ud07-teoria/">Teoria</a> · <a href="ud07-consultas-avanzadas/ud07-practicas/">Pràctiques</a></div></div>
+  <div class="bd-card"><span class="bd-card-ra">RA2</span><h3>UD05 · DDL: definició de dades</h3><p>DDL en Oracle: taules, tipus, restriccions, índexs, vistes i seqüències. DCL: usuaris, rols i privilegis.</p><div class="bd-card-links"><a href="ud05-ddl-dcl/ud05-teoria/">Teoria</a> · <a href="ud05-ddl-dcl/ud05-practicas/">Pràctiques</a></div></div>
+  <div class="bd-card"><span class="bd-card-ra">RA3</span><h3>UD06 · Consultes (I): una taula</h3><p>SELECT, projecció, selecció, ordenació, operadors, valors nuls i funcions de fila.</p><div class="bd-card-links"><a href="ud06-consultas-basicas/ud06-teoria/">Teoria</a> · <a href="ud06-consultas-basicas/ud06-practicas/">Pràctiques</a></div></div>
+  <div class="bd-card"><span class="bd-card-ra">RA3</span><h3>UD07 · Consultes (II): avançades</h3><p>Agrupament, composicions internes i externes, subconsultes, operadors de conjunts i optimització.</p><div class="bd-card-links"><a href="ud07-consultas-avanzadas/ud07-teoria/">Teoria</a> · <a href="ud07-consultas-avanzadas/ud07-practicas/">Pràctiques</a></div></div>
   <div class="bd-card"><span class="bd-card-ra">RA4</span><h3>UD08 · Manipulació de dades i transaccions</h3><p>INSERT, UPDATE, DELETE, MERGE, transaccions, ACID, concurrència i bloquejos.</p><div class="bd-card-links"><a href="ud08-dml-transacciones/ud08-teoria/">Teoria</a> · <a href="ud08-dml-transacciones/ud08-practicas/">Pràctiques</a></div></div>
   <div class="bd-card"><span class="bd-card-ra">RA5</span><h3>UD09 · Programació amb PL/SQL</h3><p>Blocs, variables, control de flux, procediments, funcions, cursors, excepcions, triggers i tasques programades.</p><div class="bd-card-links"><a href="ud09-plsql/ud09-teoria/">Teoria</a> · <a href="ud09-plsql/ud09-practicas/">Pràctiques</a></div></div>
   <div class="bd-card"><span class="bd-card-ra">RA7</span><h3>UD10 · Bases de dades NoSQL</h3><p>Tipus de bases de dades no relacionals, modelatge documental i operacions CRUD i d'agregació amb MongoDB.</p><div class="bd-card-links"><a href="ud10-nosql/ud10-teoria/">Teoria</a> · <a href="ud10-nosql/ud10-practicas/">Pràctiques</a></div></div>
@@ -105,9 +109,9 @@ Cada unitat té dos pàgines: **teoria** (conceptes, exemples i autoavaluació) 
 | UD02 Model Entitat/Relació | | | | | | ● | |
 | UD03 Model relacional | | ○ | | | | ● | |
 | UD04 Normalització | | | | | | ● | |
-| UD05 Definició i control de dades | | ● | | | | ○ | |
-| UD06 Consultes sobre una taula | | | ● | | ○ | | |
-| UD07 Consultes avançades | | ○ | ● | | | | |
+| UD05 DDL: definició de dades | | ● | | | | ○ | |
+| UD06 Consultes (I): una taula | | | ● | | ○ | | |
+| UD07 Consultes (II): avançades | | ○ | ● | | | | |
 | UD08 Manipulació i transaccions | | | | ● | | ○ | |
 | UD09 Programació PL/SQL | | | | ○ | ● | ○ | |
 | UD10 Bases de dades NoSQL | ○ | | | | | | ● |

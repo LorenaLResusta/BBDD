@@ -16,22 +16,16 @@ En esta unidad aprenderás a reconocer las anomalías de un mal diseño, a ident
 {{< ra "RA6:b,c,e,g,h" >}}
 ### Temporalización
 
-La unidad ocupa **14 horas de aula** (6 de teoría y 8 de práctica). Es una unidad muy práctica: se aprende a normalizar normalizando.
+La unidad ocupa **2 horas de aula** (1 de teoría y 1 de práctica). Es una unidad **mínima**: en el aula se ven solo las ideas esenciales (anomalías, dependencias y las tres primeras formas normales). El resto de la teoría y las prácticas quedan como material de estudio y de ampliación.
 
-{{< sesiones unidad="UD04" horas="14" >}}
+{{< sesiones unidad="UD04" horas="2" >}}
 items:
-  - {h: 2, tipo: T, t: "Anomalías y dependencias funcionales", ref: "§1 y §2"}
-  - {h: 1, tipo: P, t: "Dependencias, cierres y claves", ref: "Práctica 4.2"}
-  - {h: 2, tipo: T, t: "Las formas normales: 1FN, 2FN, 3FN y FNBC", ref: "§3"}
-  - {h: 2, tipo: P, t: "Normalizar las facturas de un taller", ref: "Práctica 4.1"}
-  - {h: 1, tipo: T, t: "Descomposición sin pérdida y desnormalización controlada", ref: "§4 y §5"}
-  - {h: 1, tipo: T, t: "Restricciones no representables y procedimiento completo", ref: "§6 y §7"}
-  - {h: 2, tipo: P, t: "Reservas de un hotel rural", ref: "Práctica 4.4"}
-  - {h: 1, tipo: P, t: "¿En qué forma normal está?", ref: "Práctica 4.3"}
-  - {h: 1, tipo: P, t: "FNBC y dependencias perdidas", ref: "Práctica 4.5"}
-  - {h: 1, tipo: P, t: "Informe de normalización de EduGest", ref: "Proyecto EduGest-4"}
+  - {h: 1, tipo: T, t: "Anomalías, dependencias funcionales y formas normales (1FN a 3FN)", ref: "§1 a §3"}
+  - {h: 1, tipo: P, t: "Normalizar las facturas de un taller", ref: "Práctica 4.1"}
 autonomo:
-  - "Práctica 4.6 (¿normalizar o desnormalizar?)"
+  - "Prácticas 4.2 a 4.6 (dependencias, formas normales, reservas de un hotel, FNBC y desnormalización)"
+  - "Teoría §4 a §9 (descomposición sin pérdida, desnormalización y procedimiento completo)"
+  - "Proyecto EduGest · UD04 (informe de normalización)"
   - "Ejercicios resueltos y autoevaluación"
 {{< /sesiones >}}
 

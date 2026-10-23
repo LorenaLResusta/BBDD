@@ -19,9 +19,9 @@ Su objetivo prioritario es modelar y estructurar la semántica de la informació
 
 ### Temporalización
 
-La unidad ocupa **19 horas de aula** (12 de teoría y 7 de práctica). Cada sesión aparece señalada en la página con una franja de color.
+La unidad ocupa **32 horas de aula** (12 de teoría y 20 de práctica). Es una de las unidades **prioritarias** del módulo: un buen diseño conceptual condiciona todo lo que viene después. Cada sesión aparece señalada en la página con una franja de color.
 
-{{< sesiones unidad="UD02" horas="19" >}}
+{{< sesiones unidad="UD02" horas="32" >}}
 items:
   - {h: 2, tipo: T, t: "Ciclo de vida del diseño. Entidades fuertes y débiles", ref: "§1 y §2.1"}
   - {h: 2, tipo: T, t: "Atributos y relaciones: grado y roles", ref: "§2.2 y §2.3"}
@@ -33,11 +33,16 @@ items:
   - {h: 1, tipo: T, t: "Metodología en cinco pasos y ejemplos resueltos", ref: "§5 y §6"}
   - {h: 1, tipo: T, t: "Notaciones y herramientas de modelado", ref: "§7"}
   - {h: 2, tipo: P, t: "Plataforma de streaming", ref: "Práctica 2.3"}
+  - {h: 2, tipo: P, t: "Clínica veterinaria con jerarquías", ref: "Práctica 2.4"}
+  - {h: 2, tipo: P, t: "Revisión de un diseño defectuoso", ref: "Práctica 2.5"}
+  - {h: 2, tipo: P, t: "Autoescuela: ternaria o agregación", ref: "Práctica 2.6"}
+  - {h: 2, tipo: P, t: "Almazara: la entrevista que no lo dice todo", ref: "Práctica 2.7"}
+  - {h: 2, tipo: P, t: "Ingeniería inversa: del albarán a las entidades", ref: "Práctica 2.9"}
+  - {h: 3, tipo: P, t: "Banco de ejercicios: bloques 1 y 2, en clase", ref: "Ejercicios 1 a 15"}
   - {h: 2, tipo: P, t: "Modelo conceptual de EduGest", ref: "§8 y proyecto EduGest-2"}
 autonomo:
-  - "Práctica 2.4 (clínica veterinaria con jerarquías)"
-  - "Retos 2.5 y 2.6, retos avanzados 2.7 a 2.10 (entrevista ambigua, historia, ingeniería inversa y comparación de diseños) y retos de requisitos 2.11 a 2.14 (festival, editorial, taller aeronáutico y comunidad de propietarios)"
-  - "Banco de ejercicios (30 enunciados)"
+  - "Retos 2.8 y 2.10 a 2.14 (alquiler, comparación de diseños, festival, editorial, taller aeronáutico y comunidad de propietarios)"
+  - "Banco de ejercicios: bloques 3 a 5 (ejercicios 16 a 35)"
 {{< /sesiones >}}
 
 > [!NOTE]

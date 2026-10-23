@@ -16,22 +16,16 @@ En esta unitat aprendràs a reconéixer les anomalies d'un mal disseny, a identi
 {{< ra "RA6:b,c,e,g,h" >}}
 ### Temporalització
 
-La unitat ocupa **14 hores d'aula** (6 de teoria i 8 de pràctica). És una unitat molt pràctica: s'aprén a normalitzar normalitzant.
+La unitat ocupa **2 hores d'aula** (1 de teoria i 1 de pràctica). És una unitat **mínima**: a l'aula es veuen només les idees essencials (anomalies, dependències i les tres primeres formes normals). La resta de la teoria i les pràctiques queden com a material d'estudi i d'ampliació.
 
-{{< sesiones unidad="UD04" horas="14" >}}
+{{< sesiones unidad="UD04" horas="2" >}}
 items:
-  - {h: 2, tipo: T, t: "Anomalies i dependències funcionals", ref: "§1 i §2"}
-  - {h: 1, tipo: P, t: "Dependències, tancaments i claus", ref: "Pràctica 4.2"}
-  - {h: 2, tipo: T, t: "Les formes normals: 1FN, 2FN, 3FN i FNBC", ref: "§3"}
-  - {h: 2, tipo: P, t: "Normalitzar les factures d'un taller", ref: "Pràctica 4.1"}
-  - {h: 1, tipo: T, t: "Descomposició sense pèrdua i desnormalització controlada", ref: "§4 i §5"}
-  - {h: 1, tipo: T, t: "Restriccions no representables i procediment complet", ref: "§6 i §7"}
-  - {h: 2, tipo: P, t: "Reserves d'un hotel rural", ref: "Pràctica 4.4"}
-  - {h: 1, tipo: P, t: "En quina forma normal està?", ref: "Pràctica 4.3"}
-  - {h: 1, tipo: P, t: "FNBC i dependències perdudes", ref: "Pràctica 4.5"}
-  - {h: 1, tipo: P, t: "Informe de normalització d'EduGest", ref: "Projecte EduGest-4"}
+  - {h: 1, tipo: T, t: "Anomalies, dependències funcionals i formes normals (1FN a 3FN)", ref: "§1 a §3"}
+  - {h: 1, tipo: P, t: "Normalitzar les factures d'un taller", ref: "Pràctica 4.1"}
 autonomo:
-  - "Pràctica 4.6 (normalitzar o desnormalitzar?)"
+  - "Pràctiques 4.2 a 4.6 (dependències, formes normals, reserves d'un hotel, FNBC i desnormalització)"
+  - "Teoria §4 a §9 (descomposició sense pèrdua, desnormalització i procediment complet)"
+  - "Projecte EduGest · UD04 (informe de normalització)"
   - "Exercicis resolts i autoavaluació"
 {{< /sesiones >}}
 

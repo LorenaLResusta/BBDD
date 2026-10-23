@@ -34,24 +34,23 @@ En acabar esta unitat seràs capaç de:
 
 ### Temporalització
 
-La unitat ocupa **7 hores d'aula** (4 de teoria i 3 de pràctica). És la unitat amb més codi del curs: convé escriure'l a mà i recompilar-lo, no copiar-lo i apegar-lo. Les pràctiques llargues (la taula mutant, les tasques programades, el paquet de secretaria i el projecte) es completen fora de l'horari d'aula.
+La unitat ocupa **15 hores d'aula** (7 de teoria i 8 de pràctica). És la unitat amb més codi del curs i una de les **prioritàries**: convé escriure'l a mà i recompilar-lo, no copiar-lo i apegar-lo.
 
-{{< sesiones unidad="UD09" horas="7" >}}
+{{< sesiones unidad="UD09" horas="15" >}}
 items:
-  - {h: 1, tipo: T, t: "Formes d'automatitzar, eines, estructura del bloc, variables, tipus i `DBMS_OUTPUT`", ref: "§1 a §4"}
+  - {h: 2, tipo: T, t: "Maneres d'automatitzar, eines, estructura del bloc, variables, tipus i `DBMS_OUTPUT`", ref: "§1 a §4"}
   - {h: 1, tipo: P, t: "Primers blocs: l'expedient d'un alumne", ref: "Pràctica 9.1"}
-  - {h: 1, tipo: T, t: "Control de flux, funcions del gestor, cursors i funcions d'usuari", ref: "§5 a §8 · laboratori de blocs"}
-  - {h: 1, tipo: P, t: "Biblioteca de funcions d'EduGest", ref: "Pràctica 9.2"}
+  - {h: 2, tipo: T, t: "Control de flux, funcions del gestor, cursors i funcions d'usuari", ref: "§5 a §8 · laboratori de blocs"}
+  - {h: 2, tipo: P, t: "Biblioteca de funcions d'EduGest", ref: "Pràctica 9.2"}
   - {h: 1, tipo: T, t: "Excepcions i procediments emmagatzemats", ref: "§9 i §10"}
-  - {h: 1, tipo: P, t: "Matrícula amb excepcions (la 9.4, butlletins amb cursors, s'acaba a casa)", ref: "Pràctiques 9.3 i 9.4"}
-  - {h: 1, tipo: T, t: "Disparadors, tasques programades amb `DBMS_SCHEDULER` i paquets", ref: "§11 a §14 · simulador de disparadors"}
+  - {h: 2, tipo: P, t: "Matrícula amb excepcions i butlletins amb cursors", ref: "Pràctiques 9.3 i 9.4"}
+  - {h: 2, tipo: T, t: "Disparadors, tasques programades amb `DBMS_SCHEDULER` i paquets", ref: "§11 a §14 · simulador de disparadors"}
+  - {h: 2, tipo: P, t: "Disparadors d'integritat i auditoria", ref: "Pràctica 9.5"}
+  - {h: 1, tipo: P, t: "Tasques programades", ref: "Pràctica 9.7"}
 autonomo:
-  - "Pràctica 9.4 (cursors: butlletins i informes), si no s'ha acabat a l'aula"
-  - "Pràctica 9.5 (disparadors d'integritat i auditoria)"
   - "Pràctica 9.6 (repte: la taula mutant)"
-  - "Pràctica 9.7 (tasques programades)"
   - "Pràctica 9.8 (repte: el paquet de secretaria)"
-  - "Projecte EduGest · UD09 (lògica en el servidor)"
+  - "Projecte EduGest · UD09 (lògica al servidor)"
 {{< /sesiones >}}
 
 > [!IMPORTANT]

@@ -1,10 +1,10 @@
 ---
-title: "Definición y control de datos"
+title: "DDL: definición de datos"
 weight: 1
 bookToc: true
 ---
 
-# UD05 · Definición y control de datos (DDL y DCL)
+# UD05 · DDL: definición de datos (y control con DCL)
 
 ## Resumen del tema
 
@@ -19,20 +19,20 @@ Todos los ejemplos usan **Oracle AI Database 26ai Free**. Cuando una caracterís
 
 ### Temporalización
 
-La unidad ocupa **17 horas de aula** (9 de teoría y 8 de práctica).
+La unidad ocupa **14 horas de aula** (6 de teoría y 8 de práctica).
 
-{{< sesiones unidad="UD05" horas="17" >}}
+{{< sesiones unidad="UD05" horas="14" >}}
 items:
   - {h: 1, tipo: T, t: "SQL y Oracle. Almacenamiento de la información", ref: "§1 y §2"}
-  - {h: 2, tipo: T, t: "Tipos de datos de Oracle", ref: "§3 · calculadora de NUMBER(p, s)"}
-  - {h: 2, tipo: T, t: "CREATE TABLE y restricciones de integridad", ref: "§4 y §5 · constructor de CREATE TABLE"}
+  - {h: 1, tipo: T, t: "Tipos de datos de Oracle", ref: "§3 · calculadora de NUMBER(p, s)"}
+  - {h: 1, tipo: T, t: "CREATE TABLE y restricciones de integridad", ref: "§4 y §5 · constructor de CREATE TABLE"}
   - {h: 2, tipo: P, t: "Primeras tablas y restricciones en Oracle", ref: "Práctica 5.1"}
   - {h: 2, tipo: P, t: "Del diagrama de Chen al DDL", ref: "Práctica 5.2"}
   - {h: 1, tipo: T, t: "Modificar y eliminar la estructura (ALTER, DROP)", ref: "§6"}
   - {h: 1, tipo: P, t: "Evolución del esquema con ALTER", ref: "Práctica 5.5"}
   - {h: 1, tipo: T, t: "Secuencias, identidad, índices y vistas", ref: "§7, §8 y §9"}
   - {h: 1, tipo: P, t: "Índices, vistas y secuencias en EduGest", ref: "Práctica 5.6"}
-  - {h: 2, tipo: T, t: "Usuarios, roles y privilegios. Diccionario de datos y herramientas", ref: "§10 a §12 · taller de privilegios"}
+  - {h: 1, tipo: T, t: "Usuarios, roles y privilegios. Diccionario de datos", ref: "§10 a §12 · taller de privilegios"}
   - {h: 1, tipo: P, t: "Usuarios, roles y privilegios en EduGest", ref: "Práctica 5.7"}
   - {h: 1, tipo: P, t: "Implementación de EduGest", ref: "Proyecto EduGest-5"}
 autonomo:
