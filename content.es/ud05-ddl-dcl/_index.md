@@ -7,7 +7,7 @@ weight: 50
 
 Es el momento de pasar del papel al servidor. En esta unidad implementas en **Oracle** el esquema relacional diseñado en las unidades anteriores: tablas, tipos de datos, restricciones, índices, vistas y secuencias. También aprendes a proteger la base de datos con usuarios, roles y privilegios.
 
-{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,f" >}}
+{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,b,c,d,e,f,h" "RA3:h" >}}
 
 | Página | Contenido |
 |---|---|

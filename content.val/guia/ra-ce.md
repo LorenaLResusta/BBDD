@@ -17,10 +17,10 @@ flowchart TB
     RA1["RA1 · Elements de les BD i SGBD"] --- U1[UD01]
     RA6["RA6 · Disseny relacional normalitzat"] --- U2[UD02] & U3[UD03] & U4[UD04]
     RA2["RA2 · Creació de BD (DDL/DCL)"] --- U5[UD05]
-    RA3["RA3 · Consultes"] --- U6[UD06] & U7[UD06]
-    RA4["RA4 · Modificació i transaccions"] --- U8[UD07]
-    RA5["RA5 · Programació en el SGBD"] --- U9[UD08]
-    RA7["RA7 · Bases de dades no relacionals"] --- U10[UD09]
+    RA3["RA3 · Consultes"] --- U6[UD06]
+    RA4["RA4 · Modificació i transaccions"] --- U7[UD07]
+    RA5["RA5 · Programació en el SGBD"] --- U8[UD08]
+    RA7["RA7 · Bases de dades no relacionals"] --- U9[UD09]
 ```
 
 > [!NOTE]
@@ -69,7 +69,7 @@ Text literal dels ensenyaments mínims. L'última columna indica en quines unita
 | RA3.e | S'han realitzat consultes resum. | [UD06](/ud06-consultas) |
 | RA3.f | S'han realitzat consultes amb subconsultes. | [UD06](/ud06-consultas) |
 | RA3.g | S'han realitzat consultes que impliquen múltiples seleccions. | [UD06](/ud06-consultas) |
-| RA3.h | S'han aplicat criteris d'optimització de consultes. | [UD06](/ud06-consultas) |
+| RA3.h | S'han aplicat criteris d'optimització de consultes. | [UD05](/ud05-ddl-dcl), [UD06](/ud06-consultas) |
 
 ## RA4. Modifica la informació emmagatzemada en la base de dades utilitzant assistents, eines gràfiques i el llenguatge de manipulació de dades.
 
@@ -104,13 +104,13 @@ Text literal dels ensenyaments mínims. L'última columna indica en quines unita
 | CE | Criteri d'avaluació | Unitats |
 |---|---|---|
 | RA6.a | S'han utilitzat eines gràfiques per a representar el disseny lògic. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional), [UD05](/ud05-ddl-dcl) |
-| RA6.b | S'han identificat les taules del disseny lògic. | [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion) |
-| RA6.c | S'han identificat els camps que formen part de les taules del disseny lògic. | [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion) |
-| RA6.d | S'han analitzat les relacions entre les taules del disseny lògic. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional) |
-| RA6.e | S'han identificat els camps clau. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion) |
+| RA6.b | S'han identificat les taules del disseny lògic. | [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion), [UD05](/ud05-ddl-dcl) |
+| RA6.c | S'han identificat els camps que formen part de les taules del disseny lògic. | [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion), [UD05](/ud05-ddl-dcl) |
+| RA6.d | S'han analitzat les relacions entre les taules del disseny lògic. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional), [UD05](/ud05-ddl-dcl) |
+| RA6.e | S'han identificat els camps clau. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion), [UD05](/ud05-ddl-dcl) |
 | RA6.f | S'han aplicat regles d'integritat. | [UD03](/ud03-modelo-relacional), [UD05](/ud05-ddl-dcl), [UD07](/ud07-dml-transacciones) |
 | RA6.g | S'han aplicat regles de normalització. | [UD04](/ud04-normalizacion) |
-| RA6.h | S'han analitzat i documentat les restriccions que no es poden plasmar en el disseny lògic. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion), [UD08](/ud08-plsql) |
+| RA6.h | S'han analitzat i documentat les restriccions que no es poden plasmar en el disseny lògic. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion), [UD05](/ud05-ddl-dcl), [UD08](/ud08-plsql) |
 
 ## RA7. Gestiona la informació emmagatzemada en bases de dades no relacionals, avaluant i utilitzant les possibilitats que proporciona el sistema gestor.
 

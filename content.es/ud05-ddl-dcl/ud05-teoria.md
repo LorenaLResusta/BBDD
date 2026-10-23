@@ -15,7 +15,7 @@ Hasta ahora hemos **diseñado**. En esta unidad **implementamos**: convertimos e
 
 Todos los ejemplos usan **Oracle AI Database 26ai Free**. Cuando una característica sea propia de Oracle o de una versión concreta, se indica.
 
-{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,f" >}}
+{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,b,c,d,e,f,h" "RA3:h" >}}
 
 ### Temporalización
 

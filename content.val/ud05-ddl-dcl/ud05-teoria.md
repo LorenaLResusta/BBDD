@@ -15,7 +15,7 @@ Fins ara hem **dissenyat**. En esta unitat **implementem**: convertim l'esquema 
 
 Tots els exemples usen **Oracle AI Database 26ai Free**. Quan una característica siga pròpia d'Oracle o d'una versió concreta, s'indica.
 
-{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,f" >}}
+{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,b,c,d,e,f,h" "RA3:h" >}}
 
 ### Temporalització
 

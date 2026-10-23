@@ -7,7 +7,7 @@ weight: 50
 
 És el moment de passar del paper al servidor. En esta unitat implementes en **Oracle** l'esquema relacional dissenyat en les unitats anteriors: taules, tipus de dades, restriccions, índexs, vistes i seqüències. També aprens a protegir la base de dades amb usuaris, rols i privilegis.
 
-{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,f" >}}
+{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,b,c,d,e,f,h" "RA3:h" >}}
 
 | Pàgina | Contingut |
 |---|---|

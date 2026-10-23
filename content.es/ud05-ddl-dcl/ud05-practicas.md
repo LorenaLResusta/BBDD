@@ -6,7 +6,7 @@ bookToc: true
 
 # UD05 · Prácticas
 
-{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,f" >}}
+{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,b,c,d,e,f,h" "RA3:h" >}}
 
 | Práctica | Tipo | Nivel | CE principales |
 |---|---|---|---|

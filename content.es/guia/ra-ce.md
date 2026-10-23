@@ -17,10 +17,10 @@ flowchart TB
     RA1["RA1 · Elementos de las BD y SGBD"] --- U1[UD01]
     RA6["RA6 · Diseño relacional normalizado"] --- U2[UD02] & U3[UD03] & U4[UD04]
     RA2["RA2 · Creación de BD (DDL/DCL)"] --- U5[UD05]
-    RA3["RA3 · Consultas"] --- U6[UD06] & U7[UD06]
-    RA4["RA4 · Modificación y transacciones"] --- U8[UD07]
-    RA5["RA5 · Programación en el SGBD"] --- U9[UD08]
-    RA7["RA7 · Bases de datos no relacionales"] --- U10[UD09]
+    RA3["RA3 · Consultas"] --- U6[UD06]
+    RA4["RA4 · Modificación y transacciones"] --- U7[UD07]
+    RA5["RA5 · Programación en el SGBD"] --- U8[UD08]
+    RA7["RA7 · Bases de datos no relacionales"] --- U9[UD09]
 ```
 
 > [!NOTE]
@@ -69,7 +69,7 @@ Texto literal de las enseñanzas mínimas. La última columna indica en qué uni
 | RA3.e | Se han realizado consultas resumen. | [UD06](/ud06-consultas) |
 | RA3.f | Se han realizado consultas con subconsultas. | [UD06](/ud06-consultas) |
 | RA3.g | Se han realizado consultas que implican múltiples selecciones. | [UD06](/ud06-consultas) |
-| RA3.h | Se han aplicado criterios de optimización de consultas. | [UD06](/ud06-consultas) |
+| RA3.h | Se han aplicado criterios de optimización de consultas. | [UD05](/ud05-ddl-dcl), [UD06](/ud06-consultas) |
 
 ## RA4. Modifica la información almacenada en la base de datos utilizando asistentes, herramientas gráficas y el lenguaje de manipulación de datos.
 
@@ -104,13 +104,13 @@ Texto literal de las enseñanzas mínimas. La última columna indica en qué uni
 | CE | Criterio de evaluación | Unidades |
 |---|---|---|
 | RA6.a | Se han utilizado herramientas gráficas para representar el diseño lógico. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional), [UD05](/ud05-ddl-dcl) |
-| RA6.b | Se han identificado las tablas del diseño lógico. | [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion) |
-| RA6.c | Se han identificado los campos que forman parte de las tablas del diseño lógico. | [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion) |
-| RA6.d | Se han analizado las relaciones entre las tablas del diseño lógico. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional) |
-| RA6.e | Se han identificado los campos clave. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion) |
+| RA6.b | Se han identificado las tablas del diseño lógico. | [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion), [UD05](/ud05-ddl-dcl) |
+| RA6.c | Se han identificado los campos que forman parte de las tablas del diseño lógico. | [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion), [UD05](/ud05-ddl-dcl) |
+| RA6.d | Se han analizado las relaciones entre las tablas del diseño lógico. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional), [UD05](/ud05-ddl-dcl) |
+| RA6.e | Se han identificado los campos clave. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion), [UD05](/ud05-ddl-dcl) |
 | RA6.f | Se han aplicado reglas de integridad. | [UD03](/ud03-modelo-relacional), [UD05](/ud05-ddl-dcl), [UD07](/ud07-dml-transacciones) |
 | RA6.g | Se han aplicado reglas de normalización. | [UD04](/ud04-normalizacion) |
-| RA6.h | Se han analizado y documentado las restricciones que no pueden plasmarse en el diseño lógico. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion), [UD08](/ud08-plsql) |
+| RA6.h | Se han analizado y documentado las restricciones que no pueden plasmarse en el diseño lógico. | [UD02](/ud02-modelo-er), [UD03](/ud03-modelo-relacional), [UD04](/ud04-normalizacion), [UD05](/ud05-ddl-dcl), [UD08](/ud08-plsql) |
 
 ## RA7. Gestiona la información almacenada en bases de datos no relacionales, evaluando y utilizando las posibilidades que proporciona el sistema gestor.
 
