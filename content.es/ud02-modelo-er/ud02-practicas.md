@@ -2827,20 +2827,32 @@ La aerolínea de *Berlín* quiere sustituir sus hojas de cálculo de operaciones
 
 > Berlín, el de la serie *Berlín*, ha montado su propia aerolínea para sus golpes por Europa y necesita una base de datos que no sea una servilleta.
 >
-> Una compañía aérea tiene un código interno, un nombre y un país. Dispone de una flota de aeronaves, cada una con su matrícula y la fecha en que entró en servicio, y cada aeronave es de un modelo concreto (fabricante, capacidad de pasajeros y autonomía en kilómetros) que puede estar representado por muchas aeronaves. Los aeropuertos se conocen por su código IATA y tienen nombre, ciudad, país y unas coordenadas (latitud y longitud) que siempre se manejan juntas. La compañía publica rutas entre pares de aeropuertos, de las que se guarda la distancia; una ruta no es lo mismo que un vuelo y solo interesa que exista.
+> La base de datos guarda varias compañías aéreas, porque Berlín también vende plazas en vuelos de otras compañías. De cada compañía se conoce un código interno, un nombre y un país.
 >
-> Los vuelos no tienen un código propio en el mundo: «IB6250» lo opera cada día la misma compañía, de modo que un vuelo se identifica por la compañía, el número de vuelo y la fecha. De cada vuelo se calcula la duración real una vez completado. Un vuelo se compone de uno o varios tramos numerados dentro del vuelo (con escalas, el tramo 1 puede ser Valencia-Madrid y el 2, Madrid-Lima); cada tramo sale de un aeropuerto y llega a otro, tiene hora de salida y de llegada y lo realiza una única aeronave, que a lo largo del día hace muchos tramos.
+> Cada compañía tiene su flota de aeronaves. De cada aeronave se guarda la matrícula, que la identifica, y la fecha en que entró en servicio; una aeronave pertenece a una sola compañía. Además, cada aeronave es de un modelo concreto, del que se conoce el fabricante, la capacidad de pasajeros y la autonomía en kilómetros; de un mismo modelo puede haber muchas aeronaves.
 >
-> El personal tiene DNI, nombre y fecha de alta, y se calcula su antigüedad. Hay pilotos (licencia y horas de vuelo), tripulantes de cabina (varios idiomas) e instructores (especialidad). Hay empleados que no son nada de lo anterior, como el personal de tierra, y un piloto veterano puede ser también instructor. En cada tramo trabajan varios empleados desempeñando un rol (comandante, copiloto, jefe de cabina…); de cada asignación se anota la hora de presentación. Un empleado puede tener roles distintos en tramos distintos, y en un mismo tramo solo un empleado puede ser comandante, pero el diagrama no puede garantizarlo.
+> Los aeropuertos se identifican por su código IATA (VLC, MAD, LIM…) y tienen nombre, ciudad, país y unas coordenadas formadas por latitud y longitud, que siempre se consultan juntas.
 >
-> Los pasajeros se identifican por su pasaporte y tienen nombre y varios teléfonos. Un pasajero reserva plaza en un vuelo con una tarifa (código, nombre y kilos de equipaje incluidos); de la reserva se guardan el asiento y el precio pagado. En un mismo vuelo un pasajero solo viaja con una tarifa, pero puede volar muchas veces y con tarifas distintas en vuelos distintos.
+> Una ruta es un par ordenado de aeropuertos (origen y destino) entre los que se puede volar; de cada ruta solo se guarda la distancia en kilómetros. Las rutas son un catálogo común: no interesa qué compañía las opera, solo que existen. Valencia-Madrid y Madrid-Valencia son dos rutas distintas. Ojo: una ruta no es un vuelo; la ruta es un dato permanente y el vuelo ocurre un día concreto.
+>
+> Un vuelo no tiene un código único en el mundo: el vuelo «IB6250» lo opera la misma compañía todos los días. Por eso un vuelo se identifica por tres datos a la vez: la compañía que lo opera, el número de vuelo y la fecha. Un vuelo no puede existir sin su compañía. Cuando el vuelo termina se calcula su duración real.
+>
+> Cada vuelo se divide en uno o varios tramos, numerados dentro del vuelo (1, 2, 3…). Un vuelo directo tiene un único tramo; uno con escala tiene varios: por ejemplo, el tramo 1 es Valencia-Madrid y el tramo 2, Madrid-Lima. De cada tramo se guardan la hora de salida y la de llegada, el aeropuerto del que sale y el aeropuerto al que llega. Cada tramo lo realiza una única aeronave, y una aeronave realiza muchos tramos a lo largo del día.
+>
+> De cada empleado se guarda el DNI, el nombre y la fecha de alta; su antigüedad se calcula a partir de esa fecha. Algunos empleados son pilotos (número de licencia y horas de vuelo), otros son tripulantes de cabina (hablan uno o varios idiomas) y otros son instructores (especialidad). Un empleado puede pertenecer a más de un grupo: un piloto veterano puede ser también instructor. Y hay empleados que no pertenecen a ninguno, como el personal de tierra.
+>
+> Los roles que se pueden desempeñar a bordo forman un catálogo (comandante, copiloto, jefe de cabina, sobrecargo…) con un código y una descripción. En cada tramo trabajan varios empleados, y cada uno desempeña en él uno o varios roles: en vuelos cortos, por ejemplo, el jefe de cabina hace también de sobrecargo. De cada asignación (empleado, tramo y rol) se anota la hora de presentación. Un mismo empleado trabaja en muchos tramos y puede desempeñar roles distintos en cada uno. Por seguridad, en un tramo solo puede haber un comandante; esta regla no se puede expresar en el diagrama y tendrás que recogerla como restricción.
+>
+> De cada pasajero se guarda el número de pasaporte, que lo identifica, el nombre y uno o varios teléfonos. Las tarifas tienen un código, un nombre (Basic, Classic, Plus…) y los kilos de equipaje incluidos.
+>
+> Un pasajero reserva plaza en un vuelo (no en un tramo) con una tarifa; de cada reserva se guardan el asiento y el precio pagado. En un mismo vuelo, un pasajero viaja con una sola tarifa. En cambio, puede volar muchas veces, con tarifas distintas en vuelos distintos, y en un vuelo viajan muchos pasajeros con la misma tarifa.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
 
 1. Dibuja el diagrama EER en notación de Chen.
 2. Escribe el identificador completo de `VUELO` y de `TRAMO` y explica qué cambiaría si el número de vuelo bastara para identificar un vuelo.
-3. Calcula las cardinalidades de las dos ternarias fijando, por turnos, dos de sus entidades.
+3. Calcula las cardinalidades de las dos ternarias, *reserva* (pasajero, vuelo, tarifa) y *tripulación* (empleado, tramo, rol), fijando por turnos dos de sus entidades.
 4. Clasifica la especialización del personal y justifica cada una de las dos propiedades con una frase del texto.
 5. Escribe cinco restricciones que el diagrama no recoge (comandante único por tramo, coherencia de aeropuertos, solapamientos de la aeronave…) y propón cómo comprobar cada una.
 6. Elabora el diccionario de datos de `TRAMO` y de la relación `tripulación`.
@@ -2851,8 +2863,9 @@ La aerolínea de *Berlín* quiere sustituir sus hojas de cálculo de operaciones
 
 {{% comprobacion %}}
 - [ ] `VUELO` es débil de `COMPAÑÍA` con **dos** discriminadores (número y fecha) y `TRAMO` es débil de `VUELO`.
-- [ ] *Ruta* es una relación reflexiva N:M entre `AEROPUERTO` con roles origen y destino, y *sale de* y *llega a* son dos relaciones distintas.
-- [ ] *Reserva* tiene `TARIFA` con máximo 1 y *tripulación* tiene las tres entidades con máximo N.
+- [ ] *Ruta* es una relación reflexiva N:M entre `AEROPUERTO` con roles origen y destino y el atributo `distancia`; no está unida a `COMPAÑÍA`.
+- [ ] *Sale de* y *llega a* son dos relaciones distintas entre `TRAMO` y `AEROPUERTO`.
+- [ ] *Reserva* (`PASAJERO`, `VUELO`, `TARIFA`) tiene `TARIFA` con máximo 1, y *tripulación* (`EMPLEADO`, `TRAMO`, `ROL`) tiene las tres entidades con máximo N.
 - [ ] La jerarquía del personal es **parcial y solapada**.
 - [ ] `coordenadas` es compuesto, `idiomas` y `teléfonos` multivaluados y `antigüedad` y `duración_real` derivados.
 {{% /comprobacion %}}
@@ -2889,7 +2902,7 @@ La aerolínea ofrece vuelos en código compartido: el mismo vuelo se vende con e
 {{% details title="Objetivo de aprendizaje (léelo al terminar)" %}}
 
 
-Resolver un caso con tres niveles de entidades débiles, una reflexiva 1:N con roles, una especialización solapada y una agregación que se relaciona con otra entidad.
+Resolver un caso con tres entidades débiles en dos cadenas (`PLANTA` → `HABITACIÓN` → `CAMA` y `PACIENTE` → `INGRESO`), una reflexiva 1:N con roles, una especialización parcial y solapada y una agregación que se relaciona con otra entidad.
 
 {{% /details %}}
 
@@ -2901,13 +2914,21 @@ El hospital de *Hospital Central* quiere informatizar los ingresos, la ocupació
 
 > El hospital de *Hospital Central* crece: ahora tiene plantas, habitaciones, camas y hasta prescripciones, y necesita una base de datos a la altura.
 >
-> De cada paciente se conserva el número de historia clínica, el nombre, la fecha de nacimiento (la edad se calcula), las alergias (puede tener varias o ninguna) y la dirección, que el servicio de admisión necesita por partes: calle, número, código postal y localidad. Un paciente puede ingresar muchas veces; cada ingreso se numera dentro de la historia del paciente (el ingreso 1, el 2…) y guarda la fecha de ingreso, la fecha de alta si ya se ha producido y el motivo. Un ingreso no tiene sentido sin su paciente.
+> De cada paciente se guarda el número de historia clínica, que lo identifica, el nombre, la fecha de nacimiento (la edad se calcula a partir de ella), las alergias (puede no tener ninguna o tener varias) y la dirección. El servicio de admisión necesita la dirección por partes: calle, número, código postal y localidad.
 >
-> El hospital se organiza en plantas, que se identifican por su número y tienen un nombre. Dentro de una planta las habitaciones se numeran a partir de 1 y tienen un tipo (individual o doble); dentro de cada habitación las camas se distinguen por una letra (A, B…). Cada planta tiene al menos una habitación y cada habitación al menos una cama. Un ingreso ocupa camas a lo largo de la estancia, con la fecha de inicio y la de fin de cada ocupación; el paciente puede cambiar de cama o volver a una cama que ya ocupó, y una cama la ocupan muchos ingresos con el tiempo.
+> Un paciente puede ingresar muchas veces. Los ingresos se numeran dentro de cada paciente (ingreso 1, ingreso 2…), así que el número de ingreso por sí solo no identifica un ingreso: hace falta saber de qué paciente es. De cada ingreso se guardan la fecha de ingreso, la fecha de alta (vacía mientras el paciente sigue ingresado) y el motivo.
 >
-> El personal se identifica por un código y tiene nombre y DNI. Los hay médicos (especialidad y número de colegiado), enfermeros (titulación) y docentes (categoría), que son los que tutorizan a residentes. Hay personal administrativo que no encaja en ninguno de los tres grupos, y es habitual que un médico sea también docente. Cada persona del personal tiene como mucho un supervisor, que también es personal, y un supervisor puede tener muchas personas a su cargo.
+> El hospital se organiza en plantas, identificadas por su número y con un nombre. Las habitaciones se numeran desde 1 dentro de cada planta (la planta 2 y la planta 3 tienen las dos una habitación 1) y tienen un tipo: individual o doble. A su vez, las camas se distinguen por una letra (A, B…) dentro de cada habitación. Toda planta tiene al menos una habitación y toda habitación, al menos una cama.
 >
-> Un médico atiende un ingreso concreto (se anota la fecha de la primera visita), y un ingreso lo atienden uno o varios médicos. Sobre cada atención el médico prescribe medicamentos: de cada medicamento se guarda el código, el nombre y varios principios activos; de cada prescripción, la fecha, la dosis y la frecuencia. No se prescribe «a un médico» ni «a un ingreso» por separado, sino dentro de una atención concreta.
+> Durante la estancia, un ingreso va ocupando camas. De cada ocupación se guardan la fecha de inicio y la de fin. El paciente puede cambiar de cama e incluso volver más tarde a una cama que ya ocupó en el mismo ingreso; por eso la misma pareja ingreso-cama puede repetirse en fechas distintas. Con el tiempo, una cama la ocupan muchos ingresos.
+>
+> Cada miembro del personal se identifica por un código y tiene nombre y DNI. Hay tres grupos: médicos (especialidad y número de colegiado), enfermeros (titulación) y docentes (categoría); los docentes son los que tutorizan a los residentes. Una persona puede estar en más de un grupo (es habitual que un médico sea también docente) y hay personal, como el administrativo, que no está en ninguno.
+>
+> Cada persona tiene como máximo un supervisor, que también forma parte del personal; un supervisor puede tener muchas personas a su cargo.
+>
+> Un médico atiende muchos ingresos, y cada ingreso lo atienden uno o varios médicos. De cada atención (un médico concreto con un ingreso concreto) se anota la fecha de la primera visita.
+>
+> Durante una atención, el médico prescribe medicamentos. De cada medicamento se guarda el código, el nombre y sus principios activos (uno o varios). De cada prescripción se guardan la fecha, la dosis y la frecuencia. Dentro de una misma atención, cada medicamento se prescribe una sola vez: si cambia la pauta, se modifica la prescripción existente. La prescripción no se hace «a un médico» ni «a un ingreso» por separado, sino dentro de una atención concreta.
 
 {{% details title="Tareas (despliégalas tras leer el enunciado)" %}}
 
@@ -2926,7 +2947,7 @@ El hospital de *Hospital Central* quiere informatizar los ingresos, la ocupació
 {{% comprobacion %}}
 - [ ] `INGRESO`, `HABITACIÓN` y `CAMA` son débiles y las tres relaciones que las unen a su propietaria son identificadoras.
 - [ ] *Ocupa* es N:M entre `INGRESO` y `CAMA` con `fecha_inicio` como discriminador de la relación.
-- [ ] *Prescribe* relaciona la agregación *atención* con `MEDICAMENTO`.
+- [ ] *Prescribe* relaciona la agregación *atención* con `MEDICAMENTO` (N:M) y no necesita discriminador: cada medicamento se prescribe una sola vez por atención.
 - [ ] *Supervisa* es reflexiva con roles y máximo 1 en el lado del supervisor.
 - [ ] La especialización es **parcial y solapada**; `alergias` y `principios_activos` son multivaluados, `dirección` compuesto y `edad` derivado.
 {{% /comprobacion %}}

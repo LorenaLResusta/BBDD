@@ -2827,20 +2827,32 @@ L'aerolínia de *Berlín* vol substituir els seus fulls de càlcul d'operacions 
 
 > Berlín, el de la sèrie *Berlín*, ha muntat la seua pròpia aerolínia per als seus colps per Europa i necessita una base de dades que no siga un tovalló.
 >
-> Una companyia aèria té un codi intern, un nom i un país. Disposa d'una flota d'aeronaus, cadascuna amb la seua matrícula i la data en què va entrar en servei, i cada aeronau és d'un model concret (fabricant, capacitat de passatgers i autonomia en quilòmetres) que pot estar representat per moltes aeronaus. Els aeroports es coneixen pel seu codi IATA i tenen nom, ciutat, país i unes coordenades (latitud i longitud) que sempre es manegen juntes. La companyia publica rutes entre parells d'aeroports, de les quals es guarda la distància; una ruta no és el mateix que un vol i només interessa que existisca.
+> La base de dades guarda diverses companyies aèries, perquè Berlín també ven places en vols d'altres companyies. De cada companyia es coneix un codi intern, un nom i un país.
 >
-> Els vols no tenen un codi propi al món: «IB6250» l'opera cada dia la mateixa companyia, de manera que un vol s'identifica per la companyia, el número de vol i la data. De cada vol es calcula la durada real una vegada completat. Un vol es compon d'un o diversos trams numerats dins del vol (amb escales, el tram 1 pot ser València-Madrid i el 2, Madrid-Lima); cada tram ix d'un aeroport i arriba a un altre, té hora d'eixida i d'arribada i el fa una única aeronau, que al llarg del dia fa molts trams.
+> Cada companyia té la seua flota d'aeronaus. De cada aeronau es guarda la matrícula, que la identifica, i la data en què va entrar en servei; una aeronau pertany a una sola companyia. A més, cada aeronau és d'un model concret, del qual es coneix el fabricant, la capacitat de passatgers i l'autonomia en quilòmetres; d'un mateix model hi pot haver moltes aeronaus.
 >
-> El personal té DNI, nom i data d'alta, i se'n calcula l'antiguitat. Hi ha pilots (llicència i hores de vol), tripulants de cabina (diversos idiomes) i instructors (especialitat). Hi ha empleats que no són res de l'anterior, com el personal de terra, i un pilot veterà pot ser també instructor. En cada tram treballen diversos empleats exercint un rol (comandant, copilot, cap de cabina…); de cada assignació s'anota l'hora de presentació. Un empleat pot tindre rols distints en trams distints, i en un mateix tram només un empleat pot ser comandant, però el diagrama no pot garantir-ho.
+> Els aeroports s'identifiquen pel seu codi IATA (VLC, MAD, LIM…) i tenen nom, ciutat, país i unes coordenades formades per latitud i longitud, que sempre es consulten juntes.
 >
-> Els passatgers s'identifiquen pel seu passaport i tenen nom i diversos telèfons. Un passatger reserva plaça en un vol amb una tarifa (codi, nom i quilos d'equipatge inclosos); de la reserva es guarden el seient i el preu pagat. En un mateix vol un passatger només viatja amb una tarifa, però pot volar moltes vegades i amb tarifes distintes en vols distints.
+> Una ruta és un parell ordenat d'aeroports (origen i destinació) entre els quals es pot volar; de cada ruta només es guarda la distància en quilòmetres. Les rutes són un catàleg comú: no interessa quina companyia les opera, només que existeixen. València-Madrid i Madrid-València són dues rutes distintes. Compte: una ruta no és un vol; la ruta és una dada permanent i el vol té lloc un dia concret.
+>
+> Un vol no té un codi únic al món: el vol «IB6250» l'opera la mateixa companyia tots els dies. Per això un vol s'identifica per tres dades alhora: la companyia que l'opera, el número de vol i la data. Un vol no pot existir sense la seua companyia. Quan el vol acaba se'n calcula la durada real.
+>
+> Cada vol es divideix en un o diversos trams, numerats dins del vol (1, 2, 3…). Un vol directe té un sol tram; un amb escala en té diversos: per exemple, el tram 1 és València-Madrid i el tram 2, Madrid-Lima. De cada tram es guarden l'hora d'eixida i la d'arribada, l'aeroport del qual ix i l'aeroport al qual arriba. Cada tram el fa una única aeronau, i una aeronau fa molts trams al llarg del dia.
+>
+> De cada empleat es guarda el DNI, el nom i la data d'alta; l'antiguitat es calcula a partir d'eixa data. Alguns empleats són pilots (número de llicència i hores de vol), altres són tripulants de cabina (parlen un o diversos idiomes) i altres són instructors (especialitat). Un empleat pot pertànyer a més d'un grup: un pilot veterà pot ser també instructor. I hi ha empleats que no pertanyen a cap, com el personal de terra.
+>
+> Els rols que es poden exercir a bord formen un catàleg (comandant, copilot, cap de cabina, sobrecàrrec…) amb un codi i una descripció. En cada tram treballen diversos empleats, i cadascun hi exerceix un o diversos rols: en vols curts, per exemple, el cap de cabina fa també de sobrecàrrec. De cada assignació (empleat, tram i rol) s'anota l'hora de presentació. Un mateix empleat treballa en molts trams i pot exercir rols distints en cadascun. Per seguretat, en un tram només hi pot haver un comandant; esta regla no es pot expressar en el diagrama i l'hauràs de recollir com a restricció.
+>
+> De cada passatger es guarda el número de passaport, que l'identifica, el nom i un o diversos telèfons. Les tarifes tenen un codi, un nom (Basic, Classic, Plus…) i els quilos d'equipatge inclosos.
+>
+> Un passatger reserva plaça en un vol (no en un tram) amb una tarifa; de cada reserva es guarden el seient i el preu pagat. En un mateix vol, un passatger viatja amb una sola tarifa. En canvi, pot volar moltes vegades, amb tarifes distintes en vols distints, i en un vol viatgen molts passatgers amb la mateixa tarifa.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
 
 1. Dibuixa el diagrama EER en notació de Chen.
 2. Escriu l'identificador complet de `VUELO` i de `TRAMO` i explica què canviaria si el número de vol bastara per a identificar un vol.
-3. Calcula les cardinalitats de les dues ternàries fixant, per torns, dues de les seues entitats.
+3. Calcula les cardinalitats de les dues ternàries, *reserva* (passatger, vol, tarifa) i *tripulació* (empleat, tram, rol), fixant per torns dues de les seues entitats.
 4. Classifica l'especialització del personal i justifica cadascuna de les dues propietats amb una frase del text.
 5. Escriu cinc restriccions que el diagrama no arreplega (comandant únic per tram, coherència d'aeroports, solapaments de l'aeronau…) i proposa com comprovar cadascuna.
 6. Elabora el diccionari de dades de `TRAMO` i de la relació `tripulación`.
@@ -2851,8 +2863,9 @@ L'aerolínia de *Berlín* vol substituir els seus fulls de càlcul d'operacions 
 
 {{% comprobacion %}}
 - [ ] `VUELO` és feble de `COMPAÑÍA` amb **dos** discriminadors (número i data) i `TRAMO` és feble de `VUELO`.
-- [ ] *Ruta* és una relació reflexiva N:M entre `AEROPUERTO` amb rols origen i destinació, i *ix de* i *arriba a* són dues relacions distintes.
-- [ ] *Reserva* té `TARIFA` amb màxim 1 i *tripulació* té les tres entitats amb màxim N.
+- [ ] *Ruta* és una relació reflexiva N:M entre `AEROPUERTO` amb rols origen i destinació i l'atribut `distancia`; no està unida a `COMPAÑÍA`.
+- [ ] *Ix de* i *arriba a* són dues relacions distintes entre `TRAMO` i `AEROPUERTO`.
+- [ ] *Reserva* (`PASAJERO`, `VUELO`, `TARIFA`) té `TARIFA` amb màxim 1, i *tripulació* (`EMPLEADO`, `TRAMO`, `ROL`) té les tres entitats amb màxim N.
 - [ ] La jerarquia del personal és **parcial i solapada**.
 - [ ] `coordenadas` és compost, `idiomas` i `teléfonos` multivaluats i `antigüedad` i `duración_real` derivats.
 {{% /comprobacion %}}
@@ -2889,7 +2902,7 @@ L'aerolínia ofereix vols en codi compartit: el mateix vol es ven amb el número
 {{% details title="Objectiu d'aprenentatge (llig-lo en acabar)" %}}
 
 
-Resoldre un cas amb tres nivells d'entitats febles, una reflexiva 1:N amb rols, una especialització solapada i una agregació que es relaciona amb una altra entitat.
+Resoldre un cas amb tres entitats febles en dues cadenes (`PLANTA` → `HABITACIÓN` → `CAMA` i `PACIENTE` → `INGRESO`), una reflexiva 1:N amb rols, una especialització parcial i solapada i una agregació que es relaciona amb una altra entitat.
 
 {{% /details %}}
 
@@ -2901,13 +2914,21 @@ L'hospital d'*Hospital Central* vol informatitzar els ingressos, l'ocupació de 
 
 > L'hospital d'*Hospital Central* creix: ara té plantes, habitacions, llits i fins i tot prescripcions, i necessita una base de dades a l'altura.
 >
-> De cada pacient es conserva el número d'història clínica, el nom, la data de naixement (l'edat es calcula), les al·lèrgies (en pot tindre diverses o cap) i l'adreça, que el servei d'admissió necessita per parts: carrer, número, codi postal i localitat. Un pacient pot ingressar moltes vegades; cada ingrés es numera dins de la història del pacient (l'ingrés 1, el 2…) i guarda la data d'ingrés, la data d'alta si ja s'ha produït i el motiu. Un ingrés no té sentit sense el seu pacient.
+> De cada pacient es guarda el número d'història clínica, que l'identifica, el nom, la data de naixement (l'edat es calcula a partir d'ella), les al·lèrgies (pot no tindre'n cap o tindre'n diverses) i l'adreça. El servei d'admissió necessita l'adreça per parts: carrer, número, codi postal i localitat.
 >
-> L'hospital s'organitza en plantes, que s'identifiquen pel seu número i tenen un nom. Dins d'una planta les habitacions es numeren a partir d'1 i tenen un tipus (individual o doble); dins de cada habitació els llits es distingeixen per una lletra (A, B…). Cada planta té almenys una habitació i cada habitació almenys un llit. Un ingrés ocupa llits al llarg de l'estada, amb la data d'inici i la de fi de cada ocupació; el pacient pot canviar de llit o tornar a un llit que ja va ocupar, i un llit l'ocupen molts ingressos amb el temps.
+> Un pacient pot ingressar moltes vegades. Els ingressos es numeren dins de cada pacient (ingrés 1, ingrés 2…), així que el número d'ingrés tot sol no identifica un ingrés: cal saber de quin pacient és. De cada ingrés es guarden la data d'ingrés, la data d'alta (buida mentre el pacient continua ingressat) i el motiu.
 >
-> El personal s'identifica per un codi i té nom i DNI. N'hi ha metges (especialitat i número de col·legiat), infermers (titulació) i docents (categoria), que són els que tutoritzen residents. Hi ha personal administratiu que no encaixa en cap dels tres grups, i és habitual que un metge siga també docent. Cada persona del personal té com a màxim un supervisor, que també és personal, i un supervisor pot tindre moltes persones al seu càrrec.
+> L'hospital s'organitza en plantes, identificades pel seu número i amb un nom. Les habitacions es numeren des d'1 dins de cada planta (la planta 2 i la planta 3 tenen totes dues una habitació 1) i tenen un tipus: individual o doble. Al seu torn, els llits es distingeixen per una lletra (A, B…) dins de cada habitació. Tota planta té almenys una habitació i tota habitació, almenys un llit.
 >
-> Un metge atén un ingrés concret (s'anota la data de la primera visita), i un ingrés l'atenen un o diversos metges. Sobre cada atenció el metge prescriu medicaments: de cada medicament es guarda el codi, el nom i diversos principis actius; de cada prescripció, la data, la dosi i la freqüència. No es prescriu «a un metge» ni «a un ingrés» per separat, sinó dins d'una atenció concreta.
+> Durant l'estada, un ingrés va ocupant llits. De cada ocupació es guarden la data d'inici i la de fi. El pacient pot canviar de llit i fins i tot tornar més tard a un llit que ja va ocupar en el mateix ingrés; per això la mateixa parella ingrés-llit es pot repetir en dates distintes. Amb el temps, un llit l'ocupen molts ingressos.
+>
+> Cada membre del personal s'identifica per un codi i té nom i DNI. Hi ha tres grups: metges (especialitat i número de col·legiat), infermers (titulació) i docents (categoria); els docents són els que tutoritzen els residents. Una persona pot estar en més d'un grup (és habitual que un metge siga també docent) i hi ha personal, com l'administratiu, que no està en cap.
+>
+> Cada persona té com a màxim un supervisor, que també forma part del personal; un supervisor pot tindre moltes persones al seu càrrec.
+>
+> Un metge atén molts ingressos, i cada ingrés l'atenen un o diversos metges. De cada atenció (un metge concret amb un ingrés concret) s'anota la data de la primera visita.
+>
+> Durant una atenció, el metge prescriu medicaments. De cada medicament es guarda el codi, el nom i els seus principis actius (un o diversos). De cada prescripció es guarden la data, la dosi i la freqüència. Dins d'una mateixa atenció, cada medicament es prescriu una sola vegada: si canvia la pauta, es modifica la prescripció existent. La prescripció no es fa «a un metge» ni «a un ingrés» per separat, sinó dins d'una atenció concreta.
 
 {{% details title="Tasques (desplega-les després de llegir l'enunciat)" %}}
 
@@ -2926,7 +2947,7 @@ L'hospital d'*Hospital Central* vol informatitzar els ingressos, l'ocupació de 
 {{% comprobacion %}}
 - [ ] `INGRESO`, `HABITACIÓN` i `CAMA` són febles i les tres relacions que les uneixen a la seua propietària són identificadores.
 - [ ] *Ocupa* és N:M entre `INGRESO` i `CAMA` amb `fecha_inicio` com a discriminador de la relació.
-- [ ] *Prescriu* relaciona l'agregació *atenció* amb `MEDICAMENTO`.
+- [ ] *Prescriu* relaciona l'agregació *atenció* amb `MEDICAMENTO` (N:M) i no necessita discriminador: cada medicament es prescriu una sola vegada per atenció.
 - [ ] *Supervisa* és reflexiva amb rols i màxim 1 al costat del supervisor.
 - [ ] L'especialització és **parcial i solapada**; `alergias` i `principios_activos` són multivaluats, `dirección` compost i `edad` derivat.
 {{% /comprobacion %}}
