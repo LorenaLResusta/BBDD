@@ -59,7 +59,9 @@
      "Aprendiz de detective"
     ]
    ],
-   "save_note": "Tu progreso se guarda en este navegador."
+   "save_note": "Tu progreso se guarda en este navegador.",
+   "stamp": "CASO CERRADO",
+   "arrested": "ARRESTADO"
   },
   "intro": {
    "title": "Madrugada previa al lanzamiento",
@@ -79,19 +81,25 @@
     "id": "vega",
     "name": "Dra. Lucía Vega",
     "role": "Jefa de diseño",
-    "habit": "Siempre calcula las cardinalidades de una ternaria fijando dos de las tres entidades y contando la tercera."
+    "habit": "Siempre calcula las cardinalidades de una ternaria fijando dos de las tres entidades y contando la tercera.",
+    "avatar": "👩‍🔬",
+    "color": "#7a5cff"
    },
    {
     "id": "tablas",
     "name": "Óscar Tablas",
     "role": "Becario de datos",
-    "habit": "Mete varios valores en una sola celda: por ejemplo, los teléfonos separados por comas."
+    "habit": "Mete varios valores en una sola celda: por ejemplo, los teléfonos separados por comas.",
+    "avatar": "🧑‍💻",
+    "color": "#e08a1e"
    },
    {
     "id": "nulos",
     "name": "Marga Nulos",
     "role": "Administradora de la base de datos",
-    "habit": "Nunca usa claves compuestas: a todo le pone un id autonumérico."
+    "habit": "Nunca usa claves compuestas: a todo le pone un id autonumérico.",
+    "avatar": "👩‍💼",
+    "color": "#2e9e5b"
    }
   ],
   "acts": [
@@ -181,6 +189,42 @@
      "title": "Nota manuscrita",
      "text": "En la mesa del mostrador hay una hoja arrancada: «reserva = pasajero + vuelo + tarifa, todo junto en la clave». Quien la escribió **no calculó las cardinalidades fijando dos patas**: puso la tarifa con máximo N.",
      "key": true
+    },
+    "scene": {
+     "tone": "hall",
+     "icon": "🧳",
+     "props": [
+      [
+       "🧳",
+       250,
+       162,
+       58
+      ],
+      [
+       "🛄",
+       330,
+       162,
+       50
+      ],
+      [
+       "🎫",
+       420,
+       120,
+       40
+      ],
+      [
+       "🖥️",
+       520,
+       140,
+       60
+      ],
+      [
+       "🛃",
+       590,
+       100,
+       34
+      ]
+     ]
     }
    },
    {
@@ -210,6 +254,36 @@
      "title": "Pósit en el hangar",
      "text": "Un pósit amarillo: «los identificadores de los diagramas son de varios atributos; **no los he sustituido por ningún id autonumérico**». Alguien respetó las claves compuestas.",
      "key": true
+    },
+    "scene": {
+     "tone": "hangar",
+     "icon": "✈️",
+     "props": [
+      [
+       "✈️",
+       340,
+       140,
+       130
+      ],
+      [
+       "🔧",
+       500,
+       165,
+       44
+      ],
+      [
+       "🛠️",
+       210,
+       165,
+       40
+      ],
+      [
+       "⛽",
+       570,
+       165,
+       44
+      ]
+     ]
     }
    },
    {
@@ -242,6 +316,36 @@
      "title": "Cuaderno de turnos",
      "text": "Esa noche solo había **personal de tierra** en el edificio: ni pilotos ni tripulantes ni instructores. Cualquiera de los tres sospechosos pudo entrar.",
      "key": false
+    },
+    "scene": {
+     "tone": "warm",
+     "icon": "📋",
+     "props": [
+      [
+       "📋",
+       250,
+       150,
+       56
+      ],
+      [
+       "🕒",
+       350,
+       92,
+       54
+      ],
+      [
+       "🧑‍✈️",
+       450,
+       165,
+       62
+      ],
+      [
+       "👷",
+       540,
+       165,
+       58
+      ]
+     ]
     }
    },
    {
@@ -282,6 +386,37 @@
      "title": "Copia de la hoja de cálculo",
      "text": "En la hoja de cálculo que el sabotaje dejó abierta aparece una celda con **tres teléfonos separados por comas** en el mismo pasajero. Un atributo multivaluado metido a la fuerza en una sola celda.",
      "key": true
+    },
+    "scene": {
+     "tone": "server",
+     "icon": "🖥️",
+     "props": [
+      [
+       "🗄️",
+       250,
+       160,
+       66
+      ],
+      [
+       "💾",
+       340,
+       160,
+       46
+      ],
+      [
+       "📡",
+       430,
+       160,
+       56
+      ],
+      [
+       "🔌",
+       520,
+       165,
+       40
+      ]
+     ],
+     "leds": true
     }
    },
    {
@@ -311,6 +446,37 @@
      "title": "Mapa de rutas",
      "text": "En el catálogo de rutas **falta Madrid→Valencia**, pero Valencia→Madrid sigue ahí: alguien borró una sola dirección. Quien lo hizo sabía que son dos filas distintas.",
      "key": false
+    },
+    "scene": {
+     "tone": "map",
+     "icon": "🗺️",
+     "props": [
+      [
+       "🗺️",
+       360,
+       125,
+       120
+      ],
+      [
+       "📍",
+       262,
+       160,
+       44
+      ],
+      [
+       "📍",
+       478,
+       160,
+       44
+      ],
+      [
+       "🧭",
+       570,
+       160,
+       44
+      ]
+     ],
+     "route": true
     }
    },
    {
@@ -378,6 +544,36 @@
      "title": "Registro del archivo",
      "text": "El borrado del supervisor dejó a sus dos supervisados con el campo vacío: la clave ajena estaba en **`SET NULL`**, no en cascada. Quien lo preparó no quería perder más datos de los necesarios.",
      "key": false
+    },
+    "scene": {
+     "tone": "vault",
+     "icon": "🗄️",
+     "props": [
+      [
+       "🗄️",
+       250,
+       162,
+       66
+      ],
+      [
+       "🗃️",
+       340,
+       162,
+       60
+      ],
+      [
+       "📁",
+       430,
+       162,
+       50
+      ],
+      [
+       "🧑‍⚕️",
+       530,
+       165,
+       58
+      ]
+     ]
     }
    },
    {
@@ -407,6 +603,36 @@
      "title": "Registro de camas",
      "text": "En el registro, la misma cama aparece ocupada **dos veces por el mismo ingreso en fechas distintas** y ambas filas se han conservado. El diseño original permitía repetir la cama.",
      "key": false
+    },
+    "scene": {
+     "tone": "clinic",
+     "icon": "🛏️",
+     "props": [
+      [
+       "🛏️",
+       250,
+       165,
+       64
+      ],
+      [
+       "🛏️",
+       360,
+       165,
+       64
+      ],
+      [
+       "🛏️",
+       470,
+       165,
+       64
+      ],
+      [
+       "🩺",
+       565,
+       130,
+       44
+      ]
+     ]
     }
    },
    {
@@ -459,6 +685,37 @@
      "title": "Post-it con pasos",
      "text": "Un post-it con las tablas apiladas en **orden de creación**; el último paso está tachado. Quien lo escribió sabía muy bien cómo se enlazan las tablas.",
      "key": false
+    },
+    "scene": {
+     "tone": "code",
+     "icon": "💻",
+     "props": [
+      [
+       "📜",
+       250,
+       160,
+       50
+      ],
+      [
+       "💻",
+       360,
+       150,
+       76
+      ],
+      [
+       "🧩",
+       470,
+       160,
+       50
+      ],
+      [
+       "⌨️",
+       555,
+       165,
+       40
+      ]
+     ],
+     "leds": true
     }
    },
    {
@@ -484,6 +741,30 @@
      "title": "Recuento del esquema",
      "text": "El esquema completo tiene **ocho** tablas. La carpeta del sabotaje solo contiene las de las entidades y las dos relaciones: se perdieron justo las tablas de los atributos multivaluados.",
      "key": false
+    },
+    "scene": {
+     "tone": "vault",
+     "icon": "🧮",
+     "props": [
+      [
+       "🔢",
+       250,
+       160,
+       50
+      ],
+      [
+       "🧮",
+       360,
+       150,
+       90
+      ],
+      [
+       "📊",
+       475,
+       160,
+       56
+      ]
+     ]
     }
    },
    {
@@ -519,6 +800,36 @@
      "title": "Registro de triggers",
      "text": "El registro de triggers está **vacío**: ninguna regla de varias filas estaba protegida por la base de datos. Por eso el sabotaje no activó ninguna alarma.",
      "key": false
+    },
+    "scene": {
+     "tone": "alarm",
+     "icon": "⚡",
+     "props": [
+      [
+       "⚡",
+       250,
+       150,
+       60
+      ],
+      [
+       "🚨",
+       350,
+       150,
+       60
+      ],
+      [
+       "📟",
+       450,
+       160,
+       56
+      ],
+      [
+       "🔒",
+       540,
+       160,
+       50
+      ]
+     ]
     }
    },
    {
@@ -548,6 +859,30 @@
      "title": "La última pieza",
      "text": "La puerta se abre. En el suelo hay una hoja con los datos del pasajero ES-10: **dos tarifas en el mismo vuelo**. Alguien modificó la clave de la reserva para que lo permitiera.",
      "key": false
+    },
+    "scene": {
+     "tone": "dawn",
+     "icon": "🚪",
+     "props": [
+      [
+       "🚪",
+       360,
+       165,
+       120
+      ],
+      [
+       "🗝️",
+       250,
+       150,
+       50
+      ],
+      [
+       "🌅",
+       520,
+       110,
+       56
+      ]
+     ]
     }
    }
   ],
@@ -627,7 +962,9 @@
      "Aprenent de detectiu"
     ]
    ],
-   "save_note": "El teu progrés es guarda en este navegador."
+   "save_note": "El teu progrés es guarda en este navegador.",
+   "stamp": "CAS TANCAT",
+   "arrested": "ARRESTAT"
   },
   "intro": {
    "title": "Matinada prèvia al llançament",
@@ -647,19 +984,25 @@
     "id": "vega",
     "name": "Dra. Lucía Vega",
     "role": "Cap de disseny",
-    "habit": "Sempre calcula les cardinalitats d'una ternària fixant dues de les tres entitats i comptant la tercera."
+    "habit": "Sempre calcula les cardinalitats d'una ternària fixant dues de les tres entitats i comptant la tercera.",
+    "avatar": "👩‍🔬",
+    "color": "#7a5cff"
    },
    {
     "id": "tablas",
     "name": "Óscar Tablas",
     "role": "Becari de dades",
-    "habit": "Posa diversos valors en una sola cel·la: per exemple, els telèfons separats per comes."
+    "habit": "Posa diversos valors en una sola cel·la: per exemple, els telèfons separats per comes.",
+    "avatar": "🧑‍💻",
+    "color": "#e08a1e"
    },
    {
     "id": "nulos",
     "name": "Marga Nulos",
     "role": "Administradora de la base de dades",
-    "habit": "Mai no usa claus compostes: a tot li posa un id autonumèric."
+    "habit": "Mai no usa claus compostes: a tot li posa un id autonumèric.",
+    "avatar": "👩‍💼",
+    "color": "#2e9e5b"
    }
   ],
   "acts": [
@@ -749,6 +1092,42 @@
      "title": "Nota manuscrita",
      "text": "A la taula del taulell hi ha un full arrancat: «reserva = passatger + vol + tarifa, tot junt en la clau». Qui la va escriure **no va calcular les cardinalitats fixant dues potes**: va posar la tarifa amb màxim N.",
      "key": true
+    },
+    "scene": {
+     "tone": "hall",
+     "icon": "🧳",
+     "props": [
+      [
+       "🧳",
+       250,
+       162,
+       58
+      ],
+      [
+       "🛄",
+       330,
+       162,
+       50
+      ],
+      [
+       "🎫",
+       420,
+       120,
+       40
+      ],
+      [
+       "🖥️",
+       520,
+       140,
+       60
+      ],
+      [
+       "🛃",
+       590,
+       100,
+       34
+      ]
+     ]
     }
    },
    {
@@ -778,6 +1157,36 @@
      "title": "Post-it al hangar",
      "text": "Un post-it groc: «els identificadors dels diagrames són de diversos atributs; **no els he substituït per cap id autonumèric**». Algú va respectar les claus compostes.",
      "key": true
+    },
+    "scene": {
+     "tone": "hangar",
+     "icon": "✈️",
+     "props": [
+      [
+       "✈️",
+       340,
+       140,
+       130
+      ],
+      [
+       "🔧",
+       500,
+       165,
+       44
+      ],
+      [
+       "🛠️",
+       210,
+       165,
+       40
+      ],
+      [
+       "⛽",
+       570,
+       165,
+       44
+      ]
+     ]
     }
    },
    {
@@ -810,6 +1219,36 @@
      "title": "Quadern de torns",
      "text": "Eixa nit només hi havia **personal de terra** a l'edifici: ni pilots ni tripulants ni instructors. Qualsevol dels tres sospitosos va poder entrar.",
      "key": false
+    },
+    "scene": {
+     "tone": "warm",
+     "icon": "📋",
+     "props": [
+      [
+       "📋",
+       250,
+       150,
+       56
+      ],
+      [
+       "🕒",
+       350,
+       92,
+       54
+      ],
+      [
+       "🧑‍✈️",
+       450,
+       165,
+       62
+      ],
+      [
+       "👷",
+       540,
+       165,
+       58
+      ]
+     ]
     }
    },
    {
@@ -850,6 +1289,37 @@
      "title": "Còpia del full de càlcul",
      "text": "Al full de càlcul que el sabotatge va deixar obert apareix una cel·la amb **tres telèfons separats per comes** al mateix passatger. Un atribut multivaluat ficat a la força en una sola cel·la.",
      "key": true
+    },
+    "scene": {
+     "tone": "server",
+     "icon": "🖥️",
+     "props": [
+      [
+       "🗄️",
+       250,
+       160,
+       66
+      ],
+      [
+       "💾",
+       340,
+       160,
+       46
+      ],
+      [
+       "📡",
+       430,
+       160,
+       56
+      ],
+      [
+       "🔌",
+       520,
+       165,
+       40
+      ]
+     ],
+     "leds": true
     }
    },
    {
@@ -879,6 +1349,37 @@
      "title": "Mapa de rutes",
      "text": "Al catàleg de rutes **falta Madrid→València**, però València→Madrid continua ahí: algú va esborrar una sola direcció. Qui ho va fer sabia que són dues files distintes.",
      "key": false
+    },
+    "scene": {
+     "tone": "map",
+     "icon": "🗺️",
+     "props": [
+      [
+       "🗺️",
+       360,
+       125,
+       120
+      ],
+      [
+       "📍",
+       262,
+       160,
+       44
+      ],
+      [
+       "📍",
+       478,
+       160,
+       44
+      ],
+      [
+       "🧭",
+       570,
+       160,
+       44
+      ]
+     ],
+     "route": true
     }
    },
    {
@@ -946,6 +1447,36 @@
      "title": "Registre de l'arxiu",
      "text": "L'esborrat del supervisor va deixar els seus dos supervisats amb el camp buit: la clau forana estava en **`SET NULL`**, no en cascada. Qui ho va preparar no volia perdre més dades de les necessàries.",
      "key": false
+    },
+    "scene": {
+     "tone": "vault",
+     "icon": "🗄️",
+     "props": [
+      [
+       "🗄️",
+       250,
+       162,
+       66
+      ],
+      [
+       "🗃️",
+       340,
+       162,
+       60
+      ],
+      [
+       "📁",
+       430,
+       162,
+       50
+      ],
+      [
+       "🧑‍⚕️",
+       530,
+       165,
+       58
+      ]
+     ]
     }
    },
    {
@@ -975,6 +1506,36 @@
      "title": "Registre de llits",
      "text": "Al registre, el mateix llit apareix ocupat **dues vegades pel mateix ingrés en dates distintes** i totes dues files s'han conservat. El disseny original permetia repetir el llit.",
      "key": false
+    },
+    "scene": {
+     "tone": "clinic",
+     "icon": "🛏️",
+     "props": [
+      [
+       "🛏️",
+       250,
+       165,
+       64
+      ],
+      [
+       "🛏️",
+       360,
+       165,
+       64
+      ],
+      [
+       "🛏️",
+       470,
+       165,
+       64
+      ],
+      [
+       "🩺",
+       565,
+       130,
+       44
+      ]
+     ]
     }
    },
    {
@@ -1027,6 +1588,37 @@
      "title": "Post-it amb passos",
      "text": "Un post-it amb les taules apilades en **ordre de creació**; l'últim pas està ratllat. Qui ho va escriure sabia molt bé com s'enllacen les taules.",
      "key": false
+    },
+    "scene": {
+     "tone": "code",
+     "icon": "💻",
+     "props": [
+      [
+       "📜",
+       250,
+       160,
+       50
+      ],
+      [
+       "💻",
+       360,
+       150,
+       76
+      ],
+      [
+       "🧩",
+       470,
+       160,
+       50
+      ],
+      [
+       "⌨️",
+       555,
+       165,
+       40
+      ]
+     ],
+     "leds": true
     }
    },
    {
@@ -1052,6 +1644,30 @@
      "title": "Recompte de l'esquema",
      "text": "L'esquema complet té **huit** taules. La carpeta del sabotatge només conté les de les entitats i les dues relacions: es van perdre justament les taules dels atributs multivaluats.",
      "key": false
+    },
+    "scene": {
+     "tone": "vault",
+     "icon": "🧮",
+     "props": [
+      [
+       "🔢",
+       250,
+       160,
+       50
+      ],
+      [
+       "🧮",
+       360,
+       150,
+       90
+      ],
+      [
+       "📊",
+       475,
+       160,
+       56
+      ]
+     ]
     }
    },
    {
@@ -1087,6 +1703,36 @@
      "title": "Registre de triggers",
      "text": "El registre de triggers està **buit**: cap regla de diverses files estava protegida per la base de dades. Per això el sabotatge no va activar cap alarma.",
      "key": false
+    },
+    "scene": {
+     "tone": "alarm",
+     "icon": "⚡",
+     "props": [
+      [
+       "⚡",
+       250,
+       150,
+       60
+      ],
+      [
+       "🚨",
+       350,
+       150,
+       60
+      ],
+      [
+       "📟",
+       450,
+       160,
+       56
+      ],
+      [
+       "🔒",
+       540,
+       160,
+       50
+      ]
+     ]
     }
    },
    {
@@ -1116,6 +1762,30 @@
      "title": "L'última peça",
      "text": "La porta s'obri. A terra hi ha un full amb les dades del passatger ES-10: **dues tarifes en el mateix vol**. Algú va modificar la clau de la reserva perquè ho permetera.",
      "key": false
+    },
+    "scene": {
+     "tone": "dawn",
+     "icon": "🚪",
+     "props": [
+      [
+       "🚪",
+       360,
+       165,
+       120
+      ],
+      [
+       "🗝️",
+       250,
+       150,
+       50
+      ],
+      [
+       "🌅",
+       520,
+       110,
+       56
+      ]
+     ]
     }
    }
   ],

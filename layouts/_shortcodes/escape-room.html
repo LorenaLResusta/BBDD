@@ -67,6 +67,53 @@
 .esc-big { font-size: 2rem; font-weight: 800; color: var(--e-acc); }
 .esc-note { font-size: .78rem; opacity: .7; margin-top: .6rem; }
 .esc ul.esc-rules { margin: .4rem 0; padding-left: 1.2rem; }
+
+.esc-scene { width: 100%; height: auto; display: block; border-radius: .5rem; margin: 0 0 .8rem; box-shadow: 0 2px 8px rgba(0,0,0,.18); }
+.esc-det-b { animation: esc-bob 2.6s ease-in-out infinite; }
+@keyframes esc-bob { 50% { transform: translateY(-3px); } }
+.esc-prop { animation: esc-pop .5s both; transform-box: fill-box; transform-origin: 50% 100%; }
+@keyframes esc-pop { from { opacity: 0; transform: scale(.4) translateY(10px); } to { opacity: 1; transform: none; } }
+.esc-led { animation: esc-blink 1.4s steps(2) infinite; }
+@keyframes esc-blink { 50% { opacity: .15; } }
+.esc-route { stroke-dasharray: 6 7; animation: esc-dash 1.2s linear infinite; }
+@keyframes esc-dash { to { stroke-dashoffset: -26; } }
+.esc-lock .esc-shackle { transition: transform .55s cubic-bezier(.3,1.6,.5,1); transform-box: fill-box; transform-origin: 100% 100%; }
+.esc-lock .esc-lbody { transition: fill .4s; }
+.esc-lock.open .esc-shackle { transform: translateY(-9px) rotate(38deg); }
+.esc-lock.open .esc-lbody { fill: #2e9e5b; }
+.esc-spark { font-size: 18px; animation: esc-spark 1.1s ease-out forwards; }
+@keyframes esc-spark { from { opacity: 1; transform: translateY(0) scale(.6); } to { opacity: 0; transform: translateY(-34px) scale(1.3); } }
+.esc-win { animation: esc-flick 4s steps(1) infinite; }
+@keyframes esc-flick { 45% { opacity: .35; } 55% { opacity: 1; } }
+.esc-star { animation: esc-tw 3s ease-in-out infinite; }
+@keyframes esc-tw { 50% { opacity: .2; } }
+.esc-fly { animation: esc-fly 14s linear infinite; }
+@keyframes esc-fly { from { transform: translateX(-80px); } to { transform: translateX(800px); } }
+.esc-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .25rem; margin: .2rem 0 .7rem; }
+.esc-floor { grid-column: 1 / -1; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; opacity: .7; margin-top: .3rem; }
+.esc-tile { position: relative; min-width: 0; overflow: hidden; aspect-ratio: 1; display: grid; place-items: center; font-size: 1.05rem; border: 1px solid var(--gray-200, #ccc); border-radius: .4rem; background: color-mix(in srgb, currentColor 6%, transparent); color: inherit; padding: 0; cursor: pointer; }
+.esc-tile i { position: absolute; top: 1px; left: 4px; font: 700 .6rem/1 inherit; font-style: normal; opacity: .65; }
+.esc-tile.locked { filter: grayscale(1); opacity: .35; cursor: not-allowed; }
+.esc-tile.solved { background: color-mix(in srgb, var(--e-ok) 22%, transparent); border-color: var(--e-ok); }
+.esc-tile.solved::after { content: '✔'; position: absolute; right: 3px; bottom: 0; font-size: .7rem; color: var(--e-ok); font-weight: 900; }
+.esc-tile.cur { outline: 2px solid var(--e-acc); outline-offset: 1px; animation: esc-pulse 1.8s ease-in-out infinite; }
+@keyframes esc-pulse { 50% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--e-acc) 30%, transparent); } }
+.esc-clue { position: relative; background: #fffdf4; color: #2b2b2b; border: 1px solid #e6dfc4; border-left-width: 1px; border-radius: .15rem; padding: .45rem .55rem .5rem; box-shadow: 0 2px 5px rgba(0,0,0,.2); transform: rotate(-1.2deg); margin: .2rem .1rem .75rem; }
+.esc-clue:nth-of-type(even) { transform: rotate(1.1deg); }
+.esc-clue::before { content: '📍'; position: absolute; top: -.7rem; left: 50%; margin-left: -.6rem; font-size: 1.1rem; filter: drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
+.esc-clue.key { background: #fff3f1; border-color: #f0b5ae; box-shadow: 0 2px 6px rgba(214,69,69,.35); }
+.esc-clue.key::before { content: '📌'; }
+.esc-clue b, .esc-clue span { color: #2b2b2b; }
+.esc-av { width: 3rem; height: 3rem; border-radius: 50%; display: grid; place-items: center; font-size: 1.7rem; flex: none; border: 3px solid var(--c, #888); background: color-mix(in srgb, var(--c, #888) 18%, #fff); }
+.esc-sc { display: flex; gap: .7rem; align-items: flex-start; }
+.esc-sc > div { min-width: 0; }
+.esc-stamp { display: inline-block; border: 4px solid var(--e-ko); color: var(--e-ko); font-weight: 900; letter-spacing: .12em; padding: .15rem .8rem; transform: rotate(-8deg); border-radius: .3rem; font-size: 1.2rem; animation: esc-stampin .45s cubic-bezier(.2,1.8,.4,1) both; background: color-mix(in srgb, var(--e-ko) 8%, transparent); }
+@keyframes esc-stampin { from { opacity: 0; transform: rotate(-8deg) scale(2.4); } to { opacity: 1; transform: rotate(-8deg) scale(1); } }
+.esc-culprit { display: flex; gap: .9rem; align-items: center; flex-wrap: wrap; margin: .6rem 0; }
+.esc-culprit .esc-av { width: 4.2rem; height: 4.2rem; font-size: 2.4rem; }
+.esc-key { animation: esc-keypop .6s cubic-bezier(.2,1.8,.4,1) both; }
+@keyframes esc-keypop { from { opacity: 0; transform: scale(.3) rotate(-30deg); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .esc * { animation: none !important; transition: none !important; } }
 @media print { .esc button { display: none; } }
 </style>
 <script>
@@ -78,6 +125,95 @@
   var U = D.ui, P = D.puzzles;
   var S = { view: 'intro', i: 0, solved: {}, hints: {}, fails: {}, pts: {}, actSeen: {}, wrongAcc: 0, accPts: null, started: false, order: {} };
   var ephemeral = { streak: 0 };
+
+  // ------- arte SVG -------
+  var NS = 'http://www.w3.org/2000/svg';
+  function sv(tag, a, parent) { var n = document.createElementNS(NS, tag); for (var k in a) n.setAttribute(k, a[k]); if (parent) parent.appendChild(n); return n; }
+  var TONES = { hall: ['#cfe8ff', '#9cc7f0', '#7d8ea3'], hangar: ['#b9c6d6', '#8195ad', '#5d6b7d'], warm: ['#ffe9c7', '#f5c98a', '#a8825a'], server: ['#14323a', '#0b1d22', '#1f4650'], map: ['#fdf3d8', '#f1d9a0', '#b89a5f'], vault: ['#2b2f3a', '#171a22', '#3a3f4d'], clinic: ['#d9f2e4', '#a9dcc0', '#6fa386'], code: ['#2a2350', '#14102b', '#3b3370'], alarm: ['#3a1c22', '#1c0d11', '#5b2a33'], dawn: ['#ffd9a8', '#ff9e7a', '#7d5a6b'], night: ['#0e1740', '#1b2a63', '#0b1022'] };
+  var DARKT = { server: 1, vault: 1, code: 1, alarm: 1, night: 1 };
+  var sid = 0;
+  function bg(svg, tone, h) {
+    var t = TONES[tone], id = 'esg' + (++sid), defs = sv('defs', {}, svg), lg = sv('linearGradient', { id: id, x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
+    sv('stop', { offset: 0, 'stop-color': t[0] }, lg); sv('stop', { offset: 1, 'stop-color': t[1] }, lg);
+    sv('rect', { x: 0, y: 0, width: 720, height: h, fill: 'url(#' + id + ')' }, svg);
+    sv('rect', { x: 0, y: h - 38, width: 720, height: 38, fill: t[2] }, svg);
+    sv('rect', { x: 0, y: h - 38, width: 720, height: 3, fill: 'rgba(0,0,0,.25)' }, svg);
+  }
+  function detective(parent, x, y, sc) {
+    var g = sv('g', { transform: 'translate(' + x + ',' + y + ') scale(' + sc + ')' }, parent), d = sv('g', { 'class': 'esc-det-b' }, g);
+    sv('ellipse', { cx: 0, cy: 1, rx: 22, ry: 4, fill: 'rgba(0,0,0,.25)' }, g);
+    sv('rect', { x: -9, y: -24, width: 7, height: 24, fill: '#2b2b36' }, d); sv('rect', { x: 2, y: -24, width: 7, height: 24, fill: '#2b2b36' }, d);
+    sv('path', { d: 'M-17 -22 L-13 -66 Q0 -74 13 -66 L17 -22 Z', fill: '#b08a57' }, d);
+    sv('path', { d: 'M0 -68 L0 -22', stroke: '#8a6a3f', 'stroke-width': 2 }, d);
+    sv('rect', { x: -15, y: -44, width: 30, height: 5, fill: '#7a5a33' }, d);
+    sv('path', { d: 'M-7 -68 L0 -58 L7 -68 Z', fill: '#fff' }, d);
+    sv('circle', { cx: 0, cy: -80, r: 10, fill: '#f2c9a0' }, d);
+    sv('circle', { cx: 3.5, cy: -81, r: 1.3, fill: '#222' }, d);
+    sv('ellipse', { cx: 0, cy: -88, rx: 17, ry: 4, fill: '#4a3a2a' }, d);
+    sv('path', { d: 'M-10 -88 Q0 -107 10 -88 Z', fill: '#5a4733' }, d);
+    sv('line', { x1: 12, y1: -58, x2: 29, y2: -68, stroke: '#b08a57', 'stroke-width': 6, 'stroke-linecap': 'round' }, d);
+    sv('line', { x1: 31, y1: -70, x2: 37, y2: -74, stroke: '#333', 'stroke-width': 3 }, d);
+    sv('circle', { cx: 42, cy: -78, r: 9, fill: 'rgba(200,235,255,.55)', stroke: '#333', 'stroke-width': 2.5 }, d);
+    sv('path', { d: 'M37 -81 Q40 -85 45 -83', stroke: '#fff', 'stroke-width': 1.5, fill: 'none' }, d);
+    return g;
+  }
+  function padlock(parent, x, y, open) {
+    var g = sv('g', { 'class': 'esc-lock' + (open ? ' open' : ''), transform: 'translate(' + x + ',' + y + ')' }, parent);
+    sv('path', { 'class': 'esc-shackle', d: 'M-10 0 L-10 -13 A10 10 0 0 1 10 -13 L10 0', fill: 'none', stroke: '#aab', 'stroke-width': 5, 'stroke-linecap': 'round' }, g);
+    sv('rect', { 'class': 'esc-lbody', x: -17, y: 0, width: 34, height: 28, rx: 5, fill: '#d9a21b', stroke: 'rgba(0,0,0,.35)', 'stroke-width': 1.5 }, g);
+    sv('circle', { cx: 0, cy: 11, r: 3.5, fill: '#4a3300' }, g); sv('rect', { x: -1.5, y: 12, width: 3, height: 8, fill: '#4a3300' }, g);
+    return g;
+  }
+  function label(svg, text, dark) {
+    var w = Math.min(560, 22 + text.length * 8.6);
+    sv('rect', { x: 10, y: 10, width: w, height: 26, rx: 13, fill: dark ? 'rgba(255,255,255,.16)' : 'rgba(0,0,0,.45)' }, svg);
+    var t = sv('text', { x: 22, y: 28, fill: '#fff', 'font-size': 14, 'font-weight': 700, 'font-family': 'system-ui,sans-serif' }, svg); t.textContent = text;
+  }
+  function sceneSVG(p, num, open) {
+    var sc = p.scene || {}, H = 200, svg = sv('svg', { viewBox: '0 0 720 ' + H, 'class': 'esc-scene', role: 'img', 'aria-label': p.room });
+    bg(svg, sc.tone || 'hall', H);
+    if (sc.leds) for (var l = 0; l < 7; l++) sv('circle', { cx: 232 + l * 42, cy: 58 + (l % 2) * 14, r: 3.2, fill: l % 3 ? '#4cff8a' : '#ff5a5a', 'class': 'esc-led', style: 'animation-delay:' + (l * 0.23) + 's' }, svg);
+    if (sc.route) sv('path', { d: 'M262 140 Q370 38 478 140', fill: 'none', stroke: '#d64545', 'stroke-width': 3, 'class': 'esc-route' }, svg);
+    (sc.props || []).forEach(function (pr, k) {
+      var tx = sv('text', { x: pr[1], y: pr[2], 'font-size': pr[3], 'text-anchor': 'middle', 'class': 'esc-prop', style: 'animation-delay:' + (k * 0.12) + 's' }, svg); tx.textContent = pr[0];
+    });
+    detective(svg, 78, H - 34, 1.15);
+    padlock(svg, 662, H - 66, open);
+    label(svg, num + ' · ' + p.room, !!DARKT[sc.tone]);
+    return svg;
+  }
+  function openLock(svg) {
+    if (!svg) return;
+    var lk = svg.querySelector('.esc-lock'); if (lk) lk.setAttribute('class', 'esc-lock open');
+    for (var k = 0; k < 4; k++) { var s = sv('text', { x: 640 + k * 14, y: 110, 'class': 'esc-spark', style: 'animation-delay:' + (k * 0.12) + 's' }, svg); s.textContent = k % 2 ? '✨' : '⭐'; }
+  }
+  function introSVG() {
+    var H = 220, svg = sv('svg', { viewBox: '0 0 720 ' + H, 'class': 'esc-scene', role: 'img', 'aria-label': U.title });
+    bg(svg, 'night', H);
+    for (var s = 0; s < 22; s++) sv('circle', { cx: (s * 97 + 31) % 700 + 10, cy: (s * 53 + 17) % 90 + 8, r: s % 3 ? 1.2 : 1.9, fill: '#fff', 'class': 'esc-star', style: 'animation-delay:' + (s * 0.3) + 's' }, svg);
+    sv('circle', { cx: 620, cy: 52, r: 24, fill: '#fff6c9' }, svg); sv('circle', { cx: 610, cy: 46, r: 24, fill: '#0e1740', opacity: .0 }, svg);
+    var f = sv('text', { x: 0, y: 60, 'font-size': 34, 'class': 'esc-fly' }, svg); f.textContent = '✈️';
+    sv('rect', { x: 230, y: 62, width: 260, height: H - 100, fill: '#1b2340', stroke: '#2d3a6b', 'stroke-width': 2 }, svg);
+    sv('rect', { x: 220, y: 54, width: 280, height: 10, fill: '#2d3a6b' }, svg);
+    for (var r = 0; r < 4; r++) for (var c = 0; c < 8; c++) sv('rect', { x: 242 + c * 30, y: 76 + r * 22, width: 16, height: 12, fill: (r * 8 + c) % 5 === 0 ? '#ffd966' : '#26305e', 'class': (r * 8 + c) % 7 === 0 ? 'esc-win' : '' }, svg);
+    sv('rect', { x: 345, y: H - 80, width: 30, height: 42, fill: '#0b1022', stroke: '#ffd966', 'stroke-width': 2 }, svg);
+    var tx = sv('text', { x: 360, y: 52, 'text-anchor': 'middle', 'font-size': 13, fill: '#ffd966', 'font-weight': 700, 'font-family': 'system-ui,sans-serif' }, svg); tx.textContent = 'AEROLÍNEA · BASE DE DATOS';
+    detective(svg, 140, H - 34, 1.25);
+    return svg;
+  }
+  function endSVG() {
+    var H = 220, svg = sv('svg', { viewBox: '0 0 720 ' + H, 'class': 'esc-scene', role: 'img', 'aria-label': D.ending.title });
+    bg(svg, 'dawn', H);
+    sv('circle', { cx: 520, cy: 150, r: 46, fill: '#fff1b8' }, svg);
+    sv('rect', { x: 0, y: 150, width: 720, height: 70, fill: '#7d5a6b' }, svg);
+    sv('rect', { x: 560, y: 70, width: 120, height: 110, fill: '#3a2f4f' }, svg);
+    for (var r = 0; r < 3; r++) for (var c = 0; c < 4; c++) sv('rect', { x: 572 + c * 26, y: 82 + r * 28, width: 14, height: 14, fill: '#6a5a86' }, svg);
+    var fl = sv('text', { x: 0, y: 50, 'font-size': 32, 'class': 'esc-fly' }, svg); fl.textContent = '✈️';
+    detective(svg, 300, H - 34, 1.3);
+    ['✨', '🗝️', '🌅'].forEach(function (e, k) { var s = sv('text', { x: 130 + k * 70, y: 120 + (k % 2) * 20, 'font-size': 30, 'class': 'esc-prop', style: 'animation-delay:' + k * 0.2 + 's' }, svg); s.textContent = e; });
+    return svg;
+  }
+  function avatar(s) { var a = el('div', 'esc-av', s.avatar); a.style.setProperty('--c', s.color); a.setAttribute('aria-hidden', 'true'); return a; }
 
   function load() { try { var r = window.localStorage.getItem(KEY); if (r) { var o = JSON.parse(r); for (var k in o) S[k] = o[k]; } } catch (e) {} }
   function save() { try { window.localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
@@ -129,16 +265,18 @@
   function drawSide() {
     clear(side);
     side.appendChild(el('h4', null, U.rooms));
-    var ul = el('ul', 'esc-rooms');
+    var map = el('div', 'esc-tiles'), lastAct = 0;
     P.forEach(function (p, n) {
-      var li = el('li'); var b = el('button', 'esc-room' + (S.solved[p.id] ? ' solved' : '') + (S.view === 'puzzle' && S.i === n ? ' cur' : ''), String(n + 1));
-      b.type = 'button'; b.title = p.room;
+      if (p.act !== lastAct) { lastAct = p.act; var a = actOf(p.act); map.appendChild(el('div', 'esc-floor', a.unit + ' · ' + a.title.split('· ').pop())); }
       var open = S.solved[p.id] || n === firstUnsolved();
+      var b = el('button', 'esc-tile' + (S.solved[p.id] ? ' solved' : '') + (!open ? ' locked' : '') + (S.view === 'puzzle' && S.i === n ? ' cur' : ''));
+      b.type = 'button'; b.title = p.room; b.setAttribute('aria-label', (n + 1) + '. ' + p.room);
+      b.appendChild(el('i', null, String(n + 1))); b.appendChild(document.createTextNode(open ? (p.scene && p.scene.icon || '🔑') : '🔒'));
       b.disabled = !open || !S.started;
       b.addEventListener('click', function () { S.i = n; S.view = 'puzzle'; render(); });
-      li.appendChild(b); ul.appendChild(li);
+      map.appendChild(b);
     });
-    side.appendChild(ul);
+    side.appendChild(map);
     side.appendChild(el('h4', null, U.notebook));
     var any = false;
     P.forEach(function (p) {
@@ -161,11 +299,12 @@
   function dossier(parent) {
     parent.appendChild(el('h4', null, U.dossier));
     var g = el('div', 'esc-sus');
-    D.dossier.forEach(function (s) { var c = el('div', 'esc-card'); c.appendChild(el('b', null, s.name)); c.appendChild(el('em', null, s.role)); c.appendChild(rp(null, s.habit)); g.appendChild(c); });
+    D.dossier.forEach(function (s) { var c = el('div', 'esc-card esc-sc'); c.appendChild(avatar(s)); var w = el('div'); w.appendChild(el('b', null, s.name)); w.appendChild(el('em', null, s.role)); w.appendChild(rp(null, s.habit)); c.appendChild(w); g.appendChild(c); });
     parent.appendChild(g);
   }
 
   function vIntro() {
+    main.appendChild(introSVG());
     main.appendChild(el('h3', null, D.intro.title));
     D.intro.text.forEach(function (t) { main.appendChild(rp(null, t)); });
     var ul = el('ul', 'esc-rules'); D.intro.rules.forEach(function (r) { ul.appendChild(rp(null, r, 'li')); }); main.appendChild(ul);
@@ -195,6 +334,7 @@
   function vPuzzle() {
     var p = P[S.i], a = actOf(p.act);
     if (!S.solved[p.id] && !S.actSeen[a.id] && !P.some(function (q) { return q.act === p.act && S.solved[q.id]; })) { S.view = 'act'; render(); return; }
+    var sceneEl = sceneSVG(p, S.i + 1, !!S.solved[p.id]); main.appendChild(sceneEl);
     main.appendChild(el('h3', null, (S.i + 1) + '. ' + p.room));
     main.appendChild(el('div', 'esc-where', a.title + ' · ' + U.stars + ': ' + new Array(p.stars + 1).join('★') + new Array(4 - p.stars).join('☆')));
     main.appendChild(rp('esc-story', p.story));
@@ -207,7 +347,7 @@
     var btns = el('div', 'esc-btns'); var msg = el('div');
     var check = btn(U.check, function () {
       var r = ctl.read(); if (r === null) { show(msg, 'ko', U.pick_one); return; }
-      if (ctl.grade(r)) solve(p, ctl, msg, btns, check, hb, hints);
+      if (ctl.grade(r)) solve(p, ctl, msg, btns, check, hb, hints, sceneEl);
       else { S.fails[p.id] = (S.fails[p.id] || 0) + 1; ephemeral.streak++; show(msg, 'ko', U.ko + (ephemeral.streak >= 2 ? ' ' + U.ko2 : '')); drawTop(); save(); }
     });
     var hb = btn('', function () { var n = S.hints[p.id] || 0; if (n >= 3) return; S.hints[p.id] = n + 1; drawHints(); drawTop(); save(); }, true);
@@ -224,9 +364,9 @@
   function drawTop() { var m = top.querySelector('.esc-meta'); clear(m); m.appendChild(el('span', null, U.score + ': ' + total())); }
   function show(node, kind, text) { clear(node); node.className = 'esc-fb ' + kind; node.appendChild(rich(el('span'), text)); }
 
-  function solve(p, ctl, msg, btns, check, hb, hints) {
+  function solve(p, ctl, msg, btns, check, hb, hints, sceneEl) {
     S.solved[p.id] = true; S.pts[p.id] = pointsFor(p); ephemeral.streak = 0; ctl.lock(); save();
-    showSolved(p, msg, btns, check, hb); drawSide(); drawTop();
+    openLock(sceneEl); showSolved(p, msg, btns, check, hb); drawSide(); drawTop();
   }
   function showSolved(p, msg, btns, check, hb) {
     check.disabled = true; hb.disabled = true;
@@ -323,7 +463,7 @@
     var g = el('div', 'esc-sus'), nm = 'acc' + (++uid), inputs = [];
     D.dossier.forEach(function (s) {
       var l = el('label', 'esc-card'), r = el('input'); r.type = 'radio'; r.name = nm; r.value = s.id; inputs.push(r);
-      l.appendChild(r); l.appendChild(el('b', null, ' ' + s.name)); l.appendChild(el('em', null, s.role)); l.appendChild(rp(null, s.habit)); g.appendChild(l);
+      l.className = 'esc-card esc-sc'; r.style.display = 'none'; l.appendChild(r); l.appendChild(avatar(s)); var w = el('div'); w.appendChild(el('b', null, s.name)); w.appendChild(el('em', null, s.role)); w.appendChild(rp(null, s.habit)); l.appendChild(w); g.appendChild(l);
     });
     main.appendChild(g);
     var msg = el('div'); var b = el('div', 'esc-btns');
@@ -339,7 +479,10 @@
     var A = D.accusation, E = D.ending, t = total(), pc = Math.round(100 * t / MAX), rank = U.ranks[U.ranks.length - 1][1];
     for (var k = 0; k < U.ranks.length; k++) if (pc >= U.ranks[k][0]) { rank = U.ranks[k][1]; break; }
     main.appendChild(el('span', 'esc-tag', U.ending));
+    main.appendChild(endSVG());
     main.appendChild(el('h3', null, E.title));
+    var cul = D.dossier.filter(function (s) { return s.id === A.answer; })[0], cb = el('div', 'esc-culprit');
+    cb.appendChild(avatar(cul)); cb.appendChild(el('strong', null, cul.name)); cb.appendChild(el('span', 'esc-stamp', U.arrested)); cb.appendChild(el('span', 'esc-stamp', U.stamp)); main.appendChild(cb);
     main.appendChild(rp('esc-fb ok', A.right));
     main.appendChild(rp(null, E.text));
     main.appendChild(el('div', 'esc-where', U.final_score));
