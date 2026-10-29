@@ -16,22 +16,16 @@ En esta unidad aprenderás a reconocer las anomalías de un mal diseño, a ident
 {{< ra "RA6:b,c,e,g,h" >}}
 ### Temporalización
 
-La unidad ocupa **14 horas de aula** (6 de teoría y 8 de práctica). Es una unidad muy práctica: se aprende a normalizar normalizando.
+La unidad ocupa **2 horas de aula** (1 de teoría y 1 de práctica). Es una unidad **mínima**: en el aula se ven solo las ideas esenciales (anomalías, dependencias y las tres primeras formas normales). El resto de la teoría y las prácticas quedan como material de estudio y de ampliación.
 
-{{< sesiones unidad="UD04" horas="14" >}}
+{{< sesiones unidad="UD04" horas="2" >}}
 items:
-  - {h: 2, tipo: T, t: "Anomalías y dependencias funcionales", ref: "§1 y §2"}
-  - {h: 1, tipo: P, t: "Dependencias, cierres y claves", ref: "Práctica 4.2"}
-  - {h: 2, tipo: T, t: "Las formas normales: 1FN, 2FN, 3FN y FNBC", ref: "§3"}
-  - {h: 2, tipo: P, t: "Normalizar las facturas de un taller", ref: "Práctica 4.1"}
-  - {h: 1, tipo: T, t: "Descomposición sin pérdida y desnormalización controlada", ref: "§4 y §5"}
-  - {h: 1, tipo: T, t: "Restricciones no representables y procedimiento completo", ref: "§6 y §7"}
-  - {h: 2, tipo: P, t: "Reservas de un hotel rural", ref: "Práctica 4.4"}
-  - {h: 1, tipo: P, t: "¿En qué forma normal está?", ref: "Práctica 4.3"}
-  - {h: 1, tipo: P, t: "FNBC y dependencias perdidas", ref: "Práctica 4.5"}
-  - {h: 1, tipo: P, t: "Informe de normalización de EduGest", ref: "Proyecto EduGest-4"}
+  - {h: 1, tipo: T, t: "Anomalías, dependencias funcionales y formas normales (1FN a 3FN)", ref: "§1 a §3"}
+  - {h: 1, tipo: P, t: "Normalizar las facturas de un taller", ref: "Práctica 4.1"}
 autonomo:
-  - "Práctica 4.6 (¿normalizar o desnormalizar?)"
+  - "Prácticas 4.2 a 4.6 (dependencias, formas normales, reservas de un hotel, FNBC y desnormalización)"
+  - "Teoría §4 a §9 (descomposición sin pérdida, desnormalización y procedimiento completo)"
+  - "Proyecto EduGest · UD04 (informe de normalización)"
   - "Ejercicios resueltos y autoevaluación"
 {{< /sesiones >}}
 
@@ -314,7 +308,7 @@ Normalizar es **descomponer** una tabla en varias. Una descomposición correcta 
 | ALUMNO(nia, alumno, cod_grupo) + GRUPO(cod_grupo, tutor, cod_ciclo...) | cod_grupo | Sí, de GRUPO | ✅ |
 | A(nia, alumno, tutor) + B(alumno, cod_grupo) | alumno | No | ❌ Si dos alumnos se llaman igual, el `JOIN` mezcla sus grupos y genera filas falsas |
 
-Cuando lleguemos a la UD07 podrás comprobarlo en Oracle: la consulta que reconstruye la hoja original es un `JOIN` de todas las tablas normalizadas.
+Cuando lleguemos a la UD06 podrás comprobarlo en Oracle: la consulta que reconstruye la hoja original es un `JOIN` de todas las tablas normalizadas.
 
 ---
 
@@ -325,12 +319,12 @@ Cuando lleguemos a la UD07 podrás comprobarlo en Oracle: la consulta que recons
 | Situación | Ejemplo | Cómo se controla la redundancia |
 |---|---|---|
 | Sistemas analíticos (OLAP) | Tabla de hechos de matrículas con el nombre del ciclo repetido | Se carga por procesos ETL, no la modifica nadie |
-| Valores agregados muy consultados | Guardar `num_alumnos` en GRUPO | Trigger que lo actualiza (UD09) |
+| Valores agregados muy consultados | Guardar `num_alumnos` en GRUPO | Trigger que lo actualiza (UD08) |
 | Valores históricos que **deben** congelarse | Guardar el `precio` en cada línea de factura | No es redundancia: el precio del producto cambia, el de la factura no |
-| Bases de datos documentales | Incrustar los datos del ciclo en el documento del alumno (UD10) | El modelo se diseña según las consultas |
+| Bases de datos documentales | Incrustar los datos del ciclo en el documento del alumno (UD09) | El modelo se diseña según las consultas |
 
 > [!CAUTION]
-> Desnormalizar «porque los JOIN son lentos» sin haberlo medido es un error frecuente. Con índices adecuados (UD05 y UD07), un esquema normalizado responde rápido en la mayoría de los sistemas transaccionales.
+> Desnormalizar «porque los JOIN son lentos» sin haberlo medido es un error frecuente. Con índices adecuados (UD05 y UD06), un esquema normalizado responde rápido en la mayoría de los sistemas transaccionales.
 
 ---
 
@@ -463,6 +457,68 @@ Claves candidatas: **AC, BC, CD y CE**. Todos los atributos son primos, así que
   options: ["Sí, el precio ya está en PRODUCTO", "No, es un valor histórico distinto del precio actual", "Sí, incumple la 1FN", "Depende del SGBD"]
   answer: 1
   explain: "El precio de PRODUCTO cambia con el tiempo; el de la factura no debe cambiar. Son **hechos distintos**, así que no hay redundancia."
+{{< /quiz >}}
+
+### Autoevaluación ampliada
+
+Dos tests más para afianzar el tema. Corrige al terminar: cada pregunta explica por qué la respuesta es la correcta, y puedes reiniciar y repetirlos las veces que quieras.
+
+#### Test A · Anomalías y dependencias
+
+{{< quiz >}}
+- q: "Una tabla `PEDIDO(num, cliente, direccion_cliente, producto)` repite la dirección en cada pedido. ¿Qué anomalía puede provocar?"
+  options: ["De actualización: cambiar la dirección en unas filas y no en otras", "Ninguna", "Solo anomalías de consulta", "De conexión"]
+  answer: 0
+  explain: "La redundancia genera anomalías de actualización, inserción (no puedo guardar un cliente sin pedido) y borrado (al borrar el último pedido se pierde el cliente)."
+- q: "Si `dni → nombre` es una dependencia funcional, significa que…"
+  options: ["Dos filas con el mismo `dni` tienen siempre el mismo `nombre`", "Dos filas con el mismo nombre tienen el mismo dni", "El nombre es clave primaria", "El dni se calcula a partir del nombre"]
+  answer: 0
+  explain: "X → Y: el valor de X determina el de Y. No implica lo contrario."
+- q: "Una tabla está en **1FN** cuando…"
+  options: ["Todos sus atributos son atómicos y no hay grupos repetitivos", "No tiene claves foráneas", "Tiene al menos tres columnas", "No admite nulos"]
+  answer: 0
+  explain: "Una celda no puede contener listas («666111222, 965000000») ni haber columnas tel1, tel2, tel3."
+- q: "Una **dependencia parcial** aparece cuando…"
+  options: ["Un atributo no clave depende solo de una parte de la clave compuesta", "Un atributo depende de otro no clave", "Hay claves foráneas", "La tabla está vacía"]
+  answer: 0
+  explain: "Se elimina al pasar a 2FN, sacando esos atributos a una tabla con la parte de la clave de la que dependen."
+- q: "Una **dependencia transitiva** (A → B → C, con B no clave) se elimina para alcanzar la…"
+  options: ["1FN", "2FN", "3FN", "Ninguna"]
+  answer: 2
+  explain: "En 3FN, los atributos no clave dependen de la clave, de toda la clave y de nada más que la clave."
+- q: "¿Qué dependencia funcional hay en `MATRICULA(dni, cod_modulo, nombre_alumno, nota)` con clave (dni, cod_modulo)?"
+  options: ["`dni → nombre_alumno` (parcial: viola la 2FN)", "`nota → dni`", "`nombre_alumno → cod_modulo`", "Ninguna"]
+  answer: 0
+  explain: "El nombre depende solo de una parte de la clave. Hay que moverlo a la tabla ALUMNO."
+{{< /quiz >}}
+
+#### Test B · Normalización en la práctica
+
+{{< quiz >}}
+- q: "Una descomposición **sin pérdida de información** garantiza que…"
+  options: ["Al reunir las tablas con JOIN se recupera exactamente la tabla original", "Se ahorra espacio en disco siempre", "No hay claves foráneas", "Se pueden borrar los datos antiguos"]
+  answer: 0
+  explain: "Si se descompone mal, el JOIN puede producir tuplas espurias (filas que no existían)."
+- q: "¿Cuándo puede ser razonable **desnormalizar**?"
+  options: ["Nunca", "Para mejorar el rendimiento de consultas muy frecuentes, asumiendo el coste de mantener la coherencia", "Para ahorrar tiempo de diseño", "Cuando haya pocas filas"]
+  answer: 1
+  explain: "Es una decisión consciente y documentada, posterior a normalizar, y compensada con controles (triggers, procesos)."
+- q: "Una tabla `ALUMNO(dni, nombre, ciclo, tutor_ciclo)` donde `ciclo → tutor_ciclo`. ¿En qué forma normal falla?"
+  options: ["1FN", "2FN", "3FN", "Cumple todas"]
+  answer: 2
+  explain: "`tutor_ciclo` depende de `ciclo` (no clave): dependencia transitiva. Se crea una tabla CICLO(ciclo, tutor)."
+- q: "Si la clave primaria es **simple** (una sola columna) y la tabla está en 1FN, ¿puede haber dependencias parciales?"
+  options: ["Sí, siempre", "No: una dependencia parcial requiere clave compuesta, así que ya está en 2FN", "Solo si hay nulos", "Depende del gestor"]
+  answer: 1
+  explain: "Con clave simple es imposible depender de «parte» de la clave."
+- q: "La normalización **no** puede expresar por sí sola una regla como «un profesor no puede dar dos módulos a la misma hora». ¿Qué conviene hacer?"
+  options: ["Ignorarla", "Documentarla y decidir cómo controlarla (UNIQUE, CHECK, trigger o aplicación)", "Meterla en una tabla más", "Crear una vista"]
+  answer: 1
+  explain: "Las restricciones de negocio sobrantes se registran en el catálogo de restricciones y se implementan donde sea más fiable."
+- q: "Una tabla con atributo `telefonos = '666111222, 965000000'` incumple…"
+  options: ["La 1FN, por no ser atómico", "La 3FN", "La integridad referencial", "Nada"]
+  answer: 0
+  explain: "Se soluciona con una tabla TELEFONO(persona, numero), con una fila por teléfono."
 {{< /quiz >}}
 
 ## Referencias

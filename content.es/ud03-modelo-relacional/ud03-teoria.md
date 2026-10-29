@@ -19,9 +19,9 @@ En esta unidad se estudian minuciosamente los conceptos matemáticos y pragmáti
 
 ### Temporalización
 
-La unidad ocupa **17 horas de aula** (9 de teoría y 8 de práctica).
+La unidad ocupa **20 horas de aula** (9 de teoría y 11 de práctica).
 
-{{< sesiones unidad="UD03" horas="17" >}}
+{{< sesiones unidad="UD03" horas="20" >}}
 items:
   - {h: 2, tipo: T, t: "Relación, atributo, dominio, tupla, grado y cardinalidad. Claves", ref: "§1 y §2 · laboratorio de claves"}
   - {h: 2, tipo: T, t: "Restricciones e integridad referencial", ref: "§3 · simulador de integridad"}
@@ -30,13 +30,16 @@ items:
   - {h: 2, tipo: T, t: "Reglas de transformación (II): relaciones y jerarquías. Ejemplos", ref: "§4.4 a §4.9 y §5"}
   - {h: 2, tipo: P, t: "Biblioteca: del E/R a las tablas", ref: "Práctica 3.1"}
   - {h: 1, tipo: T, t: "Restricciones no representables y herramientas", ref: "§6 y §7"}
-  - {h: 2, tipo: P, t: "Tres formas de transformar una jerarquía", ref: "Práctica 3.3"}
-  - {h: 1, tipo: P, t: "Catálogo de restricciones de un hotel", ref: "Práctica 3.5"}
+  - {h: 1, tipo: P, t: "Tres formas de transformar una jerarquía", ref: "Práctica 3.3"}
   - {h: 2, tipo: P, t: "Modelo lógico de EduGest", ref: "§8 y proyecto EduGest-3"}
+  - {h: 2, tipo: P, t: "Tareas de transformación 1 y 2 (naviera e instituto)", ref: "Tareas 1 y 2"}
+  - {h: 1, tipo: P, t: "Ingeniería inversa de un esquema", ref: "Práctica 3.4"}
+  - {h: 1, tipo: P, t: "Catálogo de restricciones de un hotel", ref: "Práctica 3.5"}
+  - {h: 1, tipo: P, t: "Banco de ejercicios de transformación (bloque 1)", ref: "Ejercicios 1 a 5"}
 autonomo:
-  - "Tareas de transformación 1 a 7 (E/R → relacional)"
-  - "Práctica 3.4 (ingeniería inversa) y práctica 3.6"
-  - "Banco de 20 ejercicios"
+  - "Tareas de transformación 3 a 7 (E/R → relacional)"
+  - "Práctica 3.6"
+  - "Banco de 20 ejercicios (bloques 2 y 3)"
 {{< /sesiones >}}
 
 > [!IMPORTANT]
@@ -558,12 +561,12 @@ El modelo relacional expresa muy bien las restricciones **de una fila** (atribut
 
 | Regla de negocio (EduGest) | ¿Por qué no basta con una restricción declarativa? | Dónde se implementará |
 |---|---|---|
-| El jefe de un departamento debe pertenecer a ese departamento | Compara una fila de `DEPARTAMENTO` con una fila de `PROFESOR` | Trigger (UD09) |
-| Un alumno solo se matricula en módulos del ciclo de su grupo | Implica `ALUMNO`, `GRUPO` y `MODULO` | Trigger o procedimiento de matrícula (UD09) |
-| Un profesor no supera 20 horas lectivas semanales | Es una **suma** sobre varias filas de `IMPARTE` | Trigger compuesto o procedimiento (UD09) |
-| No hay faltas anteriores a la fecha de matrícula | Compara dos tablas | Trigger (UD09) |
+| El jefe de un departamento debe pertenecer a ese departamento | Compara una fila de `DEPARTAMENTO` con una fila de `PROFESOR` | Trigger (UD08) |
+| Un alumno solo se matricula en módulos del ciclo de su grupo | Implica `ALUMNO`, `GRUPO` y `MODULO` | Trigger o procedimiento de matrícula (UD08) |
+| Un profesor no supera 20 horas lectivas semanales | Es una **suma** sobre varias filas de `IMPARTE` | Trigger compuesto o procedimiento (UD08) |
+| No hay faltas anteriores a la fecha de matrícula | Compara dos tablas | Trigger (UD08) |
 | La nota final se pone en múltiplos de 0,25 | Es una regla de **una fila** | Regla de fila: `nota_final` múltiplo de 0,25 (se declara en la UD05) |
-| Un grupo no supera 30 alumnos | Es un **recuento** sobre varias filas | Procedimiento de matrícula o trigger (UD09) |
+| Un grupo no supera 30 alumnos | Es un **recuento** sobre varias filas | Procedimiento de matrícula o trigger (UD08) |
 
 Cada restricción se documenta con un formato fijo:
 
@@ -573,7 +576,7 @@ R1. Jefe de departamento
     Tablas: DEPARTAMENTO(id_jefe), PROFESOR(id_profesor, id_departamento)
     Momento de comprobación: al asignar o cambiar el jefe y al cambiar de
                              departamento a un profesor.
-    Implementación prevista: trigger (UD09).
+    Implementación prevista: trigger (UD08).
 ```
 
 > [!IMPORTANT]
@@ -596,7 +599,7 @@ El diseño lógico se representa con un **diagrama relacional**: un rectángulo 
 > Cuando termines el proyecto en la UD05, dibuja el diagrama de las tablas que hayas creado y compáralo con tu diseño lógico. Si no coinciden, hay un error en uno de los dos.
 
 {{% details title="Pista: ¿dónde se comprueba una regla de negocio?" %}}
-Hazte tres preguntas, en este orden: ¿se decide mirando **una sola fila**? → regla de fila (se declara en el propio esquema). ¿Compara una columna con la **clave de otra tabla**? → clave ajena. ¿Necesita **sumar, contar o comparar varias filas** o tablas? → trigger o procedimiento en el servidor (UD09). Solo si ninguna de las tres sirve debe vivir en la aplicación.
+Hazte tres preguntas, en este orden: ¿se decide mirando **una sola fila**? → regla de fila (se declara en el propio esquema). ¿Compara una columna con la **clave de otra tabla**? → clave ajena. ¿Necesita **sumar, contar o comparar varias filas** o tablas? → trigger o procedimiento en el servidor (UD08). Solo si ninguna de las tres sirve debe vivir en la aplicación.
 {{% /details %}}
 
 ---
@@ -740,9 +743,71 @@ Responde a las preguntas y pulsa **Corregir**. Cada respuesta incluye una explic
   answer: 2
   explain: "Cambiar una clave primaria referenciada rompe la integridad referencial si el gestor no propaga el cambio. Por eso se prefieren claves **estables**, que no cambien nunca."
 - q: "La regla «un profesor no puede impartir más de 20 horas semanales» se debe..."
-  options: ["Expresar con una regla de fila en la tabla IMPARTE", "Documentar como restricción no representable e implementar con programación en el servidor (UD09)", "Ignorar, ya que no forma parte del modelo", "Resolver con una clave ajena"]
+  options: ["Expresar con una regla de fila en la tabla IMPARTE", "Documentar como restricción no representable e implementar con programación en el servidor (UD08)", "Ignorar, ya que no forma parte del modelo", "Resolver con una clave ajena"]
   answer: 1
-  explain: "Afecta a la **suma** de varias filas. Una regla de fila solo ve la fila actual. Se documenta (RA6.h) y se implementa con un trigger o un procedimiento (UD09)."
+  explain: "Afecta a la **suma** de varias filas. Una regla de fila solo ve la fila actual. Se documenta (RA6.h) y se implementa con un trigger o un procedimiento (UD08)."
+{{< /quiz >}}
+
+### Autoevaluación ampliada
+
+Dos tests más para afianzar el tema. Corrige al terminar: cada pregunta explica por qué la respuesta es la correcta, y puedes reiniciar y repetirlos las veces que quieras.
+
+#### Test A · Conceptos del modelo relacional
+
+{{< quiz >}}
+- q: "En el modelo relacional, una **tupla** es…"
+  options: ["Una columna de la tabla", "Una fila de la relación", "El nombre de la tabla", "Una clave foránea"]
+  answer: 1
+  explain: "Relación = tabla, tupla = fila, atributo = columna, dominio = conjunto de valores permitidos."
+- q: "Una **clave candidata** es…"
+  options: ["Cualquier columna que no admite nulos", "Un conjunto mínimo de atributos que identifica de forma única cada tupla", "La clave que se elige para la clave foránea", "Una clave que todavía no se ha creado"]
+  answer: 1
+  explain: "De entre las candidatas se elige una como clave primaria; las demás son claves alternativas (UNIQUE)."
+- q: "¿Qué garantiza la **integridad de entidad**?"
+  options: ["Que la clave primaria no sea nula ni se repita", "Que las claves foráneas apunten a filas existentes", "Que los datos estén cifrados", "Que no haya duplicados en ninguna columna"]
+  answer: 0
+  explain: "La integridad referencial es la que exige que las claves foráneas apunten a filas existentes."
+- q: "La **integridad referencial** impide…"
+  options: ["Que una clave foránea contenga un valor que no existe como clave en la tabla referenciada", "Que una tabla tenga más de 10 columnas", "Que haya valores nulos en cualquier columna", "Que se borre la base de datos"]
+  answer: 0
+  explain: "Una clave foránea puede ser nula (si la participación es opcional), pero si tiene valor debe existir en la tabla padre."
+- q: "Si se borra una fila de la tabla padre que tiene filas hijas y la política es **CASCADE**…"
+  options: ["Se rechaza el borrado", "Se borran también las filas hijas", "Las hijas pasan a NULL", "No ocurre nada"]
+  answer: 1
+  explain: "RESTRICT rechaza; CASCADE propaga el borrado; SET NULL pone la clave foránea a nulo."
+- q: "Una clave primaria **compuesta** es la que…"
+  options: ["Se forma con varias columnas", "Contiene letras y números", "Es autonumérica", "Se calcula con una función"]
+  answer: 0
+  explain: "Es habitual en las tablas intermedias de relaciones N:M: la clave es la pareja de claves foráneas."
+{{< /quiz >}}
+
+#### Test B · Transformación E/R → relacional
+
+{{< quiz >}}
+- q: "En una relación **1:N** entre `GRUPO` (1) y `ALUMNO` (N), ¿dónde va la clave foránea?"
+  options: ["En `GRUPO`", "En `ALUMNO`", "En una tabla nueva", "En ninguna parte"]
+  answer: 1
+  explain: "La clave foránea se coloca en el lado N, apuntando a la clave primaria del lado 1."
+- q: "Una relación **N:M** con atributo propio (`nota` en la matrícula) se transforma en…"
+  options: ["Un atributo de ALUMNO", "Una tabla con las dos claves foráneas como clave primaria y la columna `nota`", "Dos tablas independientes sin relación", "Una vista"]
+  answer: 1
+  explain: "La nota depende de la pareja alumno-módulo, de modo que solo puede vivir en la tabla de la relación."
+- q: "En una **relación 1:1 con participación opcional en un lado**, lo más habitual es poner la clave foránea…"
+  options: ["En el lado de participación obligatoria, evitando nulos", "Siempre en el lado opcional", "En ambas tablas", "En una tercera tabla siempre"]
+  answer: 0
+  explain: "Así la clave foránea nunca es nula. La alternativa de fundir las dos tablas es válida si ambas participan siempre."
+- q: "Una **entidad débil** por identificación genera una tabla cuya clave primaria es…"
+  options: ["Solo su atributo discriminador", "La clave de la entidad fuerte más su discriminador", "Un número aleatorio", "No tiene clave"]
+  answer: 1
+  explain: "Por ejemplo, la línea de pedido tiene clave (num_pedido, num_linea)."
+- q: "Para una jerarquía con pocos atributos específicos y que apenas se consulta por subtipo, ¿qué estrategia es razonable?"
+  options: ["Tabla única con un atributo discriminador", "Una tabla por cada subtipo sin supertipo, siempre", "No transformarla", "Una tabla por atributo"]
+  answer: 0
+  explain: "La tabla única es simple y rápida, a costa de admitir nulos en los atributos específicos; hay que controlar con CHECK que sean coherentes con el tipo."
+- q: "Una restricción como «un empleado no puede ser jefe de sí mismo» en el modelo lógico…"
+  options: ["Se expresa a veces con CHECK; si no, queda como regla documentada para controlar en la aplicación o con un trigger", "No importa", "Siempre se expresa con una clave primaria", "Se elimina del diseño"]
+  answer: 0
+  explain: "Las restricciones que el modelo no puede expresar deben documentarse y decidir dónde se controlan."
 {{< /quiz >}}
 
 ## Referencias

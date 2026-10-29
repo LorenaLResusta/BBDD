@@ -1,12 +1,12 @@
 ---
-title: "Definición y control de datos - Prácticas"
+title: "DDL: definición de datos - Prácticas"
 weight: 2
 bookToc: true
 ---
 
 # UD05 · Prácticas
 
-{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,f" >}}
+{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,b,c,d,e,f,h" "RA3:h" >}}
 
 | Práctica | Tipo | Nivel | CE principales |
 |---|---|---|---|
@@ -94,7 +94,7 @@ Una tienda online necesita guardar sus **clientes** y sus **pedidos**. Un client
     ORDER  BY table_name, constraint_type;
     ```
 
-5. **Inserta datos correctos** (en la UD08 estudiarás `INSERT` en detalle):
+5. **Inserta datos correctos** (en la UD07 estudiarás `INSERT` en detalle):
 
     ```sql
     INSERT INTO cliente (id_cliente, nombre, email) VALUES (1, 'Ana Ruiz', 'ana@mail.com');
@@ -325,7 +325,7 @@ CREATE TABLE administrativo (
 ```
 
 > [!TIP]
-> **Truco profesional para garantizar una jerarquía disyunta solo con restricciones.** El discriminador `tipo` se repite en cada subclase con un `CHECK` de valor fijo, y la clave ajena es compuesta (id, tipo). Así, un empleado de tipo `'ADM'` no puede aparecer en `PROGRAMADOR`: la clave ajena (id, 'PRO') no encontraría su fila. Lo que **no** garantiza es que la jerarquía sea **total** (que todo empleado esté en alguna subclase).
+> **Truco profesional para garantizar una jerarquía disjunta solo con restricciones.** El discriminador `tipo` se repite en cada subclase con un `CHECK` de valor fijo, y la clave ajena es compuesta (id, tipo). Así, un empleado de tipo `'ADM'` no puede aparecer en `PROGRAMADOR`: la clave ajena (id, 'PRO') no encontraría su fila. Lo que **no** garantiza es que la jerarquía sea **total** (que todo empleado esté en alguna subclase).
 
 #### Comprobación
 
@@ -612,7 +612,7 @@ Carga el esquema de referencia: ejecuta [los scripts del proyecto](/guia/proyect
         WITH READ ONLY;
     ```
 
-4. **Vista de matrículas legibles**, que oculta los identificadores internos (adelanto de la UD07):
+4. **Vista de matrículas legibles**, que oculta los identificadores internos (adelanto de la UD06):
 
     ```sql
     CREATE OR REPLACE VIEW v_matricula_detalle AS
@@ -663,7 +663,7 @@ Carga el esquema de referencia: ejecuta [los scripts del proyecto](/guia/proyect
 
 #### Ampliación
 
-Crea una vista `v_resumen_grupo` con el código de grupo, el ciclo, el turno y el nombre completo del tutor (los grupos sin tutor también deben aparecer). Necesitarás un `LEFT JOIN`, que verás en la UD07.
+Crea una vista `v_resumen_grupo` con el código de grupo, el ciclo, el turno y el nombre completo del tutor (los grupos sin tutor también deben aparecer). Necesitarás un `LEFT JOIN`, que verás en la UD06.
 
 ---
 
@@ -778,7 +778,7 @@ Completa la matriz con ✅ (permitido) o ❌ (error y código). Tus resultados d
 |---|---|
 | El usuario recibe un rol pero sigue sin poder hacer nada | Los roles se activan al **iniciar sesión**: desconecta y vuelve a conectar |
 | `ORA-01045: user lacks CREATE SESSION privilege` | Falta `CREATE SESSION` en el rol o en el usuario |
-| Un procedimiento PL/SQL no ve una tabla aunque el rol tenga permiso (UD09) | En los procedimientos con derechos del definidor, los privilegios recibidos **a través de roles** no cuentan: hay que concederlos directamente al usuario |
+| Un procedimiento PL/SQL no ve una tabla aunque el rol tenga permiso (UD08) | En los procedimientos con derechos del definidor, los privilegios recibidos **a través de roles** no cuentan: hay que concederlos directamente al usuario |
 
 #### Ampliación
 
@@ -846,7 +846,7 @@ Sintaxis de otro SGBD (2), orden de creación (1), coma olvidada (1), `CHECK` no
 
 1. **Tu script de esquema.** Implementa en Oracle **tu** modelo relacional normalizado (EduGest-4) en un script relanzable, con todas las restricciones con nombre, índices sobre las claves ajenas y comentarios en las tablas.
 2. **Comparación.** Ejecuta tu script en un usuario `EDUGEST_MIO` y el de referencia en `EDUGEST`. Usa el diccionario (`USER_TAB_COLUMNS`, `USER_CONSTRAINTS`) para listar las diferencias y justifica las tuyas en `05-implementacion.md`.
-3. **Restricciones implementables con DDL.** De tu catálogo de restricciones (UD03-UD04), implementa todas las que se puedan expresar con `CHECK` o índices únicos basados en función. Marca las que quedan para la UD09.
+3. **Restricciones implementables con DDL.** De tu catálogo de restricciones (UD03-UD04), implementa todas las que se puedan expresar con `CHECK` o índices únicos basados en función. Marca las que quedan para la UD08.
 4. **Seguridad.** Entrega `03_seguridad.sql` (práctica 5.7 completa, con perfiles) y la matriz de pruebas.
 5. **Vistas e índices.** Entrega `04_vistas_indices.sql` (práctica 5.6 y su ampliación).
 6. **Diagrama.** Genera con SQL Developer Data Modeler el diagrama relacional del esquema `EDUGEST` por ingeniería inversa e inclúyelo en la documentación.

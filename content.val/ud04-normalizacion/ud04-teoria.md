@@ -16,22 +16,16 @@ En esta unitat aprendràs a reconéixer les anomalies d'un mal disseny, a identi
 {{< ra "RA6:b,c,e,g,h" >}}
 ### Temporalització
 
-La unitat ocupa **14 hores d'aula** (6 de teoria i 8 de pràctica). És una unitat molt pràctica: s'aprén a normalitzar normalitzant.
+La unitat ocupa **2 hores d'aula** (1 de teoria i 1 de pràctica). És una unitat **mínima**: a l'aula es veuen només les idees essencials (anomalies, dependències i les tres primeres formes normals). La resta de la teoria i les pràctiques queden com a material d'estudi i d'ampliació.
 
-{{< sesiones unidad="UD04" horas="14" >}}
+{{< sesiones unidad="UD04" horas="2" >}}
 items:
-  - {h: 2, tipo: T, t: "Anomalies i dependències funcionals", ref: "§1 i §2"}
-  - {h: 1, tipo: P, t: "Dependències, tancaments i claus", ref: "Pràctica 4.2"}
-  - {h: 2, tipo: T, t: "Les formes normals: 1FN, 2FN, 3FN i FNBC", ref: "§3"}
-  - {h: 2, tipo: P, t: "Normalitzar les factures d'un taller", ref: "Pràctica 4.1"}
-  - {h: 1, tipo: T, t: "Descomposició sense pèrdua i desnormalització controlada", ref: "§4 i §5"}
-  - {h: 1, tipo: T, t: "Restriccions no representables i procediment complet", ref: "§6 i §7"}
-  - {h: 2, tipo: P, t: "Reserves d'un hotel rural", ref: "Pràctica 4.4"}
-  - {h: 1, tipo: P, t: "En quina forma normal està?", ref: "Pràctica 4.3"}
-  - {h: 1, tipo: P, t: "FNBC i dependències perdudes", ref: "Pràctica 4.5"}
-  - {h: 1, tipo: P, t: "Informe de normalització d'EduGest", ref: "Projecte EduGest-4"}
+  - {h: 1, tipo: T, t: "Anomalies, dependències funcionals i formes normals (1FN a 3FN)", ref: "§1 a §3"}
+  - {h: 1, tipo: P, t: "Normalitzar les factures d'un taller", ref: "Pràctica 4.1"}
 autonomo:
-  - "Pràctica 4.6 (normalitzar o desnormalitzar?)"
+  - "Pràctiques 4.2 a 4.6 (dependències, formes normals, reserves d'un hotel, FNBC i desnormalització)"
+  - "Teoria §4 a §9 (descomposició sense pèrdua, desnormalització i procediment complet)"
+  - "Projecte EduGest · UD04 (informe de normalització)"
   - "Exercicis resolts i autoavaluació"
 {{< /sesiones >}}
 
@@ -314,7 +308,7 @@ Normalitzar és **descompondre** una taula en diverses. Una descomposició corre
 | ALUMNO(nia, alumno, cod_grupo) + GRUPO(cod_grupo, tutor, cod_ciclo...) | cod_grupo | Sí, de GRUPO | ✅ |
 | A(nia, alumno, tutor) + B(alumno, cod_grupo) | alumno | No | ❌ Si dos alumnes es diuen igual, el `JOIN` barreja els seus grups i genera files falses |
 
-Quan arribem a la UD07 podràs comprovar-ho en Oracle: la consulta que reconstruïx el full original és un `JOIN` de totes les taules normalitzades.
+Quan arribem a la UD06 podràs comprovar-ho en Oracle: la consulta que reconstruïx el full original és un `JOIN` de totes les taules normalitzades.
 
 ---
 
@@ -325,12 +319,12 @@ Quan arribem a la UD07 podràs comprovar-ho en Oracle: la consulta que reconstru
 | Situació | Exemple | Com es controla la redundància |
 |---|---|---|
 | Sistemes analítics (OLAP) | Taula de fets de matrícules amb el nom del cicle repetit | Es carrega per processos ETL, no la modifica ningú |
-| Valors agregats molt consultats | Guardar `num_alumnos` en GRUPO | Trigger que l'actualitza (UD09) |
+| Valors agregats molt consultats | Guardar `num_alumnos` en GRUPO | Trigger que l'actualitza (UD08) |
 | Valors històrics que **han de** congelar-se | Guardar el `precio` en cada línia de factura | No és redundància: el preu del producte canvia, el de la factura no |
-| Bases de dades documentals | Incrustar les dades del cicle en el document de l'alumne (UD10) | El model es dissenya segons les consultes |
+| Bases de dades documentals | Incrustar les dades del cicle en el document de l'alumne (UD09) | El model es dissenya segons les consultes |
 
 > [!CAUTION]
-> Desnormalitzar «perquè els JOIN són lents» sense haver-ho mesurat és un error freqüent. Amb índexs adequats (UD05 i UD07), un esquema normalitzat respon ràpid en la majoria dels sistemes transaccionals.
+> Desnormalitzar «perquè els JOIN són lents» sense haver-ho mesurat és un error freqüent. Amb índexs adequats (UD05 i UD06), un esquema normalitzat respon ràpid en la majoria dels sistemes transaccionals.
 
 ---
 
@@ -463,6 +457,68 @@ Claus candidates: **AC, BC, CD i CE**. Tots els atributs són primers, així que
   options: ["Sí, el preu ja està en PRODUCTO", "No, és un valor històric distint del preu actual", "Sí, incompleix la 1FN", "Depén del SGBD"]
   answer: 1
   explain: "El preu de PRODUCTO canvia amb el temps; el de la factura no ha de canviar. Són **fets distints**, així que no hi ha redundància."
+{{< /quiz >}}
+
+### Autoavaluació ampliada
+
+Dos tests més per a reforçar el tema. Corregeix en acabar: cada pregunta explica per què la resposta és la correcta, i pots reiniciar-los i repetir-los tantes voltes com vulgues.
+
+#### Test A · Anomalies i dependències
+
+{{< quiz >}}
+- q: "Una taula `COMANDA(num, client, adreca_client, producte)` repeteix l'adreça en cada comanda. Quina anomalia pot provocar?"
+  options: ["D'actualització: canviar l'adreça en unes files i en altres no", "Cap", "Només anomalies de consulta", "De connexió"]
+  answer: 0
+  explain: "La redundància genera anomalies d'actualització, d'inserció (no puc guardar un client sense comanda) i d'esborrat (en esborrar l'última comanda es perd el client)."
+- q: "Si `dni → nom` és una dependència funcional, significa que…"
+  options: ["Dues files amb el mateix `dni` tenen sempre el mateix `nom`", "Dues files amb el mateix nom tenen el mateix dni", "El nom és clau primària", "El dni es calcula a partir del nom"]
+  answer: 0
+  explain: "X → Y: el valor de X determina el d'Y. No implica el contrari."
+- q: "Una taula està en **1FN** quan…"
+  options: ["Tots els seus atributs són atòmics i no hi ha grups repetitius", "No té claus foranes", "Té almenys tres columnes", "No admet nuls"]
+  answer: 0
+  explain: "Una cel·la no pot contindre llistes («666111222, 965000000») ni haver-hi columnes tel1, tel2, tel3."
+- q: "Una **dependència parcial** apareix quan…"
+  options: ["Un atribut no clau depén només d'una part de la clau composta", "Un atribut depén d'un altre no clau", "Hi ha claus foranes", "La taula està buida"]
+  answer: 0
+  explain: "S'elimina en passar a 2FN, traient eixos atributs a una taula amb la part de la clau de la qual depenen."
+- q: "Una **dependència transitiva** (A → B → C, amb B no clau) s'elimina per a aconseguir la…"
+  options: ["1FN", "2FN", "3FN", "Cap"]
+  answer: 2
+  explain: "En 3FN, els atributs no clau depenen de la clau, de tota la clau i de res més que la clau."
+- q: "Quina dependència funcional hi ha en `MATRICULA(dni, cod_modul, nom_alumne, nota)` amb clau (dni, cod_modul)?"
+  options: ["`dni → nom_alumne` (parcial: viola la 2FN)", "`nota → dni`", "`nom_alumne → cod_modul`", "Cap"]
+  answer: 0
+  explain: "El nom depén només d'una part de la clau. Cal moure'l a la taula ALUMNE."
+{{< /quiz >}}
+
+#### Test B · Normalització en la pràctica
+
+{{< quiz >}}
+- q: "Una descomposició **sense pèrdua d'informació** garanteix que…"
+  options: ["En reunir les taules amb JOIN es recupera exactament la taula original", "S'estalvia espai en disc sempre", "No hi ha claus foranes", "Es poden esborrar les dades antigues"]
+  answer: 0
+  explain: "Si es descompon malament, el JOIN pot produir tuples espúries (files que no existien)."
+- q: "Quan pot ser raonable **desnormalitzar**?"
+  options: ["Mai", "Per a millorar el rendiment de consultes molt freqüents, assumint el cost de mantindre la coherència", "Per a estalviar temps de disseny", "Quan hi haja poques files"]
+  answer: 1
+  explain: "És una decisió conscient i documentada, posterior a normalitzar, i compensada amb controls (triggers, processos)."
+- q: "Una taula `ALUMNE(dni, nom, cicle, tutor_cicle)` on `cicle → tutor_cicle`. En quina forma normal falla?"
+  options: ["1FN", "2FN", "3FN", "Les compleix totes"]
+  answer: 2
+  explain: "`tutor_cicle` depén de `cicle` (no clau): dependència transitiva. Es crea una taula CICLE(cicle, tutor)."
+- q: "Si la clau primària és **simple** (una sola columna) i la taula està en 1FN, pot haver-hi dependències parcials?"
+  options: ["Sí, sempre", "No: una dependència parcial requereix clau composta, així que ja està en 2FN", "Només si hi ha nuls", "Depén del gestor"]
+  answer: 1
+  explain: "Amb clau simple és impossible dependre d'una «part» de la clau."
+- q: "La normalització **no** pot expressar per si sola una regla com «un professor no pot donar dos mòduls a la mateixa hora». Què convé fer?"
+  options: ["Ignorar-la", "Documentar-la i decidir com controlar-la (UNIQUE, CHECK, trigger o aplicació)", "Posar-la en una taula més", "Crear una vista"]
+  answer: 1
+  explain: "Les restriccions de negoci sobrants es registren en el catàleg de restriccions i s'implementen on siga més fiable."
+- q: "Una taula amb atribut `telefons = '666111222, 965000000'` incompleix…"
+  options: ["La 1FN, per no ser atòmic", "La 3FN", "La integritat referencial", "Res"]
+  answer: 0
+  explain: "Es soluciona amb una taula TELEFON(persona, numero), amb una fila per telèfon."
 {{< /quiz >}}
 
 ## Referències

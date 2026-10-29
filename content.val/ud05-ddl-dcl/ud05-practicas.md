@@ -1,12 +1,12 @@
 ---
-title: "Definició i control de dades - Pràctiques"
+title: "DDL: definició de dades - Pràctiques"
 weight: 2
 bookToc: true
 ---
 
 # UD05 · Pràctiques
 
-{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,f" >}}
+{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,b,c,d,e,f,h" "RA3:h" >}}
 
 | Pràctica | Tipus | Nivell | CE principals |
 |---|---|---|---|
@@ -94,7 +94,7 @@ Una botiga en línia necessita guardar els seus **clients** i les seues **comand
     ORDER  BY table_name, constraint_type;
     ```
 
-5. **Inserix dades correctes** (a la UD08 estudiaràs `INSERT` amb detall):
+5. **Inserix dades correctes** (a la UD07 estudiaràs `INSERT` amb detall):
 
     ```sql
     INSERT INTO cliente (id_cliente, nombre, email) VALUES (1, 'Ana Ruiz', 'ana@mail.com');
@@ -612,7 +612,7 @@ Carrega l'esquema de referència: executa [els scripts del projecte](/guia/proye
         WITH READ ONLY;
     ```
 
-4. **Vista de matrícules llegibles**, que oculta els identificadors interns (avanç de la UD07):
+4. **Vista de matrícules llegibles**, que oculta els identificadors interns (avanç de la UD06):
 
     ```sql
     CREATE OR REPLACE VIEW v_matricula_detalle AS
@@ -663,7 +663,7 @@ Carrega l'esquema de referència: executa [els scripts del projecte](/guia/proye
 
 #### Ampliació
 
-Crea una vista `v_resumen_grupo` amb el codi de grup, el cicle, el torn i el nom complet del tutor (els grups sense tutor també han d'aparéixer). Necessitaràs un `LEFT JOIN`, que veuràs a la UD07.
+Crea una vista `v_resumen_grupo` amb el codi de grup, el cicle, el torn i el nom complet del tutor (els grups sense tutor també han d'aparéixer). Necessitaràs un `LEFT JOIN`, que veuràs a la UD06.
 
 ---
 
@@ -778,7 +778,7 @@ Completa la matriu amb ✅ (permés) o ❌ (error i codi). Els teus resultats ha
 |---|---|
 | L'usuari rep un rol però continua sense poder fer res | Els rols s'activen en **iniciar sessió**: desconnecta i torna a connectar |
 | `ORA-01045: user lacks CREATE SESSION privilege` | Falta `CREATE SESSION` en el rol o en l'usuari |
-| Un procediment PL/SQL no veu una taula encara que el rol tinga permís (UD09) | En els procediments amb drets del definidor, els privilegis rebuts **a través de rols** no compten: cal concedir-los directament a l'usuari |
+| Un procediment PL/SQL no veu una taula encara que el rol tinga permís (UD08) | En els procediments amb drets del definidor, els privilegis rebuts **a través de rols** no compten: cal concedir-los directament a l'usuari |
 
 #### Ampliació
 
@@ -846,7 +846,7 @@ Sintaxi d'un altre SGBD (2), ordre de creació (1), coma oblidada (1), `CHECK` n
 
 1. **El teu script d'esquema.** Implementa en Oracle **el teu** model relacional normalitzat (EduGest-4) en un script relanzable, amb totes les restriccions amb nom, índexs sobre les claus alienes i comentaris en les taules.
 2. **Comparació.** Executa el teu script en un usuari `EDUGEST_MIO` i el de referència en `EDUGEST`. Usa el diccionari (`USER_TAB_COLUMNS`, `USER_CONSTRAINTS`) per a llistar les diferències i justifica les teues en `05-implementacion.md`.
-3. **Restriccions implementables amb DDL.** Del teu catàleg de restriccions (UD03-UD04), implementa totes les que es puguen expressar amb `CHECK` o índexs únics basats en funció. Marca les que queden per a la UD09.
+3. **Restriccions implementables amb DDL.** Del teu catàleg de restriccions (UD03-UD04), implementa totes les que es puguen expressar amb `CHECK` o índexs únics basats en funció. Marca les que queden per a la UD08.
 4. **Seguretat.** Lliura `03_seguridad.sql` (pràctica 5.7 completa, amb perfils) i la matriu de proves.
 5. **Vistes i índexs.** Lliura `04_vistas_indices.sql` (pràctica 5.6 i la seua ampliació).
 6. **Diagrama.** Genera amb SQL Developer Data Modeler el diagrama relacional de l'esquema `EDUGEST` per enginyeria inversa i inclou-lo en la documentació.

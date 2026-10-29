@@ -19,9 +19,9 @@ Su objetivo prioritario es modelar y estructurar la semántica de la informació
 
 ### Temporalización
 
-La unidad ocupa **19 horas de aula** (12 de teoría y 7 de práctica). Cada sesión aparece señalada en la página con una franja de color.
+La unidad ocupa **26 horas de aula** (12 de teoría y 14 de práctica). Es una de las unidades **prioritarias** del módulo: un buen diseño conceptual condiciona todo lo que viene después. Cada sesión aparece señalada en la página con una franja de color.
 
-{{< sesiones unidad="UD02" horas="19" >}}
+{{< sesiones unidad="UD02" horas="26" >}}
 items:
   - {h: 2, tipo: T, t: "Ciclo de vida del diseño. Entidades fuertes y débiles", ref: "§1 y §2.1"}
   - {h: 2, tipo: T, t: "Atributos y relaciones: grado y roles", ref: "§2.2 y §2.3"}
@@ -33,11 +33,15 @@ items:
   - {h: 1, tipo: T, t: "Metodología en cinco pasos y ejemplos resueltos", ref: "§5 y §6"}
   - {h: 1, tipo: T, t: "Notaciones y herramientas de modelado", ref: "§7"}
   - {h: 2, tipo: P, t: "Plataforma de streaming", ref: "Práctica 2.3"}
+  - {h: 2, tipo: P, t: "Autoescuela: ternaria o agregación", ref: "Práctica 2.6"}
+  - {h: 2, tipo: P, t: "Ingeniería inversa: del albarán a las entidades", ref: "Práctica 2.9"}
+  - {h: 3, tipo: P, t: "Banco de ejercicios: bloques 1 y 2, en clase", ref: "Ejercicios 1 a 15"}
   - {h: 2, tipo: P, t: "Modelo conceptual de EduGest", ref: "§8 y proyecto EduGest-2"}
 autonomo:
-  - "Práctica 2.4 (clínica veterinaria con jerarquías)"
-  - "Retos 2.5 y 2.6, retos avanzados 2.7 a 2.10 (entrevista ambigua, historia, ingeniería inversa y comparación de diseños) y retos de requisitos 2.11 a 2.14 (festival, editorial, taller aeronáutico y comunidad de propietarios)"
-  - "Banco de ejercicios (30 enunciados)"
+  - "Retos 2.8 y 2.10 a 2.14 (alquiler, comparación de diseños, festival, editorial, taller aeronáutico y comunidad de propietarios)"
+  - "Banco de ejercicios: bloques 3 a 5 (ejercicios 16 a 35)"
+  - "Práctica 2.5 (revisión de un diseño defectuoso)"
+  - "Prácticas 2.4 (clínica veterinaria con jerarquías) y 2.7 (almazara: la entrevista que no lo dice todo)"
 {{< /sesiones >}}
 
 > [!NOTE]
@@ -729,9 +733,9 @@ Responde a las preguntas y pulsa **Corregir**. Cada respuesta incluye una explic
   answer: 2
   explain: "La nota depende de la **pareja** alumno-módulo (y del curso académico). Por eso es un atributo de la relación."
 - q: "Todo vehículo de una flota es un turismo o una furgoneta, nunca las dos cosas. ¿Cómo es la jerarquía?"
-  options: ["Parcial y solapada", "Total y disyunta", "Parcial y disyunta", "Total y solapada"]
+  options: ["Parcial y solapada", "Total y disjunta", "Parcial y disjunta", "Total y solapada"]
   answer: 1
-  explain: "**Total** porque todo vehículo pertenece a alguna subclase; **disyunta** porque no puede pertenecer a las dos a la vez."
+  explain: "**Total** porque todo vehículo pertenece a alguna subclase; **disjunta** porque no puede pertenecer a las dos a la vez."
 - q: "En notación de pata de gallo, ¿qué indica el símbolo `o{` junto a una entidad?"
   options: ["Exactamente uno", "Cero o uno", "Uno o muchos", "Cero o muchos"]
   answer: 3
@@ -744,6 +748,68 @@ Responde a las preguntas y pulsa **Corregir**. Cada respuesta incluye una explic
   options: ["Ninguno, más relaciones dan más información", "Una relación redundante que se deduce de las otras dos", "Una entidad débil mal identificada", "Falta una jerarquía"]
   answer: 1
   explain: "Si el ciclo de un alumno se deduce de su grupo, la relación directa es **redundante** y puede producir inconsistencias (que el alumno esté en un grupo de DAM y en el ciclo DAW)."
+{{< /quiz >}}
+
+### Autoevaluación ampliada
+
+Dos tests más para afianzar el tema. Corrige al terminar: cada pregunta explica por qué la respuesta es la correcta, y puedes reiniciar y repetirlos las veces que quieras.
+
+#### Test A · Elementos del modelo E/R
+
+{{< quiz >}}
+- q: "En un diagrama E/R, un **atributo identificador** (clave) de una entidad es…"
+  options: ["Cualquier atributo obligatorio", "El atributo, o conjunto de atributos, que distingue de forma única cada ocurrencia de la entidad", "El atributo con más caracteres", "El que aparece primero en la lista"]
+  answer: 1
+  explain: "La clave identifica sin ambigüedad cada ocurrencia: un DNI para una persona, la matrícula para un coche."
+- q: "Un atributo **multivaluado** es el que…"
+  options: ["Puede tomar varios valores para una misma ocurrencia (p. ej., los teléfonos de un cliente)", "Tiene varios tipos de dato", "Se calcula a partir de otros", "Se repite en varias entidades"]
+  answer: 0
+  explain: "Al pasar a tablas, un atributo multivaluado se convierte en una tabla aparte. No confundir con el compuesto (dirección = calle + número + CP)."
+- q: "La edad calculada a partir de la fecha de nacimiento es un atributo…"
+  options: ["Compuesto", "Multivaluado", "Derivado", "Identificador"]
+  answer: 2
+  explain: "Un atributo derivado se obtiene de otros y, en general, no se almacena: se calcula cuando hace falta."
+- q: "Si cada **EMPLEADO** trabaja en un único **DEPARTAMENTO** y un departamento tiene muchos empleados, la cardinalidad entre ambos es…"
+  options: ["1:1", "1:N (departamento a empleado)", "N:M", "0:0"]
+  answer: 1
+  explain: "Un departamento (1) tiene muchos empleados (N). La clave del lado 1 acaba como clave foránea en el lado N."
+- q: "Una relación **N:M** entre `ALUMNO` y `MODULO` casi siempre acaba en el modelo relacional como…"
+  options: ["Una clave foránea en ALUMNO", "Una clave foránea en MODULO", "Una tabla intermedia con las claves de ambos", "Un atributo multivaluado"]
+  answer: 2
+  explain: "La tabla intermedia (matrícula) tiene como clave compuesta las claves de las dos entidades y puede llevar atributos propios, como la nota."
+- q: "La cardinalidad **(0,N)** en el extremo de una entidad significa…"
+  options: ["Participación obligatoria, un solo valor", "Participación opcional: puede no estar relacionada con ninguna ocurrencia y puede estarlo con muchas", "Participación obligatoria con muchas", "La relación no existe"]
+  answer: 1
+  explain: "El primer número es el mínimo (0 = opcional, 1 = obligatoria) y el segundo el máximo (1 o N)."
+{{< /quiz >}}
+
+#### Test B · Entidades débiles, jerarquías y casos
+
+{{< quiz >}}
+- q: "¿Cuál de estos es un buen ejemplo de **entidad débil**?"
+  options: ["`CLIENTE`", "`LINEA_PEDIDO`, identificada por el número de línea dentro de su `PEDIDO`", "`PRODUCTO`", "`PROVEEDOR`"]
+  answer: 1
+  explain: "La línea no se identifica sola: necesita el pedido al que pertenece (pedido 7, línea 1)."
+- q: "En una jerarquía **total y exclusiva** de `PERSONA` en `ALUMNO` y `PROFESOR`…"
+  options: ["Toda persona es alumno o profesor, y nunca ambos", "Una persona puede ser ambos y también ninguno", "Solo hay alumnos", "No se puede transformar a tablas"]
+  answer: 0
+  explain: "Total: no hay personas fuera de los subtipos. Exclusiva (disjunta): ningún caso pertenece a los dos."
+- q: "Una relación **reflexiva** (o recursiva) es aquella que…"
+  options: ["Relaciona una entidad consigo misma, como `EMPLEADO` supervisa a `EMPLEADO`", "Relaciona tres entidades", "No tiene atributos", "Siempre es 1:1"]
+  answer: 0
+  explain: "Los roles (jefe/subordinado) distinguen los dos extremos de la relación."
+- q: "¿Qué ocurre cuando una relación necesita **tres entidades a la vez** (profesor, módulo, grupo) y la información solo tiene sentido en conjunto?"
+  options: ["Se usa una relación ternaria (o se reifica en una entidad)", "Se ignora una de las entidades", "Se dibuja con colores", "Se convierte en atributo"]
+  answer: 0
+  explain: "Una ternaria no equivale a tres binarias: la combinación concreta (qué profesor da qué módulo a qué grupo) se perdería."
+- q: "En el análisis de requisitos, el cliente dice: «de cada alumno guardamos su edad». ¿Qué es lo más recomendable?"
+  options: ["Guardar la edad tal cual", "Guardar la fecha de nacimiento y derivar la edad", "No guardar nada", "Guardar la edad y la fecha de nacimiento"]
+  answer: 1
+  explain: "La edad cambia cada año; la fecha de nacimiento no. Guardar el dato primitivo evita información obsoleta."
+- q: "¿Cuál es la secuencia correcta del diseño de bases de datos?"
+  options: ["Físico → lógico → conceptual", "Conceptual → lógico → físico", "Lógico → conceptual → físico", "Implementación → requisitos → modelo"]
+  answer: 1
+  explain: "Primero se entiende el problema (E/R), luego se traduce al modelo del SGBD (relacional) y por último se concreta en el gestor (tipos, índices, almacenamiento)."
 {{< /quiz >}}
 
 ## Referencias

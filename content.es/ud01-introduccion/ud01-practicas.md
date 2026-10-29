@@ -424,7 +424,7 @@ La jefatura de estudios quiere saber si el porcentaje de aprobados en *Bases de 
 - [ ] La respuesta del punto 5 menciona el impacto en el rendimiento y los datos históricos.
 
 > [!TIP]
-> Lo que acabas de hacer con la tabla dinámica es una **consulta resumen**. En la UD07 la escribirás en SQL con `GROUP BY` y `AVG`.
+> Lo que acabas de hacer con la tabla dinámica es una **consulta resumen**. En la UD06 la escribirás en SQL con `GROUP BY` y `AVG`.
 {{% /comprobacion %}}
 
 ---

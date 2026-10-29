@@ -1,10 +1,10 @@
 ---
-title: "Definició i control de dades"
+title: "DDL: definició de dades"
 weight: 1
 bookToc: true
 ---
 
-# UD05 · Definició i control de dades (DDL i DCL)
+# UD05 · DDL: definició de dades (i control amb DCL)
 
 ## Resum del tema
 
@@ -15,30 +15,33 @@ Fins ara hem **dissenyat**. En esta unitat **implementem**: convertim l'esquema 
 
 Tots els exemples usen **Oracle AI Database 26ai Free**. Quan una característica siga pròpia d'Oracle o d'una versió concreta, s'indica.
 
-{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,f" >}}
+{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,b,c,d,e,f,h" "RA3:h" >}}
 
 ### Temporalització
 
-La unitat ocupa **17 hores d'aula** (9 de teoria i 8 de pràctica).
+La unitat ocupa **35 hores d'aula** (7 de teoria i 28 de pràctica).
 
-{{< sesiones unidad="UD05" horas="17" >}}
+{{< sesiones unidad="UD05" horas="35" >}}
 items:
   - {h: 1, tipo: T, t: "SQL i Oracle. Emmagatzematge de la informació", ref: "§1 i §2"}
-  - {h: 2, tipo: T, t: "Tipus de dades d'Oracle", ref: "§3 · calculadora de NUMBER(p, s)"}
-  - {h: 2, tipo: T, t: "CREATE TABLE i restriccions d'integritat", ref: "§4 i §5 · constructor de CREATE TABLE"}
-  - {h: 2, tipo: P, t: "Primeres taules i restriccions en Oracle", ref: "Pràctica 5.1"}
-  - {h: 2, tipo: P, t: "Del diagrama de Chen al DDL", ref: "Pràctica 5.2"}
+  - {h: 1, tipo: T, t: "Tipus de dades d'Oracle", ref: "§3 · calculadora de NUMBER(p, s)"}
+  - {h: 1, tipo: T, t: "CREATE TABLE i restriccions d'integritat", ref: "§4 i §5 · constructor de CREATE TABLE"}
+  - {h: 3, tipo: P, t: "Primeres taules i restriccions a Oracle", ref: "Pràctica 5.1"}
+  - {h: 3, tipo: P, t: "Del diagrama de Chen al DDL", ref: "Pràctica 5.2"}
   - {h: 1, tipo: T, t: "Modificar i eliminar l'estructura (ALTER, DROP)", ref: "§6"}
-  - {h: 1, tipo: P, t: "Evolució de l'esquema amb ALTER", ref: "Pràctica 5.5"}
+  - {h: 2, tipo: P, t: "Evolució de l'esquema amb ALTER", ref: "Pràctica 5.5"}
   - {h: 1, tipo: T, t: "Seqüències, identitat, índexs i vistes", ref: "§7, §8 i §9"}
-  - {h: 1, tipo: P, t: "Índexs, vistes i seqüències en EduGest", ref: "Pràctica 5.6"}
-  - {h: 2, tipo: T, t: "Usuaris, rols i privilegis. Diccionari de dades i eines", ref: "§10 a §12 · taller de privilegis"}
-  - {h: 1, tipo: P, t: "Usuaris, rols i privilegis en EduGest", ref: "Pràctica 5.7"}
-  - {h: 1, tipo: P, t: "Implementació d'EduGest", ref: "Projecte EduGest-5"}
+  - {h: 2, tipo: P, t: "Índexs, vistes i seqüències a EduGest", ref: "Pràctica 5.6"}
+  - {h: 1, tipo: T, t: "Usuaris, rols i privilegis. Diccionari de dades", ref: "§10 a §12 · taller de privilegis"}
+  - {h: 2, tipo: P, t: "Usuaris, rols i privilegis a EduGest", ref: "Pràctica 5.7"}
+  - {h: 3, tipo: P, t: "Implementació d'EduGest", ref: "Projecte EduGest-5"}
+  - {h: 1, tipo: T, t: "Repàs de restriccions i errors freqüents en DDL", ref: "§5 i §13"}
+  - {h: 3, tipo: P, t: "Biblioteca: script complet i bateria de proves", ref: "Pràctica 5.3"}
+  - {h: 4, tipo: P, t: "Sis casos per a implementar", ref: "Pràctica 5.4"}
+  - {h: 3, tipo: P, t: "Depurar un script defectuós", ref: "Pràctica 5.8"}
+  - {h: 3, tipo: E, t: "Prova i revisió de la 1a avaluació", ref: ""}
 autonomo:
-  - "Pràctica 5.3 (biblioteca: script complet i bateria de proves)"
-  - "Pràctica 5.4 (sis casos per a implementar)"
-  - "Pràctica 5.8 (depurar un script defectuós)"
+  - "Ampliacions de les pràctiques 5.1 a 5.8 i autoavaluació"
 {{< /sesiones >}}
 
 > [!IMPORTANT]
@@ -73,8 +76,8 @@ Abans de ser una empresa de bases de dades, Larry Ellison, Bob Miner i Ed Oates 
 |---|---|---|---|
 | **DDL** | `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `RENAME`, `COMMENT` | Definir l'estructura | UD05 |
 | **DCL** | `GRANT`, `REVOKE` | Controlar l'accés | UD05 |
-| **DML** | `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `MERGE` | Consultar i modificar dades | UD06 a UD08 |
-| **TCL** | `COMMIT`, `ROLLBACK`, `SAVEPOINT` | Controlar transaccions | UD08 |
+| **DML** | `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `MERGE` | Consultar i modificar dades | UD06 a UD07 |
+| **TCL** | `COMMIT`, `ROLLBACK`, `SAVEPOINT` | Controlar transaccions | UD07 |
 
 > [!WARNING]
 > En Oracle, **cada sentència DDL executa un `COMMIT` implícit** abans i després d'executar-se. Si tenies canvis de dades pendents i llances un `CREATE TABLE`, eixos canvis queden confirmats i ja no podràs desfer-los amb `ROLLBACK`.
@@ -121,7 +124,7 @@ CREATE TABLE producto (
 - Les paraules reservades i els identificadors **no distingeixen majúscules**: `CREATE TABLE Alumno` crea la taula `ALUMNO`. Oracle guarda els noms en majúscules en el diccionari.
 - Si escrius un identificador entre **cometes dobles** (`"Alumno"`), Oracle respecta majúscules i espais, i hauràs d'usar sempre les cometes. **Evita-ho.**
 - Els identificadors poden tindre fins a **128 bytes** (des d'Oracle 12.2), comencen per lletra i poden contindre lletres, números, `_`, `$` i `#`.
-- Cada sentència acaba en `;`. Els blocs PL/SQL (UD09) acaben a més amb `/` en una línia.
+- Cada sentència acaba en `;`. Els blocs PL/SQL (UD08) acaben a més amb `/` en una línia.
 - Comentaris: `-- hasta el final de la línea` i `/* de varias líneas */`.
 - Les cadenes van entre **cometes simples**: `'DAM'`. Per a incloure una cometa, es duplica: `'Sant Joan d''Alacant'`.
 
@@ -405,7 +408,7 @@ CONSTRAINT ck_reserva_fechas  CHECK (fecha_salida > fecha_entrada)
 > [!WARNING]
 > Si `nota_final` és `NULL`, la condició `nota_final BETWEEN 0 AND 10` és **desconeguda** i el `CHECK` **l'accepta**. Si la columna ha de tindre valor, afig `NOT NULL`.
 >
-> Un `CHECK` **no** pot usar subconsultes, ni consultar altres taules, ni cridar `SYSDATE`. Les regles que ho necessiten són restriccions no representables (UD03, apartat 6) i s'implementen amb triggers (UD09).
+> Un `CHECK` **no** pot usar subconsultes, ni consultar altres taules, ni cridar `SYSDATE`. Les regles que ho necessiten són restriccions no representables (UD03, apartat 6) i s'implementen amb triggers (UD08).
 
 ### 5.5 Consultar les restriccions en el diccionari
 
@@ -520,7 +523,7 @@ TRUNCATE TABLE falta_asistencia;            -- buida la taula; no es pot desfer
 
 | Sentència | Esborra | Estructura | Es pot desfer? |
 |---|---|---|---|
-| `DELETE FROM t` (DML, UD08) | Files (totes o algunes) | Es manté | Sí, amb `ROLLBACK` |
+| `DELETE FROM t` (DML, UD07) | Files (totes o algunes) | Es manté | Sí, amb `ROLLBACK` |
 | `TRUNCATE TABLE t` | Totes les files | Es manté | **No** (és DDL) |
 | `DROP TABLE t` | Taula i dades | Desapareix | Només des de la paperera |
 | `DROP TABLE t PURGE` | Taula i dades | Desapareix | **No** |
@@ -607,7 +610,7 @@ DROP INDEX ix_alumno_apellidos_nombre;
 | Columnes usades per a ordenar resultats grans | Columnes que es modifiquen constantment |
 
 > [!IMPORTANT]
-> Un índex **accelera les lectures** però **alenteix les escriptures**: cada `INSERT`, `UPDATE` o `DELETE` ha d'actualitzar també tots els índexs de la taula, i a més ocupa espai. Indexar és una decisió de **disseny físic**: la UD07 ensenya a comprovar amb el pla d'execució si un índex s'usa.
+> Un índex **accelera les lectures** però **alenteix les escriptures**: cada `INSERT`, `UPDATE` o `DELETE` ha d'actualitzar també tots els índexs de la taula, i a més ocupa espai. Indexar és una decisió de **disseny físic**: la UD06 ensenya a comprovar amb el pla d'execució si un índex s'usa.
 
 ---
 
@@ -932,6 +935,68 @@ El criteri RA2.h demana usar **assistents, eines gràfiques i els llenguatges DD
   options: ["Perquè Oracle no permet claus alienes sense índex", "Perquè Oracle no el crea automàticament i accelera els JOIN i els esborrats en la taula pare", "Perquè convertix la clau aliena en única", "No convé mai"]
   answer: 1
   explain: "Oracle indexa automàticament PK i UNIQUE, però no les FK. Sense índex, cada esborrat en la taula pare recorre la taula filla completa i bloqueja més del necessari."
+{{< /quiz >}}
+
+### Autoavaluació ampliada
+
+Dos tests més per a reforçar el tema. Corregeix en acabar: cada pregunta explica per què la resposta és la correcta, i pots reiniciar-los i repetir-los tantes voltes com vulgues.
+
+#### Test A · Tipus, taules i restriccions (Oracle)
+
+{{< quiz >}}
+- q: "A Oracle, quin tipus de dada és el recomanat per a cadenes de longitud variable?"
+  options: ["`CHAR`", "`VARCHAR2`", "`TEXT`", "`STRING`"]
+  answer: 1
+  explain: "`VARCHAR2(n)` és el tipus de text variable d'Oracle. `CHAR(n)` omple amb blancs fins a n; `TEXT` i `STRING` no existeixen a Oracle."
+- q: "Què fa `NUMBER(7,2)`?"
+  options: ["Guarda fins a 7 dígits en total, 2 d'ells decimals (màxim 99999,99)", "Guarda 7 enters i 2 decimals (fins a 9999999,99)", "Guarda una cadena de 7 caràcters", "Guarda una data"]
+  answer: 0
+  explain: "El primer número és la precisió (dígits totals); el segon, l'escala (decimals). Queden 5 dígits per a la part entera."
+- q: "Quina restricció impedeix que una columna tinga valors repetits però **permet** nuls?"
+  options: ["`PRIMARY KEY`", "`UNIQUE`", "`NOT NULL`", "`CHECK`"]
+  answer: 1
+  explain: "`PRIMARY KEY` equival a `UNIQUE` + `NOT NULL`. A Oracle, `UNIQUE` admet diversos nuls."
+- q: "Què fa `ALTER TABLE alumne ADD CONSTRAINT ck_nota CHECK (nota BETWEEN 0 AND 10)`?"
+  options: ["Afig una columna", "Afig una regla que rebutja notes fora del rang 0-10", "Esborra les notes invàlides existents", "Crea un índex"]
+  answer: 1
+  explain: "Si ja hagueren files que no complisquen la regla, la sentència fallaria (llevat que es cree amb `NOVALIDATE`)."
+- q: "Quina és la sentència correcta per a eliminar una taula i les restriccions de clau forana que la referencien?"
+  options: ["`DELETE TABLE t`", "`DROP TABLE t CASCADE CONSTRAINTS`", "`REMOVE TABLE t`", "`TRUNCATE TABLE t CASCADE`"]
+  answer: 1
+  explain: "`DROP TABLE` és DDL i no es pot desfer amb ROLLBACK (llevat de la paperera de reciclatge amb `FLASHBACK`)."
+- q: "Què passa si defineixes una clau forana amb `ON DELETE CASCADE` i esborres la fila pare?"
+  options: ["Es rebutja l'esborrat", "S'esborren també les files filles", "Les filles queden amb la clau a NULL", "S'esborra la taula filla"]
+  answer: 1
+  explain: "`ON DELETE SET NULL` posaria la clau forana a nul. Sense clàusula, Oracle rebutja l'esborrat (ORA-02292)."
+{{< /quiz >}}
+
+#### Test B · Objectes, privilegis i diccionari
+
+{{< quiz >}}
+- q: "Per a què serveix una **seqüència** (`CREATE SEQUENCE`)?"
+  options: ["Per a ordenar files", "Per a generar valors numèrics únics, típicament per a claus primàries", "Per a copiar taules", "Per a xifrar dades"]
+  answer: 1
+  explain: "Des d'Oracle 12c també hi ha columnes identitat (`GENERATED ... AS IDENTITY`), que usen una seqüència interna."
+- q: "Un **índex** en una columna…"
+  options: ["Accelera certes cerques però ocupa espai i alenteix les escriptures", "Sempre accelera tot", "Impedeix valors repetits sempre", "Reemplaça la clau primària"]
+  answer: 0
+  explain: "Oracle crea automàticament un índex per a cada PRIMARY KEY i UNIQUE; les claus foranes convé indexar-les explícitament si es consulten per elles."
+- q: "Una **vista** és…"
+  options: ["Una còpia física de la taula", "Una consulta guardada amb nom que s'usa com si fora una taula", "Un tipus d'índex", "Un usuari especial"]
+  answer: 1
+  explain: "Les vistes simplifiquen consultes i limiten quines columnes o files veu cada usuari. No emmagatzemen dades (llevat de les vistes materialitzades)."
+- q: "Quina sentència dona permís de lectura sobre la taula `alumne` a l'usuari `ana`?"
+  options: ["`GRANT SELECT ON alumne TO ana;`", "`ALLOW SELECT alumne ana;`", "`REVOKE SELECT ON alumne FROM ana;`", "`CREATE USER ana SELECT;`"]
+  answer: 0
+  explain: "`GRANT` concedeix i `REVOKE` retira. És DCL (control de dades)."
+- q: "El principi del **mínim privilegi** diu que…"
+  options: ["Cada usuari ha de tindre només els permisos imprescindibles per al seu treball", "Tots els usuaris han de ser DBA", "Els permisos es concedeixen per defecte a tots", "Els privilegis s'hereten del sistema operatiu"]
+  answer: 0
+  explain: "Redueix el dany possible davant d'errors o accessos indeguts. Els **rols** ajuden a agrupar privilegis."
+- q: "Quina vista del diccionari de dades permet veure les taules de l'usuari actual?"
+  options: ["`USER_TABLES`", "`ALL_USERS_ONLY`", "`TABLES_NOW`", "`DUAL`"]
+  answer: 0
+  explain: "`USER_*` mostra els objectes propis, `ALL_*` els accessibles i `DBA_*` tots (requereix privilegis)."
 {{< /quiz >}}
 
 ## Referències

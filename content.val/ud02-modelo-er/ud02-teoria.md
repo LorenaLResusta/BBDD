@@ -19,9 +19,9 @@ El seu objectiu prioritari és modelar i estructurar la semàntica de la informa
 
 ### Temporalització
 
-La unitat ocupa **19 hores d'aula** (12 de teoria i 7 de pràctica). Cada sessió apareix assenyalada en la pàgina amb una franja de color.
+La unitat ocupa **26 hores d'aula** (12 de teoria i 14 de pràctica). És una de les unitats **prioritàries** del mòdul: un bon disseny conceptual condiciona tot el que ve després. Cada sessió apareix assenyalada en la pàgina amb una franja de color.
 
-{{< sesiones unidad="UD02" horas="19" >}}
+{{< sesiones unidad="UD02" horas="26" >}}
 items:
   - {h: 2, tipo: T, t: "Cicle de vida del disseny. Entitats fortes i febles", ref: "§1 i §2.1"}
   - {h: 2, tipo: T, t: "Atributs i relacions: grau i rols", ref: "§2.2 i §2.3"}
@@ -33,11 +33,15 @@ items:
   - {h: 1, tipo: T, t: "Metodologia en cinc passos i exemples resolts", ref: "§5 i §6"}
   - {h: 1, tipo: T, t: "Notacions i eines de modelatge", ref: "§7"}
   - {h: 2, tipo: P, t: "Plataforma de streaming", ref: "Pràctica 2.3"}
+  - {h: 2, tipo: P, t: "Autoescola: ternària o agregació", ref: "Pràctica 2.6"}
+  - {h: 2, tipo: P, t: "Enginyeria inversa: de l'albarà a les entitats", ref: "Pràctica 2.9"}
+  - {h: 3, tipo: P, t: "Banc d'exercicis: blocs 1 i 2, a classe", ref: "Exercicis 1 a 15"}
   - {h: 2, tipo: P, t: "Model conceptual d'EduGest", ref: "§8 i projecte EduGest-2"}
 autonomo:
-  - "Pràctica 2.4 (clínica veterinària amb jerarquies)"
-  - "Reptes 2.5 i 2.6, reptes avançats 2.7 a 2.10 (entrevista ambigua, història, enginyeria inversa i comparació de dissenys) i reptes de requisits 2.11 a 2.14 (festival, editorial, taller aeronàutic i comunitat de propietaris)"
-  - "Banc d'exercicis (30 enunciats)"
+  - "Reptes 2.8 i 2.10 a 2.14 (lloguer, comparació de dissenys, festival, editorial, taller aeronàutic i comunitat de propietaris)"
+  - "Banc d'exercicis: blocs 3 a 5 (exercicis 16 a 35)"
+  - "Pràctica 2.5 (revisió d'un disseny defectuós)"
+  - "Pràctiques 2.4 (clínica veterinària amb jerarquies) i 2.7 (almàssera: l'entrevista que no ho diu tot)"
 {{< /sesiones >}}
 
 > [!NOTE]
@@ -744,6 +748,68 @@ Respon a les preguntes i prem **Corregir**. Cada resposta inclou una explicació
   options: ["Cap, més relacions donen més informació", "Una relació redundant que es deduïx de les altres dos", "Una entitat feble mal identificada", "Falta una jerarquia"]
   answer: 1
   explain: "Si el cicle d'un alumne es deduïx del seu grup, la relació directa és **redundant** i pot produir inconsistències (que l'alumne estiga en un grup de DAM i en el cicle DAW)."
+{{< /quiz >}}
+
+### Autoavaluació ampliada
+
+Dos tests més per a reforçar el tema. Corregeix en acabar: cada pregunta explica per què la resposta és la correcta, i pots reiniciar-los i repetir-los tantes voltes com vulgues.
+
+#### Test A · Elements del model E/R
+
+{{< quiz >}}
+- q: "En un diagrama E/R, un **atribut identificador** (clau) d'una entitat és…"
+  options: ["Qualsevol atribut obligatori", "L'atribut, o conjunt d'atributs, que distingeix de manera única cada ocurrència de l'entitat", "L'atribut amb més caràcters", "El que apareix primer a la llista"]
+  answer: 1
+  explain: "La clau identifica sense ambigüitat cada ocurrència: un DNI per a una persona, la matrícula per a un cotxe."
+- q: "Un atribut **multivalor** és el que…"
+  options: ["Pot prendre diversos valors per a una mateixa ocurrència (p. ex., els telèfons d'un client)", "Té diversos tipus de dada", "Es calcula a partir d'altres", "Es repeteix en diverses entitats"]
+  answer: 0
+  explain: "En passar a taules, un atribut multivalor es converteix en una taula a part. No s'ha de confondre amb el compost (adreça = carrer + número + CP)."
+- q: "L'edat calculada a partir de la data de naixement és un atribut…"
+  options: ["Compost", "Multivalor", "Derivat", "Identificador"]
+  answer: 2
+  explain: "Un atribut derivat s'obté d'altres i, en general, no s'emmagatzema: es calcula quan cal."
+- q: "Si cada **EMPLEAT** treballa en un únic **DEPARTAMENT** i un departament té molts empleats, la cardinalitat entre tots dos és…"
+  options: ["1:1", "1:N (departament a empleat)", "N:M", "0:0"]
+  answer: 1
+  explain: "Un departament (1) té molts empleats (N). La clau del costat 1 acaba com a clau forana al costat N."
+- q: "Una relació **N:M** entre `ALUMNE` i `MODUL` quasi sempre acaba en el model relacional com…"
+  options: ["Una clau forana en ALUMNE", "Una clau forana en MODUL", "Una taula intermèdia amb les claus d'ambdós", "Un atribut multivalor"]
+  answer: 2
+  explain: "La taula intermèdia (matrícula) té com a clau composta les claus de les dues entitats i pot portar atributs propis, com la nota."
+- q: "La cardinalitat **(0,N)** a l'extrem d'una entitat significa…"
+  options: ["Participació obligatòria, un sol valor", "Participació opcional: pot no estar relacionada amb cap ocurrència i pot estar-ho amb moltes", "Participació obligatòria amb moltes", "La relació no existeix"]
+  answer: 1
+  explain: "El primer número és el mínim (0 = opcional, 1 = obligatòria) i el segon el màxim (1 o N)."
+{{< /quiz >}}
+
+#### Test B · Entitats febles, jerarquies i casos
+
+{{< quiz >}}
+- q: "Quin d'aquests és un bon exemple d'**entitat feble**?"
+  options: ["`CLIENT`", "`LINIA_COMANDA`, identificada pel número de línia dins de la seua `COMANDA`", "`PRODUCTE`", "`PROVEÏDOR`"]
+  answer: 1
+  explain: "La línia no s'identifica sola: necessita la comanda a la qual pertany (comanda 7, línia 1)."
+- q: "En una jerarquia **total i exclusiva** de `PERSONA` en `ALUMNE` i `PROFESSOR`…"
+  options: ["Tota persona és alumne o professor, i mai tots dos", "Una persona pot ser tots dos i també cap", "Només hi ha alumnes", "No es pot transformar a taules"]
+  answer: 0
+  explain: "Total: no hi ha persones fora dels subtipus. Exclusiva (disjunta): cap cas pertany als dos."
+- q: "Una relació **reflexiva** (o recursiva) és aquella que…"
+  options: ["Relaciona una entitat amb ella mateixa, com `EMPLEAT` supervisa `EMPLEAT`", "Relaciona tres entitats", "No té atributs", "Sempre és 1:1"]
+  answer: 0
+  explain: "Els rols (cap/subordinat) distingeixen els dos extrems de la relació."
+- q: "Què passa quan una relació necessita **tres entitats alhora** (professor, mòdul, grup) i la informació només té sentit en conjunt?"
+  options: ["S'usa una relació ternària (o es reifica en una entitat)", "S'ignora una de les entitats", "Es dibuixa amb colors", "Es converteix en atribut"]
+  answer: 0
+  explain: "Una ternària no equival a tres binàries: la combinació concreta (quin professor dona quin mòdul a quin grup) es perdria."
+- q: "En l'anàlisi de requisits, el client diu: «de cada alumne guardem la seua edat». Què és el més recomanable?"
+  options: ["Guardar l'edat tal qual", "Guardar la data de naixement i derivar l'edat", "No guardar res", "Guardar l'edat i la data de naixement"]
+  answer: 1
+  explain: "L'edat canvia cada any; la data de naixement no. Guardar la dada primitiva evita informació obsoleta."
+- q: "Quina és la seqüència correcta del disseny de bases de dades?"
+  options: ["Físic → lògic → conceptual", "Conceptual → lògic → físic", "Lògic → conceptual → físic", "Implementació → requisits → model"]
+  answer: 1
+  explain: "Primer s'entén el problema (E/R), després es tradueix al model del SGBD (relacional) i finalment es concreta en el gestor (tipus, índexs, emmagatzematge)."
 {{< /quiz >}}
 
 ## Referències

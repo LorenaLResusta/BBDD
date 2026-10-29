@@ -1,10 +1,10 @@
 ---
-title: "Definición y control de datos"
+title: "DDL: definición de datos"
 weight: 1
 bookToc: true
 ---
 
-# UD05 · Definición y control de datos (DDL y DCL)
+# UD05 · DDL: definición de datos (y control con DCL)
 
 ## Resumen del tema
 
@@ -15,30 +15,33 @@ Hasta ahora hemos **diseñado**. En esta unidad **implementamos**: convertimos e
 
 Todos los ejemplos usan **Oracle AI Database 26ai Free**. Cuando una característica sea propia de Oracle o de una versión concreta, se indica.
 
-{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,f" >}}
+{{< ra "RA2:a,b,c,d,e,f,g,h" "RA6:a,b,c,d,e,f,h" "RA3:h" >}}
 
 ### Temporalización
 
-La unidad ocupa **17 horas de aula** (9 de teoría y 8 de práctica).
+La unidad ocupa **35 horas de aula** (7 de teoría y 28 de práctica).
 
-{{< sesiones unidad="UD05" horas="17" >}}
+{{< sesiones unidad="UD05" horas="35" >}}
 items:
   - {h: 1, tipo: T, t: "SQL y Oracle. Almacenamiento de la información", ref: "§1 y §2"}
-  - {h: 2, tipo: T, t: "Tipos de datos de Oracle", ref: "§3 · calculadora de NUMBER(p, s)"}
-  - {h: 2, tipo: T, t: "CREATE TABLE y restricciones de integridad", ref: "§4 y §5 · constructor de CREATE TABLE"}
-  - {h: 2, tipo: P, t: "Primeras tablas y restricciones en Oracle", ref: "Práctica 5.1"}
-  - {h: 2, tipo: P, t: "Del diagrama de Chen al DDL", ref: "Práctica 5.2"}
+  - {h: 1, tipo: T, t: "Tipos de datos de Oracle", ref: "§3 · calculadora de NUMBER(p, s)"}
+  - {h: 1, tipo: T, t: "CREATE TABLE y restricciones de integridad", ref: "§4 y §5 · constructor de CREATE TABLE"}
+  - {h: 3, tipo: P, t: "Primeras tablas y restricciones en Oracle", ref: "Práctica 5.1"}
+  - {h: 3, tipo: P, t: "Del diagrama de Chen al DDL", ref: "Práctica 5.2"}
   - {h: 1, tipo: T, t: "Modificar y eliminar la estructura (ALTER, DROP)", ref: "§6"}
-  - {h: 1, tipo: P, t: "Evolución del esquema con ALTER", ref: "Práctica 5.5"}
+  - {h: 2, tipo: P, t: "Evolución del esquema con ALTER", ref: "Práctica 5.5"}
   - {h: 1, tipo: T, t: "Secuencias, identidad, índices y vistas", ref: "§7, §8 y §9"}
-  - {h: 1, tipo: P, t: "Índices, vistas y secuencias en EduGest", ref: "Práctica 5.6"}
-  - {h: 2, tipo: T, t: "Usuarios, roles y privilegios. Diccionario de datos y herramientas", ref: "§10 a §12 · taller de privilegios"}
-  - {h: 1, tipo: P, t: "Usuarios, roles y privilegios en EduGest", ref: "Práctica 5.7"}
-  - {h: 1, tipo: P, t: "Implementación de EduGest", ref: "Proyecto EduGest-5"}
+  - {h: 2, tipo: P, t: "Índices, vistas y secuencias en EduGest", ref: "Práctica 5.6"}
+  - {h: 1, tipo: T, t: "Usuarios, roles y privilegios. Diccionario de datos", ref: "§10 a §12 · taller de privilegios"}
+  - {h: 2, tipo: P, t: "Usuarios, roles y privilegios en EduGest", ref: "Práctica 5.7"}
+  - {h: 3, tipo: P, t: "Implementación de EduGest", ref: "Proyecto EduGest-5"}
+  - {h: 1, tipo: T, t: "Repaso de restricciones y errores frecuentes en DDL", ref: "§5 y §13"}
+  - {h: 3, tipo: P, t: "Biblioteca: script completo y batería de pruebas", ref: "Práctica 5.3"}
+  - {h: 4, tipo: P, t: "Seis casos para implementar", ref: "Práctica 5.4"}
+  - {h: 3, tipo: P, t: "Depurar un script defectuoso", ref: "Práctica 5.8"}
+  - {h: 3, tipo: E, t: "Prueba y revisión de la 1ª evaluación", ref: ""}
 autonomo:
-  - "Práctica 5.3 (biblioteca: script completo y batería de pruebas)"
-  - "Práctica 5.4 (seis casos para implementar)"
-  - "Práctica 5.8 (depurar un script defectuoso)"
+  - "Ampliaciones de las prácticas 5.1 a 5.8 y autoevaluación"
 {{< /sesiones >}}
 
 > [!IMPORTANT]
@@ -73,8 +76,8 @@ Antes de ser una empresa de bases de datos, Larry Ellison, Bob Miner y Ed Oates 
 |---|---|---|---|
 | **DDL** | `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `RENAME`, `COMMENT` | Definir la estructura | UD05 |
 | **DCL** | `GRANT`, `REVOKE` | Controlar el acceso | UD05 |
-| **DML** | `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `MERGE` | Consultar y modificar datos | UD06 a UD08 |
-| **TCL** | `COMMIT`, `ROLLBACK`, `SAVEPOINT` | Controlar transacciones | UD08 |
+| **DML** | `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `MERGE` | Consultar y modificar datos | UD06 a UD07 |
+| **TCL** | `COMMIT`, `ROLLBACK`, `SAVEPOINT` | Controlar transacciones | UD07 |
 
 > [!WARNING]
 > En Oracle, **cada sentencia DDL ejecuta un `COMMIT` implícito** antes y después de ejecutarse. Si tenías cambios de datos pendientes y lanzas un `CREATE TABLE`, esos cambios quedan confirmados y ya no podrás deshacerlos con `ROLLBACK`.
@@ -121,7 +124,7 @@ CREATE TABLE producto (
 - Las palabras reservadas y los identificadores **no distinguen mayúsculas**: `CREATE TABLE Alumno` crea la tabla `ALUMNO`. Oracle guarda los nombres en mayúsculas en el diccionario.
 - Si escribes un identificador entre **comillas dobles** (`"Alumno"`), Oracle respeta mayúsculas y espacios, y tendrás que usar siempre las comillas. **Evítalo.**
 - Los identificadores pueden tener hasta **128 bytes** (desde Oracle 12.2), empiezan por letra y pueden contener letras, números, `_`, `$` y `#`.
-- Cada sentencia termina en `;`. Los bloques PL/SQL (UD09) terminan además con `/` en una línea.
+- Cada sentencia termina en `;`. Los bloques PL/SQL (UD08) terminan además con `/` en una línea.
 - Comentarios: `-- hasta el final de la línea` y `/* de varias líneas */`.
 - Las cadenas van entre **comillas simples**: `'DAM'`. Para incluir una comilla, se duplica: `'Sant Joan d''Alacant'`.
 
@@ -405,7 +408,7 @@ CONSTRAINT ck_reserva_fechas  CHECK (fecha_salida > fecha_entrada)
 > [!WARNING]
 > Si `nota_final` es `NULL`, la condición `nota_final BETWEEN 0 AND 10` es **desconocida** y el `CHECK` **la acepta**. Si la columna debe tener valor, añade `NOT NULL`.
 >
-> Un `CHECK` **no** puede usar subconsultas, ni consultar otras tablas, ni llamar a `SYSDATE`. Las reglas que lo necesitan son restricciones no representables (UD03, apartado 6) y se implementan con triggers (UD09).
+> Un `CHECK` **no** puede usar subconsultas, ni consultar otras tablas, ni llamar a `SYSDATE`. Las reglas que lo necesitan son restricciones no representables (UD03, apartado 6) y se implementan con triggers (UD08).
 
 ### 5.5 Consultar las restricciones en el diccionario
 
@@ -520,7 +523,7 @@ TRUNCATE TABLE falta_asistencia;            -- vacía la tabla; no se puede desh
 
 | Sentencia | Borra | Estructura | ¿Se puede deshacer? |
 |---|---|---|---|
-| `DELETE FROM t` (DML, UD08) | Filas (todas o algunas) | Se mantiene | Sí, con `ROLLBACK` |
+| `DELETE FROM t` (DML, UD07) | Filas (todas o algunas) | Se mantiene | Sí, con `ROLLBACK` |
 | `TRUNCATE TABLE t` | Todas las filas | Se mantiene | **No** (es DDL) |
 | `DROP TABLE t` | Tabla y datos | Desaparece | Solo desde la papelera |
 | `DROP TABLE t PURGE` | Tabla y datos | Desaparece | **No** |
@@ -607,7 +610,7 @@ DROP INDEX ix_alumno_apellidos_nombre;
 | Columnas usadas para ordenar resultados grandes | Columnas que se modifican constantemente |
 
 > [!IMPORTANT]
-> Un índice **acelera las lecturas** pero **ralentiza las escrituras**: cada `INSERT`, `UPDATE` o `DELETE` tiene que actualizar también todos los índices de la tabla, y además ocupa espacio. Indexar es una decisión de **diseño físico**: la UD07 enseña a comprobar con el plan de ejecución si un índice se usa.
+> Un índice **acelera las lecturas** pero **ralentiza las escrituras**: cada `INSERT`, `UPDATE` o `DELETE` tiene que actualizar también todos los índices de la tabla, y además ocupa espacio. Indexar es una decisión de **diseño físico**: la UD06 enseña a comprobar con el plan de ejecución si un índice se usa.
 
 ---
 
@@ -932,6 +935,68 @@ El criterio RA2.h pide usar **asistentes, herramientas gráficas y los lenguajes
   options: ["Porque Oracle no permite claves ajenas sin índice", "Porque Oracle no lo crea automáticamente y acelera los JOIN y los borrados en la tabla padre", "Porque convierte la clave ajena en única", "No conviene nunca"]
   answer: 1
   explain: "Oracle indexa automáticamente PK y UNIQUE, pero no las FK. Sin índice, cada borrado en la tabla padre recorre la tabla hija completa y bloquea más de lo necesario."
+{{< /quiz >}}
+
+### Autoevaluación ampliada
+
+Dos tests más para afianzar el tema. Corrige al terminar: cada pregunta explica por qué la respuesta es la correcta, y puedes reiniciar y repetirlos las veces que quieras.
+
+#### Test A · Tipos, tablas y restricciones (Oracle)
+
+{{< quiz >}}
+- q: "En Oracle, ¿qué tipo de dato es el recomendado para cadenas de longitud variable?"
+  options: ["`CHAR`", "`VARCHAR2`", "`TEXT`", "`STRING`"]
+  answer: 1
+  explain: "`VARCHAR2(n)` es el tipo de texto variable de Oracle. `CHAR(n)` rellena con blancos hasta n; `TEXT` y `STRING` no existen en Oracle."
+- q: "¿Qué hace `NUMBER(7,2)`?"
+  options: ["Guarda hasta 7 dígitos en total, 2 de ellos decimales (máximo 99999,99)", "Guarda 7 enteros y 2 decimales (hasta 9999999,99)", "Guarda una cadena de 7 caracteres", "Guarda una fecha"]
+  answer: 0
+  explain: "El primer número es la precisión (dígitos totales); el segundo, la escala (decimales). Quedan 5 dígitos para la parte entera."
+- q: "¿Qué restricción impide que una columna tenga valores repetidos pero **permite** nulos?"
+  options: ["`PRIMARY KEY`", "`UNIQUE`", "`NOT NULL`", "`CHECK`"]
+  answer: 1
+  explain: "`PRIMARY KEY` equivale a `UNIQUE` + `NOT NULL`. En Oracle, `UNIQUE` admite varios nulos."
+- q: "¿Qué hace `ALTER TABLE alumno ADD CONSTRAINT ck_nota CHECK (nota BETWEEN 0 AND 10)`?"
+  options: ["Añade una columna", "Añade una regla que rechaza notas fuera del rango 0-10", "Borra las notas inválidas existentes", "Crea un índice"]
+  answer: 1
+  explain: "Si ya hubiera filas que no cumplen la regla, la sentencia fallaría (a menos que se cree con `NOVALIDATE`)."
+- q: "¿Cuál es la sentencia correcta para eliminar una tabla y sus restricciones de clave foránea que la referencian?"
+  options: ["`DELETE TABLE t`", "`DROP TABLE t CASCADE CONSTRAINTS`", "`REMOVE TABLE t`", "`TRUNCATE TABLE t CASCADE`"]
+  answer: 1
+  explain: "`DROP TABLE` es DDL y no se puede deshacer con ROLLBACK (salvo papelera de reciclaje con `FLASHBACK`)."
+- q: "¿Qué ocurre si defines una clave foránea con `ON DELETE CASCADE` y borras la fila padre?"
+  options: ["Se rechaza el borrado", "Se borran también las filas hijas", "Las hijas quedan con la clave a NULL", "Se borra la tabla hija"]
+  answer: 1
+  explain: "`ON DELETE SET NULL` pondría la clave foránea a nulo. Sin cláusula, Oracle rechaza el borrado (ORA-02292)."
+{{< /quiz >}}
+
+#### Test B · Objetos, privilegios y diccionario
+
+{{< quiz >}}
+- q: "¿Para qué sirve una **secuencia** (`CREATE SEQUENCE`)?"
+  options: ["Para ordenar filas", "Para generar valores numéricos únicos, típicamente para claves primarias", "Para copiar tablas", "Para cifrar datos"]
+  answer: 1
+  explain: "Desde Oracle 12c también existen las columnas identidad (`GENERATED ... AS IDENTITY`), que usan una secuencia interna."
+- q: "Un **índice** en una columna…"
+  options: ["Acelera ciertas búsquedas pero ocupa espacio y ralentiza las escrituras", "Siempre acelera todo", "Impide valores repetidos siempre", "Reemplaza la clave primaria"]
+  answer: 0
+  explain: "Oracle crea automáticamente un índice para cada PRIMARY KEY y UNIQUE; las claves foráneas conviene indexarlas explícitamente si se consultan por ellas."
+- q: "Una **vista** es…"
+  options: ["Una copia física de la tabla", "Una consulta guardada con nombre que se usa como si fuera una tabla", "Un tipo de índice", "Un usuario especial"]
+  answer: 1
+  explain: "Las vistas simplifican consultas y limitan qué columnas o filas ve cada usuario. No almacenan datos (salvo las vistas materializadas)."
+- q: "¿Qué sentencia da permiso de lectura sobre la tabla `alumno` al usuario `ana`?"
+  options: ["`GRANT SELECT ON alumno TO ana;`", "`ALLOW SELECT alumno ana;`", "`REVOKE SELECT ON alumno FROM ana;`", "`CREATE USER ana SELECT;`"]
+  answer: 0
+  explain: "`GRANT` concede y `REVOKE` retira. Es DCL (control de datos)."
+- q: "El principio del **mínimo privilegio** dice que…"
+  options: ["Cada usuario debe tener solo los permisos imprescindibles para su trabajo", "Todos los usuarios deben ser DBA", "Los permisos se conceden por defecto a todos", "Los privilegios se heredan del sistema operativo"]
+  answer: 0
+  explain: "Reduce el daño posible ante errores o accesos indebidos. Los **roles** ayudan a agrupar privilegios."
+- q: "¿Qué vista del diccionario de datos permite ver las tablas del usuario actual?"
+  options: ["`USER_TABLES`", "`ALL_USERS_ONLY`", "`TABLES_NOW`", "`DUAL`"]
+  answer: 0
+  explain: "`USER_*` muestra los objetos propios, `ALL_*` los accesibles y `DBA_*` todos (requiere privilegios)."
 {{< /quiz >}}
 
 ## Referencias

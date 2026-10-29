@@ -17,11 +17,11 @@ content.es/
 ├── ud03-modelo-relacional/        RA6, RA2 · Modelo relacional
 ├── ud04-normalizacion/            RA6 · Normalización
 ├── ud05-ddl-dcl/                  RA2 · DDL y DCL en Oracle
-├── ud06-consultas-basicas/        RA3 · Consultas sobre una tabla y funciones
-├── ud07-consultas-avanzadas/      RA3 · JOIN, agrupamiento, subconsultas, optimización
-├── ud08-dml-transacciones/        RA4 · DML, transacciones y concurrencia
-├── ud09-plsql/                    RA5 · PL/SQL: procedimientos, cursores, triggers, jobs
-└── ud10-nosql/                    RA7 · Bases de datos NoSQL con MongoDB
+├── ud06-consultas/        RA3 · Consultas sobre una tabla y funciones
+├── ud06-consultas/      RA3 · JOIN, agrupamiento, subconsultas, optimización
+├── ud07-dml-transacciones/        RA4 · DML, transacciones y concurrencia
+├── ud08-plsql/                    RA5 · PL/SQL: procedimientos, cursores, triggers, jobs
+└── ud09-nosql/                    RA7 · Bases de datos NoSQL con MongoDB
 ```
 
 Cada unidad tiene `_index.md` (presentación y RA/CE), `udXX-teoria.md` y `udXX-practicas.md`.
@@ -32,10 +32,10 @@ Cada unidad tiene `_index.md` (presentación y RA/CE), `udXX-teoria.md` y `udXX-
 
 | Ruta | Contenido |
 |---|---|
-| `assets/recursos/sql/edugest_00_usuario.sql` | Crea el usuario EDUGEST (ejecutar como SYSTEM en FREEPDB1) |
-| `assets/recursos/sql/edugest_01_esquema.sql` | Esquema relacional de referencia |
-| `assets/recursos/sql/edugest_02_datos.sql` | Datos de ejemplo (curso 2025-26) |
-| `assets/recursos/nosql/edugest_mongo.js` | Versión documental para MongoDB |
+| `static/recursos/sql/edugest_00_usuario.sql` | Crea el usuario EDUGEST (ejecutar como SYSTEM en FREEPDB1) |
+| `static/recursos/sql/edugest_01_esquema.sql` | Esquema relacional de referencia |
+| `static/recursos/sql/edugest_02_datos.sql` | Datos de ejemplo (curso 2025-26) |
+| `static/recursos/nosql/edugest_mongo.js` | Versión documental para MongoDB |
 | `assets/images/` | Diagramas SVG usados en las páginas (`![...](images/x.svg)`) |
 | `data/curriculo.yaml` | Texto oficial de los RA y CE (lo usa el shortcode `ra`) |
 

@@ -14,4 +14,4 @@ El disseny d'una base de dades comença **lluny de l'ordinador**: escoltant el c
 | [Teoria](/ud02-modelo-er/ud02-teoria) | Cicle de disseny, entitats, atributs, relacions, cardinalitats, entitats febles, jerarquies, agregació, ternàries, notacions, eines i cas EduGest |
 | [Pràctiques](/ud02-modelo-er/ud02-practicas) | Deu pràctiques progressives (quatre reptes avançats), la tasca EduGest i un banc de 30 enunciats |
 
-**Durada:** 19 hores d'aula, del 25/09/2026 al 23/10/2026. Consulta la [guia didàctica](/) per a vore el seu lloc en el calendari del curs.
+**Durada:** 26 hores d'aula, del 14/09/2026 al 21/10/2026. Consulta la [guia didàctica](/) per a vore el seu lloc en el calendari del curs.

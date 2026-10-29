@@ -424,7 +424,7 @@ La direcció d'estudis vol saber si el percentatge d'aprovats en *Bases de dades
 - [ ] La resposta del punt 5 menciona l'impacte en el rendiment i les dades històriques.
 
 > [!TIP]
-> Això que acabes de fer amb la taula dinàmica és una **consulta resum**. En la UD07 l'escriuràs en SQL amb `GROUP BY` i `AVG`.
+> Això que acabes de fer amb la taula dinàmica és una **consulta resum**. En la UD06 l'escriuràs en SQL amb `GROUP BY` i `AVG`.
 {{% /comprobacion %}}
 
 ---
