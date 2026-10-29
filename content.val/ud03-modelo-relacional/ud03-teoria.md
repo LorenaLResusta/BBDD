@@ -79,21 +79,22 @@ Una relació es defineix com un subconjunt del producte cartesià d'una família
 Per a caracteritzar matemàticament una taula s'utilitzen els conceptes següents:
 
 1. **Atribut (camp o columna):** Representa una propietat o característica de l'entitat o relació que descriu la taula. Cada columna té un nom únic a la taula i un tipus de dada especificat.
-2. **Domini:** És el conjunt finit de tots els valors atòmics vàlids del mateix tipus que un atribut pot albergar. Diversos atributs distints poden compartir el mateix domini (per exemple, `fecha_contrato` i `fecha_nacimiento` comparteixen el domini `DATE`).
+2. **Domini:** És el conjunt de valors atòmics que pot prendre un atribut. El defineix el tipus de dada i, si es vol, una restricció addicional (per exemple, «edat entre 0 i 120»). Diversos atributs distints poden compartir el mateix domini (per exemple, `fecha_contrato` i `fecha_nacimiento` comparteixen el domini `DATE`).
 3. **Grau:** És el nombre total d'atributs (columnes) que componen la taula. Una taula amb 5 columnes té un **grau de 5**.
 4. **Cardinalitat:** És el nombre total de tuples (files o registres) emmagatzemades en un moment determinat a la taula. A diferència del grau (que és fix una vegada dissenyat l'esquema), la cardinalitat és dinàmica i varia constantment a mesura que s'inserixen o s'esborren files.
 
 ---
 
 {{% curiosidad titulo="Codd i els dos tipus de «dada absent»" %}}
-El mateix Codd va proposar més tard distingir entre un valor **absent però aplicable** i un altre **no aplicable**. Els gestors reals es van quedar amb un únic valor nul (`NULL`), i d'ací vénen moltes sorpreses: dos nuls no poden considerar-se iguals entre si.
+El mateix Codd va proposar més tard distingir entre un valor **absent però aplicable** i un altre **no aplicable**. Els gestors reals es van quedar amb un únic valor nul (`NULL`), i d'ací vénen moltes sorpreses: comparar dos nuls amb `=` no dona «veritat» sinó «desconegut», perquè no se sap si són iguals.
 {{% /curiosidad %}}
 
 ### 1.3 Tuples (files) i semàntica de valors nuls (NULL)
 
-- **Tupla (fila, registre o ocurrència):** Cada fila individual de la taula representa una instància concreta de l'entitat o relació del món real. Cada tupla està formada per una llista ordenada de valors, on cada valor correspon a un atribut específic.
+- **Tupla (fila, registre o ocurrència):** Cada fila individual de la taula representa una instància concreta de l'entitat o relació del món real. Cada tupla té un valor per a cada atribut de la taula; l'ordre de les columnes no és significatiu (vegeu l'apartat 3.1).
 - **Valors nuls (`NULL`):** Representen l'**absència de valor**, valor desconegut o no aplicable.
   - *Diferència semàntica important:* El valor `NULL` no equival al número zero (`0`) ni a una cadena de text buida (`""`). Un zero en `saldo` significa que el saldo és de 0 euros; un `NULL` en `saldo` significa que es desconeix el saldo.
+  - *Nota sobre Oracle:* a Oracle, el gestor que usarem, la cadena buida `''` s'emmagatzema com a `NULL`. És una peculiaritat d'Oracle, no del model relacional.
 
 ---
 
@@ -110,7 +111,7 @@ Les claus constituïxen el pilar fonamental per a garantir la unicitat de les fi
 ### 2.1 Clau candidata i clau primària (Primary Key - PK)
 
 - **Clau candidata:** És un atribut o conjunt mínim d'atributs els valors dels quals identifiquen de manera única i unívoca cada tupla d'una relació, sense que cap subconjunt propi d'eixos atributs puga identificar-la.
-- **Clau primària (Primary Key - PK):** És la clau candidata triada explícitament pel dissenyador de la base de dades com a identificador principal de les tuples de la taula. Per regla absoluta del model relacional, **cap atribut de la clau primària pot contindre valors nuls (`NOT NULL`) ni duplicats**.
+- **Clau primària (Primary Key - PK):** És la clau candidata triada explícitament pel dissenyador de la base de dades com a identificador principal de les tuples de la taula. Per regla absoluta del model relacional, **cap atribut de la clau primària pot ser nul (`NOT NULL`) i no pot haver-hi dues files amb el mateix valor de clau primària**. En una clau composta es compara la combinació completa: cada atribut per separat sí que es pot repetir (vegeu l'apartat 2.4).
 
 ---
 
@@ -125,7 +126,7 @@ Qualsevol clau candidata que no haja sigut triada com a clau primària passa a s
 
 ### 2.3 Clau forana / aliena (Foreign Key - FK)
 
-Una **Clau Aliena (Foreign Key - FK)** és un atribut (o conjunt d'atributs) d'una taula els valors del qual han de coincidir obligatòriament amb els valors de la clau primària d'una altra taula (o de la mateixa taula en relacions reflexives), o bé ser nuls si la participació és opcional.
+Una **Clau Aliena (Foreign Key - FK)** és un atribut (o conjunt d'atributs) d'una taula els valors del qual han de coincidir obligatòriament amb els valors de la clau primària (o d'una clau alternativa) d'una altra taula (o de la mateixa taula en relacions reflexives), o bé ser nuls si la participació és opcional.
 
 Les claus alienes representen les relacions del model EER en l'esquema relacional lògic.
 
@@ -208,7 +209,7 @@ Quan s'intenta eliminar o actualitzar una fila de la taula pare (la taula que co
 ---
 
 > [!WARNING]
-> **No tots els gestors oferixen totes les polítiques.** Quasi tots permeten l'esborrat en cascada i la posada a nuls, però molts no permeten propagar el canvi d'una clau primària. Per això convé dissenyar claus primàries **estables**. A la UD05 comprovaràs què oferix el gestor que usarem.
+> **No tots els gestors oferixen totes les polítiques.** Quasi tots permeten l'esborrat en cascada i la posada a nuls, però molts no permeten propagar el canvi d'una clau primària. Per això convé dissenyar claus primàries **estables**. Oracle, per exemple, només oferix `ON DELETE CASCADE` i `ON DELETE SET NULL` (o rebutjar): no té `ON UPDATE` ni posada a valor per defecte. A la UD05 comprovaràs què oferix el gestor que usarem.
 
 > [!TIP]
 > **Quina política trie?** Fes-te aquesta pregunta sobre la fila filla: *té sentit que continue existint sense la fila pare?*

@@ -79,21 +79,22 @@ Una relación se define como un subconjunto del producto cartesiano de una famil
 Para caracterizar matemáticamente una tabla se utilizan los siguientes conceptos:
 
 1. **Atributo (Campo o Columna):** Representa una propiedad o característica de la entidad o relación que describe la tabla. Cada columna tiene un nombre único en la tabla y un tipo de dato especificado.
-2. **Dominio:** Es el conjunto finito de todos los valores atómicos válidos del mismo tipo que un atributo puede albergar. Varios atributos distintos pueden compartir el mismo dominio (por ejemplo, `fecha_contrato` y `fecha_nacimiento` comparten el dominio `DATE`).
+2. **Dominio:** Es el conjunto de valores atómicos que puede tomar un atributo. Lo define el tipo de dato y, si se quiere, una restricción adicional (por ejemplo, «edad entre 0 y 120»). Varios atributos distintos pueden compartir el mismo dominio (por ejemplo, `fecha_contrato` y `fecha_nacimiento` comparten el dominio `DATE`).
 3. **Grado:** Es el número total de atributos (columnas) que componen la tabla. Una tabla con 5 columnas tiene un **grado de 5**.
 4. **Cardinalidad:** Es el número total de tuplas (filas o registros) almacenadas en un momento determinado en la tabla. A diferencia del grado (que es fijo una vez diseñado el esquema), la cardinalidad es dinámica y varía constantemente a medida que se insertan o borran filas.
 
 ---
 
 {{% curiosidad titulo="Codd y los dos tipos de «dato ausente»" %}}
-El propio Codd propuso más tarde distinguir entre un valor **ausente pero aplicable** y otro **no aplicable**. Los gestores reales se quedaron con un único valor nulo (`NULL`), y de ahí vienen muchas sorpresas: dos nulos no pueden considerarse iguales entre sí.
+El propio Codd propuso más tarde distinguir entre un valor **ausente pero aplicable** y otro **no aplicable**. Los gestores reales se quedaron con un único valor nulo (`NULL`), y de ahí vienen muchas sorpresas: comparar dos nulos con `=` no da «verdadero» sino «desconocido», porque no se sabe si son iguales.
 {{% /curiosidad %}}
 
 ### 1.3 Tuplas (Filas) y Semántica de Valores Nulos (NULL)
 
-- **Tupla (Fila, Registro u Ocurrencia):** Cada fila individual de la tabla representa una instancia concreta de la entidad o relación del mundo real. Cada tupla está formada por una lista ordenada de valores, donde cada valor corresponde a un atributo específico.
+- **Tupla (Fila, Registro u Ocurrencia):** Cada fila individual de la tabla representa una instancia concreta de la entidad o relación del mundo real. Cada tupla tiene un valor para cada atributo de la tabla; el orden de las columnas no es significativo (véase el apartado 3.1).
 - **Valores Nulos (`NULL`):** Representan la **ausencia de valor**, valor desconocido o no aplicable.
   - *Diferencia Semántica Importante:* El valor `NULL` no equivale al número cero (`0`) ni a una cadena de texto vacía (`""`). Un cero en `saldo` significa que el saldo es de 0 euros; un `NULL` en `saldo` significa que se desconoce el saldo.
+  - *Nota sobre Oracle:* en Oracle, el gestor que usaremos, la cadena vacía `''` se almacena como `NULL`. Es una peculiaridad de Oracle, no del modelo relacional.
 
 ---
 
@@ -110,7 +111,7 @@ Las claves constituyen el pilar fundamental para garantizar la unicidad de las f
 ### 2.1 Clave Candidata y Clave Primaria (Primary Key - PK)
 
 - **Clave Candidata:** Es un atributo o conjunto mínimo de atributos cuyos valores identifican de forma única e unívoca cada tupla de una relación, sin que ningún subconjunto propio de dichos atributos pueda identificarla.
-- **Clave Primaria (Primary Key - PK):** Es la clave candidata elegida explícitamente por el diseñador de la base de datos como el identificador principal de las tuplas de la tabla. Por regla absoluta del modelo relacional, **ningún atributo de la clave primaria puede contener valores nulos (`NOT NULL`) ni duplicados**.
+- **Clave Primaria (Primary Key - PK):** Es la clave candidata elegida explícitamente por el diseñador de la base de datos como el identificador principal de las tuplas de la tabla. Por regla absoluta del modelo relacional, **ningún atributo de la clave primaria puede ser nulo (`NOT NULL`) y no puede haber dos filas con el mismo valor de clave primaria**. En una clave compuesta se compara la combinación completa: cada atributo por separado sí puede repetirse (véase el apartado 2.4).
 
 ---
 
@@ -125,7 +126,7 @@ Cualquier clave candidata que no haya sido elegida como clave primaria pasa a se
 
 ### 2.3 Clave Foránea / Ajena (Foreign Key - FK)
 
-Una **Clave Foránea (Foreign Key - FK)** es un atributo (o conjunto de atributos) en una tabla cuyos valores deben coincidir obligatoriamente con los valores de la clave primaria de otra tabla (o de la misma tabla en relaciones reflexivas), o bien ser nulos si la participación es opcional.
+Una **Clave Foránea (Foreign Key - FK)** es un atributo (o conjunto de atributos) en una tabla cuyos valores deben coincidir obligatoriamente con los valores de la clave primaria (o de una clave alternativa) de otra tabla (o de la misma tabla en relaciones reflexivas), o bien ser nulos si la participación es opcional.
 
 Las claves foráneas representan las relaciones del modelo EER en el esquema relacional lógico.
 
@@ -208,7 +209,7 @@ Cuando se intenta eliminar o actualizar una fila en la tabla padre (la tabla que
 ---
 
 > [!WARNING]
-> **No todos los gestores ofrecen todas las políticas.** Casi todos permiten el borrado en cascada y la puesta a nulos, pero muchos no permiten propagar el cambio de una clave primaria. Por eso conviene diseñar claves primarias **estables**. En la UD05 comprobarás qué ofrece el gestor que usaremos.
+> **No todos los gestores ofrecen todas las políticas.** Casi todos permiten el borrado en cascada y la puesta a nulos, pero muchos no permiten propagar el cambio de una clave primaria. Por eso conviene diseñar claves primarias **estables**. Oracle, por ejemplo, solo ofrece `ON DELETE CASCADE` y `ON DELETE SET NULL` (o rechazar): no tiene `ON UPDATE` ni puesta a valor por defecto. En la UD05 comprobarás qué ofrece el gestor que usaremos.
 
 > [!TIP]
 > **¿Qué política elijo?** Hazte esta pregunta sobre la fila hija: *¿tiene sentido que siga existiendo sin la fila padre?*
