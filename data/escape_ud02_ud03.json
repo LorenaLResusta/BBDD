@@ -1,0 +1,1138 @@
+{
+ "es": {
+  "ui": {
+   "title": "El caso del esquema desaparecido",
+   "tag": "Escape room",
+   "sub": "UD02 · Modelo E/R  +  UD03 · Modelo relacional",
+   "start": "Entrar en el edificio",
+   "check": "Comprobar",
+   "hint": "Pedir pista",
+   "hint_n": "Pista {n} de {m}",
+   "no_hint": "No quedan pistas",
+   "next": "Siguiente sala",
+   "restart": "Empezar de nuevo",
+   "resume": "Continuar la partida",
+   "ok": "¡Cerradura abierta!",
+   "ko": "La cerradura no cede. Revisa tus datos e inténtalo otra vez.",
+   "ko2": "Dos fallos seguidos: quizá te convenga pedir una pista (cuesta puntos).",
+   "notebook": "Libreta del inspector",
+   "empty_nb": "Todavía no has encontrado ninguna pista.",
+   "key_clue": "Pista clave",
+   "rooms": "Salas",
+   "score": "Puntos",
+   "hints_used": "Pistas usadas",
+   "theory": "Repasa la teoría",
+   "pick_one": "Elige una opción",
+   "pick_many": "Marca todas las que correspondan",
+   "your_answer": "Tu respuesta",
+   "order_help": "Usa las flechas para colocar los elementos en un orden válido, de arriba (primero) a abajo (último).",
+   "up": "Subir",
+   "down": "Bajar",
+   "dossier": "Expediente de sospechosos",
+   "accuse": "Acusar",
+   "accuse_pick": "Elige al culpable",
+   "ending": "Caso cerrado",
+   "final_score": "Puntuación final",
+   "rank": "Rango",
+   "act_done": "Has completado el acto",
+   "key_got": "Llave conseguida",
+   "reveal": "Mostrar la libreta completa",
+   "locked": "Bloqueada",
+   "solved": "Resuelta",
+   "current": "Actual",
+   "stars": "Dificultad",
+   "ranks": [
+    [
+     90,
+     "Inspector Codd en persona"
+    ],
+    [
+     70,
+     "Inspector"
+    ],
+    [
+     45,
+     "Agente de investigación"
+    ],
+    [
+     0,
+     "Aprendiz de detective"
+    ]
+   ],
+   "save_note": "Tu progreso se guarda en este navegador."
+  },
+  "intro": {
+   "title": "Madrugada previa al lanzamiento",
+   "text": [
+    "Son las **4:12** de la madrugada y mañana la aerolínea lanza su nueva base de datos. Hace una hora alguien **borró el modelo**, dejó solo unas pocas notas sueltas y cerró con llave la planta de diseño. Tú eres el **inspector Codd** y has quedado encerrado dentro.",
+    "Para salir tienes que abrir **diez cerraduras**: cinco de la planta de diseño (**UD02**, modelo entidad/relación) y cinco de la cámara acorazada (**UD03**, modelo relacional). Cada cerradura es un problema de las unidades, y cada una que abras dejará una **pista** en tu libreta.",
+    "Con las pistas deberás **descubrir quién fue**. Hay tres sospechosos y solo uno encaja con todo lo que vayas encontrando."
+   ],
+   "rules": [
+    "Cada sala empieza valiendo 100 puntos. Una pista cuesta 20 y cada fallo, 10.",
+    "Puedes releer las salas que ya has resuelto y la libreta en cualquier momento.",
+    "No se puede saltar ninguna sala: la puerta de la siguiente solo se abre con la cerradura anterior."
+   ]
+  },
+  "dossier": [
+   {
+    "id": "vega",
+    "name": "Dra. Lucía Vega",
+    "role": "Jefa de diseño",
+    "habit": "Siempre calcula las cardinalidades de una ternaria fijando dos de las tres entidades y contando la tercera."
+   },
+   {
+    "id": "tablas",
+    "name": "Óscar Tablas",
+    "role": "Becario de datos",
+    "habit": "Mete varios valores en una sola celda: por ejemplo, los teléfonos separados por comas."
+   },
+   {
+    "id": "nulos",
+    "name": "Marga Nulos",
+    "role": "Administradora de la base de datos",
+    "habit": "Nunca usa claves compuestas: a todo le pone un id autonumérico."
+   }
+  ],
+  "acts": [
+   {
+    "id": 1,
+    "title": "Acto I · La planta de diseño",
+    "unit": "UD02",
+    "intro": "Los armarios de la planta de diseño guardan los diagramas E/R que alguien ha manipulado. Cada cerradura se abre con una decisión de modelado correcta.",
+    "key": "Llave del modelo E/R"
+   },
+   {
+    "id": 2,
+    "title": "Acto II · La cámara acorazada",
+    "unit": "UD03",
+    "intro": "Bajo la planta de diseño está la cámara donde se guardan los esquemas relacionales. Aquí las cerraduras piden claves, integridad y transformaciones.",
+    "key": "Llave del modelo relacional"
+   },
+   {
+    "id": 3,
+    "title": "Acto III · La puerta de salida",
+    "unit": "UD02 + UD03",
+    "intro": "Tienes las dos llaves. La puerta de salida solo se abre con una pregunta que mezcla todo lo anterior y, después, con una acusación.",
+    "key": ""
+   }
+  ],
+  "puzzles": [
+   {
+    "id": "p1",
+    "act": 1,
+    "room": "Mostrador de facturación",
+    "stars": 2,
+    "type": "match",
+    "ref": "2.4 y 4.4 · Cardinalidades y ternarias",
+    "ref_url": "/ud02-modelo-er/ud02-teoria/",
+    "story": "En el mostrador hay un listado de reservas y una cerradura con tres diales. Cada dial pide la cardinalidad máxima de una pata de la ternaria **reserva** (pasajero, vuelo, tarifa).",
+    "prompt": "Regla del enunciado: *en un mismo vuelo un pasajero viaja con una sola tarifa*. Fijando dos de las tres entidades, ¿cuántas instancias de la tercera pueden aparecer como máximo? (La tabla es solo una muestra.)",
+    "table": {
+     "head": [
+      "pasaporte",
+      "vuelo",
+      "tarifa"
+     ],
+     "rows": [
+      [
+       "ES-10",
+       "IB6250 · 01/10",
+       "Basic"
+      ],
+      [
+       "ES-10",
+       "IB6250 · 02/10",
+       "Plus"
+      ],
+      [
+       "ES-22",
+       "IB6250 · 01/10",
+       "Basic"
+      ],
+      [
+       "ES-31",
+       "IB6250 · 01/10",
+       "Plus"
+      ]
+     ]
+    },
+    "items": [
+     "Fijados un PASAJERO y un VUELO → ¿cuántas TARIFAS?",
+     "Fijados un VUELO y una TARIFA → ¿cuántos PASAJEROS?",
+     "Fijados un PASAJERO y una TARIFA → ¿cuántos VUELOS?"
+    ],
+    "choices": [
+     "1",
+     "N"
+    ],
+    "answer": [
+     0,
+     1,
+     1
+    ],
+    "hints": [
+     "Para cada pregunta, fija las dos entidades que te dan y pregúntate cuántas de la tercera «caben».",
+     "La tabla es solo una muestra de datos: la cardinalidad la fija la **regla** del enunciado, no los pocos ejemplos que ves.",
+     "La regla restringe una sola pata: la de la tarifa. Las otras dos no tienen límite."
+    ],
+    "explain": "Se calcula fijando dos patas y contando la tercera. Solo `TARIFA` tiene máximo **1** (la regla del enunciado); un vuelo lo toman muchos pasajeros y un pasajero con una tarifa puede volar muchas veces.",
+    "clue": {
+     "title": "Nota manuscrita",
+     "text": "En la mesa del mostrador hay una hoja arrancada: «reserva = pasajero + vuelo + tarifa, todo junto en la clave». Quien la escribió **no calculó las cardinalidades fijando dos patas**: puso la tarifa con máximo N.",
+     "key": true
+    }
+   },
+   {
+    "id": "p2",
+    "act": 1,
+    "room": "Hangar de mantenimiento",
+    "stars": 2,
+    "type": "choice",
+    "ref": "2.1 · Entidades débiles",
+    "ref_url": "/ud02-modelo-er/ud02-teoria/",
+    "story": "En el hangar hay una caja fuerte con teclado. Una etiqueta dice: «Identificador completo del **TRAMO** de un vuelo».",
+    "prompt": "Un vuelo se identifica por la compañía, el número de vuelo y la fecha. Un tramo se numera dentro de su vuelo (1, 2, 3…). ¿Cuál es el identificador completo de `TRAMO`?",
+    "options": [
+     "`nº_tramo`",
+     "`nº_vuelo`, `fecha`, `nº_tramo`",
+     "`cód_compañía`, `nº_vuelo`, `fecha`, `nº_tramo`",
+     "`cód_compañía`, `nº_vuelo`, `nº_tramo`"
+    ],
+    "answer": 2,
+    "hints": [
+     "`TRAMO` es una entidad débil: no puede identificarse por sí sola.",
+     "Su propietaria es `VUELO`, que a su vez es débil de `COMPAÑÍA`. La debilidad se acumula.",
+     "Suma todos los atributos que identifican a `VUELO` y añade el discriminador de `TRAMO`."
+    ],
+    "explain": "Las entidades débiles **heredan** la identificación de su propietaria. `VUELO` = (compañía, número, fecha) y `TRAMO` = identificador de `VUELO` + `nº_tramo`. Sin la fecha, el tramo 1 del vuelo IB6250 de hoy se confundiría con el de ayer.",
+    "clue": {
+     "title": "Pósit en el hangar",
+     "text": "Un pósit amarillo: «los identificadores de los diagramas son de varios atributos; **no los he sustituido por ningún id autonumérico**». Alguien respetó las claves compuestas.",
+     "key": true
+    }
+   },
+   {
+    "id": "p3",
+    "act": 1,
+    "room": "Sala de turnos",
+    "stars": 2,
+    "type": "multi",
+    "ref": "4.2 · Jerarquías parciales y solapadas",
+    "ref_url": "/ud02-modelo-er/ud02-teoria/",
+    "story": "El cuaderno de turnos del personal tiene la página de la jerarquía subrayada. La cerradura pide dos frases.",
+    "prompt": "La jerarquía del personal tiene tres subtipos: pilotos, tripulantes de cabina e instructores. Marca las **dos** frases del enunciado que justifican que es **parcial** y **solapada**.",
+    "options": [
+     "Los pilotos tienen licencia y horas de vuelo.",
+     "Hay empleados que no son nada de lo anterior, como el personal de tierra.",
+     "El personal tiene DNI, nombre y fecha de alta, y se calcula su antigüedad.",
+     "Un piloto veterano puede ser también instructor."
+    ],
+    "answer": [
+     1,
+     3
+    ],
+    "hints": [
+     "Parcial/total habla de si **todo** supertipo debe estar en algún subtipo. Disjunta/solapada habla de si puede estar en **varios**.",
+     "Busca una frase sobre empleados que no pertenecen a ningún subtipo y otra sobre empleados que pertenecen a dos.",
+     "Los atributos de los subtipos o del supertipo no dicen nada sobre las propiedades de la jerarquía."
+    ],
+    "explain": "«Hay empleados que no son nada de lo anterior» → **parcial** (existe personal sin subtipo). «Un piloto puede ser también instructor» → **solapada** (un empleado en dos subtipos).",
+    "clue": {
+     "title": "Cuaderno de turnos",
+     "text": "Esa noche solo había **personal de tierra** en el edificio: ni pilotos ni tripulantes ni instructores. Cualquiera de los tres sospechosos pudo entrar.",
+     "key": false
+    }
+   },
+   {
+    "id": "p4",
+    "act": 1,
+    "room": "Sala de servidores",
+    "stars": 2,
+    "type": "match",
+    "ref": "2.2 · Atributos",
+    "ref_url": "/ud02-modelo-er/ud02-teoria/",
+    "story": "Los servidores tienen una pantalla con cuatro atributos descolocados. Hay que clasificar cada uno antes de que se bloquee.",
+    "prompt": "Clasifica cada atributo según su tipo.",
+    "items": [
+     "`coordenadas` de un aeropuerto (latitud y longitud, que siempre se manejan juntas)",
+     "`teléfonos` de un pasajero (puede tener varios)",
+     "`antigüedad` de un empleado (se calcula a partir de la fecha de alta)",
+     "`matrícula` de una aeronave (la identifica)"
+    ],
+    "choices": [
+     "Simple",
+     "Compuesto",
+     "Multivaluado",
+     "Derivado"
+    ],
+    "answer": [
+     1,
+     2,
+     3,
+     0
+    ],
+    "hints": [
+     "Compuesto = se descompone en partes. Multivaluado = varios valores a la vez. Derivado = se puede calcular.",
+     "Si un atributo se puede calcular a partir de otro, no necesitas guardarlo: es derivado.",
+     "La matrícula es un único valor, sin partes y sin cálculo."
+    ],
+    "explain": "`coordenadas` es **compuesto** (latitud + longitud); `teléfonos` es **multivaluado** (en UD03 pasará a una tabla aparte); `antigüedad` es **derivado** (se calcula con la fecha de alta); `matrícula` es **simple** e identificador.",
+    "clue": {
+     "title": "Copia de la hoja de cálculo",
+     "text": "En la hoja de cálculo que el sabotaje dejó abierta aparece una celda con **tres teléfonos separados por comas** en el mismo pasajero. Un atributo multivaluado metido a la fuerza en una sola celda.",
+     "key": true
+    }
+   },
+   {
+    "id": "p5",
+    "act": 1,
+    "room": "Mapa de rutas",
+    "stars": 3,
+    "type": "choice",
+    "ref": "2.3 · Relaciones y roles",
+    "ref_url": "/ud02-modelo-er/ud02-teoria/",
+    "story": "En la pared hay un mapa de rutas con una pegatina: «Valencia–Madrid y Madrid–Valencia son **dos** rutas distintas». La última cerradura del acto pide cómo se modela una ruta.",
+    "prompt": "Una ruta une un aeropuerto de origen con uno de destino y guarda la distancia. Es un catálogo común: no depende de ninguna compañía. ¿Cómo se modela?",
+    "options": [
+     "Como un atributo `ruta` dentro de `VUELO`.",
+     "Como una relación 1:N entre `COMPAÑÍA` y `AEROPUERTO`.",
+     "Como una relación reflexiva N:M sobre `AEROPUERTO`, con roles origen y destino y el atributo `distancia`.",
+     "Como una entidad débil de `COMPAÑÍA`."
+    ],
+    "answer": 2,
+    "hints": [
+     "Una ruta relaciona dos instancias de la **misma** entidad.",
+     "Los nombres de rol (origen, destino) distinguen un sentido del otro: Valencia→Madrid no es Madrid→Valencia.",
+     "Un aeropuerto es origen de muchas rutas y destino de muchas rutas: ¿qué máximo tiene cada pata?"
+    ],
+    "explain": "Es una relación **reflexiva N:M** con roles. Un aeropuerto es origen de muchas rutas y destino de muchas rutas, y el sentido importa. `distancia` es un atributo de la relación. No depende de la compañía.",
+    "clue": {
+     "title": "Mapa de rutas",
+     "text": "En el catálogo de rutas **falta Madrid→Valencia**, pero Valencia→Madrid sigue ahí: alguien borró una sola dirección. Quien lo hizo sabía que son dos filas distintas.",
+     "key": false
+    }
+   },
+   {
+    "id": "p6",
+    "act": 2,
+    "room": "Archivo de personal",
+    "stars": 2,
+    "type": "match",
+    "ref": "3.3 · Integridad referencial",
+    "ref_url": "/ud03-modelo-relacional/ud03-teoria/",
+    "story": "La cámara acorazada se abre con una prueba de borrado. Si eliges mal la política, la puerta se bloquea.",
+    "prompt": "En `PERSONAL`, la clave ajena `supervisor` apunta a la propia tabla. Se borra al empleado **10**. ¿Qué ocurre según la política de la clave ajena?",
+    "table": {
+     "head": [
+      "cód",
+      "nombre",
+      "supervisor"
+     ],
+     "rows": [
+      [
+       "10",
+       "Dr. Salas",
+       "NULL"
+      ],
+      [
+       "11",
+       "Ana Ríos",
+       "10"
+      ],
+      [
+       "12",
+       "Pablo Mora",
+       "10"
+      ],
+      [
+       "13",
+       "Eva Lara",
+       "11"
+      ]
+     ]
+    },
+    "items": [
+     "Política **restringida** (`RESTRICT`)",
+     "Política **en cascada** (`CASCADE`)",
+     "Política **puesta a nulos** (`SET NULL`)"
+    ],
+    "choices": [
+     "Se rechaza el borrado y no cambia nada.",
+     "Se borran 3 filas: la 10, la 11 y la 12.",
+     "Se borran 4 filas: la 10 y, en cadena, la 11, la 12 y la 13.",
+     "Se borra solo la fila 10; las filas 11 y 12 quedan con supervisor `NULL`."
+    ],
+    "answer": [
+     0,
+     2,
+     3
+    ],
+    "hints": [
+     "Restringido: la base de datos protege las filas que dependen de la borrada.",
+     "En cascada el borrado se propaga: cada fila borrada puede tener, a su vez, supervisados.",
+     "Puesta a nulos solo afecta a las filas que apuntaban directamente a la 10."
+    ],
+    "explain": "`RESTRICT` rechaza. `CASCADE` se propaga **en cadena**: al borrar la 11 se borra la 13. `SET NULL` deja a 11 y 12 sin supervisor y no toca a 13, que cuelga de 11. Recuerda: `SET NULL` exige que la clave ajena admita nulos.",
+    "clue": {
+     "title": "Registro del archivo",
+     "text": "El borrado del supervisor dejó a sus dos supervisados con el campo vacío: la clave ajena estaba en **`SET NULL`**, no en cascada. Quien lo preparó no quería perder más datos de los necesarios.",
+     "key": false
+    }
+   },
+   {
+    "id": "p7",
+    "act": 2,
+    "room": "Registro de camas",
+    "stars": 3,
+    "type": "choice",
+    "ref": "4.5 · Transformación N:M",
+    "ref_url": "/ud03-modelo-relacional/ud03-teoria/",
+    "story": "Un teclado pide la clave primaria de la tabla de ocupaciones de camas. El teclado solo acepta una opción.",
+    "prompt": "Tienes `INGRESO(nhc, nº_ingreso)` y `CAMA(planta, nº_habitación, letra)`. Un ingreso puede **volver a la misma cama en fechas distintas**; una ocupación en curso tiene `fecha_fin` vacía. La tabla es `OCUPA(…, fecha_inicio, fecha_fin)`. ¿Cuál es su clave primaria?",
+    "options": [
+     "`nhc`, `nº_ingreso`, `planta`, `nº_habitación`, `letra`",
+     "`nhc`, `nº_ingreso`, `planta`, `nº_habitación`, `letra`, `fecha_inicio`",
+     "`nhc`, `nº_ingreso`, `planta`, `nº_habitación`, `letra`, `fecha_inicio`, `fecha_fin`",
+     "No hace falta clave primaria: bastan las dos claves ajenas."
+    ],
+    "answer": 1,
+    "hints": [
+     "Una N:M se convierte en una tabla cuya clave contiene las claves de las dos entidades que une.",
+     "Si no añades nada más, la misma pareja ingreso–cama no podría repetirse: pero el enunciado dice que sí puede.",
+     "Una clave primaria nunca admite `NULL`, y `fecha_fin` está vacía mientras la ocupación sigue."
+    ],
+    "explain": "La clave es **ingreso + cama + `fecha_inicio`**: `fecha_inicio` es el discriminador de la relación y permite repetir la misma cama en fechas distintas. `fecha_fin` no puede estar en la clave porque admite `NULL`.",
+    "clue": {
+     "title": "Registro de camas",
+     "text": "En el registro, la misma cama aparece ocupada **dos veces por el mismo ingreso en fechas distintas** y ambas filas se han conservado. El diseño original permitía repetir la cama.",
+     "key": false
+    }
+   },
+   {
+    "id": "p8",
+    "act": 2,
+    "room": "Sala de scripts",
+    "stars": 3,
+    "type": "order",
+    "ref": "4 · Reglas de transformación",
+    "ref_url": "/ud03-modelo-relacional/ud03-teoria/",
+    "story": "Seis plantillas de tabla están mezcladas sobre la mesa. Cada clave ajena exige que la tabla a la que apunta ya exista. Hay que apilarlas en un orden que se pueda ejecutar.",
+    "prompt": "Ordena las tablas de arriba (se crea primero) a abajo (se crea última), de modo que ninguna clave ajena apunte a una tabla que todavía no existe.",
+    "items": [
+     "`ATIENDE`(nhc, nº_ingreso, cód_médico, fecha_primera_visita)",
+     "`MEDICAMENTO`(cód_medicamento, nombre)",
+     "`INGRESO`(nhc, nº_ingreso, fecha_ingreso)",
+     "`PRESCRIBE`(nhc, nº_ingreso, cód_médico, cód_medicamento, fecha, dosis)",
+     "`PACIENTE`(nhc, nombre)",
+     "`MÉDICO`(cód_médico, nombre)"
+    ],
+    "before": [
+     [
+      4,
+      2
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      3
+     ]
+    ],
+    "hints": [
+     "Dibuja una flecha desde cada clave ajena hacia la tabla a la que apunta.",
+     "`INGRESO` es débil de `PACIENTE`; `ATIENDE` une un ingreso con un médico.",
+     "`PRESCRIBE` apunta a `ATIENDE` (la atención) y a `MEDICAMENTO`, así que va la última."
+    ],
+    "explain": "Hay varios órdenes válidos. Las condiciones son: `PACIENTE` antes que `INGRESO`; `INGRESO` y `MÉDICO` antes que `ATIENDE`; `ATIENDE` y `MEDICAMENTO` antes que `PRESCRIBE`. Es el orden en que escribirás los `CREATE TABLE` en la UD05.",
+    "clue": {
+     "title": "Post-it con pasos",
+     "text": "Un post-it con las tablas apiladas en **orden de creación**; el último paso está tachado. Quien lo escribió sabía muy bien cómo se enlazan las tablas.",
+     "key": false
+    }
+   },
+   {
+    "id": "p9",
+    "act": 2,
+    "room": "Sala del recuento",
+    "stars": 3,
+    "type": "number",
+    "ref": "4.2 y 4.3 · Débiles y multivaluados",
+    "ref_url": "/ud03-modelo-relacional/ud03-teoria/",
+    "story": "Un contador mecánico con cuatro ruedas espera el número de tablas del esquema de la mini-clínica.",
+    "prompt": "Un diagrama EER tiene: `PACIENTE` (atributo multivaluado `alergias`), `INGRESO` (débil de `PACIENTE`), `MÉDICO` y `MEDICAMENTO` (atributo multivaluado `principios_activos`). Además hay dos relaciones N:M: *atiende* (`MÉDICO`–`INGRESO`) y *prescribe* (la atención con `MEDICAMENTO`). ¿Cuántas tablas tiene el esquema relacional?",
+    "answer": 8,
+    "min": 0,
+    "max": 20,
+    "hints": [
+     "Cada entidad es una tabla.",
+     "Cada atributo multivaluado necesita su propia tabla.",
+     "Cada relación N:M necesita su propia tabla. Suma: entidades + multivaluados + relaciones N:M."
+    ],
+    "explain": "4 entidades (`PACIENTE`, `INGRESO`, `MÉDICO`, `MEDICAMENTO`) + 2 por los multivaluados (`ALERGIA`, `PRINCIPIO_ACTIVO`) + 2 por las N:M (`ATIENDE`, `PRESCRIBE`) = **8** tablas.",
+    "clue": {
+     "title": "Recuento del esquema",
+     "text": "El esquema completo tiene **ocho** tablas. La carpeta del sabotaje solo contiene las de las entidades y las dos relaciones: se perdieron justo las tablas de los atributos multivaluados.",
+     "key": false
+    }
+   },
+   {
+    "id": "p10",
+    "act": 2,
+    "room": "Registro de triggers",
+    "stars": 3,
+    "type": "multi",
+    "ref": "6 · Restricciones que el modelo lógico no expresa",
+    "ref_url": "/ud03-modelo-relacional/ud03-teoria/",
+    "story": "El registro de triggers de la cámara está vacío. Para abrir la compuerta hay que marcar qué reglas **no** podría haber vigilado el propio esquema.",
+    "prompt": "Marca las **tres** reglas que **no** se pueden declarar con claves, `NOT NULL`, claves ajenas ni reglas de fila, y que necesitarían un trigger o un procedimiento.",
+    "options": [
+     "La hora de llegada de un tramo es posterior a la de salida.",
+     "En cada tramo solo puede haber un comandante.",
+     "El pasaporte identifica a cada pasajero.",
+     "Una aeronave no puede hacer dos tramos que se solapen en el tiempo.",
+     "El aeropuerto de origen de un tramo tiene que existir en `AEROPUERTO`.",
+     "La distancia entre el origen y el destino de un tramo no supera la autonomía del modelo de su aeronave."
+    ],
+    "answer": [
+     1,
+     3,
+     5
+    ],
+    "hints": [
+     "Una regla de **una fila** o de **clave** sí se declara. Una que compara **varias filas o varias tablas**, no.",
+     "Pregúntate para cada regla: ¿basta mirar una sola fila? ¿es una clave o una clave ajena?",
+     "Dos de las reglas «fáciles» son de una fila (hora de llegada) y de clave ajena (aeropuerto de origen); otra es una clave (pasaporte)."
+    ],
+    "explain": "Las tres correctas afectan a **varias filas o tablas**: contar comandantes por tramo, comparar tramos de una misma aeronave y cruzar `TRAMO`, `RUTA`, `AERONAVE` y `MODELO`. La hora de llegada es regla de fila, el pasaporte es clave y el aeropuerto es clave ajena: se declaran en el esquema.",
+    "clue": {
+     "title": "Registro de triggers",
+     "text": "El registro de triggers está **vacío**: ninguna regla de varias filas estaba protegida por la base de datos. Por eso el sabotaje no activó ninguna alarma.",
+     "key": false
+    }
+   },
+   {
+    "id": "p11",
+    "act": 3,
+    "room": "Puerta de salida",
+    "stars": 3,
+    "type": "choice",
+    "ref": "UD02 + UD03 · De la ternaria a la tabla",
+    "ref_url": "/ud03-modelo-relacional/ud03-teoria/",
+    "story": "La puerta de salida muestra un diagrama E/R con la ternaria **reserva** (pasajero, vuelo, tarifa) y pide la tabla resultante. Tienes la clave del modelo E/R y la del relacional: es el momento de usar las dos.",
+    "prompt": "Recuerda: un pasajero viaja con **una sola tarifa** en un vuelo (`TARIFA` tiene máximo 1). `VUELO` se identifica por (`cód_compañía`, `nº_vuelo`, `fecha`). ¿Cuál es la clave primaria de `RESERVA(pasaporte, cód_compañía, nº_vuelo, fecha, cód_tarifa, asiento, precio)`?",
+    "options": [
+     "`pasaporte`, `cód_compañía`, `nº_vuelo`, `fecha`, `cód_tarifa`",
+     "`pasaporte`, `cód_tarifa`",
+     "`pasaporte`, `cód_compañía`, `nº_vuelo`, `fecha`",
+     "`cód_compañía`, `nº_vuelo`, `fecha`"
+    ],
+    "answer": 2,
+    "hints": [
+     "La clave de una ternaria con una pata de máximo 1 **no** incluye esa pata.",
+     "Piensa qué identifica una reserva: un pasajero en un vuelo concreto.",
+     "`cód_tarifa` será una clave ajena obligatoria, pero no forma parte de la clave primaria."
+    ],
+    "explain": "Como `TARIFA` tiene máximo 1, fijados pasajero y vuelo solo hay una tarifa: la clave es **pasajero + vuelo completo**, y `cód_tarifa` es solo clave ajena (`NOT NULL`). Si la incluyes en la clave, permitirías dos tarifas para el mismo pasajero y vuelo, rompiendo la regla.",
+    "clue": {
+     "title": "La última pieza",
+     "text": "La puerta se abre. En el suelo hay una hoja con los datos del pasajero ES-10: **dos tarifas en el mismo vuelo**. Alguien modificó la clave de la reserva para que lo permitiera.",
+     "key": false
+    }
+   }
+  ],
+  "accusation": {
+   "title": "Acusación final",
+   "text": "La puerta está abierta, pero antes de salir tienes que decir a quién acusas. Repasa la libreta: las **pistas clave** descartan a dos sospechosos.",
+   "answer": "tablas",
+   "right": "**Óscar Tablas.** Las pistas clave lo dejan claro: la nota manuscrita muestra que quien manipuló el archivo no calcula las cardinalidades fijando dos patas, así que **no es la Dra. Vega**; los identificadores compuestos siguen intactos, así que **no es Marga Nulos** (ella los habría sustituido por un id); y la celda con tres teléfonos separados por comas es el sello del becario.",
+   "wrong": {
+    "vega": "No es la Dra. Vega: ella siempre calcula las cardinalidades de una ternaria fijando dos patas, y la nota manuscrita demuestra que quien manipuló el archivo no lo hizo así.",
+    "nulos": "No es Marga Nulos: ella nunca usa claves compuestas y las del archivo siguen siendo compuestas. Revisa el pósit del hangar."
+   }
+  },
+  "ending": {
+   "title": "Caso cerrado",
+   "text": "Óscar Tablas confiesa: borró el modelo porque no entendía por qué sus tablas únicas «no valían». El equipo recuperará los diagramas y la base de datos se lanzará mañana a su hora. Tú has salido del edificio justo al amanecer.",
+   "next": "Si te han quedado dudas, repasa la teoría de la [UD02](/ud02-modelo-er/ud02-teoria/) y de la [UD03](/ud03-modelo-relacional/ud03-teoria/), o prueba las [prácticas de la UD03](/ud03-modelo-relacional/ud03-practicas/)."
+  }
+ },
+ "val": {
+  "ui": {
+   "title": "El cas de l'esquema desaparegut",
+   "tag": "Escape room",
+   "sub": "UD02 · Model E/R  +  UD03 · Model relacional",
+   "start": "Entrar a l'edifici",
+   "check": "Comprovar",
+   "hint": "Demanar pista",
+   "hint_n": "Pista {n} de {m}",
+   "no_hint": "No queden pistes",
+   "next": "Següent sala",
+   "restart": "Començar de nou",
+   "resume": "Continuar la partida",
+   "ok": "Pany obert!",
+   "ko": "El pany no cedeix. Revisa les teues dades i torna-ho a intentar.",
+   "ko2": "Dos errors seguits: potser et convinga demanar una pista (costa punts).",
+   "notebook": "Llibreta de l'inspector",
+   "empty_nb": "Encara no has trobat cap pista.",
+   "key_clue": "Pista clau",
+   "rooms": "Sales",
+   "score": "Punts",
+   "hints_used": "Pistes usades",
+   "theory": "Repassa la teoria",
+   "pick_one": "Tria una opció",
+   "pick_many": "Marca totes les que corresponguen",
+   "your_answer": "La teua resposta",
+   "order_help": "Usa les fletxes per a col·locar els elements en un ordre vàlid, de dalt (primer) a baix (últim).",
+   "up": "Pujar",
+   "down": "Baixar",
+   "dossier": "Expedient de sospitosos",
+   "accuse": "Acusar",
+   "accuse_pick": "Tria el culpable",
+   "ending": "Cas tancat",
+   "final_score": "Puntuació final",
+   "rank": "Rang",
+   "act_done": "Has completat l'acte",
+   "key_got": "Clau aconseguida",
+   "reveal": "Mostrar la llibreta completa",
+   "locked": "Bloquejada",
+   "solved": "Resolta",
+   "current": "Actual",
+   "stars": "Dificultat",
+   "ranks": [
+    [
+     90,
+     "Inspector Codd en persona"
+    ],
+    [
+     70,
+     "Inspector"
+    ],
+    [
+     45,
+     "Agent d'investigació"
+    ],
+    [
+     0,
+     "Aprenent de detectiu"
+    ]
+   ],
+   "save_note": "El teu progrés es guarda en este navegador."
+  },
+  "intro": {
+   "title": "Matinada prèvia al llançament",
+   "text": [
+    "Són les **4:12** de la matinada i demà l'aerolínia llança la seua nova base de dades. Fa una hora algú va **esborrar el model**, va deixar només unes poques notes soltes i va tancar amb clau la planta de disseny. Tu eres l'**inspector Codd** i has quedat tancat dins.",
+    "Per a eixir has d'obrir **deu panys**: cinc de la planta de disseny (**UD02**, model entitat/relació) i cinc de la cambra cuirassada (**UD03**, model relacional). Cada pany és un problema de les unitats, i cadascun que òbris deixarà una **pista** en la teua llibreta.",
+    "Amb les pistes hauràs de **descobrir qui va ser**. Hi ha tres sospitosos i només un encaixa amb tot el que vages trobant."
+   ],
+   "rules": [
+    "Cada sala comença valent 100 punts. Una pista costa 20 i cada error, 10.",
+    "Pots rellegir les sales que ja has resolt i la llibreta en qualsevol moment.",
+    "No es pot saltar cap sala: la porta de la següent només s'obri amb el pany anterior."
+   ]
+  },
+  "dossier": [
+   {
+    "id": "vega",
+    "name": "Dra. Lucía Vega",
+    "role": "Cap de disseny",
+    "habit": "Sempre calcula les cardinalitats d'una ternària fixant dues de les tres entitats i comptant la tercera."
+   },
+   {
+    "id": "tablas",
+    "name": "Óscar Tablas",
+    "role": "Becari de dades",
+    "habit": "Posa diversos valors en una sola cel·la: per exemple, els telèfons separats per comes."
+   },
+   {
+    "id": "nulos",
+    "name": "Marga Nulos",
+    "role": "Administradora de la base de dades",
+    "habit": "Mai no usa claus compostes: a tot li posa un id autonumèric."
+   }
+  ],
+  "acts": [
+   {
+    "id": 1,
+    "title": "Acte I · La planta de disseny",
+    "unit": "UD02",
+    "intro": "Els armaris de la planta de disseny guarden els diagrames E/R que algú ha manipulat. Cada pany s'obri amb una decisió de modelatge correcta.",
+    "key": "Clau del model E/R"
+   },
+   {
+    "id": 2,
+    "title": "Acte II · La cambra cuirassada",
+    "unit": "UD03",
+    "intro": "Davall la planta de disseny hi ha la cambra on es guarden els esquemes relacionals. Ací els panys demanen claus, integritat i transformacions.",
+    "key": "Clau del model relacional"
+   },
+   {
+    "id": 3,
+    "title": "Acte III · La porta d'eixida",
+    "unit": "UD02 + UD03",
+    "intro": "Tens les dues claus. La porta d'eixida només s'obri amb una pregunta que barreja tot l'anterior i, després, amb una acusació.",
+    "key": ""
+   }
+  ],
+  "puzzles": [
+   {
+    "id": "p1",
+    "act": 1,
+    "room": "Taulell de facturació",
+    "stars": 2,
+    "type": "match",
+    "ref": "2.4 i 4.4 · Cardinalitats i ternàries",
+    "ref_url": "/ud02-modelo-er/ud02-teoria/",
+    "story": "Al taulell hi ha un llistat de reserves i un pany amb tres dials. Cada dial demana la cardinalitat màxima d'una pota de la ternària **reserva** (passatger, vol, tarifa).",
+    "prompt": "Regla de l'enunciat: *en un mateix vol un passatger viatja amb una sola tarifa*. Fixant dues de les tres entitats, quantes instàncies de la tercera poden aparéixer com a màxim? (La taula és només una mostra.)",
+    "table": {
+     "head": [
+      "passaport",
+      "vol",
+      "tarifa"
+     ],
+     "rows": [
+      [
+       "ES-10",
+       "IB6250 · 01/10",
+       "Basic"
+      ],
+      [
+       "ES-10",
+       "IB6250 · 02/10",
+       "Plus"
+      ],
+      [
+       "ES-22",
+       "IB6250 · 01/10",
+       "Basic"
+      ],
+      [
+       "ES-31",
+       "IB6250 · 01/10",
+       "Plus"
+      ]
+     ]
+    },
+    "items": [
+     "Fixats un PASSATGER i un VOL → quantes TARIFES?",
+     "Fixats un VOL i una TARIFA → quants PASSATGERS?",
+     "Fixats un PASSATGER i una TARIFA → quants VOLS?"
+    ],
+    "choices": [
+     "1",
+     "N"
+    ],
+    "answer": [
+     0,
+     1,
+     1
+    ],
+    "hints": [
+     "Per a cada pregunta, fixa les dues entitats que et donen i pregunta't quantes de la tercera «caben».",
+     "La taula és només una mostra de dades: la cardinalitat la fixa la **regla** de l'enunciat, no els pocs exemples que veus.",
+     "La regla restringeix una sola pota: la de la tarifa. Les altres dues no tenen límit."
+    ],
+    "explain": "Es calcula fixant dues potes i comptant la tercera. Només `TARIFA` té màxim **1** (la regla de l'enunciat); un vol el prenen molts passatgers i un passatger amb una tarifa pot volar moltes vegades.",
+    "clue": {
+     "title": "Nota manuscrita",
+     "text": "A la taula del taulell hi ha un full arrancat: «reserva = passatger + vol + tarifa, tot junt en la clau». Qui la va escriure **no va calcular les cardinalitats fixant dues potes**: va posar la tarifa amb màxim N.",
+     "key": true
+    }
+   },
+   {
+    "id": "p2",
+    "act": 1,
+    "room": "Hangar de manteniment",
+    "stars": 2,
+    "type": "choice",
+    "ref": "2.1 · Entitats febles",
+    "ref_url": "/ud02-modelo-er/ud02-teoria/",
+    "story": "Al hangar hi ha una caixa forta amb teclat. Una etiqueta diu: «Identificador complet del **TRAM** d'un vol».",
+    "prompt": "Un vol s'identifica per la companyia, el número de vol i la data. Un tram es numera dins del seu vol (1, 2, 3…). Quin és l'identificador complet de `TRAMO`?",
+    "options": [
+     "`nº_tramo`",
+     "`nº_vuelo`, `fecha`, `nº_tramo`",
+     "`cód_compañía`, `nº_vuelo`, `fecha`, `nº_tramo`",
+     "`cód_compañía`, `nº_vuelo`, `nº_tramo`"
+    ],
+    "answer": 2,
+    "hints": [
+     "`TRAMO` és una entitat feble: no pot identificar-se per si sola.",
+     "La seua propietària és `VUELO`, que al seu torn és feble de `COMPAÑÍA`. La debilitat s'acumula.",
+     "Suma tots els atributs que identifiquen `VUELO` i afig el discriminador de `TRAMO`."
+    ],
+    "explain": "Les entitats febles **hereten** la identificació de la seua propietària. `VUELO` = (companyia, número, data) i `TRAMO` = identificador de `VUELO` + `nº_tramo`. Sense la data, el tram 1 del vol IB6250 d'hui es confondria amb el d'ahir.",
+    "clue": {
+     "title": "Post-it al hangar",
+     "text": "Un post-it groc: «els identificadors dels diagrames són de diversos atributs; **no els he substituït per cap id autonumèric**». Algú va respectar les claus compostes.",
+     "key": true
+    }
+   },
+   {
+    "id": "p3",
+    "act": 1,
+    "room": "Sala de torns",
+    "stars": 2,
+    "type": "multi",
+    "ref": "4.2 · Jerarquies parcials i solapades",
+    "ref_url": "/ud02-modelo-er/ud02-teoria/",
+    "story": "El quadern de torns del personal té la pàgina de la jerarquia subratllada. El pany demana dues frases.",
+    "prompt": "La jerarquia del personal té tres subtipus: pilots, tripulants de cabina i instructors. Marca les **dues** frases de l'enunciat que justifiquen que és **parcial** i **solapada**.",
+    "options": [
+     "Els pilots tenen llicència i hores de vol.",
+     "Hi ha empleats que no són res de l'anterior, com el personal de terra.",
+     "El personal té DNI, nom i data d'alta, i se'n calcula l'antiguitat.",
+     "Un pilot veterà pot ser també instructor."
+    ],
+    "answer": [
+     1,
+     3
+    ],
+    "hints": [
+     "Parcial/total parla de si **tot** supertipus ha d'estar en algun subtipus. Disjunta/solapada parla de si pot estar en **diversos**.",
+     "Busca una frase sobre empleats que no pertanyen a cap subtipus i una altra sobre empleats que pertanyen a dos.",
+     "Els atributs dels subtipus o del supertipus no diuen res sobre les propietats de la jerarquia."
+    ],
+    "explain": "«Hi ha empleats que no són res de l'anterior» → **parcial** (hi ha personal sense subtipus). «Un pilot pot ser també instructor» → **solapada** (un empleat en dos subtipus).",
+    "clue": {
+     "title": "Quadern de torns",
+     "text": "Eixa nit només hi havia **personal de terra** a l'edifici: ni pilots ni tripulants ni instructors. Qualsevol dels tres sospitosos va poder entrar.",
+     "key": false
+    }
+   },
+   {
+    "id": "p4",
+    "act": 1,
+    "room": "Sala de servidors",
+    "stars": 2,
+    "type": "match",
+    "ref": "2.2 · Atributs",
+    "ref_url": "/ud02-modelo-er/ud02-teoria/",
+    "story": "Els servidors tenen una pantalla amb quatre atributs descol·locats. Cal classificar cadascun abans que es bloquege.",
+    "prompt": "Classifica cada atribut segons el seu tipus.",
+    "items": [
+     "`coordenadas` d'un aeroport (latitud i longitud, que sempre es manegen juntes)",
+     "`teléfonos` d'un passatger (en pot tindre diversos)",
+     "`antigüedad` d'un empleat (es calcula a partir de la data d'alta)",
+     "`matrícula` d'una aeronau (la identifica)"
+    ],
+    "choices": [
+     "Simple",
+     "Compost",
+     "Multivaluat",
+     "Derivat"
+    ],
+    "answer": [
+     1,
+     2,
+     3,
+     0
+    ],
+    "hints": [
+     "Compost = es descompon en parts. Multivaluat = diversos valors alhora. Derivat = es pot calcular.",
+     "Si un atribut es pot calcular a partir d'un altre, no cal guardar-lo: és derivat.",
+     "La matrícula és un únic valor, sense parts i sense càlcul."
+    ],
+    "explain": "`coordenadas` és **compost** (latitud + longitud); `teléfonos` és **multivaluat** (a la UD03 passarà a una taula a part); `antigüedad` és **derivat** (es calcula amb la data d'alta); `matrícula` és **simple** i identificador.",
+    "clue": {
+     "title": "Còpia del full de càlcul",
+     "text": "Al full de càlcul que el sabotatge va deixar obert apareix una cel·la amb **tres telèfons separats per comes** al mateix passatger. Un atribut multivaluat ficat a la força en una sola cel·la.",
+     "key": true
+    }
+   },
+   {
+    "id": "p5",
+    "act": 1,
+    "room": "Mapa de rutes",
+    "stars": 3,
+    "type": "choice",
+    "ref": "2.3 · Relacions i rols",
+    "ref_url": "/ud02-modelo-er/ud02-teoria/",
+    "story": "A la paret hi ha un mapa de rutes amb un adhesiu: «València–Madrid i Madrid–València són **dues** rutes distintes». L'últim pany de l'acte demana com es modela una ruta.",
+    "prompt": "Una ruta uneix un aeroport d'origen amb un de destinació i guarda la distància. És un catàleg comú: no depén de cap companyia. Com es modela?",
+    "options": [
+     "Com un atribut `ruta` dins de `VUELO`.",
+     "Com una relació 1:N entre `COMPAÑÍA` i `AEROPUERTO`.",
+     "Com una relació reflexiva N:M sobre `AEROPUERTO`, amb rols origen i destinació i l'atribut `distancia`.",
+     "Com una entitat feble de `COMPAÑÍA`."
+    ],
+    "answer": 2,
+    "hints": [
+     "Una ruta relaciona dues instàncies de la **mateixa** entitat.",
+     "Els noms de rol (origen, destinació) distingeixen un sentit de l'altre: València→Madrid no és Madrid→València.",
+     "Un aeroport és origen de moltes rutes i destinació de moltes rutes: quin màxim té cada pota?"
+    ],
+    "explain": "És una relació **reflexiva N:M** amb rols. Un aeroport és origen de moltes rutes i destinació de moltes rutes, i el sentit importa. `distancia` és un atribut de la relació. No depén de la companyia.",
+    "clue": {
+     "title": "Mapa de rutes",
+     "text": "Al catàleg de rutes **falta Madrid→València**, però València→Madrid continua ahí: algú va esborrar una sola direcció. Qui ho va fer sabia que són dues files distintes.",
+     "key": false
+    }
+   },
+   {
+    "id": "p6",
+    "act": 2,
+    "room": "Arxiu de personal",
+    "stars": 2,
+    "type": "match",
+    "ref": "3.3 · Integritat referencial",
+    "ref_url": "/ud03-modelo-relacional/ud03-teoria/",
+    "story": "La cambra cuirassada s'obri amb una prova d'esborrat. Si tries malament la política, la porta es bloqueja.",
+    "prompt": "A `PERSONAL`, la clau forana `supervisor` apunta a la mateixa taula. S'esborra l'empleat **10**. Què passa segons la política de la clau forana?",
+    "table": {
+     "head": [
+      "cód",
+      "nom",
+      "supervisor"
+     ],
+     "rows": [
+      [
+       "10",
+       "Dr. Salas",
+       "NULL"
+      ],
+      [
+       "11",
+       "Ana Ríos",
+       "10"
+      ],
+      [
+       "12",
+       "Pablo Mora",
+       "10"
+      ],
+      [
+       "13",
+       "Eva Lara",
+       "11"
+      ]
+     ]
+    },
+    "items": [
+     "Política **restringida** (`RESTRICT`)",
+     "Política **en cascada** (`CASCADE`)",
+     "Política **posada a nuls** (`SET NULL`)"
+    ],
+    "choices": [
+     "Es rebutja l'esborrat i no canvia res.",
+     "S'esborren 3 files: la 10, la 11 i la 12.",
+     "S'esborren 4 files: la 10 i, en cadena, la 11, la 12 i la 13.",
+     "S'esborra només la fila 10; les files 11 i 12 queden amb supervisor `NULL`."
+    ],
+    "answer": [
+     0,
+     2,
+     3
+    ],
+    "hints": [
+     "Restringit: la base de dades protegeix les files que depenen de l'esborrada.",
+     "En cascada l'esborrat es propaga: cada fila esborrada pot tindre, al seu torn, supervisats.",
+     "Posada a nuls només afecta les files que apuntaven directament a la 10."
+    ],
+    "explain": "`RESTRICT` rebutja. `CASCADE` es propaga **en cadena**: en esborrar la 11 s'esborra la 13. `SET NULL` deixa la 11 i la 12 sense supervisor i no toca la 13, que penja de la 11. Recorda: `SET NULL` exigeix que la clau forana admeta nuls.",
+    "clue": {
+     "title": "Registre de l'arxiu",
+     "text": "L'esborrat del supervisor va deixar els seus dos supervisats amb el camp buit: la clau forana estava en **`SET NULL`**, no en cascada. Qui ho va preparar no volia perdre més dades de les necessàries.",
+     "key": false
+    }
+   },
+   {
+    "id": "p7",
+    "act": 2,
+    "room": "Registre de llits",
+    "stars": 3,
+    "type": "choice",
+    "ref": "4.5 · Transformació N:M",
+    "ref_url": "/ud03-modelo-relacional/ud03-teoria/",
+    "story": "Un teclat demana la clau primària de la taula d'ocupacions de llits. El teclat només accepta una opció.",
+    "prompt": "Tens `INGRESO(nhc, nº_ingreso)` i `CAMA(planta, nº_habitación, letra)`. Un ingrés pot **tornar al mateix llit en dates distintes**; una ocupació en curs té `fecha_fin` buida. La taula és `OCUPA(…, fecha_inicio, fecha_fin)`. Quina és la seua clau primària?",
+    "options": [
+     "`nhc`, `nº_ingreso`, `planta`, `nº_habitación`, `letra`",
+     "`nhc`, `nº_ingreso`, `planta`, `nº_habitación`, `letra`, `fecha_inicio`",
+     "`nhc`, `nº_ingreso`, `planta`, `nº_habitación`, `letra`, `fecha_inicio`, `fecha_fin`",
+     "No cal clau primària: basten les dues claus foranes."
+    ],
+    "answer": 1,
+    "hints": [
+     "Una N:M es converteix en una taula la clau de la qual conté les claus de les dues entitats que uneix.",
+     "Si no afigs res més, la mateixa parella ingrés–llit no es podria repetir: però l'enunciat diu que sí que es pot.",
+     "Una clau primària mai no admet `NULL`, i `fecha_fin` està buida mentre l'ocupació continua."
+    ],
+    "explain": "La clau és **ingrés + llit + `fecha_inicio`**: `fecha_inicio` és el discriminador de la relació i permet repetir el mateix llit en dates distintes. `fecha_fin` no pot estar a la clau perquè admet `NULL`.",
+    "clue": {
+     "title": "Registre de llits",
+     "text": "Al registre, el mateix llit apareix ocupat **dues vegades pel mateix ingrés en dates distintes** i totes dues files s'han conservat. El disseny original permetia repetir el llit.",
+     "key": false
+    }
+   },
+   {
+    "id": "p8",
+    "act": 2,
+    "room": "Sala d'scripts",
+    "stars": 3,
+    "type": "order",
+    "ref": "4 · Regles de transformació",
+    "ref_url": "/ud03-modelo-relacional/ud03-teoria/",
+    "story": "Sis plantilles de taula estan barrejades sobre la taula. Cada clau forana exigeix que la taula a la qual apunta ja existisca. Cal apilar-les en un ordre que es puga executar.",
+    "prompt": "Ordena les taules de dalt (es crea primer) a baix (es crea l'última), de manera que cap clau forana apunte a una taula que encara no existeix.",
+    "items": [
+     "`ATIENDE`(nhc, nº_ingreso, cód_médico, fecha_primera_visita)",
+     "`MEDICAMENTO`(cód_medicamento, nombre)",
+     "`INGRESO`(nhc, nº_ingreso, fecha_ingreso)",
+     "`PRESCRIBE`(nhc, nº_ingreso, cód_médico, cód_medicamento, fecha, dosis)",
+     "`PACIENTE`(nhc, nombre)",
+     "`MÉDICO`(cód_médico, nombre)"
+    ],
+    "before": [
+     [
+      4,
+      2
+     ],
+     [
+      2,
+      0
+     ],
+     [
+      5,
+      0
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      3
+     ]
+    ],
+    "hints": [
+     "Dibuixa una fletxa des de cada clau forana cap a la taula a la qual apunta.",
+     "`INGRESO` és feble de `PACIENTE`; `ATIENDE` uneix un ingrés amb un metge.",
+     "`PRESCRIBE` apunta a `ATIENDE` (l'atenció) i a `MEDICAMENTO`, així que va l'última."
+    ],
+    "explain": "Hi ha diversos ordres vàlids. Les condicions són: `PACIENTE` abans que `INGRESO`; `INGRESO` i `MÉDICO` abans que `ATIENDE`; `ATIENDE` i `MEDICAMENTO` abans que `PRESCRIBE`. És l'ordre en què escriuràs els `CREATE TABLE` a la UD05.",
+    "clue": {
+     "title": "Post-it amb passos",
+     "text": "Un post-it amb les taules apilades en **ordre de creació**; l'últim pas està ratllat. Qui ho va escriure sabia molt bé com s'enllacen les taules.",
+     "key": false
+    }
+   },
+   {
+    "id": "p9",
+    "act": 2,
+    "room": "Sala del recompte",
+    "stars": 3,
+    "type": "number",
+    "ref": "4.2 i 4.3 · Febles i multivaluats",
+    "ref_url": "/ud03-modelo-relacional/ud03-teoria/",
+    "story": "Un comptador mecànic amb quatre rodes espera el nombre de taules de l'esquema de la mini-clínica.",
+    "prompt": "Un diagrama EER té: `PACIENTE` (atribut multivaluat `alergias`), `INGRESO` (feble de `PACIENTE`), `MÉDICO` i `MEDICAMENTO` (atribut multivaluat `principios_activos`). A més hi ha dues relacions N:M: *atiende* (`MÉDICO`–`INGRESO`) i *prescribe* (l'atenció amb `MEDICAMENTO`). Quantes taules té l'esquema relacional?",
+    "answer": 8,
+    "min": 0,
+    "max": 20,
+    "hints": [
+     "Cada entitat és una taula.",
+     "Cada atribut multivaluat necessita la seua pròpia taula.",
+     "Cada relació N:M necessita la seua pròpia taula. Suma: entitats + multivaluats + relacions N:M."
+    ],
+    "explain": "4 entitats (`PACIENTE`, `INGRESO`, `MÉDICO`, `MEDICAMENTO`) + 2 pels multivaluats (`ALERGIA`, `PRINCIPIO_ACTIVO`) + 2 per les N:M (`ATIENDE`, `PRESCRIBE`) = **8** taules.",
+    "clue": {
+     "title": "Recompte de l'esquema",
+     "text": "L'esquema complet té **huit** taules. La carpeta del sabotatge només conté les de les entitats i les dues relacions: es van perdre justament les taules dels atributs multivaluats.",
+     "key": false
+    }
+   },
+   {
+    "id": "p10",
+    "act": 2,
+    "room": "Registre de triggers",
+    "stars": 3,
+    "type": "multi",
+    "ref": "6 · Restriccions que el model lògic no expressa",
+    "ref_url": "/ud03-modelo-relacional/ud03-teoria/",
+    "story": "El registre de triggers de la cambra està buit. Per a obrir la comporta cal marcar quines regles **no** hauria pogut vigilar l'esquema.",
+    "prompt": "Marca les **tres** regles que **no** es poden declarar amb claus, `NOT NULL`, claus foranes ni regles de fila, i que necessitarien un trigger o un procediment.",
+    "options": [
+     "L'hora d'arribada d'un tram és posterior a la d'eixida.",
+     "En cada tram només pot haver-hi un comandant.",
+     "El passaport identifica cada passatger.",
+     "Una aeronau no pot fer dos trams que se solapen en el temps.",
+     "L'aeroport d'origen d'un tram ha d'existir a `AEROPUERTO`.",
+     "La distància entre l'origen i la destinació d'un tram no supera l'autonomia del model de la seua aeronau."
+    ],
+    "answer": [
+     1,
+     3,
+     5
+    ],
+    "hints": [
+     "Una regla d'**una fila** o de **clau** sí que es declara. Una que compara **diverses files o diverses taules**, no.",
+     "Pregunta't per a cada regla: basta mirar una sola fila? És una clau o una clau forana?",
+     "Dues de les regles «fàcils» són d'una fila (hora d'arribada) i de clau forana (aeroport d'origen); una altra és una clau (passaport)."
+    ],
+    "explain": "Les tres correctes afecten **diverses files o taules**: comptar comandants per tram, comparar trams d'una mateixa aeronau i creuar `TRAMO`, `RUTA`, `AERONAVE` i `MODELO`. L'hora d'arribada és regla de fila, el passaport és clau i l'aeroport és clau forana: es declaren a l'esquema.",
+    "clue": {
+     "title": "Registre de triggers",
+     "text": "El registre de triggers està **buit**: cap regla de diverses files estava protegida per la base de dades. Per això el sabotatge no va activar cap alarma.",
+     "key": false
+    }
+   },
+   {
+    "id": "p11",
+    "act": 3,
+    "room": "Porta d'eixida",
+    "stars": 3,
+    "type": "choice",
+    "ref": "UD02 + UD03 · De la ternària a la taula",
+    "ref_url": "/ud03-modelo-relacional/ud03-teoria/",
+    "story": "La porta d'eixida mostra un diagrama E/R amb la ternària **reserva** (passatger, vol, tarifa) i demana la taula resultant. Tens la clau del model E/R i la del relacional: és el moment d'usar les dues.",
+    "prompt": "Recorda: un passatger viatja amb **una sola tarifa** en un vol (`TARIFA` té màxim 1). `VUELO` s'identifica per (`cód_compañía`, `nº_vuelo`, `fecha`). Quina és la clau primària de `RESERVA(pasaporte, cód_compañía, nº_vuelo, fecha, cód_tarifa, asiento, precio)`?",
+    "options": [
+     "`pasaporte`, `cód_compañía`, `nº_vuelo`, `fecha`, `cód_tarifa`",
+     "`pasaporte`, `cód_tarifa`",
+     "`pasaporte`, `cód_compañía`, `nº_vuelo`, `fecha`",
+     "`cód_compañía`, `nº_vuelo`, `fecha`"
+    ],
+    "answer": 2,
+    "hints": [
+     "La clau d'una ternària amb una pota de màxim 1 **no** inclou eixa pota.",
+     "Pensa què identifica una reserva: un passatger en un vol concret.",
+     "`cód_tarifa` serà una clau forana obligatòria, però no forma part de la clau primària."
+    ],
+    "explain": "Com que `TARIFA` té màxim 1, fixats passatger i vol només hi ha una tarifa: la clau és **passatger + vol complet**, i `cód_tarifa` és només clau forana (`NOT NULL`). Si l'inclous a la clau, permetries dues tarifes per al mateix passatger i vol, trencant la regla.",
+    "clue": {
+     "title": "L'última peça",
+     "text": "La porta s'obri. A terra hi ha un full amb les dades del passatger ES-10: **dues tarifes en el mateix vol**. Algú va modificar la clau de la reserva perquè ho permetera.",
+     "key": false
+    }
+   }
+  ],
+  "accusation": {
+   "title": "Acusació final",
+   "text": "La porta està oberta, però abans d'eixir has de dir a qui acuses. Repassa la llibreta: les **pistes clau** descarten dos sospitosos.",
+   "answer": "tablas",
+   "right": "**Óscar Tablas.** Les pistes clau ho deixen clar: la nota manuscrita mostra que qui va manipular l'arxiu no calcula les cardinalitats fixant dues potes, així que **no és la Dra. Vega**; els identificadors compostos continuen intactes, així que **no és Marga Nulos** (ella els hauria substituït per un id); i la cel·la amb tres telèfons separats per comes és el segell del becari.",
+   "wrong": {
+    "vega": "No és la Dra. Vega: ella sempre calcula les cardinalitats d'una ternària fixant dues potes, i la nota manuscrita demostra que qui va manipular l'arxiu no ho va fer així.",
+    "nulos": "No és Marga Nulos: ella mai no usa claus compostes i les de l'arxiu continuen sent compostes. Revisa el post-it del hangar."
+   }
+  },
+  "ending": {
+   "title": "Cas tancat",
+   "text": "Óscar Tablas confessa: va esborrar el model perquè no entenia per què les seues taules úniques «no valien». L'equip recuperarà els diagrames i la base de dades es llançarà demà a la seua hora. Tu has eixit de l'edifici just a l'alba.",
+   "next": "Si t'han quedat dubtes, repassa la teoria de la [UD02](/ud02-modelo-er/ud02-teoria/) i de la [UD03](/ud03-modelo-relacional/ud03-teoria/), o prova les [pràctiques de la UD03](/ud03-modelo-relacional/ud03-practicas/)."
+  }
+ }
+}

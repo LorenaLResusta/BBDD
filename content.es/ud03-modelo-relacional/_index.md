@@ -13,5 +13,6 @@ El modelo relacional es el puente entre el diseño conceptual y la base de datos
 |---|---|
 | [Teoría](/ud03-modelo-relacional/ud03-teoria) | Relaciones, dominios, claves, `NULL`, integridad, reglas de transformación E/R → relacional, restricciones no representables, herramientas y caso EduGest |
 | [Prácticas](/ud03-modelo-relacional/ud03-practicas) | Cinco prácticas, la tarea EduGest y un banco de 20 ejercicios |
+| [Escape room](/ud03-modelo-relacional/ud03-escape-room) | Juego de repaso de UD02 y UD03: diez cerraduras, una libreta de pistas y un culpable por descubrir |
 
 **Duración:** 20 horas de aula, del 22/10/2026 al 18/11/2026. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.
