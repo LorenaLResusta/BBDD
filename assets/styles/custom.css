@@ -429,3 +429,7 @@ details.sol-lock > summary { cursor: pointer; font-weight: 600; }
 .sol-msg { min-height: 1.2em; margin: .25rem 0; font-size: .9em; }
 .sol-msg.ko { color: #c0392b; }
 details.sol-lock.sol-open .sol-form { display: none; }
+
+.bd-fold { margin: 1rem 0; }
+.bd-fold > summary { cursor: pointer; font-weight: 700; padding: .45rem .7rem; border: 1px solid var(--gray-200, #ccc); border-radius: .4rem; }
+.bd-fold[open] > summary { margin-bottom: .6rem; }

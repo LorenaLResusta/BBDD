@@ -19,6 +19,7 @@
 {{- $u := dict -}}
 {{- range site.Data.planificacion.unidades }}{{ if eq .c $uni }}{{ $u = . }}{{ end }}{{ end -}}
 {{- if and $u (ne (int $u.h) $tot) }}{{ errorf "sesiones %s: planificacion.json asigna %d h y la página declara %d h" $uni (int $u.h) $tot }}{{ end -}}
+<details class="bd-fold"><summary>{{ if eq site.Language.Lang "val" }}Temporalització de {{ $uni }} (desplega){{ else }}Temporalización de {{ $uni }} (desplegar){{ end }}</summary>
 <div class="bd-temp">
   <div class="bd-temp-head">
     <strong>{{ $uni }} · {{ $tot }} {{ if eq site.Language.Lang "val" }}hores d'aula{{ else }}horas de aula{{ end }}</strong>
@@ -42,3 +43,4 @@
   <div class="bd-w-note" style="padding:0 .9rem .6rem"><strong>{{ if eq site.Language.Lang "val" }}Treball autònom (fora de l'horari d'aula):{{ else }}Trabajo autónomo (fuera del horario de aula):{{ end }}</strong> {{ delimit . " · " | markdownify }}</div>
   {{- end }}
 </div>
+</details>

@@ -1,5 +1,6 @@
 {{- /* Calendario interactivo del curso 2026/27. Lee data/planificacion.json (generado por el reparto de horas). */ -}}
 {{- $id := printf "cal-%d" .Ordinal -}}
+<details class="bd-fold"><summary>{{ if eq site.Language.Lang "val" }}Calendari del curs 2026/27 (desplega)</summary>{{ else }}Calendario del curso 2026/27 (desplegar)</summary>{{ end }}
 <div class="bd-w" id="{{ $id }}" style="--c: var(--color-accent-important)">
   <div class="bd-w-head"><span class="bd-w-tag">Interactivo</span> Calendario del curso 2026/27 <span class="bd-w-sub">Pulsa un día o una unidad</span></div>
   <div class="bd-w-body">
@@ -10,6 +11,7 @@
     <div class="bd-cal-legend" data-c="kinds"></div>
   </div>
 </div>
+</details>
 <script>
 (function () {
   var root = document.getElementById({{ $id }});
