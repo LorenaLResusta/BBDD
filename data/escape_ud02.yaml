@@ -1,0 +1,606 @@
+# Escape room UD02 · Modelo E/R (shortcode escape-click). Escenas en assets/escape/ud02-*.svg
+# Cada hotspot "id" coincide con un <g data-hs="id"> de la escena. Tipos: puzzle (choice, multi, match, order, number), note, decoy, door.
+es:
+  title: "¡Corten! Fuga del plató"
+  sub: "Escape room · UD02 Modelo Entidad/Relación"
+  target_min: 35
+  intro:
+    - "Eres becario o becaria de **Estudios Chen**, la productora que rueda la serie juvenil *Instituto Cardinal*. Al terminar la grabación de esta noche se va la luz y el sistema de seguridad bloquea todas las puertas del plató."
+    - "Mara, la jefa de datos de la productora, protegió cada cerradura con preguntas sobre el modelo E/R de la serie («si no sabes leer un diagrama, no toques mi base de datos»). Tienes que atravesar el **camerino**, la **sala de guionistas** y el **control de realización** antes de que llegue el equipo de mañana."
+  rooms:
+    - id: camerino
+      scene: ud02-camerino
+      name: "Camerino"
+      story: "La puerta del camerino tiene un teclado de tres dígitos. Junto a él, alguien ha pegado tres pegatinas: 💄 🪞 👗. La sala huele a laca y a prisa."
+      hotspots:
+        - id: espejo
+          kind: puzzle
+          type: match
+          icon: "🪞"
+          name: "Espejo de bombillas"
+          story: "En una esquina del espejo hay un pósit con la ficha que la productora guarda de cada actor o actriz del reparto, con las notas de Mara."
+          prompt: "¿Qué tipo de atributo es cada uno en el modelo E/R?"
+          items:
+            - "`telefonos`: uno o varios por persona"
+            - "`dni`: no hay dos iguales y es el que usamos para identificar"
+            - "`edad`: se calcula a partir de la fecha de nacimiento"
+            - "`nombre_real`: nombre, primer apellido y segundo apellido"
+            - "`nombre_artistico`: lo que sale en los créditos (dos actores pueden coincidir)"
+            - "`num_seg_social`: tampoco se repite, pero no lo usamos para identificar"
+          choices: ["Identificador principal", "Identificador alternativo", "Compuesto", "Multivaluado", "Derivado", "Simple (descriptor)"]
+          answer: [3, 0, 4, 2, 5, 1]
+          hints:
+            - "Los dos identificadores no se repiten nunca: el principal es el elegido (subrayado) y el alternativo, el que también podría serlo (subrayado discontinuo)."
+            - "Si un dato se puede calcular, no se guarda: es **derivado** (elipse discontinua)."
+            - "Varios valores para la misma persona → multivaluado. Varias partes con significado propio → compuesto."
+          explain: "`dni` identifica (principal) y `num_seg_social` también podría hacerlo (alternativo). `nombre_real` se descompone en partes (compuesto), `telefonos` admite varios valores (multivaluado), `edad` se calcula (derivado) y `nombre_artistico` es un descriptor simple que puede repetirse."
+          ref: "2.2 Atributos: clasificación"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#22-atributos-clasificación-estructura-y-dominio"
+          reward: { icon: "🪞", text: "🪞 = **4** (escrito con pintalabios detrás del pósit)" }
+        - id: vestuario
+          kind: puzzle
+          type: choice
+          icon: "👗"
+          name: "Burro de vestuario"
+          story:
+            - "Cada prenda lleva cosida una etiqueta: *ICARD · prenda 7*. Junto al burro, una nota del departamento de vestuario:"
+            - "«Las prendas se numeran desde 1 **dentro de cada serie**: la serie ICARD tiene su prenda 7 y la serie MARINA también tiene una prenda 7. De cada prenda guardamos talla, color y estado. Si una serie se cancela y se borra, su vestuario se destruye.»"
+          prompt: "¿Cómo modelas PRENDA en el diagrama E/R?"
+          options:
+            - "Entidad fuerte con identificador `num_prenda`"
+            - "Entidad débil por existencia, identificada solo con `num_prenda`"
+            - "Entidad débil por identificación: se identifica con el código de la serie más `num_prenda`"
+            - "Atributo multivaluado `prendas` de SERIE"
+          answer: 2
+          hints:
+            - "¿Basta `num_prenda` para distinguir la prenda 7 de ICARD de la prenda 7 de MARINA?"
+            - "Si una entidad necesita la clave de otra para identificarse, depende de ella para algo más que existir."
+            - "Un atributo multivaluado no sirve cuando de cada valor guardas datos propios (talla, color, estado…)."
+          explain: "PRENDA no existe sin su serie (dependencia de existencia) y, además, `num_prenda` solo es único **dentro** de cada serie: su identificador es (código de serie, `num_prenda`). Es una entidad **débil por identificación**: doble rectángulo y relación identificadora con SERIE."
+          ref: "2.1 Entidades fuertes y débiles"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#21-entidades-fuertes-débiles-e-instancias"
+          reward: { icon: "🔑", text: "Una llavecita en el bolsillo de una chaqueta · 👗 = **7**" }
+        - id: tocador
+          kind: puzzle
+          type: number
+          icon: "💄"
+          name: "Tocador de maquillaje"
+          needs: [vestuario]
+          locked: "El cajón del tocador está cerrado con llave. La cerradura es diminuta… quizá la llave esté escondida en algún lugar del camerino."
+          story:
+            - "Con la llavecita abres el cajón. Dentro hay una hoja de requisitos arrugada:"
+            - "«Estudios Chen quiere guardar sus series (código, título y cadena) y los capítulos de cada serie (número, título y duración en minutos). Cada capítulo lo protagonizan varios actores, de los que guardamos DNI, nombre y color de pelo, para maquillaje. Cada actor interpreta uno o varios personajes, de los que interesa su nombre y su apodo. Los camerinos (número y planta) se asignan a los actores durante el rodaje.»"
+          prompt: "Mara ha subrayado ocho palabras: *serie, cadena, capítulo, duración, actor, color de pelo, personaje, camerino*. ¿Cuántas deben ser **entidades** en el diagrama?"
+          answer: 5
+          hints:
+            - "Una entidad tiene propiedades propias que interesa guardar y muchas instancias distintas."
+            - "Un dato que solo describe a otra cosa, y del que no guardas nada más, es un atributo."
+            - "Cadena, duración y color de pelo describen a otra cosa: en el enunciado no tienen datos propios."
+          explain: "Son entidades SERIE, CAPÍTULO, ACTOR, PERSONAJE y CAMERINO: de cada una se guardan varios datos. `cadena`, `duracion` y `color_pelo` son atributos de SERIE, CAPÍTULO y ACTOR. Si mañana hubiera que guardar el teléfono o la web de cada cadena, CADENA pasaría a ser entidad."
+          ref: "5. Fases en la construcción del esquema"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#5-fases-en-la-construcción-del-esquema-conceptual"
+          reward: { icon: "💄", text: "💄 = **5**" }
+        - id: poster
+          kind: decoy
+          icon: "🖼️"
+          name: "Póster de la serie"
+          text: "Es el póster de la primera temporada de *Instituto Cardinal*. Alguien ha escrito en una esquina: «el amor es 1:1, la amistad es N:M». Muy bonito, pero aquí no hay ningún número."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Puerta del camerino"
+          story: "Un teclado de tres dígitos. Las pegatinas indican el orden en que hay que introducir los números que encuentres."
+          lock: { type: digits, code: "547", order: "💄 🪞 👗" }
+          hints:
+            - "Mira tu mochila: cada reto resuelto de esta sala te dio un número."
+            - "El orden es el de las pegatinas: primero el número del tocador, luego el del espejo y por último el del vestuario."
+          explain: "Cada dígito era la recompensa de un reto: 💄 5 · 🪞 4 · 👗 7."
+    - id: guionistas
+      scene: ud02-guionistas
+      name: "Sala de guionistas"
+      story: "La sala de guionistas está llena de café frío y teorías sobre la segunda temporada. La puerta tiene una **cerradura de flechas** y, pegadas en ella, cuatro frases sobre el reparto. Para saber qué flecha corresponde a cada frase necesitas la **leyenda**, que los guionistas han repartido en cuatro trozos por la sala."
+      hotspots:
+        - id: pizarra
+          kind: puzzle
+          type: match
+          icon: "📋"
+          name: "Pizarra de la trama"
+          story: "En la pizarra hay cuatro relaciones dibujadas a toda prisa. Alguien ha tachado las cardinalidades."
+          prompt: "¿De qué tipo es cada relación según sus cardinalidades máximas?"
+          items:
+            - "SERIE **tiene** CAPÍTULO: una serie tiene muchos capítulos; cada capítulo es de una sola serie."
+            - "ACTOR **interpreta** PERSONAJE: un actor interpreta varios personajes y un personaje puede interpretarlo más de un actor (de niño y de mayor)."
+            - "ACTOR **usa** CAMERINO: durante el rodaje cada actor usa un único camerino y cada camerino lo usa un único actor."
+            - "DIRECTOR **dirige** CAPÍTULO: cada capítulo lo dirige una sola persona, que puede dirigir muchos."
+          choices: ["1:1", "1:N", "N:M"]
+          answer: [1, 2, 0, 1]
+          hints:
+            - "Haz las dos preguntas: «una instancia de A, ¿con cuántas de B como máximo?» y al revés."
+            - "Si las dos respuestas son «muchas», es N:M; si las dos son «una», 1:1; si cada una dice una cosa, 1:N."
+          explain: "SERIE–CAPÍTULO y DIRECTOR–CAPÍTULO son **1:N** (el lado N es CAPÍTULO); ACTOR–PERSONAJE es **N:M** y ACTOR–CAMERINO es **1:1**. Para clasificar una relación solo se miran las cardinalidades **máximas**."
+          ref: "2.4 Cardinalidades mínima y máxima"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#24-restricciones-de-cardinalidad-mínima-y-máxima"
+          reward: { icon: "📋", text: "Trozo de leyenda: **→ = (1,1)**" }
+        - id: corcho
+          kind: puzzle
+          type: choice
+          icon: "🧵"
+          name: "Corcho con hilos rojos"
+          story: "En el corcho, fotos de personajes unidas con hilo rojo y una nota: «En la segunda temporada, un personaje puede ser **mentor** de varios personajes, y cada personaje tiene como mucho un mentor»."
+          prompt: "¿Cómo se modela la relación MENTORIZA?"
+          options:
+            - "Binaria entre PERSONAJE y una nueva entidad MENTOR"
+            - "Reflexiva (grado 1) 1:N sobre PERSONAJE, con los roles *mentor* y *aprendiz*"
+            - "Reflexiva (grado 1) N:M sobre PERSONAJE, sin necesidad de roles"
+            - "Un atributo multivaluado `aprendices` en PERSONAJE"
+          answer: 1
+          hints:
+            - "El mentor y el aprendiz son… personajes. ¿Cuántas entidades distintas participan?"
+            - "En una relación reflexiva es obligatorio indicar el papel (rol) de cada extremo."
+            - "Un mentor tiene muchos aprendices; un aprendiz tiene, como mucho, un mentor."
+          explain: "Participa una sola entidad (PERSONAJE) dos veces: es una relación **reflexiva** de grado 1. Como un mentor tiene muchos aprendices y cada aprendiz un mentor como máximo, es **1:N**. Los **nombres de rol** (*mentor*, *aprendiz*) son obligatorios para saber en qué sentido se lee."
+          ref: "2.3 Relaciones: grado y roles"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#23-relaciones-grado-semántica-y-nombres-de-rol"
+          reward: { icon: "🧵", text: "Trozo de leyenda: **← = (0,1)**" }
+        - id: archivador
+          kind: note
+          icon: "🗄️"
+          name: "Archivador del guion"
+          text: "En el primer cajón está la *biblia* de la serie, con las reglas de reparto que Mara usa en su modelo:"
+          list:
+            - "En un mismo capítulo, cada personaje lo interpreta **un solo** actor."
+            - "En un mismo capítulo, un actor puede interpretar **varios** personajes (los gemelos Ruiz los hace la misma actriz)."
+            - "Un actor interpreta al mismo personaje en **muchos** capítulos."
+            - "En el fondo del cajón hay un trozo de papel con una flecha dibujada."
+          reward: { icon: "🗄️", text: "Trozo de leyenda: **↑ = (0,n)**" }
+        - id: portatil
+          kind: puzzle
+          type: choice
+          icon: "💻"
+          name: "Portátil de Mara"
+          story: "El portátil muestra la relación ternaria **APARECE** (ACTOR, PERSONAJE, CAPÍTULO) y pide su conectividad para desbloquearse. Las reglas de reparto están en el archivador."
+          table:
+            head: ["Si fijas…", "¿cuántos como máximo?"]
+            rows: [["un PERSONAJE y un CAPÍTULO", "… ACTORES"], ["un ACTOR y un CAPÍTULO", "… PERSONAJES"], ["un ACTOR y un PERSONAJE", "… CAPÍTULOS"]]
+          prompt: "¿Qué conectividad tiene APARECE?"
+          options:
+            - "N:N:N, sin ninguna restricción"
+            - "1:N:N, con ACTOR en el lado «1»"
+            - "1:N:N, con PERSONAJE en el lado «1»"
+            - "1:1:N, con CAPÍTULO en el lado «N»"
+          answer: 1
+          hints:
+            - "Las reglas del archivador responden a cada una de las tres preguntas de la tabla."
+            - "Solo una de las tres preguntas tiene como respuesta «uno»."
+            - "Fijados un personaje y un capítulo, solo hay un actor posible: ACTOR es el lado «1»."
+          explain: "(PERSONAJE, CAPÍTULO) → como mucho **1** ACTOR; (ACTOR, CAPÍTULO) → **N** personajes; (ACTOR, PERSONAJE) → **N** capítulos. Es una ternaria **1:N:N** con ACTOR en el lado 1. En la UD03 verás que por eso la clave primaria de APARECE será (personaje, capítulo)."
+          ref: "4.4 Relaciones ternarias"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#44-relaciones-ternarias-y-análisis-formal-de-cardinalidad"
+          reward: { icon: "💻", text: "Trozo de leyenda: **↓ = (1,n)**" }
+        - id: cafetera
+          kind: decoy
+          icon: "☕"
+          name: "Cafetera"
+          text: "Está vacía. Como la inspiración de los guionistas a las tres de la madrugada."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Puerta de la sala"
+          story: "Una cerradura de cuatro flechas. Cada frase pegada en la puerta se completa con un par (mínima, máxima), y cada par corresponde a una flecha de la leyenda."
+          list:
+            - "Un capítulo pertenece a ___ series."
+            - "Una serie tiene ___ capítulos (hay series anunciadas que aún no tienen ningún capítulo rodado)."
+            - "Un actor del reparto interpreta ___ personajes (todos interpretan al menos uno)."
+            - "Un personaje tiene ___ mentores."
+          prompt: "Introduce las cuatro flechas en el orden de las frases."
+          lock: { type: arrows, code: "RUDL" }
+          hints:
+            - "Necesitas los cuatro trozos de la leyenda: pizarra, corcho, archivador y portátil."
+            - "Para cada frase pregúntate: ¿puede ser cero? (mínima) ¿puede ser más de uno? (máxima)."
+            - "La primera frase es (1,1): →."
+          explain: "(1,1) → · (0,n) ↑ · (1,n) ↓ · (0,1) ←. Traducir cada cardinalidad a una frase completa es la mejor forma de no leerla al revés."
+    - id: control
+      scene: ud02-control
+      name: "Control de realización"
+      story: "El control de realización está lleno de pantallas encendidas. La salida tiene un **candado de cuatro letras** y, junto a él, una tira de pegatinas: 🔴 🎚️ 📺 🎬."
+      hotspots:
+        - id: monitores
+          kind: puzzle
+          type: match
+          icon: "📺"
+          name: "Pared de monitores"
+          story: "Cada pantalla muestra una jerarquía del modelo de la productora, con una nota de Mara."
+          prompt: "¿Qué tipo de jerarquía es cada una?"
+          items:
+            - "Pantalla 1 · PERSONAL → ACTOR, TÉCNICO, GUIONISTA. Hay personal de administración que no es nada de eso, y alguna actriz también escribe guiones."
+            - "Pantalla 2 · CAPÍTULO → PILOTO, REGULAR, FINAL_TEMPORADA. Todo capítulo es exactamente de uno de los tres tipos."
+            - "Pantalla 3 · CONTRATO → INDEFINIDO, POR_OBRA. Hay contratos de prácticas que no son de ninguno de los dos, y ninguno puede ser de los dos a la vez."
+            - "Pantalla 4 · SERIE → TV_ABIERTA, STREAMING. Toda serie se emite en al menos uno de los dos sitios, y muchas en ambos."
+          choices: ["Total y disjunta (T, D)", "Total y solapada (T, S)", "Parcial y disjunta (P, D)", "Parcial y solapada (P, S)"]
+          answer: [3, 0, 2, 1]
+          hints:
+            - "Cobertura: ¿puede haber instancias del supertipo que no estén en ningún subtipo? Si es así, es parcial."
+            - "Solapamiento: ¿puede una instancia estar en dos subtipos a la vez? Si es así, es solapada."
+          explain: "1 → (P, S) · 2 → (T, D) · 3 → (P, D) · 4 → (T, S). Son dos preguntas independientes: **cobertura** (total o parcial) y **solapamiento** (disjunta o solapada)."
+          ref: "4.2 Clasificación de jerarquías"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#42-clasificación-de-jerarquías-totalparcial-disjuntasolapada"
+          reward: { icon: "📺", text: "📺 = **E**" }
+        - id: mesa
+          kind: puzzle
+          type: choice
+          icon: "🎚️"
+          name: "Mesa de mezclas"
+          story: "Pegado en la mesa hay un mensaje del equipo de casting: «Los actores hacen pruebas (CASTING) para personajes. Solo algunas pruebas se graban en vídeo, y cada vídeo grabado lo valora **un** director de casting. Mara, ¿cómo lo metemos en el modelo?»"
+          prompt: "¿Cuál es la mejor forma de modelarlo?"
+          options:
+            - "Una ternaria ACTOR–PERSONAJE–DIRECTOR_CASTING"
+            - "Una agregación: CASTING (ACTOR–PERSONAJE) como entidad agregada, relacionada con DIRECTOR_CASTING mediante VALORA, de forma opcional"
+            - "Un atributo `director_casting` en ACTOR"
+            - "Una jerarquía con DIRECTOR_CASTING como subtipo de ACTOR"
+          answer: 1
+          hints:
+            - "¿Puede existir una prueba de casting que ningún director valore?"
+            - "Si la relación entre dos entidades existe sin la tercera, una ternaria obligaría a inventarse un director."
+          explain: "Una prueba (ACTOR–PERSONAJE) existe aunque nadie la valore. Con una ternaria, toda prueba necesitaría un director. La **agregación** convierte CASTING en una entidad de orden superior que se relaciona, opcionalmente, con DIRECTOR_CASTING."
+          ref: "4.3 Agregación"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#43-agregación-modelado-de-asociaciones-como-entidades"
+          reward: { icon: "🎚️", text: "🎚️ = **H**" }
+        - id: onair
+          kind: puzzle
+          type: match
+          icon: "🔴"
+          name: "Luz ON AIR"
+          story: "Al pulsar la luz se ilumina un panel con cuatro normas internas del estudio."
+          prompt: "¿Qué restricción entre relaciones describe cada norma?"
+          items:
+            - "Para **dirigir** un capítulo, una persona tiene que haber escrito **el guion de ese mismo capítulo**."
+            - "Un técnico puede **manejar cámaras** o **mezclar sonido** en el estudio, pero nunca hace las dos cosas, ni siquiera en capítulos distintos."
+            - "Para **dirigir** algún capítulo, una persona tiene que haber **escrito** al menos un guion (de cualquier capítulo)."
+            - "Un técnico puede manejar cámaras en un capítulo y mezclar sonido en otro, pero no las dos cosas **en el mismo capítulo**."
+          choices: ["Exclusividad", "Exclusión", "Inclusividad", "Inclusión"]
+          answer: [3, 0, 2, 1]
+          hints:
+            - "Las restricciones acabadas en *-idad* hablan de una **instancia** y de las relaciones en las que participa."
+            - "Exclusión e inclusión hablan de **parejas** concretas: (técnico, capítulo) o (persona, capítulo)."
+          explain: "Exclusividad e inclusividad miran si una instancia participa en una relación u otra; exclusión e inclusión miran **la misma pareja** de instancias en las dos relaciones."
+          ref: "3. Restricciones avanzadas"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#3-restricciones-avanzadas-sobre-relaciones"
+          reward: { icon: "🔴", text: "🔴 = **C**" }
+        - id: claqueta
+          kind: puzzle
+          type: choice
+          icon: "🎬"
+          name: "Claqueta"
+          story: "En la claqueta, en lugar del número de escena, alguien ha dibujado la relación SERIE — CAPÍTULO en notación pata de gallo: «toda serie tiene uno o muchos capítulos»."
+          prompt: "¿Qué símbolo va junto a CAPÍTULO?"
+          options: ["`||`", "`o|`", "`o{`", "`|{`"]
+          answer: 3
+          hints:
+            - "En pata de gallo, el símbolo junto a una entidad dice cuántas instancias **de esa entidad** se asocian con una de la otra."
+            - "La raya vertical significa «mínimo uno»; el círculo, «mínimo cero»; la pata de gallo, «muchos»."
+          explain: "Junto a CAPÍTULO se dibuja cuántos capítulos tiene una serie: mínimo 1 (`|`) y máximo muchos (`{`), es decir, `|{`. En la notación de Chen sería (1,n)."
+          ref: "7.1 Chen y pata de gallo"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#71-equivalencia-entre-la-notación-de-chen-y-la-pata-de-gallo"
+          reward: { icon: "🎬", text: "🎬 = **N**" }
+        - id: pizza
+          kind: decoy
+          icon: "🍕"
+          name: "Caja de pizza"
+          text: "Fría y sin ninguna pista dentro. Solo queda un trozo con piña, que nadie del equipo se ha atrevido a tocar."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Salida"
+          story: "Un candado de cuatro letras. Las pegatinas marcan el orden."
+          lock: { type: letters, code: "CHEN", order: "🔴 🎚️ 📺 🎬" }
+          hints:
+            - "Cada reto de esta sala te dio una letra."
+            - "La palabra es el apellido del autor del modelo Entidad/Relación (1976)."
+          explain: "**C·H·E·N**: Peter Chen publicó el modelo Entidad/Relación en 1976."
+  ending:
+    title: "¡Has salido del plató!"
+    text:
+      - "Mara te espera en el aparcamiento con un café (caliente, esta vez): «Si sabes leer un diagrama, ya puedes tocar mi base de datos»."
+      - "En la UD03 transformarás este mismo modelo en tablas."
+val:
+  title: "Talleu! Fugida del plató"
+  sub: "Escape room · UD02 Model Entitat/Relació"
+  target_min: 35
+  intro:
+    - "Eres becari o becària d'**Estudis Chen**, la productora que roda la sèrie juvenil *Institut Cardinal*. En acabar la gravació d'esta nit se'n va la llum i el sistema de seguretat bloqueja totes les portes del plató."
+    - "Mara, la cap de dades de la productora, va protegir cada pany amb preguntes sobre el model E/R de la sèrie («si no saps llegir un diagrama, no toques la meua base de dades»). Has de travessar el **camerino**, la **sala de guionistes** i el **control de realització** abans que arribe l'equip de demà."
+  rooms:
+    - id: camerino
+      scene: ud02-camerino
+      name: "Camerino"
+      story: "La porta del camerino té un teclat de tres dígits. Al costat, algú ha apegat tres adhesius: 💄 🪞 👗. La sala fa olor de laca i de pressa."
+      hotspots:
+        - id: espejo
+          kind: puzzle
+          type: match
+          icon: "🪞"
+          name: "Espill de bombetes"
+          story: "En un cantó de l'espill hi ha un pòsit amb la fitxa que la productora guarda de cada actor o actriu del repartiment, amb les notes de Mara."
+          prompt: "Quin tipus d'atribut és cadascun en el model E/R?"
+          items:
+            - "`telefons`: un o diversos per persona"
+            - "`dni`: no n'hi ha dos d'iguals i és el que usem per a identificar"
+            - "`edat`: es calcula a partir de la data de naixement"
+            - "`nom_real`: nom, primer cognom i segon cognom"
+            - "`nom_artistic`: el que ix als crèdits (dos actors poden coincidir)"
+            - "`num_seg_social`: tampoc es repetix, però no l'usem per a identificar"
+          choices: ["Identificador principal", "Identificador alternatiu", "Compost", "Multivalorat", "Derivat", "Simple (descriptor)"]
+          answer: [3, 0, 4, 2, 5, 1]
+          hints:
+            - "Els dos identificadors no es repetixen mai: el principal és l'elegit (subratllat) i l'alternatiu, el que també podria ser-ho (subratllat discontinu)."
+            - "Si una dada es pot calcular, no es guarda: és **derivada** (el·lipse discontínua)."
+            - "Diversos valors per a la mateixa persona → multivalorat. Diverses parts amb significat propi → compost."
+          explain: "`dni` identifica (principal) i `num_seg_social` també podria fer-ho (alternatiu). `nom_real` es descompon en parts (compost), `telefons` admet diversos valors (multivalorat), `edat` es calcula (derivat) i `nom_artistic` és un descriptor simple que es pot repetir."
+          ref: "2.2 Atributs: classificació"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#22-atributs-classificació-estructura-i-domini"
+          reward: { icon: "🪞", text: "🪞 = **4** (escrit amb pintallavis darrere del pòsit)" }
+        - id: vestuario
+          kind: puzzle
+          type: choice
+          icon: "👗"
+          name: "Penjador de vestuari"
+          story:
+            - "Cada peça porta cosida una etiqueta: *ICARD · peça 7*. Al costat del penjador, una nota del departament de vestuari:"
+            - "«Les peces es numeren des d'1 **dins de cada sèrie**: la sèrie ICARD té la seua peça 7 i la sèrie MARINA també té una peça 7. De cada peça guardem talla, color i estat. Si una sèrie es cancel·la i s'esborra, el seu vestuari es destruïx.»"
+          prompt: "Com modeles PEÇA en el diagrama E/R?"
+          options:
+            - "Entitat forta amb identificador `num_peca`"
+            - "Entitat feble per existència, identificada només amb `num_peca`"
+            - "Entitat feble per identificació: s'identifica amb el codi de la sèrie més `num_peca`"
+            - "Atribut multivalorat `peces` de SÈRIE"
+          answer: 2
+          hints:
+            - "N'hi ha prou amb `num_peca` per a distingir la peça 7 d'ICARD de la peça 7 de MARINA?"
+            - "Si una entitat necessita la clau d'una altra per a identificar-se, en depén per a alguna cosa més que existir."
+            - "Un atribut multivalorat no servix quan de cada valor guardes dades pròpies (talla, color, estat…)."
+          explain: "PEÇA no existix sense la seua sèrie (dependència d'existència) i, a més, `num_peca` només és únic **dins** de cada sèrie: el seu identificador és (codi de sèrie, `num_peca`). És una entitat **feble per identificació**: doble rectangle i relació identificadora amb SÈRIE."
+          ref: "2.1 Entitats fortes i febles"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#21-entitats-fortes-febles-i-instàncies"
+          reward: { icon: "🔑", text: "Una claueta a la butxaca d'una jaqueta · 👗 = **7**" }
+        - id: tocador
+          kind: puzzle
+          type: number
+          icon: "💄"
+          name: "Tocador de maquillatge"
+          needs: [vestuario]
+          locked: "El calaix del tocador està tancat amb clau. El pany és diminut… potser la clau està amagada en algun lloc del camerino."
+          story:
+            - "Amb la claueta obris el calaix. Dins hi ha un full de requisits arrugat:"
+            - "«Estudis Chen vol guardar les seues sèries (codi, títol i cadena) i els capítols de cada sèrie (número, títol i durada en minuts). Cada capítol el protagonitzen diversos actors, dels quals guardem DNI, nom i color de cabell, per a maquillatge. Cada actor interpreta un o diversos personatges, dels quals interessa el nom i el sobrenom. Els camerinos (número i planta) s'assignen als actors durant el rodatge.»"
+          prompt: "Mara ha subratllat huit paraules: *sèrie, cadena, capítol, durada, actor, color de cabell, personatge, camerino*. Quantes han de ser **entitats** en el diagrama?"
+          answer: 5
+          hints:
+            - "Una entitat té propietats pròpies que interessa guardar i moltes instàncies distintes."
+            - "Una dada que només descriu una altra cosa, i de la qual no guardes res més, és un atribut."
+            - "Cadena, durada i color de cabell descriuen una altra cosa: en l'enunciat no tenen dades pròpies."
+          explain: "Són entitats SÈRIE, CAPÍTOL, ACTOR, PERSONATGE i CAMERINO: de cadascuna es guarden diverses dades. `cadena`, `durada` i `color_cabell` són atributs de SÈRIE, CAPÍTOL i ACTOR. Si demà calguera guardar el telèfon o la web de cada cadena, CADENA passaria a ser entitat."
+          ref: "5. Fases en la construcció de l'esquema"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#5-fases-en-la-construcció-de-lesquema-conceptual"
+          reward: { icon: "💄", text: "💄 = **5**" }
+        - id: poster
+          kind: decoy
+          icon: "🖼️"
+          name: "Pòster de la sèrie"
+          text: "És el pòster de la primera temporada d'*Institut Cardinal*. Algú ha escrit en un cantó: «l'amor és 1:1, l'amistat és N:M». Molt bonic, però ací no hi ha cap número."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Porta del camerino"
+          story: "Un teclat de tres dígits. Els adhesius indiquen l'ordre en què cal introduir els números que trobes."
+          lock: { type: digits, code: "547", order: "💄 🪞 👗" }
+          hints:
+            - "Mira la teua motxilla: cada repte resolt d'esta sala et va donar un número."
+            - "L'ordre és el dels adhesius: primer el número del tocador, després el de l'espill i finalment el del vestuari."
+          explain: "Cada dígit era la recompensa d'un repte: 💄 5 · 🪞 4 · 👗 7."
+    - id: guionistas
+      scene: ud02-guionistas
+      name: "Sala de guionistes"
+      story: "La sala de guionistes està plena de café fred i de teories sobre la segona temporada. La porta té un **pany de fletxes** i, apegades a ella, quatre frases sobre el repartiment. Per a saber quina fletxa correspon a cada frase necessites la **llegenda**, que els guionistes han repartit en quatre trossos per la sala."
+      hotspots:
+        - id: pizarra
+          kind: puzzle
+          type: match
+          icon: "📋"
+          name: "Pissarra de la trama"
+          story: "En la pissarra hi ha quatre relacions dibuixades a corre-cuita. Algú ha ratllat les cardinalitats."
+          prompt: "De quin tipus és cada relació segons les seues cardinalitats màximes?"
+          items:
+            - "SÈRIE **té** CAPÍTOL: una sèrie té molts capítols; cada capítol és d'una sola sèrie."
+            - "ACTOR **interpreta** PERSONATGE: un actor interpreta diversos personatges i un personatge el pot interpretar més d'un actor (de xiquet i de major)."
+            - "ACTOR **usa** CAMERINO: durant el rodatge cada actor usa un únic camerino i cada camerino l'usa un únic actor."
+            - "DIRECTOR **dirigix** CAPÍTOL: cada capítol el dirigix una sola persona, que en pot dirigir molts."
+          choices: ["1:1", "1:N", "N:M"]
+          answer: [1, 2, 0, 1]
+          hints:
+            - "Fes-te les dos preguntes: «una instància d'A, amb quantes de B com a màxim?» i al revés."
+            - "Si les dos respostes són «moltes», és N:M; si les dos són «una», 1:1; si cadascuna diu una cosa, 1:N."
+          explain: "SÈRIE–CAPÍTOL i DIRECTOR–CAPÍTOL són **1:N** (el costat N és CAPÍTOL); ACTOR–PERSONATGE és **N:M** i ACTOR–CAMERINO és **1:1**. Per a classificar una relació només es miren les cardinalitats **màximes**."
+          ref: "2.4 Cardinalitats mínima i màxima"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#24-restriccions-de-cardinalitat-mínima-i-màxima"
+          reward: { icon: "📋", text: "Tros de llegenda: **→ = (1,1)**" }
+        - id: corcho
+          kind: puzzle
+          type: choice
+          icon: "🧵"
+          name: "Suro amb fils roigs"
+          story: "En el suro, fotos de personatges unides amb fil roig i una nota: «En la segona temporada, un personatge pot ser **mentor** de diversos personatges, i cada personatge té com a molt un mentor»."
+          prompt: "Com es modela la relació MENTORITZA?"
+          options:
+            - "Binària entre PERSONATGE i una nova entitat MENTOR"
+            - "Reflexiva (grau 1) 1:N sobre PERSONATGE, amb els rols *mentor* i *aprenent*"
+            - "Reflexiva (grau 1) N:M sobre PERSONATGE, sense necessitat de rols"
+            - "Un atribut multivalorat `aprenents` en PERSONATGE"
+          answer: 1
+          hints:
+            - "El mentor i l'aprenent són… personatges. Quantes entitats distintes hi participen?"
+            - "En una relació reflexiva és obligatori indicar el paper (rol) de cada extrem."
+            - "Un mentor té molts aprenents; un aprenent té, com a molt, un mentor."
+          explain: "Hi participa una sola entitat (PERSONATGE) dos vegades: és una relació **reflexiva** de grau 1. Com que un mentor té molts aprenents i cada aprenent un mentor com a màxim, és **1:N**. Els **noms de rol** (*mentor*, *aprenent*) són obligatoris per a saber en quin sentit es llig."
+          ref: "2.3 Relacions: grau i rols"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#23-relacions-grau-semàntica-i-noms-de-rol"
+          reward: { icon: "🧵", text: "Tros de llegenda: **← = (0,1)**" }
+        - id: archivador
+          kind: note
+          icon: "🗄️"
+          name: "Arxivador del guió"
+          text: "En el primer calaix està la *bíblia* de la sèrie, amb les regles de repartiment que Mara usa en el seu model:"
+          list:
+            - "En un mateix capítol, cada personatge l'interpreta **un sol** actor."
+            - "En un mateix capítol, un actor pot interpretar **diversos** personatges (els bessons Ruiz els fa la mateixa actriu)."
+            - "Un actor interpreta el mateix personatge en **molts** capítols."
+            - "Al fons del calaix hi ha un tros de paper amb una fletxa dibuixada."
+          reward: { icon: "🗄️", text: "Tros de llegenda: **↑ = (0,n)**" }
+        - id: portatil
+          kind: puzzle
+          type: choice
+          icon: "💻"
+          name: "Portàtil de Mara"
+          story: "El portàtil mostra la relació ternària **APAREIX** (ACTOR, PERSONATGE, CAPÍTOL) i en demana la connectivitat per a desbloquejar-se. Les regles de repartiment estan en l'arxivador."
+          table:
+            head: ["Si fixes…", "quants com a màxim?"]
+            rows: [["un PERSONATGE i un CAPÍTOL", "… ACTORS"], ["un ACTOR i un CAPÍTOL", "… PERSONATGES"], ["un ACTOR i un PERSONATGE", "… CAPÍTOLS"]]
+          prompt: "Quina connectivitat té APAREIX?"
+          options:
+            - "N:N:N, sense cap restricció"
+            - "1:N:N, amb ACTOR en el costat «1»"
+            - "1:N:N, amb PERSONATGE en el costat «1»"
+            - "1:1:N, amb CAPÍTOL en el costat «N»"
+          answer: 1
+          hints:
+            - "Les regles de l'arxivador responen cadascuna de les tres preguntes de la taula."
+            - "Només una de les tres preguntes té com a resposta «un»."
+            - "Fixats un personatge i un capítol, només hi ha un actor possible: ACTOR és el costat «1»."
+          explain: "(PERSONATGE, CAPÍTOL) → com a molt **1** ACTOR; (ACTOR, CAPÍTOL) → **N** personatges; (ACTOR, PERSONATGE) → **N** capítols. És una ternària **1:N:N** amb ACTOR en el costat 1. En la UD03 veuràs que per això la clau primària d'APAREIX serà (personatge, capítol)."
+          ref: "4.4 Relacions ternàries"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#44-relacions-ternàries-i-anàlisi-formal-de-cardinalitat"
+          reward: { icon: "💻", text: "Tros de llegenda: **↓ = (1,n)**" }
+        - id: cafetera
+          kind: decoy
+          icon: "☕"
+          name: "Cafetera"
+          text: "Està buida. Com la inspiració dels guionistes a les tres de la matinada."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Porta de la sala"
+          story: "Un pany de quatre fletxes. Cada frase apegada a la porta es completa amb un parell (mínima, màxima), i cada parell correspon a una fletxa de la llegenda."
+          list:
+            - "Un capítol pertany a ___ sèries."
+            - "Una sèrie té ___ capítols (hi ha sèries anunciades que encara no tenen cap capítol rodat)."
+            - "Un actor del repartiment interpreta ___ personatges (tots n'interpreten almenys un)."
+            - "Un personatge té ___ mentors."
+          prompt: "Introduïx les quatre fletxes en l'ordre de les frases."
+          lock: { type: arrows, code: "RUDL" }
+          hints:
+            - "Necessites els quatre trossos de la llegenda: pissarra, suro, arxivador i portàtil."
+            - "Per a cada frase pregunta't: pot ser zero? (mínima) pot ser més d'un? (màxima)."
+            - "La primera frase és (1,1): →."
+          explain: "(1,1) → · (0,n) ↑ · (1,n) ↓ · (0,1) ←. Traduir cada cardinalitat a una frase completa és la millor manera de no llegir-la al revés."
+    - id: control
+      scene: ud02-control
+      name: "Control de realització"
+      story: "El control de realització està ple de pantalles enceses. L'eixida té un **cadenat de quatre lletres** i, al costat, una tira d'adhesius: 🔴 🎚️ 📺 🎬."
+      hotspots:
+        - id: monitores
+          kind: puzzle
+          type: match
+          icon: "📺"
+          name: "Paret de monitors"
+          story: "Cada pantalla mostra una jerarquia del model de la productora, amb una nota de Mara."
+          prompt: "Quin tipus de jerarquia és cadascuna?"
+          items:
+            - "Pantalla 1 · PERSONAL → ACTOR, TÈCNIC, GUIONISTA. Hi ha personal d'administració que no és res d'això, i alguna actriu també escriu guions."
+            - "Pantalla 2 · CAPÍTOL → PILOT, REGULAR, FINAL_TEMPORADA. Tot capítol és exactament d'un dels tres tipus."
+            - "Pantalla 3 · CONTRACTE → INDEFINIT, PER_OBRA. Hi ha contractes de pràctiques que no són de cap dels dos, i cap no pot ser dels dos alhora."
+            - "Pantalla 4 · SÈRIE → TV_OBERTA, STREAMING. Tota sèrie s'emet en almenys un dels dos llocs, i moltes en tots dos."
+          choices: ["Total i disjunta (T, D)", "Total i solapada (T, S)", "Parcial i disjunta (P, D)", "Parcial i solapada (P, S)"]
+          answer: [3, 0, 2, 1]
+          hints:
+            - "Cobertura: hi pot haver instàncies del supertipus que no estiguen en cap subtipus? Si és així, és parcial."
+            - "Solapament: una instància pot estar en dos subtipus alhora? Si és així, és solapada."
+          explain: "1 → (P, S) · 2 → (T, D) · 3 → (P, D) · 4 → (T, S). Són dos preguntes independents: **cobertura** (total o parcial) i **solapament** (disjunta o solapada)."
+          ref: "4.2 Classificació de jerarquies"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#42-classificació-de-jerarquies-totalparcial-disjuntasolapada"
+          reward: { icon: "📺", text: "📺 = **E**" }
+        - id: mesa
+          kind: puzzle
+          type: choice
+          icon: "🎚️"
+          name: "Taula de mescles"
+          story: "Apegat a la taula hi ha un missatge de l'equip de càsting: «Els actors fan proves (CÀSTING) per a personatges. Només algunes proves es graven en vídeo, i cada vídeo gravat el valora **un** director de càsting. Mara, com ho fiquem en el model?»"
+          prompt: "Quina és la millor manera de modelar-ho?"
+          options:
+            - "Una ternària ACTOR–PERSONATGE–DIRECTOR_CASTING"
+            - "Una agregació: CÀSTING (ACTOR–PERSONATGE) com a entitat agregada, relacionada amb DIRECTOR_CASTING mitjançant VALORA, de manera opcional"
+            - "Un atribut `director_casting` en ACTOR"
+            - "Una jerarquia amb DIRECTOR_CASTING com a subtipus d'ACTOR"
+          answer: 1
+          hints:
+            - "Pot existir una prova de càsting que cap director valore?"
+            - "Si la relació entre dos entitats existix sense la tercera, una ternària obligaria a inventar-se un director."
+          explain: "Una prova (ACTOR–PERSONATGE) existix encara que ningú la valore. Amb una ternària, tota prova necessitaria un director. L'**agregació** convertix CÀSTING en una entitat d'ordre superior que es relaciona, opcionalment, amb DIRECTOR_CASTING."
+          ref: "4.3 Agregació"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#43-agregació-modelatge-dassociacions-com-a-entitats"
+          reward: { icon: "🎚️", text: "🎚️ = **H**" }
+        - id: onair
+          kind: puzzle
+          type: match
+          icon: "🔴"
+          name: "Llum ON AIR"
+          story: "En prémer la llum s'il·lumina un panell amb quatre normes internes de l'estudi."
+          prompt: "Quina restricció entre relacions descriu cada norma?"
+          items:
+            - "Per a **dirigir** un capítol, una persona ha d'haver escrit **el guió d'eixe mateix capítol**."
+            - "Un tècnic pot **manejar càmeres** o **mesclar so** en l'estudi, però mai fa les dos coses, ni tan sols en capítols distints."
+            - "Per a **dirigir** algun capítol, una persona ha d'haver **escrit** almenys un guió (de qualsevol capítol)."
+            - "Un tècnic pot manejar càmeres en un capítol i mesclar so en un altre, però no les dos coses **en el mateix capítol**."
+          choices: ["Exclusivitat", "Exclusió", "Inclusivitat", "Inclusió"]
+          answer: [3, 0, 2, 1]
+          hints:
+            - "Les restriccions acabades en *-itat* parlen d'una **instància** i de les relacions en què participa."
+            - "Exclusió i inclusió parlen de **parelles** concretes: (tècnic, capítol) o (persona, capítol)."
+          explain: "Exclusivitat i inclusivitat miren si una instància participa en una relació o en una altra; exclusió i inclusió miren **la mateixa parella** d'instàncies en les dos relacions."
+          ref: "3. Restriccions avançades"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#3-restriccions-avançades-sobre-relacions"
+          reward: { icon: "🔴", text: "🔴 = **C**" }
+        - id: claqueta
+          kind: puzzle
+          type: choice
+          icon: "🎬"
+          name: "Claqueta"
+          story: "En la claqueta, en lloc del número d'escena, algú ha dibuixat la relació SÈRIE — CAPÍTOL en notació pota de gall: «tota sèrie té un o molts capítols»."
+          prompt: "Quin símbol va al costat de CAPÍTOL?"
+          options: ["`||`", "`o|`", "`o{`", "`|{`"]
+          answer: 3
+          hints:
+            - "En pota de gall, el símbol al costat d'una entitat diu quantes instàncies **d'eixa entitat** s'associen amb una de l'altra."
+            - "La ratlla vertical significa «mínim u»; el cercle, «mínim zero»; la pota de gall, «molts»."
+          explain: "Al costat de CAPÍTOL es dibuixa quants capítols té una sèrie: mínim 1 (`|`) i màxim molts (`{`), és a dir, `|{`. En la notació de Chen seria (1,n)."
+          ref: "7.1 Chen i pota de gall"
+          ref_url: "/ud02-modelo-er/ud02-teoria/#71-equivalència-entre-la-notació-de-chen-i-la-pota-de-gall"
+          reward: { icon: "🎬", text: "🎬 = **N**" }
+        - id: pizza
+          kind: decoy
+          icon: "🍕"
+          name: "Caixa de pizza"
+          text: "Freda i sense cap pista dins. Només queda un tros amb pinya, que ningú de l'equip s'ha atrevit a tocar."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Eixida"
+          story: "Un cadenat de quatre lletres. Els adhesius marquen l'ordre."
+          lock: { type: letters, code: "CHEN", order: "🔴 🎚️ 📺 🎬" }
+          hints:
+            - "Cada repte d'esta sala et va donar una lletra."
+            - "La paraula és el cognom de l'autor del model Entitat/Relació (1976)."
+          explain: "**C·H·E·N**: Peter Chen va publicar el model Entitat/Relació en 1976."
+  ending:
+    title: "Has eixit del plató!"
+    text:
+      - "Mara t'espera en l'aparcament amb un café (calent, esta vegada): «Si saps llegir un diagrama, ja pots tocar la meua base de dades»."
+      - "En la UD03 transformaràs este mateix model en taules."

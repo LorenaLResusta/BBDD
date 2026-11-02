@@ -1,32 +1,32 @@
 ---
-title: "Escape room UD02 + UD03"
+title: "Escape room UD03"
 weight: 3
 bookToc: false
 ---
 
-# Escape room · El cas de l'esquema desaparegut
+# Escape room · Bloqueig en el Banc Codd
 
-{{< ra "RA6:a,b,c,d,e,h" "RA2:e" >}}
+{{< ra "RA6:b,c,d,e,f,h" "RA2:a,d,e" >}}
 
-Un joc per a **repassar abans de l'examen** (o per a jugar a classe per parelles) amb tot el que has vist a la [UD02](/ud02-modelo-er/) i a la [UD03](/ud03-modelo-relacional/). Eres l'inspector Codd, estàs tancat a l'edifici d'una aerolínia i només eixiràs si obris **deu panys**, reuneixes les pistes de la teua llibreta i descobreixes qui va esborrar el model de dades.
+Un escape room d'**escenes clicables** per a tancar la [UD03](/ud03-modelo-relacional/). El sistema de seguretat del Banc Codd t'ha deixat tancat al soterrani i només obri les portes a qui demostra que entén la seua base de dades relacional.
 
-| Acte | Panys | Què practiques |
+| Sala | Cadenat | Què repasses |
 |---|---|---|
-| I · La planta de disseny (UD02) | 5 | Cardinalitats d'una ternària, entitats febles, jerarquies parcials i solapades, tipus d'atributs, relacions reflexives amb rols |
-| II · La cambra cuirassada (UD03) | 5 | Polítiques d'esborrat, clau primària d'una N:M, ordre de creació de taules, recompte de taules, restriccions que l'esquema no expressa |
-| III · La porta d'eixida | 1 + acusació | De la ternària a la taula i deducció del culpable amb les pistes |
+| 📚 Arxiu | 4 dígits | Grau i cardinalitat, claus candidates, valors nuls, restriccions inherents |
+| 🖥️ Sala de servidors | 3 dígits + corrent | Integritat referencial, VNN, polítiques d'esborrat, esborrat en cascada, claus alienes compostes |
+| 🏦 Cambra cuirassada | 3 dígits + clau | Transformació de N:M, 1:N i 1:1, nombre de taules d'un esquema, pèrdues semàntiques |
 
 > [!TIP]
-> Cada sala et deixa una **pista** a la llibreta i, en resoldre-la, t'explica **per què** és correcta i a quin apartat de la teoria has de tornar. Encara que encertes a la primera, llig-la: és on està el que es pregunta a l'examen.
+> Alguns objectes depenen d'altres: la prestatgeria necessita llum, la porta B necessita corrent i la porta cuirassada, les dos meitats d'una clau. Si alguna cosa no s'obri, mira què et falta en la llista d'objectes.
 
-> [!NOTE]
-> Una pista costa 20 punts i cada error, 10. No és un examen: usa-les quan les necessites, però intenta abans raonar amb l'esquema davant. Si jugues a classe, compareu les puntuacions **després** de comentar les respostes, no abans.
+> [!WARNING]
+> Les pistes sumen un minut al cronòmetre i cada error, uns segons. En la sala de servidors, **llig primer la pissarra**: els altres reptes es resolen amb les seues dades.
 
-{{< escape-room >}}
+{{< escape-click data="escape_ud03" >}}
 
 ## Per al professorat
 
-- **Durada:** 30-45 minuts per parelles. Funciona bé com a tancament de la UD03.
-- **Pistes clau:** tres de les pistes descarten dos dels tres sospitosos. Demana a l'alumnat que justifique l'acusació **amb les pistes**, no per intuïció.
-- **Progrés:** es guarda al navegador de cada alumne; el botó *Començar de nou* l'esborra.
-- **Contingut:** els textos estan a `data/escape_ud02_ud03.json` (castellà i valencià). Per a afegir una sala basta afegir un element a `puzzles`, amb un dels cinc tipus (`choice`, `multi`, `match`, `order`, `number`).
+- **Durada:** 30-40 minuts per parelles. L'objectiu de tres estreles és eixir en menys de 40 minuts, comptant penalitzacions.
+- **Dinàmica:** el repte del monitor d'alarmes (esborrat en cascada) i el de la consola (quines operacions es rebutgen) donen molt de joc per a comentar-los en veu alta després. Al final apareix la llista de reptes que han costat més, amb l'enllaç a la teoria.
+- **Repàs del trimestre:** en acabar la UD02 i la UD03, l'[escape room final del 1r trimestre](/escape-rooms/trimestre-1) mescla les dos unitats.
+- **Contingut:** els textos (castellà i valencià) estan en `data/escape_ud03.yaml` i les escenes en `assets/escape/ud03-*.svg`.

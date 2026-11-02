@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Sala de guionistas">
+<defs>
+<linearGradient id="gnWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#284b63"/><stop offset="1" stop-color="#3c6e71"/></linearGradient>
+<linearGradient id="gnFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d405b"/><stop offset="1" stop-color="#22223b"/></linearGradient>
+<radialGradient id="gnLamp" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#ffe8a3" stop-opacity=".45"/><stop offset="1" stop-color="#ffe8a3" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="960" height="540" fill="url(#gnWall)"/>
+<rect y="410" width="960" height="130" fill="url(#gnFloor)"/>
+<rect y="404" width="960" height="8" fill="#1b2a38"/>
+<polygon points="430,0 530,0 760,410 200,410" fill="url(#gnLamp)" pointer-events="none"/>
+<rect x="455" y="0" width="50" height="14" fill="#1b2a38"/>
+<!-- PIZARRA -->
+<g data-hs="pizarra">
+<rect x="34" y="62" width="300" height="220" rx="4" fill="#cfd8dc"/>
+<rect x="44" y="72" width="280" height="200" fill="#fbfdff"/>
+<g fill="none" stroke="#1565c0" stroke-width="3">
+<rect x="62" y="96" width="70" height="34"/><rect x="232" y="96" width="74" height="34"/>
+<polygon points="182,95 212,113 182,131 152,113"/>
+<path d="M132 113 H152 M212 113 H232"/>
+<rect x="62" y="190" width="70" height="34"/><polygon points="182,189 212,207 182,225 152,207"/><rect x="232" y="190" width="74" height="34"/>
+<path d="M132 207 H152 M212 207 H232 M97 130 V190"/>
+</g>
+<g stroke="#c62828" stroke-width="3"><path d="M140 104 l8 8 m0 -8 l-8 8 M214 198 l8 8 m0 -8 l-8 8"/></g>
+<text x="182" y="256" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="700" fill="#c62828">1:N ? N:M ? 1:1 ?</text>
+<rect x="60" y="282" width="248" height="8" rx="3" fill="#90a4ae"/>
+<rect x="250" y="276" width="34" height="7" rx="2" fill="#1565c0"/>
+</g>
+<!-- CORCHO -->
+<g data-hs="corcho">
+<rect x="368" y="62" width="196" height="160" rx="4" fill="#8d5524"/>
+<rect x="376" y="70" width="180" height="144" fill="#c68642"/>
+<g stroke="#fff" stroke-width="3"><rect x="390" y="84" width="44" height="52" fill="#ffd166"/><rect x="490" y="80" width="48" height="56" fill="#06d6a0"/><rect x="438" y="148" width="46" height="54" fill="#ef476f"/></g>
+<g fill="#7a3e1d"><circle cx="412" cy="100" r="11"/><circle cx="514" cy="98" r="12"/><circle cx="461" cy="166" r="11"/></g>
+<g fill="#7a3e1d"><rect x="398" y="112" width="28" height="22" rx="10"/><rect x="500" y="110" width="28" height="24" rx="10"/><rect x="448" y="178" width="26" height="22" rx="10"/></g>
+<path d="M412 86 L514 82 M514 82 L461 150 M412 86 L461 150" stroke="#d00000" stroke-width="2.5" fill="none"/>
+<g fill="#e63946"><circle cx="412" cy="86" r="4"/><circle cx="514" cy="82" r="4"/><circle cx="461" cy="150" r="4"/></g>
+</g>
+<!-- CAFETERA -->
+<g data-hs="cafetera">
+<rect x="584" y="300" width="110" height="104" fill="#4e342e"/>
+<rect x="604" y="226" width="64" height="74" rx="6" fill="#263238"/>
+<rect x="614" y="238" width="44" height="14" rx="3" fill="#80cbc4"/>
+<rect x="622" y="266" width="28" height="8" fill="#111"/>
+<path d="M624 286 h24 v14 h-24 z" fill="#fff"/><path d="M648 290 q8 0 8 5 t-8 5" stroke="#fff" stroke-width="2" fill="none"/>
+<path d="M630 280 q-4 -8 2 -14 M640 280 q-4 -8 2 -14" stroke="#cfd8dc" stroke-width="2" fill="none" opacity=".7"/>
+</g>
+<!-- ARCHIVADOR -->
+<g data-hs="archivador">
+<rect x="712" y="200" width="100" height="204" rx="3" fill="#78909c"/>
+<g fill="#90a4ae" stroke="#546e7a" stroke-width="2"><rect x="720" y="210" width="84" height="56"/><rect x="720" y="274" width="84" height="56"/><rect x="720" y="338" width="84" height="56"/></g>
+<g fill="#cfd8dc"><rect x="748" y="232" width="28" height="7" rx="3"/><rect x="748" y="296" width="28" height="7" rx="3"/><rect x="748" y="360" width="28" height="7" rx="3"/></g>
+<g fill="#fff"><rect x="752" y="246" width="20" height="10"/><rect x="752" y="310" width="20" height="10"/></g>
+<path d="M722 206 l-10 -26 h46 l6 24 z" fill="#fffde7" stroke="#bbb"/>
+</g>
+<!-- MESA Y PORTÁTIL -->
+<rect x="190" y="372" width="400" height="18" rx="3" fill="#a1887f"/>
+<g fill="#6d4c41"><rect x="204" y="390" width="14" height="80"/><rect x="560" y="390" width="14" height="80"/></g>
+<g fill="#ffccbc"><rect x="232" y="346" width="70" height="26" rx="3"/><path d="M240 352 h54 M240 360 h46" stroke="#a1887f" stroke-width="2"/></g>
+<rect x="510" y="340" width="20" height="32" rx="4" fill="#fff"/><rect x="510" y="340" width="20" height="8" fill="#e53935"/>
+<g data-hs="portatil">
+<polygon points="350,372 470,372 486,384 334,384" fill="#9e9e9e"/>
+<rect x="356" y="286" width="108" height="86" rx="5" fill="#37474f"/>
+<rect x="364" y="294" width="92" height="68" fill="#0d47a1"/>
+<rect x="378" y="320" width="64" height="16" rx="3" fill="#e3f2fd"/>
+<g fill="#0d47a1"><circle cx="388" cy="328" r="3"/><circle cx="398" cy="328" r="3"/><circle cx="408" cy="328" r="3"/><circle cx="418" cy="328" r="3"/></g>
+<rect x="398" y="304" width="24" height="8" rx="2" fill="#ffd54f"/>
+</g>
+<!-- PUERTA -->
+<g data-hs="puerta">
+<rect x="830" y="104" width="120" height="300" fill="#1b2a38"/>
+<rect x="838" y="112" width="104" height="292" fill="#455a64"/>
+<rect x="852" y="130" width="76" height="70" fill="#90caf9" opacity=".5"/>
+<rect x="850" y="236" width="50" height="62" rx="5" fill="#212121" stroke="#9e9e9e" stroke-width="2"/>
+<g fill="#ffd54f"><polygon points="875,244 868,254 882,254"/><polygon points="875,290 868,280 882,280"/><polygon points="857,267 867,260 867,274"/><polygon points="893,267 883,260 883,274"/></g>
+<circle cx="926" cy="262" r="6" fill="#cfd8dc"/>
+</g>
+</svg>

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Cámara acorazada">
+<defs>
+<linearGradient id="caWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b2f3a"/><stop offset="1" stop-color="#40465a"/></linearGradient>
+<radialGradient id="caDoor" cx=".42" cy=".38" r=".7"><stop offset="0" stop-color="#e0e3ea"/><stop offset=".6" stop-color="#9aa1b1"/><stop offset="1" stop-color="#5c6375"/></radialGradient>
+<linearGradient id="caGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe082"/><stop offset="1" stop-color="#c79100"/></linearGradient>
+</defs>
+<rect width="960" height="540" fill="url(#caWall)"/>
+<rect y="436" width="960" height="104" fill="#1f222b"/>
+<g stroke="#2e3240" stroke-width="2"><path d="M0 470 H960 M0 505 H960 M160 436 V540 M400 436 V540 M640 436 V540 M880 436 V540"/></g>
+<!-- CAJAS DE SEGURIDAD -->
+<rect x="30" y="50" width="400" height="300" rx="6" fill="#6b7183"/>
+<g fill="#8a91a5" stroke="#4d5263" stroke-width="2">
+<rect x="42" y="62" width="68" height="48"/><rect x="118" y="62" width="68" height="48"/><rect x="194" y="62" width="68" height="48"/><rect x="270" y="62" width="68" height="48"/><rect x="346" y="62" width="72" height="48"/>
+<rect x="42" y="118" width="68" height="48"/><rect x="194" y="118" width="68" height="48"/><rect x="270" y="118" width="68" height="48"/><rect x="346" y="118" width="72" height="48"/>
+<rect x="42" y="174" width="68" height="48"/><rect x="118" y="174" width="68" height="48"/><rect x="194" y="174" width="68" height="48"/><rect x="346" y="174" width="72" height="48"/>
+<rect x="42" y="230" width="68" height="48"/><rect x="118" y="230" width="68" height="48"/><rect x="194" y="230" width="68" height="48"/><rect x="270" y="230" width="68" height="48"/>
+<rect x="42" y="286" width="68" height="52"/><rect x="118" y="286" width="68" height="52"/><rect x="270" y="286" width="68" height="52"/><rect x="346" y="286" width="72" height="52"/>
+</g>
+<g fill="#4d5263"><circle cx="100" cy="86" r="4"/><circle cx="176" cy="86" r="4"/><circle cx="252" cy="86" r="4"/><circle cx="328" cy="86" r="4"/><circle cx="406" cy="86" r="4"/><circle cx="100" cy="142" r="4"/><circle cx="252" cy="142" r="4"/><circle cx="328" cy="142" r="4"/><circle cx="406" cy="142" r="4"/><circle cx="100" cy="198" r="4"/><circle cx="176" cy="198" r="4"/><circle cx="252" cy="198" r="4"/><circle cx="406" cy="198" r="4"/><circle cx="100" cy="254" r="4"/><circle cx="176" cy="254" r="4"/><circle cx="252" cy="254" r="4"/><circle cx="328" cy="254" r="4"/><circle cx="100" cy="312" r="4"/><circle cx="176" cy="312" r="4"/><circle cx="328" cy="312" r="4"/><circle cx="406" cy="312" r="4"/></g>
+<g data-hs="caja12">
+<rect x="118" y="118" width="68" height="48" fill="#c9a227" stroke="#7a5d00" stroke-width="2"/>
+<text x="140" y="149" text-anchor="middle" font-family="monospace" font-weight="900" font-size="18" fill="#3b2c00">12</text><circle cx="174" cy="142" r="5" fill="#3b2c00"/>
+</g>
+<g data-hs="caja27">
+<rect x="270" y="174" width="68" height="48" fill="#c9a227" stroke="#7a5d00" stroke-width="2"/>
+<text x="292" y="205" text-anchor="middle" font-family="monospace" font-weight="900" font-size="18" fill="#3b2c00">27</text><circle cx="326" cy="198" r="5" fill="#3b2c00"/>
+</g>
+<g data-hs="caja33">
+<rect x="194" y="286" width="68" height="52" fill="#c9a227" stroke="#7a5d00" stroke-width="2"/>
+<text x="216" y="319" text-anchor="middle" font-family="monospace" font-weight="900" font-size="18" fill="#3b2c00">33</text><circle cx="250" cy="312" r="5" fill="#3b2c00"/>
+</g>
+<!-- LÁSER -->
+<g data-hs="laser">
+<g stroke="#ff1744" stroke-width="3" opacity=".85"><path d="M440 100 L560 300 M440 300 L560 100 M440 200 L560 200"/></g>
+<path d="M440 100 L560 300 M440 300 L560 100 M440 200 L560 200" stroke="transparent" stroke-width="22"/>
+<g fill="#b71c1c"><rect x="432" y="92" width="10" height="216" rx="3"/><rect x="558" y="92" width="10" height="216" rx="3"/></g>
+</g>
+<!-- CARRO DE LINGOTES -->
+<g data-hs="carro">
+<rect x="96" y="420" width="250" height="18" fill="#455a64"/>
+<g fill="#263238"><circle cx="126" cy="448" r="14"/><circle cx="316" cy="448" r="14"/></g>
+<path d="M346 420 L380 360" stroke="#455a64" stroke-width="8"/>
+<g fill="url(#caGold)" stroke="#a07400" stroke-width="2">
+<polygon points="110,420 160,420 152,400 118,400"/><polygon points="164,420 214,420 206,400 172,400"/><polygon points="218,420 268,420 260,400 226,400"/><polygon points="272,420 322,420 314,400 280,400"/>
+<polygon points="136,400 186,400 178,380 144,380"/><polygon points="190,400 240,400 232,380 198,380"/><polygon points="244,400 294,400 286,380 252,380"/>
+<polygon points="164,380 214,380 206,360 172,360"/><polygon points="218,380 268,380 260,360 226,360"/>
+</g>
+<rect x="300" y="352" width="52" height="24" fill="#fff" stroke="#9e9e9e" transform="rotate(8 326 364)"/><path d="M306 360 h40 M306 368 h30" stroke="#555" stroke-width="2" transform="rotate(8 326 364)"/>
+</g>
+<!-- TERMINAL -->
+<g data-hs="terminal">
+<rect x="456" y="330" width="88" height="106" fill="#37474f"/>
+<polygon points="446,330 554,330 540,262 460,262" fill="#263238"/>
+<polygon points="456,322 544,322 532,272 468,272" fill="#00251a"/>
+<g font-family="monospace" font-size="9" fill="#00e676"><text x="474" y="290">PK? FK?</text><text x="474" y="304">UK? VNN?</text><text x="474" y="316">&gt;_</text></g>
+<rect x="470" y="350" width="60" height="10" rx="3" fill="#90a4ae"/>
+</g>
+<!-- PUERTA ACORAZADA -->
+<g data-hs="puerta">
+<circle cx="760" cy="250" r="182" fill="#30343f"/>
+<circle cx="760" cy="250" r="168" fill="url(#caDoor)" stroke="#4a5060" stroke-width="6"/>
+<circle cx="760" cy="250" r="128" fill="none" stroke="#7b8294" stroke-width="4"/>
+<g fill="#5c6375"><circle cx="760" cy="96" r="8"/><circle cx="760" cy="404" r="8"/><circle cx="606" cy="250" r="8"/><circle cx="914" cy="250" r="8"/><circle cx="651" cy="141" r="8"/><circle cx="869" cy="359" r="8"/><circle cx="869" cy="141" r="8"/><circle cx="651" cy="359" r="8"/></g>
+<g stroke="#3b4050" stroke-width="12" stroke-linecap="round"><path d="M760 250 L760 160 M760 250 L838 295 M760 250 L682 295"/></g>
+<circle cx="760" cy="250" r="34" fill="#3b4050"/><circle cx="760" cy="250" r="22" fill="#c9a227"/>
+<g fill="#212121"><rect x="740" y="330" width="40" height="30" rx="4"/></g>
+<g fill="#ffd54f" font-family="monospace" font-size="11" font-weight="900"><text x="745" y="349">_ _ _</text></g>
+<g fill="#3b2c00"><circle cx="872" cy="232" r="6"/><circle cx="872" cy="268" r="6"/></g>
+</g>
+</svg>

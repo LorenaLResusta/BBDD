@@ -13,6 +13,7 @@ El diseño de una base de datos empieza **lejos del ordenador**: escuchando al c
 |---|---|
 | [Teoría](/ud02-modelo-er/ud02-teoria) | Ciclo de diseño, entidades, atributos, relaciones, cardinalidades, entidades débiles, jerarquías, agregación, ternarias, notaciones, herramientas y caso EduGest |
 | [Prácticas](/ud02-modelo-er/ud02-practicas) | Diez prácticas progresivas (cuatro retos avanzados), la tarea EduGest y un banco de 30 enunciados |
-| [Escape room](/ud03-modelo-relacional/ud03-escape-room) | Juego de repaso conjunto con la UD03 (diez cerraduras y una libreta de pistas) |
+| [Escape room](/ud02-modelo-er/ud02-escape-room) | *¡Corten! Fuga del plató*: tres salas con objetos clicables y candados de números, flechas y letras |
+| [Escape room final del trimestre](/escape-rooms/trimestre-1) | Repaso conjunto de UD02 y UD03 antes del examen de la 1.ª evaluación |
 
 **Duración:** 26 horas de aula, del 14/09/2026 al 21/10/2026. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.

@@ -13,6 +13,7 @@ El model relacional és el pont entre el disseny conceptual i la base de dades r
 |---|---|
 | [Teoria](/ud03-modelo-relacional/ud03-teoria) | Relacions, dominis, claus, `NULL`, integritat, regles de transformació E/R → relacional, restriccions no representables, eines i cas EduGest |
 | [Pràctiques](/ud03-modelo-relacional/ud03-practicas) | Cinc pràctiques, la tasca EduGest i un banc de 20 exercicis |
-| [Escape room](/ud03-modelo-relacional/ud03-escape-room) | Joc de repàs d'UD02 i UD03: deu panys, una llibreta de pistes i un culpable per descobrir |
+| [Escape room](/ud03-modelo-relacional/ud03-escape-room) | *Bloqueig en el Banc Codd*: tres sales amb objectes clicables, claus i cadenats de números |
+| [Escape room final del trimestre](/escape-rooms/trimestre-1) | Repàs conjunt d'UD02 i UD03 abans de l'examen de la 1a avaluació |
 
 **Durada:** 20 hores d'aula, del 22/10/2026 al 18/11/2026. Consulta la [guia didàctica](/) per a vore el seu lloc en el calendari del curs.

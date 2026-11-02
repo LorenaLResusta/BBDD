@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Camerino">
+<defs>
+<linearGradient id="cmWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b3a63"/><stop offset="1" stop-color="#8a5a7a"/></linearGradient>
+<linearGradient id="cmFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a4b2e"/><stop offset="1" stop-color="#4a2c1a"/></linearGradient>
+<radialGradient id="cmGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff7c2" stop-opacity=".9"/><stop offset="1" stop-color="#fff7c2" stop-opacity="0"/></radialGradient>
+<linearGradient id="cmMirror" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cfe6f2"/><stop offset=".55" stop-color="#9fc3d6"/><stop offset="1" stop-color="#d9eef8"/></linearGradient>
+</defs>
+<rect width="960" height="540" fill="url(#cmWall)"/>
+<g opacity=".12" stroke="#fff" stroke-width="2"><path d="M0 60 H960 M0 120 H960 M0 180 H960 M0 240 H960 M0 300 H960 M0 360 H960"/></g>
+<rect y="400" width="960" height="140" fill="url(#cmFloor)"/>
+<g stroke="#3a2214" stroke-width="2" opacity=".6"><path d="M0 430 H960 M0 465 H960 M0 505 H960 M120 400 V430 M330 430 V465 M560 400 V430 M700 465 V505 M840 430 V465 M250 505 V540 M610 505 V540"/></g>
+<rect y="392" width="960" height="10" fill="#3a2234"/>
+<!-- focos de techo -->
+<circle cx="420" cy="0" r="120" fill="url(#cmGlow)" opacity=".35"/>
+<!-- PUERTA -->
+<g data-hs="puerta">
+<rect x="36" y="100" width="170" height="300" fill="#2a1a2e"/>
+<rect x="44" y="108" width="154" height="292" rx="3" fill="#6b4a3a"/>
+<rect x="58" y="124" width="126" height="120" rx="3" fill="#7d5847" stroke="#4d3125" stroke-width="3"/>
+<rect x="58" y="258" width="126" height="126" rx="3" fill="#7d5847" stroke="#4d3125" stroke-width="3"/>
+<polygon points="121,150 129,172 152,172 134,186 141,208 121,195 101,208 108,186 90,172 113,172" fill="#ffd34d" stroke="#b8860b" stroke-width="2"/>
+<rect x="160" y="250" width="30" height="52" rx="4" fill="#20202a" stroke="#999" stroke-width="2"/>
+<g fill="#7fe3a0"><rect x="165" y="256" width="6" height="5"/><rect x="174" y="256" width="6" height="5"/><rect x="183" y="256" width="3" height="5"/><rect x="165" y="265" width="6" height="5"/><rect x="174" y="265" width="6" height="5"/><rect x="165" y="274" width="6" height="5"/><rect x="174" y="274" width="6" height="5"/></g>
+<circle cx="175" cy="291" r="4" fill="#ff4d6d"/>
+<circle cx="64" cy="270" r="6" fill="#d9b25b"/>
+</g>
+<!-- ESPEJO -->
+<g data-hs="espejo">
+<rect x="290" y="62" width="250" height="220" rx="10" fill="#3b2a1f"/>
+<rect x="312" y="84" width="206" height="176" rx="4" fill="url(#cmMirror)"/>
+<path d="M340 100 L380 100 L330 170 Z M470 140 L505 120 L460 230 Z" fill="#fff" opacity=".35"/>
+<g fill="#fff3b0" stroke="#e0b84a" stroke-width="2">
+<circle cx="300" cy="80" r="9"/><circle cx="300" cy="125" r="9"/><circle cx="300" cy="170" r="9"/><circle cx="300" cy="215" r="9"/><circle cx="300" cy="260" r="9"/>
+<circle cx="530" cy="80" r="9"/><circle cx="530" cy="125" r="9"/><circle cx="530" cy="170" r="9"/><circle cx="530" cy="215" r="9"/><circle cx="530" cy="260" r="9"/>
+<circle cx="350" cy="70" r="9"/><circle cx="415" cy="70" r="9"/><circle cx="480" cy="70" r="9"/>
+</g>
+<g transform="rotate(6 470 200)"><rect x="445" y="180" width="58" height="52" fill="#ffe66d"/><path d="M452 194 H495 M452 204 H490 M452 214 H495 M452 224 H480" stroke="#8a6d0b" stroke-width="2"/></g>
+</g>
+<!-- TOCADOR -->
+<g data-hs="tocador">
+<rect x="262" y="296" width="306" height="20" rx="3" fill="#e9d6c3"/>
+<rect x="272" y="316" width="286" height="84" fill="#c7a888"/>
+<rect x="352" y="328" width="126" height="44" rx="3" fill="#b28f6f" stroke="#7d5e42" stroke-width="2"/>
+<rect x="404" y="344" width="22" height="6" rx="3" fill="#7d5e42"/>
+<circle cx="415" cy="361" r="4" fill="#2a1a12"/><rect x="414" y="362" width="2" height="6" fill="#2a1a12"/>
+<rect x="282" y="400" width="12" height="10" fill="#7d5e42"/><rect x="536" y="400" width="12" height="10" fill="#7d5e42"/>
+<rect x="300" y="272" width="14" height="26" rx="3" fill="#2a2a2a"/><rect x="301" y="262" width="12" height="12" rx="3" fill="#e0245e"/>
+<rect x="330" y="280" width="40" height="16" rx="8" fill="#f2a6c0"/>
+<ellipse cx="510" cy="290" rx="26" ry="8" fill="#f5e1c8" stroke="#c9a77d" stroke-width="2"/>
+<path d="M480 296 l20 -36 M492 296 l8 -40" stroke="#5a3b28" stroke-width="5" stroke-linecap="round"/>
+</g>
+<!-- silla -->
+<g fill="#2e2440"><rect x="380" y="380" width="90" height="12" rx="4"/><rect x="386" y="392" width="8" height="70"/><rect x="456" y="392" width="8" height="70"/></g>
+<!-- PÓSTER -->
+<g data-hs="poster">
+<rect x="596" y="72" width="104" height="150" fill="#1a1f4a" stroke="#fff" stroke-width="4"/>
+<circle cx="648" cy="125" r="30" fill="#ff7a59"/>
+<rect x="618" y="150" width="60" height="30" fill="#ffd34d"/>
+<path d="M606 196 H690 M614 208 H682" stroke="#fff" stroke-width="4"/>
+<text x="648" y="96" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="13" fill="#fff">CARDINAL</text>
+</g>
+<!-- VESTUARIO -->
+<g data-hs="vestuario">
+<rect x="722" y="110" width="8" height="300" fill="#b9b9c6"/><rect x="916" y="110" width="8" height="300" fill="#b9b9c6"/>
+<rect x="716" y="106" width="214" height="10" rx="5" fill="#d8d8e3"/>
+<rect x="706" y="406" width="40" height="8" rx="4" fill="#8f8fa0"/><rect x="900" y="406" width="40" height="8" rx="4" fill="#8f8fa0"/>
+<g stroke="#ddd" stroke-width="3" fill="none"><path d="M760 116 v12 l-22 14 h44 z M818 116 v12 l-22 14 h44 z M876 116 v12 l-22 14 h44 z"/></g>
+<path d="M738 142 h44 l12 40 -10 4 v150 h-58 v-150 l-10 -4 z" fill="#2f9e8f"/>
+<path d="M796 142 h44 l10 30 -8 4 v190 h-48 v-190 l-8 -4 z" fill="#e0457b"/>
+<path d="M854 142 h44 l12 36 -10 4 v120 h-58 v-120 l-10 -4 z" fill="#ffb703"/>
+<path d="M760 142 v40 M818 142 v60 M876 142 v40" stroke="#000" stroke-opacity=".2" stroke-width="3"/>
+<rect x="868" y="190" width="22" height="14" rx="2" fill="#fff"/><path d="M872 197 h14" stroke="#555" stroke-width="2"/>
+</g>
+</svg>

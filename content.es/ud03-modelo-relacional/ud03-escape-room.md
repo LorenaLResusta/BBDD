@@ -1,32 +1,32 @@
 ---
-title: "Escape room UD02 + UD03"
+title: "Escape room UD03"
 weight: 3
 bookToc: false
 ---
 
-# Escape room · El caso del esquema desaparecido
+# Escape room · Bloqueo en el Banco Codd
 
-{{< ra "RA6:a,b,c,d,e,h" "RA2:e" >}}
+{{< ra "RA6:b,c,d,e,f,h" "RA2:a,d,e" >}}
 
-Un juego para **repasar antes del examen** (o para jugar en clase por parejas) con todo lo que has visto en la [UD02](/ud02-modelo-er/) y en la [UD03](/ud03-modelo-relacional/). Eres el inspector Codd, estás encerrado en el edificio de una aerolínea y solo saldrás si abres **diez cerraduras**, reúnes las pistas de tu libreta y descubres quién borró el modelo de datos.
+Un escape room de **escenas clicables** para cerrar la [UD03](/ud03-modelo-relacional/). El sistema de seguridad del Banco Codd te ha dejado encerrado en el sótano y solo abre las puertas a quien demuestra que entiende su base de datos relacional.
 
-| Acto | Cerraduras | Qué practicas |
+| Sala | Candado | Qué repasas |
 |---|---|---|
-| I · La planta de diseño (UD02) | 5 | Cardinalidades de una ternaria, entidades débiles, jerarquías parciales y solapadas, tipos de atributos, relaciones reflexivas con roles |
-| II · La cámara acorazada (UD03) | 5 | Políticas de borrado, clave primaria de una N:M, orden de creación de tablas, recuento de tablas, restricciones que el esquema no expresa |
-| III · La puerta de salida | 1 + acusación | De la ternaria a la tabla y deducción del culpable con las pistas |
+| 📚 Archivo | 4 dígitos | Grado y cardinalidad, claves candidatas, valores nulos, restricciones inherentes |
+| 🖥️ Sala de servidores | 3 dígitos + corriente | Integridad referencial, VNN, políticas de borrado, borrado en cascada, claves ajenas compuestas |
+| 🏦 Cámara acorazada | 3 dígitos + llave | Transformación de N:M, 1:N y 1:1, número de tablas de un esquema, pérdidas semánticas |
 
 > [!TIP]
-> Cada sala te deja una **pista** en la libreta y, al resolverla, te explica **por qué** es correcta y a qué apartado de la teoría debes volver. Aunque aciertes a la primera, léela: es donde está lo que se pregunta en el examen.
+> Algunos objetos dependen de otros: la estantería necesita luz, la puerta B necesita corriente y la puerta acorazada, las dos mitades de una llave. Si algo no se abre, mira qué te falta en la lista de objetos.
 
-> [!NOTE]
-> Una pista cuesta 20 puntos y cada fallo, 10. No es un examen: úsalas cuando las necesites, pero intenta antes razonar con el esquema delante. Si juegas en clase, comparad las puntuaciones **después** de comentar las respuestas, no antes.
+> [!WARNING]
+> Las pistas suman un minuto al cronómetro y cada fallo, unos segundos. En la sala de servidores, **lee primero la pizarra**: los demás retos se resuelven con sus datos.
 
-{{< escape-room >}}
+{{< escape-click data="escape_ud03" >}}
 
 ## Para el profesorado
 
-- **Duración:** 30-45 minutos por parejas. Funciona bien como cierre de la UD03.
-- **Pistas clave:** tres de las pistas descartan a dos de los tres sospechosos. Pide al alumnado que justifique la acusación **con las pistas**, no por intuición.
-- **Progreso:** se guarda en el navegador de cada alumno; el botón *Empezar de nuevo* lo borra.
-- **Contenido:** los textos están en `data/escape_ud02_ud03.json` (castellano y valenciano). Para añadir una sala basta con añadir un elemento a `puzzles`, con uno de los cinco tipos (`choice`, `multi`, `match`, `order`, `number`).
+- **Duración:** 30-40 minutos por parejas. El objetivo de tres estrellas es salir en menos de 40 minutos, contando penalizaciones.
+- **Dinámica:** el reto del monitor de alarmas (borrado en cascada) y el de la consola (qué operaciones se rechazan) dan mucho juego para comentarlo en voz alta después. Al final aparece la lista de retos que han costado más, con su enlace a la teoría.
+- **Repaso del trimestre:** al acabar la UD02 y la UD03, el [escape room final del 1.er trimestre](/escape-rooms/trimestre-1) mezcla las dos unidades.
+- **Contenido:** los textos (castellano y valenciano) están en `data/escape_ud03.yaml` y las escenas en `assets/escape/ud03-*.svg`.
