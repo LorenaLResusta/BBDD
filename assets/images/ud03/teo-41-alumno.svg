@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="5458 6675 348 198" width="348" height="198" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
+<title id="t">Entidad fuerte ALUMNO</title><desc id="d">Entidad fuerte con identificador y clave alternativa</desc>
+<rect x="5458" y="6675" width="348" height="198" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+<g stroke="#1f2937" stroke-width="1.4" fill="none"><line x1="5688.0" y1="6773.6" x2="5714.0" y2="6773.6"/><line x1="5639.3" y1="6794.6" x2="5639.3" y2="6820.6"/><line x1="5590.7" y1="6773.6" x2="5564.7" y2="6773.6"/><line x1="5639.3" y1="6752.6" x2="5639.3" y2="6726.6"/></g>
+<rect x="5590.7" y="6752.6" width="97.3" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<ellipse cx="5748.2" cy="6773.6" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="5639.3" cy="6834.6" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="5523.3" cy="6773.6" rx="41.4" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="5639.3" cy="6712.6" rx="27.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<text x="5639.3" y="6778.6" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">ALUMNO</text>
+<text x="5748.2" y="6777.6" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="5639.3" y="6838.6" font-size="12" text-anchor="middle" fill="#111111">dni</text>
+<line x1="5630.1" y1="6842.6" x2="5648.6" y2="6842.6" stroke="#111111" stroke-width="1.8" stroke-dasharray="1.5 2.5"/>
+<text x="5523.3" y="6777.6" font-size="12" text-anchor="middle" fill="#111111">fecha_nac</text>
+<text x="5639.3" y="6716.6" font-size="12" text-anchor="middle" fill="#111111">nia</text>
+<line x1="5630.2" y1="6720.6" x2="5648.5" y2="6720.6" stroke="#111111" stroke-width="1.3"/>
+</svg>

@@ -13,7 +13,7 @@ math: true
 **Visión General:**
 El **Modelo Relacional**, ideado por Edgar F. Codd en IBM en 1970, es el modelo de datos lógico más extendido y utilizado comercialmente en el mundo de las bases de datos. A diferencia del Modelo Entidad-Relación (EER), que es una herramienta de abstracción conceptual para representar la información del mundo real de forma independiente del software, el Modelo Relacional representa la estructura lógica de los datos mediante **relaciones (tablas)** compuestas por **tuplas (filas)** y **atributos (columnas)**.
 
-En esta unidad se estudian minuciosamente los conceptos matemáticos y pragmáticos que sustentan el modelo relacional: la estructura formal de una tabla, el dominio y tipado de atributos, el grado y la cardinalidad, las claves (candidatas, primarias, alternativas y foráneas), la semántica de los valores nulos (`NULL`) y las reglas de integridad (inherentes y semánticas). Además, se detalla un catálogo completo de **reglas de transformación para convertir esquemas conceptuales EER en esquemas relacionales lógicos**, ilustrado con abundantes ejemplos reales, esquemas formales y tablas con datos reales.
+En esta unidad se estudian minuciosamente los conceptos matemáticos y pragmáticos que sustentan el modelo relacional: la estructura formal de una tabla, el dominio y tipado de atributos, el grado y la cardinalidad, las claves (candidatas, primarias, alternativas y foráneas), la semántica de los valores nulos (`NULL`) y las reglas de integridad (inherentes y semánticas). Además, se detalla un catálogo completo de **reglas de transformación para convertir esquemas conceptuales EER en esquemas relacionales lógicos**, ilustrado con ejemplos reales, esquemas formales y tablas con datos reales.
 
 {{< ra "RA6:a,b,c,d,e,f,h" "RA2:a,d,e" >}}
 
@@ -246,7 +246,17 @@ La práctica 3.2 se hace en la [página de prácticas](/ud03-modelo-relacional/u
 
 ## 4. Reglas de Transformación del Modelo EER al Modelo Relacional
 
-Para transformar de forma metódica un diagrama EER conceptual a un esquema relacional lógico, se aplican las siguientes reglas estandarizadas:
+Para transformar de forma metódica un diagrama EER conceptual a un esquema relacional lógico, se aplican las reglas de este apartado. Cada regla se acompaña de **un ejemplo completo**, con la misma estructura que verás en todas:
+
+1. el **diagrama de Chen** de partida;
+2. el **esquema relacional** resultante, escrito con la notación de las prácticas (PK, FK, UK, VNN);
+3. el **patrón general** con entidades abstractas `A`, `B`, `C` y atributos `a0`, `a1`, `b0`… (`a0` es siempre el identificador de `A`);
+4. unas **filas de ejemplo** para comprobar que las restricciones hacen lo que deben.
+
+> [!NOTE]
+> **Notación del esquema.** Cada tabla se escribe con sus columnas y, debajo, sus restricciones:
+> **PK** = clave primaria · **FK** = clave ajena (`columna → TABLA`) · **UK** = clave alternativa (*unique*) · **VNN** = valor no nulo (obligatorio).
+> Es la misma notación de las [tareas de transformación](/ud03-modelo-relacional/ud03-practicas#tareas-de-transformación-del-er-al-modelo-relacional).
 
 ---
 
@@ -255,36 +265,215 @@ Para transformar de forma metódica un diagrama EER conceptual a un esquema rela
 - **Regla:** Cada entidad fuerte del diagrama EER se convierte en una **tabla (relación)** independiente.
   - Los atributos simples de la entidad pasan a ser **columnas** de la tabla.
   - El atributo identificador principal de la entidad pasa a ser la **Clave Primaria (PK)** de la tabla.
-  - Las claves alternativas pasan a protegerse con una restricción de unicidad (UK).
+  - Los identificadores candidatos (claves alternativas) pasan a ser **UK**. Como identifican, además llevan **VNN**.
 
-#### Esquema Notacional Formal
+#### Ejemplo 4.1 · La entidad ALUMNO
 
-$$\text{ENTIDAD}(\underline{\text{id\_entidad}}, \text{atributo1}, \text{atributo2})$$
+En el centro, cada alumno tiene un NIA (número de identificación del alumnado) que asigna la Conselleria. También tiene DNI, que no se repite, pero se elige el NIA como identificador principal.
+
+{{< figura src="ud03/teo-41-alumno.svg" alt="Entidad ALUMNO con los atributos nia (identificador, subrayado), dni (clave alternativa, subrayado de puntos), nombre y fecha_nac" caption="Entidad fuerte con identificador (nia) y clave alternativa (dni)" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+ALUMNO (nia, dni, nombre, fecha_nac)
+   PK:  nia
+   UK:  dni
+   VNN: dni
+```
+- `nia` es la **PK**: no se repite y no puede ser nula.
+- `dni` es **UK** porque también identifica, y **VNN** porque una clave candidata sin valor no identificaría a nadie.
+- `nombre` y `fecha_nac` son columnas normales. Si el enunciado dijera que son obligatorias, llevarían también VNN.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A (a0 identificador, a1, a2, a3 clave alternativa)
+
+A (a0, a1, a2, a3)
+   PK:  a0
+   UK:  a3
+   VNN: a3
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+| nia (PK) | dni (UK) | nombre | fecha_nac |
+|---|---|---|---|
+| 10234567 | 48123456P | Paula Ortiz | 2006-03-14 |
+| 10234568 | 21456789K | Izan Pastor | 2005-11-02 |
+| 10234569 | 74222333B | Lucía Sempere | 2006-07-29 |
+
+Una cuarta fila con el DNI `48123456P` sería rechazada por la **UK**, aunque su NIA fuese distinto.
+{{% /tab %}}
+{{< /tabs >}}
 
 ---
 
 ### 4.2 Transformación de Entidades Débiles (por Identificación y Existencia)
 
 - **Regla:** Una entidad débil se convierte en una **tabla independiente**.
-  - **Débil por Identificación:** La clave primaria de la tabla resultante es una **clave compuesta** formada por la clave primaria de la entidad fuerte propietaria (que se propaga como `FK`) combinada con el discriminador parcial de la entidad débil.
-  - **Débil por Existencia:** Si la entidad débil posee su propio identificador único, la clave primaria de la entidad fuerte se propaga como FK obligatoria (no admite nulos) con política de borrado en cascada.
+  - **Débil por Identificación (ID):** La clave primaria de la tabla resultante es una **clave compuesta** formada por la clave primaria de la entidad fuerte propietaria (que se propaga como `FK`) combinada con el discriminador parcial de la entidad débil.
+  - **Débil por Existencia (E):** Si la entidad débil posee su propio identificador único, este es su PK. La clave primaria de la entidad fuerte se propaga como **FK obligatoria (VNN)**. Es el caso habitual de una relación 1:N con participación obligatoria, que se ve con más detalle en el apartado 4.4.
 
-#### Esquema Notacional Formal (Débil por Identificación)
+#### Ejemplo 4.2-a · Débil por identificación: EDIFICIO y AULA
 
-$$\text{ENTIDAD\_DÉBIL}(\underline{\text{id\_padre}}, \underline{\text{id\_parcial\_débil}}, \text{atributo1})$$
-$$\text{FK: id\_padre } \rightarrow \text{ENTIDAD\_PADRE}(\text{id\_padre}) \text{ (borrado en cascada)}$$
+Las aulas se numeran **dentro de cada edificio**: el edificio A tiene un aula 1 y el edificio B también. El número de aula, por sí solo, no identifica: es un **discriminador** (subrayado discontinuo).
+
+{{< figura src="ud03/teo-42a-edificio-aula.svg" alt="EDIFICIO (cod_edificio, nombre) se relaciona mediante el rombo doble tiene con la entidad débil AULA (num_aula discriminador, capacidad); EDIFICIO (1,1), AULA (1,N)" caption="Entidad débil por identificación: rectángulo doble y rombo doble" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+EDIFICIO (cod_edificio, nombre)
+   PK:  cod_edificio
+
+AULA (cod_edificio, num_aula, capacidad)
+   PK:  (cod_edificio, num_aula)
+   FK:  cod_edificio → EDIFICIO
+```
+- La relación `tiene` **no genera tabla**: queda absorbida en `AULA`.
+- `cod_edificio` es a la vez **parte de la PK** y **FK**. Como forma parte de la PK, ya es obligatoria: no hace falta escribir VNN.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A (débil, discriminador a0) ──ID── B (b0)
+            Restricción de identidad
+
+A (a0, a1, aB)
+   PK:  (a0, aB)
+   FK:  aB → B
+
+B (b0, b1)
+   PK:  b0
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+**EDIFICIO**
+
+| cod_edificio (PK) | nombre |
+|---|---|
+| A | Edificio principal |
+| B | Talleres |
+
+**AULA**
+
+| cod_edificio (PK, FK) | num_aula (PK) | capacidad |
+|---|---|---|
+| A | 1 | 30 |
+| A | 2 | 24 |
+| B | 1 | 20 |
+
+El valor `1` de `num_aula` se repite, pero la pareja `(A, 1)` no. Insertar `(C, 3)` fallaría: el edificio `C` no existe (**FK**).
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Ejemplo 4.2-b · Débil por existencia: CLIENTE y PEDIDO
+
+Un pedido tiene su propio número, que no se repite nunca, pero **no puede existir sin el cliente** que lo realiza (marca **E**).
+
+{{< figura src="ud03/teo-42b-cliente-pedido.svg" alt="CLIENTE (cod_cliente, nombre) realiza PEDIDO (num_pedido, fecha); CLIENTE (1,1), PEDIDO (0,N), con la marca E de dependencia en existencia junto a PEDIDO" caption="Entidad débil por existencia: tiene identificador propio" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+CLIENTE (cod_cliente, nombre)
+   PK:  cod_cliente
+
+PEDIDO (num_pedido, fecha, cod_cliente)
+   PK:  num_pedido
+   FK:  cod_cliente → CLIENTE
+   VNN: cod_cliente
+```
+- La PK de `PEDIDO` es solo `num_pedido`: no necesita al cliente para identificarse.
+- La dependencia en existencia se traduce en **VNN** sobre la FK: no hay pedidos «huérfanos».
+- Al borrar un cliente, la política habitual es **en cascada** (se borran sus pedidos) o **restringida** (no se deja borrar). Se decide en la UD05.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A (a0, a1) ──E── R ── B (b0, b1)     (A depende de B)
+
+A (a0, a1, aB)
+   PK:  a0
+   FK:  aB → B
+   VNN: aB
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+| num_pedido (PK) | fecha | cod_cliente (FK, VNN) |
+|---|---|---|
+| 5001 | 2026-10-04 | C01 |
+| 5002 | 2026-10-04 | C02 |
+| 5003 | 2026-10-05 | C01 |
+
+Insertar `(5004, 2026-10-06, NULL)` fallaría por el **VNN**.
+{{% /tab %}}
+{{< /tabs >}}
+
+> [!TIP]
+> **¿ID o E?** Pregúntate: *¿el identificador de la entidad débil se repite entre propietarios distintos?* Si se repite (aula 1 del edificio A, aula 1 del edificio B), es por **identificación** y la PK es compuesta. Si no se repite (el pedido 5001 es único en toda la empresa), es por **existencia** y basta con una FK obligatoria.
 
 ---
 
 ### 4.3 Transformación de Atributos Compuestos y Multivaluados
 
-1. **Atributos Compuestos:** Se eliminan desplegando cada uno de sus sub-atributos simples como columnas individuales de la propia tabla.
+Estas son las **reglas preparatorias**: se aplican antes que las demás y se basan en la primera forma normal (UD04), que exige que cada columna guarde **un único valor atómico**.
+
+1. **Atributos Compuestos:** Se eliminan desplegando cada uno de sus sub-atributos simples como columnas individuales de la propia tabla. El atributo compuesto «padre» desaparece.
 2. **Atributos Multivaluados ($N$):** Se crea una **nueva tabla independiente** para albergar el atributo multivaluado. La clave primaria de esta nueva tabla será la combinación de la clave primaria de la entidad originaria y el propio atributo multivaluado.
 
-#### Esquema Notacional Formal (Atributo Multivaluado)
+#### Ejemplo 4.3 · PERSONA con dirección y varios teléfonos
 
-$$\text{ENTIDAD\_TELÉFONO}(\underline{\text{id\_persona}}, \underline{\text{numero\_telefono}}, \text{tipo\_linea})$$
-$$\text{FK: id\_persona } \rightarrow \text{PERSONA}(\text{id\_persona}) \text{ (borrado en cascada)}$$
+{{< figura src="ud03/teo-43-persona.svg" alt="Entidad PERSONA con dni (identificador), nombre, el atributo compuesto direccion (calle, numero, ciudad) y el atributo multivaluado telefono (óvalo doble)" caption="Atributo compuesto (direccion) y multivaluado (telefono, óvalo doble)" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+PERSONA (dni, nombre, calle, numero, ciudad)
+   PK:  dni
+
+TELEFONO (dni, telefono)
+   PK:  (dni, telefono)
+   FK:  dni → PERSONA
+```
+- `direccion` no aparece como columna: se sustituye por `calle`, `numero` y `ciudad`.
+- `telefono` sale de `PERSONA`. Si se dejara dentro, habría que guardar «600111222, 965000000» en una sola celda, o crear columnas `telefono1`, `telefono2`… sin saber cuántas hacen falta.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A (a0, a1, a2 multivaluado (n), a3)
+
+A (a0, a1, a3)
+   PK:  a0
+
+A2 (a0, a2)
+   PK:  (a0, a2)
+   FK:  a0 → A
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+**PERSONA**
+
+| dni (PK) | nombre | calle | numero | ciudad |
+|---|---|---|---|---|
+| 48123456P | Paula Ortiz | Lillo Juan | 128 | Sant Vicent del Raspeig |
+| 21456789K | Izan Pastor | Alfonso X | 12 | Alicante |
+
+**TELEFONO**
+
+| dni (PK, FK) | telefono (PK) |
+|---|---|
+| 48123456P | 600111222 |
+| 48123456P | 965000000 |
+| 21456789K | 611222333 |
+
+Paula tiene dos teléfonos: dos filas. Repetir `(48123456P, 600111222)` violaría la **PK**.
+{{% /tab %}}
+{{< /tabs >}}
+
+> [!NOTE]
+> **Excepción:** si el valor multivaluado no puede repetirse entre entidades distintas (por ejemplo, un correo corporativo que solo pertenece a una persona), el propio valor basta como PK: `CORREO (email, dni)` con PK: `email`, FK: `dni → PERSONA`, VNN: `dni`.
+
+> [!WARNING]
+> **Pérdida semántica.** Si el diagrama exige un mínimo de 1 («toda persona tiene al menos un teléfono»), las tablas no pueden garantizarlo: se puede insertar una persona sin ninguna fila en `TELEFONO`. Hay que anotarlo (apartado 6).
 
 #### Laboratorio: del E/R a las tablas
 
@@ -300,37 +489,230 @@ Este transformador aplica las reglas del apartado 4 y produce el esquema relacio
 
 - **Regla (Propagación de Clave):** No se crea una nueva tabla. Se toma la clave primaria de la entidad del lado "1" y se **propaga como clave foránea (`FK`)** a la tabla resultante de la entidad del lado "N".
 - Si la relación contenía atributos descriptores propios, estos se trasladan también como columnas a la tabla del lado "N".
-- Si la participación del lado "N" es obligatoria (cardinalidad mínima 1), la FK debe ser obligatoria (no admite nulos).
+- Si la participación del lado "N" es obligatoria (cardinalidad mínima 1), la FK debe ser obligatoria (**VNN**).
+- Si la clave del lado "1" es **compuesta**, la FK también es compuesta: viajan **todas** sus columnas juntas.
+
+> [!TIP]
+> **Truco para no equivocarse:** la clave viaja **hacia el lado N**. Piensa en una fila del lado N: un empleado tiene **un** departamento, así que cabe en una columna. Un departamento tiene **muchos** empleados, que no caben en una columna.
+
+#### Ejemplo 4.4-a · Participación opcional: EMPLEADO y DEPARTAMENTO (0,1)
+
+Cada empleado trabaja en **como mucho** un departamento (puede haber empleados recién contratados sin asignar). Un departamento tiene muchos empleados. La relación guarda la fecha de alta.
+
+{{< figura src="ud03/teo-44a-emp-dep-opcional.svg" alt="EMPLEADO (dni, nombre) trabaja DEPARTAMENTO (cod_dep, nombre); junto a DEPARTAMENTO (0,1), junto a EMPLEADO (0,N); atributo fecha_alta en la relación" caption="Relación 1:N con participación opcional del empleado" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+DEPARTAMENTO (cod_dep, nombre)
+   PK:  cod_dep
+
+EMPLEADO (dni, nombre, cod_dep, fecha_alta)
+   PK:  dni
+   FK:  cod_dep → DEPARTAMENTO
+```
+- `cod_dep` viaja a `EMPLEADO` (lado N) como **FK**.
+- `fecha_alta`, atributo de la relación, viaja con ella.
+- Sin VNN: el mínimo junto a DEPARTAMENTO es 0, así que `cod_dep` admite nulos.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A (a0, a1) ──N── R ──1── B (b0, b1)
+
+A (a0, a1, aB)
+   PK:  a0
+   FK:  aB → B
+
+B (b0, b1)
+   PK:  b0
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+**DEPARTAMENTO**
+
+| cod_dep (PK) | nombre |
+|---|---|
+| INF | Informática |
+| ADM | Administración |
+
+**EMPLEADO**
+
+| dni (PK) | nombre | cod_dep (FK) | fecha_alta |
+|---|---|---|---|
+| 11111111H | Marta Lloret | INF | 2020-09-01 |
+| 22222222J | Andrés Gil | INF | 2023-09-01 |
+| 33333333P | Sara Vidal | `NULL` | `NULL` |
+
+Sara aún no tiene departamento: la FK es nula y es válido.
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Ejemplo 4.4-b · Participación obligatoria: (1,1)
+
+Si el enunciado dice que **todo empleado pertenece obligatoriamente a un departamento**, el mínimo junto a DEPARTAMENTO pasa a ser 1.
+
+{{< figura src="ud03/teo-44b-emp-dep-obligatoria.svg" alt="EMPLEADO trabaja DEPARTAMENTO; junto a DEPARTAMENTO (1,1) con línea doble, junto a EMPLEADO (1,N)" caption="Relación 1:N con participación obligatoria del empleado" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+DEPARTAMENTO (cod_dep, nombre)
+   PK:  cod_dep
+
+EMPLEADO (dni, nombre, cod_dep, fecha_alta)
+   PK:  dni
+   FK:  cod_dep → DEPARTAMENTO
+   VNN: cod_dep
+```
+La única diferencia con 4.4-a es el **VNN**: ahora la fila de Sara con `cod_dep` nulo sería rechazada.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A (a0, a1) ──E── R ── B (b0, b1)     (mínimo 1 junto a B)
+
+A (a0, a1, aB)
+   PK:  a0
+   FK:  aB → B
+   VNN: aB
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+> [!WARNING]
+> **Pérdida semántica.** Junto a EMPLEADO pone **(1,N)**: todo departamento tiene **al menos un** empleado. Eso **no se puede** garantizar con claves: nada impide insertar un departamento sin empleados. Es el caso de la figura del PDF en el que la marca **E** está en el lado 1. Se anota como restricción no representable y se controla en la implementación (UD08).
+
+#### Ejemplo 4.4-c · Clave ajena compuesta: SESION y AULA
+
+Ahora el lado 1 es `AULA`, cuya clave es **compuesta** `(cod_edificio, num_aula)` (ejemplo 4.2-a). Cada sesión de clase se imparte en un aula.
+
+{{< figura src="ud03/teo-44c-sesion-aula.svg" alt="SESION (id_sesion, dia, hora) se_imparte AULA (cod_edificio y num_aula como identificador compuesto, capacidad); junto a AULA (1,1), junto a SESION (0,N)" caption="La clave del lado 1 es compuesta: la clave ajena también lo será" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+SESION (id_sesion, dia, hora, cod_edificio, num_aula)
+   PK:  id_sesion
+   FK:  (cod_edificio, num_aula) → AULA
+   VNN: cod_edificio, num_aula
+```
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A (a0, a1) ──N── R ──1── B (b0, b1)      con PK de B = (b0, b1)
+
+A (a0, a1, aB0, aB1)
+   PK:  a0
+   FK:  (aB0, aB1) → B
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+| id_sesion (PK) | dia | hora | cod_edificio (FK) | num_aula (FK) |
+|---|---|---|---|---|
+| 1 | L | 08:00 | A | 1 |
+| 2 | L | 09:00 | B | 1 |
+| 3 | M | 08:00 | A | 2 |
+
+`(B, 2)` no existe en `AULA` (ver 4.2-a): una sesión en esa aula sería rechazada.
+{{% /tab %}}
+{{< /tabs >}}
+
+> [!CAUTION]
+> **Error frecuente:** escribir dos FK separadas, `cod_edificio → EDIFICIO` y `num_aula → AULA`. Con dos FK separadas se aceptaría la pareja `(B, 2)`, porque el edificio B existe y existe *algún* aula 2. Una clave ajena apunta **siempre a la PK completa** de la tabla referenciada: si la PK es simple, la FK es simple; si es compuesta, la FK es compuesta.
 
 ---
 
-{{% paso-a-paso titulo="De N:M a tablas: ALUMNO y ASIGNATURA" %}}
+### 4.5 Transformación de Relaciones Binarias N:M
+
+- **Regla (Tabla Intermedia):** Se crea obligatoriamente una **nueva tabla de relación**.
+  - La clave primaria de esta nueva tabla es una **clave compuesta** formada por la unión de las claves primarias de ambas entidades participantes (doble propagación de clave).
+  - Cada una de estas claves funciona por separado como clave foránea (`FK`) hacia su tabla correspondiente.
+  - Los atributos propios de la relación $N:M$ se incorporan como columnas de esta nueva tabla.
+
+#### Ejemplo 4.5 · ALUMNO cursa MODULO
+
+{{< figura src="ud03/teo-45-alumno-modulo.svg" alt="ALUMNO (nia, nombre) cursa MODULO (cod_modulo, nombre) con el atributo nota; junto a ALUMNO (0,N), junto a MODULO (1,N)" caption="Relación N:M con atributo propio (nota)" >}}
+
+{{% paso-a-paso titulo="De N:M a tablas: ALUMNO y MODULO" %}}
 {{% etapa titulo="1. El diagrama" %}}
-Un alumno se matricula en muchas asignaturas y una asignatura tiene muchos alumnos: relación **N:M** con el atributo `nota`.
+Un alumno cursa muchos módulos y un módulo tiene muchos alumnos: relación **N:M** con el atributo `nota`.
 {{% /etapa %}}
 {{% etapa titulo="2. Las entidades pasan a tablas" %}}
-`ALUMNO(id_alumno PK, nombre)` y `ASIGNATURA(id_asig PK, titulo)`. Cada entidad fuerte se convierte en una tabla con su clave.
+`ALUMNO(nia PK, nombre)` y `MODULO(cod_modulo PK, nombre)`. Cada entidad fuerte se convierte en una tabla con su clave.
 {{% /etapa %}}
 {{% etapa titulo="3. La relación N:M pasa a tabla" %}}
-No se puede poner una FK en ninguna de las dos tablas sin repetir filas, así que se crea una **tabla intermedia** `MATRICULA`.
+No se puede poner una FK en ninguna de las dos tablas sin repetir filas (un alumno tendría que guardar varios módulos en una celda), así que se crea una **tabla intermedia** `CURSA`.
 {{% /etapa %}}
 {{% etapa titulo="4. Su clave" %}}
-Las dos claves ajenas forman juntas la PK compuesta `(id_alumno, id_asig)`. Así un alumno no se matricula dos veces en la misma asignatura.
+Las dos claves ajenas forman juntas la PK compuesta `(nia, cod_modulo)`. Así un alumno no cursa dos veces el mismo módulo.
 {{% /etapa %}}
 {{% etapa titulo="5. Los atributos de la relación" %}}
-`nota` y `fecha` van en `MATRICULA`: dependen de la pareja alumno-asignatura, no de uno solo.
+`nota` va en `CURSA`: depende de la pareja alumno-módulo, no de uno solo.
 {{% /etapa %}}
 {{% etapa titulo="6. Resultado" %}}
-`MATRICULA(id_alumno PK,FK → ALUMNO · id_asig PK,FK → ASIGNATURA · nota)`
+`CURSA(nia PK,FK → ALUMNO · cod_modulo PK,FK → MODULO · nota)`
 {{% /etapa %}}
 {{% /paso-a-paso %}}
 
-### 4.5 Transformación de Relaciones Binarias N:M
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+ALUMNO (nia, nombre)
+   PK:  nia
 
-- **Regla (Tabla Intermedia / Junta):** Se crea obligatoriamente una **nueva tabla de relación**.
-  - La clave primaria de esta nueva tabla es una **clave compuesta** formada por la unión de las claves primarias de ambas entidades participantes.
-  - Cada una de estas claves funciona por separado como clave foránea (`FK`) hacia su tabla correspondiente.
-  - Los atributos propios de la relación $N:M$ se incorporan como columnas de esta nueva tabla.
+MODULO (cod_modulo, nombre)
+   PK:  cod_modulo
+
+CURSA (nia, cod_modulo, nota)
+   PK:  (nia, cod_modulo)
+   FK:  nia        → ALUMNO
+   FK:  cod_modulo → MODULO
+```
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A (a0, a1) ──N── R (r1) ──M── B (b0, b1)
+
+A (a0, a1)          B (b0, b1)
+   PK:  a0             PK:  b0
+
+R (rA, rB, r1)
+   PK:  (rA, rB)
+   FK:  rA → A
+   FK:  rB → B
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+**ALUMNO**
+
+| nia (PK) | nombre |
+|---|---|
+| 10234567 | Paula Ortiz |
+| 10234568 | Izan Pastor |
+
+**MODULO**
+
+| cod_modulo (PK) | nombre |
+|---|---|
+| 0484 | Bases de datos |
+| 0485 | Programación |
+
+**CURSA**
+
+| nia (PK, FK) | cod_modulo (PK, FK) | nota |
+|---|---|---|
+| 10234567 | 0484 | 8,5 |
+| 10234567 | 0485 | 7 |
+| 10234568 | 0484 | 6,25 |
+
+Cada valor de `nia` y de `cod_modulo` se repite, pero ninguna **pareja** se repite.
+{{% /tab %}}
+{{< /tabs >}}
+
+> [!NOTE]
+> **¿Y si la pareja puede repetirse?** Si un alumno puede cursar el mismo módulo en varias convocatorias y se quiere guardar cada nota, la pareja `(nia, cod_modulo)` ya no basta: se añade a la PK el atributo que distingue las repeticiones, `CURSA (nia, cod_modulo, convocatoria, nota)` con PK: `(nia, cod_modulo, convocatoria)`.
+
+> [!WARNING]
+> **Pérdida semántica.** El (1,N) junto a MODULO dice que **todo alumno cursa al menos un módulo**. La tabla `CURSA` no puede obligar a que cada alumno tenga una fila: se anota.
 
 ---
 
@@ -338,26 +720,419 @@ Las dos claves ajenas forman juntas la PK compuesta `(id_alumno, id_asig)`. Así
 
 Existen 3 alternativas según las cardinalidades mínimas de participación:
 
-1. **Participación opcional en ambos lados:** hay dos soluciones válidas. La más simple propaga la clave de una entidad a la tabla de la otra como FK con restricción de unicidad (UK) que **admite nulos** (es la que usa EduGest para la tutoría). Si se quieren evitar los nulos, se crea una tabla intermedia con la clave de una entidad como PK y la de la otra como UK obligatoria.
-2. **Participación obligatoria en un lado y opcional en el otro:** la clave ajena se coloca en la tabla de la entidad cuya participación es **obligatoria**, referenciando a la otra, como FK obligatoria y única (UK). Así no necesita admitir nulos.
-3. **Participación obligatoria en ambos lados:** ambas entidades pueden unificarse en una **única tabla** que agrupa todos los atributos, siempre que describan de verdad el mismo objeto.
+1. **Participación opcional en ambos lados (0,1)-(0,1):** hay dos soluciones válidas. La más simple propaga la clave de una entidad a la tabla de la otra como FK con restricción de unicidad (UK) que **admite nulos** (es la que usa EduGest para la tutoría). Si se quieren evitar los nulos, se crea una tabla intermedia con la clave de una entidad como PK y la de la otra como UK obligatoria.
+2. **Participación obligatoria en un lado y opcional en el otro (0,1)-(1,1):** la clave ajena se coloca en la tabla de la entidad cuya participación es **obligatoria**, referenciando a la otra, como FK obligatoria y única (UK + VNN). Así no necesita admitir nulos.
+3. **Participación obligatoria en ambos lados (1,1)-(1,1):** ambas entidades pueden unificarse en una **única tabla** que agrupa todos los atributos, siempre que describan de verdad el mismo objeto.
 
 > [!NOTE]
 > En el transformador interactivo, la regla 2 se refleja así: si «cada A debe tener un B» (mínimo 1) y no al revés, la clave ajena está en A.
+
+#### Ejemplo 4.6-a · (0,1)-(0,1): EMPLEADO usa TAQUILLA
+
+Un empleado puede tener una taquilla o ninguna, y una taquilla puede estar libre.
+
+{{< figura src="ud03/teo-46a-empleado-taquilla.svg" alt="EMPLEADO (dni, nombre) usa TAQUILLA (num_taquilla, planta) con el atributo fecha_entrega; (0,1) junto a cada entidad" caption="Relación 1:1 con participación opcional en los dos lados" >}}
+
+{{< tabs >}}
+{{% tab "Opción 1: tabla intermedia" %}}
+```text
+EMPLEADO (dni, nombre)            TAQUILLA (num_taquilla, planta)
+   PK:  dni                          PK:  num_taquilla
+
+USA (num_taquilla, dni, fecha_entrega)
+   PK:  num_taquilla
+   UK:  dni
+   FK:  num_taquilla → TAQUILLA
+   FK:  dni          → EMPLEADO
+   VNN: dni
+```
+- **PK** en `num_taquilla`: una taquilla aparece una vez como mucho.
+- **UK** en `dni`: un empleado aparece una vez como mucho. Así se garantiza el «1» de los dos lados.
+- No hay nulos: si una taquilla está libre, simplemente no tiene fila en `USA`.
+{{% /tab %}}
+{{% tab "Opción 2: FK única con nulos" %}}
+```text
+EMPLEADO (dni, nombre)
+   PK:  dni
+
+TAQUILLA (num_taquilla, planta, dni, fecha_entrega)
+   PK:  num_taquilla
+   UK:  dni
+   FK:  dni → EMPLEADO
+```
+Menos tablas, pero `dni` y `fecha_entrega` quedan a `NULL` en las taquillas libres.
+
+> **Nota:** en Oracle, una UK de una sola columna admite varias filas con `NULL`, porque `NULL` no se considera igual a `NULL`.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A (a0, a1) ─(0,1)─ R ─(0,1)─ B (b0, b1)
+
+A (a0, a1)          B (b0, b1)
+   PK:  a0             PK:  b0
+
+R (rA, rB)
+   PK:  rA
+   UK:  rB
+   FK:  rA → A
+   FK:  rB → B
+   VNN: rB
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Ejemplo 4.6-b · (0,1)-(1,1): PERSONA posee PASAPORTE
+
+Todo pasaporte pertenece a una persona; no toda persona tiene pasaporte.
+
+{{< figura src="ud03/teo-46b-persona-pasaporte.svg" alt="PERSONA (dni, nombre) posee PASAPORTE (num_pasaporte, caducidad); junto a PERSONA (1,1) con línea doble, junto a PASAPORTE (0,1)" caption="Relación 1:1 con participación obligatoria del pasaporte" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+PERSONA (dni, nombre)
+   PK:  dni
+
+PASAPORTE (num_pasaporte, caducidad, dni)
+   PK:  num_pasaporte
+   UK:  dni
+   FK:  dni → PERSONA
+   VNN: dni
+```
+- La FK va en `PASAPORTE`, la entidad que participa **obligatoriamente**: así nunca es nula.
+- La **UK** convierte la FK en «1:1»: sin ella, una persona podría tener varios pasaportes (sería una 1:N).
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A (a0, a1) ──E── R ── B (b0, b1)     (A obligatoria, B opcional)
+
+A (a0, a1, aB)
+   PK:  a0
+   UK:  aB
+   FK:  aB → B
+   VNN: aB
+
+B (b0, b1)
+   PK:  b0
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+| num_pasaporte (PK) | caducidad | dni (UK, FK, VNN) |
+|---|---|---|
+| PAA123456 | 2031-05-10 | 48123456P |
+| PAB654321 | 2029-01-22 | 21456789K |
+
+Un segundo pasaporte para `48123456P` sería rechazado por la **UK**. Si la FK se hubiera puesto en `PERSONA`, las personas sin pasaporte tendrían esa columna a `NULL`.
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Ejemplo 4.6-c · (1,1)-(1,1): PAIS tiene CAPITAL
+
+Todo país tiene exactamente una capital y toda capital lo es de exactamente un país.
+
+{{< figura src="ud03/teo-46c-pais-capital.svg" alt="PAIS (cod_pais, nombre) tiene CAPITAL (cod_ciudad, habitantes); (1,1) junto a las dos entidades, con línea doble" caption="Relación 1:1 con participación obligatoria en los dos lados" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+PAIS (cod_pais, nombre, cod_ciudad, habitantes)
+   PK:  cod_pais
+   UK:  cod_ciudad
+   VNN: cod_ciudad
+```
+Las dos entidades se fusionan en una única tabla. La clave de la otra entidad pasa a ser **UK**.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A (a0, a1) ──E── R ──E── B (b0, b1)
+
+R (a0, a1, b0, b1)
+   PK:  a0
+   UK:  b0
+   VNN: b0
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+> [!IMPORTANT]
+> Fusionar solo tiene sentido si las dos entidades **no participan en otras relaciones** que obliguen a tenerlas separadas. Si `CAPITAL` se relacionara además con `MUSEO`, conviene mantener dos tablas y aplicar la regla 2 (FK con UK y VNN).
 
 ---
 
 ### 4.7 Transformación de Relaciones Reflexivas / Recursivas
 
+Las relaciones reflexivas se transforman **con los mismos patrones** que las binarias, pero la entidad aparece en los dos extremos. Como la clave tiene que aparecer **dos veces**, se renombra cada copia según su **rol** (`jefe`, `subordinado`…). Las dos copias son FK hacia la **misma** tabla.
+
 1. **Reflexiva 1:N:** Se añade una columna de clave foránea (`FK`) en la propia tabla que **apunta a la clave primaria de la misma tabla** (autorreferencia).
-2. **Reflexiva N:M:** Se crea una **tabla intermedia** cuya clave primaria se compone de dos columnas que hacen clave foránea hacia la clave primaria de la propia tabla (representando el rol origen y el rol destino).
+2. **Reflexiva 1:1:** Igual que una 1:1 binaria: una FK con **UK** en la propia tabla, o una tabla nueva con PK en un rol y UK en el otro.
+3. **Reflexiva N:M:** Se crea una **tabla intermedia** cuya clave primaria se compone de dos columnas que hacen clave foránea hacia la clave primaria de la propia tabla (representando el rol origen y el rol destino).
+
+#### Ejemplo 4.7-a · Reflexiva 1:N: EMPLEADO dirige EMPLEADO
+
+{{< figura src="ud03/teo-47a-reflexiva-1n.svg" alt="EMPLEADO (dni, nombre) con la relación reflexiva dirige; rol jefe (0,1) y rol subordinado (0,N)" caption="Relación reflexiva 1:N con roles" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+EMPLEADO (dni, nombre, dni_jefe)
+   PK:  dni
+   FK:  dni_jefe → EMPLEADO
+```
+`dni_jefe` contiene un DNI que tiene que existir **en la misma tabla**. Admite nulos: el director general no tiene jefe.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+A (a0, a1, rA)
+   PK:  a0
+   FK:  rA → A
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+| dni (PK) | nombre | dni_jefe (FK → EMPLEADO) |
+|---|---|---|
+| 11111111H | Marta Lloret | `NULL` |
+| 22222222J | Andrés Gil | 11111111H |
+| 33333333P | Sara Vidal | 11111111H |
+| 44444444A | Nerea Soler | 22222222J |
+
+Marta dirige a Andrés y a Sara; Andrés dirige a Nerea. Es un **árbol** guardado en una sola tabla.
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Ejemplo 4.7-b · Reflexiva 1:1: ALUMNO mentoriza ALUMNO
+
+En el programa de mentoría, un alumno de segundo mentoriza como mucho a uno de primero, y cada alumno de primero tiene como mucho un mentor.
+
+{{< figura src="ud03/teo-47b-reflexiva-11.svg" alt="ALUMNO (nia, nombre) con la relación reflexiva mentoriza; rol mentor (0,1) y rol mentorizado (0,1)" caption="Relación reflexiva 1:1" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+ALUMNO (nia, nombre)
+   PK:  nia
+
+MENTORIA (nia_mentorizado, nia_mentor)
+   PK:  nia_mentorizado
+   UK:  nia_mentor
+   FK:  nia_mentorizado → ALUMNO
+   FK:  nia_mentor      → ALUMNO
+   VNN: nia_mentor
+```
+También sería válido poner `nia_mentor` en `ALUMNO` como FK con **UK** (admitiendo nulos), como en la opción 2 del ejemplo 4.6-a.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+A (a0)
+   PK:  a0
+
+R (rA1, rA2)
+   PK:  rA1
+   UK:  rA2
+   FK:  rA1 → A
+   FK:  rA2 → A
+```
+`rA2` representa el mismo tipo de valor que `rA1`: hay que duplicarlo para poder relacionar la entidad consigo misma.
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Ejemplo 4.7-c · Reflexiva N:M: MODULO requiere MODULO
+
+Un módulo puede tener varios módulos previos recomendados, y un módulo puede ser previo de varios.
+
+{{< figura src="ud03/teo-47c-reflexiva-nm.svg" alt="MODULO (cod_modulo, nombre) con la relación reflexiva requiere; rol previo (0,N) y rol posterior (0,N)" caption="Relación reflexiva N:M" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+MODULO (cod_modulo, nombre)
+   PK:  cod_modulo
+
+REQUIERE (cod_modulo, cod_modulo_previo)
+   PK:  (cod_modulo, cod_modulo_previo)
+   FK:  cod_modulo        → MODULO
+   FK:  cod_modulo_previo → MODULO
+```
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+A (a0)
+   PK:  a0
+
+R (rA1, rA2)
+   PK:  (rA1, rA2)
+   FK:  rA1 → A
+   FK:  rA2 → A
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+| cod_modulo (PK, FK) | cod_modulo_previo (PK, FK) |
+|---|---|
+| 0486 Acceso a datos | 0484 Bases de datos |
+| 0486 Acceso a datos | 0485 Programación |
+| 0489 Prog. multimedia y disp. móviles | 0485 Programación |
+
+`0486` tiene dos previos y `0485` es previo de dos módulos.
+{{% /tab %}}
+{{< /tabs >}}
+
+> [!WARNING]
+> Las claves no impiden la fila `(0484, 0484)` (un módulo previo de sí mismo). Se evita con una **regla de fila** (`cod_modulo <> cod_modulo_previo`, UD05). Los **ciclos** (A requiere B y B requiere A) no se pueden evitar con restricciones de una fila: es una pérdida semántica.
 
 ---
 
 ### 4.8 Transformación de Relaciones Ternarias
 
-- **Ternaria N:N:N:** Se crea una tabla intermedia cuya `PK` es la combinación de las claves primarias de las tres entidades participantes.
-- **Ternaria 1:1:1 o 1:1:N:** Se crea una tabla intermedia de relación propagando las tres claves primarias, determinando la `PK` compuesta según los lados de cardinalidad máxima $N$.
+Una ternaria **siempre** genera una tabla nueva con las tres claves propagadas (cada una es FK). Lo que cambia según las cardinalidades es **cuál es la PK**:
+
+- **Ternaria N:N:N:** la `PK` es la combinación de las **tres** claves.
+- **Ternaria 1:N:N:** la `PK` son las claves de los **dos lados N**. La del lado 1 lleva VNN.
+- **Ternaria 1:1:N:** la `PK` es la clave del lado N más **una** de las de lado 1. La otra combinación (lado N + el otro lado 1) es **UK**.
+- **Ternaria 1:1:1:** la `PK` son dos claves cualesquiera; las otras dos combinaciones son **UK**.
+
+> [!TIP]
+> Recuerda el convenio de la UD02: en una ternaria, el par junto a una entidad cuenta **cuántas instancias de ella corresponden a cada pareja de las otras dos**. Si junto a PROFESOR pone (1,1), cada pareja (módulo, grupo) tiene **un solo** profesor: por eso la pareja (módulo, grupo) es la que identifica la fila.
+
+#### Ejemplo 4.8-a · N:N:N: PROFESOR imparte MODULO a GRUPO
+
+Un mismo módulo en un mismo grupo puede repartirse entre varios profesores (por ejemplo, con desdobles), y se guardan las horas de cada uno.
+
+{{< figura src="ud03/teo-48a-ternaria-nnn.svg" alt="Relación ternaria imparte entre PROFESOR (dni, nombre), MODULO (cod_modulo) y GRUPO (cod_grupo), con el atributo horas; PROFESOR (1,N), MODULO (0,N), GRUPO (0,N)" caption="Ternaria N:N:N" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+IMPARTE (dni, cod_modulo, cod_grupo, horas)
+   PK:  (dni, cod_modulo, cod_grupo)
+   FK:  dni        → PROFESOR
+   FK:  cod_modulo → MODULO
+   FK:  cod_grupo  → GRUPO
+```
+(Más las tablas `PROFESOR`, `MODULO` y `GRUPO`, que salen de las entidades.)
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+A (a0, a1)   PK: a0
+B (b0, b1)   PK: b0
+C (c0, c1)   PK: c0
+
+R (a0, b0, c0)
+   PK:  (a0, b0, c0)
+   FK:  a0 → A
+   FK:  b0 → B
+   FK:  c0 → C
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+| dni (PK, FK) | cod_modulo (PK, FK) | cod_grupo (PK, FK) | horas |
+|---|---|---|---|
+| 11111111H | 0484 | 1DAW | 3 |
+| 22222222J | 0484 | 1DAW | 2 |
+| 11111111H | 0484 | 1DAM | 5 |
+
+Dos profesores comparten 0484 en 1DAW: es válido porque la PK incluye al profesor.
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Ejemplo 4.8-b · 1:N:N: un solo profesor por módulo y grupo
+
+Si el centro decide que cada módulo de cada grupo lo imparte **un único** profesor, junto a PROFESOR pone (1,1).
+
+{{< figura src="ud03/teo-48b-ternaria-1nn.svg" alt="Relación ternaria imparte con PROFESOR (1,1), MODULO (0,N) y GRUPO (0,N)" caption="Ternaria 1:N:N" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+IMPARTE (cod_modulo, cod_grupo, dni, horas)
+   PK:  (cod_modulo, cod_grupo)
+   FK:  dni        → PROFESOR
+   FK:  cod_modulo → MODULO
+   FK:  cod_grupo  → GRUPO
+   VNN: dni
+```
+`dni` ya no forma parte de la PK: con la pareja (módulo, grupo) basta para saber quién lo imparte.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A con cardinalidad 1; B y C con cardinalidad N
+
+R (a0, b0, c0)
+   PK:  (b0, c0)
+   FK:  a0 → A
+   FK:  b0 → B
+   FK:  c0 → C
+   VNN: a0
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+| cod_modulo (PK, FK) | cod_grupo (PK, FK) | dni (FK, VNN) | horas |
+|---|---|---|---|
+| 0484 | 1DAW | 11111111H | 5 |
+| 0484 | 1DAM | 11111111H | 5 |
+| 0485 | 1DAW | 22222222J | 8 |
+
+La fila `(0484, 1DAW, 22222222J, 2)` sería rechazada: ya hay un profesor para esa pareja.
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Ejemplo 4.8-c · 1:1:N: FRANJA, AULA y GRUPO
+
+En el horario, en una franja horaria, un grupo está en **un** aula y un aula alberga **un** grupo. Una misma pareja aula-grupo se repite en muchas franjas.
+
+{{< figura src="ud03/teo-48c-ternaria-11n.svg" alt="Relación ternaria ocupa entre FRANJA (cod_franja, dia) (0,N), AULA (cod_aula) (0,1) y GRUPO (cod_grupo) (0,1)" caption="Ternaria 1:1:N" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+OCUPA (cod_franja, cod_aula, cod_grupo)
+   PK:  (cod_franja, cod_aula)
+   UK:  (cod_franja, cod_grupo)
+   FK:  cod_franja → FRANJA
+   FK:  cod_aula   → AULA
+   FK:  cod_grupo  → GRUPO
+   VNN: cod_grupo
+```
+- La **PK** `(cod_franja, cod_aula)` impide meter dos grupos en la misma aula a la vez.
+- La **UK** `(cod_franja, cod_grupo)` impide que un grupo esté en dos aulas a la vez.
+- Se podría haber elegido al revés (PK con el grupo y UK con el aula): las dos combinaciones son claves candidatas.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A y B con cardinalidad 1; C con cardinalidad N
+
+R (a0, b0, c0)
+   PK:  (a0, c0)
+   UK:  (b0, c0)
+   FK:  a0 → A
+   FK:  b0 → B
+   FK:  c0 → C
+   VNN: b0
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+| cod_franja (PK, FK) | cod_aula (PK, FK) | cod_grupo (UK, FK) |
+|---|---|---|
+| L1 | A-1 | 1DAW |
+| L1 | A-2 | 1DAM |
+| L2 | A-1 | 1DAW |
+
+- `(L1, A-1, 2ASIR)` → rechazada por la **PK**: el aula A-1 ya está ocupada en L1.
+- `(L1, B-1, 1DAW)` → rechazada por la **UK**: 1DAW ya está en otra aula en L1.
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Ternaria 1:1:1 (patrón general)
+
+Es poco frecuente. Cada pareja de entidades determina la tercera, así que **cualquier pareja** sirve de clave:
+
+```text
+R (a0, b0, c0)
+   PK:  (a0, b0)
+   UK:  (a0, c0)
+   UK:  (b0, c0)
+   FK:  a0 → A
+   FK:  b0 → B
+   FK:  c0 → C
+```
 
 ---
 
@@ -365,9 +1140,85 @@ Existen 3 alternativas según las cardinalidades mínimas de participación:
 
 Existen 3 estrategias relacionales para transformar jerarquías EER:
 
-1. **Opción A (Tabla Única para toda la Jerarquía):** Se crea una sola tabla con todos los atributos del supertipo y de los subtipos, añadiendo una columna discriminadora de tipo (`tipo_subtipo`). Válida para especializaciones disjuntas.
-2. **Opción B (Tablas para el Supertipo y cada Subtipo):** Se crea una tabla para el supertipo (con la `PK` principal) y una tabla por cada subtipo (cuya `PK` y `FK` es la clave del supertipo). Es la solución más limpia y flexible.
+1. **Opción A (Tabla Única para toda la Jerarquía):** Se crea una sola tabla con todos los atributos del supertipo y de los subtipos, añadiendo una columna discriminadora de tipo (`tipo_subtipo`). Válida para especializaciones disjuntas; en una solapada hace falta un indicador por subtipo.
+2. **Opción B (Tablas para el Supertipo y cada Subtipo):** Se crea una tabla para el supertipo (con la `PK` principal) y una tabla por cada subtipo (cuya `PK` y `FK` es la clave del supertipo). Es la solución más limpia y flexible, y la que se usa por defecto.
 3. **Opción C (Tablas únicamente para los Subtipos):** Solo se crean tablas para las entidades especializadas, duplicando los atributos del supertipo en cada una. Solo válida si la jerarquía es Total y Disjunta $(T,D)$.
+
+#### Ejemplo 4.9 · Especialización de EMPLEADO (parcial y solapada)
+
+En el centro hay profesores y personal administrativo. Hay empleados que no son ni lo uno ni lo otro (conserjes: **parcial**) y algún profesor que también hace tareas administrativas (**solapada**, marca `o`).
+
+{{< figura src="ud03/teo-49-generalizacion.svg" alt="Superclase EMPLEADO (dni, nombre, sueldo) con especialización solapada (círculo con o, línea sencilla: parcial) en PROFESOR (especialidad) y ADMINISTRATIVO (puesto)" caption="Especialización parcial y solapada (P,S)" >}}
+
+{{< tabs >}}
+{{% tab "Opción B (recomendada)" %}}
+```text
+EMPLEADO (dni, nombre, sueldo)
+   PK:  dni
+
+PROFESOR (dni, especialidad)
+   PK:  dni
+   FK:  dni → EMPLEADO
+
+ADMINISTRATIVO (dni, puesto)
+   PK:  dni
+   FK:  dni → EMPLEADO
+```
+La misma columna `dni` es **PK y FK** en cada subtipo: cada fila de `PROFESOR` «es» un empleado.
+{{% /tab %}}
+{{% tab "Opción A" %}}
+```text
+EMPLEADO (dni, nombre, sueldo, es_profesor, especialidad,
+          es_administrativo, puesto)
+   PK:  dni
+   VNN: es_profesor, es_administrativo
+```
+Al ser **solapada**, no basta con una columna `tipo`: hacen falta dos indicadores (S/N). `especialidad` y `puesto` quedan a `NULL` en muchas filas.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   A (a0, a1) ── especialización (P,S) ──> B (b0), C (c0)
+
+A (a0, a1)
+   PK:  a0
+
+B (b0, bA)
+   PK:  bA
+   FK:  bA → A
+
+C (c0, cA)
+   PK:  cA
+   FK:  cA → A
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+**EMPLEADO**
+
+| dni (PK) | nombre | sueldo |
+|---|---|---|
+| 11111111H | Marta Lloret | 2.700 |
+| 22222222J | Andrés Gil | 2.650 |
+| 55555555K | Pepe Ruiz | 1.600 |
+
+**PROFESOR**
+
+| dni (PK, FK) | especialidad |
+|---|---|
+| 11111111H | Informática |
+| 22222222J | Informática |
+
+**ADMINISTRATIVO**
+
+| dni (PK, FK) | puesto |
+|---|---|
+| 22222222J | Secretaría |
+
+Andrés está en las dos subtablas (**solapada**). Pepe, el conserje, solo está en `EMPLEADO` (**parcial**).
+{{% /tab %}}
+{{< /tabs >}}
+
+> [!WARNING]
+> **Pérdida semántica.** Con la opción B, el modelo relacional representa de forma natural la especialización **parcial y solapada**. Si fuera **total** («todo empleado es profesor o administrativo») o **disjunta** («nadie es las dos cosas»), las claves no lo pueden impedir: se anota y se controla con disparadores (UD08).
 
 {{< quiz >}}
 - q: "Todo `PASAPORTE` pertenece a una persona, pero no toda `PERSONA` tiene pasaporte. ¿Dónde va la clave ajena?"
@@ -378,11 +1229,166 @@ Existen 3 estrategias relacionales para transformar jerarquías EER:
   options: ["`num_aula`", "`id_edificio`", "`(id_edificio, num_aula)`", "No tiene clave primaria"]
   answer: 2
   explain: "El número de aula solo es único dentro de cada edificio: la clave primaria incluye la clave del propietario (que además es clave ajena)."
+- q: "`SESION` se relaciona 1:N con `AULA`, cuya PK es `(cod_edificio, num_aula)`. ¿Cómo es la clave ajena en `SESION`?"
+  options: ["Dos FK: `cod_edificio → EDIFICIO` y `num_aula → AULA`", "Una FK compuesta: `(cod_edificio, num_aula) → AULA`", "Solo `num_aula → AULA`", "No hace falta FK"]
+  answer: 1
+  explain: "Una FK apunta siempre a la PK completa. Con dos FK separadas se aceptaría un aula que no existe en ese edificio."
+- q: "En una ternaria `IMPARTE` con PROFESOR (1,1), MODULO (0,N) y GRUPO (0,N), ¿cuál es la PK?"
+  options: ["`(dni, cod_modulo, cod_grupo)`", "`(cod_modulo, cod_grupo)`", "`(dni, cod_grupo)`", "`dni`"]
+  answer: 1
+  explain: "Es una 1:N:N: las claves de los lados N forman la PK; la del lado 1 (`dni`) lleva VNN."
+- q: "En la ternaria 1:1:N de `OCUPA(cod_franja, cod_aula, cod_grupo)`, ¿qué evita la UK `(cod_franja, cod_grupo)`?"
+  options: ["Que un aula tenga dos grupos a la vez", "Que un grupo esté en dos aulas a la vez", "Que una franja no tenga aula", "Nada: sobra"]
+  answer: 1
+  explain: "La PK (franja, aula) controla el aula; la UK (franja, grupo) controla el grupo. Las dos son necesarias."
+- q: "Una relación reflexiva 1:N `EMPLEADO dirige EMPLEADO`, ¿cuántas tablas genera?"
+  options: ["Ninguna nueva: una FK `dni_jefe → EMPLEADO` en la propia tabla", "Una tabla nueva `DIRIGE`", "Dos tablas `JEFE` y `SUBORDINADO`", "Una tabla nueva con PK compuesta"]
+  answer: 0
+  explain: "Es como una 1:N cualquiera, pero los dos extremos son la misma tabla: la clave se duplica con otro nombre."
 {{< /quiz >}}
 
 ---
 
-## 5. Colección Abundante de Ejemplos de Transformación Completa
+### 4.10 Transformación de Agregaciones
+
+- **Regla:** La relación agregada se transforma primero según su tipo (normalmente N:M, con su tabla intermedia). Después, esa tabla **actúa como una entidad más**: su PK es la que se propaga a la relación con la tercera entidad.
+
+#### Ejemplo 4.10 · La matrícula, evaluada por un profesor
+
+Un alumno cursa módulos (N:M, con la fecha de matrícula). Cada **matrícula** concreta (alumno-módulo) puede tener asignado un profesor evaluador. No se evalúa al alumno ni al módulo por separado, sino a la pareja: por eso se agrega `cursa` como `MATRICULA`.
+
+{{< figura src="ud03/teo-410-agregacion.svg" alt="Agregación MATRICULA que contiene ALUMNO (nia, nombre), la relación cursa (fecha_mat) y MODULO (cod_modulo, nombre); la agregación se relaciona mediante evalua con PROFESOR (dni, nombre): (0,N) junto a MATRICULA, (0,1) junto a PROFESOR" caption="Agregación: la relación cursa actúa como entidad" >}}
+
+{{< tabs >}}
+{{% tab "Esquema relacional" %}}
+```text
+ALUMNO (nia, nombre)          PK: nia
+MODULO (cod_modulo, nombre)   PK: cod_modulo
+PROFESOR (dni, nombre)        PK: dni
+
+CURSA (nia, cod_modulo, fecha_mat, dni_evaluador)
+   PK:  (nia, cod_modulo)
+   FK:  nia           → ALUMNO
+   FK:  cod_modulo    → MODULO
+   FK:  dni_evaluador → PROFESOR
+```
+`evalua` es 1:N desde la agregación: la clave del profesor viaja a la tabla de la agregación (`CURSA`), como en cualquier 1:N.
+{{% /tab %}}
+{{% tab "Si evalua fuera N:M" %}}
+```text
+CURSA (nia, cod_modulo, fecha_mat)
+   PK:  (nia, cod_modulo)
+   FK:  nia        → ALUMNO
+   FK:  cod_modulo → MODULO
+
+EVALUA (nia, cod_modulo, dni)
+   PK:  (nia, cod_modulo, dni)
+   FK:  (nia, cod_modulo) → CURSA
+   FK:  dni               → PROFESOR
+```
+La FK apunta a `CURSA` y es **compuesta**: así solo se puede evaluar una matrícula que exista. Si se pusiera `nia → ALUMNO` y `cod_modulo → MODULO` por separado, se podría evaluar a un alumno en un módulo que no cursa.
+{{% /tab %}}
+{{% tab "Patrón general" %}}
+```text
+Diagrama:   [ A (a0) ──N── R (r1) ──M── B (b0) ]  ──N── S ──1── C (c0)
+            La agregación contiene A, R y B; S la une con C.
+
+A (a0, a1)   PK: a0
+B (b0, b1)   PK: b0
+C (c0, c1)   PK: c0
+
+Si S es 1:N (la agregación en el lado N):
+R (rA, rB, r1, rC)
+   PK:  (rA, rB)
+   FK:  rA → A
+   FK:  rB → B
+   FK:  rC → C
+
+Si S es N:M:
+R (rA, rB, r1)
+   PK:  (rA, rB)
+   FK:  rA → A
+   FK:  rB → B
+
+S (sA, sB, sC)
+   PK:  (sA, sB, sC)
+   FK:  (sA, sB) → R
+   FK:  sC → C
+```
+{{% /tab %}}
+{{% tab "Con datos" %}}
+**CURSA** (la tabla de la agregación, caso 1:N)
+
+| nia (PK, FK) | cod_modulo (PK, FK) | fecha_mat | dni_evaluador (FK) |
+|---|---|---|---|
+| 10234567 | 0484 | 2026-09-10 | 11111111H |
+| 10234567 | 0485 | 2026-09-10 | 22222222J |
+| 10234568 | 0484 | 2026-09-12 | `NULL` |
+
+- La matrícula de Izan en 0484 aún no tiene evaluador: la FK admite nulos porque junto a PROFESOR pone (0,1).
+- Si pusiera (1,1), `dni_evaluador` llevaría **VNN**.
+- No se puede asignar evaluador a `(10234568, 0485)`: esa matrícula no existe, así que no hay fila donde ponerlo.
+{{% /tab %}}
+{{< /tabs >}}
+
+> [!WARNING]
+> **Pérdidas semánticas en agregaciones.** Igual que en las binarias, los mínimos de 1 **en el lado de la agregación** no se pueden garantizar: «todo profesor evalúa al menos una matrícula» exige que cada profesor aparezca en `CURSA`, y nada lo obliga. Si `evalua` fuera N:M, tampoco se podría obligar a que toda matrícula tenga al menos una fila en `EVALUA`.
+
+> [!TIP]
+> **¿Agregación o ternaria?** Si la pareja alumno-módulo **existe por sí misma** (hay matrículas sin evaluador), es una agregación. Si las tres entidades solo tienen sentido juntas (no hay «profesor imparte módulo» sin grupo), es una ternaria (4.8).
+
+---
+
+### 4.11 Pérdidas semánticas en la transformación
+
+Hay información del diagrama E/R que **no se puede representar** con PK, FK, UK y VNN. A esto se le llama **pérdida semántica**. No se resuelve en el diseño lógico: se anota y se implementa después con reglas de fila, disparadores (*triggers*) o procedimientos almacenados (UD08). El apartado 6 explica cómo documentarlas.
+
+| Situación del diagrama | Ejemplo | ¿Por qué se pierde? |
+|---|---|---|
+| Mínimo 1 en el lado 1 de una 1:N | Todo departamento tiene al menos un empleado (4.4-b) | La FK está en `EMPLEADO`; nada obliga a que cada departamento aparezca en ella |
+| Mínimo 1 en una N:M | Todo alumno cursa al menos un módulo (4.5) | Nada obliga a que cada alumno tenga filas en `CURSA` |
+| Existencia de una entidad respecto a una relación que está en **otra** tabla | Toda persona tiene pasaporte, si la FK está en `PASAPORTE` | Solo se puede obligar con VNN en la tabla donde está la FK |
+| Atributo multivaluado con mínimo 1 | Toda persona tiene al menos un teléfono (4.3) | La tabla `TELEFONO` puede no tener filas de esa persona |
+| Generalización total o disjunta | Nadie es a la vez profesor y administrativo (4.9) | Las claves de dos tablas distintas no se comparan entre sí |
+| Mínimo 1 en el lado de la agregación | Todo profesor evalúa al menos una matrícula (4.10) | Igual que en las binarias: nada obliga a que cada profesor aparezca en `CURSA` |
+| Mínimos en ternarias | Todo profesor imparte al menos un módulo a algún grupo (4.8-a) | Nada obliga a que cada profesor tenga filas en `IMPARTE` |
+| Ciclos en reflexivas | Un módulo no puede ser previo de sí mismo a través de otros (4.7-c) | Implica recorrer varias filas |
+
+---
+
+### 4.12 Tabla resumen: patrones de transformación
+
+Esta tabla reúne los **patrones generales** de los ejemplos anteriores. Es la chuleta para resolver las tareas de transformación.
+
+| Caso del E/R | Tablas | Esquema resultante |
+|---|---|---|
+| Entidad fuerte | 1 | `A (a0, a1)` · PK: a0 |
+| Débil por identificación | 1 por entidad | `A (a0, a1, aB)` · PK: (a0, aB) · FK: aB → B |
+| Débil por existencia / 1:N obligatoria | 1 por entidad | `A (a0, a1, aB)` · PK: a0 · FK: aB → B · VNN: aB |
+| 1:N opcional | 1 por entidad | `A (a0, a1, aB)` · PK: a0 · FK: aB → B |
+| 1:N con PK compuesta en el lado 1 | 1 por entidad | `A (a0, aB0, aB1)` · PK: a0 · FK: (aB0, aB1) → B |
+| N:M | 3 | `R (rA, rB, r1)` · PK: (rA, rB) · FK: rA → A · FK: rB → B |
+| 1:1 (0,1)-(0,1) | 3 | `R (rA, rB)` · PK: rA · UK: rB · FK: rA → A · FK: rB → B · VNN: rB |
+| 1:1 (1,1)-(0,1) | 2 | `A (a0, a1, aB)` · PK: a0 · UK: aB · FK: aB → B · VNN: aB |
+| 1:1 (1,1)-(1,1) | 1 | `R (a0, a1, b0, b1)` · PK: a0 · UK: b0 · VNN: b0 |
+| Reflexiva 1:N | 1 | `A (a0, rA)` · PK: a0 · FK: rA → A |
+| Reflexiva 1:1 | 2 | `R (rA1, rA2)` · PK: rA1 · UK: rA2 · FK: rA1 → A · FK: rA2 → A |
+| Reflexiva N:M | 2 | `R (rA1, rA2)` · PK: (rA1, rA2) · FK: rA1 → A · FK: rA2 → A |
+| Ternaria N:N:N | 4 | `R (a0, b0, c0)` · PK: (a0, b0, c0) · 3 FK |
+| Ternaria 1:N:N (A es el lado 1) | 4 | `R (a0, b0, c0)` · PK: (b0, c0) · VNN: a0 · 3 FK |
+| Ternaria 1:1:N (C es el lado N) | 4 | `R (a0, b0, c0)` · PK: (a0, c0) · UK: (b0, c0) · VNN: b0 · 3 FK |
+| Ternaria 1:1:1 | 4 | `R (a0, b0, c0)` · PK: (a0, b0) · UK: (a0, c0) · UK: (b0, c0) · 3 FK |
+| Generalización (opción B) | 1 + 1 por subtipo | `B (b0, bA)` · PK: bA · FK: bA → A |
+| Agregación unida a C por 1:N | 1 por entidad + la de la agregación | `R (rA, rB, r1, rC)` · PK: (rA, rB) · FK: rA → A · FK: rB → B · FK: rC → C |
+| Agregación unida a C por N:M | 1 por entidad + 2 | `S (sA, sB, sC)` · PK: (sA, sB, sC) · FK: (sA, sB) → R · FK: sC → C |
+| Atributo multivaluado | 2 | `A2 (a0, a2)` · PK: (a0, a2) · FK: a0 → A |
+
+> [!TIP]
+> **Comprobación rápida de cualquier transformación:** coge cada FK y pregúntate *¿puede repetirse?* (si no, le falta UK o forma parte de la PK) y *¿puede faltar?* (si no, le falta VNN). Es el mismo razonamiento, al revés, de la [práctica 3.6](/ud03-modelo-relacional/ud03-practicas#práctica-36--entender-un-esquema-relacional).
+
+---
+
+## 5. Colección de Ejemplos de Transformación Completa
 
 A continuación se presentan 5 ejemplos prácticos completos que ilustran minuciosamente cada una de las reglas de transformación vistas.
 

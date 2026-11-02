@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="850 353 358 285" width="358" height="285" role="img" aria-labelledby="t d" font-family="DejaVu Sans, Verdana, Arial, sans-serif">
+<title id="t">CLIENTE realiza PEDIDO</title><desc id="d">Entidad débil por existencia</desc>
+<rect x="850" y="353" width="358" height="285" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+<g stroke="#1f2937" stroke-width="1.4" fill="none"><line x1="1001.8" y1="427.4" x2="988.8" y2="404.9"/><line x1="1050.3" y1="427.4" x2="1072.8" y2="414.4"/><line x1="1081.5" y1="580.4" x2="1105.9" y2="589.3"/><line x1="1044.2" y1="543.1" x2="1053.1" y2="518.7"/><line x1="902.0" y1="480.8" x2="966.2" y2="460.9"/><line x1="903.4" y1="485.2" x2="967.5" y2="465.2"/><line x1="902.7" y1="551.0" x2="991.6" y2="559.7"/></g>
+<rect x="966.9" y="427.4" width="94.2" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<rect x="991.6" y="543.1" width="89.9" height="42.0" fill="#ffffff" stroke="#111111" stroke-width="1.8"/>
+<polygon points="902.7,483.0 881.7,517.0 902.7,551.0 923.7,517.0" fill="#ffffff" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
+<ellipse cx="981.0" cy="391.2" rx="34.2" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1094.2" cy="402.1" rx="45.0" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1135.9" cy="600.3" rx="47.9" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<ellipse cx="1058.1" cy="504.9" rx="27.6" ry="14.0" fill="#ffffff" stroke="#111111" stroke-width="1.4"/>
+<rect x="921.9" y="462.4" width="36.5" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="940.1" y="475.9" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(1,1)</text>
+<text x="912.7" y="478.0" font-size="11" fill="#111111" text-anchor="middle">1</text>
+<rect x="944.8" y="548.0" width="37.8" height="17" rx="3" fill="#ffffff" opacity="0.94"/><text x="963.7" y="561.5" font-size="12" fill="#1e3a8a" text-anchor="middle" font-weight="700">(0,N)</text>
+<text x="892.7" y="564.0" font-size="11" fill="#111111" text-anchor="middle">N</text>
+<text x="984.0" y="538.8" font-size="11" font-weight="700" fill="#111111" text-anchor="middle">E</text>
+<text x="1013.9" y="453.4" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">CLIENTE</text>
+<text x="1036.5" y="569.1" font-size="13" font-weight="700" text-anchor="middle" fill="#111111">PEDIDO</text>
+<text x="957.3" y="521.5" font-size="12.5" font-weight="700" font-style="italic" text-anchor="middle" fill="#111111">realiza</text>
+<text x="981.0" y="395.2" font-size="12" text-anchor="middle" fill="#111111">nombre</text>
+<text x="1094.2" y="406.1" font-size="12" text-anchor="middle" fill="#111111">cod_cliente</text>
+<line x1="1060.2" y1="410.1" x2="1128.1" y2="410.1" stroke="#111111" stroke-width="1.3"/>
+<text x="1135.9" y="604.3" font-size="12" text-anchor="middle" fill="#111111">num_pedido</text>
+<line x1="1099.0" y1="608.3" x2="1172.8" y2="608.3" stroke="#111111" stroke-width="1.3"/>
+<text x="1058.1" y="508.9" font-size="12" text-anchor="middle" fill="#111111">fecha</text>
+</svg>
