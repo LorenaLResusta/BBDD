@@ -154,6 +154,7 @@ es:
             - "En el fondo del cajón hay un trozo de papel con una flecha dibujada."
           reward: { icon: "🗄️", text: "Trozo de leyenda: **↑ = (0,n)**" }
         - id: portatil
+          img: ud02-aparece
           kind: puzzle
           type: choice
           icon: "💻"
@@ -267,6 +268,7 @@ es:
           ref_url: "/ud02-modelo-er/ud02-teoria/#3-restricciones-avanzadas-sobre-relaciones"
           reward: { icon: "🔴", text: "🔴 = **C**" }
         - id: claqueta
+          img: ud02-pata-gallo
           kind: puzzle
           type: choice
           icon: "🎬"
@@ -456,6 +458,8 @@ val:
             - "Al fons del calaix hi ha un tros de paper amb una fletxa dibuixada."
           reward: { icon: "🗄️", text: "Tros de llegenda: **↑ = (0,n)**" }
         - id: portatil
+          img: ud02-aparece
+          img_text: [["id_personaje", "id_personatge"], ["num_capitulo", "num_capitol"], ["PERSONAJE", "PERSONATGE"], ["CAPÍTULO", "CAPÍTOL"], ["APARECE", "APAREIX"], ["Fija dos entidades y cuenta cuántas instancias de la tercera caben", "Fixa dos entitats i compta quantes instàncies de la tercera hi caben"]]
           kind: puzzle
           type: choice
           icon: "💻"
@@ -569,6 +573,8 @@ val:
           ref_url: "/ud02-modelo-er/ud02-teoria/#3-restriccions-avançades-sobre-relacions"
           reward: { icon: "🔴", text: "🔴 = **C**" }
         - id: claqueta
+          img: ud02-pata-gallo
+          img_text: [["SERIE", "SÈRIE"], ["CAPÍTULO", "CAPÍTOL"], [">tiene<", ">té<"], ["Toda serie tiene uno o muchos capítulos; cada capítulo es de una sola serie", "Tota sèrie té un o molts capítols; cada capítol és d'una sola sèrie"]]
           kind: puzzle
           type: choice
           icon: "🎬"

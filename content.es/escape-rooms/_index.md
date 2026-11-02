@@ -12,6 +12,9 @@ Juegos para repasar jugando, por parejas en clase o por tu cuenta antes de un ex
 |---|---|---|---|
 | [¡Corten! Fuga del plató](/ud02-modelo-er/ud02-escape-room) | Al terminar la UD02 | UD02 | Tres salas con objetos clicables, candados de números, flechas y letras |
 | [Bloqueo en el Banco Codd](/ud03-modelo-relacional/ud03-escape-room) | Al terminar la UD03 | UD03 | Tres salas con objetos clicables, objetos que abren otros y candados de números |
+| [Backstage: que empiece el festival](/ud05-ddl-dcl/ud05-escape-room) | Al terminar la UD05 | UD05 | Tres salas: tipos, restricciones, `ALTER`, usuarios y privilegios, con diagramas |
+| [Spoiler: ¿quién filtró el final?](/ud06-consultas/ud06-escape-room) | Al terminar la UD06 | UD06 | Tres salas de consultas, un gráfico de barras y un culpable por descubrir |
+| [Apagón en la estación Kepler](/ud08-plsql/ud08-escape-room) | Al terminar la UD08 | UD08 | Tres salas de PL/SQL: bucles, cursores, excepciones, procedimientos y disparadores |
 | [El caso del esquema desaparecido](/escape-rooms/trimestre-1) | Final del 1.er trimestre, antes del examen | UD02 + UD03 | Diez cerraduras encadenadas, libreta de pistas y un culpable por descubrir |
 
 > [!TIP]

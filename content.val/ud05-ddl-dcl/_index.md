@@ -13,5 +13,6 @@ weight: 50
 |---|---|
 | [Teoria](/ud05-ddl-dcl/ud05-teoria) | Emmagatzematge, tipus de dades, `CREATE`/`ALTER`/`DROP`, restriccions, seqüències, índexs, vistes, usuaris, privilegis, rols i diccionari de dades |
 | [Pràctiques](/ud05-ddl-dcl/ud05-practicas) | Huit pràctiques (de MySQL a Oracle, bateria de proves, `ALTER`, vistes, seguretat, depuració) i la implementació d'EduGest |
+| [Escape room](/ud05-ddl-dcl/ud05-escape-room) | *Backstage: que comence el festival*: tres sales amb objectes clicables, diagrames i cadenats de números i lletres |
 
 **Durada:** 35 hores d'aula, del 23/11/2026 al 27/01/2027. Consulta la [guia didàctica](/) per a vore el seu lloc en el calendari del curs.

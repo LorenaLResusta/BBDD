@@ -1,0 +1,739 @@
+# Escape room UD05 · DDL y DCL en Oracle (shortcode escape-click). Escenas: assets/escape/ud05-*.svg · Figuras: assets/escape/fig/ud05-*.svg
+es:
+  title: "Backstage: que empiece el festival"
+  sub: "Escape room · UD05 DDL y DCL en Oracle"
+  target_min: 40
+  intro:
+    - "Mañana abre el **Brisa Fest** y eres la persona que monta su base de datos en Oracle: artistas, escenarios, conciertos y entradas. A las dos de la madrugada salta el sistema antiincendios, las puertas del recinto se bloquean y la base de datos de pruebas se queda a medio crear."
+    - "Para salir tendrás que cruzar el **almacén de producción**, el **escenario principal** y la **taquilla**. Cada puerta se abre con lo que sabes de `CREATE TABLE`, restricciones, `ALTER`, usuarios y privilegios."
+  rooms:
+    - id: almacen
+      scene: ud05-almacen
+      name: "Almacén de producción"
+      story: "Cajas, cables y un teclado de **cuatro dígitos** en la puerta del personal. Junto al teclado, cuatro pegatinas marcan el orden: 🧳 📦 💻 📋."
+      hotspots:
+        - id: flightcase
+          kind: puzzle
+          type: match
+          icon: "🧳"
+          name: "Flight case de tipos"
+          story: "Dentro del flight case, las fichas de las columnas que faltan por crear. Cada ficha dice qué se guardará en ella."
+          prompt: "¿Qué tipo de Oracle es el más adecuado para cada columna?"
+          items:
+            - "`aforo`: número entero de personas, hasta 50 000"
+            - "`codigo_postal`: '03690' (hay que conservar el cero inicial)"
+            - "`foto`: imagen del artista"
+            - "`precio`: importe en euros con céntimos, hasta 9 999,99"
+            - "`biografia`: texto que puede ocupar varias páginas"
+            - "`fecha_concierto`: día y hora del concierto"
+          choices: ["VARCHAR2(5)", "NUMBER(6,2)", "DATE", "CLOB", "BLOB", "NUMBER(6)"]
+          answer: [5, 0, 4, 1, 3, 2]
+          hints:
+            - "Un código postal no se usa para hacer cuentas, y como número perdería el 0 inicial."
+            - "En Oracle, `DATE` guarda también la hora. Para dinero: `NUMBER(p,s)` con dos decimales."
+            - "`CLOB` es texto largo y `BLOB`, binario (imágenes, PDF…)."
+          explain: "Un código postal es **texto** (`VARCHAR2(5)`): no se opera con él y conserva el 0. El dinero va en `NUMBER(6,2)`, los enteros en `NUMBER(6)`, el día y la hora en `DATE`, el texto largo en `CLOB` y la imagen en `BLOB`."
+          ref: "3.1 Tipos principales de Oracle"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#31-tipos-principales-de-oracle"
+          reward: { icon: "🧳", text: "🧳 = **6** (las seis columnas)" }
+        - id: palet
+          kind: puzzle
+          type: number
+          icon: "📦"
+          name: "Palé de cajas"
+          story: "Las cajas del palé llevan escrito el tipo de la columna `precio` y una lista de valores que el equipo de taquilla intentó insertar."
+          img: ud05-number
+          list:
+            - "`45.5`"
+            - "`999.99`"
+            - "`1000`"
+            - "`12.345`"
+            - "`123456`"
+            - "`-999.99`"
+          prompt: "¿Cuántas de esas seis inserciones en `precio NUMBER(5,2)` dan **error**?"
+          answer: 2
+          hints:
+            - "`NUMBER(5,2)`: 5 dígitos en total, 2 de ellos decimales. ¿Cuántos dígitos quedan para la parte entera?"
+            - "Si sobran decimales, Oracle **redondea**; si sobran enteros, da error ORA-01438."
+          explain: "Caben como mucho **3 dígitos enteros** (hasta 999,99). `12.345` se redondea a 12,35 y se guarda; `1000` y `123456` necesitan más de 3 enteros y dan **ORA-01438**. Son **2** errores."
+          ref: "3.2 Precisión y escala de NUMBER"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#32-precisión-y-escala-de-number"
+          reward: { icon: "📦", text: "📦 = **2**" }
+        - id: portatil
+          kind: puzzle
+          type: order
+          icon: "💻"
+          name: "Portátil sobre un flight case"
+          story: "El guion de creación se ha desordenado. Este es el diagrama de las tablas: las flechas van de cada clave ajena a la tabla que referencia."
+          img: ud05-festival
+          prompt: "¿En qué orden deben ejecutarse los `CREATE TABLE` para que no falle ninguno?"
+          items:
+            - "`CREATE TABLE festival (...)`"
+            - "`CREATE TABLE escenario (...)`"
+            - "`CREATE TABLE concierto (...)`"
+            - "`CREATE TABLE entrada (...)`"
+          hints:
+            - "Una clave ajena solo se puede declarar si la tabla a la que apunta **ya existe**."
+            - "Empieza por la tabla que no tiene ninguna clave ajena."
+          explain: "Primero las tablas «padre»: FESTIVAL, después ESCENARIO (apunta a FESTIVAL), CONCIERTO (apunta a ESCENARIO) y por último ENTRADA. Para borrarlas se sigue el orden **inverso** (o `DROP TABLE ... CASCADE CONSTRAINTS`)."
+          ref: "5.3 Claves ajenas"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#53-claves-ajenas"
+          reward: { icon: "💻", text: "💻 = **4** (las cuatro tablas, en orden)" }
+        - id: pizarra
+          kind: puzzle
+          type: number
+          icon: "📋"
+          name: "Pizarra con el guion"
+          story: "En la pizarra, la sentencia que creó la tabla ARTISTA… y que Oracle rechazó."
+          pre: |
+            CREATE TABLE artista (
+              id_artista   NUMBER(6)      PRIMARY KEY,
+              nombre       VARCHAR2       NOT NULL,
+              pais         VARCHAR2(40)   DEFAULT 'España',
+              honorarios   NUMBER(8,2)    CHECK (honorarios > 0)
+              genero       VARCHAR2(20),
+              CONSTRAINT uk_artista_nombre UNIQUE (nombre),
+            );
+          prompt: "¿Cuántos **errores de sintaxis** tiene la sentencia?"
+          answer: 3
+          hints:
+            - "Revisa los tipos: ¿a alguno le falta algo obligatorio?"
+            - "Las definiciones de columnas y restricciones se separan con comas… ni una de más ni una de menos."
+          explain: "Hay **3**: `VARCHAR2` necesita longitud (`VARCHAR2(80)`), falta la coma al final de la línea de `honorarios` y sobra la coma antes del paréntesis de cierre. `DEFAULT 'España'` y el `CHECK` en línea son correctos."
+          ref: "4.2 Ejemplo elemento a elemento"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#42-ejemplo-sencillo-elemento-a-elemento"
+          reward: { icon: "📋", text: "📋 = **3**" }
+        - id: carretilla
+          kind: decoy
+          icon: "🚜"
+          name: "Carretilla elevadora"
+          text: "Sin llave de contacto y con un cartel: «Solo personal con carné». Tu carné es de Oracle, no de carretillas."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Puerta del personal"
+          story: "Un teclado de cuatro dígitos. Las pegatinas marcan el orden."
+          lock: { type: digits, code: "6243", order: "🧳 📦 💻 📋" }
+          hints:
+            - "Cada reto de esta sala te dio un número: está en tu mochila."
+          explain: "6 · 2 · 4 · 3. La puerta del personal se abre."
+    - id: escenario
+      scene: ud05-escenario
+      name: "Escenario principal"
+      story: "El escenario está a oscuras salvo por los focos de prueba. La puerta del *backstage* tiene un **candado de cinco letras** y, en una cinta americana, el orden: 🎤 🥁 🔊 📜 🎛️."
+      hotspots:
+        - id: microfono
+          kind: puzzle
+          type: match
+          icon: "🎤"
+          name: "Micrófono"
+          story: "Pegadas al pie de micro, cinco reglas que la organización quiere que **la base de datos** haga cumplir."
+          prompt: "¿Con qué restricción se declara cada regla?"
+          items:
+            - "No puede haber dos artistas con el mismo nombre artístico."
+            - "Cada entrada se identifica por su código."
+            - "Todo concierto tiene que tener fecha."
+            - "El precio de una entrada debe ser mayor que 0."
+            - "El escenario de un concierto tiene que existir en ESCENARIO."
+          choices: ["PRIMARY KEY", "UNIQUE", "NOT NULL", "CHECK", "FOREIGN KEY"]
+          answer: [1, 0, 2, 3, 4]
+          hints:
+            - "Identificar → clave primaria. No repetirse, sin ser la clave → `UNIQUE`."
+            - "Una condición que cumple cada fila por sí sola → `CHECK`. Que el valor exista en otra tabla → clave ajena."
+          explain: "Nombre artístico → **UNIQUE** (clave alternativa), código → **PRIMARY KEY**, fecha obligatoria → **NOT NULL**, precio > 0 → **CHECK** y escenario existente → **FOREIGN KEY**."
+          ref: "5.1 Resumen de restricciones"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#51-resumen-de-restricciones"
+          reward: { icon: "🎤", text: "🎤 = **C**" }
+        - id: bateria
+          kind: puzzle
+          type: choice
+          icon: "🥁"
+          name: "Batería"
+          story: "En el bombo hay pegada la definición de una columna de ESCENARIO:"
+          pre: |
+            aforo NUMBER(6)
+                  CONSTRAINT ck_escenario_aforo CHECK (aforo BETWEEN 100 AND 50000)
+          prompt: "Se inserta un escenario con `aforo` a `NULL`. ¿Qué ocurre?"
+          options:
+            - "El `CHECK` la rechaza, porque `NULL` no está entre 100 y 50 000"
+            - "Se acepta: la condición es desconocida y el `CHECK` solo rechaza lo que es falso"
+            - "Se acepta, pero Oracle guarda 100, el mínimo del `CHECK`"
+            - "Da error porque una columna `NUMBER` no admite `NULL`"
+          answer: 1
+          hints:
+            - "¿Qué devuelve `NULL BETWEEN 100 AND 50000`: verdadero, falso o desconocido?"
+            - "Un `CHECK` exige que la condición **no sea falsa**."
+          explain: "Con `NULL` la condición es **desconocida** y el `CHECK` la deja pasar. Si el aforo es obligatorio hay que añadir `NOT NULL`."
+          ref: "5.4 Restricciones CHECK"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#54-restricciones-check"
+          reward: { icon: "🥁", text: "🥁 = **H**" }
+        - id: altavoces
+          kind: puzzle
+          type: choice
+          icon: "🔊"
+          name: "Torres de altavoces"
+          story: "Detrás de un altavoz hay una clave ajena a medio escribir. La organización quiere que, si se cancela y se borra un concierto, **sus entradas desaparezcan con él**."
+          img: ud05-fk
+          pre: |
+            CONSTRAINT fk_entrada_concierto FOREIGN KEY (id_concierto)
+                REFERENCES concierto (id_concierto)
+                ______________
+          prompt: "¿Qué completa la sentencia en Oracle?"
+          options: ["`ON DELETE CASCADE`", "`ON UPDATE CASCADE`", "`ON DELETE SET DEFAULT`", "`CASCADE CONSTRAINTS`"]
+          answer: 0
+          hints:
+            - "Queremos borrar las filas hijas al borrar la fila padre."
+            - "Oracle no tiene `ON UPDATE` ni `SET DEFAULT`, y `CASCADE CONSTRAINTS` pertenece a otra sentencia."
+          explain: "`ON DELETE CASCADE` borra las entradas al borrar su concierto. Oracle solo ofrece `ON DELETE CASCADE`, `ON DELETE SET NULL` o, si no pones nada, rechazar el borrado. `CASCADE CONSTRAINTS` es una opción de `DROP TABLE`."
+          ref: "5.3 Claves ajenas"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#53-claves-ajenas"
+          reward: { icon: "🔊", text: "🔊 = **E**" }
+        - id: setlist
+          kind: puzzle
+          type: match
+          icon: "📜"
+          name: "Setlist en el suelo"
+          story: "En lugar de canciones, el setlist recoge los cambios de última hora en las tablas."
+          prompt: "¿Qué forma de `ALTER TABLE` necesita cada cambio?"
+          items:
+            - "Cambiar el nombre de la columna `anyo` por `edicion`"
+            - "Añadir la columna `email` a ARTISTA"
+            - "Eliminar la restricción `ck_escenario_aforo`"
+            - "Ampliar `nombre` de `VARCHAR2(60)` a `VARCHAR2(100)`"
+          choices: ["ALTER TABLE … ADD (…)", "ALTER TABLE … MODIFY (…)", "ALTER TABLE … DROP CONSTRAINT …", "ALTER TABLE … RENAME COLUMN … TO …"]
+          answer: [3, 0, 2, 1]
+          hints:
+            - "`ADD` crea algo nuevo y `MODIFY` cambia el tipo o el tamaño de una columna que ya existe."
+            - "Las restricciones se eliminan por su **nombre**: por eso conviene ponérselo siempre."
+          explain: "Renombrar → `RENAME COLUMN … TO`, añadir → `ADD`, quitar una restricción → `DROP CONSTRAINT` (con su nombre) y ampliar una columna → `MODIFY`."
+          ref: "6.1 ALTER TABLE"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#61-alter-table"
+          reward: { icon: "📜", text: "📜 = **C**" }
+        - id: mesa
+          kind: puzzle
+          type: choice
+          icon: "🎛️"
+          name: "Mesa de sonido"
+          story: "En la pantalla de la mesa, una nota del técnico: «Hay que **vaciar** la tabla `entrada_pruebas` (dos millones de filas de prueba). La tabla se sigue usando, así que hay que **conservar su estructura**. No necesitamos poder deshacerlo y tiene que ser **rápido**»."
+          prompt: "¿Qué sentencia usarías?"
+          options: ["`DELETE FROM entrada_pruebas;`", "`TRUNCATE TABLE entrada_pruebas;`", "`DROP TABLE entrada_pruebas;`", "`DROP TABLE entrada_pruebas PURGE;`"]
+          answer: 1
+          hints:
+            - "`DROP` hace desaparecer también la estructura."
+            - "`DELETE` es DML: se puede deshacer, pero es lento con millones de filas."
+          explain: "`TRUNCATE TABLE` vacía la tabla de golpe y conserva su estructura, pero **no se puede deshacer** (es DDL). `DELETE` es más lento y sí admite `ROLLBACK`; `DROP` elimina la tabla."
+          ref: "6.2 DROP TABLE, papelera y TRUNCATE"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#62-drop-table-papelera-y-truncate"
+          reward: { icon: "🎛️", text: "🎛️ = **K**" }
+        - id: focos
+          kind: decoy
+          icon: "💡"
+          name: "Truss de focos"
+          text: "Los focos parpadean en rosa, azul, amarillo y verde. Muy bonito para un videoclip, pero no esconden nada."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Puerta del backstage"
+          story: "Un candado de cinco letras. La cinta americana marca el orden."
+          lock: { type: letters, code: "CHECK", order: "🎤 🥁 🔊 📜 🎛️" }
+          hints:
+            - "Cada reto de esta sala te dio una letra."
+            - "Es una palabra clave de SQL que ya has usado en esta sala."
+          explain: "**C·H·E·C·K**: la restricción que comprueba cada fila."
+    - id: taquilla
+      scene: ud05-taquilla
+      name: "Taquilla"
+      story: "La salida al recinto está en la taquilla. El torno pide un **código de cuatro dígitos** (🔢 🖥️) y, además, que hayas pasado el control de seguridad: acreditaciones, revocaciones e índices."
+      hotspots:
+        - id: acreditaciones
+          kind: puzzle
+          type: match
+          icon: "🎟️"
+          name: "Panel de acreditaciones"
+          story: "Cada acreditación lleva pegada una necesidad del personal del festival."
+          prompt: "¿Con qué se resuelve cada necesidad?"
+          items:
+            - "Dar el mismo paquete de permisos a las 40 personas de taquilla con una sola orden"
+            - "Que la prensa vea nombre, fecha y escenario de los conciertos, pero no los honorarios de los artistas"
+            - "Que el personal pueda **conectarse** a la base de datos"
+            - "Que la taquillera pueda **insertar** filas en `festival.entrada`"
+          choices: ["Privilegio de sistema", "Privilegio de objeto", "Rol", "Vista"]
+          answer: [2, 3, 0, 1]
+          hints:
+            - "Un privilegio de sistema permite una acción en la base de datos; uno de objeto, una acción sobre un objeto concreto."
+            - "Para ocultar columnas, se da acceso a una consulta guardada en lugar de a la tabla."
+          explain: "Conjunto de privilegios con nombre → **rol**; ocultar columnas → **vista**; `CREATE SESSION` → **privilegio de sistema**; `INSERT ON festival.entrada` → **privilegio de objeto**."
+          ref: "10.3 Privilegios de sistema y de objeto"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#103-privilegios-de-sistema-y-de-objeto"
+          reward: { icon: "🎟️", text: "Acreditación de staff" }
+        - id: terminal
+          kind: puzzle
+          type: multi
+          icon: "🖥️"
+          name: "Terminal de taquilla"
+          story: "Lucía empieza mañana en taquilla: tiene que poder **conectarse** y **vender entradas** (insertar en `festival.entrada`). Nada más."
+          prompt: "Siguiendo el principio de mínimo privilegio, ¿qué sentencias necesitas?"
+          options:
+            - "`CREATE USER lucia IDENTIFIED BY \"Brisa#2026\";`"
+            - "`GRANT CREATE SESSION TO lucia;`"
+            - "`GRANT INSERT ON festival.entrada TO lucia;`"
+            - "`GRANT DBA TO lucia;`"
+            - "`GRANT SELECT ANY TABLE TO lucia;`"
+            - "`GRANT CREATE TABLE TO lucia;`"
+          answer: [0, 1, 2]
+          hints:
+            - "Sin `CREATE SESSION` no puede ni conectarse."
+            - "Los privilegios `ANY` y el rol `DBA` dan muchísimo más de lo necesario."
+          explain: "Bastan **3** sentencias: crear el usuario, permitirle conectarse e insertar solo en `festival.entrada`. `DBA`, `SELECT ANY TABLE` o `CREATE TABLE` incumplen el **mínimo privilegio**."
+          ref: "10.1 El principio de mínimo privilegio"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#101-el-principio-de-mínimo-privilegio"
+          reward: { icon: "🖥️", text: "🖥️ = **3** sentencias" }
+        - id: secuencia
+          kind: puzzle
+          type: number
+          icon: "🔢"
+          name: "Contador de entradas"
+          story: "El contador numera las entradas con una secuencia:"
+          pre: |
+            CREATE SEQUENCE seq_entrada START WITH 100 INCREMENT BY 5;
+
+            -- se vende la primera entrada
+            INSERT INTO entrada (cod_entrada, ...) VALUES (seq_entrada.NEXTVAL, ...);
+            -- y luego tres más, de la misma forma
+          prompt: "¿Qué código lleva la **cuarta** entrada vendida?"
+          answer: 115
+          hints:
+            - "El primer `NEXTVAL` devuelve el valor de `START WITH`."
+            - "Cada `NEXTVAL` siguiente suma `INCREMENT BY`."
+          explain: "100, 105, 110 y **115**. Desde Oracle 12c también puedes usar una columna `GENERATED AS IDENTITY`, que crea la secuencia por ti."
+          ref: "7. Secuencias y columnas identidad"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#7-secuencias-y-columnas-identidad"
+          reward: { icon: "🔢", text: "🔢 = **115**" }
+        - id: revocacion
+          kind: puzzle
+          type: choice
+          icon: "📝"
+          name: "Nota de revocación"
+          story: "Una nota grapada en la ventanilla cuenta lo que pasó ayer con los permisos de Ana y Bea:"
+          img: ud05-grant
+          prompt: "El usuario FESTIVAL revoca a Ana el privilegio `SELECT` sobre `concierto`. ¿Qué le pasa a Bea?"
+          options:
+            - "Lo conserva: se lo dio Ana, no FESTIVAL"
+            - "Lo pierde también: con `WITH GRANT OPTION`, la revocación se propaga en cascada"
+            - "Lo conserva solo si estaba conectada en ese momento"
+            - "La revocación falla mientras Bea tenga el privilegio"
+          answer: 1
+          hints:
+            - "`WITH GRANT OPTION` es para privilegios de **objeto**; `WITH ADMIN OPTION`, para privilegios de sistema y roles."
+            - "Solo en uno de los dos casos la revocación arrastra a los demás."
+          explain: "Con privilegios de **objeto** concedidos `WITH GRANT OPTION`, la revocación se propaga **en cascada**: Bea lo pierde. Con `WITH ADMIN OPTION` (privilegios de sistema y roles) no ocurre."
+          ref: "10.3 Privilegios de sistema y de objeto"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#103-privilegios-de-sistema-y-de-objeto"
+          reward: { icon: "📝", text: "Control de revocaciones superado" }
+        - id: fichero
+          kind: puzzle
+          type: multi
+          icon: "📇"
+          name: "Fichero INDEX"
+          story: "La taquilla busca entradas por `email` miles de veces al día y va lenta. Antes de crear índices, el técnico quiere saber cuáles crea Oracle **solo**."
+          prompt: "¿Para qué restricciones crea Oracle automáticamente un índice?"
+          options: ["PRIMARY KEY", "UNIQUE", "FOREIGN KEY", "CHECK", "NOT NULL"]
+          answer: [0, 1]
+          hints:
+            - "Para comprobar que un valor no se repite, Oracle necesita buscarlo deprisa."
+            - "Las claves ajenas **no** se indexan solas, aunque convenga hacerlo."
+          explain: "Oracle crea un índice para cada **PRIMARY KEY** y cada **UNIQUE**. Las claves ajenas no se indexan solas: créalo tú (`CREATE INDEX ix_entrada_concierto ON entrada (id_concierto);`), igual que para `email` si se busca a menudo."
+          ref: "8. Índices"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#8-índices"
+          reward: { icon: "📇", text: "Pulsera de staff (índices revisados)" }
+        - id: pulseras
+          kind: decoy
+          icon: "🎗️"
+          name: "Caja de pulseras"
+          text: "Pulseras de tela de colores. Ninguna tiene chip: son de recuerdo."
+        - id: puerta
+          kind: door
+          icon: "🚧"
+          name: "Torno de salida"
+          needs: [acreditaciones, revocacion, fichero]
+          locked: "El torno no reconoce tu acreditación: antes tienes que superar todo el control de seguridad."
+          story: "El torno se ilumina. Pide el **último código de entrada** y el **número de sentencias** que necesitó Lucía."
+          lock: { type: digits, code: "1153", order: "🔢 🖥️" }
+          hints:
+            - "Los tres primeros dígitos salen del contador; el último, del terminal."
+          explain: "115 · 3. El torno gira y sales al recinto. ¡Que empiece el festival!"
+  ending:
+    title: "¡Estás fuera del backstage!"
+    text:
+      - "Amanece sobre el recinto y la base de datos del Brisa Fest ya está creada, con sus restricciones y sus permisos bien repartidos."
+      - "En la UD06 empezarás a sacarle información con `SELECT`."
+val:
+  title: "Backstage: que comence el festival"
+  sub: "Escape room · UD05 DDL i DCL en Oracle"
+  target_min: 40
+  intro:
+    - "Demà obri el **Brisa Fest** i eres la persona que munta la seua base de dades en Oracle: artistes, escenaris, concerts i entrades. A les dos de la matinada salta el sistema antiincendis, les portes del recinte es bloquegen i la base de dades de proves es queda a mig crear."
+    - "Per a eixir hauràs de travessar el **magatzem de producció**, l'**escenari principal** i la **taquilla**. Cada porta s'obri amb el que saps de `CREATE TABLE`, restriccions, `ALTER`, usuaris i privilegis."
+  rooms:
+    - id: almacen
+      scene: ud05-almacen
+      name: "Magatzem de producció"
+      story: "Caixes, cables i un teclat de **quatre dígits** en la porta del personal. Al costat del teclat, quatre adhesius marquen l'ordre: 🧳 📦 💻 📋."
+      hotspots:
+        - id: flightcase
+          kind: puzzle
+          type: match
+          icon: "🧳"
+          name: "Flight case de tipus"
+          story: "Dins del flight case, les fitxes de les columnes que falten per crear. Cada fitxa diu què s'hi guardarà."
+          prompt: "Quin tipus d'Oracle és el més adequat per a cada columna?"
+          items:
+            - "`aforo`: nombre enter de persones, fins a 50 000"
+            - "`codigo_postal`: '03690' (cal conservar el zero inicial)"
+            - "`foto`: imatge de l'artista"
+            - "`precio`: import en euros amb cèntims, fins a 9 999,99"
+            - "`biografia`: text que pot ocupar diverses pàgines"
+            - "`fecha_concierto`: dia i hora del concert"
+          choices: ["VARCHAR2(5)", "NUMBER(6,2)", "DATE", "CLOB", "BLOB", "NUMBER(6)"]
+          answer: [5, 0, 4, 1, 3, 2]
+          hints:
+            - "Un codi postal no s'usa per a fer comptes, i com a número perdria el 0 inicial."
+            - "En Oracle, `DATE` guarda també l'hora. Per als diners: `NUMBER(p,s)` amb dos decimals."
+            - "`CLOB` és text llarg i `BLOB`, binari (imatges, PDF…)."
+          explain: "Un codi postal és **text** (`VARCHAR2(5)`): no s'hi opera i conserva el 0. Els diners van en `NUMBER(6,2)`, els enters en `NUMBER(6)`, el dia i l'hora en `DATE`, el text llarg en `CLOB` i la imatge en `BLOB`."
+          ref: "3.1 Tipus principals d'Oracle"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#31-tipus-principals-doracle"
+          reward: { icon: "🧳", text: "🧳 = **6** (les sis columnes)" }
+        - id: palet
+          kind: puzzle
+          type: number
+          icon: "📦"
+          name: "Palet de caixes"
+          story: "Les caixes del palet porten escrit el tipus de la columna `precio` i una llista de valors que l'equip de taquilla va intentar inserir."
+          img: ud05-number
+          img_text: [["5 − 2 = 3 dígitos enteros", "5 − 2 = 3 dígits enters"], ["s = 2 decimales", "s = 2 decimals"]]
+          list:
+            - "`45.5`"
+            - "`999.99`"
+            - "`1000`"
+            - "`12.345`"
+            - "`123456`"
+            - "`-999.99`"
+          prompt: "Quantes d'eixes sis insercions en `precio NUMBER(5,2)` donen **error**?"
+          answer: 2
+          hints:
+            - "`NUMBER(5,2)`: 5 dígits en total, 2 dels quals decimals. Quants dígits queden per a la part entera?"
+            - "Si sobren decimals, Oracle **arredonix**; si sobren enters, dona l'error ORA-01438."
+          explain: "Hi caben com a molt **3 dígits enters** (fins a 999,99). `12.345` s'arredonix a 12,35 i es guarda; `1000` i `123456` necessiten més de 3 enters i donen **ORA-01438**. Són **2** errors."
+          ref: "3.2 Precisió i escala de NUMBER"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#32-precisió-i-escala-de-number"
+          reward: { icon: "📦", text: "📦 = **2**" }
+        - id: portatil
+          kind: puzzle
+          type: order
+          icon: "💻"
+          name: "Portàtil damunt d'un flight case"
+          story: "El guió de creació s'ha desordenat. Este és el diagrama de les taules: les fletxes van de cada clau aliena a la taula que referencia."
+          img: ud05-festival
+          prompt: "En quin ordre s'han d'executar els `CREATE TABLE` perquè no en falle cap?"
+          items:
+            - "`CREATE TABLE festival (...)`"
+            - "`CREATE TABLE escenario (...)`"
+            - "`CREATE TABLE concierto (...)`"
+            - "`CREATE TABLE entrada (...)`"
+          hints:
+            - "Una clau aliena només es pot declarar si la taula a la qual apunta **ja existix**."
+            - "Comença per la taula que no té cap clau aliena."
+          explain: "Primer les taules «pare»: FESTIVAL, després ESCENARIO (apunta a FESTIVAL), CONCIERTO (apunta a ESCENARIO) i finalment ENTRADA. Per a esborrar-les se seguix l'ordre **invers** (o `DROP TABLE ... CASCADE CONSTRAINTS`)."
+          ref: "5.3 Claus alienes"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#53-claus-alienes"
+          reward: { icon: "💻", text: "💻 = **4** (les quatre taules, en ordre)" }
+        - id: pizarra
+          kind: puzzle
+          type: number
+          icon: "📋"
+          name: "Pissarra amb el guió"
+          story: "En la pissarra, la sentència que va crear la taula ARTISTA… i que Oracle va rebutjar."
+          pre: |
+            CREATE TABLE artista (
+              id_artista   NUMBER(6)      PRIMARY KEY,
+              nombre       VARCHAR2       NOT NULL,
+              pais         VARCHAR2(40)   DEFAULT 'España',
+              honorarios   NUMBER(8,2)    CHECK (honorarios > 0)
+              genero       VARCHAR2(20),
+              CONSTRAINT uk_artista_nombre UNIQUE (nombre),
+            );
+          prompt: "Quants **errors de sintaxi** té la sentència?"
+          answer: 3
+          hints:
+            - "Revisa els tipus: a algun li falta alguna cosa obligatòria?"
+            - "Les definicions de columnes i restriccions se separen amb comes… ni una de més ni una de menys."
+          explain: "N'hi ha **3**: `VARCHAR2` necessita longitud (`VARCHAR2(80)`), falta la coma al final de la línia d'`honorarios` i sobra la coma abans del parèntesi de tancament. `DEFAULT 'España'` i el `CHECK` en línia són correctes."
+          ref: "4.2 Exemple element a element"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#42-exemple-senzill-element-a-element"
+          reward: { icon: "📋", text: "📋 = **3**" }
+        - id: carretilla
+          kind: decoy
+          icon: "🚜"
+          name: "Carretó elevador"
+          text: "Sense clau de contacte i amb un cartell: «Només personal amb carnet». El teu carnet és d'Oracle, no de carretons."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Porta del personal"
+          story: "Un teclat de quatre dígits. Els adhesius marquen l'ordre."
+          lock: { type: digits, code: "6243", order: "🧳 📦 💻 📋" }
+          hints:
+            - "Cada repte d'esta sala et va donar un número: està en la teua motxilla."
+          explain: "6 · 2 · 4 · 3. La porta del personal s'obri."
+    - id: escenario
+      scene: ud05-escenario
+      name: "Escenari principal"
+      story: "L'escenari està a les fosques llevat dels focus de prova. La porta del *backstage* té un **cadenat de cinc lletres** i, en una cinta americana, l'ordre: 🎤 🥁 🔊 📜 🎛️."
+      hotspots:
+        - id: microfono
+          kind: puzzle
+          type: match
+          icon: "🎤"
+          name: "Micròfon"
+          story: "Apegades al peu de micro, cinc regles que l'organització vol que **la base de dades** faça complir."
+          prompt: "Amb quina restricció es declara cada regla?"
+          items:
+            - "No hi pot haver dos artistes amb el mateix nom artístic."
+            - "Cada entrada s'identifica pel seu codi."
+            - "Tot concert ha de tindre data."
+            - "El preu d'una entrada ha de ser major que 0."
+            - "L'escenari d'un concert ha d'existir en ESCENARIO."
+          choices: ["PRIMARY KEY", "UNIQUE", "NOT NULL", "CHECK", "FOREIGN KEY"]
+          answer: [1, 0, 2, 3, 4]
+          hints:
+            - "Identificar → clau primària. No repetir-se, sense ser la clau → `UNIQUE`."
+            - "Una condició que complix cada fila per si sola → `CHECK`. Que el valor existisca en una altra taula → clau aliena."
+          explain: "Nom artístic → **UNIQUE** (clau alternativa), codi → **PRIMARY KEY**, data obligatòria → **NOT NULL**, preu > 0 → **CHECK** i escenari existent → **FOREIGN KEY**."
+          ref: "5.1 Resum de restriccions"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#51-resum-de-restriccions"
+          reward: { icon: "🎤", text: "🎤 = **C**" }
+        - id: bateria
+          kind: puzzle
+          type: choice
+          icon: "🥁"
+          name: "Bateria"
+          story: "En el bombo hi ha apegada la definició d'una columna d'ESCENARIO:"
+          pre: |
+            aforo NUMBER(6)
+                  CONSTRAINT ck_escenario_aforo CHECK (aforo BETWEEN 100 AND 50000)
+          prompt: "S'inserix un escenari amb `aforo` a `NULL`. Què passa?"
+          options:
+            - "El `CHECK` la rebutja, perquè `NULL` no està entre 100 i 50 000"
+            - "S'accepta: la condició és desconeguda i el `CHECK` només rebutja el que és fals"
+            - "S'accepta, però Oracle guarda 100, el mínim del `CHECK`"
+            - "Dona error perquè una columna `NUMBER` no admet `NULL`"
+          answer: 1
+          hints:
+            - "Què torna `NULL BETWEEN 100 AND 50000`: vertader, fals o desconegut?"
+            - "Un `CHECK` exigix que la condició **no siga falsa**."
+          explain: "Amb `NULL` la condició és **desconeguda** i el `CHECK` la deixa passar. Si l'aforament és obligatori cal afegir `NOT NULL`."
+          ref: "5.4 Restriccions CHECK"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#54-restriccions-check"
+          reward: { icon: "🥁", text: "🥁 = **H**" }
+        - id: altavoces
+          kind: puzzle
+          type: choice
+          icon: "🔊"
+          name: "Torres d'altaveus"
+          story: "Darrere d'un altaveu hi ha una clau aliena a mig escriure. L'organització vol que, si es cancel·la i s'esborra un concert, **les seues entrades desapareguen amb ell**."
+          img: ud05-fk
+          pre: |
+            CONSTRAINT fk_entrada_concierto FOREIGN KEY (id_concierto)
+                REFERENCES concierto (id_concierto)
+                ______________
+          prompt: "Què completa la sentència en Oracle?"
+          options: ["`ON DELETE CASCADE`", "`ON UPDATE CASCADE`", "`ON DELETE SET DEFAULT`", "`CASCADE CONSTRAINTS`"]
+          answer: 0
+          hints:
+            - "Volem esborrar les files filles en esborrar la fila pare."
+            - "Oracle no té `ON UPDATE` ni `SET DEFAULT`, i `CASCADE CONSTRAINTS` pertany a una altra sentència."
+          explain: "`ON DELETE CASCADE` esborra les entrades en esborrar el seu concert. Oracle només oferix `ON DELETE CASCADE`, `ON DELETE SET NULL` o, si no poses res, rebutjar l'esborrat. `CASCADE CONSTRAINTS` és una opció de `DROP TABLE`."
+          ref: "5.3 Claus alienes"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#53-claus-alienes"
+          reward: { icon: "🔊", text: "🔊 = **E**" }
+        - id: setlist
+          kind: puzzle
+          type: match
+          icon: "📜"
+          name: "Setlist en el terra"
+          story: "En lloc de cançons, el setlist arreplega els canvis d'última hora en les taules."
+          prompt: "Quina forma d'`ALTER TABLE` necessita cada canvi?"
+          items:
+            - "Canviar el nom de la columna `anyo` per `edicion`"
+            - "Afegir la columna `email` a ARTISTA"
+            - "Eliminar la restricció `ck_escenario_aforo`"
+            - "Ampliar `nombre` de `VARCHAR2(60)` a `VARCHAR2(100)`"
+          choices: ["ALTER TABLE … ADD (…)", "ALTER TABLE … MODIFY (…)", "ALTER TABLE … DROP CONSTRAINT …", "ALTER TABLE … RENAME COLUMN … TO …"]
+          answer: [3, 0, 2, 1]
+          hints:
+            - "`ADD` crea alguna cosa nova i `MODIFY` canvia el tipus o la grandària d'una columna que ja existix."
+            - "Les restriccions s'eliminen pel seu **nom**: per això convé posar-los-en sempre."
+          explain: "Reanomenar → `RENAME COLUMN … TO`, afegir → `ADD`, llevar una restricció → `DROP CONSTRAINT` (amb el seu nom) i ampliar una columna → `MODIFY`."
+          ref: "6.1 ALTER TABLE"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#61-alter-table"
+          reward: { icon: "📜", text: "📜 = **C**" }
+        - id: mesa
+          kind: puzzle
+          type: choice
+          icon: "🎛️"
+          name: "Taula de so"
+          story: "En la pantalla de la taula, una nota del tècnic: «Cal **buidar** la taula `entrada_pruebas` (dos milions de files de prova). La taula es continua usant, així que cal **conservar-ne l'estructura**. No necessitem poder desfer-ho i ha de ser **ràpid**»."
+          prompt: "Quina sentència usaries?"
+          options: ["`DELETE FROM entrada_pruebas;`", "`TRUNCATE TABLE entrada_pruebas;`", "`DROP TABLE entrada_pruebas;`", "`DROP TABLE entrada_pruebas PURGE;`"]
+          answer: 1
+          hints:
+            - "`DROP` fa desaparéixer també l'estructura."
+            - "`DELETE` és DML: es pot desfer, però és lent amb milions de files."
+          explain: "`TRUNCATE TABLE` buida la taula de colp i en conserva l'estructura, però **no es pot desfer** (és DDL). `DELETE` és més lent i sí que admet `ROLLBACK`; `DROP` elimina la taula."
+          ref: "6.2 DROP TABLE, paperera i TRUNCATE"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#62-drop-table-paperera-i-truncate"
+          reward: { icon: "🎛️", text: "🎛️ = **K**" }
+        - id: focos
+          kind: decoy
+          icon: "💡"
+          name: "Truss de focus"
+          text: "Els focus parpellegen en rosa, blau, groc i verd. Molt bonic per a un videoclip, però no amaguen res."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Porta del backstage"
+          story: "Un cadenat de cinc lletres. La cinta americana marca l'ordre."
+          lock: { type: letters, code: "CHECK", order: "🎤 🥁 🔊 📜 🎛️" }
+          hints:
+            - "Cada repte d'esta sala et va donar una lletra."
+            - "És una paraula clau d'SQL que ja has usat en esta sala."
+          explain: "**C·H·E·C·K**: la restricció que comprova cada fila."
+    - id: taquilla
+      scene: ud05-taquilla
+      name: "Taquilla"
+      story: "L'eixida al recinte està en la taquilla. El torn demana un **codi de quatre dígits** (🔢 🖥️) i, a més, que hages passat el control de seguretat: acreditacions, revocacions i índexs."
+      hotspots:
+        - id: acreditaciones
+          kind: puzzle
+          type: match
+          icon: "🎟️"
+          name: "Panell d'acreditacions"
+          story: "Cada acreditació porta apegada una necessitat del personal del festival."
+          prompt: "Amb què es resol cada necessitat?"
+          items:
+            - "Donar el mateix paquet de permisos a les 40 persones de taquilla amb una sola orde"
+            - "Que la premsa veja nom, data i escenari dels concerts, però no els honoraris dels artistes"
+            - "Que el personal puga **connectar-se** a la base de dades"
+            - "Que la taquillera puga **inserir** files en `festival.entrada`"
+          choices: ["Privilegi de sistema", "Privilegi d'objecte", "Rol", "Vista"]
+          answer: [2, 3, 0, 1]
+          hints:
+            - "Un privilegi de sistema permet una acció en la base de dades; un d'objecte, una acció sobre un objecte concret."
+            - "Per a amagar columnes, es dona accés a una consulta guardada en lloc de a la taula."
+          explain: "Conjunt de privilegis amb nom → **rol**; amagar columnes → **vista**; `CREATE SESSION` → **privilegi de sistema**; `INSERT ON festival.entrada` → **privilegi d'objecte**."
+          ref: "10.3 Privilegis de sistema i d'objecte"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#103-privilegis-de-sistema-i-dobjecte"
+          reward: { icon: "🎟️", text: "Acreditació de staff" }
+        - id: terminal
+          kind: puzzle
+          type: multi
+          icon: "🖥️"
+          name: "Terminal de taquilla"
+          story: "Lucía comença demà en taquilla: ha de poder **connectar-se** i **vendre entrades** (inserir en `festival.entrada`). Res més."
+          prompt: "Seguint el principi de mínim privilegi, quines sentències necessites?"
+          options:
+            - "`CREATE USER lucia IDENTIFIED BY \"Brisa#2026\";`"
+            - "`GRANT CREATE SESSION TO lucia;`"
+            - "`GRANT INSERT ON festival.entrada TO lucia;`"
+            - "`GRANT DBA TO lucia;`"
+            - "`GRANT SELECT ANY TABLE TO lucia;`"
+            - "`GRANT CREATE TABLE TO lucia;`"
+          answer: [0, 1, 2]
+          hints:
+            - "Sense `CREATE SESSION` no pot ni connectar-se."
+            - "Els privilegis `ANY` i el rol `DBA` donen moltíssim més del necessari."
+          explain: "N'hi ha prou amb **3** sentències: crear l'usuari, permetre-li connectar-se i inserir només en `festival.entrada`. `DBA`, `SELECT ANY TABLE` o `CREATE TABLE` incomplixen el **mínim privilegi**."
+          ref: "10.1 El principi de mínim privilegi"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#101-el-principi-de-mínim-privilegi"
+          reward: { icon: "🖥️", text: "🖥️ = **3** sentències" }
+        - id: secuencia
+          kind: puzzle
+          type: number
+          icon: "🔢"
+          name: "Comptador d'entrades"
+          story: "El comptador numera les entrades amb una seqüència:"
+          pre: |
+            CREATE SEQUENCE seq_entrada START WITH 100 INCREMENT BY 5;
+
+            -- es ven la primera entrada
+            INSERT INTO entrada (cod_entrada, ...) VALUES (seq_entrada.NEXTVAL, ...);
+            -- i després tres més, de la mateixa manera
+          prompt: "Quin codi porta la **quarta** entrada venuda?"
+          answer: 115
+          hints:
+            - "El primer `NEXTVAL` torna el valor de `START WITH`."
+            - "Cada `NEXTVAL` següent suma `INCREMENT BY`."
+          explain: "100, 105, 110 i **115**. Des d'Oracle 12c també pots usar una columna `GENERATED AS IDENTITY`, que crea la seqüència per tu."
+          ref: "7. Seqüències i columnes identitat"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#7-seqüències-i-columnes-identitat"
+          reward: { icon: "🔢", text: "🔢 = **115**" }
+        - id: revocacion
+          kind: puzzle
+          type: choice
+          icon: "📝"
+          name: "Nota de revocació"
+          story: "Una nota grapada en la finestreta conta el que va passar ahir amb els permisos d'Ana i Bea:"
+          img: ud05-grant
+          img_text: [[">propietario<", ">propietari<"]]
+          prompt: "L'usuari FESTIVAL revoca a Ana el privilegi `SELECT` sobre `concierto`. Què li passa a Bea?"
+          options:
+            - "El conserva: li'l va donar Ana, no FESTIVAL"
+            - "El perd també: amb `WITH GRANT OPTION`, la revocació es propaga en cascada"
+            - "El conserva només si estava connectada en eixe moment"
+            - "La revocació falla mentre Bea tinga el privilegi"
+          answer: 1
+          hints:
+            - "`WITH GRANT OPTION` és per a privilegis d'**objecte**; `WITH ADMIN OPTION`, per a privilegis de sistema i rols."
+            - "Només en un dels dos casos la revocació arrossega els altres."
+          explain: "Amb privilegis d'**objecte** concedits `WITH GRANT OPTION`, la revocació es propaga **en cascada**: Bea el perd. Amb `WITH ADMIN OPTION` (privilegis de sistema i rols) no passa."
+          ref: "10.3 Privilegis de sistema i d'objecte"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#103-privilegis-de-sistema-i-dobjecte"
+          reward: { icon: "📝", text: "Control de revocacions superat" }
+        - id: fichero
+          kind: puzzle
+          type: multi
+          icon: "📇"
+          name: "Fitxer INDEX"
+          story: "La taquilla busca entrades per `email` milers de vegades al dia i va lenta. Abans de crear índexs, el tècnic vol saber quins crea Oracle **tot sol**."
+          prompt: "Per a quines restriccions crea Oracle automàticament un índex?"
+          options: ["PRIMARY KEY", "UNIQUE", "FOREIGN KEY", "CHECK", "NOT NULL"]
+          answer: [0, 1]
+          hints:
+            - "Per a comprovar que un valor no es repetix, Oracle necessita buscar-lo de pressa."
+            - "Les claus alienes **no** s'indexen soles, encara que convinga fer-ho."
+          explain: "Oracle crea un índex per a cada **PRIMARY KEY** i cada **UNIQUE**. Les claus alienes no s'indexen soles: crea'l tu (`CREATE INDEX ix_entrada_concierto ON entrada (id_concierto);`), igual que per a `email` si es busca sovint."
+          ref: "8. Índexs"
+          ref_url: "/ud05-ddl-dcl/ud05-teoria/#8-índexs"
+          reward: { icon: "📇", text: "Polsera de staff (índexs revisats)" }
+        - id: pulseras
+          kind: decoy
+          icon: "🎗️"
+          name: "Caixa de polseres"
+          text: "Polseres de tela de colors. Cap no té xip: són de record."
+        - id: puerta
+          kind: door
+          icon: "🚧"
+          name: "Torn d'eixida"
+          needs: [acreditaciones, revocacion, fichero]
+          locked: "El torn no reconeix la teua acreditació: abans has de superar tot el control de seguretat."
+          story: "El torn s'il·lumina. Demana l'**últim codi d'entrada** i el **nombre de sentències** que va necessitar Lucía."
+          lock: { type: digits, code: "1153", order: "🔢 🖥️" }
+          hints:
+            - "Els tres primers dígits ixen del comptador; l'últim, del terminal."
+          explain: "115 · 3. El torn gira i ixes al recinte. Que comence el festival!"
+  ending:
+    title: "Estàs fora del backstage!"
+    text:
+      - "Es fa de dia sobre el recinte i la base de dades del Brisa Fest ja està creada, amb les seues restriccions i els permisos ben repartits."
+      - "En la UD06 començaràs a traure'n informació amb `SELECT`."

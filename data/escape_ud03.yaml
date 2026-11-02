@@ -132,22 +132,11 @@ es:
       story: "Los servidores zumban y una pantalla parpadea en rojo: DELETE! La puerta B **no tiene corriente**: primero tendrás que restablecerla desde los racks. Después, su teclado pide tres dígitos en el orden 🖥️ 📈 🗒️."
       hotspots:
         - id: pizarra
+          img: ud03-esquema-banco
           kind: note
           icon: "📋"
           name: "Pizarra del esquema"
           text: "El esquema de la base de datos del banco y los datos de prueba de esta noche. Lo necesitarás para los retos de esta sala."
-          pre: |
-            GESTOR  (id_gestor, nombre)
-                    PK: id_gestor
-            CLIENTE (dni, nombre, id_gestor)
-                    PK: dni · VNN: nombre
-                    FK: id_gestor → GESTOR     (al borrar: puesta a nulos)
-            CUENTA  (iban, dni_titular, saldo)
-                    PK: iban · VNN: dni_titular
-                    FK: dni_titular → CLIENTE  (al borrar: en cascada)
-            TARJETA (num_tarjeta, iban)
-                    PK: num_tarjeta · VNN: iban
-                    FK: iban → CUENTA          (al borrar: en cascada)
           table:
             - caption: "GESTOR"
               head: ["id_gestor", "nombre"]
@@ -258,6 +247,7 @@ es:
       story: "La cámara acorazada. La puerta circular tiene una rueda de combinación de **tres dígitos** y dos cerraduras laterales que necesitan las dos mitades de la **llave del director**. La pantalla de la puerta dice: COLUMNAS PK · TABLAS · REGLAS NO EXPRESABLES."
       hotspots:
         - id: caja12
+          img: ud03-caja12
           kind: puzzle
           type: choice
           icon: "🔐"
@@ -274,6 +264,7 @@ es:
           ref_url: "/ud03-modelo-relacional/ud03-teoria/#45-transformación-de-relaciones-binarias-nm"
           reward: { icon: "🔐", text: "PK de AUTORIZA = **2** columnas" }
         - id: caja27
+          img: ud03-caja27
           kind: puzzle
           type: choice
           icon: "🔐"
@@ -294,6 +285,7 @@ es:
           ref_url: "/ud03-modelo-relacional/ud03-teoria/#44-transformación-de-relaciones-binarias-1n"
           reward: { icon: "🗝️", text: "Mitad izquierda de la llave del director" }
         - id: caja33
+          img: ud03-caja33
           kind: puzzle
           type: multi
           icon: "🔐"
@@ -515,22 +507,12 @@ val:
       story: "Els servidors brunzixen i una pantalla parpelleja en roig: DELETE! La porta B **no té corrent**: primer hauràs de restablir-la des dels racks. Després, el seu teclat demana tres dígits en l'ordre 🖥️ 📈 🗒️."
       hotspots:
         - id: pizarra
+          img: ud03-esquema-banco
+          img_text: [["CLIENTE", "CLIENT"], ["CUENTA", "COMPTE"], ["TARJETA", "TARGETA"], ["num_tarjeta", "num_targeta"], [">nombre<", ">nom<"], ["al borrar, puesta a nulos", "en esborrar, posada a nuls"], ["al borrar, en cascada", "en esborrar, en cascada"]]
           kind: note
           icon: "📋"
           name: "Pissarra de l'esquema"
           text: "L'esquema de la base de dades del banc i les dades de prova d'esta nit. El necessitaràs per als reptes d'esta sala."
-          pre: |
-            GESTOR  (id_gestor, nom)
-                    PK: id_gestor
-            CLIENT  (dni, nom, id_gestor)
-                    PK: dni · VNN: nom
-                    FK: id_gestor → GESTOR    (en esborrar: posada a nuls)
-            COMPTE  (iban, dni_titular, saldo)
-                    PK: iban · VNN: dni_titular
-                    FK: dni_titular → CLIENT  (en esborrar: en cascada)
-            TARGETA (num_targeta, iban)
-                    PK: num_targeta · VNN: iban
-                    FK: iban → COMPTE         (en esborrar: en cascada)
           table:
             - caption: "GESTOR"
               head: ["id_gestor", "nom"]
@@ -641,6 +623,8 @@ val:
       story: "La cambra cuirassada. La porta circular té una roda de combinació de **tres dígits** i dos panys laterals que necessiten les dos meitats de la **clau del director**. La pantalla de la porta diu: COLUMNES PK · TAULES · REGLES NO EXPRESSABLES."
       hotspots:
         - id: caja12
+          img: ud03-caja12
+          img_text: [["CLIENTE", "CLIENT"], [">CAJA<", ">CAIXA<"], ["AUTORIZA", "AUTORITZA"], ["num_caja", "num_caixa"], ["fecha_alta", "data_alta"], [">nombre<", ">nom<"]]
           kind: puzzle
           type: choice
           icon: "🔐"
@@ -657,6 +641,8 @@ val:
           ref_url: "/ud03-modelo-relacional/ud03-teoria/#45-transformació-de-relacions-binàries-nm"
           reward: { icon: "🔐", text: "PK d'AUTORITZA = **2** columnes" }
         - id: caja27
+          img: ud03-caja27
+          img_text: [[">CAJA<", ">CAIXA<"], ["num_caja", "num_caixa"], [">tamano<", ">grandaria<"]]
           kind: puzzle
           type: choice
           icon: "🔐"
@@ -677,6 +663,8 @@ val:
           ref_url: "/ud03-modelo-relacional/ud03-teoria/#44-transformació-de-relacions-binàries-1n"
           reward: { icon: "🗝️", text: "Meitat esquerra de la clau del director" }
         - id: caja33
+          img: ud03-caja33
+          img_text: [["TARJETA_ACCESO", "TARGETA_ACCES"], ["EMPLEADO", "EMPLEAT"], ["id_tarjeta", "id_targeta"], [">nivel<", ">nivell<"]]
           kind: puzzle
           type: multi
           icon: "🔐"

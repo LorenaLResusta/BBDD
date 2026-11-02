@@ -1,0 +1,889 @@
+# Escape room UD08 · PL/SQL (shortcode escape-click). Escenas: assets/escape/ud08-*.svg · Figuras: assets/escape/fig/ud08-*.svg
+es:
+  title: "Apagón en la estación Kepler"
+  sub: "Escape room · UD08 Programación en PL/SQL"
+  target_min: 45
+  intro:
+    - "Eres la persona de guardia del equipo de software de la **estación orbital Kepler**. Una tormenta solar ha reiniciado los sistemas y todas las compuertas se han bloqueado. Por suerte (o no), cada compuerta la controla un bloque PL/SQL de la base de datos Oracle de la estación."
+    - "Para llegar a la nave de rescate tendrás que salir del **puente de mando**, cruzar el **laboratorio** y abrir la **esclusa**. Lee el código con calma: el servidor no perdona."
+  rooms:
+    - id: puente
+      scene: ud08-puente
+      name: "Puente de mando"
+      story: "La compuerta del puente pide **tres dígitos** (🖥️ 🧭 📘), pero no responderá hasta que la calefacción vuelva a funcionar."
+      hotspots:
+        - id: consola
+          kind: puzzle
+          type: number
+          icon: "🖥️"
+          name: "Consola principal"
+          story: "En la consola parpadea el bloque que calcula el primer dígito:"
+          pre: |
+            DECLARE
+              v_total NUMBER := 0;
+            BEGIN
+              FOR i IN 1 .. 5 LOOP
+                IF MOD(i, 2) = 0 THEN
+                  v_total := v_total + i;
+                END IF;
+              END LOOP;
+              DBMS_OUTPUT.PUT_LINE(v_total);
+            END;
+            /
+          prompt: "¿Qué muestra `DBMS_OUTPUT`?"
+          answer: 6
+          hints:
+            - "`i` toma los valores 1, 2, 3, 4 y 5."
+            - "`MOD(i, 2) = 0` solo es cierto para los números pares."
+          explain: "Solo se suman los pares: 2 + 4 = **6**. En un `FOR` numérico la variable `i` se declara sola y no se puede modificar dentro del bucle."
+          ref: "5.3 Bucles"
+          ref_url: "/ud08-plsql/ud08-teoria/#53-bucles"
+          reward: { icon: "🖥️", text: "🖥️ = **6**" }
+        - id: navegacion
+          kind: puzzle
+          type: number
+          icon: "🧭"
+          name: "Panel de navegación"
+          story: "El radar ejecuta un bucle `WHILE` para calcular cuántos saltos faltan:"
+          img: ud08-while
+          img_text: []
+          pre: |
+            DECLARE
+              v_n     NUMBER := 1;
+              v_pasos NUMBER := 0;
+            BEGIN
+              WHILE v_n < 50 LOOP
+                v_n     := v_n * 3;
+                v_pasos := v_pasos + 1;
+              END LOOP;
+              DBMS_OUTPUT.PUT_LINE(v_pasos);
+            END;
+            /
+          prompt: "¿Qué muestra `DBMS_OUTPUT`?"
+          answer: 4
+          hints:
+            - "Apunta en una tabla el valor de `v_n` y `v_pasos` al final de cada vuelta."
+            - "La condición se comprueba **antes** de cada vuelta."
+          explain: "`v_n` pasa por 3, 9, 27 y 81. Tras la cuarta vuelta vale 81 y la condición `81 < 50` es falsa: **4** pasos."
+          ref: "5.3 Bucles"
+          ref_url: "/ud08-plsql/ud08-teoria/#53-bucles"
+          reward: { icon: "🧭", text: "🧭 = **4**" }
+        - id: manual
+          kind: puzzle
+          type: match
+          icon: "📘"
+          name: "Manual de a bordo"
+          story: "En la estantería, el manual de PL/SQL de la estación tiene arrancada la página de la estructura de un bloque."
+          prompt: "¿Para qué sirve cada parte?"
+          items:
+            - "`EXCEPTION`"
+            - "`DECLARE`"
+            - "`/` (en SQL*Plus o SQLcl)"
+            - "`BEGIN`"
+            - "`END;`"
+          choices: ["Declarar variables, constantes y cursores (opcional)", "Empezar las instrucciones ejecutables (obligatoria)", "Tratar los errores que se produzcan (opcional)", "Cerrar el bloque", "Enviar el bloque al servidor para ejecutarlo"]
+          answer: [2, 0, 4, 1, 3]
+          hints:
+            - "Las secciones opcionales son la de declaraciones y la de excepciones."
+            - "La barra no es PL/SQL: es una orden de la herramienta cliente."
+          explain: "Un bloque tiene **4** partes: `DECLARE` (opcional), `BEGIN` (obligatoria), `EXCEPTION` (opcional) y `END;`. La barra `/` le dice a SQL*Plus o SQLcl que envíe el bloque al servidor."
+          ref: "3.1 Las cuatro secciones"
+          ref_url: "/ud08-plsql/ud08-teoria/#31-las-cuatro-secciones"
+          reward: { icon: "📘", text: "📘 = **4** (partes de un bloque)" }
+        - id: termostato
+          kind: puzzle
+          type: choice
+          icon: "🌡️"
+          name: "Termostato"
+          story: "El sensor de temperatura se ha quedado sin dato tras el reinicio. El termostato ejecuta esto:"
+          pre: |
+            DECLARE
+              v_temp NUMBER;      -- sin inicializar
+            BEGIN
+              IF v_temp > 30 THEN
+                DBMS_OUTPUT.PUT_LINE('ALTA');
+              ELSIF v_temp <= 30 THEN
+                DBMS_OUTPUT.PUT_LINE('NORMAL');
+              ELSE
+                DBMS_OUTPUT.PUT_LINE('SENSOR');
+              END IF;
+            END;
+            /
+          prompt: "¿Qué muestra?"
+          options: ["`ALTA`", "`NORMAL`", "`SENSOR`", "Un error, porque `v_temp` no tiene valor"]
+          answer: 2
+          hints:
+            - "Una variable `NUMBER` sin inicializar vale `NULL`."
+            - "Con `NULL`, tanto `> 30` como `<= 30` son desconocidos: ninguno es verdadero."
+          explain: "`v_temp` vale `NULL`, así que las dos condiciones son **desconocidas** y se ejecuta la rama `ELSE`: **SENSOR**. Es la misma lógica de tres valores del `WHERE`."
+          ref: "5.1 IF, ELSIF y ELSE"
+          ref_url: "/ud08-plsql/ud08-teoria/#51-if-elsif-y-else"
+          reward: { icon: "🌡️", text: "Calefacción restablecida" }
+        - id: ventanal
+          kind: decoy
+          icon: "🪐"
+          name: "Ventanal"
+          text: "Un planeta con anillos ocupa medio ventanal. Precioso, pero no tiene nada que decir sobre PL/SQL."
+        - id: comida
+          kind: decoy
+          icon: "🥘"
+          name: "Ración liofilizada"
+          text: "«Paella espacial». La fecha de caducidad es dentro de 40 años. La pista no está aquí."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Compuerta del puente"
+          needs: [termostato]
+          locked: "La compuerta está helada y no responde: primero restablece la calefacción."
+          story: "El teclado se descongela. Tres dígitos, en el orden 🖥️ 🧭 📘."
+          lock: { type: digits, code: "644", order: "🖥️ 🧭 📘" }
+          hints:
+            - "Consola, panel de navegación y manual: los tres números están en tu mochila."
+          explain: "6 · 4 · 4. La compuerta se abre con un siseo."
+    - id: laboratorio
+      scene: ud08-laboratorio
+      name: "Laboratorio"
+      story: "En el laboratorio, la pantalla muestra la tabla TRIPULANTE. La compuerta LAB-2 pide **cuatro dígitos** (🧬 📟 🧪) y que el sistema de cursores esté calibrado."
+      hotspots:
+        - id: pantalla
+          kind: note
+          icon: "📺"
+          name: "Pantalla de tripulación"
+          text: "La tabla TRIPULANTE con los datos de esta mañana. Los retos de la sala trabajan sobre ella (y cada uno parte de estos datos, sin los cambios de los demás)."
+          table:
+            caption: "TRIPULANTE"
+            head: ["id_trip", "nombre", "modulo", "rango"]
+            rows:
+              - ["1", "Ada", "Lab", "3"]
+              - ["2", "Bo", "Puente", "2"]
+              - ["3", "Cyn", "Lab", "1"]
+              - ["4", "Dev", "Motores", "2"]
+              - ["5", "Eli", "Lab", "2"]
+              - ["6", "Fer", "Puente", "3"]
+        - id: centrifugadora
+          kind: puzzle
+          type: number
+          icon: "🧬"
+          name: "Centrifugadora"
+          story: "La centrifugadora recorre la tabla con un cursor `FOR`:"
+          pre: |
+            DECLARE
+              v_c NUMBER := 0;
+            BEGIN
+              FOR r IN (SELECT rango FROM tripulante WHERE modulo <> 'Motores') LOOP
+                v_c := v_c + r.rango;
+              END LOOP;
+              DBMS_OUTPUT.PUT_LINE(v_c);
+            END;
+            /
+          prompt: "¿Qué muestra `DBMS_OUTPUT`?"
+          answer: 11
+          hints:
+            - "El cursor recorre todas las filas que no son de Motores."
+            - "Quedan fuera solo las filas de Dev."
+          explain: "Se suman los rangos de Ada, Bo, Cyn, Eli y Fer: 3 + 2 + 1 + 2 + 3 = **11**. El cursor `FOR` abre, recorre y cierra el cursor él solo, y declara `r` automáticamente."
+          ref: "7.3 Cursor FOR"
+          ref_url: "/ud08-plsql/ud08-teoria/#73-cursor-for-la-forma-habitual"
+          reward: { icon: "🧬", text: "🧬 = **11**" }
+        - id: terminal
+          kind: puzzle
+          type: number
+          icon: "📟"
+          name: "Terminal"
+          story: "El terminal sube de rango a quien lleva poco tiempo a bordo:"
+          pre: |
+            BEGIN
+              UPDATE tripulante
+                 SET rango = rango + 1
+               WHERE rango < 3;
+              DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT);
+            END;
+            /
+          prompt: "¿Qué muestra `DBMS_OUTPUT`?"
+          answer: 4
+          hints:
+            - "`SQL%ROWCOUNT` es un atributo del cursor implícito: cuántas filas afectó la última sentencia DML."
+            - "Cuenta las filas con rango 1 o 2."
+          explain: "Tienen rango menor que 3 Bo, Cyn, Dev y Eli: **4** filas. `SQL%ROWCOUNT` se consulta justo después de la sentencia, porque la siguiente lo sobrescribe."
+          ref: "7.1 El cursor implícito"
+          ref_url: "/ud08-plsql/ud08-teoria/#71-qué-es-un-cursor-y-cuál-es-el-implícito"
+          reward: { icon: "📟", text: "📟 = **4**" }
+        - id: microscopio
+          kind: puzzle
+          type: choice
+          icon: "🧪"
+          name: "Microscopio"
+          story: "El microscopio quiere el nombre de «la persona del laboratorio»:"
+          pre: |
+            DECLARE
+              v_nombre tripulante.nombre%TYPE;
+            BEGIN
+              SELECT nombre INTO v_nombre
+              FROM   tripulante
+              WHERE  modulo = 'Lab';
+              DBMS_OUTPUT.PUT_LINE(v_nombre);
+            END;
+            /
+          prompt: "¿Qué ocurre al ejecutarlo?"
+          options:
+            - "Muestra `Ada`, la primera fila que encuentra"
+            - "Salta `NO_DATA_FOUND`"
+            - "Salta `TOO_MANY_ROWS`, porque la consulta devuelve 3 filas"
+            - "Salta `VALUE_ERROR`, porque `%TYPE` no es compatible"
+          answer: 2
+          hints:
+            - "`SELECT … INTO` necesita que la consulta devuelva **exactamente una** fila."
+            - "¿Cuántos tripulantes son del módulo Lab?"
+          explain: "La consulta devuelve **3** filas (Ada, Cyn y Eli) y `SELECT … INTO` solo admite una: salta **TOO_MANY_ROWS** (ORA-01422). Si no devolviera ninguna, saltaría `NO_DATA_FOUND`. Para varias filas se usa un cursor."
+          ref: "9.2 Excepciones predefinidas"
+          ref_url: "/ud08-plsql/ud08-teoria/#92-excepciones-predefinidas"
+          reward: { icon: "🧪", text: "🧪 = **3** (filas del `SELECT … INTO`)" }
+        - id: probetas
+          kind: puzzle
+          type: order
+          icon: "⚗️"
+          name: "Gradilla de probetas"
+          story: "Cinco probetas, cinco pasos de un cursor explícito. Alguien las ha desordenado y el sistema de cursores no arranca."
+          prompt: "Ordena los pasos para recorrer un cursor explícito."
+          items:
+            - "Declararlo: `CURSOR c_lab IS SELECT … ;`"
+            - "Abrirlo: `OPEN c_lab;`"
+            - "Leer una fila: `FETCH c_lab INTO v_fila;`"
+            - "Salir si no quedan filas: `EXIT WHEN c_lab%NOTFOUND;`"
+            - "Cerrarlo: `CLOSE c_lab;`"
+          hints:
+            - "La declaración va en la sección `DECLARE`; el resto, en `BEGIN`."
+            - "La comprobación de `%NOTFOUND` va justo después de cada `FETCH`."
+          explain: "Declarar → `OPEN` → `FETCH` → `EXIT WHEN %NOTFOUND` (dentro de un `LOOP`) → `CLOSE`. El cursor `FOR` hace todo esto él solo, por eso es la forma habitual."
+          ref: "7.2 Cursores explícitos"
+          ref_url: "/ud08-plsql/ud08-teoria/#72-cursores-explícitos"
+          reward: { icon: "⚗️", text: "Sistema de cursores calibrado" }
+        - id: frasco
+          kind: decoy
+          icon: "🫙"
+          name: "Frasco con algas"
+          text: "Un cultivo de algas para producir oxígeno. Huele a estanque. No esconde ningún código."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Compuerta LAB-2"
+          needs: [probetas]
+          locked: "La compuerta no arranca: el sistema de cursores está sin calibrar."
+          story: "Cuatro dígitos: la centrifugadora aporta dos y el terminal y el microscopio, uno cada uno (🧬 📟 🧪)."
+          lock: { type: digits, code: "1143", order: "🧬 📟 🧪" }
+          hints:
+            - "11 · ? · ?"
+          explain: "11 · 4 · 3. La compuerta LAB-2 se desliza hacia un lado."
+    - id: esclusa
+      scene: ud08-esclusa
+      name: "Esclusa"
+      story: "Al otro lado de la escotilla espera la nave de rescate. La escotilla pide **tres dígitos** (🛰️ 🚨) y que hayas revisado los procedimientos, los disparadores y el tablero de programación."
+      hotspots:
+        - id: funcion
+          kind: puzzle
+          type: number
+          icon: "🛰️"
+          name: "Panel de oxígeno"
+          story: "El panel calcula las reservas de oxígeno con una función:"
+          pre: |
+            CREATE OR REPLACE FUNCTION fn_oxigeno (
+              p_tripulantes IN NUMBER,
+              p_horas       IN NUMBER
+            ) RETURN NUMBER IS
+            BEGIN
+              IF p_horas > 10 THEN
+                RETURN p_tripulantes * 2;
+              END IF;
+              RETURN p_tripulantes + p_horas;
+            END fn_oxigeno;
+            /
+
+            SELECT fn_oxigeno(3, 12) + fn_oxigeno(2, 5) AS reserva
+            FROM   dual;
+          prompt: "¿Qué valor devuelve la consulta?"
+          answer: 13
+          hints:
+            - "Calcula cada llamada por separado."
+            - "`RETURN` termina la función en ese mismo instante."
+          explain: "`fn_oxigeno(3, 12)`: 12 > 10, devuelve 3 · 2 = 6. `fn_oxigeno(2, 5)`: no entra en el `IF` y devuelve 2 + 5 = 7. Total: **13**. Una función se puede usar en un `SELECT` porque **devuelve un valor**."
+          ref: "8.4 Usar una función"
+          ref_url: "/ud08-plsql/ud08-teoria/#84-usar-una-función"
+          reward: { icon: "🛰️", text: "🛰️ = **13**" }
+        - id: herramientas
+          kind: puzzle
+          type: number
+          icon: "🧰"
+          name: "Caja de herramientas"
+          story: "Dentro de la caja hay un procedimiento de ajuste con parámetros de los tres tipos:"
+          img: ud08-parametros
+          img_text: [["bloque que llama", "bloc que crida"], ["IN: entra · OUT: sale · IN OUT: entra y vuelve modificado", "IN: entra · OUT: ix · IN OUT: entra i torna modificat"]]
+          pre: |
+            CREATE OR REPLACE PROCEDURE pr_ajuste (
+              p_a IN     NUMBER,
+              p_b IN OUT NUMBER,
+              p_c OUT    NUMBER
+            ) IS
+            BEGIN
+              p_b := p_b + p_a;
+              p_c := p_b * 2;
+            END pr_ajuste;
+            /
+
+            DECLARE
+              x NUMBER := 2;
+              y NUMBER := 5;
+              z NUMBER;
+            BEGIN
+              pr_ajuste(x, y, z);
+              DBMS_OUTPUT.PUT_LINE(y || '-' || z);
+            END;
+            /
+          prompt: "¿Qué valores tienen `y` y `z` después de la llamada?"
+          fields: ["`y`", "`z`"]
+          answer: [7, 14]
+          hints:
+            - "`p_b` es `IN OUT`: recibe el valor de `y` y el cambio vuelve a `y`."
+            - "`p_c` se calcula con el valor **nuevo** de `p_b`."
+          explain: "`p_b` empieza en 5 y pasa a 5 + 2 = **7**, que vuelve a `y`. `p_c` = 7 · 2 = **14**, que sale por `z`. Se muestra `7-14`. Un parámetro `IN` no se puede modificar dentro del procedimiento."
+          ref: "10.2 Parámetros IN, OUT e IN OUT"
+          ref_url: "/ud08-plsql/ud08-teoria/#102-parámetros-in-out-e-in-out"
+          reward: { icon: "🧰", text: "Procedimiento revisado: `7-14`" }
+        - id: alarma
+          kind: puzzle
+          type: number
+          icon: "🚨"
+          name: "Alarma"
+          story: "La alarma se dispara con estos dos disparadores sobre la tabla SENSOR:"
+          img: ud08-disparo
+          img_text: [["(n filas)", "(n files)"], ["BEFORE sentencia", "BEFORE sentència"], ["AFTER sentencia", "AFTER sentència"], [">cambio<", ">canvi<"], ["Disparadores de sentencia: una vez por orden · de fila (FOR EACH ROW): una vez por fila", "Disparadors de sentència: una vegada per orde · de fila (FOR EACH ROW): una vegada per fila"]]
+          pre: |
+            CREATE OR REPLACE TRIGGER trg_sensor_aviso
+              BEFORE UPDATE ON sensor
+            BEGIN
+              pkg_alarma.avisar;
+            END;
+            /
+            CREATE OR REPLACE TRIGGER trg_sensor_log
+              AFTER UPDATE ON sensor
+              FOR EACH ROW
+            BEGIN
+              INSERT INTO sensor_log VALUES (:OLD.id_sensor, :OLD.valor, :NEW.valor, SYSDATE);
+            END;
+            /
+
+            UPDATE sensor SET valor = 0 WHERE zona = 'Esclusa';   -- afecta a 4 filas
+          prompt: "¿Cuántas ejecuciones de disparador hay en total con ese `UPDATE`?"
+          answer: 5
+          hints:
+            - "El primero no tiene `FOR EACH ROW`: es de sentencia."
+            - "El segundo es de fila: se ejecuta una vez por cada fila modificada."
+          explain: "`trg_sensor_aviso` es **de sentencia**: 1 vez. `trg_sensor_log` es **de fila**: 4 veces, una por fila. Total: **5**."
+          ref: "11.1 Qué es un disparador"
+          ref_url: "/ud08-plsql/ud08-teoria/#111-qué-es-un-disparador-y-cómo-se-construye"
+          reward: { icon: "🚨", text: "🚨 = **5**" }
+        - id: antena
+          kind: puzzle
+          type: choice
+          icon: "📡"
+          name: "Antena :NEW / :OLD"
+          story: "La antena recibe los nombres de la tripulación con mayúsculas y minúsculas mezcladas. Se quiere un disparador que los guarde **siempre en mayúsculas** al insertar."
+          prompt: "¿Qué combinación funciona?"
+          options:
+            - "`BEFORE INSERT … FOR EACH ROW` con `:NEW.nombre := UPPER(:NEW.nombre);`"
+            - "`AFTER INSERT … FOR EACH ROW` con `:NEW.nombre := UPPER(:NEW.nombre);`"
+            - "`BEFORE INSERT` (sin `FOR EACH ROW`) con `:NEW.nombre := UPPER(:NEW.nombre);`"
+            - "`BEFORE INSERT … FOR EACH ROW` con `:OLD.nombre := UPPER(:NEW.nombre);`"
+          answer: 0
+          hints:
+            - "`:NEW` y `:OLD` solo existen en los disparadores **de fila**."
+            - "Para cambiar el valor que se va a guardar, hay que hacerlo **antes** de guardarlo."
+          explain: "Solo en un disparador **BEFORE … FOR EACH ROW** se puede modificar `:NEW`. En un `AFTER` la fila ya está guardada (ORA-04084), uno de sentencia no tiene `:NEW` (ORA-04082) y en un `INSERT` `:OLD` no tiene valores."
+          ref: "11.4 Normalización de datos al guardar"
+          ref_url: "/ud08-plsql/ud08-teoria/#114-normalización-de-datos-al-guardar"
+          reward: { icon: "📡", text: "Disparador de mayúsculas validado" }
+        - id: tablero
+          kind: puzzle
+          type: match
+          icon: "📋"
+          name: "Tablero de programación"
+          story: "En el tablero, cuatro tareas pendientes del software de la estación."
+          prompt: "¿Qué herramienta es la adecuada para cada una?"
+          items:
+            - "Ejecutar cada noche a las 3:00 la limpieza de los registros antiguos"
+            - "Calcular las horas de oxígeno restantes dentro de un `SELECT`"
+            - "Guardar automáticamente quién cambia el nivel de un tripulante"
+            - "Dar de alta un tripulante (varias tablas a la vez) desde la aplicación"
+          choices: ["Función", "Procedimiento", "Disparador (trigger)", "Tarea programada (DBMS_SCHEDULER)"]
+          answer: [3, 0, 2, 1]
+          hints:
+            - "Lo que se usa dentro de un `SELECT` tiene que **devolver un valor**."
+            - "Un disparador reacciona a un cambio en una tabla; una tarea programada, al reloj."
+          explain: "Cada noche → **tarea programada**; dentro de un `SELECT` → **función**; reaccionar a cambios → **disparador**; una operación de negocio que se llama desde la aplicación → **procedimiento**."
+          ref: "12.1 Disparador, procedimiento o tarea programada"
+          ref_url: "/ud08-plsql/ud08-teoria/#121-disparador-procedimiento-o-tarea-programada"
+          reward: { icon: "📋", text: "Tablero en orden" }
+        - id: traje
+          kind: decoy
+          icon: "🧑‍🚀"
+          name: "Traje espacial"
+          text: "Es de tu talla, pero el casco tiene una grieta. Mejor salir por la escotilla, con la nave de rescate acoplada."
+        - id: puerta
+          kind: door
+          icon: "🛸"
+          name: "Escotilla"
+          needs: [herramientas, antena, tablero]
+          locked: "La escotilla no se desbloquea hasta revisar el procedimiento de la caja de herramientas, la antena y el tablero."
+          story: "Tres dígitos: los dos del panel de oxígeno y el de la alarma (🛰️ 🚨)."
+          lock: { type: digits, code: "135", order: "🛰️ 🚨" }
+          hints:
+            - "13 · ?"
+          explain: "13 · 5. La escotilla se abre y la nave de rescate te espera. ¡`COMMIT`!"
+  ending:
+    title: "¡A salvo en la nave de rescate!"
+    text:
+      - "Mientras la estación Kepler se aleja por la ventanilla, el informe de incidencias se guarda solo: alguien programó un disparador para eso."
+      - "Bloques, cursores, excepciones, funciones, procedimientos y disparadores: ya sabes poner la lógica donde están los datos."
+val:
+  title: "Apagada en l'estació Kepler"
+  sub: "Escape room · UD08 Programació en PL/SQL"
+  target_min: 45
+  intro:
+    - "Eres la persona de guàrdia de l'equip de programari de l'**estació orbital Kepler**. Una tempesta solar ha reiniciat els sistemes i totes les comportes s'han bloquejat. Per sort (o no), cada comporta la controla un bloc PL/SQL de la base de dades Oracle de l'estació."
+    - "Per a arribar a la nau de rescat hauràs d'eixir del **pont de comandament**, travessar el **laboratori** i obrir la **resclosa**. Llig el codi amb calma: el servidor no perdona."
+  rooms:
+    - id: puente
+      scene: ud08-puente
+      name: "Pont de comandament"
+      story: "La comporta del pont demana **tres dígits** (🖥️ 🧭 📘), però no respondrà fins que la calefacció torne a funcionar."
+      hotspots:
+        - id: consola
+          kind: puzzle
+          type: number
+          icon: "🖥️"
+          name: "Consola principal"
+          story: "En la consola parpelleja el bloc que calcula el primer dígit:"
+          pre: |
+            DECLARE
+              v_total NUMBER := 0;
+            BEGIN
+              FOR i IN 1 .. 5 LOOP
+                IF MOD(i, 2) = 0 THEN
+                  v_total := v_total + i;
+                END IF;
+              END LOOP;
+              DBMS_OUTPUT.PUT_LINE(v_total);
+            END;
+            /
+          prompt: "Què mostra `DBMS_OUTPUT`?"
+          answer: 6
+          hints:
+            - "`i` pren els valors 1, 2, 3, 4 i 5."
+            - "`MOD(i, 2) = 0` només és cert per als nombres parells."
+          explain: "Només se sumen els parells: 2 + 4 = **6**. En un `FOR` numèric la variable `i` es declara sola i no es pot modificar dins del bucle."
+          ref: "5.3 Bucles"
+          ref_url: "/ud08-plsql/ud08-teoria/#53-bucles"
+          reward: { icon: "🖥️", text: "🖥️ = **6**" }
+        - id: navegacion
+          kind: puzzle
+          type: number
+          icon: "🧭"
+          name: "Panell de navegació"
+          story: "El radar executa un bucle `WHILE` per a calcular quants salts falten:"
+          img: ud08-while
+          img_text: [["Repite la vuelta mientras la condición sea verdadera", "Repetix la volta mentre la condició siga vertadera"]]
+          pre: |
+            DECLARE
+              v_n     NUMBER := 1;
+              v_pasos NUMBER := 0;
+            BEGIN
+              WHILE v_n < 50 LOOP
+                v_n     := v_n * 3;
+                v_pasos := v_pasos + 1;
+              END LOOP;
+              DBMS_OUTPUT.PUT_LINE(v_pasos);
+            END;
+            /
+          prompt: "Què mostra `DBMS_OUTPUT`?"
+          answer: 4
+          hints:
+            - "Anota en una taula el valor de `v_n` i `v_pasos` al final de cada volta."
+            - "La condició es comprova **abans** de cada volta."
+          explain: "`v_n` passa per 3, 9, 27 i 81. Després de la quarta volta val 81 i la condició `81 < 50` és falsa: **4** passos."
+          ref: "5.3 Bucles"
+          ref_url: "/ud08-plsql/ud08-teoria/#53-bucles"
+          reward: { icon: "🧭", text: "🧭 = **4**" }
+        - id: manual
+          kind: puzzle
+          type: match
+          icon: "📘"
+          name: "Manual de bord"
+          story: "En la prestatgeria, el manual de PL/SQL de l'estació té arrancada la pàgina de l'estructura d'un bloc."
+          prompt: "Per a què servix cada part?"
+          items:
+            - "`EXCEPTION`"
+            - "`DECLARE`"
+            - "`/` (en SQL*Plus o SQLcl)"
+            - "`BEGIN`"
+            - "`END;`"
+          choices: ["Declarar variables, constants i cursors (opcional)", "Començar les instruccions executables (obligatòria)", "Tractar els errors que es produïsquen (opcional)", "Tancar el bloc", "Enviar el bloc al servidor per a executar-lo"]
+          answer: [2, 0, 4, 1, 3]
+          hints:
+            - "Les seccions opcionals són la de declaracions i la d'excepcions."
+            - "La barra no és PL/SQL: és una orde de l'eina client."
+          explain: "Un bloc té **4** parts: `DECLARE` (opcional), `BEGIN` (obligatòria), `EXCEPTION` (opcional) i `END;`. La barra `/` li diu a SQL*Plus o SQLcl que envie el bloc al servidor."
+          ref: "3.1 Les quatre seccions"
+          ref_url: "/ud08-plsql/ud08-teoria/#31-les-quatre-seccions"
+          reward: { icon: "📘", text: "📘 = **4** (parts d'un bloc)" }
+        - id: termostato
+          kind: puzzle
+          type: choice
+          icon: "🌡️"
+          name: "Termòstat"
+          story: "El sensor de temperatura s'ha quedat sense dada després del reinici. El termòstat executa açò:"
+          pre: |
+            DECLARE
+              v_temp NUMBER;      -- sense inicialitzar
+            BEGIN
+              IF v_temp > 30 THEN
+                DBMS_OUTPUT.PUT_LINE('ALTA');
+              ELSIF v_temp <= 30 THEN
+                DBMS_OUTPUT.PUT_LINE('NORMAL');
+              ELSE
+                DBMS_OUTPUT.PUT_LINE('SENSOR');
+              END IF;
+            END;
+            /
+          prompt: "Què mostra?"
+          options: ["`ALTA`", "`NORMAL`", "`SENSOR`", "Un error, perquè `v_temp` no té valor"]
+          answer: 2
+          hints:
+            - "Una variable `NUMBER` sense inicialitzar val `NULL`."
+            - "Amb `NULL`, tant `> 30` com `<= 30` són desconeguts: cap no és vertader."
+          explain: "`v_temp` val `NULL`, així que les dos condicions són **desconegudes** i s'executa la branca `ELSE`: **SENSOR**. És la mateixa lògica de tres valors del `WHERE`."
+          ref: "5.1 IF, ELSIF i ELSE"
+          ref_url: "/ud08-plsql/ud08-teoria/#51-if-elsif-y-else"
+          reward: { icon: "🌡️", text: "Calefacció restablida" }
+        - id: ventanal
+          kind: decoy
+          icon: "🪐"
+          name: "Finestral"
+          text: "Un planeta amb anells ocupa mig finestral. Preciós, però no té res a dir sobre PL/SQL."
+        - id: comida
+          kind: decoy
+          icon: "🥘"
+          name: "Ració liofilitzada"
+          text: "«Paella espacial». La data de caducitat és d'ací a 40 anys. La pista no està ací."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Comporta del pont"
+          needs: [termostato]
+          locked: "La comporta està gelada i no respon: primer restablix la calefacció."
+          story: "El teclat es desgela. Tres dígits, en l'ordre 🖥️ 🧭 📘."
+          lock: { type: digits, code: "644", order: "🖥️ 🧭 📘" }
+          hints:
+            - "Consola, panell de navegació i manual: els tres números estan en la teua motxilla."
+          explain: "6 · 4 · 4. La comporta s'obri amb un xiulit."
+    - id: laboratorio
+      scene: ud08-laboratorio
+      name: "Laboratori"
+      story: "En el laboratori, la pantalla mostra la taula TRIPULANTE. La comporta LAB-2 demana **quatre dígits** (🧬 📟 🧪) i que el sistema de cursors estiga calibrat."
+      hotspots:
+        - id: pantalla
+          kind: note
+          icon: "📺"
+          name: "Pantalla de tripulació"
+          text: "La taula TRIPULANTE amb les dades d'este matí. Els reptes de la sala treballen sobre ella (i cadascun partix d'estes dades, sense els canvis dels altres)."
+          table:
+            caption: "TRIPULANTE"
+            head: ["id_trip", "nombre", "modulo", "rango"]
+            rows:
+              - ["1", "Ada", "Lab", "3"]
+              - ["2", "Bo", "Puente", "2"]
+              - ["3", "Cyn", "Lab", "1"]
+              - ["4", "Dev", "Motores", "2"]
+              - ["5", "Eli", "Lab", "2"]
+              - ["6", "Fer", "Puente", "3"]
+        - id: centrifugadora
+          kind: puzzle
+          type: number
+          icon: "🧬"
+          name: "Centrifugadora"
+          story: "La centrifugadora recorre la taula amb un cursor `FOR`:"
+          pre: |
+            DECLARE
+              v_c NUMBER := 0;
+            BEGIN
+              FOR r IN (SELECT rango FROM tripulante WHERE modulo <> 'Motores') LOOP
+                v_c := v_c + r.rango;
+              END LOOP;
+              DBMS_OUTPUT.PUT_LINE(v_c);
+            END;
+            /
+          prompt: "Què mostra `DBMS_OUTPUT`?"
+          answer: 11
+          hints:
+            - "El cursor recorre totes les files que no són de Motores."
+            - "Només queden fora les files de Dev."
+          explain: "Se sumen els rangs d'Ada, Bo, Cyn, Eli i Fer: 3 + 2 + 1 + 2 + 3 = **11**. El cursor `FOR` obri, recorre i tanca el cursor tot sol, i declara `r` automàticament."
+          ref: "7.3 Cursor FOR"
+          ref_url: "/ud08-plsql/ud08-teoria/#73-cursor-for-la-forma-habitual"
+          reward: { icon: "🧬", text: "🧬 = **11**" }
+        - id: terminal
+          kind: puzzle
+          type: number
+          icon: "📟"
+          name: "Terminal"
+          story: "El terminal puja de rang qui fa poc de temps que està a bord:"
+          pre: |
+            BEGIN
+              UPDATE tripulante
+                 SET rango = rango + 1
+               WHERE rango < 3;
+              DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT);
+            END;
+            /
+          prompt: "Què mostra `DBMS_OUTPUT`?"
+          answer: 4
+          hints:
+            - "`SQL%ROWCOUNT` és un atribut del cursor implícit: quantes files va afectar l'última sentència DML."
+            - "Compta les files amb rang 1 o 2."
+          explain: "Tenen rang menor que 3 Bo, Cyn, Dev i Eli: **4** files. `SQL%ROWCOUNT` es consulta just després de la sentència, perquè la següent el sobreescriu."
+          ref: "7.1 El cursor implícit"
+          ref_url: "/ud08-plsql/ud08-teoria/#71-què-és-un-cursor-i-quin-és-limplícit"
+          reward: { icon: "📟", text: "📟 = **4**" }
+        - id: microscopio
+          kind: puzzle
+          type: choice
+          icon: "🧪"
+          name: "Microscopi"
+          story: "El microscopi vol el nom de «la persona del laboratori»:"
+          pre: |
+            DECLARE
+              v_nombre tripulante.nombre%TYPE;
+            BEGIN
+              SELECT nombre INTO v_nombre
+              FROM   tripulante
+              WHERE  modulo = 'Lab';
+              DBMS_OUTPUT.PUT_LINE(v_nombre);
+            END;
+            /
+          prompt: "Què passa en executar-lo?"
+          options:
+            - "Mostra `Ada`, la primera fila que troba"
+            - "Salta `NO_DATA_FOUND`"
+            - "Salta `TOO_MANY_ROWS`, perquè la consulta torna 3 files"
+            - "Salta `VALUE_ERROR`, perquè `%TYPE` no és compatible"
+          answer: 2
+          hints:
+            - "`SELECT … INTO` necessita que la consulta torne **exactament una** fila."
+            - "Quants tripulants són del mòdul Lab?"
+          explain: "La consulta torna **3** files (Ada, Cyn i Eli) i `SELECT … INTO` només n'admet una: salta **TOO_MANY_ROWS** (ORA-01422). Si no en tornara cap, saltaria `NO_DATA_FOUND`. Per a diverses files s'usa un cursor."
+          ref: "9.2 Excepcions predefinides"
+          ref_url: "/ud08-plsql/ud08-teoria/#92-excepcions-predefinides"
+          reward: { icon: "🧪", text: "🧪 = **3** (files del `SELECT … INTO`)" }
+        - id: probetas
+          kind: puzzle
+          type: order
+          icon: "⚗️"
+          name: "Gradeta de provetes"
+          story: "Cinc provetes, cinc passos d'un cursor explícit. Algú les ha desordenades i el sistema de cursors no arranca."
+          prompt: "Ordena els passos per a recórrer un cursor explícit."
+          items:
+            - "Declarar-lo: `CURSOR c_lab IS SELECT … ;`"
+            - "Obrir-lo: `OPEN c_lab;`"
+            - "Llegir una fila: `FETCH c_lab INTO v_fila;`"
+            - "Eixir si no queden files: `EXIT WHEN c_lab%NOTFOUND;`"
+            - "Tancar-lo: `CLOSE c_lab;`"
+          hints:
+            - "La declaració va en la secció `DECLARE`; la resta, en `BEGIN`."
+            - "La comprovació de `%NOTFOUND` va just després de cada `FETCH`."
+          explain: "Declarar → `OPEN` → `FETCH` → `EXIT WHEN %NOTFOUND` (dins d'un `LOOP`) → `CLOSE`. El cursor `FOR` fa tot això tot sol, per això és la forma habitual."
+          ref: "7.2 Cursors explícits"
+          ref_url: "/ud08-plsql/ud08-teoria/#72-cursors-explícits"
+          reward: { icon: "⚗️", text: "Sistema de cursors calibrat" }
+        - id: frasco
+          kind: decoy
+          icon: "🫙"
+          name: "Pot amb algues"
+          text: "Un cultiu d'algues per a produir oxigen. Fa olor de bassa. No amaga cap codi."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Comporta LAB-2"
+          needs: [probetas]
+          locked: "La comporta no arranca: el sistema de cursors està sense calibrar."
+          story: "Quatre dígits: la centrifugadora n'aporta dos i el terminal i el microscopi, un cadascun (🧬 📟 🧪)."
+          lock: { type: digits, code: "1143", order: "🧬 📟 🧪" }
+          hints:
+            - "11 · ? · ?"
+          explain: "11 · 4 · 3. La comporta LAB-2 llisca cap a un costat."
+    - id: esclusa
+      scene: ud08-esclusa
+      name: "Resclosa"
+      story: "A l'altra banda de l'escotilla espera la nau de rescat. L'escotilla demana **tres dígits** (🛰️ 🚨) i que hages revisat els procediments, els disparadors i el tauler de programació."
+      hotspots:
+        - id: funcion
+          kind: puzzle
+          type: number
+          icon: "🛰️"
+          name: "Panell d'oxigen"
+          story: "El panell calcula les reserves d'oxigen amb una funció:"
+          pre: |
+            CREATE OR REPLACE FUNCTION fn_oxigeno (
+              p_tripulantes IN NUMBER,
+              p_horas       IN NUMBER
+            ) RETURN NUMBER IS
+            BEGIN
+              IF p_horas > 10 THEN
+                RETURN p_tripulantes * 2;
+              END IF;
+              RETURN p_tripulantes + p_horas;
+            END fn_oxigeno;
+            /
+
+            SELECT fn_oxigeno(3, 12) + fn_oxigeno(2, 5) AS reserva
+            FROM   dual;
+          prompt: "Quin valor torna la consulta?"
+          answer: 13
+          hints:
+            - "Calcula cada crida per separat."
+            - "`RETURN` acaba la funció en eixe mateix instant."
+          explain: "`fn_oxigeno(3, 12)`: 12 > 10, torna 3 · 2 = 6. `fn_oxigeno(2, 5)`: no entra en l'`IF` i torna 2 + 5 = 7. Total: **13**. Una funció es pot usar en un `SELECT` perquè **torna un valor**."
+          ref: "8.4 Usar una funció"
+          ref_url: "/ud08-plsql/ud08-teoria/#84-usar-una-funció"
+          reward: { icon: "🛰️", text: "🛰️ = **13**" }
+        - id: herramientas
+          kind: puzzle
+          type: number
+          icon: "🧰"
+          name: "Caixa d'eines"
+          story: "Dins de la caixa hi ha un procediment d'ajust amb paràmetres dels tres tipus:"
+          img: ud08-parametros
+          img_text: [["bloque que llama", "bloc que crida"], ["IN: entra · OUT: sale · IN OUT: entra y vuelve modificado", "IN: entra · OUT: ix · IN OUT: entra i torna modificat"]]
+          pre: |
+            CREATE OR REPLACE PROCEDURE pr_ajuste (
+              p_a IN     NUMBER,
+              p_b IN OUT NUMBER,
+              p_c OUT    NUMBER
+            ) IS
+            BEGIN
+              p_b := p_b + p_a;
+              p_c := p_b * 2;
+            END pr_ajuste;
+            /
+
+            DECLARE
+              x NUMBER := 2;
+              y NUMBER := 5;
+              z NUMBER;
+            BEGIN
+              pr_ajuste(x, y, z);
+              DBMS_OUTPUT.PUT_LINE(y || '-' || z);
+            END;
+            /
+          prompt: "Quins valors tenen `y` i `z` després de la crida?"
+          fields: ["`y`", "`z`"]
+          answer: [7, 14]
+          hints:
+            - "`p_b` és `IN OUT`: rep el valor de `y` i el canvi torna a `y`."
+            - "`p_c` es calcula amb el valor **nou** de `p_b`."
+          explain: "`p_b` comença en 5 i passa a 5 + 2 = **7**, que torna a `y`. `p_c` = 7 · 2 = **14**, que ix per `z`. Es mostra `7-14`. Un paràmetre `IN` no es pot modificar dins del procediment."
+          ref: "10.2 Paràmetres IN, OUT i IN OUT"
+          ref_url: "/ud08-plsql/ud08-teoria/#102-paràmetres-in-out-i-in-out"
+          reward: { icon: "🧰", text: "Procediment revisat: `7-14`" }
+        - id: alarma
+          kind: puzzle
+          type: number
+          icon: "🚨"
+          name: "Alarma"
+          story: "L'alarma es dispara amb estos dos disparadors sobre la taula SENSOR:"
+          img: ud08-disparo
+          img_text: [["(n filas)", "(n files)"], ["BEFORE sentencia", "BEFORE sentència"], ["AFTER sentencia", "AFTER sentència"], [">cambio<", ">canvi<"], ["Disparadores de sentencia: una vez por orden · de fila (FOR EACH ROW): una vez por fila", "Disparadors de sentència: una vegada per orde · de fila (FOR EACH ROW): una vegada per fila"]]
+          pre: |
+            CREATE OR REPLACE TRIGGER trg_sensor_aviso
+              BEFORE UPDATE ON sensor
+            BEGIN
+              pkg_alarma.avisar;
+            END;
+            /
+            CREATE OR REPLACE TRIGGER trg_sensor_log
+              AFTER UPDATE ON sensor
+              FOR EACH ROW
+            BEGIN
+              INSERT INTO sensor_log VALUES (:OLD.id_sensor, :OLD.valor, :NEW.valor, SYSDATE);
+            END;
+            /
+
+            UPDATE sensor SET valor = 0 WHERE zona = 'Esclusa';   -- afecta 4 files
+          prompt: "Quantes execucions de disparador hi ha en total amb eixe `UPDATE`?"
+          answer: 5
+          hints:
+            - "El primer no té `FOR EACH ROW`: és de sentència."
+            - "El segon és de fila: s'executa una vegada per cada fila modificada."
+          explain: "`trg_sensor_aviso` és **de sentència**: 1 vegada. `trg_sensor_log` és **de fila**: 4 vegades, una per fila. Total: **5**."
+          ref: "11.1 Què és un disparador"
+          ref_url: "/ud08-plsql/ud08-teoria/#111-què-és-un-disparador-i-com-es-construïx"
+          reward: { icon: "🚨", text: "🚨 = **5**" }
+        - id: antena
+          kind: puzzle
+          type: choice
+          icon: "📡"
+          name: "Antena :NEW / :OLD"
+          story: "L'antena rep els noms de la tripulació amb majúscules i minúscules mesclades. Es vol un disparador que els guarde **sempre en majúscules** en inserir."
+          prompt: "Quina combinació funciona?"
+          options:
+            - "`BEFORE INSERT … FOR EACH ROW` amb `:NEW.nombre := UPPER(:NEW.nombre);`"
+            - "`AFTER INSERT … FOR EACH ROW` amb `:NEW.nombre := UPPER(:NEW.nombre);`"
+            - "`BEFORE INSERT` (sense `FOR EACH ROW`) amb `:NEW.nombre := UPPER(:NEW.nombre);`"
+            - "`BEFORE INSERT … FOR EACH ROW` amb `:OLD.nombre := UPPER(:NEW.nombre);`"
+          answer: 0
+          hints:
+            - "`:NEW` i `:OLD` només existixen en els disparadors **de fila**."
+            - "Per a canviar el valor que es guardarà, cal fer-ho **abans** de guardar-lo."
+          explain: "Només en un disparador **BEFORE … FOR EACH ROW** es pot modificar `:NEW`. En un `AFTER` la fila ja està guardada (ORA-04084), un de sentència no té `:NEW` (ORA-04082) i en un `INSERT` `:OLD` no té valors."
+          ref: "11.4 Normalització de dades en guardar"
+          ref_url: "/ud08-plsql/ud08-teoria/#114-normalització-de-dades-en-guardar"
+          reward: { icon: "📡", text: "Disparador de majúscules validat" }
+        - id: tablero
+          kind: puzzle
+          type: match
+          icon: "📋"
+          name: "Tauler de programació"
+          story: "En el tauler, quatre tasques pendents del programari de l'estació."
+          prompt: "Quina eina és l'adequada per a cadascuna?"
+          items:
+            - "Executar cada nit a les 3:00 la neteja dels registres antics"
+            - "Calcular les hores d'oxigen restants dins d'un `SELECT`"
+            - "Guardar automàticament qui canvia el nivell d'un tripulant"
+            - "Donar d'alta un tripulant (diverses taules alhora) des de l'aplicació"
+          choices: ["Funció", "Procediment", "Disparador (trigger)", "Tasca programada (DBMS_SCHEDULER)"]
+          answer: [3, 0, 2, 1]
+          hints:
+            - "El que s'usa dins d'un `SELECT` ha de **tornar un valor**."
+            - "Un disparador reacciona a un canvi en una taula; una tasca programada, al rellotge."
+          explain: "Cada nit → **tasca programada**; dins d'un `SELECT` → **funció**; reaccionar a canvis → **disparador**; una operació de negoci que es crida des de l'aplicació → **procediment**."
+          ref: "12.1 Disparador, procediment o tasca programada"
+          ref_url: "/ud08-plsql/ud08-teoria/#121-disparador-procediment-o-tasca-programada"
+          reward: { icon: "📋", text: "Tauler en ordre" }
+        - id: traje
+          kind: decoy
+          icon: "🧑‍🚀"
+          name: "Vestit espacial"
+          text: "És de la teua talla, però el casc té una esquerda. Millor eixir per l'escotilla, amb la nau de rescat acoblada."
+        - id: puerta
+          kind: door
+          icon: "🛸"
+          name: "Escotilla"
+          needs: [herramientas, antena, tablero]
+          locked: "L'escotilla no es desbloqueja fins revisar el procediment de la caixa d'eines, l'antena i el tauler."
+          story: "Tres dígits: els dos del panell d'oxigen i el de l'alarma (🛰️ 🚨)."
+          lock: { type: digits, code: "135", order: "🛰️ 🚨" }
+          hints:
+            - "13 · ?"
+          explain: "13 · 5. L'escotilla s'obri i la nau de rescat t'espera. `COMMIT`!"
+  ending:
+    title: "A salvament en la nau de rescat!"
+    text:
+      - "Mentre l'estació Kepler s'allunya per la finestreta, l'informe d'incidències es guarda tot sol: algú va programar un disparador per a això."
+      - "Blocs, cursors, excepcions, funcions, procediments i disparadors: ja saps posar la lògica on estan les dades."

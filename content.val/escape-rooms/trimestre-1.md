@@ -24,7 +24,7 @@ L'escape room de **tancament del primer trimestre**: un repàs abans de l'examen
 
 {{< escape-room >}}
 
-## Per al professorat
+## Instruccions
 
 - **Durada:** 30-45 minuts per parelles. Està pensat com a repàs final del trimestre, en l'última sessió abans de l'examen de la 1a avaluació (3 i 4 de desembre). Les unitats tenen els seus propis escape rooms d'escenes: [UD02](/ud02-modelo-er/ud02-escape-room) i [UD03](/ud03-modelo-relacional/ud03-escape-room).
 - **Pistes clau:** tres de les pistes descarten dos dels tres sospitosos. Demana a l'alumnat que justifique l'acusació **amb les pistes**, no per intuïció.

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Sala de datos">
+<rect width="960" height="540" fill="#e3f2fd"/><rect y="0" width="960" height="40" fill="#bbdefb"/>
+<rect y="420" width="960" height="120" fill="#90a4ae"/><g stroke="#78909c" stroke-width="2"><path d="M0 460 H960 M0 500 H960 M160 420 V540 M400 420 V540 M640 420 V540 M880 420 V540"/></g>
+<g data-hs="tablero">
+<rect x="40" y="70" width="290" height="220" rx="6" fill="#fff" stroke="#546e7a" stroke-width="4"/>
+<path d="M70 260 H310 M70 260 V96" stroke="#263238" stroke-width="2"/>
+<g fill="#5b4bd6"><rect x="88" y="120" width="40" height="140"/><rect x="142" y="124" width="40" height="136"/><rect x="196" y="190" width="40" height="70"/><rect x="250" y="190" width="40" height="70"/></g>
+<text x="185" y="88" text-anchor="middle" font-family="monospace" font-size="12" font-weight="900" fill="#263238">SUM(minutos)</text>
+</g>
+<g data-hs="monitor">
+<rect x="370" y="80" width="230" height="150" rx="6" fill="#263238"/><rect x="380" y="90" width="210" height="122" fill="#e8f5e9"/>
+<rect x="388" y="98" width="194" height="16" fill="#2e7d32"/><g fill="#fff" font-family="monospace" font-size="9" font-weight="700"><text x="392" y="110">id_emp episodio minutos</text></g>
+<g fill="#81c784"><rect x="392" y="122" width="150" height="5"/><rect x="392" y="134" width="140" height="5"/><rect x="392" y="146" width="150" height="5"/><rect x="392" y="158" width="130" height="5"/><rect x="392" y="170" width="150" height="5"/><rect x="392" y="182" width="120" height="5"/><rect x="392" y="194" width="150" height="5"/></g>
+<rect x="470" y="230" width="30" height="24" fill="#37474f"/><rect x="440" y="252" width="90" height="10" rx="3" fill="#37474f"/>
+</g>
+<g data-hs="calculadora">
+<rect x="380" y="300" width="110" height="140" rx="10" fill="#37474f" stroke="#263238" stroke-width="3"/>
+<rect x="392" y="312" width="86" height="28" rx="3" fill="#c5e1a5"/><text x="470" y="332" text-anchor="end" font-family="monospace" font-weight="900" font-size="14" fill="#33691e">COUNT</text>
+<g fill="#90a4ae"><rect x="394" y="350" width="20" height="16" rx="3"/><rect x="420" y="350" width="20" height="16" rx="3"/><rect x="446" y="350" width="20" height="16" rx="3"/><rect x="394" y="374" width="20" height="16" rx="3"/><rect x="420" y="374" width="20" height="16" rx="3"/><rect x="446" y="374" width="20" height="16" rx="3"/><rect x="394" y="398" width="20" height="16" rx="3"/><rect x="420" y="398" width="20" height="16" rx="3"/></g><rect x="446" y="398" width="20" height="40" rx="3" fill="#ff7043"/>
+</g>
+<g data-hs="reloj">
+<circle cx="720" cy="110" r="52" fill="#fff" stroke="#263238" stroke-width="7"/>
+<path d="M720 110 V74 M720 110 L746 122" stroke="#263238" stroke-width="5" stroke-linecap="round"/>
+<text x="720" y="150" text-anchor="middle" font-family="monospace" font-weight="900" font-size="12" fill="#c62828">AVG</text>
+</g>
+<g data-hs="pizarra">
+<rect x="620" y="200" width="200" height="140" rx="4" fill="#2e4a3a" stroke="#8d6e63" stroke-width="6"/>
+<g fill="#e0f2f1" font-family="monospace" font-size="10"><text x="632" y="226">SELECT id_emp,</text><text x="642" y="242">episodio,</text><text x="642" y="258">SUM(minutos)</text><text x="632" y="274">FROM visionado</text><text x="632" y="290">GROUP BY id_emp;</text></g>
+<text x="770" y="324" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="22" fill="#ff8a80">?!</text>
+</g>
+<g data-hs="planta">
+<rect x="540" y="370" width="50" height="50" fill="#8d6e63"/><g fill="#43a047"><ellipse cx="565" cy="345" rx="14" ry="30"/><ellipse cx="545" cy="355" rx="10" ry="24" transform="rotate(-30 545 355)"/><ellipse cx="585" cy="355" rx="10" ry="24" transform="rotate(30 585 355)"/></g>
+</g>
+<g data-hs="puerta">
+<rect x="850" y="140" width="100" height="280" fill="#455a64"/><rect x="858" y="148" width="84" height="272" fill="#cfd8dc"/>
+<rect x="868" y="160" width="64" height="70" fill="#b3e5fc"/>
+<rect x="866" y="262" width="32" height="46" rx="4" fill="#212121"/><g fill="#ffd54f"><rect x="871" y="270" width="6" height="5"/><rect x="880" y="270" width="6" height="5"/><rect x="889" y="270" width="5" height="5"/><rect x="871" y="280" width="6" height="5"/><rect x="880" y="280" width="6" height="5"/><rect x="871" y="290" width="6" height="5"/></g>
+<rect x="904" y="270" width="28" height="18" rx="3" fill="#78909c"/><rect x="908" y="276" width="20" height="4" fill="#212121"/>
+</g>
+</svg>

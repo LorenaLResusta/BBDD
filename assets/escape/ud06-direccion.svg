@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-label="Despacho de dirección">
+<defs><linearGradient id="drN" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1a3a"/><stop offset="1" stop-color="#27406e"/></linearGradient></defs>
+<rect width="960" height="540" fill="#3e2c23"/><g opacity=".15" stroke="#000" stroke-width="2"><path d="M0 70 H960 M0 140 H960 M0 210 H960 M0 280 H960 M0 350 H960"/></g>
+<rect y="420" width="960" height="120" fill="#5d4037"/><rect x="200" y="440" width="560" height="90" rx="8" fill="#8e2a2a" opacity=".6"/>
+<g data-hs="ventana">
+<rect x="380" y="40" width="210" height="170" fill="url(#drN)" stroke="#d7ccc8" stroke-width="8"/><path d="M485 40 V210 M380 125 H590" stroke="#d7ccc8" stroke-width="5"/>
+<g fill="#fff59d"><circle cx="420" cy="70" r="2"/><circle cx="540" cy="90" r="2"/><circle cx="460" cy="160" r="2"/><circle cx="560" cy="170" r="1.5"/></g>
+<g fill="#263238"><rect x="400" y="150" width="30" height="60"/><rect x="440" y="130" width="24" height="80"/><rect x="520" y="140" width="40" height="70"/></g>
+<g fill="#ffeb3b" opacity=".7"><rect x="446" y="140" width="4" height="4"/><rect x="530" y="160" width="4" height="4"/><rect x="408" y="168" width="4" height="4"/></g>
+</g>
+<g data-hs="corcho">
+<rect x="40" y="60" width="300" height="180" rx="4" fill="#a1887f"/><rect x="48" y="68" width="284" height="164" fill="#d7a86e"/>
+<path d="M60 160 H320" stroke="#3e2723" stroke-width="3"/>
+<g fill="#c62828"><circle cx="90" cy="160" r="5"/><circle cx="150" cy="160" r="5"/><circle cx="210" cy="160" r="5"/><circle cx="270" cy="160" r="5"/><circle cx="300" cy="160" r="6"/></g>
+<g fill="#fff" stroke="#bbb"><rect x="70" y="90" width="44" height="40"/><rect x="130" y="180" width="44" height="40"/><rect x="250" y="88" width="56" height="44"/></g>
+<g fill="#ffeb3b"><rect x="190" y="84" width="40" height="38"/></g>
+<path d="M92 130 L90 160 M152 180 L150 160 M278 132 L300 160" stroke="#c62828" stroke-width="2"/>
+<text x="300" y="224" text-anchor="middle" font-family="monospace" font-weight="900" font-size="12" fill="#b71c1c">23:58</text>
+</g>
+<rect x="250" y="330" width="420" height="22" fill="#4e342e"/><rect x="270" y="352" width="380" height="80" fill="#3e2723"/>
+<g data-hs="expediente">
+<rect x="290" y="300" width="110" height="30" fill="#f5deb3" stroke="#a1887f" stroke-width="2"/><rect x="296" y="294" width="40" height="10" fill="#f5deb3" stroke="#a1887f" stroke-width="2"/>
+<text x="345" y="321" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="11" fill="#6d4c41">EXPEDIENTE</text>
+</g>
+<g data-hs="portatil">
+<polygon points="440,330 560,330 572,322 428,322" fill="#9e9e9e"/><rect x="448" y="250" width="104" height="72" rx="4" fill="#212121"/><rect x="454" y="256" width="92" height="60" fill="#0d47a1"/>
+<g fill="#90caf9" font-family="monospace" font-size="8"><text x="458" y="270">JOIN ... ON</text><text x="458" y="282">e.id_emp =</text><text x="458" y="294">d.id_emp</text></g>
+</g>
+<g data-hs="lampara">
+<rect x="598" y="318" width="44" height="10" rx="4" fill="#ffb300"/><path d="M620 318 V270" stroke="#ffb300" stroke-width="5"/><polygon points="596,272 644,272 632,240 608,240" fill="#2e7d32"/>
+<text x="620" y="300" text-anchor="middle" font-family="monospace" font-weight="900" font-size="9" fill="#ffecb3">AVG</text>
+</g>
+<g data-hs="archivador">
+<rect x="700" y="230" width="110" height="190" rx="3" fill="#607d8b"/><g fill="#78909c" stroke="#455a64" stroke-width="2"><rect x="708" y="240" width="94" height="52"/><rect x="708" y="300" width="94" height="52"/><rect x="708" y="360" width="94" height="52"/></g>
+<g fill="#cfd8dc"><rect x="740" y="262" width="30" height="7" rx="3"/><rect x="740" y="322" width="30" height="7" rx="3"/><rect x="740" y="382" width="30" height="7" rx="3"/></g>
+<text x="755" y="256" text-anchor="middle" font-family="monospace" font-weight="900" font-size="9" fill="#fff">LEFT</text>
+</g>
+<g data-hs="cajafuerte">
+<rect x="100" y="320" width="120" height="100" rx="6" fill="#455a64" stroke="#263238" stroke-width="4"/>
+<circle cx="160" cy="370" r="26" fill="#90a4ae" stroke="#263238" stroke-width="3"/><path d="M160 370 L160 350" stroke="#263238" stroke-width="4"/>
+<text x="160" y="342" text-anchor="middle" font-family="monospace" font-weight="900" font-size="10" fill="#ffd54f">NOT IN</text>
+</g>
+<g data-hs="puerta">
+<rect x="850" y="110" width="100" height="310" fill="#2b1d16"/><rect x="858" y="118" width="84" height="302" fill="#6d4c41"/>
+<g fill="none" stroke="#4e342e" stroke-width="4"><rect x="870" y="134" width="60" height="110"/><rect x="870" y="258" width="60" height="148"/></g>
+<rect x="878" y="250" width="44" height="30" rx="4" fill="#111" stroke="#ffd54f" stroke-width="2"/><text x="900" y="270" text-anchor="middle" font-family="monospace" font-weight="900" font-size="12" fill="#ffd54f">A-Z</text>
+<circle cx="930" cy="300" r="6" fill="#ffd54f"/>
+</g>
+</svg>

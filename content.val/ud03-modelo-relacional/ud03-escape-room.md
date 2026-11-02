@@ -24,7 +24,7 @@ Un escape room d'**escenes clicables** per a tancar la [UD03](/ud03-modelo-relac
 
 {{< escape-click data="escape_ud03" >}}
 
-## Per al professorat
+## Instruccions
 
 - **Durada:** 30-40 minuts per parelles. L'objectiu de tres estreles és eixir en menys de 40 minuts, comptant penalitzacions.
 - **Dinàmica:** el repte del monitor d'alarmes (esborrat en cascada) i el de la consola (quines operacions es rebutgen) donen molt de joc per a comentar-los en veu alta després. Al final apareix la llista de reptes que han costat més, amb l'enllaç a la teoria.

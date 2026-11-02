@@ -1,0 +1,776 @@
+# Escape room UD06 · Consultas (shortcode escape-click). Escenas: assets/escape/ud06-*.svg · Figuras: assets/escape/fig/ud06-*.svg
+# Los resultados están calculados sobre los datos de las notas (pantalla, monitor y expediente).
+es:
+  title: "Spoiler: ¿quién filtró el final?"
+  sub: "Escape room · UD06 Consultas"
+  target_min: 45
+  intro:
+    - "El último capítulo de *Ático 7*, la serie de moda de la plataforma **Kairos+**, ha aparecido en internet dos días antes del estreno. Te han contratado para revisar los datos y, mientras trabajas de noche en la sede, el edificio se cierra con el modo de seguridad."
+    - "Las puertas solo se abren con consultas bien hechas. Tendrás que salir de la **sala de visionado**, de la **sala de datos** y del **despacho de dirección**… y descubrir **quién filtró el final**."
+  rooms:
+    - id: visionado
+      scene: ud06-visionado
+      name: "Sala de visionado"
+      story: "En la gran pantalla está la tabla EMPLEADO. El teclado de la salida pide **tres dígitos** (🎥 🎞️ 💺) y una **tarjeta** de alguien de la plantilla."
+      hotspots:
+        - id: pantalla
+          kind: note
+          icon: "📺"
+          name: "Pantalla grande"
+          text: "La tabla EMPLEADO de Kairos+. La necesitas para los retos de esta sala (y de las siguientes)."
+          table:
+            caption: "EMPLEADO"
+            head: ["id_emp", "nombre", "depto", "ciudad", "salario", "comision"]
+            rows:
+              - ["1", "Alba", "Marketing", "Valencia", "2100", "`NULL`"]
+              - ["2", "Bruno", "Montaje", "Madrid", "1850", "150"]
+              - ["3", "Carla", "Montaje", "Valencia", "2400", "`NULL`"]
+              - ["4", "Dani", "Sistemas", "Alicante", "2600", "300"]
+              - ["5", "Elena", "Marketing", "Madrid", "1900", "100"]
+              - ["6", "Fran", "Sistemas", "Valencia", "2250", "`NULL`"]
+              - ["7", "Gala", "Montaje", "Alicante", "1700", "100"]
+              - ["8", "Hugo", "Doblaje", "Madrid", "2000", "`NULL`"]
+        - id: proyector
+          kind: puzzle
+          type: number
+          icon: "🎥"
+          name: "Proyector"
+          story: "El proyector tiene cargada esta consulta. Usa los datos de la pantalla."
+          pre: |
+            SELECT nombre
+            FROM   empleado
+            WHERE  depto = 'Montaje' OR depto = 'Sistemas' AND salario > 2300;
+          prompt: "¿Cuántas filas devuelve?"
+          answer: 4
+          hints:
+            - "`AND` tiene más precedencia que `OR`: se evalúa antes."
+            - "La condición equivale a `depto = 'Montaje' OR (depto = 'Sistemas' AND salario > 2300)`."
+          explain: "Como `AND` se evalúa antes que `OR`, salen **todos** los de Montaje (Bruno, Carla y Gala) y los de Sistemas que cobran más de 2300 (Dani): **4** filas. Si querías otra cosa, pon paréntesis: `(depto = 'Montaje' OR depto = 'Sistemas') AND salario > 2300` devuelve 2."
+          ref: "4.3 Operadores lógicos y precedencia"
+          ref_url: "/ud06-consultas/ud06-teoria/#43-operadores-lógicos-y-precedencia"
+          reward: { icon: "🎥", text: "🎥 = **4**" }
+        - id: rollo
+          kind: puzzle
+          type: number
+          icon: "🎞️"
+          name: "Rollo de película"
+          story: "En la etiqueta del rollo hay un patrón escrito a mano."
+          pre: |
+            SELECT nombre FROM empleado WHERE nombre LIKE '_a%';
+          prompt: "¿Cuántas filas devuelve?"
+          answer: 3
+          hints:
+            - "`_` es exactamente **un** carácter cualquiera y `%`, cualquier secuencia (incluso vacía)."
+            - "La condición pide que la **segunda** letra sea una `a` minúscula."
+          explain: "Cumplen el patrón Carla, Dani y Gala: **3** filas. Alba no, porque su segunda letra es una `l` (y en Oracle `LIKE` distingue mayúsculas de minúsculas)."
+          ref: "4.2 Patrones con LIKE"
+          ref_url: "/ud06-consultas/ud06-teoria/#42-patrones-con-like"
+          reward: { icon: "🎞️", text: "🎞️ = **3**" }
+        - id: butaca
+          kind: puzzle
+          type: number
+          icon: "💺"
+          name: "Butaca reservada"
+          story: "En la butaca de la fila 1 hay un cartel que pone `NULL` y, debajo, una consulta:"
+          pre: |
+            SELECT nombre FROM empleado WHERE comision <> 100;
+          prompt: "¿Cuántas filas devuelve?"
+          answer: 2
+          hints:
+            - "¿Qué devuelve `NULL <> 100`: verdadero, falso o desconocido?"
+            - "`WHERE` solo deja pasar las filas en las que la condición es **verdadera**."
+          explain: "Solo salen Bruno (150) y Dani (300): **2** filas. Con `comision` a `NULL` la comparación es **desconocida** y la fila no pasa el filtro. Para incluirlas: `WHERE comision <> 100 OR comision IS NULL` (o `NVL(comision, 0) <> 100`)."
+          ref: "5.1 Lógica de tres valores"
+          ref_url: "/ud06-consultas/ud06-teoria/#51-lógica-de-tres-valores"
+          reward: { icon: "💺", text: "💺 = **2**" }
+        - id: cartel
+          kind: puzzle
+          type: choice
+          icon: "🏆"
+          name: "Cartel TOP 1"
+          story: "El cartel anuncia «el número 1 de la plantilla». La persona que salga te prestará su tarjeta."
+          pre: |
+            SELECT nombre
+            FROM   empleado
+            ORDER  BY ciudad, salario DESC
+            FETCH  FIRST 1 ROWS ONLY;
+          prompt: "¿Qué nombre devuelve?"
+          options: ["Alba", "Dani", "Gala", "Hugo"]
+          answer: 1
+          hints:
+            - "Primero se ordena por `ciudad` (ascendente, porque no dice nada) y, a igualdad de ciudad, por `salario` de mayor a menor."
+            - "Alfabéticamente, Alicante va antes que Madrid y Valencia."
+          explain: "La primera ciudad es **Alicante** (Dani y Gala) y, dentro de ella, el salario más alto es el de **Dani** (2600). `FETCH FIRST 1 ROWS ONLY` se queda con esa fila."
+          ref: "6. Limitar el número de filas"
+          ref_url: "/ud06-consultas/ud06-teoria/#6-limitar-el-número-de-filas"
+          reward: { icon: "🪪", text: "Tarjeta de Dani" }
+        - id: palomitas
+          kind: decoy
+          icon: "🍿"
+          name: "Cubo de palomitas"
+          text: "Palomitas de la última sesión de prueba. Están frías y un poco blandas, pero no hay ninguna pista dentro."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Salida de la sala"
+          needs: [cartel]
+          locked: "El lector de la puerta pide la tarjeta de alguien de la plantilla."
+          story: "Pasas la tarjeta de Dani y el teclado se enciende: tres dígitos, en el orden de las pegatinas."
+          lock: { type: digits, code: "432", order: "🎥 🎞️ 💺" }
+          hints:
+            - "Cada consulta de esta sala devolvía un número de filas. Lo tienes en la mochila."
+          explain: "4 · 3 · 2. Se abre la puerta de la sala de visionado."
+    - id: datos
+      scene: ud06-datos
+      name: "Sala de datos"
+      story: "Aquí se guardan los registros de los visionados internos del final. El teclado pide **cuatro dígitos** (🧮 📊 ⏱️) y el panel de la puerta está bloqueado hasta que alguien corrija la consulta de la pizarra."
+      hotspots:
+        - id: monitor
+          kind: note
+          icon: "🖥️"
+          name: "Monitor de registros"
+          text: "La tabla VISIONADO: quién vio los dos últimos capítulos en los pases internos y cuántos minutos. El visionado de Fran del capítulo 10 se cortó y no se registraron los minutos."
+          table:
+            caption: "VISIONADO"
+            head: ["id_emp", "episodio", "minutos"]
+            rows:
+              - ["1", "9", "50"]
+              - ["1", "10", "52"]
+              - ["2", "9", "48"]
+              - ["2", "10", "52"]
+              - ["3", "9", "50"]
+              - ["4", "10", "52"]
+              - ["5", "9", "30"]
+              - ["6", "9", "50"]
+              - ["6", "10", "`NULL`"]
+              - ["7", "10", "52"]
+        - id: calculadora
+          kind: puzzle
+          type: number
+          icon: "🧮"
+          name: "Calculadora"
+          story: "La calculadora tiene una consulta a medio teclear:"
+          pre: |
+            SELECT COUNT(*), COUNT(minutos)
+            FROM   visionado;
+          prompt: "¿Qué valores devuelve?"
+          fields: ["`COUNT(*)`", "`COUNT(minutos)`"]
+          answer: [10, 9]
+          hints:
+            - "`COUNT(*)` cuenta filas; `COUNT(columna)` cuenta valores **no nulos** de esa columna."
+          explain: "Hay **10** filas, pero solo **9** tienen `minutos`: la de Fran en el capítulo 10 es `NULL`. Todas las funciones de agregado, salvo `COUNT(*)`, ignoran los nulos."
+          ref: "1. Funciones de agregado"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#1-funciones-de-agregado"
+          reward: { icon: "🧮", text: "🧮 = **9** (`COUNT(minutos)`)" }
+        - id: tablero
+          kind: puzzle
+          type: choice
+          icon: "📊"
+          name: "Tablero con el gráfico"
+          story: "Alguien dejó este gráfico en el tablero, pero no la consulta que lo generó."
+          img: ud06-grafico
+          prompt: "¿Qué consulta produce exactamente esos datos?"
+          options:
+            - "`SELECT id_emp, SUM(minutos) FROM visionado GROUP BY id_emp;`"
+            - "`SELECT id_emp, SUM(minutos) FROM visionado GROUP BY id_emp HAVING SUM(minutos) > 50;`"
+            - "`SELECT id_emp, SUM(minutos) FROM visionado WHERE minutos > 50 GROUP BY id_emp;`"
+            - "`SELECT id_emp, SUM(minutos) FROM visionado GROUP BY id_emp HAVING COUNT(*) > 1;`"
+          answer: 1
+          hints:
+            - "Calcula la suma de minutos de cada empleado con los datos del monitor."
+            - "`WHERE` filtra **filas** antes de agrupar; `HAVING` filtra **grupos** después."
+          explain: "Las sumas por empleado son 102, 100, 50, 52, 30, 50 y 52. `HAVING SUM(minutos) > 50` deja los **4** grupos del gráfico. Con `WHERE minutos > 50` se descartarían filas antes de sumar y todas las barras valdrían 52; con `HAVING COUNT(*) > 1` saldrían 1, 2 y 6."
+          ref: "2.3 WHERE frente a HAVING"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#23-orden-de-evaluación-where-frente-a-having"
+          reward: { icon: "📊", text: "📊 = **4** (barras)" }
+        - id: reloj
+          kind: puzzle
+          type: number
+          icon: "⏱️"
+          name: "Reloj AVG"
+          story: "Bajo el reloj, dos medias del capítulo 10 que no coinciden:"
+          pre: |
+            SELECT AVG(minutos),
+                   ROUND(AVG(NVL(minutos, 0)))
+            FROM   visionado
+            WHERE  episodio = 10;
+          prompt: "¿Qué dos valores devuelve?"
+          fields: ["`AVG(minutos)`", "`ROUND(AVG(NVL(minutos, 0)))`"]
+          answer: [52, 42]
+          hints:
+            - "El capítulo 10 tiene 5 filas y una de ellas es `NULL`."
+            - "`AVG` divide entre los valores **no nulos**; con `NVL(minutos, 0)` el nulo cuenta como 0."
+          explain: "`AVG(minutos)` = 208 / 4 = **52** (ignora el nulo). Con `NVL` el nulo pasa a valer 0: 208 / 5 = 41,6, que se redondea a **42**. Elegir una u otra depende de lo que signifique el nulo."
+          ref: "1.6 Errores habituales con los agregados"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#16-errores-habituales-con-los-agregados"
+          reward: { icon: "⏱️", text: "⏱️ = **42**" }
+        - id: pizarra
+          kind: puzzle
+          type: choice
+          icon: "🧑‍🏫"
+          name: "Pizarra con un error"
+          story: "En la pizarra hay una consulta subrayada en rojo con un «?!». El panel de la puerta no se desbloquea hasta que se diagnostique."
+          pre: |
+            SELECT id_emp, episodio, SUM(minutos)
+            FROM   visionado
+            GROUP  BY id_emp;
+          prompt: "¿Qué le pasa?"
+          options:
+            - "Nada: devuelve la suma de minutos de cada empleado"
+            - "Da error: `episodio` aparece en el `SELECT` sin estar en el `GROUP BY` ni dentro de un agregado (ORA-00979)"
+            - "Da error porque `SUM` no se puede usar con `GROUP BY`"
+            - "Funciona, pero solo muestra el primer episodio de cada empleado"
+          answer: 1
+          hints:
+            - "Tras agrupar, cada grupo es **una** fila. ¿Qué episodio pondría Oracle en el grupo del empleado 1, que vio el 9 y el 10?"
+          explain: "Todo lo que aparece en el `SELECT` debe estar en el `GROUP BY` o dentro de un agregado. Oracle responde **ORA-00979: no es una expresión GROUP BY**. Se arregla con `GROUP BY id_emp, episodio` o quitando `episodio`."
+          ref: "2.2 Qué puede aparecer en el SELECT"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#22-qué-puede-aparecer-en-el-select"
+          reward: { icon: "🔓", text: "Panel de la puerta desbloqueado" }
+        - id: planta
+          kind: decoy
+          icon: "🪴"
+          name: "Planta"
+          text: "Una planta de plástico. La única cosa de la sala que no tiene datos."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Puerta de la sala de datos"
+          needs: [pizarra]
+          locked: "El panel de la puerta está bloqueado: primero hay que diagnosticar la consulta de la pizarra."
+          story: "Cuatro dígitos, en el orden 🧮 📊 ⏱️ (el reloj aporta dos)."
+          lock: { type: digits, code: "9442", order: "🧮 📊 ⏱️" }
+          hints:
+            - "🧮 da un dígito, 📊 otro y ⏱️ los dos últimos."
+          explain: "9 · 4 · 42. Se abre la puerta y al fondo del pasillo ves el despacho de dirección."
+    - id: direccion
+      scene: ud06-direccion
+      name: "Despacho de dirección"
+      story: "El final se subió a internet a las **23:58** desde la sala de servidores. La puerta del despacho tiene un **candado de letras**: solo se abre con el **nombre** de quien lo filtró. Antes de acusar, reúne todas las pruebas."
+      hotspots:
+        - id: expediente
+          kind: note
+          icon: "🗂️"
+          name: "Expediente"
+          text: "El expediente de seguridad de la noche del jueves. Incluye las descargas del archivo del capítulo final y las entradas con tarjeta en las salas. La descarga 4 se hizo con una cuenta genérica, sin empleado asociado."
+          img: ud06-noche
+          table:
+            - caption: "DESCARGA"
+              head: ["id_desc", "id_emp", "episodio", "hora"]
+              rows: [["1", "2", "10", "22:05"], ["2", "4", "10", "22:40"], ["3", "7", "10", "23:10"], ["4", "`NULL`", "10", "23:55"], ["5", "4", "9", "21:00"]]
+            - caption: "ACCESO"
+              head: ["id_emp", "sala", "hora_entrada"]
+              rows: [["4", "Servidores", "22:30"], ["7", "Servidores", "23:00"], ["8", "Servidores", "23:50"], ["3", "Cafeteria", "23:45"]]
+            - caption: "EMPLEADO (resumen)"
+              head: ["id_emp", "nombre"]
+              rows: [["1", "Alba"], ["2", "Bruno"], ["3", "Carla"], ["4", "Dani"], ["5", "Elena"], ["6", "Fran"], ["7", "Gala"], ["8", "Hugo"]]
+        - id: portatil
+          kind: puzzle
+          type: number
+          icon: "💻"
+          name: "Portátil"
+          story: "Primera prueba: quién descargó el capítulo final con su propia cuenta."
+          pre: |
+            SELECT e.nombre, d.hora
+            FROM   empleado e
+                   JOIN descarga d ON d.id_emp = e.id_emp
+            WHERE  d.episodio = 10;
+          prompt: "¿Cuántas filas devuelve?"
+          answer: 3
+          hints:
+            - "Un `JOIN` interno solo devuelve las parejas que cumplen la condición `ON`."
+            - "La descarga con `id_emp` a `NULL` no tiene pareja en EMPLEADO."
+          explain: "Salen Bruno, Dani y Gala: **3** filas. La descarga anónima (`id_emp` `NULL`) desaparece del resultado porque `NULL = cualquier cosa` nunca es verdadero."
+          ref: "3. Composiciones internas"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#3-composiciones-internas-inner-join"
+          reward: { icon: "💻", text: "Prueba 1: 3 descargas con nombre" }
+        - id: archivador
+          kind: puzzle
+          type: number
+          icon: "🗄️"
+          name: "Archivador LEFT"
+          story: "Segunda prueba: quién **no** descargó nada."
+          img: ud06-left-join
+          pre: |
+            SELECT e.nombre, COUNT(d.id_desc)
+            FROM   empleado e
+                   LEFT JOIN descarga d ON d.id_emp = e.id_emp
+            GROUP  BY e.nombre
+            HAVING COUNT(d.id_desc) = 0;
+          prompt: "¿Cuántas filas devuelve?"
+          answer: 5
+          hints:
+            - "`LEFT JOIN` conserva todos los empleados; los que no tienen descargas llevan `NULL` en las columnas de `d`."
+            - "`COUNT(d.id_desc)` no cuenta los nulos, así que vale 0 para quien no tiene descargas."
+          explain: "Bruno, Dani y Gala tienen descargas; los otros **5** (Alba, Carla, Elena, Fran y Hugo), no. Con `COUNT(*)` en lugar de `COUNT(d.id_desc)` todos tendrían al menos 1 y no saldría nadie."
+          ref: "4.3 COUNT en una composición externa"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#43-count-en-una-composición-externa-count-frente-a-countcolumna"
+          reward: { icon: "🗄️", text: "Prueba 2: 5 sin descargas" }
+        - id: cajafuerte
+          kind: puzzle
+          type: number
+          icon: "🔒"
+          name: "Caja fuerte NOT IN"
+          story: "Tercera prueba: un becario intentó lo mismo que el archivador con una subconsulta… y la caja fuerte se quedó en blanco."
+          pre: |
+            SELECT nombre
+            FROM   empleado
+            WHERE  id_emp NOT IN (SELECT id_emp FROM descarga);
+          prompt: "¿Cuántas filas devuelve?"
+          answer: 0
+          hints:
+            - "¿Hay algún `NULL` en la lista que devuelve la subconsulta?"
+            - "`x NOT IN (2, 4, 7, NULL)` equivale a `x <> 2 AND x <> 4 AND x <> 7 AND x <> NULL`."
+          explain: "La subconsulta devuelve un `NULL` (la descarga anónima). `id_emp <> NULL` es desconocido, así que la condición nunca es verdadera: **0** filas. Es la trampa de `NOT IN` con nulos; usa `NOT EXISTS` o añade `WHERE id_emp IS NOT NULL` a la subconsulta."
+          ref: "6.4 La trampa de NOT IN con nulos"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#64-la-trampa-de-not-in-con-nulos"
+          reward: { icon: "🔒", text: "Prueba 3: cuidado con `NOT IN`" }
+        - id: lampara
+          kind: puzzle
+          type: number
+          icon: "💡"
+          name: "Lámpara AVG"
+          story: "Cuarta prueba: quién cobra por encima de la media (el filtrador podría haber cobrado por el vídeo… o no)."
+          pre: |
+            SELECT nombre
+            FROM   empleado
+            WHERE  salario > (SELECT AVG(salario) FROM empleado);
+          prompt: "¿Cuántas filas devuelve?"
+          answer: 3
+          hints:
+            - "Primero calcula la subconsulta: la media de los 8 salarios de la pantalla."
+            - "La media es exactamente 2100, y la condición es «mayor que»."
+          explain: "La media es 16 800 / 8 = 2100. La superan Carla, Dani y Fran: **3** filas (Alba cobra exactamente 2100 y no entra). Es una subconsulta **de una fila**: devuelve un solo valor."
+          ref: "6.2 Subconsultas de una fila"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#62-subconsultas-de-una-fila"
+          reward: { icon: "💡", text: "Prueba 4: 3 por encima de la media" }
+        - id: corcho
+          kind: puzzle
+          type: number
+          icon: "📌"
+          name: "Corcho con la línea de tiempo"
+          story: "En el corcho, la última consulta: quién entró en la sala de servidores después de las 23:30, justo antes de la descarga anónima de las 23:55."
+          pre: |
+            SELECT a.id_emp
+            FROM   acceso a
+            WHERE  a.sala = 'Servidores'
+            AND    a.hora_entrada > '23:30';
+          prompt: "¿Qué `id_emp` devuelve?"
+          answer: 8
+          hints:
+            - "Busca en la tabla ACCESO del expediente."
+            - "Solo hay un acceso a Servidores después de las 23:30."
+          explain: "Devuelve el **8**. Para ver el nombre directamente habría que componer con EMPLEADO: `JOIN empleado e ON e.id_emp = a.id_emp`."
+          ref: "3.3 Sintaxis JOIN … ON"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#33-sintaxis-join--on"
+          reward: { icon: "📌", text: "Sospechoso: `id_emp = 8`" }
+        - id: ventana
+          kind: decoy
+          icon: "🌃"
+          name: "Ventana"
+          text: "La ciudad duerme. En el edificio de enfrente alguien también está viendo una serie a estas horas."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Puerta del despacho"
+          needs: [portatil, archivador, cajafuerte, lampara]
+          locked: "Antes de acusar a nadie necesitas las cuatro pruebas: portátil, archivador, caja fuerte y lámpara."
+          story: "Con las pruebas en la mano, el candado de letras espera el **nombre** de quien estaba en la sala de servidores cuando se usó la cuenta anónima."
+          lock: { type: letters, code: "HUGO" }
+          hints:
+            - "El corcho te da un `id_emp`; el expediente, su nombre."
+            - "Es la única persona de Doblaje."
+          explain: "**HUGO**, de Doblaje, entró en la sala de servidores a las 23:50, se descargó el final con la cuenta genérica a las 23:55 y lo subió a las 23:58. Caso cerrado."
+  ending:
+    title: "¡Caso cerrado y tú fuera!"
+    text:
+      - "La dirección de Kairos+ te da las gracias: el estreno sigue adelante y el expediente ya está en manos del departamento legal."
+      - "Has usado `WHERE`, `LIKE`, `NULL`, agregados, `GROUP BY`, `HAVING`, composiciones y subconsultas. Con eso ya puedes contestar casi cualquier pregunta a una base de datos."
+val:
+  title: "Spoiler: qui va filtrar el final?"
+  sub: "Escape room · UD06 Consultes"
+  target_min: 45
+  intro:
+    - "L'últim capítol d'*Àtic 7*, la sèrie de moda de la plataforma **Kairos+**, ha aparegut en internet dos dies abans de l'estrena. T'han contractat per a revisar les dades i, mentre treballes de nit a la seu, l'edifici es tanca amb el mode de seguretat."
+    - "Les portes només s'obrin amb consultes ben fetes. Hauràs d'eixir de la **sala de visionat**, de la **sala de dades** i del **despatx de direcció**… i descobrir **qui va filtrar el final**."
+  rooms:
+    - id: visionado
+      scene: ud06-visionado
+      name: "Sala de visionat"
+      story: "En la pantalla gran està la taula EMPLEADO. El teclat de l'eixida demana **tres dígits** (🎥 🎞️ 💺) i una **targeta** d'algú de la plantilla."
+      hotspots:
+        - id: pantalla
+          kind: note
+          icon: "📺"
+          name: "Pantalla gran"
+          text: "La taula EMPLEADO de Kairos+. La necessites per als reptes d'esta sala (i de les següents)."
+          table:
+            caption: "EMPLEADO"
+            head: ["id_emp", "nombre", "depto", "ciudad", "salario", "comision"]
+            rows:
+              - ["1", "Alba", "Marketing", "Valencia", "2100", "`NULL`"]
+              - ["2", "Bruno", "Montaje", "Madrid", "1850", "150"]
+              - ["3", "Carla", "Montaje", "Valencia", "2400", "`NULL`"]
+              - ["4", "Dani", "Sistemas", "Alicante", "2600", "300"]
+              - ["5", "Elena", "Marketing", "Madrid", "1900", "100"]
+              - ["6", "Fran", "Sistemas", "Valencia", "2250", "`NULL`"]
+              - ["7", "Gala", "Montaje", "Alicante", "1700", "100"]
+              - ["8", "Hugo", "Doblaje", "Madrid", "2000", "`NULL`"]
+        - id: proyector
+          kind: puzzle
+          type: number
+          icon: "🎥"
+          name: "Projector"
+          story: "El projector té carregada esta consulta. Usa les dades de la pantalla."
+          pre: |
+            SELECT nombre
+            FROM   empleado
+            WHERE  depto = 'Montaje' OR depto = 'Sistemas' AND salario > 2300;
+          prompt: "Quantes files torna?"
+          answer: 4
+          hints:
+            - "`AND` té més precedència que `OR`: s'avalua abans."
+            - "La condició equival a `depto = 'Montaje' OR (depto = 'Sistemas' AND salario > 2300)`."
+          explain: "Com que `AND` s'avalua abans que `OR`, ixen **tots** els de Montaje (Bruno, Carla i Gala) i els de Sistemas que cobren més de 2300 (Dani): **4** files. Si volies una altra cosa, posa parèntesis: `(depto = 'Montaje' OR depto = 'Sistemas') AND salario > 2300` en torna 2."
+          ref: "4.3 Operadors lògics i precedència"
+          ref_url: "/ud06-consultas/ud06-teoria/#43-operadors-lògics-i-precedència"
+          reward: { icon: "🎥", text: "🎥 = **4**" }
+        - id: rollo
+          kind: puzzle
+          type: number
+          icon: "🎞️"
+          name: "Rotlle de pel·lícula"
+          story: "En l'etiqueta del rotlle hi ha un patró escrit a mà."
+          pre: |
+            SELECT nombre FROM empleado WHERE nombre LIKE '_a%';
+          prompt: "Quantes files torna?"
+          answer: 3
+          hints:
+            - "`_` és exactament **un** caràcter qualsevol i `%`, qualsevol seqüència (fins i tot buida)."
+            - "La condició demana que la **segona** lletra siga una `a` minúscula."
+          explain: "Complixen el patró Carla, Dani i Gala: **3** files. Alba no, perquè la seua segona lletra és una `l` (i en Oracle `LIKE` distingix majúscules de minúscules)."
+          ref: "4.2 Patrons amb LIKE"
+          ref_url: "/ud06-consultas/ud06-teoria/#42-patrons-amb-like"
+          reward: { icon: "🎞️", text: "🎞️ = **3**" }
+        - id: butaca
+          kind: puzzle
+          type: number
+          icon: "💺"
+          name: "Butaca reservada"
+          story: "En la butaca de la fila 1 hi ha un cartell que posa `NULL` i, davall, una consulta:"
+          pre: |
+            SELECT nombre FROM empleado WHERE comision <> 100;
+          prompt: "Quantes files torna?"
+          answer: 2
+          hints:
+            - "Què torna `NULL <> 100`: vertader, fals o desconegut?"
+            - "`WHERE` només deixa passar les files en què la condició és **vertadera**."
+          explain: "Només ixen Bruno (150) i Dani (300): **2** files. Amb `comision` a `NULL` la comparació és **desconeguda** i la fila no passa el filtre. Per a incloure-les: `WHERE comision <> 100 OR comision IS NULL` (o `NVL(comision, 0) <> 100`)."
+          ref: "5.1 Lògica de tres valors"
+          ref_url: "/ud06-consultas/ud06-teoria/#51-lògica-de-tres-valors"
+          reward: { icon: "💺", text: "💺 = **2**" }
+        - id: cartel
+          kind: puzzle
+          type: choice
+          icon: "🏆"
+          name: "Cartell TOP 1"
+          story: "El cartell anuncia «el número 1 de la plantilla». La persona que isca et deixarà la seua targeta."
+          pre: |
+            SELECT nombre
+            FROM   empleado
+            ORDER  BY ciudad, salario DESC
+            FETCH  FIRST 1 ROWS ONLY;
+          prompt: "Quin nom torna?"
+          options: ["Alba", "Dani", "Gala", "Hugo"]
+          answer: 1
+          hints:
+            - "Primer s'ordena per `ciudad` (ascendent, perquè no diu res) i, a igualtat de ciutat, per `salario` de major a menor."
+            - "Alfabèticament, Alicante va abans que Madrid i Valencia."
+          explain: "La primera ciutat és **Alicante** (Dani i Gala) i, dins d'ella, el salari més alt és el de **Dani** (2600). `FETCH FIRST 1 ROWS ONLY` es queda amb eixa fila."
+          ref: "6. Limitar el nombre de files"
+          ref_url: "/ud06-consultas/ud06-teoria/#6-limitar-el-nombre-de-files"
+          reward: { icon: "🪪", text: "Targeta de Dani" }
+        - id: palomitas
+          kind: decoy
+          icon: "🍿"
+          name: "Cubell de crispetes"
+          text: "Crispetes de l'última sessió de prova. Estan fredes i un poc blanes, però no hi ha cap pista dins."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Eixida de la sala"
+          needs: [cartel]
+          locked: "El lector de la porta demana la targeta d'algú de la plantilla."
+          story: "Passes la targeta de Dani i el teclat s'encén: tres dígits, en l'ordre dels adhesius."
+          lock: { type: digits, code: "432", order: "🎥 🎞️ 💺" }
+          hints:
+            - "Cada consulta d'esta sala tornava un nombre de files. El tens en la motxilla."
+          explain: "4 · 3 · 2. S'obri la porta de la sala de visionat."
+    - id: datos
+      scene: ud06-datos
+      name: "Sala de dades"
+      story: "Ací es guarden els registres dels visionats interns del final. El teclat demana **quatre dígits** (🧮 📊 ⏱️) i el panell de la porta està bloquejat fins que algú corregisca la consulta de la pissarra."
+      hotspots:
+        - id: monitor
+          kind: note
+          icon: "🖥️"
+          name: "Monitor de registres"
+          text: "La taula VISIONADO: qui va veure els dos últims capítols en els passes interns i quants minuts. El visionat de Fran del capítol 10 es va tallar i no es van registrar els minuts."
+          table:
+            caption: "VISIONADO"
+            head: ["id_emp", "episodio", "minutos"]
+            rows:
+              - ["1", "9", "50"]
+              - ["1", "10", "52"]
+              - ["2", "9", "48"]
+              - ["2", "10", "52"]
+              - ["3", "9", "50"]
+              - ["4", "10", "52"]
+              - ["5", "9", "30"]
+              - ["6", "9", "50"]
+              - ["6", "10", "`NULL`"]
+              - ["7", "10", "52"]
+        - id: calculadora
+          kind: puzzle
+          type: number
+          icon: "🧮"
+          name: "Calculadora"
+          story: "La calculadora té una consulta a mig teclejar:"
+          pre: |
+            SELECT COUNT(*), COUNT(minutos)
+            FROM   visionado;
+          prompt: "Quins valors torna?"
+          fields: ["`COUNT(*)`", "`COUNT(minutos)`"]
+          answer: [10, 9]
+          hints:
+            - "`COUNT(*)` compta files; `COUNT(columna)` compta valors **no nuls** d'eixa columna."
+          explain: "Hi ha **10** files, però només **9** tenen `minutos`: la de Fran en el capítol 10 és `NULL`. Totes les funcions d'agregat, excepte `COUNT(*)`, ignoren els nuls."
+          ref: "1. Funcions d'agregat"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#1-funcions-dagregat"
+          reward: { icon: "🧮", text: "🧮 = **9** (`COUNT(minutos)`)" }
+        - id: tablero
+          kind: puzzle
+          type: choice
+          icon: "📊"
+          name: "Tauler amb el gràfic"
+          story: "Algú va deixar este gràfic en el tauler, però no la consulta que el va generar."
+          img: ud06-grafico
+          prompt: "Quina consulta produïx exactament eixes dades?"
+          options:
+            - "`SELECT id_emp, SUM(minutos) FROM visionado GROUP BY id_emp;`"
+            - "`SELECT id_emp, SUM(minutos) FROM visionado GROUP BY id_emp HAVING SUM(minutos) > 50;`"
+            - "`SELECT id_emp, SUM(minutos) FROM visionado WHERE minutos > 50 GROUP BY id_emp;`"
+            - "`SELECT id_emp, SUM(minutos) FROM visionado GROUP BY id_emp HAVING COUNT(*) > 1;`"
+          answer: 1
+          hints:
+            - "Calcula la suma de minuts de cada empleat amb les dades del monitor."
+            - "`WHERE` filtra **files** abans d'agrupar; `HAVING` filtra **grups** després."
+          explain: "Les sumes per empleat són 102, 100, 50, 52, 30, 50 i 52. `HAVING SUM(minutos) > 50` deixa els **4** grups del gràfic. Amb `WHERE minutos > 50` es descartarien files abans de sumar i totes les barres valdrien 52; amb `HAVING COUNT(*) > 1` eixirien 1, 2 i 6."
+          ref: "2.3 WHERE enfront de HAVING"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#23-ordre-davaluació-where-enfront-de-having"
+          reward: { icon: "📊", text: "📊 = **4** (barres)" }
+        - id: reloj
+          kind: puzzle
+          type: number
+          icon: "⏱️"
+          name: "Rellotge AVG"
+          story: "Davall del rellotge, dos mitjanes del capítol 10 que no coincidixen:"
+          pre: |
+            SELECT AVG(minutos),
+                   ROUND(AVG(NVL(minutos, 0)))
+            FROM   visionado
+            WHERE  episodio = 10;
+          prompt: "Quins dos valors torna?"
+          fields: ["`AVG(minutos)`", "`ROUND(AVG(NVL(minutos, 0)))`"]
+          answer: [52, 42]
+          hints:
+            - "El capítol 10 té 5 files i una d'elles és `NULL`."
+            - "`AVG` dividix entre els valors **no nuls**; amb `NVL(minutos, 0)` el nul compta com a 0."
+          explain: "`AVG(minutos)` = 208 / 4 = **52** (ignora el nul). Amb `NVL` el nul passa a valdre 0: 208 / 5 = 41,6, que s'arredonix a **42**. Triar una o l'altra depén del que signifique el nul."
+          ref: "1.6 Errors habituals amb els agregats"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#16-errors-habituals-amb-els-agregats"
+          reward: { icon: "⏱️", text: "⏱️ = **42**" }
+        - id: pizarra
+          kind: puzzle
+          type: choice
+          icon: "🧑‍🏫"
+          name: "Pissarra amb un error"
+          story: "En la pissarra hi ha una consulta subratllada en roig amb un «?!». El panell de la porta no es desbloqueja fins que es diagnostique."
+          pre: |
+            SELECT id_emp, episodio, SUM(minutos)
+            FROM   visionado
+            GROUP  BY id_emp;
+          prompt: "Què li passa?"
+          options:
+            - "Res: torna la suma de minuts de cada empleat"
+            - "Dona error: `episodio` apareix en el `SELECT` sense estar en el `GROUP BY` ni dins d'un agregat (ORA-00979)"
+            - "Dona error perquè `SUM` no es pot usar amb `GROUP BY`"
+            - "Funciona, però només mostra el primer episodi de cada empleat"
+          answer: 1
+          hints:
+            - "Després d'agrupar, cada grup és **una** fila. Quin episodi posaria Oracle en el grup de l'empleat 1, que va veure el 9 i el 10?"
+          explain: "Tot el que apareix en el `SELECT` ha d'estar en el `GROUP BY` o dins d'un agregat. Oracle respon **ORA-00979: no és una expressió GROUP BY**. S'arregla amb `GROUP BY id_emp, episodio` o llevant `episodio`."
+          ref: "2.2 Què pot aparéixer al SELECT"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#22-què-pot-aparéixer-al-select"
+          reward: { icon: "🔓", text: "Panell de la porta desbloquejat" }
+        - id: planta
+          kind: decoy
+          icon: "🪴"
+          name: "Planta"
+          text: "Una planta de plàstic. L'única cosa de la sala que no té dades."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Porta de la sala de dades"
+          needs: [pizarra]
+          locked: "El panell de la porta està bloquejat: primer cal diagnosticar la consulta de la pissarra."
+          story: "Quatre dígits, en l'ordre 🧮 📊 ⏱️ (el rellotge n'aporta dos)."
+          lock: { type: digits, code: "9442", order: "🧮 📊 ⏱️" }
+          hints:
+            - "🧮 dona un dígit, 📊 un altre i ⏱️ els dos últims."
+          explain: "9 · 4 · 42. S'obri la porta i al fons del corredor veus el despatx de direcció."
+    - id: direccion
+      scene: ud06-direccion
+      name: "Despatx de direcció"
+      story: "El final es va pujar a internet a les **23:58** des de la sala de servidors. La porta del despatx té un **cadenat de lletres**: només s'obri amb el **nom** de qui el va filtrar. Abans d'acusar, reunix totes les proves."
+      hotspots:
+        - id: expediente
+          kind: note
+          icon: "🗂️"
+          name: "Expedient"
+          text: "L'expedient de seguretat de la nit de dijous. Inclou les descàrregues de l'arxiu del capítol final i les entrades amb targeta en les sales. La descàrrega 4 es va fer amb un compte genèric, sense empleat associat."
+          img: ud06-noche
+          img_text: [["La noche del jueves", "La nit de dijous"], ["descarga anónima", "descàrrega anònima"], [" descarga<", " descàrrega<"], [" acceso<", " accés<"], ["¡filtración!", "filtració!"]]
+          table:
+            - caption: "DESCARGA"
+              head: ["id_desc", "id_emp", "episodio", "hora"]
+              rows: [["1", "2", "10", "22:05"], ["2", "4", "10", "22:40"], ["3", "7", "10", "23:10"], ["4", "`NULL`", "10", "23:55"], ["5", "4", "9", "21:00"]]
+            - caption: "ACCESO"
+              head: ["id_emp", "sala", "hora_entrada"]
+              rows: [["4", "Servidores", "22:30"], ["7", "Servidores", "23:00"], ["8", "Servidores", "23:50"], ["3", "Cafeteria", "23:45"]]
+            - caption: "EMPLEADO (resum)"
+              head: ["id_emp", "nombre"]
+              rows: [["1", "Alba"], ["2", "Bruno"], ["3", "Carla"], ["4", "Dani"], ["5", "Elena"], ["6", "Fran"], ["7", "Gala"], ["8", "Hugo"]]
+        - id: portatil
+          kind: puzzle
+          type: number
+          icon: "💻"
+          name: "Portàtil"
+          story: "Primera prova: qui va descarregar el capítol final amb el seu propi compte."
+          pre: |
+            SELECT e.nombre, d.hora
+            FROM   empleado e
+                   JOIN descarga d ON d.id_emp = e.id_emp
+            WHERE  d.episodio = 10;
+          prompt: "Quantes files torna?"
+          answer: 3
+          hints:
+            - "Un `JOIN` intern només torna les parelles que complixen la condició `ON`."
+            - "La descàrrega amb `id_emp` a `NULL` no té parella en EMPLEADO."
+          explain: "Ixen Bruno, Dani i Gala: **3** files. La descàrrega anònima (`id_emp` `NULL`) desapareix del resultat perquè `NULL = qualsevol cosa` mai no és vertader."
+          ref: "3. Composicions internes"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#3-composicions-internes-inner-join"
+          reward: { icon: "💻", text: "Prova 1: 3 descàrregues amb nom" }
+        - id: archivador
+          kind: puzzle
+          type: number
+          icon: "🗄️"
+          name: "Arxivador LEFT"
+          story: "Segona prova: qui **no** va descarregar res."
+          img: ud06-left-join
+          img_text: [["todas las filas de e, con o sin pareja en d", "totes les files d'e, amb parella en d o sense"]]
+          pre: |
+            SELECT e.nombre, COUNT(d.id_desc)
+            FROM   empleado e
+                   LEFT JOIN descarga d ON d.id_emp = e.id_emp
+            GROUP  BY e.nombre
+            HAVING COUNT(d.id_desc) = 0;
+          prompt: "Quantes files torna?"
+          answer: 5
+          hints:
+            - "`LEFT JOIN` conserva tots els empleats; els que no tenen descàrregues porten `NULL` en les columnes de `d`."
+            - "`COUNT(d.id_desc)` no compta els nuls, així que val 0 per a qui no té descàrregues."
+          explain: "Bruno, Dani i Gala tenen descàrregues; els altres **5** (Alba, Carla, Elena, Fran i Hugo), no. Amb `COUNT(*)` en lloc de `COUNT(d.id_desc)` tots en tindrien almenys 1 i no n'eixiria cap."
+          ref: "4.3 COUNT en una composició externa"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#43-count-en-una-composició-externa-count-enfront-de-countcolumna"
+          reward: { icon: "🗄️", text: "Prova 2: 5 sense descàrregues" }
+        - id: cajafuerte
+          kind: puzzle
+          type: number
+          icon: "🔒"
+          name: "Caixa forta NOT IN"
+          story: "Tercera prova: un becari va intentar el mateix que l'arxivador amb una subconsulta… i la caixa forta es va quedar en blanc."
+          pre: |
+            SELECT nombre
+            FROM   empleado
+            WHERE  id_emp NOT IN (SELECT id_emp FROM descarga);
+          prompt: "Quantes files torna?"
+          answer: 0
+          hints:
+            - "Hi ha algun `NULL` en la llista que torna la subconsulta?"
+            - "`x NOT IN (2, 4, 7, NULL)` equival a `x <> 2 AND x <> 4 AND x <> 7 AND x <> NULL`."
+          explain: "La subconsulta torna un `NULL` (la descàrrega anònima). `id_emp <> NULL` és desconegut, així que la condició mai no és vertadera: **0** files. És la trampa de `NOT IN` amb nuls; usa `NOT EXISTS` o afig `WHERE id_emp IS NOT NULL` a la subconsulta."
+          ref: "6.4 La trampa de NOT IN amb nuls"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#64-la-trampa-de-not-in-amb-nuls"
+          reward: { icon: "🔒", text: "Prova 3: compte amb `NOT IN`" }
+        - id: lampara
+          kind: puzzle
+          type: number
+          icon: "💡"
+          name: "Làmpada AVG"
+          story: "Quarta prova: qui cobra per damunt de la mitjana (el filtrador podria haver cobrat pel vídeo… o no)."
+          pre: |
+            SELECT nombre
+            FROM   empleado
+            WHERE  salario > (SELECT AVG(salario) FROM empleado);
+          prompt: "Quantes files torna?"
+          answer: 3
+          hints:
+            - "Primer calcula la subconsulta: la mitjana dels 8 salaris de la pantalla."
+            - "La mitjana és exactament 2100, i la condició és «major que»."
+          explain: "La mitjana és 16 800 / 8 = 2100. La superen Carla, Dani i Fran: **3** files (Alba cobra exactament 2100 i no hi entra). És una subconsulta **d'una fila**: torna un sol valor."
+          ref: "6.2 Subconsultes d'una fila"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#62-subconsultes-duna-fila"
+          reward: { icon: "💡", text: "Prova 4: 3 per damunt de la mitjana" }
+        - id: corcho
+          kind: puzzle
+          type: number
+          icon: "📌"
+          name: "Suro amb la línia de temps"
+          story: "En el suro, l'última consulta: qui va entrar en la sala de servidors després de les 23:30, just abans de la descàrrega anònima de les 23:55."
+          pre: |
+            SELECT a.id_emp
+            FROM   acceso a
+            WHERE  a.sala = 'Servidores'
+            AND    a.hora_entrada > '23:30';
+          prompt: "Quin `id_emp` torna?"
+          answer: 8
+          hints:
+            - "Busca en la taula ACCESO de l'expedient."
+            - "Només hi ha un accés a Servidores després de les 23:30."
+          explain: "Torna el **8**. Per a veure el nom directament caldria compondre amb EMPLEADO: `JOIN empleado e ON e.id_emp = a.id_emp`."
+          ref: "3.3 Sintaxi JOIN … ON"
+          ref_url: "/ud06-consultas/ud06-teoria-avanzada/#33-sintaxi-join--on"
+          reward: { icon: "📌", text: "Sospitós: `id_emp = 8`" }
+        - id: ventana
+          kind: decoy
+          icon: "🌃"
+          name: "Finestra"
+          text: "La ciutat dorm. En l'edifici d'enfront algú també està veient una sèrie a estes hores."
+        - id: puerta
+          kind: door
+          icon: "🚪"
+          name: "Porta del despatx"
+          needs: [portatil, archivador, cajafuerte, lampara]
+          locked: "Abans d'acusar ningú necessites les quatre proves: portàtil, arxivador, caixa forta i làmpada."
+          story: "Amb les proves a la mà, el cadenat de lletres espera el **nom** de qui estava en la sala de servidors quan es va usar el compte anònim."
+          lock: { type: letters, code: "HUGO" }
+          hints:
+            - "El suro et dona un `id_emp`; l'expedient, el seu nom."
+            - "És l'única persona de Doblaje."
+          explain: "**HUGO**, de Doblaje, va entrar en la sala de servidors a les 23:50, es va descarregar el final amb el compte genèric a les 23:55 i el va pujar a les 23:58. Cas tancat."
+  ending:
+    title: "Cas tancat i tu fora!"
+    text:
+      - "La direcció de Kairos+ et dona les gràcies: l'estrena continua avant i l'expedient ja està en mans del departament legal."
+      - "Has usat `WHERE`, `LIKE`, `NULL`, agregats, `GROUP BY`, `HAVING`, composicions i subconsultes. Amb això ja pots contestar quasi qualsevol pregunta a una base de dades."

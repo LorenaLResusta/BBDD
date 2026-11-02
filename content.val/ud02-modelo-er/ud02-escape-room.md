@@ -24,7 +24,7 @@ Un escape room d'**escenes clicables** per a tancar la [UD02](/ud02-modelo-er/).
 
 {{< escape-click data="escape_ud02" >}}
 
-## Per al professorat
+## Instruccions
 
 - **Durada:** 25-35 minuts per parelles. L'objectiu de tres estreles és eixir en menys de 35 minuts, comptant penalitzacions.
 - **Dinàmica:** funciona bé projectat a classe, amb les parelles proposant la resposta abans de prémer *Comprovar*. Al final apareix la llista de reptes que han costat més, amb l'enllaç a la teoria.
