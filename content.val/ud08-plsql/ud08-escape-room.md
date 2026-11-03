@@ -30,4 +30,3 @@ Un escape room d'**escenes clicables** per a tancar la [UD08](/ud08-plsql/). Les
 - **Com jugar:** resoleu els reptes de cada sala, guardeu els resultats en la motxilla i combineu-los en el cadenat. Algunes portes exigixen a més haver resolt certs objectes (🔒).
 - **Per a comprovar-ho en Oracle:** tots els blocs són executables amb `SET SERVEROUTPUT ON` si creeu les taules TRIPULANTE i SENSOR amb les dades de les notes.
 - **En acabar:** la pantalla final mostra el temps, les estreles i els reptes que més us han costat, amb l'enllaç a la teoria.
-- **Contingut:** `data/escape_ud08.yaml`, escenes en `assets/escape/ud08-*.svg` i diagrames en `assets/escape/fig/ud08-*.svg`.

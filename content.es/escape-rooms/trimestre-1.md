@@ -29,4 +29,3 @@ El escape room de **cierre del primer trimestre**: un repaso antes del examen de
 - **Duración:** 30-45 minutos por parejas. Está pensado como repaso final del trimestre, en la última sesión antes del examen de la 1.ª evaluación (3 y 4 de diciembre). Las unidades tienen sus propios escape rooms de escenas: [UD02](/ud02-modelo-er/ud02-escape-room) y [UD03](/ud03-modelo-relacional/ud03-escape-room).
 - **Pistas clave:** tres de las pistas descartan a dos de los tres sospechosos. Pide al alumnado que justifique la acusación **con las pistas**, no por intuición.
 - **Progreso:** se guarda en el navegador de cada alumno; el botón *Empezar de nuevo* lo borra.
-- **Contenido:** los textos están en `data/escape_ud02_ud03.json` (castellano y valenciano). Para añadir una sala basta con añadir un elemento a `puzzles`, con uno de los cinco tipos (`choice`, `multi`, `match`, `order`, `number`).

@@ -29,4 +29,3 @@ Un escape room de **escenas clicables** para cerrar la [UD03](/ud03-modelo-relac
 - **Duración:** 30-40 minutos por parejas. El objetivo de tres estrellas es salir en menos de 40 minutos, contando penalizaciones.
 - **Dinámica:** el reto del monitor de alarmas (borrado en cascada) y el de la consola (qué operaciones se rechazan) dan mucho juego para comentarlo en voz alta después. Al final aparece la lista de retos que han costado más, con su enlace a la teoría.
 - **Repaso del trimestre:** al acabar la UD02 y la UD03, el [escape room final del 1.er trimestre](/escape-rooms/trimestre-1) mezcla las dos unidades.
-- **Contenido:** los textos (castellano y valenciano) están en `data/escape_ud03.yaml` y las escenas en `assets/escape/ud03-*.svg`.

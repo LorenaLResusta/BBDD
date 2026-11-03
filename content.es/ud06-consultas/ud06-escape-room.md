@@ -30,4 +30,3 @@ Un escape room de **escenas clicables** para cerrar la [UD06](/ud06-consultas/).
 - **Cómo jugar:** abrid primero las notas con los datos, calculad a mano lo que devuelve cada consulta y combinad los resultados de la mochila en el candado. En la última sala, el candado pide el **nombre** del culpable.
 - **Para comprobarlo en Oracle:** los datos son pequeños; podéis crear las tablas y ejecutar las consultas para ver que el resultado coincide.
 - **Al terminar:** la pantalla final muestra el tiempo, las estrellas y los retos que más os han costado, con el enlace a la teoría.
-- **Contenido:** `data/escape_ud06.yaml`, escenas en `assets/escape/ud06-*.svg` y diagramas (gráfico de barras, `LEFT JOIN`, línea de tiempo) en `assets/escape/fig/ud06-*.svg`.

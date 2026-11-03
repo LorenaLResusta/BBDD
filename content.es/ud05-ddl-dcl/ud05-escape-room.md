@@ -30,4 +30,3 @@ Un escape room de **escenas clicables** para cerrar la [UD05](/ud05-ddl-dcl/). M
 - **Cómo jugar:** explorad cada sala, resolved los retos de los objetos y combinad lo que guardáis en la mochila para abrir el candado de la puerta. Si un objeto está cerrado (🔒), otro de la misma sala tiene lo que falta.
 - **Al terminar:** la pantalla final muestra el tiempo, las estrellas y los retos que más os han costado, con el enlace al apartado de la teoría que hay que repasar.
 - **Progreso:** se guarda en el navegador; *Empezar de nuevo* lo borra.
-- **Contenido:** los textos (castellano y valenciano) están en `data/escape_ud05.yaml`, las escenas en `assets/escape/ud05-*.svg` y los diagramas en `assets/escape/fig/ud05-*.svg`.

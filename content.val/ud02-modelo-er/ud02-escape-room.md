@@ -29,4 +29,3 @@ Un escape room d'**escenes clicables** per a tancar la [UD02](/ud02-modelo-er/).
 - **Durada:** 25-35 minuts per parelles. L'objectiu de tres estreles és eixir en menys de 35 minuts, comptant penalitzacions.
 - **Dinàmica:** funciona bé projectat a classe, amb les parelles proposant la resposta abans de prémer *Comprovar*. Al final apareix la llista de reptes que han costat més, amb l'enllaç a la teoria.
 - **Progrés:** es guarda en el navegador de cada alumne; *Tornar a començar* l'esborra.
-- **Contingut:** els textos (castellà i valencià) estan en `data/escape_ud02.yaml` i les escenes en `assets/escape/ud02-*.svg`. Cada objecte clicable és un grup `<g data-hs="id">` l'`id` del qual coincidix amb un *hotspot* del YAML. Si afegixes un repte, recorda actualitzar el codi del cadenat d'eixa sala.

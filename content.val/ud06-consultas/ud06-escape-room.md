@@ -30,4 +30,3 @@ Un escape room d'**escenes clicables** per a tancar la [UD06](/ud06-consultas/).
 - **Com jugar:** obriu primer les notes amb les dades, calculeu a mà el que torna cada consulta i combineu els resultats de la motxilla en el cadenat. En l'última sala, el cadenat demana el **nom** del culpable.
 - **Per a comprovar-ho en Oracle:** les dades són menudes; podeu crear les taules i executar les consultes per a veure que el resultat coincidix.
 - **En acabar:** la pantalla final mostra el temps, les estreles i els reptes que més us han costat, amb l'enllaç a la teoria.
-- **Contingut:** `data/escape_ud06.yaml`, escenes en `assets/escape/ud06-*.svg` i diagrames (gràfic de barres, `LEFT JOIN`, línia de temps) en `assets/escape/fig/ud06-*.svg`.

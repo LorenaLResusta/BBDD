@@ -30,4 +30,3 @@ Un escape room d'**escenes clicables** per a tancar la [UD05](/ud05-ddl-dcl/). M
 - **Com jugar:** exploreu cada sala, resoleu els reptes dels objectes i combineu el que guardeu en la motxilla per a obrir el cadenat de la porta. Si un objecte està tancat (🔒), un altre de la mateixa sala té el que falta.
 - **En acabar:** la pantalla final mostra el temps, les estreles i els reptes que més us han costat, amb l'enllaç a l'apartat de la teoria que cal repassar.
 - **Progrés:** es guarda en el navegador; *Tornar a començar* l'esborra.
-- **Contingut:** els textos (castellà i valencià) estan en `data/escape_ud05.yaml`, les escenes en `assets/escape/ud05-*.svg` i els diagrames en `assets/escape/fig/ud05-*.svg`.
