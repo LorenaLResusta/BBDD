@@ -1,12 +1,16 @@
 ---
-title: "Escape room UD05"
+title: "Juegos UD05"
 weight: 3
-bookToc: false
+bookToc: true
+aliases:
+  - /ud05-ddl-dcl/ud05-escape-room/
 ---
 
-# Escape room · Backstage: que empiece el festival
+# Juegos · UD05
 
 {{< ra "RA2:a,b,c,d,e,g,h" "RA3:h" >}}
+
+## Escape room · Backstage: que empiece el festival
 
 Un escape room de **escenas clicables** para cerrar la [UD05](/ud05-ddl-dcl/). Montas la base de datos del Brisa Fest en Oracle y, cuando el recinto se bloquea, solo puedes salir demostrando que dominas el DDL y el DCL.
 
@@ -24,7 +28,7 @@ Un escape room de **escenas clicables** para cerrar la [UD05](/ud05-ddl-dcl/). M
 
 {{< escape-click data="escape_ud05" >}}
 
-## Instrucciones
+### Instrucciones
 
 - **Duración:** 30-40 minutos por parejas. Tres estrellas si salís en menos de 40 minutos, contando penalizaciones.
 - **Cómo jugar:** explorad cada sala, resolved los retos de los objetos y combinad lo que guardáis en la mochila para abrir el candado de la puerta. Si un objeto está cerrado (🔒), otro de la misma sala tiene lo que falta.

@@ -15,6 +15,6 @@ Con la base de datos creada y cargada, empezamos a **extraer información**. La 
 | [Prácticas · Parte I](/ud06-consultas/ud06-practicas) | Herramientas de consulta, 16 consultas para secretaría con solución, laboratorio de nulos, funciones para informes, validación de datos y tarea EduGest |
 | [Teoría · Parte II](/ud06-consultas/ud06-teoria-avanzada) | Funciones de agregado, `GROUP BY`, `HAVING`, `INNER/LEFT/RIGHT/FULL JOIN`, autocomposición, subconsultas, `EXISTS`, `WITH`, `UNION`/`INTERSECT`/`MINUS`, funciones analíticas, vistas y optimización |
 | [Prácticas · Parte II](/ud06-consultas/ud06-practicas-avanzadas) | Consultas resumen, composiciones paso a paso, informes de jefatura, subconsultas, conjuntos, optimización con medio millón de filas, cuadro de mando y tarea EduGest |
-| [Escape room](/ud06-consultas/ud06-escape-room) | *Spoiler: ¿quién filtró el final?*: tres salas con consultas, un gráfico y un culpable por descubrir |
+| [Juegos](/ud06-consultas/ud06-juegos) | *Spoiler: ¿quién filtró el final?*: tres salas con consultas, un gráfico y un culpable por descubrir |
 
 **Duración:** 40 horas de aula, del 28/01/2027 al 06/04/2027. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.

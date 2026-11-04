@@ -1,0 +1,453 @@
+# Memory de parejas (shortcode memory). a/b: text y/o fig (mini diagrama o tables)
+es:
+  title: Memory · Situaciones y decisiones de diseño
+  tag_a: Situación
+  tag_b: Modelo
+  intro: 'Empareja cada **situación** del enunciado con la **decisión de modelado** que le corresponde. Los diagramas de las cartas «Modelo» usan nombres genéricos (X, E, F, D, R…): tienes que reconocer el patrón, no el nombre.'
+  pairs:
+  - a:
+      text: Todo vehículo de la flota es furgoneta o camión, y ninguno es las dos cosas.
+    b:
+      text: Jerarquía **(T, D)**
+      fig:
+        t: isa
+        top: X
+        subs:
+        - X1
+        - X2
+        label: (T, D)
+    explain: 'Ningún vehículo queda fuera (total) y nadie está en dos subtipos (disjunta): **(T, D)**.'
+  - a:
+      text: Hay personal que ni conduce ni repara, y algún mecánico también conduce.
+    b:
+      text: Jerarquía **(P, S)**
+      fig:
+        t: isa
+        top: X
+        subs:
+        - X1
+        - X2
+        label: (P, S)
+    explain: 'Hay instancias fuera de los subtipos (parcial) y alguien está en dos (solapada): **(P, S)**.'
+  - a:
+      text: Todo socio es alumno, profesor o ambas cosas a la vez.
+    b:
+      text: Jerarquía **(T, S)**
+      fig:
+        t: isa
+        top: X
+        subs:
+        - X1
+        - X2
+        label: (T, S)
+    explain: 'Todos están en algún subtipo (total) y se puede estar en los dos (solapada): **(T, S)**.'
+  - a:
+      text: Hay alojamientos que no son ni hotel ni camping, y ninguno puede ser las dos cosas.
+    b:
+      text: Jerarquía **(P, D)**
+      fig:
+        t: isa
+        top: X
+        subs:
+        - X1
+        - X2
+        label: (P, D)
+    explain: 'Puede haber instancias sin subtipo (parcial) y nunca en dos (disjunta): **(P, D)**.'
+  - a:
+      text: Un profesor imparte asignaturas o tutoriza prácticas, pero nunca hace las dos cosas.
+    b:
+      text: Restricción de **exclusividad**
+      fig:
+        t: arc
+        e: E
+        r1: R1
+        r2: R2
+        label: Exclusividad
+    explain: 'Una misma instancia participa en una relación **o** en la otra, nunca en las dos: **exclusividad**.'
+  - a:
+      text: Un profesor puede impartir y evaluar asignaturas, pero no puede evaluar una asignatura que él mismo imparte.
+    b:
+      text: Restricción de **exclusión**
+      fig:
+        t: arc
+        e: E
+        r1: R1
+        r2: R2
+        label: Exclusión
+    explain: 'La prohibición es sobre la **misma pareja** (profesor, asignatura): **exclusión**.'
+  - a:
+      text: Solo puede coordinar proyectos quien haya participado en alguno.
+    b:
+      text: Restricción de **inclusividad**
+      fig:
+        t: arc
+        e: E
+        r1: R1
+        r2: R2
+        label: Inclusividad
+    explain: 'Para participar en una relación, la instancia debe participar en la otra (con cualquier pareja): **inclusividad**.'
+  - a:
+      text: Solo puede coordinar un proyecto quien participe en ese mismo proyecto.
+    b:
+      text: Restricción de **inclusión**
+      fig:
+        t: arc
+        e: E
+        r1: R1
+        r2: R2
+        label: Inclusión
+    explain: 'La pareja (persona, proyecto) de COORDINA tiene que estar también en PARTICIPA: **inclusión**.'
+  - a:
+      text: Las habitaciones se numeran desde 1 dentro de cada hotel.
+    b:
+      text: Entidad débil **por identificación**
+      fig:
+        t: weak
+        a: F
+        r: R
+        b: D
+        id: true
+        ca: (1,1)
+        cb: (0,n)
+        note: ID
+    explain: 'El número solo identifica **dentro** del hotel: la clave de la débil incluye la de la fuerte. Doble rectángulo y doble rombo.'
+  - a:
+      text: Cada factura tiene un número único, pero no puede existir sin su cliente.
+    b:
+      text: Entidad débil **por existencia**
+      fig:
+        t: weak
+        a: F
+        r: R
+        b: D
+        id: false
+        ca: (1,1)
+        cb: (0,n)
+        note: E
+    explain: 'Tiene identificador propio, pero depende del cliente para existir: débil **por existencia**.'
+  - a:
+      text: En cada examen, un alumno se sienta en una sola aula; en un aula caben muchos alumnos y un alumno usa la misma aula en muchos exámenes.
+    b:
+      text: Ternaria **1:N:N**, con AULA en el lado 1
+      fig:
+        t: tern
+        a: ALUMNO
+        b: EXAMEN
+        c: AULA
+        r: R
+        ca: N
+        cb: N
+        cc: '1'
+    explain: Fijados (alumno, examen) hay **una** aula; las otras dos preguntas dan **muchos**.
+  - a:
+      text: Cada alumno hace cada examen en una sola aula, y en una misma aula cada alumno solo hace un examen.
+    b:
+      text: Ternaria **1:1:N**, con ALUMNO en el lado N
+      fig:
+        t: tern
+        a: ALUMNO
+        b: EXAMEN
+        c: AULA
+        r: R
+        ca: N
+        cb: '1'
+        cc: '1'
+    explain: Fijados (alumno, examen) hay una aula; fijados (alumno, aula), un examen; fijados (examen, aula), muchos alumnos.
+  - a:
+      text: Un alumno puede repetir un examen en aulas distintas, y en una aula se hacen muchos exámenes de muchos alumnos.
+    b:
+      text: Ternaria **N:N:N**
+      fig:
+        t: tern
+        a: ALUMNO
+        b: EXAMEN
+        c: AULA
+        r: R
+        ca: N
+        cb: N
+        cc: N
+    explain: 'Ninguna pareja fijada limita a la tercera entidad: **N:N:N**.'
+  - a:
+      text: Cada empleado tiene, como mucho, un jefe, que también es empleado.
+    b:
+      text: Reflexiva **1:N** con roles
+      fig:
+        t: refl
+        a: EMPLEADO
+        r: R
+        ca: (0,1)
+        cb: (0,n)
+        roles: jefe / subordinado
+    explain: 'Una sola entidad que se relaciona consigo misma; cada uno tiene como mucho un jefe: **1:N**.'
+  - a:
+      text: Un empleado puede ser mentor de varios compañeros y tener varios mentores.
+    b:
+      text: Reflexiva **N:M** con roles
+      fig:
+        t: refl
+        a: EMPLEADO
+        r: R
+        ca: (0,n)
+        cb: (0,n)
+        roles: mentor / aprendiz
+    explain: 'Las dos preguntas dan «muchos»: reflexiva **N:M**.'
+  - a:
+      text: Una persona puede tener varios teléfonos.
+    b:
+      text: Atributo **multivaluado**
+      fig:
+        t: mv
+        e: E
+        attr: x
+    explain: 'Varios valores para la misma instancia: doble elipse.'
+  - a:
+      text: La dirección se guarda separada en calle, número y código postal.
+    b:
+      text: Atributo **compuesto**
+      fig:
+        t: mv
+        e: E
+        attr: x
+        multi: false
+        parts:
+        - x1
+        - x2
+        - x3
+    explain: Un atributo formado por partes con significado propio.
+  - a:
+      text: La edad se calcula a partir de la fecha de nacimiento.
+    b:
+      text: Atributo **derivado**
+      fig:
+        t: mv
+        e: E
+        attr: x
+        multi: false
+        dashed: true
+    explain: 'Se calcula a partir de otro atributo: elipse discontinua.'
+val:
+  title: Memory · Situacions i decisions de disseny
+  tag_a: Situació
+  tag_b: Model
+  intro: 'Emparella cada **situació** de l''enunciat amb la **decisió de modelatge** que li correspon. Els diagrames de les cartes «Model» usen noms genèrics (X, E, F, D, R…): has de reconéixer el patró, no el nom.'
+  pairs:
+  - a:
+      text: Tot vehicle de la flota és furgoneta o camió, i cap no és les dos coses.
+    b:
+      text: Jerarquia **(T, D)**
+      fig:
+        t: isa
+        top: X
+        subs:
+        - X1
+        - X2
+        label: (T, D)
+    explain: 'Cap vehicle no queda fora (total) i ningú no està en dos subtipus (disjunta): **(T, D)**.'
+  - a:
+      text: Hi ha personal que ni conduïx ni repara, i algun mecànic també conduïx.
+    b:
+      text: Jerarquia **(P, S)**
+      fig:
+        t: isa
+        top: X
+        subs:
+        - X1
+        - X2
+        label: (P, S)
+    explain: 'Hi ha instàncies fora dels subtipus (parcial) i algú està en dos (solapada): **(P, S)**.'
+  - a:
+      text: Tot soci és alumne, professor o les dos coses alhora.
+    b:
+      text: Jerarquia **(T, S)**
+      fig:
+        t: isa
+        top: X
+        subs:
+        - X1
+        - X2
+        label: (T, S)
+    explain: 'Tots estan en algun subtipus (total) i es pot estar en els dos (solapada): **(T, S)**.'
+  - a:
+      text: Hi ha allotjaments que no són ni hotel ni càmping, i cap no pot ser les dos coses.
+    b:
+      text: Jerarquia **(P, D)**
+      fig:
+        t: isa
+        top: X
+        subs:
+        - X1
+        - X2
+        label: (P, D)
+    explain: 'Hi pot haver instàncies sense subtipus (parcial) i mai en dos (disjunta): **(P, D)**.'
+  - a:
+      text: Un professor impartix assignatures o tutoritza pràctiques, però mai fa les dos coses.
+    b:
+      text: Restricció d'**exclusivitat**
+      fig:
+        t: arc
+        e: E
+        r1: R1
+        r2: R2
+        label: Exclusivitat
+    explain: 'Una mateixa instància participa en una relació **o** en l''altra, mai en les dos: **exclusivitat**.'
+  - a:
+      text: Un professor pot impartir i avaluar assignatures, però no pot avaluar una assignatura que ell mateix impartix.
+    b:
+      text: Restricció d'**exclusió**
+      fig:
+        t: arc
+        e: E
+        r1: R1
+        r2: R2
+        label: Exclusió
+    explain: 'La prohibició és sobre la **mateixa parella** (professor, assignatura): **exclusió**.'
+  - a:
+      text: Només pot coordinar projectes qui haja participat en algun.
+    b:
+      text: Restricció d'**inclusivitat**
+      fig:
+        t: arc
+        e: E
+        r1: R1
+        r2: R2
+        label: Inclusivitat
+    explain: 'Per a participar en una relació, la instància ha de participar en l''altra (amb qualsevol parella): **inclusivitat**.'
+  - a:
+      text: Només pot coordinar un projecte qui participe en eixe mateix projecte.
+    b:
+      text: Restricció d'**inclusió**
+      fig:
+        t: arc
+        e: E
+        r1: R1
+        r2: R2
+        label: Inclusió
+    explain: 'La parella (persona, projecte) de COORDINA ha d''estar també en PARTICIPA: **inclusió**.'
+  - a:
+      text: Les habitacions es numeren des d'1 dins de cada hotel.
+    b:
+      text: Entitat feble **per identificació**
+      fig:
+        t: weak
+        a: F
+        r: R
+        b: D
+        id: true
+        ca: (1,1)
+        cb: (0,n)
+        note: ID
+    explain: 'El número només identifica **dins** de l''hotel: la clau de la feble inclou la de la forta. Doble rectangle i doble rombe.'
+  - a:
+      text: Cada factura té un número únic, però no pot existir sense el seu client.
+    b:
+      text: Entitat feble **per existència**
+      fig:
+        t: weak
+        a: F
+        r: R
+        b: D
+        id: false
+        ca: (1,1)
+        cb: (0,n)
+        note: E
+    explain: 'Té identificador propi, però depén del client per a existir: feble **per existència**.'
+  - a:
+      text: En cada examen, un alumne s'asseu en una sola aula; en una aula caben molts alumnes i un alumne usa la mateixa aula en molts exàmens.
+    b:
+      text: Ternària **1:N:N**, amb AULA en el costat 1
+      fig:
+        t: tern
+        a: ALUMNE
+        b: EXAMEN
+        c: AULA
+        r: R
+        ca: N
+        cb: N
+        cc: '1'
+    explain: Fixats (alumne, examen) hi ha **una** aula; les altres dos preguntes donen **molts**.
+  - a:
+      text: Cada alumne fa cada examen en una sola aula, i en una mateixa aula cada alumne només fa un examen.
+    b:
+      text: Ternària **1:1:N**, amb ALUMNE en el costat N
+      fig:
+        t: tern
+        a: ALUMNE
+        b: EXAMEN
+        c: AULA
+        r: R
+        ca: N
+        cb: '1'
+        cc: '1'
+    explain: Fixats (alumne, examen) hi ha una aula; fixats (alumne, aula), un examen; fixats (examen, aula), molts alumnes.
+  - a:
+      text: Un alumne pot repetir un examen en aules distintes, i en una aula es fan molts exàmens de molts alumnes.
+    b:
+      text: Ternària **N:N:N**
+      fig:
+        t: tern
+        a: ALUMNE
+        b: EXAMEN
+        c: AULA
+        r: R
+        ca: N
+        cb: N
+        cc: N
+    explain: 'Cap parella fixada no limita la tercera entitat: **N:N:N**.'
+  - a:
+      text: Cada empleat té, com a molt, un cap, que també és empleat.
+    b:
+      text: Reflexiva **1:N** amb rols
+      fig:
+        t: refl
+        a: EMPLEAT
+        r: R
+        ca: (0,1)
+        cb: (0,n)
+        roles: cap / subordinat
+    explain: 'Una sola entitat que es relaciona amb si mateixa; cadascú té com a molt un cap: **1:N**.'
+  - a:
+      text: Un empleat pot ser mentor de diversos companys i tindre diversos mentors.
+    b:
+      text: Reflexiva **N:M** amb rols
+      fig:
+        t: refl
+        a: EMPLEAT
+        r: R
+        ca: (0,n)
+        cb: (0,n)
+        roles: mentor / aprenent
+    explain: 'Les dos preguntes donen «molts»: reflexiva **N:M**.'
+  - a:
+      text: Una persona pot tindre diversos telèfons.
+    b:
+      text: Atribut **multivalorat**
+      fig:
+        t: mv
+        e: E
+        attr: x
+    explain: 'Diversos valors per a la mateixa instància: doble el·lipse.'
+  - a:
+      text: L'adreça es guarda separada en carrer, número i codi postal.
+    b:
+      text: Atribut **compost**
+      fig:
+        t: mv
+        e: E
+        attr: x
+        multi: false
+        parts:
+        - x1
+        - x2
+        - x3
+    explain: Un atribut format per parts amb significat propi.
+  - a:
+      text: L'edat es calcula a partir de la data de naixement.
+    b:
+      text: Atribut **derivat**
+      fig:
+        t: mv
+        e: E
+        attr: x
+        multi: false
+        dashed: true
+    explain: 'Es calcula a partir d''un altre atribut: el·lipse discontínua.'

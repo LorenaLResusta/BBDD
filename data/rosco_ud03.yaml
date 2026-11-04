@@ -2,7 +2,7 @@
 es:
   title: Rosco de la UD03 · Modelo relacional
   intro: Claves, integridad y transformación en una vuelta.
-  time: 220
+  time: 140
   letters:
   - l: A
     mode: empieza
@@ -152,7 +152,7 @@ es:
 val:
   title: Rosco de la UD03 · Model relacional
   intro: Claus, integritat i transformació en una volta.
-  time: 220
+  time: 140
   letters:
   - l: A
     mode: empieza

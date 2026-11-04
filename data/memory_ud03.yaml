@@ -1,0 +1,559 @@
+# Memory de parejas (shortcode memory). a/b: text y/o fig (mini diagrama o tables)
+es:
+  title: Memory · Del diagrama a las tablas
+  tag_a: Diagrama E/R
+  tag_b: Esquema
+  intro: 'Empareja cada **fragmento de diagrama** con el **esquema relacional** que se obtiene al transformarlo. Muchas cartas usan las mismas entidades y solo cambian las cardinalidades: léelas con calma. En los esquemas, la PK va subrayada y las FK llevan una flecha hacia la tabla a la que apuntan.'
+  pairs:
+  - a:
+      fig:
+        t: rel
+        a: EMPLEADO
+        r: TRABAJA
+        b: DEPARTAMENTO
+        ca: (0,n)
+        cb: (1,1)
+    b:
+      fig:
+        t: tables
+        rows:
+        - EMPLEADO({id_emp}, …, id_dep →DEPARTAMENTO)
+        - '[VNN: id_dep]'
+    explain: '1:N con mínima 1 en el lado N: la FK va en EMPLEADO y es **obligatoria (VNN)**.'
+  - a:
+      fig:
+        t: rel
+        a: EMPLEADO
+        r: TRABAJA
+        b: DEPARTAMENTO
+        ca: (0,n)
+        cb: (0,1)
+    b:
+      fig:
+        t: tables
+        rows:
+        - EMPLEADO({id_emp}, …, id_dep →DEPARTAMENTO)
+        - '[id_dep admite nulos]'
+    explain: '1:N con mínima 0: la FK va en EMPLEADO y **admite nulos**.'
+  - a:
+      fig:
+        t: rel
+        a: EMPLEADO
+        r: TRABAJA
+        b: DEPARTAMENTO
+        ca: (1,n)
+        cb: (1,1)
+    b:
+      fig:
+        t: tables
+        rows:
+        - EMPLEADO({id_emp}, …, id_dep →DEPARTAMENTO)
+        - '[VNN: id_dep · «todo departamento tiene algún empleado» no se puede expresar]'
+    explain: 'Como la anterior, pero el (1,n) junto a EMPLEADO dice que todo departamento tiene algún empleado: eso **se pierde** en la transformación.'
+  - a:
+      fig:
+        t: rel
+        a: EMPLEADO
+        r: TRABAJA
+        b: DEPARTAMENTO
+        ca: (0,n)
+        cb: (0,n)
+    b:
+      fig:
+        t: tables
+        rows:
+        - TRABAJA({id_emp} →EMPLEADO, {id_dep} →DEPARTAMENTO)
+    explain: 'N:M: **tabla nueva** con PK compuesta por las dos claves.'
+  - a:
+      fig:
+        t: rel
+        a: EMPLEADO
+        r: DIRIGE
+        b: DEPARTAMENTO
+        ca: (1,1)
+        cb: (0,1)
+    b:
+      fig:
+        t: tables
+        rows:
+        - DEPARTAMENTO({id_dep}, …, id_director →EMPLEADO)
+        - '[UK + VNN: id_director]'
+    explain: '1:1 (1,1)–(0,1): la FK va en DEPARTAMENTO (el lado que siempre tiene director) con **UK y VNN**.'
+  - a:
+      fig:
+        t: rel
+        a: EMPLEADO
+        r: DIRIGE
+        b: DEPARTAMENTO
+        ca: (0,1)
+        cb: (0,1)
+    b:
+      fig:
+        t: tables
+        rows:
+        - DEPARTAMENTO({id_dep}, …, id_director →EMPLEADO)
+        - '[UK: id_director · admite nulos]'
+    explain: '1:1 (0,1)–(0,1): FK en uno de los dos lados con **UK**, y admite nulos.'
+  - a:
+      fig:
+        t: refl
+        a: EMPLEADO
+        r: SUPERVISA
+        ca: (0,1)
+        cb: (0,n)
+        roles: jefe / subordinado
+    b:
+      fig:
+        t: tables
+        rows:
+        - EMPLEADO({id_emp}, …, id_jefe →EMPLEADO)
+    explain: 'Reflexiva 1:N: una **FK hacia la propia tabla**.'
+  - a:
+      fig:
+        t: refl
+        a: EMPLEADO
+        r: MENTORIZA
+        ca: (0,n)
+        cb: (0,n)
+        roles: mentor / aprendiz
+    b:
+      fig:
+        t: tables
+        rows:
+        - MENTORIZA({id_mentor} →EMPLEADO, {id_aprendiz} →EMPLEADO)
+    explain: 'Reflexiva N:M: **tabla nueva** con dos FK hacia la misma tabla, una por rol.'
+  - a:
+      fig:
+        t: tern
+        a: ALUMNO
+        b: EXAMEN
+        c: AULA
+        r: R
+        ca: N
+        cb: N
+        cc: '1'
+    b:
+      fig:
+        t: tables
+        rows:
+        - R({id_alu} →ALUMNO, {id_exa} →EXAMEN, id_aula →AULA)
+    explain: 'Ternaria 1:N:N: la PK son las claves de los dos lados **N**; la del lado 1 es un atributo más.'
+  - a:
+      fig:
+        t: tern
+        a: ALUMNO
+        b: EXAMEN
+        c: AULA
+        r: R
+        ca: N
+        cb: N
+        cc: N
+    b:
+      fig:
+        t: tables
+        rows:
+        - R({id_alu} →ALUMNO, {id_exa} →EXAMEN, {id_aula} →AULA)
+    explain: 'Ternaria N:N:N: la PK son las **tres** claves.'
+  - a:
+      fig:
+        t: tern
+        a: ALUMNO
+        b: EXAMEN
+        c: AULA
+        r: R
+        ca: N
+        cb: '1'
+        cc: '1'
+    b:
+      fig:
+        t: tables
+        rows:
+        - R({id_alu} →ALUMNO, {id_exa} →EXAMEN, id_aula →AULA)
+        - '[UK: (id_alu, id_aula)]'
+    explain: 'Ternaria 1:1:N: PK (alumno, examen) y **UK** (alumno, aula), porque cada pareja con el lado N determina la tercera.'
+  - a:
+      fig:
+        t: weak
+        a: EDIFICIO
+        r: R
+        b: AULA
+        id: true
+        ca: (1,1)
+        cb: (0,n)
+        note: ID
+    b:
+      fig:
+        t: tables
+        rows:
+        - AULA({cod_edif} →EDIFICIO, {num_aula}, …)
+    explain: 'Débil por identificación: la PK de AULA **incluye** la clave de EDIFICIO.'
+  - a:
+      fig:
+        t: weak
+        a: CLIENTE
+        r: R
+        b: FACTURA
+        id: false
+        ca: (1,1)
+        cb: (0,n)
+        note: E
+    b:
+      fig:
+        t: tables
+        rows:
+        - FACTURA({num_factura}, …, dni →CLIENTE)
+        - '[VNN: dni · ON DELETE CASCADE]'
+    explain: 'Débil por existencia: PK propia y FK **obligatoria**, normalmente con borrado en cascada.'
+  - a:
+      fig:
+        t: mv
+        e: PERSONA
+        attr: telefonos
+    b:
+      fig:
+        t: tables
+        rows:
+        - TELEFONOS({dni} →PERSONA, {telefono})
+    explain: 'Multivaluado: **tabla nueva** con la clave de la entidad y el valor.'
+  - a:
+      fig:
+        t: mv
+        e: PERSONA
+        attr: direccion
+        multi: false
+        parts:
+        - calle
+        - numero
+        - cp
+    b:
+      fig:
+        t: tables
+        rows:
+        - PERSONA({dni}, calle, numero, cp, …)
+    explain: 'Compuesto: se sustituye por sus **componentes**.'
+  - a:
+      fig:
+        t: isa
+        top: VEHICULO
+        subs:
+        - COCHE
+        - MOTO
+        label: (T, D)
+    b:
+      fig:
+        t: tables
+        rows:
+        - COCHE({matricula}, …)
+        - MOTO({matricula}, …)
+        - '[sin tabla para el supertipo]'
+    explain: '(T, D): basta con **una tabla por subtipo**, porque no hay instancias sin subtipo ni repetidas.'
+  - a:
+      fig:
+        t: isa
+        top: PERSONA
+        subs:
+        - PROFESOR
+        - ALUMNO
+        label: (P, S)
+    b:
+      fig:
+        t: tables
+        rows:
+        - PERSONA({dni}, …)
+        - PROFESOR({dni} →PERSONA, …)
+        - ALUMNO({dni} →PERSONA, …)
+    explain: '(P, S): **supertipo y subtipos** con la misma PK, que en los subtipos es también FK.'
+  - a:
+      fig:
+        t: isa
+        top: EMPLEADO
+        subs:
+        - CONDUCTOR
+        - MECANICO
+        label: (P, D)
+    b:
+      fig:
+        t: tables
+        rows:
+        - EMPLEADO({id_emp}, …, tipo, carne, especialidad)
+        - '[tipo: NULL, C o M · el resto admite nulos]'
+    explain: '(P, D): una **única tabla** con columna discriminante y atributos de los subtipos que admiten nulos.'
+val:
+  title: Memory · Del diagrama a les taules
+  tag_a: Diagrama E/R
+  tag_b: Esquema
+  intro: 'Emparella cada **fragment de diagrama** amb l''**esquema relacional** que s''obté en transformar-lo. Moltes cartes usen les mateixes entitats i només canvien les cardinalitats: llig-les amb calma. En els esquemes, la PK va subratllada i les FK porten una fletxa cap a la taula a la qual apunten.'
+  pairs:
+  - a:
+      fig:
+        t: rel
+        a: EMPLEAT
+        r: TREBALLA
+        b: DEPARTAMENT
+        ca: (0,n)
+        cb: (1,1)
+    b:
+      fig:
+        t: tables
+        rows:
+        - EMPLEAT({id_emp}, …, id_dep →DEPARTAMENT)
+        - '[VNN: id_dep]'
+    explain: '1:N amb mínima 1 en el costat N: la FK va en EMPLEAT i és **obligatòria (VNN)**.'
+  - a:
+      fig:
+        t: rel
+        a: EMPLEAT
+        r: TREBALLA
+        b: DEPARTAMENT
+        ca: (0,n)
+        cb: (0,1)
+    b:
+      fig:
+        t: tables
+        rows:
+        - EMPLEAT({id_emp}, …, id_dep →DEPARTAMENT)
+        - '[id_dep admet nuls]'
+    explain: '1:N amb mínima 0: la FK va en EMPLEAT i **admet nuls**.'
+  - a:
+      fig:
+        t: rel
+        a: EMPLEAT
+        r: TREBALLA
+        b: DEPARTAMENT
+        ca: (1,n)
+        cb: (1,1)
+    b:
+      fig:
+        t: tables
+        rows:
+        - EMPLEAT({id_emp}, …, id_dep →DEPARTAMENT)
+        - '[VNN: id_dep · «tot departament té algun empleat» no es pot expressar]'
+    explain: 'Com l''anterior, però el (1,n) al costat d''EMPLEAT diu que tot departament té algun empleat: això **es perd** en la transformació.'
+  - a:
+      fig:
+        t: rel
+        a: EMPLEAT
+        r: TREBALLA
+        b: DEPARTAMENT
+        ca: (0,n)
+        cb: (0,n)
+    b:
+      fig:
+        t: tables
+        rows:
+        - TREBALLA({id_emp} →EMPLEAT, {id_dep} →DEPARTAMENT)
+    explain: 'N:M: **taula nova** amb PK composta per les dos claus.'
+  - a:
+      fig:
+        t: rel
+        a: EMPLEAT
+        r: DIRIGIX
+        b: DEPARTAMENT
+        ca: (1,1)
+        cb: (0,1)
+    b:
+      fig:
+        t: tables
+        rows:
+        - DEPARTAMENT({id_dep}, …, id_director →EMPLEAT)
+        - '[UK + VNN: id_director]'
+    explain: '1:1 (1,1)–(0,1): la FK va en DEPARTAMENT (el costat que sempre té director) amb **UK i VNN**.'
+  - a:
+      fig:
+        t: rel
+        a: EMPLEAT
+        r: DIRIGIX
+        b: DEPARTAMENT
+        ca: (0,1)
+        cb: (0,1)
+    b:
+      fig:
+        t: tables
+        rows:
+        - DEPARTAMENT({id_dep}, …, id_director →EMPLEAT)
+        - '[UK: id_director · admet nuls]'
+    explain: '1:1 (0,1)–(0,1): FK en un dels dos costats amb **UK**, i admet nuls.'
+  - a:
+      fig:
+        t: refl
+        a: EMPLEAT
+        r: SUPERVISA
+        ca: (0,1)
+        cb: (0,n)
+        roles: cap / subordinat
+    b:
+      fig:
+        t: tables
+        rows:
+        - EMPLEAT({id_emp}, …, id_jefe →EMPLEAT)
+    explain: 'Reflexiva 1:N: una **FK cap a la mateixa taula**.'
+  - a:
+      fig:
+        t: refl
+        a: EMPLEAT
+        r: MENTORITZA
+        ca: (0,n)
+        cb: (0,n)
+        roles: mentor / aprenent
+    b:
+      fig:
+        t: tables
+        rows:
+        - MENTORITZA({id_mentor} →EMPLEAT, {id_aprendiz} →EMPLEAT)
+    explain: 'Reflexiva N:M: **taula nova** amb dos FK cap a la mateixa taula, una per rol.'
+  - a:
+      fig:
+        t: tern
+        a: ALUMNE
+        b: EXAMEN
+        c: AULA
+        r: R
+        ca: N
+        cb: N
+        cc: '1'
+    b:
+      fig:
+        t: tables
+        rows:
+        - R({id_alu} →ALUMNE, {id_exa} →EXAMEN, id_aula →AULA)
+    explain: 'Ternària 1:N:N: la PK són les claus dels dos costats **N**; la del costat 1 és un atribut més.'
+  - a:
+      fig:
+        t: tern
+        a: ALUMNE
+        b: EXAMEN
+        c: AULA
+        r: R
+        ca: N
+        cb: N
+        cc: N
+    b:
+      fig:
+        t: tables
+        rows:
+        - R({id_alu} →ALUMNE, {id_exa} →EXAMEN, {id_aula} →AULA)
+    explain: 'Ternària N:N:N: la PK són les **tres** claus.'
+  - a:
+      fig:
+        t: tern
+        a: ALUMNE
+        b: EXAMEN
+        c: AULA
+        r: R
+        ca: N
+        cb: '1'
+        cc: '1'
+    b:
+      fig:
+        t: tables
+        rows:
+        - R({id_alu} →ALUMNE, {id_exa} →EXAMEN, id_aula →AULA)
+        - '[UK: (id_alu, id_aula)]'
+    explain: 'Ternària 1:1:N: PK (alumne, examen) i **UK** (alumne, aula), perquè cada parella amb el costat N determina la tercera.'
+  - a:
+      fig:
+        t: weak
+        a: EDIFICI
+        r: R
+        b: AULA
+        id: true
+        ca: (1,1)
+        cb: (0,n)
+        note: ID
+    b:
+      fig:
+        t: tables
+        rows:
+        - AULA({cod_edif} →EDIFICI, {num_aula}, …)
+    explain: 'Feble per identificació: la PK d''AULA **inclou** la clau d''EDIFICI.'
+  - a:
+      fig:
+        t: weak
+        a: CLIENT
+        r: R
+        b: FACTURA
+        id: false
+        ca: (1,1)
+        cb: (0,n)
+        note: E
+    b:
+      fig:
+        t: tables
+        rows:
+        - FACTURA({num_factura}, …, dni →CLIENT)
+        - '[VNN: dni · ON DELETE CASCADE]'
+    explain: 'Feble per existència: PK pròpia i FK **obligatòria**, normalment amb esborrat en cascada.'
+  - a:
+      fig:
+        t: mv
+        e: PERSONA
+        attr: telefons
+    b:
+      fig:
+        t: tables
+        rows:
+        - TELEFONS({dni} →PERSONA, {telefon})
+    explain: 'Multivalorat: **taula nova** amb la clau de l''entitat i el valor.'
+  - a:
+      fig:
+        t: mv
+        e: PERSONA
+        attr: adreca
+        multi: false
+        parts:
+        - carrer
+        - numero
+        - cp
+    b:
+      fig:
+        t: tables
+        rows:
+        - PERSONA({dni}, carrer, numero, cp, …)
+    explain: 'Compost: se substituïx pels seus **components**.'
+  - a:
+      fig:
+        t: isa
+        top: VEHICLE
+        subs:
+        - COTXE
+        - MOTO
+        label: (T, D)
+    b:
+      fig:
+        t: tables
+        rows:
+        - COTXE({matricula}, …)
+        - MOTO({matricula}, …)
+        - '[sense taula per al supertipus]'
+    explain: '(T, D): n''hi ha prou amb **una taula per subtipus**, perquè no hi ha instàncies sense subtipus ni repetides.'
+  - a:
+      fig:
+        t: isa
+        top: PERSONA
+        subs:
+        - PROFESSOR
+        - ALUMNE
+        label: (P, S)
+    b:
+      fig:
+        t: tables
+        rows:
+        - PERSONA({dni}, …)
+        - PROFESSOR({dni} →PERSONA, …)
+        - ALUMNE({dni} →PERSONA, …)
+    explain: '(P, S): **supertipus i subtipus** amb la mateixa PK, que en els subtipus és també FK.'
+  - a:
+      fig:
+        t: isa
+        top: EMPLEAT
+        subs:
+        - CONDUCTOR
+        - MECANIC
+        label: (P, D)
+    b:
+      fig:
+        t: tables
+        rows:
+        - EMPLEAT({id_emp}, …, tipo, carne, especialidad)
+        - '[tipus: NULL, C o M · la resta admet nuls]'
+    explain: '(P, D): una **única taula** amb columna discriminant i atributs dels subtipus que admeten nuls.'

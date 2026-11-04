@@ -2,7 +2,7 @@
 es:
   title: Rosco de la UD02 · Modelo E/R
   intro: Todo el vocabulario del modelo Entidad/Relación en una vuelta.
-  time: 240
+  time: 150
   letters:
   - l: A
     mode: empieza
@@ -182,7 +182,7 @@ es:
 val:
   title: Rosco de la UD02 · Model E/R
   intro: Tot el vocabulari del model Entitat/Relació en una volta.
-  time: 240
+  time: 150
   letters:
   - l: A
     mode: empieza

@@ -13,6 +13,6 @@ Quan una tasca necessita lògica (decisions, bucles, tractament d'errors) o una 
 |---|---|
 | [Teoria](/ud08-plsql/ud08-teoria) | Formes d'automatitzar, eines, blocs, variables, control de flux, funcions del SGBD, procediments, funcions, cursors, excepcions, disparadors (inclòs el compost), `DBMS_SCHEDULER` i comparació amb altres SGBD |
 | [Pràctiques](/ud08-plsql/ud08-practicas) | Expedient d'un alumne, biblioteca de funcions, matrícula amb excepcions, butlletins amb cursors, disparadors d'integritat i auditoria, taula mutant, tasques programades i paquet de secretaria |
-| [Escape room](/ud08-plsql/ud08-escape-room) | *Apagada en l'estació Kepler*: tres sales amb blocs PL/SQL que cal executar mentalment |
+| [Jocs](/ud08-plsql/ud08-juegos) | *Apagada en l'estació Kepler*: tres sales amb blocs PL/SQL que cal executar mentalment |
 
 **Durada:** 35 hores d'aula, del 12/04/2027 al 30/04/2027. Consulta la [guia didàctica](/) per a vore el seu lloc en el calendari del curs.

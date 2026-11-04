@@ -1,12 +1,16 @@
 ---
-title: "Escape room UD06"
+title: "Juegos UD06"
 weight: 5
-bookToc: false
+bookToc: true
+aliases:
+  - /ud06-consultas/ud06-escape-room/
 ---
 
-# Escape room · Spoiler: ¿quién filtró el final?
+# Juegos · UD06
 
 {{< ra "RA3:a,b,c,d,e,f" "RA5:e" >}}
+
+## Escape room · Spoiler: ¿quién filtró el final?
 
 Un escape room de **escenas clicables** para cerrar la [UD06](/ud06-consultas/). Alguien ha filtrado el último capítulo de una serie y tú tienes los datos: cada consulta bien leída abre una puerta y te acerca al culpable.
 
@@ -24,7 +28,7 @@ Un escape room de **escenas clicables** para cerrar la [UD06](/ud06-consultas/).
 
 {{< escape-click data="escape_ud06" >}}
 
-## Instrucciones
+### Instrucciones
 
 - **Duración:** 35-45 minutos por parejas. Tres estrellas si salís en menos de 45 minutos, contando penalizaciones.
 - **Cómo jugar:** abrid primero las notas con los datos, calculad a mano lo que devuelve cada consulta y combinad los resultados de la mochila en el candado. En la última sala, el candado pide el **nombre** del culpable.

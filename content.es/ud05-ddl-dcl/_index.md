@@ -13,6 +13,6 @@ Es el momento de pasar del papel al servidor. En esta unidad implementas en **Or
 |---|---|
 | [Teoría](/ud05-ddl-dcl/ud05-teoria) | Almacenamiento, tipos de datos, `CREATE`/`ALTER`/`DROP`, restricciones, secuencias, índices, vistas, usuarios, privilegios, roles y diccionario de datos |
 | [Prácticas](/ud05-ddl-dcl/ud05-practicas) | Ocho prácticas (de MySQL a Oracle, batería de pruebas, `ALTER`, vistas, seguridad, depuración) y la implementación de EduGest |
-| [Escape room](/ud05-ddl-dcl/ud05-escape-room) | *Backstage: que empiece el festival*: tres salas con objetos clicables, diagramas y candados de números y letras |
+| [Juegos](/ud05-ddl-dcl/ud05-juegos) | *Backstage: que empiece el festival*: tres salas con objetos clicables, diagramas y candados de números y letras |
 
 **Duración:** 35 horas de aula, del 23/11/2026 al 27/01/2027. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.

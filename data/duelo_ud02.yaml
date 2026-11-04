@@ -1,0 +1,309 @@
+# Duelo por equipos (shortcode duelo). type: choice | number | open
+es:
+  title: Duelo EER · Liga UniArena
+  time: 90
+  intro: 'Dos equipos, un caso completo y doce rondas de dificultad creciente. Leed el enunciado con calma antes de empezar: todas las preguntas salen de él.'
+  case:
+  - La liga universitaria de eSports **UniArena** quiere una base de datos. De cada **miembro** guarda el DNI, el nombre, la fecha de nacimiento y uno o varios correos electrónicos; la edad se muestra en la web, pero se calcula. Todo miembro es **jugador**, **entrenador** o las dos cosas (algunos jugadores veteranos también entrenan). De los jugadores interesa su *nick*, que no se repite, y su rango; de los entrenadores, su número de licencia.
+  - Cada **equipo** tiene un código, un nombre y una ciudad. Cada entrenador entrena exactamente a un equipo, y cada equipo tiene uno o dos entrenadores. Cada equipo tiene exactamente un capitán, que es uno de los jugadores; un jugador puede ser capitán, como mucho, de un equipo.
+  - La liga se organiza por **temporadas**, identificadas por su año. En cada temporada, un jugador ficha por un solo equipo, en el que juega con un rol (por ejemplo, *support*); un equipo tiene muchos jugadores en cada temporada y un jugador puede repetir equipo en varias temporadas.
+  - 'Cada **partido** tiene un identificador, una fecha y un resultado, y lo disputan dos equipos: uno como local y otro como visitante. Los partidos se juegan en **rondas** que se numeran 1, 2, 3… dentro de cada partido; de cada ronda se guarda el mapa.'
+  - Se registra qué jugadores participan en cada partido y sus estadísticas (*kills* y muertes). Un **árbitro** (número de licencia y nombre) puede sancionar una participación concreta indicando el motivo; cada participación recibe como mucho una sanción.
+  - Los **patrocinadores** (CIF y nombre) patrocinan equipos, y de cada patrocinio se guarda el importe.
+  solution_img: duelo-eer-es
+  solution_txt: Este es el diagrama EER de la liga UniArena. En la UD03 lo transformaréis en tablas en el duelo de la unidad.
+  rounds:
+  - pts: 100
+    type: choice
+    q: ¿Qué tipo de atributo es la **edad** del miembro?
+    options:
+    - Simple
+    - Derivado
+    - Multivaluado
+    - Identificador alternativo
+    answer: 1
+    explain: 'Se calcula a partir de la fecha de nacimiento: **derivado** (elipse discontinua).'
+    hint: Fíjate en la palabra «se calcula».
+    ref: 2.2 Atributos
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributos-clasificación-estructura-y-dominio
+  - pts: 100
+    type: choice
+    q: ¿Y los **correos electrónicos** del miembro?
+    options:
+    - Compuesto
+    - Multivaluado
+    - Derivado
+    - Una entidad débil CORREO por identificación
+    answer: 1
+    explain: 'Uno o varios valores para el mismo miembro: **multivaluado** (doble elipse). Solo haría falta una entidad si guardáramos datos de cada correo.'
+    hint: ¿Cuántos valores puede tener un mismo miembro?
+    ref: 2.2 Atributos
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributos-clasificación-estructura-y-dominio
+  - pts: 100
+    type: choice
+    q: ¿Qué papel tiene el *nick* en JUGADOR?
+    options:
+    - Identificador principal de JUGADOR
+    - 'Identificador alternativo: el identificador principal (DNI) lo hereda de MIEMBRO'
+    - Atributo multivaluado
+    - Atributo derivado del nombre
+    answer: 1
+    explain: Los subtipos heredan el identificador del supertipo. El *nick* no se repite, así que es un **identificador alternativo**.
+    ref: 4.1 Generalización
+    ref_url: /ud02-modelo-er/ud02-teoria/#41-generalización-y-especialización-mecanismo-de-herencia
+  - pts: 200
+    type: choice
+    q: ¿Qué jerarquía forman MIEMBRO, JUGADOR y ENTRENADOR?
+    options:
+    - (T, D)
+    - (T, S)
+    - (P, D)
+    - (P, S)
+    answer: 1
+    explain: '«Todo miembro es jugador, entrenador o las dos cosas»: **total** y **solapada**.'
+    hint: 'Hay dos preguntas: ¿puede haber miembros que no sean nada? ¿Puede alguien ser las dos cosas?'
+    ref: 4.2 Clasificación de jerarquías
+    ref_url: /ud02-modelo-er/ud02-teoria/#42-clasificación-de-jerarquías-totalparcial-disjuntasolapada
+  - pts: 200
+    type: choice
+    q: ¿Cuáles son las cardinalidades de ENTRENA? Junto a cada entidad se indica cuántas instancias de ella se asocian con una instancia de la otra.
+    options:
+    - ENTRENADOR (1,2) — ENTRENA — (1,1) EQUIPO
+    - ENTRENADOR (1,1) — ENTRENA — (1,2) EQUIPO
+    - ENTRENADOR (0,n) — ENTRENA — (1,1) EQUIPO
+    - ENTRENADOR (1,2) — ENTRENA — (0,n) EQUIPO
+    answer: 0
+    explain: Un equipo tiene **uno o dos** entrenadores (1,2 junto a ENTRENADOR) y cada entrenador entrena **exactamente uno** (1,1 junto a EQUIPO).
+    hint: Pregunta primero «¿cuántos entrenadores tiene un equipo?».
+    ref: 2.4 Cardinalidades
+    ref_url: /ud02-modelo-er/ud02-teoria/#24-restricciones-de-cardinalidad-mínima-y-máxima
+  - pts: 200
+    type: choice
+    q: ¿Cómo es la relación CAPITANEA?
+    options:
+    - 1:1, con (1,1) junto a JUGADOR y (0,1) junto a EQUIPO
+    - 1:1, con (0,1) en los dos lados
+    - 1:N, con N junto a JUGADOR
+    - N:M
+    answer: 0
+    explain: 'Cada equipo tiene **exactamente un** capitán y un jugador es capitán de **como mucho un** equipo: 1:1 (1,1)–(0,1).'
+    ref: 2.4 Cardinalidades
+    ref_url: /ud02-modelo-er/ud02-teoria/#24-restricciones-de-cardinalidad-mínima-y-máxima
+  - pts: 300
+    type: choice
+    q: ¿Qué es RONDA en el modelo?
+    options:
+    - Una entidad débil por identificación de PARTIDO
+    - Una entidad débil por existencia de PARTIDO
+    - Una entidad fuerte identificada por `num_ronda`
+    - Un atributo multivaluado de PARTIDO
+    answer: 0
+    explain: 'El número de ronda se repite en cada partido: su identificador es (partido, `num_ronda`). Es **débil por identificación**, y además guarda el mapa, así que no basta un atributo.'
+    hint: ¿Basta el número de ronda para distinguir la ronda 2 de un partido de la ronda 2 de otro?
+    ref: 2.1 Entidades débiles
+    ref_url: /ud02-modelo-er/ud02-teoria/#21-entidades-fuertes-débiles-e-instancias
+  - pts: 300
+    type: choice
+    q: ¿Cómo se modela que cada partido lo disputan un equipo local y otro visitante?
+    options:
+    - 'Entidad PARTIDO con dos relaciones 1:N con EQUIPO: LOCAL y VISITANTE'
+    - Relación reflexiva N:M sobre EQUIPO, sin roles
+    - Ternaria EQUIPO–EQUIPO–PARTIDO
+    - Atributos de texto `local` y `visitante` en PARTIDO
+    answer: 0
+    explain: 'Son dos papeles distintos del mismo equipo en un partido: dos relaciones 1:N (cada partido tiene exactamente un local y un visitante).'
+    ref: 2.3 Relaciones y roles
+    ref_url: /ud02-modelo-er/ud02-teoria/#23-relaciones-grado-semántica-y-nombres-de-rol
+  - pts: 300
+    type: choice
+    q: ¿Qué conectividad tiene la ternaria FICHA (JUGADOR, EQUIPO, TEMPORADA)?
+    options:
+    - 1:N:N, con EQUIPO en el lado 1
+    - 1:N:N, con TEMPORADA en el lado 1
+    - N:N:N
+    - 1:1:N, con JUGADOR en el lado N
+    answer: 0
+    explain: Fijados (jugador, temporada) hay **un** equipo; fijados (equipo, temporada), muchos jugadores; fijados (jugador, equipo), muchas temporadas.
+    hint: 'Fija un jugador y una temporada: ¿cuántos equipos puede haber?'
+    ref: 4.4 Relaciones ternarias
+    ref_url: /ud02-modelo-er/ud02-teoria/#44-relaciones-ternarias-y-análisis-formal-de-cardinalidad
+  - pts: 400
+    type: choice
+    q: ¿Cómo se modela que un árbitro sancione una **participación** concreta?
+    options:
+    - Agregación de PARTICIPA (JUGADOR–PARTIDO) relacionada con ÁRBITRO mediante SANCIONA, con (0,1) junto a ÁRBITRO
+    - Ternaria JUGADOR–PARTIDO–ÁRBITRO
+    - Relación binaria ÁRBITRO–JUGADOR
+    - Atributo `arbitro` en PARTIDO
+    answer: 0
+    explain: 'La sanción afecta a una participación que existe aunque no haya sanción: hay que tratar PARTICIPA como una entidad (**agregación**). Una ternaria obligaría a que toda participación tuviera árbitro.'
+    ref: 4.3 Agregación
+    ref_url: /ud02-modelo-er/ud02-teoria/#43-agregación-modelado-de-asociaciones-como-entidades
+  - pts: 400
+    type: open
+    q: ¿Qué reglas del enunciado **no** se ven en el diagrama y habría que documentar aparte? Decid al menos dos.
+    model: 'Por ejemplo: un equipo no puede jugar contra sí mismo (local distinto de visitante); el capitán de un equipo debería tener ficha en ese equipo en la temporada en curso; un jugador que participa en un partido debería tener ficha en uno de los dos equipos.'
+    explain: Son restricciones semánticas que se documentan junto al diagrama.
+    ref: 9. Errores frecuentes
+    ref_url: /ud02-modelo-er/ud02-teoria/#9-errores-frecuentes-y-buenas-prácticas
+  - pts: 500
+    type: open
+    q: 'Dibujad en la pizarra el fragmento de FICHA: las tres entidades, el rombo, el atributo `rol` y la conectividad.'
+    model: JUGADOR, EQUIPO y TEMPORADA unidas al rombo FICHA; **N** junto a JUGADOR, **1** junto a EQUIPO y **N** junto a TEMPORADA. `rol` es un atributo de FICHA, porque depende de la combinación jugador-temporada.
+    explain: ''
+    ref: 4.4 Relaciones ternarias
+    ref_url: /ud02-modelo-er/ud02-teoria/#44-relaciones-ternarias-y-análisis-formal-de-cardinalidad
+val:
+  title: Duel EER · Lliga UniArena
+  time: 90
+  intro: 'Dos equips, un cas complet i dotze rondes de dificultat creixent. Llegiu l''enunciat amb calma abans de començar: totes les preguntes ixen d''ell.'
+  case:
+  - La lliga universitària d'eSports **UniArena** vol una base de dades. De cada **membre** guarda el DNI, el nom, la data de naixement i un o diversos correus electrònics; l'edat es mostra en la web, però es calcula. Tot membre és **jugador**, **entrenador** o les dos coses (alguns jugadors veterans també entrenen). Dels jugadors interessa el seu *nick*, que no es repetix, i el seu rang; dels entrenadors, el seu número de llicència.
+  - Cada **equip** té un codi, un nom i una ciutat. Cada entrenador entrena exactament un equip, i cada equip té un o dos entrenadors. Cada equip té exactament un capità, que és un dels jugadors; un jugador pot ser capità, com a molt, d'un equip.
+  - La lliga s'organitza per **temporades**, identificades pel seu any. En cada temporada, un jugador fitxa per un sol equip, en el qual juga amb un rol (per exemple, *support*); un equip té molts jugadors en cada temporada i un jugador pot repetir equip en diverses temporades.
+  - 'Cada **partida** té un identificador, una data i un resultat, i la disputen dos equips: un com a local i un altre com a visitant. Les partides es juguen en **rondes** que es numeren 1, 2, 3… dins de cada partida; de cada ronda es guarda el mapa.'
+  - Es registra quins jugadors participen en cada partida i les seues estadístiques (*kills* i morts). Un **àrbitre** (número de llicència i nom) pot sancionar una participació concreta indicant el motiu; cada participació rep com a molt una sanció.
+  - Els **patrocinadors** (CIF i nom) patrocinen equips, i de cada patrocini es guarda l'import.
+  solution_img: duelo-eer-val
+  solution_txt: Este és el diagrama EER de la lliga UniArena. En la UD03 el transformareu en taules en el duel de la unitat.
+  rounds:
+  - pts: 100
+    type: choice
+    q: Quin tipus d'atribut és l'**edat** del membre?
+    options:
+    - Simple
+    - Derivat
+    - Multivalorat
+    - Identificador alternatiu
+    answer: 1
+    explain: 'Es calcula a partir de la data de naixement: **derivat** (el·lipse discontínua).'
+    hint: Fixa't en la paraula «es calcula».
+    ref: 2.2 Atributs
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributs-classificació-estructura-i-domini
+  - pts: 100
+    type: choice
+    q: I els **correus electrònics** del membre?
+    options:
+    - Compost
+    - Multivalorat
+    - Derivat
+    - Una entitat feble CORREU per identificació
+    answer: 1
+    explain: 'Un o diversos valors per al mateix membre: **multivalorat** (doble el·lipse). Només caldria una entitat si guardàrem dades de cada correu.'
+    hint: Quants valors pot tindre un mateix membre?
+    ref: 2.2 Atributs
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributs-classificació-estructura-i-domini
+  - pts: 100
+    type: choice
+    q: Quin paper té el *nick* en JUGADOR?
+    options:
+    - Identificador principal de JUGADOR
+    - 'Identificador alternatiu: l''identificador principal (DNI) l''hereta de MEMBRE'
+    - Atribut multivalorat
+    - Atribut derivat del nom
+    answer: 1
+    explain: Els subtipus hereten l'identificador del supertipus. El *nick* no es repetix, així que és un **identificador alternatiu**.
+    ref: 4.1 Generalització
+    ref_url: /ud02-modelo-er/ud02-teoria/#41-generalització-i-especialització-mecanisme-dherència
+  - pts: 200
+    type: choice
+    q: Quina jerarquia formen MEMBRE, JUGADOR i ENTRENADOR?
+    options:
+    - (T, D)
+    - (T, S)
+    - (P, D)
+    - (P, S)
+    answer: 1
+    explain: '«Tot membre és jugador, entrenador o les dos coses»: **total** i **solapada**.'
+    hint: 'Hi ha dos preguntes: hi pot haver membres que no siguen res? Algú pot ser les dos coses?'
+    ref: 4.2 Classificació de jerarquies
+    ref_url: /ud02-modelo-er/ud02-teoria/#42-classificació-de-jerarquies-totalparcial-disjuntasolapada
+  - pts: 200
+    type: choice
+    q: Quines són les cardinalitats d'ENTRENA? Al costat de cada entitat s'indica quantes instàncies d'ella s'associen amb una instància de l'altra.
+    options:
+    - ENTRENADOR (1,2) — ENTRENA — (1,1) EQUIP
+    - ENTRENADOR (1,1) — ENTRENA — (1,2) EQUIP
+    - ENTRENADOR (0,n) — ENTRENA — (1,1) EQUIP
+    - ENTRENADOR (1,2) — ENTRENA — (0,n) EQUIP
+    answer: 0
+    explain: Un equip té **un o dos** entrenadors (1,2 al costat d'ENTRENADOR) i cada entrenador entrena **exactament un** (1,1 al costat d'EQUIP).
+    hint: Pregunta primer «quants entrenadors té un equip?».
+    ref: 2.4 Cardinalitats
+    ref_url: /ud02-modelo-er/ud02-teoria/#24-restriccions-de-cardinalitat-mínima-i-màxima
+  - pts: 200
+    type: choice
+    q: Com és la relació CAPITANEJA?
+    options:
+    - 1:1, amb (1,1) al costat de JUGADOR i (0,1) al costat d'EQUIP
+    - 1:1, amb (0,1) en els dos costats
+    - 1:N, amb N al costat de JUGADOR
+    - N:M
+    answer: 0
+    explain: 'Cada equip té **exactament un** capità i un jugador és capità de **com a molt un** equip: 1:1 (1,1)–(0,1).'
+    ref: 2.4 Cardinalitats
+    ref_url: /ud02-modelo-er/ud02-teoria/#24-restriccions-de-cardinalitat-mínima-i-màxima
+  - pts: 300
+    type: choice
+    q: Què és RONDA en el model?
+    options:
+    - Una entitat feble per identificació de PARTIDA
+    - Una entitat feble per existència de PARTIDA
+    - Una entitat forta identificada per `num_ronda`
+    - Un atribut multivalorat de PARTIDA
+    answer: 0
+    explain: 'El número de ronda es repetix en cada partida: el seu identificador és (partida, `num_ronda`). És **feble per identificació**, i a més guarda el mapa, així que no n''hi ha prou amb un atribut.'
+    hint: N'hi ha prou amb el número de ronda per a distingir la ronda 2 d'una partida de la ronda 2 d'una altra?
+    ref: 2.1 Entitats febles
+    ref_url: /ud02-modelo-er/ud02-teoria/#21-entitats-fortes-febles-i-instàncies
+  - pts: 300
+    type: choice
+    q: Com es modela que cada partida la disputen un equip local i un altre visitant?
+    options:
+    - 'Entitat PARTIDA amb dos relacions 1:N amb EQUIP: LOCAL i VISITANT'
+    - Relació reflexiva N:M sobre EQUIP, sense rols
+    - Ternària EQUIP–EQUIP–PARTIDA
+    - Atributs de text `local` i `visitant` en PARTIDA
+    answer: 0
+    explain: 'Són dos papers distints del mateix equip en una partida: dos relacions 1:N (cada partida té exactament un local i un visitant).'
+    ref: 2.3 Relacions i rols
+    ref_url: /ud02-modelo-er/ud02-teoria/#23-relacions-grau-semàntica-i-noms-de-rol
+  - pts: 300
+    type: choice
+    q: Quina connectivitat té la ternària FITXA (JUGADOR, EQUIP, TEMPORADA)?
+    options:
+    - 1:N:N, amb EQUIP en el costat 1
+    - 1:N:N, amb TEMPORADA en el costat 1
+    - N:N:N
+    - 1:1:N, amb JUGADOR en el costat N
+    answer: 0
+    explain: Fixats (jugador, temporada) hi ha **un** equip; fixats (equip, temporada), molts jugadors; fixats (jugador, equip), moltes temporades.
+    hint: 'Fixa un jugador i una temporada: quants equips hi pot haver?'
+    ref: 4.4 Relacions ternàries
+    ref_url: /ud02-modelo-er/ud02-teoria/#44-relacions-ternàries-i-anàlisi-formal-de-cardinalitat
+  - pts: 400
+    type: choice
+    q: Com es modela que un àrbitre sancione una **participació** concreta?
+    options:
+    - Agregació de PARTICIPA (JUGADOR–PARTIDA) relacionada amb ÀRBITRE mitjançant SANCIONA, amb (0,1) al costat d'ÀRBITRE
+    - Ternària JUGADOR–PARTIDA–ÀRBITRE
+    - Relació binària ÀRBITRE–JUGADOR
+    - Atribut `arbitre` en PARTIDA
+    answer: 0
+    explain: 'La sanció afecta una participació que existix encara que no hi haja sanció: cal tractar PARTICIPA com una entitat (**agregació**). Una ternària obligaria que tota participació tinguera àrbitre.'
+    ref: 4.3 Agregació
+    ref_url: /ud02-modelo-er/ud02-teoria/#43-agregació-modelatge-dassociacions-com-a-entitats
+  - pts: 400
+    type: open
+    q: Quines regles de l'enunciat **no** es veuen en el diagrama i caldria documentar a banda? Digueu-ne almenys dos.
+    model: 'Per exemple: un equip no pot jugar contra si mateix (local distint de visitant); el capità d''un equip hauria de tindre fitxa en eixe equip en la temporada en curs; un jugador que participa en una partida hauria de tindre fitxa en un dels dos equips.'
+    explain: Són restriccions semàntiques que es documenten al costat del diagrama.
+    ref: 9. Errors freqüents
+    ref_url: /ud02-modelo-er/ud02-teoria/#9-errors-freqüents-i-bones-pràctiques
+  - pts: 500
+    type: open
+    q: 'Dibuixeu en la pissarra el fragment de FITXA: les tres entitats, el rombe, l''atribut `rol` i la connectivitat.'
+    model: JUGADOR, EQUIP i TEMPORADA unides al rombe FITXA; **N** al costat de JUGADOR, **1** al costat d'EQUIP i **N** al costat de TEMPORADA. `rol` és un atribut de FITXA, perquè depén de la combinació jugador-temporada.
+    explain: ''
+    ref: 4.4 Relacions ternàries
+    ref_url: /ud02-modelo-er/ud02-teoria/#44-relacions-ternàries-i-anàlisi-formal-de-cardinalitat
