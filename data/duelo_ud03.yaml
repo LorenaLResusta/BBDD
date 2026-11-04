@@ -1,0 +1,273 @@
+# Duelo por equipos (shortcode duelo). type: choice | number | open
+es:
+  title: Duelo relacional · Liga UniArena
+  time: 90
+  intro: El mismo caso del duelo de la UD02, ahora con su diagrama EER resuelto. Doce rondas para transformarlo en tablas.
+  case:
+  - La liga universitaria de eSports **UniArena** quiere una base de datos. De cada **miembro** guarda el DNI, el nombre, la fecha de nacimiento y uno o varios correos electrónicos; la edad se muestra en la web, pero se calcula. Todo miembro es **jugador**, **entrenador** o las dos cosas (algunos jugadores veteranos también entrenan). De los jugadores interesa su *nick*, que no se repite, y su rango; de los entrenadores, su número de licencia.
+  - Cada **equipo** tiene un código, un nombre y una ciudad. Cada entrenador entrena exactamente a un equipo, y cada equipo tiene uno o dos entrenadores. Cada equipo tiene exactamente un capitán, que es uno de los jugadores; un jugador puede ser capitán, como mucho, de un equipo.
+  - La liga se organiza por **temporadas**, identificadas por su año. En cada temporada, un jugador ficha por un solo equipo, en el que juega con un rol (por ejemplo, *support*); un equipo tiene muchos jugadores en cada temporada y un jugador puede repetir equipo en varias temporadas.
+  - 'Cada **partido** tiene un identificador, una fecha y un resultado, y lo disputan dos equipos: uno como local y otro como visitante. Los partidos se juegan en **rondas** que se numeran 1, 2, 3… dentro de cada partido; de cada ronda se guarda el mapa.'
+  - Se registra qué jugadores participan en cada partido y sus estadísticas (*kills* y muertes). Un **árbitro** (número de licencia y nombre) puede sancionar una participación concreta indicando el motivo; cada participación recibe como mucho una sanción.
+  - Los **patrocinadores** (CIF y nombre) patrocinan equipos, y de cada patrocinio se guarda el importe.
+  case_img: duelo-eer-es
+  solution_img: duelo-esquema-es
+  solution_txt: 'Este es el esquema relacional completo: 13 tablas.'
+  rounds:
+  - pts: 100
+    type: number
+    q: ¿Cuántas columnas tiene la clave primaria de la tabla FICHA?
+    answer: 2
+    explain: 'FICHA es una ternaria 1:N:N: su PK son las claves de los dos lados N, (`dni`, `anyo`). `cod_equipo` es una FK normal.'
+    hint: La clave del lado «1» no entra en la PK.
+    ref: 4.8 Ternarias
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#48-transformación-de-relaciones-ternarias
+  - pts: 100
+    type: choice
+    q: ¿Cómo se transforman los correos del miembro?
+    options:
+    - Una columna `emails` en MIEMBRO
+    - Columnas `email1`, `email2` y `email3` en MIEMBRO
+    - EMAIL(_dni_ → MIEMBRO, _email_) con PK compuesta
+    - EMAIL(dni → MIEMBRO, email) con PK solo `dni`
+    answer: 2
+    explain: Multivaluado → **tabla nueva** con la clave de la entidad y el valor, ambos en la PK. Con PK solo `dni` cada miembro tendría un único correo.
+    ref: 4.3 Multivaluados
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#43-transformación-de-atributos-compuestos-y-multivaluados
+  - pts: 200
+    type: choice
+    q: La jerarquía MIEMBRO → JUGADOR, ENTRENADOR es (T, S). ¿Qué transformación es la adecuada?
+    options:
+    - Una tabla para el supertipo y una para cada subtipo, con la misma PK, que en los subtipos es también FK
+    - Solo una tabla por subtipo, copiando en cada una los atributos de MIEMBRO
+    - Una única tabla MIEMBRO con una columna `tipo` de un solo valor
+    - Solo la tabla MIEMBRO, sin `nick` ni `licencia`
+    answer: 0
+    explain: 'Al ser **solapada**, una persona puede estar en los dos subtipos: con tablas solo de subtipos se duplicarían sus datos, y una columna `tipo` de un solo valor no permite ser las dos cosas.'
+    ref: 4.9 Jerarquías
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#49-transformación-de-jerarquías-de-generalización--especialización
+  - pts: 200
+    type: choice
+    q: ¿Cómo se transforma CAPITANEA (cada equipo tiene exactamente un capitán; un jugador capitanea como mucho un equipo)?
+    options:
+    - FK `dni_capitan` en EQUIPO, con UK y VNN
+    - FK `cod_equipo` en JUGADOR, sin restricciones
+    - Tabla nueva CAPITANEA(_cod_equipo_, _dni_)
+    - FK `dni_capitan` en EQUIPO, sin UK
+    answer: 0
+    explain: '1:1 (1,1)–(0,1): la FK va en el lado que **siempre** tiene pareja (EQUIPO) con **VNN** (siempre hay capitán) y **UK** (nadie capitanea dos equipos).'
+    ref: 4.6 Relaciones 1:1
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#46-transformación-de-relaciones-binarias-11
+  - pts: 200
+    type: choice
+    q: ¿Y ENTRENA (cada entrenador entrena exactamente un equipo; cada equipo tiene uno o dos)?
+    options:
+    - FK `cod_equipo` en ENTRENADOR, con VNN
+    - FK `dni_entrenador` en EQUIPO
+    - Tabla nueva ENTRENA con PK compuesta
+    - Columnas `entrenador1` y `entrenador2` en EQUIPO
+    answer: 0
+    explain: 'Es 1:N: la FK va al lado N (ENTRENADOR) y es obligatoria. El «uno o dos» no lo garantiza el esquema: se documenta.'
+    ref: 4.4 Relaciones 1:N
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#44-transformación-de-relaciones-binarias-1n
+  - pts: 300
+    type: number
+    q: ¿Cuántas claves ajenas tiene la tabla PARTIDO?
+    answer: 2
+    explain: 'Dos: `cod_local` y `cod_visitante`, ambas hacia EQUIPO y obligatorias (una por cada relación 1:N).'
+    ref: 4.4 Relaciones 1:N
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#44-transformación-de-relaciones-binarias-1n
+  - pts: 300
+    type: choice
+    q: ¿Cuál es la clave primaria de RONDA?
+    options:
+    - (`id_partido`, `num_ronda`)
+    - (`num_ronda`)
+    - Un `id_ronda` nuevo, sin FK
+    - (`id_partido`)
+    answer: 0
+    explain: 'Débil por identificación: su PK **incluye** la clave de PARTIDO, que además es FK.'
+    ref: 4.2 Entidades débiles
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#42-transformación-de-entidades-débiles-por-identificación-y-existencia
+  - pts: 300
+    type: choice
+    q: ¿Qué tabla sale de la ternaria FICHA?
+    options:
+    - FICHA(_dni_, _anyo_, cod_equipo, rol)
+    - FICHA(_dni_, _anyo_, _cod_equipo_, rol)
+    - FICHA(_dni_, _cod_equipo_, anyo, rol)
+    - Una FK `cod_equipo` en JUGADOR
+    answer: 0
+    explain: '1:N:N con EQUIPO en el lado 1: PK (`dni`, `anyo`) y `cod_equipo` como FK obligatoria. Con las tres en la PK, un jugador podría fichar por dos equipos en la misma temporada.'
+    ref: 4.8 Ternarias
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#48-transformación-de-relaciones-ternarias
+  - pts: 400
+    type: choice
+    q: ¿Cómo se transforma la sanción (agregación de PARTICIPA relacionada con ÁRBITRO, como mucho una sanción por participación)?
+    options:
+    - Añadir a PARTICIPA las columnas `num_licencia` (FK a ÁRBITRO, admite nulos) y `motivo`
+    - Tabla SANCIONA(_dni_, _id_partido_, _num_licencia_, motivo)
+    - FK en ÁRBITRO hacia PARTICIPA
+    - Una ternaria JUGADOR–PARTIDO–ÁRBITRO sin tabla PARTICIPA
+    answer: 0
+    explain: 'La agregación se transforma como una entidad (PARTICIPA) y SANCIONA es una 1:N hacia ella con mínima 0: FK opcional en PARTICIPA. Con las tres columnas en la PK se permitirían varias sanciones por participación.'
+    ref: 4.10 Agregaciones
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#410-transformación-de-agregaciones
+  - pts: 400
+    type: number
+    q: ¿Cuántas tablas tiene el esquema relacional completo?
+    answer: 13
+    explain: 'MIEMBRO, EMAIL, JUGADOR, ENTRENADOR, EQUIPO, TEMPORADA, FICHA, PARTIDO, RONDA, PARTICIPA, ÁRBITRO, PATROCINADOR y PATROCINA: **13**. CAPITANEA, ENTRENA, LOCAL, VISITANTE, TIENE y SANCIONA se resuelven con FK.'
+    hint: Cuenta entidades (incluidos los subtipos), multivaluados, N:M, ternarias y agregaciones.
+    ref: 4.12 Tabla resumen
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#412-tabla-resumen-patrones-de-transformación
+  - pts: 500
+    type: open
+    q: ¿Cómo garantizaríais que un equipo no juega contra sí mismo? ¿Y que cada equipo tiene uno o dos entrenadores?
+    model: '`CHECK (cod_local <> cod_visitante)` en PARTIDO: es una regla de fila y sí se puede declarar. «Uno o dos entrenadores» implica contar filas de otra tabla: no se puede con PK, FK, UK, VNN ni CHECK; se documenta y se implementa con un disparador o desde la aplicación.'
+    explain: ''
+    ref: 6. Restricciones que el modelo no expresa
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#6-restricciones-que-el-modelo-lógico-no-puede-expresar
+  - pts: 500
+    type: open
+    q: Escribid el esquema completo de PARTICIPA con su PK, sus FK y qué columnas admiten nulos.
+    model: PARTICIPA(_dni_ → JUGADOR, _id_partido_ → PARTIDO, kills, muertes, num_licencia → ÁRBITRO, motivo). PK (`dni`, `id_partido`); `num_licencia` y `motivo` admiten nulos (no toda participación tiene sanción).
+    explain: ''
+    ref: 4.10 Agregaciones
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#410-transformación-de-agregaciones
+val:
+  title: Duel relacional · Lliga UniArena
+  time: 90
+  intro: El mateix cas del duel de la UD02, ara amb el seu diagrama EER resolt. Dotze rondes per a transformar-lo en taules.
+  case:
+  - La lliga universitària d'eSports **UniArena** vol una base de dades. De cada **membre** guarda el DNI, el nom, la data de naixement i un o diversos correus electrònics; l'edat es mostra en la web, però es calcula. Tot membre és **jugador**, **entrenador** o les dos coses (alguns jugadors veterans també entrenen). Dels jugadors interessa el seu *nick*, que no es repetix, i el seu rang; dels entrenadors, el seu número de llicència.
+  - Cada **equip** té un codi, un nom i una ciutat. Cada entrenador entrena exactament un equip, i cada equip té un o dos entrenadors. Cada equip té exactament un capità, que és un dels jugadors; un jugador pot ser capità, com a molt, d'un equip.
+  - La lliga s'organitza per **temporades**, identificades pel seu any. En cada temporada, un jugador fitxa per un sol equip, en el qual juga amb un rol (per exemple, *support*); un equip té molts jugadors en cada temporada i un jugador pot repetir equip en diverses temporades.
+  - 'Cada **partida** té un identificador, una data i un resultat, i la disputen dos equips: un com a local i un altre com a visitant. Les partides es juguen en **rondes** que es numeren 1, 2, 3… dins de cada partida; de cada ronda es guarda el mapa.'
+  - Es registra quins jugadors participen en cada partida i les seues estadístiques (*kills* i morts). Un **àrbitre** (número de llicència i nom) pot sancionar una participació concreta indicant el motiu; cada participació rep com a molt una sanció.
+  - Els **patrocinadors** (CIF i nom) patrocinen equips, i de cada patrocini es guarda l'import.
+  case_img: duelo-eer-val
+  solution_img: duelo-esquema-val
+  solution_txt: 'Este és l''esquema relacional complet: 13 taules.'
+  rounds:
+  - pts: 100
+    type: number
+    q: Quantes columnes té la clau primària de la taula FITXA?
+    answer: 2
+    explain: 'FITXA és una ternària 1:N:N: la seua PK són les claus dels dos costats N, (`dni`, `any`). `cod_equip` és una FK normal.'
+    hint: La clau del costat «1» no entra en la PK.
+    ref: 4.8 Ternàries
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#48-transformació-de-relacions-ternàries
+  - pts: 100
+    type: choice
+    q: Com es transformen els correus del membre?
+    options:
+    - Una columna `emails` en MEMBRE
+    - Columnes `email1`, `email2` i `email3` en MEMBRE
+    - EMAIL(_dni_ → MEMBRE, _email_) amb PK composta
+    - EMAIL(dni → MEMBRE, email) amb PK només `dni`
+    answer: 2
+    explain: Multivalorat → **taula nova** amb la clau de l'entitat i el valor, tots dos en la PK. Amb PK només `dni` cada membre tindria un únic correu.
+    ref: 4.3 Multivalorats
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#43-transformació-datributs-compostos-i-multivalorats
+  - pts: 200
+    type: choice
+    q: La jerarquia MEMBRE → JUGADOR, ENTRENADOR és (T, S). Quina transformació és l'adequada?
+    options:
+    - Una taula per al supertipus i una per a cada subtipus, amb la mateixa PK, que en els subtipus és també FK
+    - Només una taula per subtipus, copiant en cadascuna els atributs de MEMBRE
+    - Una única taula MEMBRE amb una columna `tipus` d'un sol valor
+    - Només la taula MEMBRE, sense `nick` ni `llicencia`
+    answer: 0
+    explain: 'En ser **solapada**, una persona pot estar en els dos subtipus: amb taules només de subtipus es duplicarien les seues dades, i una columna `tipus` d''un sol valor no permet ser les dos coses.'
+    ref: 4.9 Jerarquies
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#49-transformació-de-jerarquies-de-generalització--especialització
+  - pts: 200
+    type: choice
+    q: Com es transforma CAPITANEJA (cada equip té exactament un capità; un jugador capitaneja com a molt un equip)?
+    options:
+    - FK `dni_capita` en EQUIP, amb UK i VNN
+    - FK `cod_equip` en JUGADOR, sense restriccions
+    - Taula nova CAPITANEJA(_cod_equip_, _dni_)
+    - FK `dni_capita` en EQUIP, sense UK
+    answer: 0
+    explain: '1:1 (1,1)–(0,1): la FK va en el costat que **sempre** té parella (EQUIP) amb **VNN** (sempre hi ha capità) i **UK** (ningú capitaneja dos equips).'
+    ref: 4.6 Relacions 1:1
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#46-transformació-de-relacions-binàries-11
+  - pts: 200
+    type: choice
+    q: I ENTRENA (cada entrenador entrena exactament un equip; cada equip en té un o dos)?
+    options:
+    - FK `cod_equip` en ENTRENADOR, amb VNN
+    - FK `dni_entrenador` en EQUIP
+    - Taula nova ENTRENA amb PK composta
+    - Columnes `entrenador1` i `entrenador2` en EQUIP
+    answer: 0
+    explain: 'És 1:N: la FK va al costat N (ENTRENADOR) i és obligatòria. L''«un o dos» no el garantix l''esquema: es documenta.'
+    ref: 4.4 Relacions 1:N
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#44-transformació-de-relacions-binàries-1n
+  - pts: 300
+    type: number
+    q: Quantes claus alienes té la taula PARTIDA?
+    answer: 2
+    explain: 'Dos: `cod_local` i `cod_visitant`, totes dos cap a EQUIP i obligatòries (una per cada relació 1:N).'
+    ref: 4.4 Relacions 1:N
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#44-transformació-de-relacions-binàries-1n
+  - pts: 300
+    type: choice
+    q: Quina és la clau primària de RONDA?
+    options:
+    - (`id_partida`, `num_ronda`)
+    - (`num_ronda`)
+    - Un `id_ronda` nou, sense FK
+    - (`id_partida`)
+    answer: 0
+    explain: 'Feble per identificació: la seua PK **inclou** la clau de PARTIDA, que a més és FK.'
+    ref: 4.2 Entitats febles
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#42-transformació-dentitats-febles-per-identificació-i-existència
+  - pts: 300
+    type: choice
+    q: Quina taula ix de la ternària FITXA?
+    options:
+    - FITXA(_dni_, _any_, cod_equip, rol)
+    - FITXA(_dni_, _any_, _cod_equip_, rol)
+    - FITXA(_dni_, _cod_equip_, any, rol)
+    - Una FK `cod_equip` en JUGADOR
+    answer: 0
+    explain: '1:N:N amb EQUIP en el costat 1: PK (`dni`, `any`) i `cod_equip` com a FK obligatòria. Amb les tres en la PK, un jugador podria fitxar per dos equips en la mateixa temporada.'
+    ref: 4.8 Ternàries
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#48-transformació-de-relacions-ternàries
+  - pts: 400
+    type: choice
+    q: Com es transforma la sanció (agregació de PARTICIPA relacionada amb ÀRBITRE, com a molt una sanció per participació)?
+    options:
+    - Afegir a PARTICIPA les columnes `num_llicencia` (FK a ÀRBITRE, admet nuls) i `motiu`
+    - Taula SANCIONA(_dni_, _id_partida_, _num_llicencia_, motiu)
+    - FK en ÀRBITRE cap a PARTICIPA
+    - Una ternària JUGADOR–PARTIDA–ÀRBITRE sense taula PARTICIPA
+    answer: 0
+    explain: 'L''agregació es transforma com una entitat (PARTICIPA) i SANCIONA és una 1:N cap a ella amb mínima 0: FK opcional en PARTICIPA. Amb les tres columnes en la PK es permetrien diverses sancions per participació.'
+    ref: 4.10 Agregacions
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#410-transformació-dagregacions
+  - pts: 400
+    type: number
+    q: Quantes taules té l'esquema relacional complet?
+    answer: 13
+    explain: 'MEMBRE, EMAIL, JUGADOR, ENTRENADOR, EQUIP, TEMPORADA, FITXA, PARTIDA, RONDA, PARTICIPA, ÀRBITRE, PATROCINADOR i PATROCINA: **13**. CAPITANEJA, ENTRENA, LOCAL, VISITANT, TÉ i SANCIONA es resolen amb FK.'
+    hint: Compta entitats (inclosos els subtipus), multivalorats, N:M, ternàries i agregacions.
+    ref: 4.12 Taula resum
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#412-taula-resum-patrons-de-transformació
+  - pts: 500
+    type: open
+    q: Com garantiríeu que un equip no juga contra si mateix? I que cada equip té un o dos entrenadors?
+    model: '`CHECK (cod_local <> cod_visitant)` en PARTIDA: és una regla de fila i sí que es pot declarar. «Un o dos entrenadors» implica comptar files d''una altra taula: no es pot amb PK, FK, UK, VNN ni CHECK; es documenta i s''implementa amb un disparador o des de l''aplicació.'
+    explain: ''
+    ref: 6. Restriccions que el model no expressa
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#6-restriccions-que-el-model-lògic-no-pot-expressar
+  - pts: 500
+    type: open
+    q: Escriviu l'esquema complet de PARTICIPA amb la seua PK, les seues FK i quines columnes admeten nuls.
+    model: PARTICIPA(_dni_ → JUGADOR, _id_partida_ → PARTIDA, kills, morts, num_llicencia → ÀRBITRE, motiu). PK (`dni`, `id_partida`); `num_llicencia` i `motiu` admeten nuls (no tota participació té sanció).
+    explain: ''
+    ref: 4.10 Agregacions
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#410-transformació-dagregacions

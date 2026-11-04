@@ -1,756 +1,1313 @@
 # Escape room UD03 · Modelo relacional (shortcode escape-click). Escenas en assets/escape/ud03-*.svg
-# Cada hotspot "id" coincide con un <g data-hs="id"> de la escena. Tipos: puzzle (choice, multi, match, order, number), note, decoy, door.
 es:
-  title: "Bloqueo en el Banco Codd"
-  sub: "Escape room · UD03 Modelo relacional"
-  target_min: 40
+  title: Bloqueo en el Banco Codd
+  sub: Escape room · UD03 Modelo relacional
+  target_min: 50
   intro:
-    - "Formas parte del equipo de auditoría informática del **Banco Codd**. Esta noche estáis probando el nuevo sistema de seguridad cuando algo falla: se activa el protocolo de bloqueo y te quedas encerrado en el sótano."
-    - "El sistema solo libera las puertas a quien demuestre que entiende la base de datos relacional del banco. Tendrás que salir del **archivo**, de la **sala de servidores** y, por último, de la **cámara acorazada**."
+  - 'Formas parte del equipo de auditoría informática del **Banco Codd**. Esta noche estáis probando el nuevo sistema de seguridad cuando algo falla: se activa el protocolo de bloqueo y te quedas encerrado en el sótano.'
+  - El sistema solo libera las puertas a quien demuestre que entiende la base de datos relacional del banco. Tendrás que salir del **archivo**, de la **sala de servidores**, de la **cámara acorazada** y, por último, del **despacho del director**.
   rooms:
-    - id: archivo
-      scene: ud03-archivo
-      name: "Archivo"
-      story: "Un archivo lleno de carpetas y polvo. El teclado de la puerta A pide **cuatro dígitos** y en su pantallita se lee: GRADO · CARDINALIDAD · CLAVES CANDIDATAS · RESTRICCIONES INHERENTES."
-      hotspots:
-        - id: listado
-          kind: puzzle
-          type: number
-          icon: "📄"
-          name: "Listado sobre la mesa"
-          story: "Un listado impreso de la relación CUENTA, tal como estaba a las 00:00."
-          table:
-            head: ["iban", "dni_titular", "tipo", "saldo", "fecha_apertura"]
-            rows:
-              - ["ES01", "11111111A", "corriente", "500", "2019-03-01"]
-              - ["ES02", "11111111A", "ahorro", "1200", "2021-07-15"]
-              - ["ES03", "22222222B", "corriente", "80", "2022-01-10"]
-              - ["ES04", "33333333C", "corriente", "0", "2023-05-02"]
-              - ["ES05", "44444444D", "ahorro", "`NULL`", "2024-11-30"]
-              - ["ES06", "22222222B", "ahorro", "3500", "2025-02-14"]
-          prompt: "¿Cuál es el grado y cuál la cardinalidad de CUENTA en este momento?"
-          fields: ["Grado", "Cardinalidad"]
-          answer: [5, 6]
-          hints:
-            - "Uno de los dos números cuenta columnas y el otro, filas."
-            - "El **grado** es el número de atributos (columnas); la **cardinalidad**, el número de tuplas (filas)."
-          explain: "Grado **5** (cinco atributos) y cardinalidad **6** (seis tuplas). El grado se fija al diseñar la tabla; la cardinalidad cambia cada vez que se inserta o se borra una fila. Ojo: en el modelo E/R, «cardinalidad» significa otra cosa."
-          ref: "1.2 Grado y cardinalidad"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#12-atributos-dominios-grado-y-cardinalidad"
-          reward: { icon: "📄", text: "Grado = **5** · Cardinalidad = **6**" }
-        - id: fichero
-          kind: puzzle
-          type: number
-          icon: "🗂️"
-          name: "Fichero de empleados"
-          story: "En cada cajoncito hay fichas de empleados. La primera ficha explica las reglas de la tabla EMPLEADO:"
-          list:
-            - "`id_emp`: número interno; nunca se repite."
-            - "`dni`: no hay dos empleados con el mismo DNI."
-            - "`email`: el correo corporativo es personal e intransferible."
-            - "`nombre`: puede haber dos empleados que se llamen igual."
-            - "`departamento`: en cada uno trabajan muchos empleados."
-            - "`extension`: todo el departamento comparte la misma extensión de teléfono."
-          prompt: "¿Cuántas **claves candidatas** tiene EMPLEADO?"
-          answer: 3
-          hints:
-            - "Una clave candidata identifica cada fila y es **mínima**: si le quitas un atributo, deja de identificar."
-            - "(`dni`, `nombre`) identifica… pero no es mínima, así que no cuenta."
-            - "Busca los atributos que, según las reglas, no se repiten nunca."
-          explain: "`id_emp`, `dni` y `email` son claves candidatas: cada una identifica por sí sola. Se elige una como **PK** (normalmente `id_emp`) y las otras dos pasan a ser **claves alternativas (UK)**. Combinaciones como (`dni`, `nombre`) no son candidatas porque no son mínimas."
-          ref: "2.1 Clave candidata y clave primaria"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#21-clave-candidata-y-clave-primaria-primary-key---pk"
-          reward: { icon: "🗂️", text: "Claves candidatas = **3**" }
-        - id: lampara
-          kind: puzzle
-          type: choice
-          icon: "💡"
-          name: "Lámpara de escritorio"
-          story: "La lámpara no enciende. Lleva colgada una etiqueta: «Solo me enciendo para quien sepa qué significa el saldo de la cuenta ES05 del listado»."
-          prompt: "En la fila de ES05, `saldo` vale `NULL`. ¿Qué significa?"
-          options:
-            - "Que el saldo es 0 euros"
-            - "Que el saldo es una cadena vacía"
-            - "Que no hay valor: el saldo es desconocido o no aplicable"
-            - "Que la fila incumple la integridad y el SGBD debería haberla rechazado"
-          answer: 2
-          hints:
-            - "Compara ES04 (saldo 0) con ES05 (saldo `NULL`): ¿significan lo mismo?"
-            - "`NULL` no es un valor del dominio, sino la ausencia de valor."
-          explain: "`NULL` representa la **ausencia de valor** (desconocido o no aplicable). No es 0 ni una cadena vacía: ES04 tiene saldo cero y de ES05 no sabemos el saldo. (En Oracle, eso sí, una cadena vacía `''` se guarda como `NULL`.)"
-          ref: "1.3 Valores nulos"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#13-tuplas-filas-y-semántica-de-valores-nulos-null"
-          reward: { icon: "💡", text: "Lámpara encendida: ya puedes leer la estantería" }
-        - id: estanteria
-          kind: puzzle
-          type: multi
-          icon: "📚"
-          name: "Estantería"
-          needs: [lampara]
-          locked: "Está tan oscuro que no se leen los lomos de las carpetas. Necesitas luz."
-          story: "A la luz de la lámpara lees los lomos: seis carpetas con supuestas «reglas que impone el propio modelo relacional». Solo algunas son verdad."
-          prompt: "¿Cuáles son restricciones **inherentes** del modelo relacional?"
-          options:
-            - "No puede haber dos tuplas idénticas en una relación."
-            - "El orden de las filas tiene significado y debe respetarse."
-            - "Cada celda contiene un único valor atómico."
-            - "El orden de las columnas no altera el significado de la relación."
-            - "Toda tabla debe tener al menos una clave ajena."
-            - "Ninguna columna puede contener valores nulos."
-          answer: [0, 2, 3]
-          hints:
-            - "Las restricciones inherentes salen de la definición matemática de relación: un **conjunto** de tuplas."
-            - "En un conjunto no hay elementos repetidos ni importa el orden."
-            - "Los nulos solo están prohibidos en la clave primaria, y las claves ajenas las decide el diseñador."
-          explain: "Son inherentes la **unicidad de tuplas**, la **atomicidad** y el **desorden** de filas y de columnas. Las claves ajenas y la obligatoriedad son restricciones **semánticas**, que decide el diseñador. Has marcado **3** carpetas."
-          ref: "3.1 Restricciones inherentes"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#31-restricciones-inherentes-al-modelo"
-          reward: { icon: "📚", text: "Restricciones inherentes = **3**" }
-        - id: reloj
-          kind: decoy
-          icon: "🕰️"
-          name: "Reloj de pared"
-          text: "Son las tres de la madrugada. El reloj no tiene clave primaria, pero sí mucha prisa. Sigue buscando."
-        - id: puerta
-          kind: door
-          icon: "🚪"
-          name: "Puerta A"
-          story: "El teclado pide cuatro dígitos, en este orden:"
-          list:
-            - "1.º el **grado** de CUENTA"
-            - "2.º la **cardinalidad** de CUENTA"
-            - "3.º el número de **claves candidatas** de EMPLEADO"
-            - "4.º el número de **restricciones inherentes** de la estantería"
-          lock: { type: digits, code: "5633" }
-          hints:
-            - "Todo lo que necesitas está en tu mochila."
-            - "Grado y cardinalidad salen del listado; las claves, del fichero; las restricciones, de la estantería (que necesita luz)."
-          explain: "5 · 6 · 3 · 3. La puerta A se abre con un chasquido."
-    - id: servidores
-      scene: ud03-servidores
-      name: "Sala de servidores"
-      story: "Los servidores zumban y una pantalla parpadea en rojo: DELETE! La puerta B **no tiene corriente**: primero tendrás que restablecerla desde los racks. Después, su teclado pide tres dígitos en el orden 🖥️ 📈 🗒️."
-      hotspots:
-        - id: pizarra
-          img: ud03-esquema-banco
-          kind: note
-          icon: "📋"
-          name: "Pizarra del esquema"
-          text: "El esquema de la base de datos del banco y los datos de prueba de esta noche. Lo necesitarás para los retos de esta sala."
-          table:
-            - caption: "GESTOR"
-              head: ["id_gestor", "nombre"]
-              rows: [["G1", "Marta"], ["G2", "Iván"]]
-            - caption: "CLIENTE"
-              head: ["dni", "nombre", "id_gestor"]
-              rows: [["111A", "Ana", "G1"], ["222B", "Bruno", "G2"], ["333C", "Carla", "`NULL`"]]
-            - caption: "CUENTA"
-              head: ["iban", "dni_titular", "saldo"]
-              rows: [["ES01", "111A", "500"], ["ES02", "111A", "1200"], ["ES03", "222B", "80"], ["ES04", "333C", "0"]]
-            - caption: "TARJETA"
-              head: ["num_tarjeta", "iban"]
-              rows: [["T1", "ES01"], ["T2", "ES01"], ["T3", "ES02"], ["T4", "ES03"], ["T5", "ES04"]]
-        - id: consola
-          kind: puzzle
-          type: multi
-          icon: "🖥️"
-          name: "Consola"
-          story: "En la consola hay seis operaciones pendientes. Cada una se ejecutaría **por separado**, partiendo de los datos de la pizarra."
-          prompt: "¿Cuáles **rechazaría** el SGBD?"
-          options:
-            - "Insertar en CUENTA la fila (ES05, 444D, 300)."
-            - "Insertar en CLIENTE la fila (444D, Diego, `NULL`)."
-            - "Insertar en TARJETA la fila (T6, `NULL`)."
-            - "Insertar en CUENTA la fila (ES03, 333C, 10)."
-            - "Borrar el gestor G2."
-            - "Cambiar el saldo de ES04 a 50."
-          answer: [0, 2, 3]
-          hints:
-            - "Comprueba cada operación contra las PK, los VNN y las FK del esquema."
-            - "Una FK solo admite valores que existan en la tabla referenciada… o `NULL`, si la columna no es obligatoria."
-            - "Borrar G2 no se rechaza: mira qué política tiene la FK de CLIENTE hacia GESTOR."
-          explain: "Se rechazan **3**: ES05 apunta a un cliente que no existe (integridad referencial), T6 deja vacía una FK obligatoria (VNN) y ES03 repite una clave primaria. Insertar a Diego sin gestor es válido (FK opcional), borrar G2 pone a `NULL` el gestor de Bruno y cambiar un saldo no afecta a ninguna clave."
-          ref: "3.3 Integridad referencial"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#33-integridad-referencial-y-políticas-de-borradomodificación"
-          reward: { icon: "🖥️", text: "🖥️ = **3** operaciones rechazadas" }
-        - id: monitor
-          kind: puzzle
-          type: number
-          icon: "📈"
-          name: "Monitor de alarmas"
-          story: "La alarma avisa: alguien ha lanzado la orden **borrar a la clienta Ana (111A)**. Antes de que se ejecute, el sistema quiere saber cuánto daño hará."
-          prompt: "Con las políticas de la pizarra, ¿cuántas filas desaparecen en total de las cuatro tablas, contando la de Ana?"
-          answer: 6
-          hints:
-            - "Sigue las flechas: CLIENTE → CUENTA → TARJETA. Las dos FK son «en cascada»."
-            - "Ana tiene 2 cuentas. ¿Cuántas tarjetas tienen esas cuentas?"
-            - "1 clienta + 2 cuentas + 3 tarjetas."
-          explain: "Se borra Ana (**1**); en cascada, sus cuentas ES01 y ES02 (**2**); y, en cascada otra vez, las tarjetas T1, T2 y T3 (**3**). Total: **6**. GESTOR no cambia: el borrado se propaga de la tabla padre a la hija, nunca hacia arriba."
-          ref: "3.3 Políticas de borrado"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#33-integridad-referencial-y-políticas-de-borradomodificación"
-          reward: { icon: "📈", text: "📈 = **6** filas borradas" }
-        - id: postit
-          kind: puzzle
-          type: number
-          icon: "🗒️"
-          name: "Pósit en la pared"
-          story: "«Ojo: en el banco de verdad, la PK de CUENTA no es `iban`, sino (`cod_entidad`, `cod_sucursal`, `num_cuenta`). Hay que rehacer la FK de MOVIMIENTO.»"
-          prompt: "¿Cuántas columnas debe tener la clave ajena de MOVIMIENTO hacia CUENTA?"
-          answer: 3
-          hints:
-            - "Una FK debe coincidir con la clave primaria (o alternativa) a la que apunta."
-            - "Si la PK referenciada es compuesta, la FK también lo es."
-          explain: "Una FK referencia la PK **completa**: si la PK de CUENTA tiene 3 columnas, la FK de MOVIMIENTO también tiene **3** (`cod_entidad`, `cod_sucursal`, `num_cuenta`) y se declara como **una sola** restricción compuesta, no como tres FK sueltas."
-          ref: "2.4 Claves compuestas"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#24-claves-primarias-compuestas"
-          reward: { icon: "🗒️", text: "🗒️ = **3** columnas" }
-        - id: rack
-          kind: puzzle
-          type: match
-          icon: "🔌"
-          name: "Racks de servidores"
-          story: "Un rack muestra un aviso: «Energía de la puerta B cortada. Para restablecerla, configura bien la política de borrado de cada clave ajena del nuevo módulo»."
-          prompt: "Cuando se borra la fila padre, ¿qué política es la más adecuada en cada caso?"
-          items:
-            - "Los **clientes** de un gestor que se jubila (más adelante se les asignará otro)."
-            - "Las **cajas de seguridad** de una sucursal que cierra: pasan a la sucursal central `0001`."
-            - "Los **movimientos** de una cuenta que se cancela y se borra."
-            - "Las **cuentas** de un cliente al que alguien intenta borrar por error."
-          choices: ["En cascada", "Restringido (rechazar)", "Puesta a nulos", "Puesta a valor por defecto"]
-          answer: [2, 3, 0, 1]
-          hints:
-            - "Pregúntate por la fila hija: ¿tiene sentido que siga existiendo sin su padre?"
-            - "Si no tiene sentido → cascada. Si lo tiene, pero se queda sin padre un tiempo → nulos. Si no debería pasar nunca → restringido."
-          explain: "Movimientos → **cascada** (no tienen sentido sin su cuenta); clientes → **puesta a nulos** (siguen siendo clientes); cuentas → **restringido** (hay que impedir borrar un cliente con cuentas); cajas → **valor por defecto** (`0001`). Recuerda que Oracle solo ofrece cascada, puesta a nulos o rechazar."
-          ref: "3.3 Políticas de borrado"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#33-integridad-referencial-y-políticas-de-borradomodificación"
-          reward: { icon: "⚡", text: "Corriente restablecida en la puerta B" }
-        - id: extintor
-          kind: decoy
-          icon: "🧯"
-          name: "Extintor"
-          text: "Un extintor de CO₂, el adecuado para fuegos eléctricos. Esperemos no necesitarlo, ni para los servidores ni para tu cabeza."
-        - id: puerta
-          kind: door
-          icon: "🚪"
-          name: "Puerta B"
-          needs: [rack]
-          locked: "El teclado está apagado: la puerta no tiene corriente."
-          story: "El teclado vuelve a la vida. Tres dígitos, en el orden de las pegatinas."
-          lock: { type: digits, code: "363", order: "🖥️ 📈 🗒️" }
-          hints:
-            - "Los tres números están en tu mochila: consola, monitor y pósit."
-          explain: "3 · 6 · 3. La puerta B se abre con un silbido."
-    - id: camara
-      scene: ud03-camara
-      name: "Cámara acorazada"
-      story: "La cámara acorazada. La puerta circular tiene una rueda de combinación de **tres dígitos** y dos cerraduras laterales que necesitan las dos mitades de la **llave del director**. La pantalla de la puerta dice: COLUMNAS PK · TABLAS · REGLAS NO EXPRESABLES."
-      hotspots:
-        - id: caja12
-          img: ud03-caja12
-          kind: puzzle
-          type: choice
-          icon: "🔐"
-          name: "Caja de seguridad 12"
-          story: "Dentro de la caja está el diagrama del servicio de cajas: CLIENTE (0,n) — AUTORIZA — (0,n) CAJA, con el atributo `fecha_alta` en la relación. Un cliente puede estar autorizado a abrir varias cajas y una caja puede tener varios autorizados."
-          prompt: "¿Cuál es la clave primaria de la tabla AUTORIZA?"
-          options: ["(`dni`)", "(`num_caja`)", "(`dni`, `num_caja`)", "(`dni`, `num_caja`, `fecha_alta`)"]
-          answer: 2
-          hints:
-            - "Una N:M siempre genera una tabla nueva."
-            - "Su PK está formada por las claves de las dos entidades. Los atributos de la relación no entran, salvo que una misma pareja pueda repetirse."
-          explain: "Una N:M se transforma en una tabla con las claves de las dos entidades como **PK compuesta** y cada una como FK: AUTORIZA(`dni`, `num_caja`, `fecha_alta`). La PK tiene **2** columnas."
-          ref: "4.5 Relaciones N:M"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#45-transformación-de-relaciones-binarias-nm"
-          reward: { icon: "🔐", text: "PK de AUTORIZA = **2** columnas" }
-        - id: caja27
-          img: ud03-caja27
-          kind: puzzle
-          type: choice
-          icon: "🔐"
-          name: "Caja de seguridad 27"
-          story: "Diagrama: SUCURSAL (1,1) — CUSTODIA — (0,n) CAJA. Cada caja está en una única sucursal; una sucursal puede tener muchas cajas, o ninguna."
-          prompt: "¿Cómo se transforma CUSTODIA?"
-          options:
-            - "Con una FK `num_caja` en SUCURSAL"
-            - "Con una FK `cod_sucursal` en CAJA, sin VNN"
-            - "Con una FK `cod_sucursal` en CAJA, con VNN"
-            - "Con una tabla nueva CUSTODIA (`cod_sucursal`, `num_caja`)"
-          answer: 2
-          hints:
-            - "En una 1:N, la FK viaja al lado N."
-            - "¿Puede existir una caja sin sucursal? Fíjate en la cardinalidad mínima junto a SUCURSAL."
-          explain: "La FK va al lado **N** (CAJA) y, como toda caja está en una sucursal (mínimo 1), lleva **VNN**: CAJA(`num_caja`, …, `cod_sucursal`) · FK: `cod_sucursal` → SUCURSAL · VNN: `cod_sucursal`."
-          ref: "4.4 Relaciones 1:N"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#44-transformación-de-relaciones-binarias-1n"
-          reward: { icon: "🗝️", text: "Mitad izquierda de la llave del director" }
-        - id: caja33
-          img: ud03-caja33
-          kind: puzzle
-          type: multi
-          icon: "🔐"
-          name: "Caja de seguridad 33"
-          story: "Diagrama: EMPLEADO (0,1) — USA — (1,1) TARJETA_ACCESO. Cada tarjeta pertenece exactamente a un empleado y cada empleado tiene, como mucho, una tarjeta. Se transforma así: TARJETA_ACCESO(`id_tarjeta`, `nivel`, `id_emp`) · PK: `id_tarjeta`."
-          prompt: "¿Qué restricciones lleva `id_emp` en TARJETA_ACCESO?"
-          options: ["PK", "FK → EMPLEADO", "UK", "VNN"]
-          answer: [1, 2, 3]
-          hints:
-            - "¿Puede faltar? Toda tarjeta pertenece a un empleado."
-            - "¿Puede repetirse? Un empleado tiene, como mucho, una tarjeta."
-            - "La PK de la tabla ya es `id_tarjeta`."
-          explain: "`id_emp` es **FK** (apunta a EMPLEADO), **VNN** (toda tarjeta tiene dueño) y **UK** (un empleado no puede tener dos tarjetas). Es el patrón de la 1:1 (1,1)-(0,1)."
-          ref: "4.6 Relaciones 1:1"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#46-transformación-de-relaciones-binarias-11"
-          reward: { icon: "🗝️", text: "Mitad derecha de la llave del director" }
-        - id: carro
-          kind: puzzle
-          type: number
-          icon: "💰"
-          name: "Carro de lingotes"
-          story: "Sobre los lingotes hay una etiqueta con el modelo E/R del banco, en forma de lista:"
-          list:
-            - "Entidades: SUCURSAL, EMPLEADO, CLIENTE, CUENTA y CAJA."
-            - "Cada empleado trabaja en una sucursal; una sucursal tiene uno o varios empleados."
-            - "Un empleado puede supervisar a otros; cada empleado tiene, como mucho, un supervisor."
-            - "Un cliente puede ser titular de varias cuentas y una cuenta puede tener varios titulares."
-            - "Cada cuenta está domiciliada en una sucursal."
-            - "Un cliente puede tener varios teléfonos (atributo multivaluado)."
-            - "Un cliente alquila cajas; cada caja la alquila, como mucho, un cliente."
-          prompt: "¿Cuántas tablas tendrá el esquema relacional?"
-          answer: 7
-          hints:
-            - "Cada entidad es una tabla. Después, mira qué relaciones generan una tabla nueva."
-            - "Las 1:N (también la reflexiva) se resuelven con una FK: no crean tabla."
-            - "La N:M y el atributo multivaluado sí crean una tabla cada uno."
-          explain: "5 entidades + 1 tabla para la N:M (TITULAR) + 1 para el multivaluado (TELEFONO) = **7**. Trabajar, supervisar, domiciliar y alquilar son 1:N y se resuelven con una FK."
-          ref: "4.12 Tabla resumen"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#412-tabla-resumen-patrones-de-transformación"
-          reward: { icon: "💰", text: "Tablas del esquema = **7**" }
-        - id: terminal
-          kind: puzzle
-          type: multi
-          icon: "🧾"
-          name: "Terminal"
-          story: "El terminal pide revisar la documentación de restricciones. Muestra seis reglas de negocio del banco."
-          prompt: "¿Cuáles **no** se pueden expresar solo con PK, FK, UK y VNN?"
-          options:
-            - "Toda sucursal tiene al menos un empleado."
-            - "Cada cuenta está domiciliada en exactamente una sucursal."
-            - "Todo cliente es titular de al menos una cuenta."
-            - "El número de empleado no se repite."
-            - "Ningún empleado puede supervisarse a sí mismo, ni directa ni indirectamente."
-            - "Una caja la alquila, como mucho, un cliente."
-          answer: [0, 2, 4]
-          hints:
-            - "La mínima 1 en el lado «1» de una 1:N y la mínima 1 en una N:M se pierden al transformar."
-            - "Los ciclos en una reflexiva obligan a recorrer varias filas."
-            - "«Exactamente una» en el lado N se consigue con FK + VNN."
-          explain: "Se pierden **3**: la mínima 1 de SUCURSAL en TRABAJA (la FK está en EMPLEADO), la mínima 1 de CLIENTE en la N:M y los ciclos de la reflexiva. Se documentan y se implementan más adelante con *triggers* o procedimientos (UD08)."
-          ref: "4.11 Pérdidas semánticas"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#411-pérdidas-semánticas-en-la-transformación"
-          reward: { icon: "🧾", text: "Reglas no expresables = **3**" }
-        - id: laser
-          kind: decoy
-          icon: "🚨"
-          name: "Rejilla láser"
-          text: "Una rejilla de láseres rojos. Mejor no tocarla: no esconde ninguna pista, solo problemas."
-        - id: puerta
-          kind: door
-          icon: "🏦"
-          name: "Puerta acorazada"
-          needs: [caja27, caja33]
-          locked: "Las dos cerraduras laterales están vacías: necesitas las dos mitades de la llave del director."
-          story: "Introduces las dos mitades de la llave y giran a la vez. Queda la rueda de combinación:"
-          list:
-            - "1.º el número de **columnas de la PK** de AUTORIZA"
-            - "2.º el número de **tablas** del esquema del carro"
-            - "3.º el número de **reglas que el esquema no puede expresar**"
-          lock: { type: digits, code: "273" }
-          hints:
-            - "Necesitas lo que encontraste en la caja 12, el carro y el terminal."
-            - "Los dos primeros dígitos son 2 y 7."
-          explain: "2 · 7 · 3. La rueda gira, los cerrojos se retiran y la puerta acorazada se abre."
+  - id: archivo
+    scene: ud03-archivo
+    name: Archivo
+    story: 'Un archivo lleno de carpetas y polvo. El teclado de la puerta A pide **cuatro dígitos** y en su pantallita se lee: GRADO · CARDINALIDAD · CLAVES CANDIDATAS · RESTRICCIONES INHERENTES.'
+    hotspots:
+    - id: listado
+      kind: puzzle
+      type: number
+      icon: 📄
+      name: Listado sobre la mesa
+      story: Un listado impreso de la relación CUENTA, tal como estaba a las 00:00.
+      table:
+        head:
+        - iban
+        - dni_titular
+        - tipo
+        - saldo
+        - fecha_apertura
+        rows:
+        - - ES01
+          - 11111111A
+          - corriente
+          - '500'
+          - '2019-03-01'
+        - - ES02
+          - 11111111A
+          - ahorro
+          - '1200'
+          - '2021-07-15'
+        - - ES03
+          - 22222222B
+          - corriente
+          - '80'
+          - '2022-01-10'
+        - - ES04
+          - 33333333C
+          - corriente
+          - '0'
+          - '2023-05-02'
+        - - ES05
+          - 44444444D
+          - ahorro
+          - '`NULL`'
+          - '2024-11-30'
+        - - ES06
+          - 22222222B
+          - ahorro
+          - '3500'
+          - '2025-02-14'
+      prompt: ¿Cuál es el grado y cuál la cardinalidad de CUENTA en este momento?
+      fields:
+      - Grado
+      - Cardinalidad
+      answer:
+      - 5
+      - 6
+      hints:
+      - Uno de los dos números cuenta columnas y el otro, filas.
+      - El **grado** es el número de atributos (columnas); la **cardinalidad**, el número de tuplas (filas).
+      explain: 'Grado **5** (cinco atributos) y cardinalidad **6** (seis tuplas). El grado se fija al diseñar la tabla; la cardinalidad cambia cada vez que se inserta o se borra una fila. Ojo: en el modelo E/R, «cardinalidad» significa otra cosa.'
+      ref: 1.2 Grado y cardinalidad
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#12-atributos-dominios-grado-y-cardinalidad
+      reward:
+        icon: 📄
+        text: Grado = **5** · Cardinalidad = **6**
+    - id: fichero
+      kind: puzzle
+      type: number
+      icon: 🗂️
+      name: Fichero de empleados
+      story: 'En cada cajoncito hay fichas de empleados. La primera ficha explica las reglas de la tabla EMPLEADO:'
+      list:
+      - '`id_emp`: número interno; nunca se repite.'
+      - '`dni`: no hay dos empleados con el mismo DNI.'
+      - '`email`: el correo corporativo es personal e intransferible.'
+      - '`nombre`: puede haber dos empleados que se llamen igual.'
+      - '`departamento`: en cada uno trabajan muchos empleados.'
+      - '`extension`: todo el departamento comparte la misma extensión de teléfono.'
+      prompt: ¿Cuántas **claves candidatas** tiene EMPLEADO?
+      answer: 3
+      hints:
+      - 'Una clave candidata identifica cada fila y es **mínima**: si le quitas un atributo, deja de identificar.'
+      - (`dni`, `nombre`) identifica… pero no es mínima, así que no cuenta.
+      - Busca los atributos que, según las reglas, no se repiten nunca.
+      explain: '`id_emp`, `dni` y `email` son claves candidatas: cada una identifica por sí sola. Se elige una como **PK** (normalmente `id_emp`) y las otras dos pasan a ser **claves alternativas (UK)**. Combinaciones como (`dni`, `nombre`) no son candidatas porque no son mínimas.'
+      ref: 2.1 Clave candidata y clave primaria
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#21-clave-candidata-y-clave-primaria-primary-key---pk
+      reward:
+        icon: 🗂️
+        text: Claves candidatas = **3**
+    - id: lampara
+      kind: puzzle
+      type: choice
+      icon: 💡
+      name: Lámpara de escritorio
+      story: 'La lámpara no enciende. Lleva colgada una etiqueta: «Solo me enciendo para quien sepa qué significa el saldo de la cuenta ES05 del listado».'
+      prompt: En la fila de ES05, `saldo` vale `NULL`. ¿Qué significa?
+      options:
+      - Que el saldo es 0 euros
+      - Que el saldo es una cadena vacía
+      - 'Que no hay valor: el saldo es desconocido o no aplicable'
+      - Que la fila incumple la integridad y el SGBD debería haberla rechazado
+      answer: 2
+      hints:
+      - 'Compara ES04 (saldo 0) con ES05 (saldo `NULL`): ¿significan lo mismo?'
+      - '`NULL` no es un valor del dominio, sino la ausencia de valor.'
+      explain: '`NULL` representa la **ausencia de valor** (desconocido o no aplicable). No es 0 ni una cadena vacía: ES04 tiene saldo cero y de ES05 no sabemos el saldo. (En Oracle, eso sí, una cadena vacía `''''` se guarda como `NULL`.)'
+      ref: 1.3 Valores nulos
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#13-tuplas-filas-y-semántica-de-valores-nulos-null
+      reward:
+        icon: 💡
+        text: 'Lámpara encendida: ya puedes leer la estantería'
+    - id: estanteria
+      kind: puzzle
+      type: multi
+      icon: 📚
+      name: Estantería
+      needs:
+      - lampara
+      locked: Está tan oscuro que no se leen los lomos de las carpetas. Necesitas luz.
+      story: 'A la luz de la lámpara lees los lomos: seis carpetas con supuestas «reglas que impone el propio modelo relacional». Solo algunas son verdad.'
+      prompt: ¿Cuáles son restricciones **inherentes** del modelo relacional?
+      options:
+      - No puede haber dos tuplas idénticas en una relación.
+      - El orden de las filas tiene significado y debe respetarse.
+      - Cada celda contiene un único valor atómico.
+      - El orden de las columnas no altera el significado de la relación.
+      - Toda tabla debe tener al menos una clave ajena.
+      - Ninguna columna puede contener valores nulos.
+      answer:
+      - 0
+      - 2
+      - 3
+      hints:
+      - 'Las restricciones inherentes salen de la definición matemática de relación: un **conjunto** de tuplas.'
+      - En un conjunto no hay elementos repetidos ni importa el orden.
+      - Los nulos solo están prohibidos en la clave primaria, y las claves ajenas las decide el diseñador.
+      explain: Son inherentes la **unicidad de tuplas**, la **atomicidad** y el **desorden** de filas y de columnas. Las claves ajenas y la obligatoriedad son restricciones **semánticas**, que decide el diseñador. Has marcado **3** carpetas.
+      ref: 3.1 Restricciones inherentes
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#31-restricciones-inherentes-al-modelo
+      reward:
+        icon: 📚
+        text: Restricciones inherentes = **3**
+    - id: reloj
+      kind: decoy
+      icon: 🕰️
+      name: Reloj de pared
+      text: Son las tres de la madrugada. El reloj no tiene clave primaria, pero sí mucha prisa. Sigue buscando.
+    - id: puerta
+      kind: door
+      icon: 🚪
+      name: Puerta A
+      story: 'El teclado pide cuatro dígitos, en este orden:'
+      list:
+      - 1.º el **grado** de CUENTA
+      - 2.º la **cardinalidad** de CUENTA
+      - 3.º el número de **claves candidatas** de EMPLEADO
+      - 4.º el número de **restricciones inherentes** de la estantería
+      lock:
+        type: digits
+        code: '5633'
+      hints:
+      - Todo lo que necesitas está en tu mochila.
+      - Grado y cardinalidad salen del listado; las claves, del fichero; las restricciones, de la estantería (que necesita luz).
+      explain: 5 · 6 · 3 · 3. La puerta A se abre con un chasquido.
+  - id: servidores
+    scene: ud03-servidores
+    name: Sala de servidores
+    story: 'Los servidores zumban y una pantalla parpadea en rojo: DELETE! La puerta B **no tiene corriente**: primero tendrás que restablecerla desde los racks. Después, su teclado pide tres dígitos en el orden 🖥️ 📈 🗒️.'
+    hotspots:
+    - id: pizarra
+      img: ud03-esquema-banco
+      kind: note
+      icon: 📋
+      name: Pizarra del esquema
+      text: El esquema de la base de datos del banco y los datos de prueba de esta noche. Lo necesitarás para los retos de esta sala.
+      table:
+      - caption: GESTOR
+        head:
+        - id_gestor
+        - nombre
+        rows:
+        - - G1
+          - Marta
+        - - G2
+          - Iván
+      - caption: CLIENTE
+        head:
+        - dni
+        - nombre
+        - id_gestor
+        rows:
+        - - 111A
+          - Ana
+          - G1
+        - - 222B
+          - Bruno
+          - G2
+        - - 333C
+          - Carla
+          - '`NULL`'
+      - caption: CUENTA
+        head:
+        - iban
+        - dni_titular
+        - saldo
+        rows:
+        - - ES01
+          - 111A
+          - '500'
+        - - ES02
+          - 111A
+          - '1200'
+        - - ES03
+          - 222B
+          - '80'
+        - - ES04
+          - 333C
+          - '0'
+      - caption: TARJETA
+        head:
+        - num_tarjeta
+        - iban
+        rows:
+        - - T1
+          - ES01
+        - - T2
+          - ES01
+        - - T3
+          - ES02
+        - - T4
+          - ES03
+        - - T5
+          - ES04
+    - id: consola
+      kind: puzzle
+      type: multi
+      icon: 🖥️
+      name: Consola
+      story: En la consola hay seis operaciones pendientes. Cada una se ejecutaría **por separado**, partiendo de los datos de la pizarra.
+      prompt: ¿Cuáles **rechazaría** el SGBD?
+      options:
+      - Insertar en CUENTA la fila (ES05, 444D, 300).
+      - Insertar en CLIENTE la fila (444D, Diego, `NULL`).
+      - Insertar en TARJETA la fila (T6, `NULL`).
+      - Insertar en CUENTA la fila (ES03, 333C, 10).
+      - Borrar el gestor G2.
+      - Cambiar el saldo de ES04 a 50.
+      answer:
+      - 0
+      - 2
+      - 3
+      hints:
+      - Comprueba cada operación contra las PK, los VNN y las FK del esquema.
+      - Una FK solo admite valores que existan en la tabla referenciada… o `NULL`, si la columna no es obligatoria.
+      - 'Borrar G2 no se rechaza: mira qué política tiene la FK de CLIENTE hacia GESTOR.'
+      explain: 'Se rechazan **3**: ES05 apunta a un cliente que no existe (integridad referencial), T6 deja vacía una FK obligatoria (VNN) y ES03 repite una clave primaria. Insertar a Diego sin gestor es válido (FK opcional), borrar G2 pone a `NULL` el gestor de Bruno y cambiar un saldo no afecta a ninguna clave.'
+      ref: 3.3 Integridad referencial
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integridad-referencial-y-políticas-de-borradomodificación
+      reward:
+        icon: 🖥️
+        text: 🖥️ = **3** operaciones rechazadas
+    - id: monitor
+      kind: puzzle
+      type: number
+      icon: 📈
+      name: Monitor de alarmas
+      story: 'La alarma avisa: alguien ha lanzado la orden **borrar a la clienta Ana (111A)**. Antes de que se ejecute, el sistema quiere saber cuánto daño hará.'
+      prompt: Con las políticas de la pizarra, ¿cuántas filas desaparecen en total de las cuatro tablas, contando la de Ana?
+      answer: 6
+      hints:
+      - 'Sigue las flechas: CLIENTE → CUENTA → TARJETA. Las dos FK son «en cascada».'
+      - Ana tiene 2 cuentas. ¿Cuántas tarjetas tienen esas cuentas?
+      - 1 clienta + 2 cuentas + 3 tarjetas.
+      explain: 'Se borra Ana (**1**); en cascada, sus cuentas ES01 y ES02 (**2**); y, en cascada otra vez, las tarjetas T1, T2 y T3 (**3**). Total: **6**. GESTOR no cambia: el borrado se propaga de la tabla padre a la hija, nunca hacia arriba.'
+      ref: 3.3 Políticas de borrado
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integridad-referencial-y-políticas-de-borradomodificación
+      reward:
+        icon: 📈
+        text: 📈 = **6** filas borradas
+    - id: postit
+      kind: puzzle
+      type: number
+      icon: 🗒️
+      name: Pósit en la pared
+      story: '«Ojo: en el banco de verdad, la PK de CUENTA no es `iban`, sino (`cod_entidad`, `cod_sucursal`, `num_cuenta`). Hay que rehacer la FK de MOVIMIENTO.»'
+      prompt: ¿Cuántas columnas debe tener la clave ajena de MOVIMIENTO hacia CUENTA?
+      answer: 3
+      hints:
+      - Una FK debe coincidir con la clave primaria (o alternativa) a la que apunta.
+      - Si la PK referenciada es compuesta, la FK también lo es.
+      explain: 'Una FK referencia la PK **completa**: si la PK de CUENTA tiene 3 columnas, la FK de MOVIMIENTO también tiene **3** (`cod_entidad`, `cod_sucursal`, `num_cuenta`) y se declara como **una sola** restricción compuesta, no como tres FK sueltas.'
+      ref: 2.4 Claves compuestas
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#24-claves-primarias-compuestas
+      reward:
+        icon: 🗒️
+        text: 🗒️ = **3** columnas
+    - id: rack
+      kind: puzzle
+      type: match
+      icon: 🔌
+      name: Racks de servidores
+      story: 'Un rack muestra un aviso: «Energía de la puerta B cortada. Para restablecerla, configura bien la política de borrado de cada clave ajena del nuevo módulo».'
+      prompt: Cuando se borra la fila padre, ¿qué política es la más adecuada en cada caso?
+      items:
+      - Los **clientes** de un gestor que se jubila (más adelante se les asignará otro).
+      - 'Las **cajas de seguridad** de una sucursal que cierra: pasan a la sucursal central `0001`.'
+      - Los **movimientos** de una cuenta que se cancela y se borra.
+      - Las **cuentas** de un cliente al que alguien intenta borrar por error.
+      choices:
+      - En cascada
+      - Restringido (rechazar)
+      - Puesta a nulos
+      - Puesta a valor por defecto
+      answer:
+      - 2
+      - 3
+      - 0
+      - 1
+      hints:
+      - 'Pregúntate por la fila hija: ¿tiene sentido que siga existiendo sin su padre?'
+      - Si no tiene sentido → cascada. Si lo tiene, pero se queda sin padre un tiempo → nulos. Si no debería pasar nunca → restringido.
+      explain: Movimientos → **cascada** (no tienen sentido sin su cuenta); clientes → **puesta a nulos** (siguen siendo clientes); cuentas → **restringido** (hay que impedir borrar un cliente con cuentas); cajas → **valor por defecto** (`0001`). Recuerda que Oracle solo ofrece cascada, puesta a nulos o rechazar.
+      ref: 3.3 Políticas de borrado
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integridad-referencial-y-políticas-de-borradomodificación
+      reward:
+        icon: ⚡
+        text: Corriente restablecida en la puerta B
+    - id: extintor
+      kind: decoy
+      icon: 🧯
+      name: Extintor
+      text: Un extintor de CO₂, el adecuado para fuegos eléctricos. Esperemos no necesitarlo, ni para los servidores ni para tu cabeza.
+    - id: puerta
+      kind: door
+      icon: 🚪
+      name: Puerta B
+      needs:
+      - rack
+      locked: 'El teclado está apagado: la puerta no tiene corriente.'
+      story: El teclado vuelve a la vida. Tres dígitos, en el orden de las pegatinas.
+      lock:
+        type: digits
+        code: '363'
+        order: 🖥️ 📈 🗒️
+      hints:
+      - 'Los tres números están en tu mochila: consola, monitor y pósit.'
+      explain: 3 · 6 · 3. La puerta B se abre con un silbido.
+  - id: camara
+    scene: ud03-camara
+    name: Cámara acorazada
+    story: 'La cámara acorazada. La puerta circular tiene una rueda de combinación de **tres dígitos** y dos cerraduras laterales que necesitan las dos mitades de la **llave del director**. La pantalla de la puerta dice: COLUMNAS PK · TABLAS · REGLAS NO EXPRESABLES.'
+    hotspots:
+    - id: caja12
+      img: ud03-caja12
+      kind: puzzle
+      type: choice
+      icon: 🔐
+      name: Caja de seguridad 12
+      story: 'Dentro de la caja está el diagrama del servicio de cajas: CLIENTE (0,n) — AUTORIZA — (0,n) CAJA, con el atributo `fecha_alta` en la relación. Un cliente puede estar autorizado a abrir varias cajas y una caja puede tener varios autorizados.'
+      prompt: ¿Cuál es la clave primaria de la tabla AUTORIZA?
+      options:
+      - (`dni`)
+      - (`num_caja`)
+      - (`dni`, `num_caja`)
+      - (`dni`, `num_caja`, `fecha_alta`)
+      answer: 2
+      hints:
+      - Una N:M siempre genera una tabla nueva.
+      - Su PK está formada por las claves de las dos entidades. Los atributos de la relación no entran, salvo que una misma pareja pueda repetirse.
+      explain: 'Una N:M se transforma en una tabla con las claves de las dos entidades como **PK compuesta** y cada una como FK: AUTORIZA(`dni`, `num_caja`, `fecha_alta`). La PK tiene **2** columnas.'
+      ref: 4.5 Relaciones N:M
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#45-transformación-de-relaciones-binarias-nm
+      reward:
+        icon: 🔐
+        text: PK de AUTORIZA = **2** columnas
+    - id: caja27
+      img: ud03-caja27
+      kind: puzzle
+      type: choice
+      icon: 🔐
+      name: Caja de seguridad 27
+      story: 'Diagrama: SUCURSAL (1,1) — CUSTODIA — (0,n) CAJA. Cada caja está en una única sucursal; una sucursal puede tener muchas cajas, o ninguna.'
+      prompt: ¿Cómo se transforma CUSTODIA?
+      options:
+      - Con una FK `num_caja` en SUCURSAL
+      - Con una FK `cod_sucursal` en CAJA, sin VNN
+      - Con una FK `cod_sucursal` en CAJA, con VNN
+      - Con una tabla nueva CUSTODIA (`cod_sucursal`, `num_caja`)
+      answer: 2
+      hints:
+      - En una 1:N, la FK viaja al lado N.
+      - ¿Puede existir una caja sin sucursal? Fíjate en la cardinalidad mínima junto a SUCURSAL.
+      explain: 'La FK va al lado **N** (CAJA) y, como toda caja está en una sucursal (mínimo 1), lleva **VNN**: CAJA(`num_caja`, …, `cod_sucursal`) · FK: `cod_sucursal` → SUCURSAL · VNN: `cod_sucursal`.'
+      ref: 4.4 Relaciones 1:N
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#44-transformación-de-relaciones-binarias-1n
+      reward:
+        icon: 🗝️
+        text: Mitad izquierda de la llave del director
+    - id: caja33
+      img: ud03-caja33
+      kind: puzzle
+      type: multi
+      icon: 🔐
+      name: Caja de seguridad 33
+      story: 'Diagrama: EMPLEADO (0,1) — USA — (1,1) TARJETA_ACCESO. Cada tarjeta pertenece exactamente a un empleado y cada empleado tiene, como mucho, una tarjeta. Se transforma así: TARJETA_ACCESO(`id_tarjeta`, `nivel`, `id_emp`) · PK: `id_tarjeta`.'
+      prompt: ¿Qué restricciones lleva `id_emp` en TARJETA_ACCESO?
+      options:
+      - PK
+      - FK → EMPLEADO
+      - UK
+      - VNN
+      answer:
+      - 1
+      - 2
+      - 3
+      hints:
+      - ¿Puede faltar? Toda tarjeta pertenece a un empleado.
+      - ¿Puede repetirse? Un empleado tiene, como mucho, una tarjeta.
+      - La PK de la tabla ya es `id_tarjeta`.
+      explain: '`id_emp` es **FK** (apunta a EMPLEADO), **VNN** (toda tarjeta tiene dueño) y **UK** (un empleado no puede tener dos tarjetas). Es el patrón de la 1:1 (1,1)-(0,1).'
+      ref: 4.6 Relaciones 1:1
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#46-transformación-de-relaciones-binarias-11
+      reward:
+        icon: 🗝️
+        text: Mitad derecha de la llave del director
+    - id: carro
+      kind: puzzle
+      type: number
+      icon: 💰
+      name: Carro de lingotes
+      story: 'Sobre los lingotes hay una etiqueta con el modelo E/R del banco, en forma de lista:'
+      list:
+      - 'Entidades: SUCURSAL, EMPLEADO, CLIENTE, CUENTA y CAJA.'
+      - Cada empleado trabaja en una sucursal; una sucursal tiene uno o varios empleados.
+      - Un empleado puede supervisar a otros; cada empleado tiene, como mucho, un supervisor.
+      - Un cliente puede ser titular de varias cuentas y una cuenta puede tener varios titulares.
+      - Cada cuenta está domiciliada en una sucursal.
+      - Un cliente puede tener varios teléfonos (atributo multivaluado).
+      - Un cliente alquila cajas; cada caja la alquila, como mucho, un cliente.
+      prompt: ¿Cuántas tablas tendrá el esquema relacional?
+      answer: 7
+      hints:
+      - Cada entidad es una tabla. Después, mira qué relaciones generan una tabla nueva.
+      - 'Las 1:N (también la reflexiva) se resuelven con una FK: no crean tabla.'
+      - La N:M y el atributo multivaluado sí crean una tabla cada uno.
+      explain: 5 entidades + 1 tabla para la N:M (TITULAR) + 1 para el multivaluado (TELEFONO) = **7**. Trabajar, supervisar, domiciliar y alquilar son 1:N y se resuelven con una FK.
+      ref: 4.12 Tabla resumen
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#412-tabla-resumen-patrones-de-transformación
+      reward:
+        icon: 💰
+        text: Tablas del esquema = **7**
+    - id: terminal
+      kind: puzzle
+      type: multi
+      icon: 🧾
+      name: Terminal
+      story: El terminal pide revisar la documentación de restricciones. Muestra seis reglas de negocio del banco.
+      prompt: ¿Cuáles **no** se pueden expresar solo con PK, FK, UK y VNN?
+      options:
+      - Toda sucursal tiene al menos un empleado.
+      - Cada cuenta está domiciliada en exactamente una sucursal.
+      - Todo cliente es titular de al menos una cuenta.
+      - El número de empleado no se repite.
+      - Ningún empleado puede supervisarse a sí mismo, ni directa ni indirectamente.
+      - Una caja la alquila, como mucho, un cliente.
+      answer:
+      - 0
+      - 2
+      - 4
+      hints:
+      - La mínima 1 en el lado «1» de una 1:N y la mínima 1 en una N:M se pierden al transformar.
+      - Los ciclos en una reflexiva obligan a recorrer varias filas.
+      - «Exactamente una» en el lado N se consigue con FK + VNN.
+      explain: 'Se pierden **3**: la mínima 1 de SUCURSAL en TRABAJA (la FK está en EMPLEADO), la mínima 1 de CLIENTE en la N:M y los ciclos de la reflexiva. Se documentan y se implementan más adelante con *triggers* o procedimientos (UD08).'
+      ref: 4.11 Pérdidas semánticas
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#411-pérdidas-semánticas-en-la-transformación
+      reward:
+        icon: 🧾
+        text: Reglas no expresables = **3**
+    - id: laser
+      kind: decoy
+      icon: 🚨
+      name: Rejilla láser
+      text: 'Una rejilla de láseres rojos. Mejor no tocarla: no esconde ninguna pista, solo problemas.'
+    - id: puerta
+      kind: door
+      icon: 🏦
+      name: Puerta acorazada
+      needs:
+      - caja27
+      - caja33
+      locked: 'Las dos cerraduras laterales están vacías: necesitas las dos mitades de la llave del director.'
+      story: 'Introduces las dos mitades de la llave y giran a la vez. Queda la rueda de combinación:'
+      list:
+      - 1.º el número de **columnas de la PK** de AUTORIZA
+      - 2.º el número de **tablas** del esquema del carro
+      - 3.º el número de **reglas que el esquema no puede expresar**
+      lock:
+        type: digits
+        code: '273'
+      hints:
+      - Necesitas lo que encontraste en la caja 12, el carro y el terminal.
+      - Los dos primeros dígitos son 2 y 7.
+      explain: 2 · 7 · 3. La rueda gira, los cerrojos se retiran y la puerta acorazada se abre.
+  - id: despacho
+    scene: ud03-despacho
+    name: Despacho del director
+    story: 'El último obstáculo: el despacho del director, con la salida al garaje. El teclado pide **tres dígitos** y no hay pegatinas: el orden es el de los objetos de la pared, de izquierda a derecha (pizarra, mapa) y luego la papelera. La puerta tampoco se abre si el cuadro sigue torcido.'
+    hotspots:
+    - id: pizarra
+      kind: puzzle
+      type: number
+      icon: 🧮
+      name: Pizarra
+      story: 'En la pizarra, una relación con dos claves candidatas: `R(A, B, C)`, con CK1 = `A` y CK2 = (`B`, `C`).'
+      prompt: ¿Cuántas **superclaves** tiene R?
+      answer: 5
+      hints:
+      - Una superclave es cualquier conjunto de atributos que **contiene** una clave candidata (no tiene que ser mínimo).
+      - 'Las que contienen `A`: {A}, {A,B}, {A,C}, {A,B,C}. ¿Cuáles contienen (B, C) y no están ya contadas?'
+      explain: 'Contienen `A`: {A}, {A,B}, {A,C}, {A,B,C}. Contienen (B, C): {B,C} y {A,B,C}, que ya estaba. En total, **5**. Solo dos de ellas son mínimas: las claves candidatas.'
+      ref: 2.1 Claves
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#21-clave-candidata-y-clave-primaria-primary-key---pk
+      reward:
+        icon: 🧮
+        text: 🧮 = **5** superclaves
+    - id: mapa
+      kind: puzzle
+      type: number
+      icon: 🗺️
+      name: Mapa
+      story: 'El mapa de las sucursales está modelado con una cadena de entidades débiles por identificación:'
+      list:
+      - PAÍS (`cod_pais`) es fuerte.
+      - REGIÓN es débil de PAÍS, con clave parcial `num_region`.
+      - CIUDAD es débil de REGIÓN, con clave parcial `num_ciudad`.
+      - BARRIO es débil de CIUDAD, con clave parcial `num_barrio`.
+      prompt: ¿Cuántas columnas tiene la clave primaria de la tabla BARRIO?
+      answer: 4
+      hints:
+      - La PK de una débil por identificación es la PK completa de su fuerte más su clave parcial.
+      - REGIÓN tiene 2 columnas en la PK; CIUDAD, 3…
+      explain: 'BARRIO hereda la PK completa de CIUDAD (`cod_pais`, `num_region`, `num_ciudad`) y añade `num_barrio`: **4** columnas, y las tres primeras forman a la vez una FK compuesta hacia CIUDAD.'
+      ref: 4.2 Entidades débiles
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#42-transformación-de-entidades-débiles-por-identificación-y-existencia
+      reward:
+        icon: 🗺️
+        text: 🗺️ = **4** columnas
+    - id: papelera
+      kind: puzzle
+      type: number
+      icon: 🗑️
+      name: Papelera
+      story: 'En la papelera, la orden que el director estuvo a punto de lanzar: **borrar el departamento D1**. Estas son las tablas y sus políticas:'
+      pre: 'EMPLEADO.id_dep   → DEPARTAMENTO  (al borrar: puesta a nulos)
+
+        PROYECTO.id_dep   → DEPARTAMENTO  (al borrar: en cascada)
+
+        ASIGNA.id_emp     → EMPLEADO      (al borrar: en cascada)
+
+        ASIGNA.id_proy    → PROYECTO      (al borrar: en cascada)
+
+
+        EMPLEADO: E1(D1), E2(D1), E3(D1), E4(D2)
+
+        PROYECTO: P1(D1), P2(D1), P3(D2)
+
+        ASIGNA:   (E1,P1) (E2,P1) (E3,P2) (E4,P2) (E4,P3)'
+      prompt: ¿Cuántas filas se **borran** en total (contando la del departamento)?
+      answer: 7
+      hints:
+      - 'Los empleados de D1 **no** se borran: su `id_dep` pasa a `NULL`.'
+      - Los proyectos de D1 sí se borran, y con ellos todas sus asignaciones, sea quien sea el empleado.
+      explain: 'Se borra D1 (**1**). Los empleados E1, E2 y E3 se quedan con `id_dep` a `NULL`. Los proyectos P1 y P2 se borran en cascada (**2**) y, con ellos, las asignaciones (E1,P1), (E2,P1), (E3,P2) y (E4,P2) (**4**). Total: **7** filas borradas y 3 modificadas.'
+      ref: 3.3 Políticas de borrado
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integridad-referencial-y-políticas-de-borradomodificación
+      reward:
+        icon: 🗑️
+        text: 🗑️ = **7** filas
+    - id: cuadro
+      kind: puzzle
+      type: choice
+      icon: 🖼️
+      name: Cuadro torcido
+      story: 'El cuadro muestra la jerarquía CLIENTE → PARTICULAR, EMPRESA, que es **(P, D)**: hay clientes que todavía no se han clasificado. Debajo, una pregunta del director.'
+      prompt: ¿Qué transformación **pierde información** con esta jerarquía?
+      options:
+      - Una tabla para el supertipo y otra para cada subtipo
+      - Una única tabla CLIENTE con una columna `tipo` que admite nulos
+      - Solo una tabla para cada subtipo, sin tabla CLIENTE
+      - Tabla CLIENTE y, en cada subtipo, la misma PK como FK
+      answer: 2
+      hints:
+      - 'Fíjate en la «P»: hay clientes sin subtipo.'
+      - ¿Dónde guardarías un cliente que no es ni particular ni empresa?
+      explain: 'Si solo hay tablas de subtipos, los clientes **sin clasificar** no tienen dónde guardarse: esa opción solo vale para jerarquías **totales**. Las demás conservan toda la información.'
+      ref: 4.9 Jerarquías
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#49-transformación-de-jerarquías-de-generalización--especialización
+      reward:
+        icon: 🖼️
+        text: Cuadro enderezado
+    - id: trofeos
+      kind: decoy
+      icon: 🏆
+      name: Trofeos
+      text: «Mejor esquema relacional 1998». La copa está vacía y no hay nada escrito en la base.
+    - id: puerta
+      kind: door
+      icon: 🚪
+      name: Salida al garaje
+      needs:
+      - cuadro
+      locked: La puerta no responde mientras el cuadro siga torcido.
+      story: 'Tres dígitos: pizarra, mapa y papelera.'
+      lock:
+        type: digits
+        code: '547'
+      hints:
+      - El orden es el de la historia de la sala.
+      explain: '5 · 4 · 7. La puerta del garaje se levanta: ¡libre!'
   ending:
-    title: "¡Has salido del Banco Codd!"
+    title: ¡Has salido del Banco Codd!
     text:
-      - "El sistema de seguridad registra tu salida a las 03:40 con un mensaje: «Integridad verificada»."
-      - "Claves, integridad referencial y reglas de transformación: todo lo que has usado esta noche es lo que necesitarás en la UD05 para crear las tablas en Oracle."
+    - 'El sistema de seguridad registra tu salida a las 03:40 con un mensaje: «Integridad verificada».'
+    - 'Claves, integridad referencial y reglas de transformación: todo lo que has usado esta noche es lo que necesitarás en la UD05 para crear las tablas en Oracle.'
 val:
-  title: "Bloqueig en el Banc Codd"
-  sub: "Escape room · UD03 Model relacional"
-  target_min: 40
+  title: Bloqueig en el Banc Codd
+  sub: Escape room · UD03 Model relacional
+  target_min: 50
   intro:
-    - "Formes part de l'equip d'auditoria informàtica del **Banc Codd**. Esta nit esteu provant el nou sistema de seguretat quan alguna cosa falla: s'activa el protocol de bloqueig i et quedes tancat al soterrani."
-    - "El sistema només allibera les portes a qui demostre que entén la base de dades relacional del banc. Hauràs d'eixir de l'**arxiu**, de la **sala de servidors** i, finalment, de la **cambra cuirassada**."
+  - 'Formes part de l''equip d''auditoria informàtica del **Banc Codd**. Esta nit esteu provant el nou sistema de seguretat quan alguna cosa falla: s''activa el protocol de bloqueig i et quedes tancat al soterrani.'
+  - El sistema només allibera les portes a qui demostre que entén la base de dades relacional del banc. Hauràs d'eixir de l'**arxiu**, de la **sala de servidors**, de la **cambra cuirassada** i, finalment, del **despatx del director**.
   rooms:
-    - id: archivo
-      scene: ud03-archivo
-      name: "Arxiu"
-      story: "Un arxiu ple de carpetes i de pols. El teclat de la porta A demana **quatre dígits** i en la seua pantalleta es llig: GRAU · CARDINALITAT · CLAUS CANDIDATES · RESTRICCIONS INHERENTS."
-      hotspots:
-        - id: listado
-          kind: puzzle
-          type: number
-          icon: "📄"
-          name: "Llistat damunt de la taula"
-          story: "Un llistat imprés de la relació COMPTE, tal com estava a les 00:00."
-          table:
-            head: ["iban", "dni_titular", "tipus", "saldo", "data_obertura"]
-            rows:
-              - ["ES01", "11111111A", "corrent", "500", "2019-03-01"]
-              - ["ES02", "11111111A", "estalvi", "1200", "2021-07-15"]
-              - ["ES03", "22222222B", "corrent", "80", "2022-01-10"]
-              - ["ES04", "33333333C", "corrent", "0", "2023-05-02"]
-              - ["ES05", "44444444D", "estalvi", "`NULL`", "2024-11-30"]
-              - ["ES06", "22222222B", "estalvi", "3500", "2025-02-14"]
-          prompt: "Quin és el grau i quina la cardinalitat de COMPTE en este moment?"
-          fields: ["Grau", "Cardinalitat"]
-          answer: [5, 6]
-          hints:
-            - "Un dels dos números compta columnes i l'altre, files."
-            - "El **grau** és el nombre d'atributs (columnes); la **cardinalitat**, el nombre de tuples (files)."
-          explain: "Grau **5** (cinc atributs) i cardinalitat **6** (sis tuples). El grau es fixa en dissenyar la taula; la cardinalitat canvia cada vegada que s'inserix o s'esborra una fila. Compte: en el model E/R, «cardinalitat» significa una altra cosa."
-          ref: "1.2 Grau i cardinalitat"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#12-atributs-dominis-grau-i-cardinalitat"
-          reward: { icon: "📄", text: "Grau = **5** · Cardinalitat = **6**" }
-        - id: fichero
-          kind: puzzle
-          type: number
-          icon: "🗂️"
-          name: "Fitxer d'empleats"
-          story: "En cada calaixet hi ha fitxes d'empleats. La primera fitxa explica les regles de la taula EMPLEAT:"
-          list:
-            - "`id_emp`: número intern; no es repetix mai."
-            - "`dni`: no hi ha dos empleats amb el mateix DNI."
-            - "`email`: el correu corporatiu és personal i intransferible."
-            - "`nom`: hi pot haver dos empleats que es diguen igual."
-            - "`departament`: en cadascun treballen molts empleats."
-            - "`extensio`: tot el departament compartix la mateixa extensió de telèfon."
-          prompt: "Quantes **claus candidates** té EMPLEAT?"
-          answer: 3
-          hints:
-            - "Una clau candidata identifica cada fila i és **mínima**: si li lleves un atribut, deixa d'identificar."
-            - "(`dni`, `nom`) identifica… però no és mínima, així que no compta."
-            - "Busca els atributs que, segons les regles, no es repetixen mai."
-          explain: "`id_emp`, `dni` i `email` són claus candidates: cadascuna identifica per si sola. Se n'elegix una com a **PK** (normalment `id_emp`) i les altres dos passen a ser **claus alternatives (UK)**. Combinacions com (`dni`, `nom`) no són candidates perquè no són mínimes."
-          ref: "2.1 Clau candidata i clau primària"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#21-clau-candidata-i-clau-primària-primary-key---pk"
-          reward: { icon: "🗂️", text: "Claus candidates = **3**" }
-        - id: lampara
-          kind: puzzle
-          type: choice
-          icon: "💡"
-          name: "Làmpada d'escriptori"
-          story: "La làmpada no s'encén. Porta penjada una etiqueta: «Només m'encenc per a qui sàpia què significa el saldo del compte ES05 del llistat»."
-          prompt: "En la fila d'ES05, `saldo` val `NULL`. Què significa?"
-          options:
-            - "Que el saldo és 0 euros"
-            - "Que el saldo és una cadena buida"
-            - "Que no hi ha valor: el saldo és desconegut o no aplicable"
-            - "Que la fila incomplix la integritat i el SGBD l'hauria d'haver rebutjada"
-          answer: 2
-          hints:
-            - "Compara ES04 (saldo 0) amb ES05 (saldo `NULL`): signifiquen el mateix?"
-            - "`NULL` no és un valor del domini, sinó l'absència de valor."
-          explain: "`NULL` representa l'**absència de valor** (desconegut o no aplicable). No és 0 ni una cadena buida: ES04 té saldo zero i d'ES05 no sabem el saldo. (En Oracle, això sí, una cadena buida `''` es guarda com a `NULL`.)"
-          ref: "1.3 Valors nuls"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#13-tuples-files-i-semàntica-de-valors-nuls-null"
-          reward: { icon: "💡", text: "Làmpada encesa: ja pots llegir la prestatgeria" }
-        - id: estanteria
-          kind: puzzle
-          type: multi
-          icon: "📚"
-          name: "Prestatgeria"
-          needs: [lampara]
-          locked: "Està tan fosc que no es lligen els lloms de les carpetes. Necessites llum."
-          story: "A la llum de la làmpada llegixes els lloms: sis carpetes amb suposades «regles que imposa el mateix model relacional». Només algunes són veritat."
-          prompt: "Quines són restriccions **inherents** del model relacional?"
-          options:
-            - "No hi pot haver dos tuples idèntiques en una relació."
-            - "L'ordre de les files té significat i s'ha de respectar."
-            - "Cada cel·la conté un únic valor atòmic."
-            - "L'ordre de les columnes no altera el significat de la relació."
-            - "Tota taula ha de tindre almenys una clau aliena."
-            - "Cap columna pot contindre valors nuls."
-          answer: [0, 2, 3]
-          hints:
-            - "Les restriccions inherents ixen de la definició matemàtica de relació: un **conjunt** de tuples."
-            - "En un conjunt no hi ha elements repetits ni importa l'ordre."
-            - "Els nuls només estan prohibits en la clau primària, i les claus alienes les decidix el dissenyador."
-          explain: "Són inherents la **unicitat de tuples**, l'**atomicitat** i el **desordre** de files i de columnes. Les claus alienes i l'obligatorietat són restriccions **semàntiques**, que decidix el dissenyador. Has marcat **3** carpetes."
-          ref: "3.1 Restriccions inherents"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#31-restriccions-inherents-al-model"
-          reward: { icon: "📚", text: "Restriccions inherents = **3**" }
-        - id: reloj
-          kind: decoy
-          icon: "🕰️"
-          name: "Rellotge de paret"
-          text: "Són les tres de la matinada. El rellotge no té clau primària, però sí molta pressa. Continua buscant."
-        - id: puerta
-          kind: door
-          icon: "🚪"
-          name: "Porta A"
-          story: "El teclat demana quatre dígits, en este ordre:"
-          list:
-            - "1r el **grau** de COMPTE"
-            - "2n la **cardinalitat** de COMPTE"
-            - "3r el nombre de **claus candidates** d'EMPLEAT"
-            - "4t el nombre de **restriccions inherents** de la prestatgeria"
-          lock: { type: digits, code: "5633" }
-          hints:
-            - "Tot el que necessites està en la teua motxilla."
-            - "Grau i cardinalitat ixen del llistat; les claus, del fitxer; les restriccions, de la prestatgeria (que necessita llum)."
-          explain: "5 · 6 · 3 · 3. La porta A s'obri amb un espetec."
-    - id: servidores
-      scene: ud03-servidores
-      name: "Sala de servidors"
-      story: "Els servidors brunzixen i una pantalla parpelleja en roig: DELETE! La porta B **no té corrent**: primer hauràs de restablir-la des dels racks. Després, el seu teclat demana tres dígits en l'ordre 🖥️ 📈 🗒️."
-      hotspots:
-        - id: pizarra
-          img: ud03-esquema-banco
-          img_text: [["CLIENTE", "CLIENT"], ["CUENTA", "COMPTE"], ["TARJETA", "TARGETA"], ["num_tarjeta", "num_targeta"], [">nombre<", ">nom<"], ["al borrar, puesta a nulos", "en esborrar, posada a nuls"], ["al borrar, en cascada", "en esborrar, en cascada"]]
-          kind: note
-          icon: "📋"
-          name: "Pissarra de l'esquema"
-          text: "L'esquema de la base de dades del banc i les dades de prova d'esta nit. El necessitaràs per als reptes d'esta sala."
-          table:
-            - caption: "GESTOR"
-              head: ["id_gestor", "nom"]
-              rows: [["G1", "Marta"], ["G2", "Iván"]]
-            - caption: "CLIENT"
-              head: ["dni", "nom", "id_gestor"]
-              rows: [["111A", "Anna", "G1"], ["222B", "Bru", "G2"], ["333C", "Carla", "`NULL`"]]
-            - caption: "COMPTE"
-              head: ["iban", "dni_titular", "saldo"]
-              rows: [["ES01", "111A", "500"], ["ES02", "111A", "1200"], ["ES03", "222B", "80"], ["ES04", "333C", "0"]]
-            - caption: "TARGETA"
-              head: ["num_targeta", "iban"]
-              rows: [["T1", "ES01"], ["T2", "ES01"], ["T3", "ES02"], ["T4", "ES03"], ["T5", "ES04"]]
-        - id: consola
-          kind: puzzle
-          type: multi
-          icon: "🖥️"
-          name: "Consola"
-          story: "En la consola hi ha sis operacions pendents. Cadascuna s'executaria **per separat**, partint de les dades de la pissarra."
-          prompt: "Quines **rebutjaria** el SGBD?"
-          options:
-            - "Inserir en COMPTE la fila (ES05, 444D, 300)."
-            - "Inserir en CLIENT la fila (444D, Diego, `NULL`)."
-            - "Inserir en TARGETA la fila (T6, `NULL`)."
-            - "Inserir en COMPTE la fila (ES03, 333C, 10)."
-            - "Esborrar el gestor G2."
-            - "Canviar el saldo d'ES04 a 50."
-          answer: [0, 2, 3]
-          hints:
-            - "Comprova cada operació contra les PK, els VNN i les FK de l'esquema."
-            - "Una FK només admet valors que existisquen en la taula referenciada… o `NULL`, si la columna no és obligatòria."
-            - "Esborrar G2 no es rebutja: mira quina política té la FK de CLIENT cap a GESTOR."
-          explain: "Se'n rebutgen **3**: ES05 apunta a un client que no existix (integritat referencial), T6 deixa buida una FK obligatòria (VNN) i ES03 repetix una clau primària. Inserir Diego sense gestor és vàlid (FK opcional), esborrar G2 posa a `NULL` el gestor de Bru i canviar un saldo no afecta cap clau."
-          ref: "3.3 Integritat referencial"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#33-integritat-referencial-i-polítiques-desborratmodificació"
-          reward: { icon: "🖥️", text: "🖥️ = **3** operacions rebutjades" }
-        - id: monitor
-          kind: puzzle
-          type: number
-          icon: "📈"
-          name: "Monitor d'alarmes"
-          story: "L'alarma avisa: algú ha llançat l'orde **esborrar la clienta Anna (111A)**. Abans que s'execute, el sistema vol saber quant de mal farà."
-          prompt: "Amb les polítiques de la pissarra, quantes files desapareixen en total de les quatre taules, comptant la d'Anna?"
-          answer: 6
-          hints:
-            - "Seguix les fletxes: CLIENT → COMPTE → TARGETA. Les dos FK són «en cascada»."
-            - "Anna té 2 comptes. Quantes targetes tenen eixos comptes?"
-            - "1 clienta + 2 comptes + 3 targetes."
-          explain: "S'esborra Anna (**1**); en cascada, els seus comptes ES01 i ES02 (**2**); i, en cascada una altra vegada, les targetes T1, T2 i T3 (**3**). Total: **6**. GESTOR no canvia: l'esborrat es propaga de la taula pare a la filla, mai cap amunt."
-          ref: "3.3 Polítiques d'esborrat"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#33-integritat-referencial-i-polítiques-desborratmodificació"
-          reward: { icon: "📈", text: "📈 = **6** files esborrades" }
-        - id: postit
-          kind: puzzle
-          type: number
-          icon: "🗒️"
-          name: "Pòsit en la paret"
-          story: "«Compte: en el banc de veritat, la PK de COMPTE no és `iban`, sinó (`cod_entitat`, `cod_sucursal`, `num_compte`). Cal refer la FK de MOVIMENT.»"
-          prompt: "Quantes columnes ha de tindre la clau aliena de MOVIMENT cap a COMPTE?"
-          answer: 3
-          hints:
-            - "Una FK ha de coincidir amb la clau primària (o alternativa) a la qual apunta."
-            - "Si la PK referenciada és composta, la FK també ho és."
-          explain: "Una FK referencia la PK **completa**: si la PK de COMPTE té 3 columnes, la FK de MOVIMENT també en té **3** (`cod_entitat`, `cod_sucursal`, `num_compte`) i es declara com **una sola** restricció composta, no com tres FK soltes."
-          ref: "2.4 Claus compostes"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#24-claus-primàries-compostes"
-          reward: { icon: "🗒️", text: "🗒️ = **3** columnes" }
-        - id: rack
-          kind: puzzle
-          type: match
-          icon: "🔌"
-          name: "Racks de servidors"
-          story: "Un rack mostra un avís: «Energia de la porta B tallada. Per a restablir-la, configura bé la política d'esborrat de cada clau aliena del nou mòdul»."
-          prompt: "Quan s'esborra la fila pare, quina política és la més adequada en cada cas?"
-          items:
-            - "Els **clients** d'un gestor que es jubila (més avant se n'assignarà un altre)."
-            - "Les **caixes de seguretat** d'una sucursal que tanca: passen a la sucursal central `0001`."
-            - "Els **moviments** d'un compte que es cancel·la i s'esborra."
-            - "Els **comptes** d'un client que algú intenta esborrar per error."
-          choices: ["En cascada", "Restringit (rebutjar)", "Posada a nuls", "Posada a valor per defecte"]
-          answer: [2, 3, 0, 1]
-          hints:
-            - "Pregunta't per la fila filla: té sentit que continue existint sense el seu pare?"
-            - "Si no té sentit → cascada. Si en té, però es queda sense pare un temps → nuls. Si no hauria de passar mai → restringit."
-          explain: "Moviments → **cascada** (no tenen sentit sense el seu compte); clients → **posada a nuls** (continuen sent clients); comptes → **restringit** (cal impedir esborrar un client amb comptes); caixes → **valor per defecte** (`0001`). Recorda que Oracle només oferix cascada, posada a nuls o rebutjar."
-          ref: "3.3 Polítiques d'esborrat"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#33-integritat-referencial-i-polítiques-desborratmodificació"
-          reward: { icon: "⚡", text: "Corrent restablit en la porta B" }
-        - id: extintor
-          kind: decoy
-          icon: "🧯"
-          name: "Extintor"
-          text: "Un extintor de CO₂, l'adequat per a focs elèctrics. Esperem no necessitar-lo, ni per als servidors ni per al teu cap."
-        - id: puerta
-          kind: door
-          icon: "🚪"
-          name: "Porta B"
-          needs: [rack]
-          locked: "El teclat està apagat: la porta no té corrent."
-          story: "El teclat torna a la vida. Tres dígits, en l'ordre dels adhesius."
-          lock: { type: digits, code: "363", order: "🖥️ 📈 🗒️" }
-          hints:
-            - "Els tres números estan en la teua motxilla: consola, monitor i pòsit."
-          explain: "3 · 6 · 3. La porta B s'obri amb un xiulit."
-    - id: camara
-      scene: ud03-camara
-      name: "Cambra cuirassada"
-      story: "La cambra cuirassada. La porta circular té una roda de combinació de **tres dígits** i dos panys laterals que necessiten les dos meitats de la **clau del director**. La pantalla de la porta diu: COLUMNES PK · TAULES · REGLES NO EXPRESSABLES."
-      hotspots:
-        - id: caja12
-          img: ud03-caja12
-          img_text: [["CLIENTE", "CLIENT"], [">CAJA<", ">CAIXA<"], ["AUTORIZA", "AUTORITZA"], ["num_caja", "num_caixa"], ["fecha_alta", "data_alta"], [">nombre<", ">nom<"]]
-          kind: puzzle
-          type: choice
-          icon: "🔐"
-          name: "Caixa de seguretat 12"
-          story: "Dins de la caixa està el diagrama del servei de caixes: CLIENT (0,n) — AUTORITZA — (0,n) CAIXA, amb l'atribut `data_alta` en la relació. Un client pot estar autoritzat a obrir diverses caixes i una caixa pot tindre diversos autoritzats."
-          prompt: "Quina és la clau primària de la taula AUTORITZA?"
-          options: ["(`dni`)", "(`num_caixa`)", "(`dni`, `num_caixa`)", "(`dni`, `num_caixa`, `data_alta`)"]
-          answer: 2
-          hints:
-            - "Una N:M sempre genera una taula nova."
-            - "La seua PK està formada per les claus de les dos entitats. Els atributs de la relació no hi entren, llevat que una mateixa parella es puga repetir."
-          explain: "Una N:M es transforma en una taula amb les claus de les dos entitats com a **PK composta** i cadascuna com a FK: AUTORITZA(`dni`, `num_caixa`, `data_alta`). La PK té **2** columnes."
-          ref: "4.5 Relacions N:M"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#45-transformació-de-relacions-binàries-nm"
-          reward: { icon: "🔐", text: "PK d'AUTORITZA = **2** columnes" }
-        - id: caja27
-          img: ud03-caja27
-          img_text: [[">CAJA<", ">CAIXA<"], ["num_caja", "num_caixa"], [">tamano<", ">grandaria<"]]
-          kind: puzzle
-          type: choice
-          icon: "🔐"
-          name: "Caixa de seguretat 27"
-          story: "Diagrama: SUCURSAL (1,1) — CUSTODIA — (0,n) CAIXA. Cada caixa està en una única sucursal; una sucursal pot tindre moltes caixes, o cap."
-          prompt: "Com es transforma CUSTODIA?"
-          options:
-            - "Amb una FK `num_caixa` en SUCURSAL"
-            - "Amb una FK `cod_sucursal` en CAIXA, sense VNN"
-            - "Amb una FK `cod_sucursal` en CAIXA, amb VNN"
-            - "Amb una taula nova CUSTODIA (`cod_sucursal`, `num_caixa`)"
-          answer: 2
-          hints:
-            - "En una 1:N, la FK viatja al costat N."
-            - "Pot existir una caixa sense sucursal? Fixa't en la cardinalitat mínima al costat de SUCURSAL."
-          explain: "La FK va al costat **N** (CAIXA) i, com que tota caixa està en una sucursal (mínim 1), porta **VNN**: CAIXA(`num_caixa`, …, `cod_sucursal`) · FK: `cod_sucursal` → SUCURSAL · VNN: `cod_sucursal`."
-          ref: "4.4 Relacions 1:N"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#44-transformació-de-relacions-binàries-1n"
-          reward: { icon: "🗝️", text: "Meitat esquerra de la clau del director" }
-        - id: caja33
-          img: ud03-caja33
-          img_text: [["TARJETA_ACCESO", "TARGETA_ACCES"], ["EMPLEADO", "EMPLEAT"], ["id_tarjeta", "id_targeta"], [">nivel<", ">nivell<"]]
-          kind: puzzle
-          type: multi
-          icon: "🔐"
-          name: "Caixa de seguretat 33"
-          story: "Diagrama: EMPLEAT (0,1) — USA — (1,1) TARGETA_ACCES. Cada targeta pertany exactament a un empleat i cada empleat té, com a molt, una targeta. Es transforma així: TARGETA_ACCES(`id_targeta`, `nivell`, `id_emp`) · PK: `id_targeta`."
-          prompt: "Quines restriccions porta `id_emp` en TARGETA_ACCES?"
-          options: ["PK", "FK → EMPLEAT", "UK", "VNN"]
-          answer: [1, 2, 3]
-          hints:
-            - "Pot faltar? Tota targeta pertany a un empleat."
-            - "Es pot repetir? Un empleat té, com a molt, una targeta."
-            - "La PK de la taula ja és `id_targeta`."
-          explain: "`id_emp` és **FK** (apunta a EMPLEAT), **VNN** (tota targeta té amo) i **UK** (un empleat no pot tindre dos targetes). És el patró de la 1:1 (1,1)-(0,1)."
-          ref: "4.6 Relacions 1:1"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#46-transformació-de-relacions-binàries-11"
-          reward: { icon: "🗝️", text: "Meitat dreta de la clau del director" }
-        - id: carro
-          kind: puzzle
-          type: number
-          icon: "💰"
-          name: "Carro de lingots"
-          story: "Damunt dels lingots hi ha una etiqueta amb el model E/R del banc, en forma de llista:"
-          list:
-            - "Entitats: SUCURSAL, EMPLEAT, CLIENT, COMPTE i CAIXA."
-            - "Cada empleat treballa en una sucursal; una sucursal té un o diversos empleats."
-            - "Un empleat pot supervisar-ne d'altres; cada empleat té, com a molt, un supervisor."
-            - "Un client pot ser titular de diversos comptes i un compte pot tindre diversos titulars."
-            - "Cada compte està domiciliat en una sucursal."
-            - "Un client pot tindre diversos telèfons (atribut multivalorat)."
-            - "Un client lloga caixes; cada caixa la lloga, com a molt, un client."
-          prompt: "Quantes taules tindrà l'esquema relacional?"
-          answer: 7
-          hints:
-            - "Cada entitat és una taula. Després, mira quines relacions generen una taula nova."
-            - "Les 1:N (també la reflexiva) es resolen amb una FK: no creen taula."
-            - "La N:M i l'atribut multivalorat sí que creen una taula cadascun."
-          explain: "5 entitats + 1 taula per a la N:M (TITULAR) + 1 per al multivalorat (TELEFON) = **7**. Treballar, supervisar, domiciliar i llogar són 1:N i es resolen amb una FK."
-          ref: "4.12 Taula resum"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#412-taula-resum-patrons-de-transformació"
-          reward: { icon: "💰", text: "Taules de l'esquema = **7**" }
-        - id: terminal
-          kind: puzzle
-          type: multi
-          icon: "🧾"
-          name: "Terminal"
-          story: "El terminal demana revisar la documentació de restriccions. Mostra sis regles de negoci del banc."
-          prompt: "Quines **no** es poden expressar només amb PK, FK, UK i VNN?"
-          options:
-            - "Tota sucursal té almenys un empleat."
-            - "Cada compte està domiciliat en exactament una sucursal."
-            - "Tot client és titular d'almenys un compte."
-            - "El número d'empleat no es repetix."
-            - "Cap empleat pot supervisar-se a si mateix, ni directament ni indirectament."
-            - "Una caixa la lloga, com a molt, un client."
-          answer: [0, 2, 4]
-          hints:
-            - "La mínima 1 en el costat «1» d'una 1:N i la mínima 1 en una N:M es perden en transformar."
-            - "Els cicles en una reflexiva obliguen a recórrer diverses files."
-            - "«Exactament una» en el costat N s'aconseguix amb FK + VNN."
-          explain: "Se'n perden **3**: la mínima 1 de SUCURSAL en TREBALLA (la FK està en EMPLEAT), la mínima 1 de CLIENT en la N:M i els cicles de la reflexiva. Es documenten i s'implementen més avant amb *triggers* o procediments (UD08)."
-          ref: "4.11 Pèrdues semàntiques"
-          ref_url: "/ud03-modelo-relacional/ud03-teoria/#411-pèrdues-semàntiques-en-la-transformació"
-          reward: { icon: "🧾", text: "Regles no expressables = **3**" }
-        - id: laser
-          kind: decoy
-          icon: "🚨"
-          name: "Reixeta làser"
-          text: "Una reixeta de làsers roigs. Millor no tocar-la: no amaga cap pista, només problemes."
-        - id: puerta
-          kind: door
-          icon: "🏦"
-          name: "Porta cuirassada"
-          needs: [caja27, caja33]
-          locked: "Els dos panys laterals estan buits: necessites les dos meitats de la clau del director."
-          story: "Introduïxes les dos meitats de la clau i giren alhora. Queda la roda de combinació:"
-          list:
-            - "1r el nombre de **columnes de la PK** d'AUTORITZA"
-            - "2n el nombre de **taules** de l'esquema del carro"
-            - "3r el nombre de **regles que l'esquema no pot expressar**"
-          lock: { type: digits, code: "273" }
-          hints:
-            - "Necessites el que vas trobar en la caixa 12, el carro i el terminal."
-            - "Els dos primers dígits són 2 i 7."
-          explain: "2 · 7 · 3. La roda gira, els forrellats es retiren i la porta cuirassada s'obri."
+  - id: archivo
+    scene: ud03-archivo
+    name: Arxiu
+    story: 'Un arxiu ple de carpetes i de pols. El teclat de la porta A demana **quatre dígits** i en la seua pantalleta es llig: GRAU · CARDINALITAT · CLAUS CANDIDATES · RESTRICCIONS INHERENTS.'
+    hotspots:
+    - id: listado
+      kind: puzzle
+      type: number
+      icon: 📄
+      name: Llistat damunt de la taula
+      story: Un llistat imprés de la relació COMPTE, tal com estava a les 00:00.
+      table:
+        head:
+        - iban
+        - dni_titular
+        - tipus
+        - saldo
+        - data_obertura
+        rows:
+        - - ES01
+          - 11111111A
+          - corrent
+          - '500'
+          - '2019-03-01'
+        - - ES02
+          - 11111111A
+          - estalvi
+          - '1200'
+          - '2021-07-15'
+        - - ES03
+          - 22222222B
+          - corrent
+          - '80'
+          - '2022-01-10'
+        - - ES04
+          - 33333333C
+          - corrent
+          - '0'
+          - '2023-05-02'
+        - - ES05
+          - 44444444D
+          - estalvi
+          - '`NULL`'
+          - '2024-11-30'
+        - - ES06
+          - 22222222B
+          - estalvi
+          - '3500'
+          - '2025-02-14'
+      prompt: Quin és el grau i quina la cardinalitat de COMPTE en este moment?
+      fields:
+      - Grau
+      - Cardinalitat
+      answer:
+      - 5
+      - 6
+      hints:
+      - Un dels dos números compta columnes i l'altre, files.
+      - El **grau** és el nombre d'atributs (columnes); la **cardinalitat**, el nombre de tuples (files).
+      explain: 'Grau **5** (cinc atributs) i cardinalitat **6** (sis tuples). El grau es fixa en dissenyar la taula; la cardinalitat canvia cada vegada que s''inserix o s''esborra una fila. Compte: en el model E/R, «cardinalitat» significa una altra cosa.'
+      ref: 1.2 Grau i cardinalitat
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#12-atributs-dominis-grau-i-cardinalitat
+      reward:
+        icon: 📄
+        text: Grau = **5** · Cardinalitat = **6**
+    - id: fichero
+      kind: puzzle
+      type: number
+      icon: 🗂️
+      name: Fitxer d'empleats
+      story: 'En cada calaixet hi ha fitxes d''empleats. La primera fitxa explica les regles de la taula EMPLEAT:'
+      list:
+      - '`id_emp`: número intern; no es repetix mai.'
+      - '`dni`: no hi ha dos empleats amb el mateix DNI.'
+      - '`email`: el correu corporatiu és personal i intransferible.'
+      - '`nom`: hi pot haver dos empleats que es diguen igual.'
+      - '`departament`: en cadascun treballen molts empleats.'
+      - '`extensio`: tot el departament compartix la mateixa extensió de telèfon.'
+      prompt: Quantes **claus candidates** té EMPLEAT?
+      answer: 3
+      hints:
+      - 'Una clau candidata identifica cada fila i és **mínima**: si li lleves un atribut, deixa d''identificar.'
+      - (`dni`, `nom`) identifica… però no és mínima, així que no compta.
+      - Busca els atributs que, segons les regles, no es repetixen mai.
+      explain: '`id_emp`, `dni` i `email` són claus candidates: cadascuna identifica per si sola. Se n''elegix una com a **PK** (normalment `id_emp`) i les altres dos passen a ser **claus alternatives (UK)**. Combinacions com (`dni`, `nom`) no són candidates perquè no són mínimes.'
+      ref: 2.1 Clau candidata i clau primària
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#21-clau-candidata-i-clau-primària-primary-key---pk
+      reward:
+        icon: 🗂️
+        text: Claus candidates = **3**
+    - id: lampara
+      kind: puzzle
+      type: choice
+      icon: 💡
+      name: Làmpada d'escriptori
+      story: 'La làmpada no s''encén. Porta penjada una etiqueta: «Només m''encenc per a qui sàpia què significa el saldo del compte ES05 del llistat».'
+      prompt: En la fila d'ES05, `saldo` val `NULL`. Què significa?
+      options:
+      - Que el saldo és 0 euros
+      - Que el saldo és una cadena buida
+      - 'Que no hi ha valor: el saldo és desconegut o no aplicable'
+      - Que la fila incomplix la integritat i el SGBD l'hauria d'haver rebutjada
+      answer: 2
+      hints:
+      - 'Compara ES04 (saldo 0) amb ES05 (saldo `NULL`): signifiquen el mateix?'
+      - '`NULL` no és un valor del domini, sinó l''absència de valor.'
+      explain: '`NULL` representa l''**absència de valor** (desconegut o no aplicable). No és 0 ni una cadena buida: ES04 té saldo zero i d''ES05 no sabem el saldo. (En Oracle, això sí, una cadena buida `''''` es guarda com a `NULL`.)'
+      ref: 1.3 Valors nuls
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#13-tuples-files-i-semàntica-de-valors-nuls-null
+      reward:
+        icon: 💡
+        text: 'Làmpada encesa: ja pots llegir la prestatgeria'
+    - id: estanteria
+      kind: puzzle
+      type: multi
+      icon: 📚
+      name: Prestatgeria
+      needs:
+      - lampara
+      locked: Està tan fosc que no es lligen els lloms de les carpetes. Necessites llum.
+      story: 'A la llum de la làmpada llegixes els lloms: sis carpetes amb suposades «regles que imposa el mateix model relacional». Només algunes són veritat.'
+      prompt: Quines són restriccions **inherents** del model relacional?
+      options:
+      - No hi pot haver dos tuples idèntiques en una relació.
+      - L'ordre de les files té significat i s'ha de respectar.
+      - Cada cel·la conté un únic valor atòmic.
+      - L'ordre de les columnes no altera el significat de la relació.
+      - Tota taula ha de tindre almenys una clau aliena.
+      - Cap columna pot contindre valors nuls.
+      answer:
+      - 0
+      - 2
+      - 3
+      hints:
+      - 'Les restriccions inherents ixen de la definició matemàtica de relació: un **conjunt** de tuples.'
+      - En un conjunt no hi ha elements repetits ni importa l'ordre.
+      - Els nuls només estan prohibits en la clau primària, i les claus alienes les decidix el dissenyador.
+      explain: Són inherents la **unicitat de tuples**, l'**atomicitat** i el **desordre** de files i de columnes. Les claus alienes i l'obligatorietat són restriccions **semàntiques**, que decidix el dissenyador. Has marcat **3** carpetes.
+      ref: 3.1 Restriccions inherents
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#31-restriccions-inherents-al-model
+      reward:
+        icon: 📚
+        text: Restriccions inherents = **3**
+    - id: reloj
+      kind: decoy
+      icon: 🕰️
+      name: Rellotge de paret
+      text: Són les tres de la matinada. El rellotge no té clau primària, però sí molta pressa. Continua buscant.
+    - id: puerta
+      kind: door
+      icon: 🚪
+      name: Porta A
+      story: 'El teclat demana quatre dígits, en este ordre:'
+      list:
+      - 1r el **grau** de COMPTE
+      - 2n la **cardinalitat** de COMPTE
+      - 3r el nombre de **claus candidates** d'EMPLEAT
+      - 4t el nombre de **restriccions inherents** de la prestatgeria
+      lock:
+        type: digits
+        code: '5633'
+      hints:
+      - Tot el que necessites està en la teua motxilla.
+      - Grau i cardinalitat ixen del llistat; les claus, del fitxer; les restriccions, de la prestatgeria (que necessita llum).
+      explain: 5 · 6 · 3 · 3. La porta A s'obri amb un espetec.
+  - id: servidores
+    scene: ud03-servidores
+    name: Sala de servidors
+    story: 'Els servidors brunzixen i una pantalla parpelleja en roig: DELETE! La porta B **no té corrent**: primer hauràs de restablir-la des dels racks. Després, el seu teclat demana tres dígits en l''ordre 🖥️ 📈 🗒️.'
+    hotspots:
+    - id: pizarra
+      img: ud03-esquema-banco
+      img_text:
+      - - CLIENTE
+        - CLIENT
+      - - CUENTA
+        - COMPTE
+      - - TARJETA
+        - TARGETA
+      - - num_tarjeta
+        - num_targeta
+      - - '>nombre<'
+        - '>nom<'
+      - - al borrar, puesta a nulos
+        - en esborrar, posada a nuls
+      - - al borrar, en cascada
+        - en esborrar, en cascada
+      kind: note
+      icon: 📋
+      name: Pissarra de l'esquema
+      text: L'esquema de la base de dades del banc i les dades de prova d'esta nit. El necessitaràs per als reptes d'esta sala.
+      table:
+      - caption: GESTOR
+        head:
+        - id_gestor
+        - nom
+        rows:
+        - - G1
+          - Marta
+        - - G2
+          - Iván
+      - caption: CLIENT
+        head:
+        - dni
+        - nom
+        - id_gestor
+        rows:
+        - - 111A
+          - Anna
+          - G1
+        - - 222B
+          - Bru
+          - G2
+        - - 333C
+          - Carla
+          - '`NULL`'
+      - caption: COMPTE
+        head:
+        - iban
+        - dni_titular
+        - saldo
+        rows:
+        - - ES01
+          - 111A
+          - '500'
+        - - ES02
+          - 111A
+          - '1200'
+        - - ES03
+          - 222B
+          - '80'
+        - - ES04
+          - 333C
+          - '0'
+      - caption: TARGETA
+        head:
+        - num_targeta
+        - iban
+        rows:
+        - - T1
+          - ES01
+        - - T2
+          - ES01
+        - - T3
+          - ES02
+        - - T4
+          - ES03
+        - - T5
+          - ES04
+    - id: consola
+      kind: puzzle
+      type: multi
+      icon: 🖥️
+      name: Consola
+      story: En la consola hi ha sis operacions pendents. Cadascuna s'executaria **per separat**, partint de les dades de la pissarra.
+      prompt: Quines **rebutjaria** el SGBD?
+      options:
+      - Inserir en COMPTE la fila (ES05, 444D, 300).
+      - Inserir en CLIENT la fila (444D, Diego, `NULL`).
+      - Inserir en TARGETA la fila (T6, `NULL`).
+      - Inserir en COMPTE la fila (ES03, 333C, 10).
+      - Esborrar el gestor G2.
+      - Canviar el saldo d'ES04 a 50.
+      answer:
+      - 0
+      - 2
+      - 3
+      hints:
+      - Comprova cada operació contra les PK, els VNN i les FK de l'esquema.
+      - Una FK només admet valors que existisquen en la taula referenciada… o `NULL`, si la columna no és obligatòria.
+      - 'Esborrar G2 no es rebutja: mira quina política té la FK de CLIENT cap a GESTOR.'
+      explain: 'Se''n rebutgen **3**: ES05 apunta a un client que no existix (integritat referencial), T6 deixa buida una FK obligatòria (VNN) i ES03 repetix una clau primària. Inserir Diego sense gestor és vàlid (FK opcional), esborrar G2 posa a `NULL` el gestor de Bru i canviar un saldo no afecta cap clau.'
+      ref: 3.3 Integritat referencial
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integritat-referencial-i-polítiques-desborratmodificació
+      reward:
+        icon: 🖥️
+        text: 🖥️ = **3** operacions rebutjades
+    - id: monitor
+      kind: puzzle
+      type: number
+      icon: 📈
+      name: Monitor d'alarmes
+      story: 'L''alarma avisa: algú ha llançat l''orde **esborrar la clienta Anna (111A)**. Abans que s''execute, el sistema vol saber quant de mal farà.'
+      prompt: Amb les polítiques de la pissarra, quantes files desapareixen en total de les quatre taules, comptant la d'Anna?
+      answer: 6
+      hints:
+      - 'Seguix les fletxes: CLIENT → COMPTE → TARGETA. Les dos FK són «en cascada».'
+      - Anna té 2 comptes. Quantes targetes tenen eixos comptes?
+      - 1 clienta + 2 comptes + 3 targetes.
+      explain: 'S''esborra Anna (**1**); en cascada, els seus comptes ES01 i ES02 (**2**); i, en cascada una altra vegada, les targetes T1, T2 i T3 (**3**). Total: **6**. GESTOR no canvia: l''esborrat es propaga de la taula pare a la filla, mai cap amunt.'
+      ref: 3.3 Polítiques d'esborrat
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integritat-referencial-i-polítiques-desborratmodificació
+      reward:
+        icon: 📈
+        text: 📈 = **6** files esborrades
+    - id: postit
+      kind: puzzle
+      type: number
+      icon: 🗒️
+      name: Pòsit en la paret
+      story: '«Compte: en el banc de veritat, la PK de COMPTE no és `iban`, sinó (`cod_entitat`, `cod_sucursal`, `num_compte`). Cal refer la FK de MOVIMENT.»'
+      prompt: Quantes columnes ha de tindre la clau aliena de MOVIMENT cap a COMPTE?
+      answer: 3
+      hints:
+      - Una FK ha de coincidir amb la clau primària (o alternativa) a la qual apunta.
+      - Si la PK referenciada és composta, la FK també ho és.
+      explain: 'Una FK referencia la PK **completa**: si la PK de COMPTE té 3 columnes, la FK de MOVIMENT també en té **3** (`cod_entitat`, `cod_sucursal`, `num_compte`) i es declara com **una sola** restricció composta, no com tres FK soltes.'
+      ref: 2.4 Claus compostes
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#24-claus-primàries-compostes
+      reward:
+        icon: 🗒️
+        text: 🗒️ = **3** columnes
+    - id: rack
+      kind: puzzle
+      type: match
+      icon: 🔌
+      name: Racks de servidors
+      story: 'Un rack mostra un avís: «Energia de la porta B tallada. Per a restablir-la, configura bé la política d''esborrat de cada clau aliena del nou mòdul».'
+      prompt: Quan s'esborra la fila pare, quina política és la més adequada en cada cas?
+      items:
+      - Els **clients** d'un gestor que es jubila (més avant se n'assignarà un altre).
+      - 'Les **caixes de seguretat** d''una sucursal que tanca: passen a la sucursal central `0001`.'
+      - Els **moviments** d'un compte que es cancel·la i s'esborra.
+      - Els **comptes** d'un client que algú intenta esborrar per error.
+      choices:
+      - En cascada
+      - Restringit (rebutjar)
+      - Posada a nuls
+      - Posada a valor per defecte
+      answer:
+      - 2
+      - 3
+      - 0
+      - 1
+      hints:
+      - 'Pregunta''t per la fila filla: té sentit que continue existint sense el seu pare?'
+      - Si no té sentit → cascada. Si en té, però es queda sense pare un temps → nuls. Si no hauria de passar mai → restringit.
+      explain: Moviments → **cascada** (no tenen sentit sense el seu compte); clients → **posada a nuls** (continuen sent clients); comptes → **restringit** (cal impedir esborrar un client amb comptes); caixes → **valor per defecte** (`0001`). Recorda que Oracle només oferix cascada, posada a nuls o rebutjar.
+      ref: 3.3 Polítiques d'esborrat
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integritat-referencial-i-polítiques-desborratmodificació
+      reward:
+        icon: ⚡
+        text: Corrent restablit en la porta B
+    - id: extintor
+      kind: decoy
+      icon: 🧯
+      name: Extintor
+      text: Un extintor de CO₂, l'adequat per a focs elèctrics. Esperem no necessitar-lo, ni per als servidors ni per al teu cap.
+    - id: puerta
+      kind: door
+      icon: 🚪
+      name: Porta B
+      needs:
+      - rack
+      locked: 'El teclat està apagat: la porta no té corrent.'
+      story: El teclat torna a la vida. Tres dígits, en l'ordre dels adhesius.
+      lock:
+        type: digits
+        code: '363'
+        order: 🖥️ 📈 🗒️
+      hints:
+      - 'Els tres números estan en la teua motxilla: consola, monitor i pòsit.'
+      explain: 3 · 6 · 3. La porta B s'obri amb un xiulit.
+  - id: camara
+    scene: ud03-camara
+    name: Cambra cuirassada
+    story: 'La cambra cuirassada. La porta circular té una roda de combinació de **tres dígits** i dos panys laterals que necessiten les dos meitats de la **clau del director**. La pantalla de la porta diu: COLUMNES PK · TAULES · REGLES NO EXPRESSABLES.'
+    hotspots:
+    - id: caja12
+      img: ud03-caja12
+      img_text:
+      - - CLIENTE
+        - CLIENT
+      - - '>CAJA<'
+        - '>CAIXA<'
+      - - AUTORIZA
+        - AUTORITZA
+      - - num_caja
+        - num_caixa
+      - - fecha_alta
+        - data_alta
+      - - '>nombre<'
+        - '>nom<'
+      kind: puzzle
+      type: choice
+      icon: 🔐
+      name: Caixa de seguretat 12
+      story: 'Dins de la caixa està el diagrama del servei de caixes: CLIENT (0,n) — AUTORITZA — (0,n) CAIXA, amb l''atribut `data_alta` en la relació. Un client pot estar autoritzat a obrir diverses caixes i una caixa pot tindre diversos autoritzats.'
+      prompt: Quina és la clau primària de la taula AUTORITZA?
+      options:
+      - (`dni`)
+      - (`num_caixa`)
+      - (`dni`, `num_caixa`)
+      - (`dni`, `num_caixa`, `data_alta`)
+      answer: 2
+      hints:
+      - Una N:M sempre genera una taula nova.
+      - La seua PK està formada per les claus de les dos entitats. Els atributs de la relació no hi entren, llevat que una mateixa parella es puga repetir.
+      explain: 'Una N:M es transforma en una taula amb les claus de les dos entitats com a **PK composta** i cadascuna com a FK: AUTORITZA(`dni`, `num_caixa`, `data_alta`). La PK té **2** columnes.'
+      ref: 4.5 Relacions N:M
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#45-transformació-de-relacions-binàries-nm
+      reward:
+        icon: 🔐
+        text: PK d'AUTORITZA = **2** columnes
+    - id: caja27
+      img: ud03-caja27
+      img_text:
+      - - '>CAJA<'
+        - '>CAIXA<'
+      - - num_caja
+        - num_caixa
+      - - '>tamano<'
+        - '>grandaria<'
+      kind: puzzle
+      type: choice
+      icon: 🔐
+      name: Caixa de seguretat 27
+      story: 'Diagrama: SUCURSAL (1,1) — CUSTODIA — (0,n) CAIXA. Cada caixa està en una única sucursal; una sucursal pot tindre moltes caixes, o cap.'
+      prompt: Com es transforma CUSTODIA?
+      options:
+      - Amb una FK `num_caixa` en SUCURSAL
+      - Amb una FK `cod_sucursal` en CAIXA, sense VNN
+      - Amb una FK `cod_sucursal` en CAIXA, amb VNN
+      - Amb una taula nova CUSTODIA (`cod_sucursal`, `num_caixa`)
+      answer: 2
+      hints:
+      - En una 1:N, la FK viatja al costat N.
+      - Pot existir una caixa sense sucursal? Fixa't en la cardinalitat mínima al costat de SUCURSAL.
+      explain: 'La FK va al costat **N** (CAIXA) i, com que tota caixa està en una sucursal (mínim 1), porta **VNN**: CAIXA(`num_caixa`, …, `cod_sucursal`) · FK: `cod_sucursal` → SUCURSAL · VNN: `cod_sucursal`.'
+      ref: 4.4 Relacions 1:N
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#44-transformació-de-relacions-binàries-1n
+      reward:
+        icon: 🗝️
+        text: Meitat esquerra de la clau del director
+    - id: caja33
+      img: ud03-caja33
+      img_text:
+      - - TARJETA_ACCESO
+        - TARGETA_ACCES
+      - - EMPLEADO
+        - EMPLEAT
+      - - id_tarjeta
+        - id_targeta
+      - - '>nivel<'
+        - '>nivell<'
+      kind: puzzle
+      type: multi
+      icon: 🔐
+      name: Caixa de seguretat 33
+      story: 'Diagrama: EMPLEAT (0,1) — USA — (1,1) TARGETA_ACCES. Cada targeta pertany exactament a un empleat i cada empleat té, com a molt, una targeta. Es transforma així: TARGETA_ACCES(`id_targeta`, `nivell`, `id_emp`) · PK: `id_targeta`.'
+      prompt: Quines restriccions porta `id_emp` en TARGETA_ACCES?
+      options:
+      - PK
+      - FK → EMPLEAT
+      - UK
+      - VNN
+      answer:
+      - 1
+      - 2
+      - 3
+      hints:
+      - Pot faltar? Tota targeta pertany a un empleat.
+      - Es pot repetir? Un empleat té, com a molt, una targeta.
+      - La PK de la taula ja és `id_targeta`.
+      explain: '`id_emp` és **FK** (apunta a EMPLEAT), **VNN** (tota targeta té amo) i **UK** (un empleat no pot tindre dos targetes). És el patró de la 1:1 (1,1)-(0,1).'
+      ref: 4.6 Relacions 1:1
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#46-transformació-de-relacions-binàries-11
+      reward:
+        icon: 🗝️
+        text: Meitat dreta de la clau del director
+    - id: carro
+      kind: puzzle
+      type: number
+      icon: 💰
+      name: Carro de lingots
+      story: 'Damunt dels lingots hi ha una etiqueta amb el model E/R del banc, en forma de llista:'
+      list:
+      - 'Entitats: SUCURSAL, EMPLEAT, CLIENT, COMPTE i CAIXA.'
+      - Cada empleat treballa en una sucursal; una sucursal té un o diversos empleats.
+      - Un empleat pot supervisar-ne d'altres; cada empleat té, com a molt, un supervisor.
+      - Un client pot ser titular de diversos comptes i un compte pot tindre diversos titulars.
+      - Cada compte està domiciliat en una sucursal.
+      - Un client pot tindre diversos telèfons (atribut multivalorat).
+      - Un client lloga caixes; cada caixa la lloga, com a molt, un client.
+      prompt: Quantes taules tindrà l'esquema relacional?
+      answer: 7
+      hints:
+      - Cada entitat és una taula. Després, mira quines relacions generen una taula nova.
+      - 'Les 1:N (també la reflexiva) es resolen amb una FK: no creen taula.'
+      - La N:M i l'atribut multivalorat sí que creen una taula cadascun.
+      explain: 5 entitats + 1 taula per a la N:M (TITULAR) + 1 per al multivalorat (TELEFON) = **7**. Treballar, supervisar, domiciliar i llogar són 1:N i es resolen amb una FK.
+      ref: 4.12 Taula resum
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#412-taula-resum-patrons-de-transformació
+      reward:
+        icon: 💰
+        text: Taules de l'esquema = **7**
+    - id: terminal
+      kind: puzzle
+      type: multi
+      icon: 🧾
+      name: Terminal
+      story: El terminal demana revisar la documentació de restriccions. Mostra sis regles de negoci del banc.
+      prompt: Quines **no** es poden expressar només amb PK, FK, UK i VNN?
+      options:
+      - Tota sucursal té almenys un empleat.
+      - Cada compte està domiciliat en exactament una sucursal.
+      - Tot client és titular d'almenys un compte.
+      - El número d'empleat no es repetix.
+      - Cap empleat pot supervisar-se a si mateix, ni directament ni indirectament.
+      - Una caixa la lloga, com a molt, un client.
+      answer:
+      - 0
+      - 2
+      - 4
+      hints:
+      - La mínima 1 en el costat «1» d'una 1:N i la mínima 1 en una N:M es perden en transformar.
+      - Els cicles en una reflexiva obliguen a recórrer diverses files.
+      - «Exactament una» en el costat N s'aconseguix amb FK + VNN.
+      explain: 'Se''n perden **3**: la mínima 1 de SUCURSAL en TREBALLA (la FK està en EMPLEAT), la mínima 1 de CLIENT en la N:M i els cicles de la reflexiva. Es documenten i s''implementen més avant amb *triggers* o procediments (UD08).'
+      ref: 4.11 Pèrdues semàntiques
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#411-pèrdues-semàntiques-en-la-transformació
+      reward:
+        icon: 🧾
+        text: Regles no expressables = **3**
+    - id: laser
+      kind: decoy
+      icon: 🚨
+      name: Reixeta làser
+      text: 'Una reixeta de làsers roigs. Millor no tocar-la: no amaga cap pista, només problemes.'
+    - id: puerta
+      kind: door
+      icon: 🏦
+      name: Porta cuirassada
+      needs:
+      - caja27
+      - caja33
+      locked: 'Els dos panys laterals estan buits: necessites les dos meitats de la clau del director.'
+      story: 'Introduïxes les dos meitats de la clau i giren alhora. Queda la roda de combinació:'
+      list:
+      - 1r el nombre de **columnes de la PK** d'AUTORITZA
+      - 2n el nombre de **taules** de l'esquema del carro
+      - 3r el nombre de **regles que l'esquema no pot expressar**
+      lock:
+        type: digits
+        code: '273'
+      hints:
+      - Necessites el que vas trobar en la caixa 12, el carro i el terminal.
+      - Els dos primers dígits són 2 i 7.
+      explain: 2 · 7 · 3. La roda gira, els forrellats es retiren i la porta cuirassada s'obri.
+  - id: despacho
+    scene: ud03-despacho
+    name: Despatx del director
+    story: 'L''últim obstacle: el despatx del director, amb l''eixida al garatge. El teclat demana **tres dígits** i no hi ha adhesius: l''ordre és el dels objectes de la paret, d''esquerra a dreta (pissarra, mapa) i després la paperera. La porta tampoc no s''obri si el quadre continua tort.'
+    hotspots:
+    - id: pizarra
+      kind: puzzle
+      type: number
+      icon: 🧮
+      name: Pissarra
+      story: 'En la pissarra, una relació amb dos claus candidates: `R(A, B, C)`, amb CK1 = `A` i CK2 = (`B`, `C`).'
+      prompt: Quantes **superclaus** té R?
+      answer: 5
+      hints:
+      - Una superclau és qualsevol conjunt d'atributs que **conté** una clau candidata (no ha de ser mínim).
+      - 'Les que contenen `A`: {A}, {A,B}, {A,C}, {A,B,C}. Quines contenen (B, C) i no estan ja comptades?'
+      explain: 'Contenen `A`: {A}, {A,B}, {A,C}, {A,B,C}. Contenen (B, C): {B,C} i {A,B,C}, que ja hi era. En total, **5**. Només dos són mínimes: les claus candidates.'
+      ref: 2.1 Claus
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#21-clau-candidata-i-clau-primària-primary-key---pk
+      reward:
+        icon: 🧮
+        text: 🧮 = **5** superclaus
+    - id: mapa
+      kind: puzzle
+      type: number
+      icon: 🗺️
+      name: Mapa
+      story: 'El mapa de les sucursals està modelat amb una cadena d''entitats febles per identificació:'
+      list:
+      - PAÍS (`cod_pais`) és forta.
+      - REGIÓ és feble de PAÍS, amb clau parcial `num_regio`.
+      - CIUTAT és feble de REGIÓ, amb clau parcial `num_ciutat`.
+      - BARRI és feble de CIUTAT, amb clau parcial `num_barri`.
+      prompt: Quantes columnes té la clau primària de la taula BARRI?
+      answer: 4
+      hints:
+      - La PK d'una feble per identificació és la PK completa de la seua forta més la seua clau parcial.
+      - REGIÓ té 2 columnes en la PK; CIUTAT, 3…
+      explain: 'BARRI hereta la PK completa de CIUTAT (`cod_pais`, `num_regio`, `num_ciutat`) i afig `num_barri`: **4** columnes, i les tres primeres formen alhora una FK composta cap a CIUTAT.'
+      ref: 4.2 Entitats febles
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#42-transformació-dentitats-febles-per-identificació-i-existència
+      reward:
+        icon: 🗺️
+        text: 🗺️ = **4** columnes
+    - id: papelera
+      kind: puzzle
+      type: number
+      icon: 🗑️
+      name: Paperera
+      story: 'En la paperera, l''orde que el director va estar a punt de llançar: **esborrar el departament D1**. Estes són les taules i les seues polítiques:'
+      pre: 'EMPLEAT.id_dep    → DEPARTAMENT  (en esborrar: posada a nuls)
+
+        PROJECTE.id_dep   → DEPARTAMENT  (en esborrar: en cascada)
+
+        ASSIGNA.id_emp    → EMPLEAT      (en esborrar: en cascada)
+
+        ASSIGNA.id_proj   → PROJECTE     (en esborrar: en cascada)
+
+
+        EMPLEAT:  E1(D1), E2(D1), E3(D1), E4(D2)
+
+        PROJECTE: P1(D1), P2(D1), P3(D2)
+
+        ASSIGNA:  (E1,P1) (E2,P1) (E3,P2) (E4,P2) (E4,P3)'
+      prompt: Quantes files s'**esborren** en total (comptant la del departament)?
+      answer: 7
+      hints:
+      - 'Els empleats de D1 **no** s''esborren: el seu `id_dep` passa a `NULL`.'
+      - Els projectes de D1 sí que s'esborren, i amb ells totes les seues assignacions, siga qui siga l'empleat.
+      explain: 'S''esborra D1 (**1**). Els empleats E1, E2 i E3 es queden amb `id_dep` a `NULL`. Els projectes P1 i P2 s''esborren en cascada (**2**) i, amb ells, les assignacions (E1,P1), (E2,P1), (E3,P2) i (E4,P2) (**4**). Total: **7** files esborrades i 3 modificades.'
+      ref: 3.3 Polítiques d'esborrat
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integritat-referencial-i-polítiques-desborratmodificació
+      reward:
+        icon: 🗑️
+        text: 🗑️ = **7** files
+    - id: cuadro
+      kind: puzzle
+      type: choice
+      icon: 🖼️
+      name: Quadre tort
+      story: 'El quadre mostra la jerarquia CLIENT → PARTICULAR, EMPRESA, que és **(P, D)**: hi ha clients que encara no s''han classificat. Davall, una pregunta del director.'
+      prompt: Quina transformació **perd informació** amb esta jerarquia?
+      options:
+      - Una taula per al supertipus i una altra per a cada subtipus
+      - Una única taula CLIENT amb una columna `tipus` que admet nuls
+      - Només una taula per a cada subtipus, sense taula CLIENT
+      - Taula CLIENT i, en cada subtipus, la mateixa PK com a FK
+      answer: 2
+      hints:
+      - 'Fixa''t en la «P»: hi ha clients sense subtipus.'
+      - On guardaries un client que no és ni particular ni empresa?
+      explain: 'Si només hi ha taules de subtipus, els clients **sense classificar** no tenen on guardar-se: eixa opció només val per a jerarquies **totals**. Les altres conserven tota la informació.'
+      ref: 4.9 Jerarquies
+      ref_url: /ud03-modelo-relacional/ud03-teoria/#49-transformació-de-jerarquies-de-generalització--especialització
+      reward:
+        icon: 🖼️
+        text: Quadre adreçat
+    - id: trofeos
+      kind: decoy
+      icon: 🏆
+      name: Trofeus
+      text: «Millor esquema relacional 1998». La copa està buida i no hi ha res escrit en la base.
+    - id: puerta
+      kind: door
+      icon: 🚪
+      name: Eixida al garatge
+      needs:
+      - cuadro
+      locked: La porta no respon mentre el quadre continue tort.
+      story: 'Tres dígits: pissarra, mapa i paperera.'
+      lock:
+        type: digits
+        code: '547'
+      hints:
+      - L'ordre és el de la història de la sala.
+      explain: '5 · 4 · 7. La porta del garatge s''alça: lliure!'
   ending:
-    title: "Has eixit del Banc Codd!"
+    title: Has eixit del Banc Codd!
     text:
-      - "El sistema de seguretat registra la teua eixida a les 03:40 amb un missatge: «Integritat verificada»."
-      - "Claus, integritat referencial i regles de transformació: tot el que has usat esta nit és el que necessitaràs en la UD05 per a crear les taules en Oracle."
+    - 'El sistema de seguretat registra la teua eixida a les 03:40 amb un missatge: «Integritat verificada».'
+    - 'Claus, integritat referencial i regles de transformació: tot el que has usat esta nit és el que necessitaràs en la UD05 per a crear les taules en Oracle.'

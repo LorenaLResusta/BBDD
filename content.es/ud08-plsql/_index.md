@@ -13,6 +13,6 @@ Cuando una tarea necesita lógica (decisiones, bucles, tratamiento de errores) o
 |---|---|
 | [Teoría](/ud08-plsql/ud08-teoria) | Formas de automatizar, herramientas, bloques, variables, control de flujo, funciones del SGBD, procedimientos, funciones, cursores, excepciones, disparadores (incluido el compuesto), `DBMS_SCHEDULER` y comparación con otros SGBD |
 | [Prácticas](/ud08-plsql/ud08-practicas) | Expediente de un alumno, biblioteca de funciones, matrícula con excepciones, boletines con cursores, disparadores de integridad y auditoría, tabla mutante, tareas programadas y paquete de secretaría |
-| [Escape room](/ud08-plsql/ud08-escape-room) | *Apagón en la estación Kepler*: tres salas con bloques PL/SQL que hay que ejecutar mentalmente |
+| [Juegos](/ud08-plsql/ud08-juegos) | *Apagón en la estación Kepler*: tres salas con bloques PL/SQL que hay que ejecutar mentalmente |
 
 **Duración:** 35 horas de aula, del 12/04/2027 al 30/04/2027. Consulta la [guía didáctica](/) para ver su lugar en el calendario del curso.

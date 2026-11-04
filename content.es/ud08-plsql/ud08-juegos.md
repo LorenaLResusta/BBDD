@@ -1,12 +1,16 @@
 ---
-title: "Escape room UD08"
+title: "Juegos UD08"
 weight: 3
-bookToc: false
+bookToc: true
+aliases:
+  - /ud08-plsql/ud08-escape-room/
 ---
 
-# Escape room · Apagón en la estación Kepler
+# Juegos · UD08
 
 {{< ra "RA5:a,b,c,d,e,f,g,h,i" >}}
+
+## Escape room · Apagón en la estación Kepler
 
 Un escape room de **escenas clicables** para cerrar la [UD08](/ud08-plsql/). Las compuertas de una estación espacial las controlan bloques PL/SQL: para llegar a la nave de rescate tienes que **leer y ejecutar el código mentalmente**.
 
@@ -24,7 +28,7 @@ Un escape room de **escenas clicables** para cerrar la [UD08](/ud08-plsql/). Las
 
 {{< escape-click data="escape_ud08" >}}
 
-## Instrucciones
+### Instrucciones
 
 - **Duración:** 35-45 minutos por parejas. Tres estrellas si salís en menos de 45 minutos, contando penalizaciones.
 - **Cómo jugar:** resolved los retos de cada sala, guardad los resultados en la mochila y combinadlos en el candado. Algunas puertas exigen además haber resuelto ciertos objetos (🔒).

@@ -1,12 +1,16 @@
 ---
-title: "Escape room UD08"
+title: "Jocs UD08"
 weight: 3
-bookToc: false
+bookToc: true
+aliases:
+  - /ud08-plsql/ud08-escape-room/
 ---
 
-# Escape room · Apagada en l'estació Kepler
+# Jocs · UD08
 
 {{< ra "RA5:a,b,c,d,e,f,g,h,i" >}}
+
+## Escape room · Apagada en l'estació Kepler
 
 Un escape room d'**escenes clicables** per a tancar la [UD08](/ud08-plsql/). Les comportes d'una estació espacial les controlen blocs PL/SQL: per a arribar a la nau de rescat has de **llegir i executar el codi mentalment**.
 
@@ -24,7 +28,7 @@ Un escape room d'**escenes clicables** per a tancar la [UD08](/ud08-plsql/). Les
 
 {{< escape-click data="escape_ud08" >}}
 
-## Instruccions
+### Instruccions
 
 - **Durada:** 35-45 minuts per parelles. Tres estreles si eixiu en menys de 45 minuts, comptant penalitzacions.
 - **Com jugar:** resoleu els reptes de cada sala, guardeu els resultats en la motxilla i combineu-los en el cadenat. Algunes portes exigixen a més haver resolt certs objectes (🔒).
