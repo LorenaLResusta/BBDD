@@ -1,0 +1,196 @@
+# Caza de errores (shortcode caza). Zonas x, y, w, h en coordenadas del SVG del diagrama.
+es:
+  title: Caza de errores · Esquema de FitZone
+  img: caza-ud03
+  intro: 'Este es el esquema relacional que el becario obtuvo del diagrama E/R **ya corregido** del gimnasio: SOCIO (con `telefonos` multivaluado y la reflexiva 1:N *recomienda*), CLASE, MONITOR (identificado por `id_monitor`), la N:M INSCRIBE entre SOCIO y CLASE con el atributo `fecha`, la 1:N IMPARTE entre MONITOR y CLASE, y SALA, identificada por `num_sala`. Las flechas van de cada clave ajena a la columna que referencia.'
+  errors:
+  - x: 32
+    y: 116
+    w: 226
+    h: 22
+    label: SOCIO.telefonos
+    title: Multivaluado guardado como columna
+    explain: '`telefonos` es multivaluado: va a una tabla nueva `TELEFONO_SOCIO(dni, telefono)` con PK compuesta y `dni` como FK. En una sola columna se rompe la atomicidad.'
+    ref: 4.3 Atributos multivaluados
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#43-transformación-de-atributos-compuestos-y-multivaluados
+  - x: 32
+    y: 138
+    w: 226
+    h: 22
+    label: SOCIO.cod_clase
+    title: La N:M convertida en FK
+    explain: 'La relación SOCIO–CLASE es N:M y ya tiene su tabla INSCRIPCION. Una FK `cod_clase` en SOCIO solo permitiría una clase por socio y duplica información: sobra.'
+    ref: 4.5 Relaciones N:M
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#45-transformación-de-relaciones-binarias-nm
+  - x: 312
+    y: 52
+    w: 196
+    h: 70
+    label: Clave de INSCRIPCION
+    title: PK incompleta en INSCRIPCION
+    explain: 'La PK de la tabla de una N:M combina las dos claves: (`dni`, `cod_clase`). Con solo `dni`, un socio no podría inscribirse en dos clases.'
+    ref: 4.5 Relaciones N:M
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#45-transformación-de-relaciones-binarias-nm
+  - x: 760
+    y: 94
+    w: 50
+    h: 214
+    label: Flecha de CLASE.id_monitor
+    title: FK que apunta a una columna que no es clave
+    explain: 'Una clave ajena referencia la **clave primaria** (o una alternativa) de la tabla padre: `id_monitor → MONITOR.id_monitor`, no `nombre`.'
+    ref: 2.3 Clave ajena
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#23-clave-foránea--ajena-foreign-key---fk
+  - x: 310
+    y: 250
+    w: 200
+    h: 80
+    label: Tabla SALA
+    title: SALA sin clave primaria
+    explain: 'Toda tabla necesita clave primaria: `num_sala` debe marcarse como PK.'
+    ref: 4.1 Entidades fuertes
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#41-transformación-de-entidades-fuertes
+  decoys:
+  - x: 2
+    y: 160
+    w: 256
+    h: 22
+    label: SOCIO.dni_recomienda
+    title: FK reflexiva dni_recomienda
+    explain: La reflexiva 1:N se resuelve con una FK opcional hacia la propia tabla SOCIO.
+  - x: 32
+    y: 50
+    w: 226
+    h: 22
+    label: SOCIO.dni
+    title: PK dni de SOCIO
+    explain: Es el identificador de SOCIO.
+  - x: 312
+    y: 104
+    w: 196
+    h: 22
+    label: INSCRIPCION.fecha
+    title: fecha en INSCRIPCION
+    explain: Es un atributo de la relación N:M, así que va en su tabla.
+  - x: 572
+    y: 260
+    w: 186
+    h: 22
+    label: MONITOR.id_monitor
+    title: PK id_monitor
+    explain: Es el identificador de MONITOR.
+  - x: 572
+    y: 50
+    w: 196
+    h: 22
+    label: CLASE.cod_clase
+    title: PK cod_clase
+    explain: Es el identificador de CLASE. (Y la FK `id_monitor` está bien colocada en CLASE, el lado N de IMPARTE… pero mira a dónde apunta su flecha.)
+val:
+  title: Caça d'errors · Esquema de FitZone
+  img: caza-ud03
+  img_text:
+  - - dni_recomienda
+    - dni_recomana
+  - - INSCRIPCION
+    - INSCRIPCIO
+  - - SOCIO
+    - SOCI
+  - - CLASE
+    - CLASSE
+  - - fecha_nac
+    - data_naix
+  - - '>fecha<'
+    - '>data<'
+  - - '>telefonos<'
+    - '>telefons<'
+  - - '>nombre<'
+    - '>nom<'
+  - - especialidad
+    - especialitat
+  - - cod_clase
+    - cod_classe
+  - - '>aforo<'
+    - '>aforament<'
+  intro: 'Este és l''esquema relacional que el becari va obtindre del diagrama E/R **ja corregit** del gimnàs: SOCI (amb `telefons` multivalorat i la reflexiva 1:N *recomana*), CLASSE, MONITOR (identificat per `id_monitor`), la N:M INSCRIU entre SOCI i CLASSE amb l''atribut `data`, la 1:N IMPARTIX entre MONITOR i CLASSE, i SALA, identificada per `num_sala`. Les fletxes van de cada clau aliena a la columna que referencia.'
+  errors:
+  - x: 32
+    y: 116
+    w: 226
+    h: 22
+    label: SOCI.telefons
+    title: Multivalorat guardat com a columna
+    explain: '`telefons` és multivalorat: va a una taula nova `TELEFON_SOCI(dni, telefon)` amb PK composta i `dni` com a FK. En una sola columna es trenca l''atomicitat.'
+    ref: 4.3 Atributs multivalorats
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#43-transformació-datributs-compostos-i-multivalorats
+  - x: 32
+    y: 138
+    w: 226
+    h: 22
+    label: SOCI.cod_classe
+    title: La N:M convertida en FK
+    explain: 'La relació SOCI–CLASSE és N:M i ja té la seua taula INSCRIPCIO. Una FK `cod_classe` en SOCI només permetria una classe per soci i duplica informació: sobra.'
+    ref: 4.5 Relacions N:M
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#45-transformació-de-relacions-binàries-nm
+  - x: 312
+    y: 52
+    w: 196
+    h: 70
+    label: Clau de INSCRIPCIO
+    title: PK incompleta en INSCRIPCIO
+    explain: 'La PK de la taula d''una N:M combina les dos claus: (`dni`, `cod_classe`). Amb només `dni`, un soci no es podria inscriure en dos classes.'
+    ref: 4.5 Relacions N:M
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#45-transformació-de-relacions-binàries-nm
+  - x: 760
+    y: 94
+    w: 50
+    h: 214
+    label: Fletxa de CLASSE.id_monitor
+    title: FK que apunta a una columna que no és clau
+    explain: 'Una clau aliena referencia la **clau primària** (o una alternativa) de la taula pare: `id_monitor → MONITOR.id_monitor`, no `nom`.'
+    ref: 2.3 Clau aliena
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#23-clau-forana--aliena-foreign-key---fk
+  - x: 310
+    y: 250
+    w: 200
+    h: 80
+    label: Taula SALA
+    title: SALA sense clau primària
+    explain: 'Tota taula necessita clau primària: `num_sala` s''ha de marcar com a PK.'
+    ref: 4.1 Entitats fortes
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#41-transformació-dentitats-fortes
+  decoys:
+  - x: 2
+    y: 160
+    w: 256
+    h: 22
+    label: SOCI.dni_recomana
+    title: FK reflexiva dni_recomana
+    explain: La reflexiva 1:N es resol amb una FK opcional cap a la mateixa taula SOCI.
+  - x: 32
+    y: 50
+    w: 226
+    h: 22
+    label: SOCI.dni
+    title: PK dni de SOCI
+    explain: És l'identificador de SOCI.
+  - x: 312
+    y: 104
+    w: 196
+    h: 22
+    label: INSCRIPCIO.data
+    title: data en INSCRIPCIO
+    explain: És un atribut de la relació N:M, així que va en la seua taula.
+  - x: 572
+    y: 260
+    w: 186
+    h: 22
+    label: MONITOR.id_monitor
+    title: PK id_monitor
+    explain: És l'identificador de MONITOR.
+  - x: 572
+    y: 50
+    w: 196
+    h: 22
+    label: CLASSE.cod_classe
+    title: PK cod_classe
+    explain: És l'identificador de CLASSE. (I la FK `id_monitor` està ben col·locada en CLASSE, el costat N d'IMPARTIX… però mira on apunta la seua fletxa.)

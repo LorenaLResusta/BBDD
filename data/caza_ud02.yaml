@@ -1,0 +1,210 @@
+# Caza de errores (shortcode caza). Zonas x, y, w, h en coordenadas del SVG del diagrama.
+es:
+  title: Caza de errores · Gimnasio FitZone
+  img: caza-ud02
+  intro: 'El becario del gimnasio FitZone ha dibujado este diagrama E/R: los socios se inscriben en clases, cada clase la imparte un monitor, los socios valoran al monitor de las clases a las que van y un socio puede recomendar el gimnasio a otros socios.'
+  errors:
+  - x: 455
+    y: 196
+    w: 60
+    h: 30
+    label: Cardinalidad junto a CLASE
+    title: Cardinalidad imposible (2,1)
+    explain: La mínima no puede ser mayor que la máxima. Si un socio puede apuntarse a varias clases, lo correcto junto a CLASE es (0,n) o (1,n).
+    ref: 2.4 Cardinalidades
+    ref_url: /ud02-modelo-er/ud02-teoria/#24-restricciones-de-cardinalidad-mínima-y-máxima
+  - x: 300
+    y: 262
+    w: 120
+    h: 165
+    label: Relación VALORA
+    title: Una relación unida a otra relación
+    explain: Las relaciones solo unen **entidades**. Para que el socio valore al monitor de una inscripción concreta, INSCRIBE debe convertirse en una **agregación** y relacionarse con MONITOR.
+    ref: 4.3 Agregación
+    ref_url: /ud02-modelo-er/ud02-teoria/#43-agregación-modelado-de-asociaciones-como-entidades
+  - x: 380
+    y: 415
+    w: 450
+    h: 75
+    label: Entidad MONITOR
+    title: MONITOR no tiene identificador
+    explain: 'Toda entidad fuerte necesita un identificador subrayado, por ejemplo `id_monitor`. `nombre` no sirve: dos monitores pueden llamarse igual.'
+    ref: 2.2 Atributos
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributos-clasificación-estructura-y-dominio
+  - x: 240
+    y: 105
+    w: 70
+    h: 40
+    label: Atributo edad
+    title: edad debería ser derivado
+    explain: 'La edad se calcula a partir de `fecha_nac`: es un atributo **derivado** y se dibuja con la elipse discontinua (o, directamente, no se guarda).'
+    ref: 2.2 Atributos
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributos-clasificación-estructura-y-dominio
+  - x: 30
+    y: 256
+    w: 230
+    h: 175
+    label: Relación RECOMIENDA
+    title: Reflexiva sin nombres de rol
+    explain: En una relación reflexiva hay que indicar el papel de cada extremo (*recomienda* / *es recomendado*); sin roles no se sabe en qué sentido se leen las cardinalidades.
+    ref: 2.3 Relaciones y roles
+    ref_url: /ud02-modelo-er/ud02-teoria/#23-relaciones-grado-semántica-y-nombres-de-rol
+  decoys:
+  - x: 40
+    y: 102
+    w: 60
+    h: 36
+    label: Atributo dni
+    title: dni subrayado
+    explain: Es el identificador principal de SOCIO y está subrayado.
+  - x: 266
+    y: 310
+    w: 105
+    h: 40
+    label: Atributo telefonos
+    title: telefonos con doble elipse
+    explain: 'Un socio puede tener varios teléfonos: es multivaluado y se dibuja con doble elipse.'
+  - x: 212
+    y: 196
+    w: 56
+    h: 30
+    label: Cardinalidad junto a SOCIO
+    title: (0,n) junto a SOCIO
+    explain: Una clase puede tener de cero a muchos socios inscritos.
+  - x: 515
+    y: 270
+    w: 125
+    h: 145
+    label: Relación IMPARTE
+    title: IMPARTE (0,n)–(1,1)
+    explain: Cada clase la imparte un solo monitor (1,1) y un monitor puede impartir de cero a muchas clases (0,n).
+  - x: 515
+    y: 97
+    w: 92
+    h: 36
+    label: Atributo cod_clase
+    title: cod_clase subrayado
+    explain: Es el identificador de CLASE.
+  - x: 295
+    y: 202
+    w: 130
+    h: 58
+    label: Relación INSCRIBE
+    title: INSCRIBE
+    explain: Es una relación binaria entre SOCIO y CLASE con nombre de verbo. (Pero revisa las cardinalidades de sus extremos…)
+val:
+  title: Caça d'errors · Gimnàs FitZone
+  img: caza-ud02
+  img_text:
+  - - RECOMIENDA
+    - RECOMANA
+  - - INSCRIBE
+    - INSCRIU
+  - - IMPARTE
+    - IMPARTIX
+  - - SOCIO
+    - SOCI
+  - - CLASE
+    - CLASSE
+  - - fecha_nac
+    - data_naix
+  - - '>edad<'
+    - '>edat<'
+  - - '>telefonos<'
+    - '>telefons<'
+  - - '>nombre<'
+    - '>nom<'
+  - - especialidad
+    - especialitat
+  - - cod_clase
+    - cod_classe
+  intro: 'El becari del gimnàs FitZone ha dibuixat este diagrama E/R: els socis s''inscriuen en classes, cada classe la impartix un monitor, els socis valoren el monitor de les classes a què van i un soci pot recomanar el gimnàs a altres socis.'
+  errors:
+  - x: 455
+    y: 196
+    w: 60
+    h: 30
+    label: Cardinalitat al costat de CLASSE
+    title: Cardinalitat impossible (2,1)
+    explain: La mínima no pot ser major que la màxima. Si un soci es pot apuntar a diverses classes, el correcte al costat de CLASSE és (0,n) o (1,n).
+    ref: 2.4 Cardinalitats
+    ref_url: /ud02-modelo-er/ud02-teoria/#24-restriccions-de-cardinalitat-mínima-i-màxima
+  - x: 300
+    y: 262
+    w: 120
+    h: 165
+    label: Relació VALORA
+    title: Una relació unida a una altra relació
+    explain: Les relacions només unixen **entitats**. Perquè el soci valore el monitor d'una inscripció concreta, INSCRIU s'ha de convertir en una **agregació** i relacionar-se amb MONITOR.
+    ref: 4.3 Agregació
+    ref_url: /ud02-modelo-er/ud02-teoria/#43-agregació-modelatge-dassociacions-com-a-entitats
+  - x: 380
+    y: 415
+    w: 450
+    h: 75
+    label: Entitat MONITOR
+    title: MONITOR no té identificador
+    explain: 'Tota entitat forta necessita un identificador subratllat, per exemple `id_monitor`. `nom` no servix: dos monitors es poden dir igual.'
+    ref: 2.2 Atributs
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributs-classificació-estructura-i-domini
+  - x: 240
+    y: 105
+    w: 70
+    h: 40
+    label: Atribut edat
+    title: edat hauria de ser derivat
+    explain: 'L''edat es calcula a partir de `data_naix`: és un atribut **derivat** i es dibuixa amb l''el·lipse discontínua (o, directament, no es guarda).'
+    ref: 2.2 Atributs
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributs-classificació-estructura-i-domini
+  - x: 30
+    y: 256
+    w: 230
+    h: 175
+    label: Relació RECOMANA
+    title: Reflexiva sense noms de rol
+    explain: En una relació reflexiva cal indicar el paper de cada extrem (*recomana* / *és recomanat*); sense rols no se sap en quin sentit es lligen les cardinalitats.
+    ref: 2.3 Relacions i rols
+    ref_url: /ud02-modelo-er/ud02-teoria/#23-relacions-grau-semàntica-i-noms-de-rol
+  decoys:
+  - x: 40
+    y: 102
+    w: 60
+    h: 36
+    label: Atribut dni
+    title: dni subratllat
+    explain: És l'identificador principal de SOCI i està subratllat.
+  - x: 266
+    y: 310
+    w: 105
+    h: 40
+    label: Atribut telefons
+    title: telefons amb doble el·lipse
+    explain: 'Un soci pot tindre diversos telèfons: és multivalorat i es dibuixa amb doble el·lipse.'
+  - x: 212
+    y: 196
+    w: 56
+    h: 30
+    label: Cardinalitat al costat de SOCI
+    title: (0,n) al costat de SOCI
+    explain: Una classe pot tindre de zero a molts socis inscrits.
+  - x: 515
+    y: 270
+    w: 125
+    h: 145
+    label: Relació IMPARTIX
+    title: IMPARTIX (0,n)–(1,1)
+    explain: Cada classe la impartix un sol monitor (1,1) i un monitor pot impartir de zero a moltes classes (0,n).
+  - x: 515
+    y: 97
+    w: 92
+    h: 36
+    label: Atribut cod_classe
+    title: cod_classe subratllat
+    explain: És l'identificador de CLASSE.
+  - x: 295
+    y: 202
+    w: 130
+    h: 58
+    label: Relació INSCRIU
+    title: INSCRIU
+    explain: És una relació binària entre SOCI i CLASSE amb nom de verb. (Però revisa les cardinalitats dels seus extrems…)

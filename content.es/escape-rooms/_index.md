@@ -1,10 +1,10 @@
 ---
-title: "Escape rooms"
+title: "Juegos y escape rooms"
 weight: 110
 bookCollapseSection: false
 ---
 
-# Escape rooms de repaso
+# Juegos y escape rooms de repaso
 
 Juegos para repasar jugando, por parejas en clase o por tu cuenta antes de un examen. Todos se resuelven **con lo que has estudiado**: cada reto enlaza al apartado de teoría que lo explica y el progreso se guarda en tu navegador.
 
@@ -19,3 +19,10 @@ Juegos para repasar jugando, por parejas en clase o por tu cuenta antes de un ex
 
 > [!TIP]
 > En los escape rooms de las unidades, si no encuentras los objetos, pulsa **🔍 Mostrar objetos**: se iluminan todos los que se pueden pulsar. Debajo de la escena tienes, además, la lista de objetos de la sala.
+
+## Otros juegos
+
+| Juego | Unidad | Formato |
+|---|---|---|
+| [Rosco y caza de errores](/ud02-modelo-er/ud02-juegos) | UD02 | Rosco tipo Pasapalabra con el vocabulario E/R y búsqueda de errores en un diagrama |
+| [Rosco y caza de errores](/ud03-modelo-relacional/ud03-juegos) | UD03 | Rosco con claves e integridad y búsqueda de errores en un esquema relacional |

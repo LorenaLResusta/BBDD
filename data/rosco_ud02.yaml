@@ -1,0 +1,345 @@
+# Rosco tipo Pasapalabra (shortcode rosco). mode: empieza | contiene; answers: respuestas aceptadas (sin importar tildes ni mayúsculas)
+es:
+  title: Rosco de la UD02 · Modelo E/R
+  intro: Todo el vocabulario del modelo Entidad/Relación en una vuelta.
+  time: 240
+  letters:
+  - l: A
+    mode: empieza
+    clue: Propiedad o característica de una entidad o de una relación, como el nombre o la fecha de nacimiento.
+    answers:
+    - atributo
+    ref: 2.2 Atributos
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributos-clasificación-estructura-y-dominio
+  - l: B
+    mode: empieza
+    clue: Relación en la que participan exactamente dos entidades.
+    answers:
+    - binaria
+    ref: 2.3 Grado
+    ref_url: /ud02-modelo-er/ud02-teoria/#23-relaciones-grado-semántica-y-nombres-de-rol
+  - l: C
+    mode: empieza
+    clue: Par (mínima, máxima) que indica con cuántas instancias de la otra entidad puede asociarse una instancia.
+    answers:
+    - cardinalidad
+    ref: 2.4 Cardinalidades
+    ref_url: /ud02-modelo-er/ud02-teoria/#24-restricciones-de-cardinalidad-mínima-y-máxima
+  - l: D
+    mode: empieza
+    clue: Tipo de entidad que no puede existir, o no puede identificarse, sin otra entidad.
+    answers:
+    - débil
+    - debil
+    ref: 2.1 Entidades fuertes y débiles
+    ref_url: /ud02-modelo-er/ud02-teoria/#21-entidades-fuertes-débiles-e-instancias
+  - l: E
+    mode: empieza
+    clue: Objeto del mundo real, distinguible de los demás, del que interesa guardar información.
+    answers:
+    - entidad
+    ref: 2.1 Entidades
+    ref_url: /ud02-modelo-er/ud02-teoria/#21-entidades-fuertes-débiles-e-instancias
+  - l: F
+    mode: empieza
+    clue: Entidad que tiene identificador propio y existe por sí misma.
+    answers:
+    - fuerte
+    ref: 2.1 Entidades fuertes y débiles
+    ref_url: /ud02-modelo-er/ud02-teoria/#21-entidades-fuertes-débiles-e-instancias
+  - l: G
+    mode: empieza
+    clue: Número de entidades que participan en una relación.
+    answers:
+    - grado
+    ref: 2.3 Grado
+    ref_url: /ud02-modelo-er/ud02-teoria/#23-relaciones-grado-semántica-y-nombres-de-rol
+  - l: H
+    mode: contiene
+    clue: Apellido del investigador que propuso el modelo Entidad/Relación en 1976.
+    answers:
+    - Chen
+    ref: 7.1 Notación de Chen
+    ref_url: /ud02-modelo-er/ud02-teoria/#71-equivalencia-entre-la-notación-de-chen-y-la-pata-de-gallo
+  - l: I
+    mode: empieza
+    clue: Atributo o conjunto de atributos que distingue cada instancia de una entidad. En el diagrama se subraya.
+    answers:
+    - identificador
+    ref: 2.2 Atributos
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributos-clasificación-estructura-y-dominio
+  - l: J
+    mode: empieza
+    clue: Estructura formada por un supertipo y sus subtipos.
+    answers:
+    - jerarquía
+    - jerarquia
+    ref: 4.1 Generalización y especialización
+    ref_url: /ud02-modelo-er/ud02-teoria/#41-generalización-y-especialización-mecanismo-de-herencia
+  - l: L
+    mode: empieza
+    clue: 'Diseño ___: el que se obtiene al transformar el esquema conceptual a un modelo concreto, como el relacional.'
+    answers:
+    - lógico
+    - logico
+    ref: 1.2 Niveles de abstracción
+    ref_url: /ud02-modelo-er/ud02-teoria/#12-los-cuatro-niveles-de-abstracción
+  - l: M
+    mode: empieza
+    clue: Atributo que puede tomar varios valores para una misma instancia, como los teléfonos de una persona.
+    answers:
+    - multivaluado
+    ref: 2.2 Atributos
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributos-clasificación-estructura-y-dominio
+  - l: N
+    mode: contiene
+    clue: Esquema que representa la realidad sin depender de ningún SGBD; el modelo E/R es de este tipo.
+    answers:
+    - conceptual
+    ref: 1.2 Niveles de abstracción
+    ref_url: /ud02-modelo-er/ud02-teoria/#12-los-cuatro-niveles-de-abstracción
+  - l: O
+    mode: empieza
+    clue: Participación de una entidad en una relación cuando su cardinalidad mínima es 0.
+    answers:
+    - opcional
+    ref: 2.4 Cardinalidades
+    ref_url: /ud02-modelo-er/ud02-teoria/#24-restricciones-de-cardinalidad-mínima-y-máxima
+  - l: P
+    mode: empieza
+    clue: Jerarquía en la que puede haber instancias del supertipo que no pertenecen a ningún subtipo.
+    answers:
+    - parcial
+    ref: 4.2 Clasificación de jerarquías
+    ref_url: /ud02-modelo-er/ud02-teoria/#42-clasificación-de-jerarquías-totalparcial-disjuntasolapada
+  - l: Q
+    mode: contiene
+    clue: 'Lo primero que se analiza, antes de dibujar el diagrama: los ___ del sistema.'
+    answers:
+    - requisitos
+    ref: 5. Fases del esquema conceptual
+    ref_url: /ud02-modelo-er/ud02-teoria/#5-fases-en-la-construcción-del-esquema-conceptual
+  - l: R
+    mode: empieza
+    clue: Relación en la que una entidad se relaciona consigo misma; necesita nombres de rol.
+    answers:
+    - reflexiva
+    - recursiva
+    ref: 2.3 Relaciones y roles
+    ref_url: /ud02-modelo-er/ud02-teoria/#23-relaciones-grado-semántica-y-nombres-de-rol
+  - l: S
+    mode: empieza
+    clue: Jerarquía en la que una instancia del supertipo puede pertenecer a varios subtipos a la vez.
+    answers:
+    - solapada
+    ref: 4.2 Clasificación de jerarquías
+    ref_url: /ud02-modelo-er/ud02-teoria/#42-clasificación-de-jerarquías-totalparcial-disjuntasolapada
+  - l: T
+    mode: empieza
+    clue: Relación en la que participan tres entidades.
+    answers:
+    - ternaria
+    ref: 4.4 Relaciones ternarias
+    ref_url: /ud02-modelo-er/ud02-teoria/#44-relaciones-ternarias-y-análisis-formal-de-cardinalidad
+  - l: U
+    mode: contiene
+    clue: Atributo formado por varios componentes con significado propio, como una dirección (calle, número, código postal).
+    answers:
+    - compuesto
+    ref: 2.2 Atributos
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributos-clasificación-estructura-y-dominio
+  - l: V
+    mode: contiene
+    clue: Atributo cuyo valor se calcula a partir de otros, como la edad. Se dibuja con línea discontinua.
+    answers:
+    - derivado
+    ref: 2.2 Atributos
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributos-clasificación-estructura-y-dominio
+  - l: X
+    mode: contiene
+    clue: Restricción por la que una instancia puede participar en una relación o en otra, pero nunca en las dos.
+    answers:
+    - exclusividad
+    ref: 3.1 Exclusividad y exclusión
+    ref_url: /ud02-modelo-er/ud02-teoria/#31-exclusividad-y-exclusión
+  - l: Y
+    mode: contiene
+    clue: Así se marca en el diagrama el identificador principal de una entidad.
+    answers:
+    - subrayado
+    - subrayarlo
+    - subrayándolo
+    ref: 2.2 Atributos
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributos-clasificación-estructura-y-dominio
+  - l: Z
+    mode: contiene
+    clue: Proceso de reunir en un supertipo los atributos comunes de varias entidades (de abajo arriba).
+    answers:
+    - generalización
+    - generalizacion
+    ref: 4.1 Generalización y especialización
+    ref_url: /ud02-modelo-er/ud02-teoria/#41-generalización-y-especialización-mecanismo-de-herencia
+val:
+  title: Rosco de la UD02 · Model E/R
+  intro: Tot el vocabulari del model Entitat/Relació en una volta.
+  time: 240
+  letters:
+  - l: A
+    mode: empieza
+    clue: Propietat o característica d'una entitat o d'una relació, com el nom o la data de naixement.
+    answers:
+    - atribut
+    ref: 2.2 Atributs
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributs-classificació-estructura-i-domini
+  - l: B
+    mode: empieza
+    clue: Relació en què participen exactament dos entitats.
+    answers:
+    - binària
+    - binaria
+    ref: 2.3 Grau
+    ref_url: /ud02-modelo-er/ud02-teoria/#23-relacions-grau-semàntica-i-noms-de-rol
+  - l: C
+    mode: empieza
+    clue: Parell (mínima, màxima) que indica amb quantes instàncies de l'altra entitat es pot associar una instància.
+    answers:
+    - cardinalitat
+    ref: 2.4 Cardinalitats
+    ref_url: /ud02-modelo-er/ud02-teoria/#24-restriccions-de-cardinalitat-mínima-i-màxima
+  - l: D
+    mode: empieza
+    clue: Atribut el valor del qual es calcula a partir d'altres, com l'edat. Es dibuixa amb línia discontínua.
+    answers:
+    - derivat
+    ref: 2.2 Atributs
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributs-classificació-estructura-i-domini
+  - l: E
+    mode: empieza
+    clue: Objecte del món real, distingible dels altres, del qual interessa guardar informació.
+    answers:
+    - entitat
+    ref: 2.1 Entitats
+    ref_url: /ud02-modelo-er/ud02-teoria/#21-entitats-fortes-febles-i-instàncies
+  - l: F
+    mode: empieza
+    clue: Tipus d'entitat que no pot existir, o no es pot identificar, sense una altra entitat.
+    answers:
+    - feble
+    ref: 2.1 Entitats fortes i febles
+    ref_url: /ud02-modelo-er/ud02-teoria/#21-entitats-fortes-febles-i-instàncies
+  - l: G
+    mode: empieza
+    clue: Nombre d'entitats que participen en una relació.
+    answers:
+    - grau
+    ref: 2.3 Grau
+    ref_url: /ud02-modelo-er/ud02-teoria/#23-relacions-grau-semàntica-i-noms-de-rol
+  - l: H
+    mode: contiene
+    clue: Cognom de l'investigador que va proposar el model Entitat/Relació en 1976.
+    answers:
+    - Chen
+    ref: 7.1 Notació de Chen
+    ref_url: /ud02-modelo-er/ud02-teoria/#71-equivalència-entre-la-notació-de-chen-i-la-pota-de-gall
+  - l: I
+    mode: empieza
+    clue: Atribut o conjunt d'atributs que distingix cada instància d'una entitat. En el diagrama se subratlla.
+    answers:
+    - identificador
+    ref: 2.2 Atributs
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributs-classificació-estructura-i-domini
+  - l: J
+    mode: empieza
+    clue: Estructura formada per un supertipus i els seus subtipus.
+    answers:
+    - jerarquia
+    ref: 4.1 Generalització i especialització
+    ref_url: /ud02-modelo-er/ud02-teoria/#41-generalització-i-especialització-mecanisme-dherència
+  - l: L
+    mode: empieza
+    clue: 'Disseny ___: el que s''obté en transformar l''esquema conceptual a un model concret, com el relacional.'
+    answers:
+    - lògic
+    - logic
+    ref: 1.2 Nivells d'abstracció
+    ref_url: /ud02-modelo-er/ud02-teoria/#12-els-quatre-nivells-dabstracció
+  - l: M
+    mode: empieza
+    clue: Conjunt de conceptes i regles per a representar les dades. Chen va proposar el ___ E/R.
+    answers:
+    - model
+    ref: 2. El model E/R
+    ref_url: /ud02-modelo-er/ud02-teoria/#2-el-model-conceptual-entitat-relació-er
+  - l: N
+    mode: contiene
+    clue: Esquema que representa la realitat sense dependre de cap SGBD; el model E/R és d'este tipus.
+    answers:
+    - conceptual
+    ref: 1.2 Nivells d'abstracció
+    ref_url: /ud02-modelo-er/ud02-teoria/#12-els-quatre-nivells-dabstracció
+  - l: O
+    mode: empieza
+    clue: Participació d'una entitat en una relació quan la seua cardinalitat mínima és 0.
+    answers:
+    - opcional
+    ref: 2.4 Cardinalitats
+    ref_url: /ud02-modelo-er/ud02-teoria/#24-restriccions-de-cardinalitat-mínima-i-màxima
+  - l: P
+    mode: empieza
+    clue: Jerarquia en què hi pot haver instàncies del supertipus que no pertanyen a cap subtipus.
+    answers:
+    - parcial
+    ref: 4.2 Classificació de jerarquies
+    ref_url: /ud02-modelo-er/ud02-teoria/#42-classificació-de-jerarquies-totalparcial-disjuntasolapada
+  - l: Q
+    mode: contiene
+    clue: 'El primer que s''analitza, abans de dibuixar el diagrama: els ___ del sistema.'
+    answers:
+    - requisits
+    ref: 5. Fases de l'esquema conceptual
+    ref_url: /ud02-modelo-er/ud02-teoria/#5-fases-en-la-construcció-de-lesquema-conceptual
+  - l: R
+    mode: empieza
+    clue: Relació en què una entitat es relaciona amb si mateixa; necessita noms de rol.
+    answers:
+    - reflexiva
+    - recursiva
+    ref: 2.3 Relacions i rols
+    ref_url: /ud02-modelo-er/ud02-teoria/#23-relacions-grau-semàntica-i-noms-de-rol
+  - l: S
+    mode: empieza
+    clue: Jerarquia en què una instància del supertipus pot pertànyer a diversos subtipus alhora.
+    answers:
+    - solapada
+    ref: 4.2 Classificació de jerarquies
+    ref_url: /ud02-modelo-er/ud02-teoria/#42-classificació-de-jerarquies-totalparcial-disjuntasolapada
+  - l: T
+    mode: empieza
+    clue: Relació en què participen tres entitats.
+    answers:
+    - ternària
+    - ternaria
+    ref: 4.4 Relacions ternàries
+    ref_url: /ud02-modelo-er/ud02-teoria/#44-relacions-ternàries-i-anàlisi-formal-de-cardinalitat
+  - l: U
+    mode: contiene
+    clue: Així es marca en el diagrama l'identificador principal d'una entitat.
+    answers:
+    - subratllat
+    - subratllar-lo
+    ref: 2.2 Atributs
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributs-classificació-estructura-i-domini
+  - l: V
+    mode: contiene
+    clue: Atribut que pot prendre diversos valors per a una mateixa instància, com els telèfons d'una persona.
+    answers:
+    - multivalorat
+    ref: 2.2 Atributs
+    ref_url: /ud02-modelo-er/ud02-teoria/#22-atributs-classificació-estructura-i-domini
+  - l: X
+    mode: contiene
+    clue: Restricció per la qual una instància pot participar en una relació o en una altra, però mai en les dos.
+    answers:
+    - exclusivitat
+    ref: 3.1 Exclusivitat i exclusió
+    ref_url: /ud02-modelo-er/ud02-teoria/#31-exclusivitat-i-exclusió

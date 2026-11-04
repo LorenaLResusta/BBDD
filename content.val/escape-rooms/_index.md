@@ -1,10 +1,10 @@
 ---
-title: "Escape rooms"
+title: "Jocs i escape rooms"
 weight: 110
 bookCollapseSection: false
 ---
 
-# Escape rooms de repàs
+# Jocs i escape rooms de repàs
 
 Jocs per a repassar jugant, per parelles a classe o pel teu compte abans d'un examen. Tots es resolen **amb el que has estudiat**: cada repte enllaça amb l'apartat de teoria que l'explica i el progrés es guarda en el teu navegador.
 
@@ -19,3 +19,10 @@ Jocs per a repassar jugant, per parelles a classe o pel teu compte abans d'un ex
 
 > [!TIP]
 > En els escape rooms de les unitats, si no trobes els objectes, prem **🔍 Mostrar objectes**: s'il·luminen tots els que es poden prémer. Davall de l'escena tens, a més, la llista d'objectes de la sala.
+
+## Altres jocs
+
+| Joc | Unitat | Format |
+|---|---|---|
+| [Rosco i caça d'errors](/ud02-modelo-er/ud02-juegos) | UD02 | Rosco tipus Passaparaula amb el vocabulari E/R i cerca d'errors en un diagrama |
+| [Rosco i caça d'errors](/ud03-modelo-relacional/ud03-juegos) | UD03 | Rosco amb claus i integritat i cerca d'errors en un esquema relacional |

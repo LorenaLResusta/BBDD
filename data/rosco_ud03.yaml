@@ -1,0 +1,293 @@
+# Rosco tipo Pasapalabra (shortcode rosco). mode: empieza | contiene; answers: respuestas aceptadas (sin importar tildes ni mayúsculas)
+es:
+  title: Rosco de la UD03 · Modelo relacional
+  intro: Claves, integridad y transformación en una vuelta.
+  time: 220
+  letters:
+  - l: A
+    mode: empieza
+    clue: 'Clave ___: atributo o conjunto de atributos que referencia la clave primaria de otra tabla.'
+    answers:
+    - ajena
+    ref: 2.3 Clave ajena
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#23-clave-foránea--ajena-foreign-key---fk
+  - l: B
+    mode: empieza
+    clue: Las políticas de ___ indican qué ocurre con las filas hijas cuando se elimina la fila padre.
+    answers:
+    - borrado
+    ref: 3.3 Integridad referencial
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integridad-referencial-y-políticas-de-borradomodificación
+  - l: C
+    mode: empieza
+    clue: Política por la que, al borrar la fila padre, se borran también automáticamente sus filas hijas.
+    answers:
+    - cascada
+    - en cascada
+    ref: 3.3 Políticas de borrado
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integridad-referencial-y-políticas-de-borradomodificación
+  - l: D
+    mode: empieza
+    clue: Conjunto de valores válidos que puede tomar un atributo.
+    answers:
+    - dominio
+    ref: 1.2 Dominios
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#12-atributos-dominios-grado-y-cardinalidad
+  - l: E
+    mode: empieza
+    clue: Descripción de una relación con su nombre y sus atributos, por ejemplo `CLIENTE(dni, nombre)`.
+    answers:
+    - esquema
+    ref: 1.1 Relación
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#11-definición-de-relación-tabla
+  - l: F
+    mode: empieza
+    clue: Otro nombre que recibe la clave ajena, calcado del inglés *foreign key*.
+    answers:
+    - foránea
+    - foranea
+    ref: 2.3 Clave ajena
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#23-clave-foránea--ajena-foreign-key---fk
+  - l: G
+    mode: empieza
+    clue: Número de atributos (columnas) de una relación.
+    answers:
+    - grado
+    ref: 1.2 Grado y cardinalidad
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#12-atributos-dominios-grado-y-cardinalidad
+  - l: H
+    mode: empieza
+    clue: 'Fila ___: la que contiene la clave ajena que apunta a otra fila.'
+    answers:
+    - hija
+    ref: 3.3 Integridad referencial
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integridad-referencial-y-políticas-de-borradomodificación
+  - l: I
+    mode: empieza
+    clue: '___ referencial: toda clave ajena debe coincidir con una clave existente o ser nula.'
+    answers:
+    - integridad
+    ref: 3.3 Integridad referencial
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integridad-referencial-y-políticas-de-borradomodificación
+  - l: J
+    mode: empieza
+    clue: Al transformarla puedes crear una tabla para el supertipo y una por subtipo, solo las de los subtipos o una única tabla.
+    answers:
+    - jerarquía
+    - jerarquia
+    ref: 4.9 Transformación de jerarquías
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#49-transformación-de-jerarquías-de-generalización--especialización
+  - l: L
+    mode: contiene
+    clue: 'Clave ___: clave candidata que no se ha elegido como primaria. Se marca con UK.'
+    answers:
+    - alternativa
+    ref: 2.2 Claves alternativas
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#22-claves-alternativas
+  - l: M
+    mode: empieza
+    clue: Tipo de atributo que, al transformarse, genera una tabla nueva.
+    answers:
+    - multivaluado
+    ref: 4.3 Atributos multivaluados
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#43-transformación-de-atributos-compuestos-y-multivaluados
+  - l: N
+    mode: empieza
+    clue: 'Puesta a ___: política que deja vacía la clave ajena de las filas hijas al borrar la fila padre.'
+    answers:
+    - nulos
+    - 'null'
+    ref: 3.3 Políticas de borrado
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integridad-referencial-y-políticas-de-borradomodificación
+  - l: O
+    mode: contiene
+    clue: Apellido del investigador de IBM que propuso el modelo relacional en 1970.
+    answers:
+    - Codd
+    ref: 1. Conceptos fundamentales
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#1-conceptos-fundamentales-del-modelo-relacional
+  - l: P
+    mode: empieza
+    clue: 'Clave ___: clave candidata elegida para identificar las tuplas de una relación.'
+    answers:
+    - primaria
+    ref: 2.1 Clave primaria
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#21-clave-candidata-y-clave-primaria-primary-key---pk
+  - l: R
+    mode: empieza
+    clue: Nombre formal que recibe una tabla en el modelo relacional.
+    answers:
+    - relación
+    - relacion
+    ref: 1.1 Relación
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#11-definición-de-relación-tabla
+  - l: S
+    mode: empieza
+    clue: Conjunto de atributos que identifica las tuplas, aunque no sea mínimo.
+    answers:
+    - superclave
+    ref: 2.1 Claves
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#21-clave-candidata-y-clave-primaria-primary-key---pk
+  - l: T
+    mode: empieza
+    clue: Cada una de las filas de una relación.
+    answers:
+    - tupla
+    ref: 1.3 Tuplas
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#13-tuplas-filas-y-semántica-de-valores-nulos-null
+  - l: U
+    mode: empieza
+    clue: Restricción inherente por la que en una relación no puede haber dos tuplas iguales.
+    answers:
+    - unicidad
+    ref: 3.1 Restricciones inherentes
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#31-restricciones-inherentes-al-modelo
+  - l: V
+    mode: empieza
+    clue: Sigla que indica en el esquema que un atributo no puede tomar el valor nulo.
+    answers:
+    - VNN
+    ref: 3.2 Restricciones semánticas
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#32-restricciones-semánticas-o-de-usuario-pk-uk-obligatoriedad-reglas-de-fila
+val:
+  title: Rosco de la UD03 · Model relacional
+  intro: Claus, integritat i transformació en una volta.
+  time: 220
+  letters:
+  - l: A
+    mode: empieza
+    clue: 'Clau ___: atribut o conjunt d''atributs que referencia la clau primària d''una altra taula.'
+    answers:
+    - aliena
+    ref: 2.3 Clau aliena
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#23-clau-forana--aliena-foreign-key---fk
+  - l: B
+    mode: contiene
+    clue: Les polítiques d'___ indiquen què passa amb les files filles quan s'elimina la fila pare.
+    answers:
+    - esborrat
+    ref: 3.3 Integritat referencial
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integritat-referencial-i-polítiques-desborratmodificació
+  - l: C
+    mode: empieza
+    clue: Política per la qual, en esborrar la fila pare, s'esborren també automàticament les files filles.
+    answers:
+    - cascada
+    - en cascada
+    ref: 3.3 Polítiques d'esborrat
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integritat-referencial-i-polítiques-desborratmodificació
+  - l: D
+    mode: empieza
+    clue: Conjunt de valors vàlids que pot prendre un atribut.
+    answers:
+    - domini
+    ref: 1.2 Dominis
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#12-atributs-dominis-grau-i-cardinalitat
+  - l: E
+    mode: empieza
+    clue: Descripció d'una relació amb el seu nom i els seus atributs, per exemple `CLIENT(dni, nom)`.
+    answers:
+    - esquema
+    ref: 1.1 Relació
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#11-definició-de-relació-taula
+  - l: F
+    mode: empieza
+    clue: 'Fila ___: la que conté la clau aliena que apunta a una altra fila.'
+    answers:
+    - filla
+    ref: 3.3 Integritat referencial
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integritat-referencial-i-polítiques-desborratmodificació
+  - l: G
+    mode: empieza
+    clue: Nombre d'atributs (columnes) d'una relació.
+    answers:
+    - grau
+    ref: 1.2 Grau i cardinalitat
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#12-atributs-dominis-grau-i-cardinalitat
+  - l: I
+    mode: empieza
+    clue: '___ referencial: tota clau aliena ha de coincidir amb una clau existent o ser nul·la.'
+    answers:
+    - integritat
+    ref: 3.3 Integritat referencial
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integritat-referencial-i-polítiques-desborratmodificació
+  - l: J
+    mode: empieza
+    clue: En transformar-la pots crear una taula per al supertipus i una per subtipus, només les dels subtipus o una única taula.
+    answers:
+    - jerarquia
+    ref: 4.9 Transformació de jerarquies
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#49-transformació-de-jerarquies-de-generalització--especialització
+  - l: L
+    mode: contiene
+    clue: 'Clau ___: clau candidata que no s''ha triat com a primària. Es marca amb UK.'
+    answers:
+    - alternativa
+    ref: 2.2 Claus alternatives
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#22-claus-alternatives
+  - l: M
+    mode: empieza
+    clue: Tipus d'atribut que, en transformar-se, genera una taula nova.
+    answers:
+    - multivalorat
+    ref: 4.3 Atributs multivalorats
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#43-transformació-datributs-compostos-i-multivalorats
+  - l: N
+    mode: empieza
+    clue: 'Posada a ___: política que deixa buida la clau aliena de les files filles en esborrar la fila pare.'
+    answers:
+    - nuls
+    - 'null'
+    ref: 3.3 Polítiques d'esborrat
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#33-integritat-referencial-i-polítiques-desborratmodificació
+  - l: O
+    mode: contiene
+    clue: Cognom de l'investigador d'IBM que va proposar el model relacional en 1970.
+    answers:
+    - Codd
+    ref: 1. Conceptes fonamentals
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#1-conceptes-fonamentals-del-model-relacional
+  - l: P
+    mode: empieza
+    clue: 'Clau ___: clau candidata triada per a identificar les tuples d''una relació.'
+    answers:
+    - primària
+    - primaria
+    ref: 2.1 Clau primària
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#21-clau-candidata-i-clau-primària-primary-key---pk
+  - l: R
+    mode: empieza
+    clue: Nom formal que rep una taula en el model relacional.
+    answers:
+    - relació
+    - relacio
+    ref: 1.1 Relació
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#11-definició-de-relació-taula
+  - l: S
+    mode: empieza
+    clue: Conjunt d'atributs que identifica les tuples, encara que no siga mínim.
+    answers:
+    - superclau
+    ref: 2.1 Claus
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#21-clau-candidata-i-clau-primària-primary-key---pk
+  - l: T
+    mode: empieza
+    clue: Cadascuna de les files d'una relació.
+    answers:
+    - tupla
+    ref: 1.3 Tuples
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#13-tuples-files-i-semàntica-de-valors-nuls-null
+  - l: U
+    mode: empieza
+    clue: Restricció inherent per la qual en una relació no hi pot haver dos tuples iguals.
+    answers:
+    - unicitat
+    ref: 3.1 Restriccions inherents
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#31-restriccions-inherents-al-model
+  - l: V
+    mode: empieza
+    clue: Sigla que indica en l'esquema que un atribut no pot prendre el valor nul.
+    answers:
+    - VNN
+    ref: 3.2 Restriccions semàntiques
+    ref_url: /ud03-modelo-relacional/ud03-teoria/#32-restriccions-semàntiques-o-dusuari-pk-uk-obligatorietat-regles-de-fila
